@@ -25,7 +25,6 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 import { off } from 'process';
 
 const pages = ['Book', 'About Me', 'FAQ'];
-const settings = ['Profile', 'My Sessions', 'Logout'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -39,15 +38,26 @@ const ResponsiveAppBar = () => {
   const imageURL = session?.user?.image;
   let myAvatar;
 
+  let logInOrOut;
+  if (session?.user) {
+    logInOrOut = 'Logout';
+  } else {
+    logInOrOut = 'Login';
+  }
+  let settings = ['Profile', 'My Sessions', logInOrOut];
+  if (!session?.user) {
+    settings = [logInOrOut];
+  }
+
   if (imageURL) {
     myAvatar = <Avatar src={imageURL}> </Avatar>;
   } else if (session?.user?.name) {
     myAvatar = <Avatar> {session?.user?.name[0]} </Avatar>;
   } else {
-    myAvatar = <Avatar></Avatar>;
+    myAvatar = <Avatar sx={{ backgroundColor: cl.getHSL(cl.red) }}></Avatar>;
   }
 
-  console.log(session);
+  console.log('session', session);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -226,11 +236,30 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              {settings.map((setting) => {
+                let handler = () => {};
+
+                switch (setting) {
+                  case 'Logout':
+                    handler = signOut;
+                    break;
+                  case 'Login':
+                    handler = signIn;
+                    break;
+                  default:
+                    handler = () => {
+                      console.log('no handler');
+                    };
+                }
+                if (setting === 'Logout') {
+                  handler = signOut;
+                }
+                return (
+                  <MenuItem key={setting} onClick={handler}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                );
+              })}
             </Menu>
           </Box>
         </Toolbar>
