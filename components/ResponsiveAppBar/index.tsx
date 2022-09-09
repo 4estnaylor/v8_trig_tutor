@@ -21,6 +21,8 @@ import TrigTutorLogo from '../../public/trig_tutor_logo.svg';
 import Link from 'next/link';
 // import Logo from './trig_tutor_logo.svg';
 
+import { useSession, signIn, signOut } from 'next-auth/react';
+
 const pages = ['Book', 'About Me', 'FAQ'];
 const settings = ['Profile', 'My Sessions', 'Logout'];
 
@@ -31,6 +33,9 @@ const ResponsiveAppBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+
+  const session = useSession();
+  console.log(session);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -190,7 +195,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar></Avatar>
               </IconButton>
             </Tooltip>
             <Menu
