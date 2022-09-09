@@ -136,8 +136,8 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page) => (
-                <Link href={`/${getURLString(page)}`}>
-                  <MenuItem key={page}>
+                <Link key={page} href={`/${getURLString(page)}`}>
+                  <MenuItem>
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 </Link>
@@ -176,9 +176,8 @@ const ResponsiveAppBar = () => {
           </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link href={`/${getURLString(page)}`}>
+              <Link key={page} href={`/${getURLString(page)}`}>
                 <Button
-                  key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: cl.getHSL(cl.black), display: 'block' }}
                 >
