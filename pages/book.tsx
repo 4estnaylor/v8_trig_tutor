@@ -1,12 +1,14 @@
 import React from 'react';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
+import Head from 'next/head';
 
 const book = () => {
   return (
     <div>
-      <header>
+      <Head>
         <title>book a session</title>
-      </header>
+        <link rel="icon" href="/trig_tutor_logo.svg" />
+      </Head>
       <ResponsiveAppBar />
       book
     </div>

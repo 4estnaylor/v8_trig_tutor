@@ -1,13 +1,15 @@
 import React from 'react';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
+import Head from 'next/head';
 
 const faq = () => {
   return (
     <div>
-      <ResponsiveAppBar />
-      <header>
+      <Head>
         <title>frequently asked questions</title>
-      </header>
+        <link rel="icon" href="/trig_tutor_logo.svg" />
+      </Head>
+      <ResponsiveAppBar />
       faq
     </div>
   );

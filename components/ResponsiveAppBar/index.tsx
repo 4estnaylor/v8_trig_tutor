@@ -22,6 +22,7 @@ import Link from 'next/link';
 // import Logo from './trig_tutor_logo.svg';
 
 import { useSession, signIn, signOut } from 'next-auth/react';
+import { off } from 'process';
 
 const pages = ['Book', 'About Me', 'FAQ'];
 const settings = ['Profile', 'My Sessions', 'Logout'];
@@ -34,7 +35,18 @@ const ResponsiveAppBar = () => {
     null
   );
 
-  const session = useSession();
+  const { data: session } = useSession();
+  const imageURL = session?.user?.image;
+  let myAvatar;
+
+  if (imageURL) {
+    myAvatar = <Avatar src={imageURL}> </Avatar>;
+  } else if (session?.user?.name) {
+    myAvatar = <Avatar> {session?.user?.name[0]} </Avatar>;
+  } else {
+    myAvatar = <Avatar></Avatar>;
+  }
+
   console.log(session);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -195,7 +207,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar></Avatar>
+                {myAvatar}
               </IconButton>
             </Tooltip>
             <Menu
