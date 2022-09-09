@@ -176,13 +176,15 @@ const ResponsiveAppBar = () => {
           </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: cl.getHSL(cl.black), display: 'block' }}
-              >
-                {page}
-              </Button>
+              <Link href={`/${getURLString(page)}`}>
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: cl.getHSL(cl.black), display: 'block' }}
+                >
+                  {page}
+                </Button>
+              </Link>
             ))}
           </Box>
 

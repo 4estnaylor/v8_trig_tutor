@@ -1,16 +1,16 @@
 import React from 'react';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 
-const book = () => {
+const about_me = () => {
   return (
     <div>
       <header>
-        <title>book a session</title>
+        <title>about me</title>
       </header>
       <ResponsiveAppBar />
-      book
+      about_me
     </div>
   );
 };
 
-export default book;
+export default about_me;
