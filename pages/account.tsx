@@ -12,7 +12,7 @@ const Account = () => {
       <div>
         <p>
           Account:
-          {session.user.name}
+          {session?.user?.name}
         </p>
         <button
           onClick={() => {
