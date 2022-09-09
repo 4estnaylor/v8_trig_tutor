@@ -52,12 +52,14 @@ const ResponsiveAppBar = () => {
   if (imageURL) {
     myAvatar = <Avatar src={imageURL}> </Avatar>;
   } else if (session?.user?.name) {
-    myAvatar = <Avatar> {session?.user?.name[0]} </Avatar>;
+    myAvatar = (
+      <Avatar sx={{ backgroundColor: cl.getHSL(cl.red) }}>
+        {session?.user?.name[0]}
+      </Avatar>
+    );
   } else {
     myAvatar = <Avatar sx={{ backgroundColor: cl.getHSL(cl.red) }}></Avatar>;
   }
-
-  console.log('session', session);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
