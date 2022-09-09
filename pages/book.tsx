@@ -21,7 +21,7 @@ const timesUTC = [
   [20, 21, 22, 23],
 ];
 
-const book = () => {
+const Book = () => {
   const weeksVisibleToUsers = 10;
   const pricePerSession = 28;
 
@@ -58,4 +58,4 @@ const book = () => {
   );
 };
 
-export default book;
+export default Book;
