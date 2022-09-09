@@ -50,7 +50,7 @@ const Book = () => {
   return (
     <div>
       <Head>
-        <title>book a session testing</title>
+        <title>book a session</title>
         <link rel="icon" href="/trig_tutor_logo.svg" />
       </Head>
       <ResponsiveAppBar />
