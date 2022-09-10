@@ -70,14 +70,14 @@ const WeekSelector = (props: WeekSelectorProps) => {
           onClick={handleClickBackward}
           $visibility={backButtonVisibility}
         >
-          <Image src={backwardsArrow} width={30} height={30} />
+          <Image src={backwardsArrow} width={20} height={20} />
         </Button>
         <DateDisplay>{dateDisplay}</DateDisplay>
         <Button
           onClick={handleClickForward}
           $visibility={forwardButtonVisibility}
         >
-          <Image src={forwardArrow} width={30} height={30} />
+          <Image src={forwardArrow} width={20} height={20} />
         </Button>
       </WeekSelectionWrapper>
       <DayLabels sunday={visibleSunday} />

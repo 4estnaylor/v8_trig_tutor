@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import useSundays from '../../../utils/hooks/useSundays';
 import Tiles from './Tiles';
@@ -28,10 +28,18 @@ const TimeSelectorSection = (props: TimeSelectorProps) => {
     setWeekIndex,
   };
 
+  const tilesProps = {
+    sundays,
+    weekIndex,
+    timeSlots,
+    selectedSessions,
+    setSelectedSessions,
+  };
+
   return (
     <Wrapper>
       <WeekSelector {...weekSelectorProps} />
-      <Tiles />
+      <Tiles {...tilesProps} />
     </Wrapper>
   );
 };
