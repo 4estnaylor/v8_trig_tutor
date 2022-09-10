@@ -15,7 +15,6 @@ export interface WeekSelectorProps {
 
 const WeekSelector = (props: WeekSelectorProps) => {
   let { sundays, weekIndex, setWeekIndex } = props;
-  console.log(props);
 
   const backButtonVisibility = weekIndex > 0;
   const forwardButtonVisibility = weekIndex < sundays.length - 1;
@@ -81,8 +80,7 @@ const WeekSelector = (props: WeekSelectorProps) => {
           <Image src={forwardArrow} width={30} height={30} />
         </Button>
       </WeekSelectionWrapper>
-      <DayLabels />
-      {/* <DayLabels2 sunday={visibleSunday} /> */}
+      <DayLabels sunday={visibleSunday} />
     </Wrapper>
   );
 };
