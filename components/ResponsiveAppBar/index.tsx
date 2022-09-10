@@ -102,7 +102,11 @@ const ResponsiveAppBar = () => {
           </SvgIcon> */}
           <Link href="/" style={{ cursor: 'pointer' }}>
             <Box
-              sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                cursor: 'pointer',
+              }}
             >
               <Box
                 component="img"

@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import useSundays from '../../../utils/hooks/useSundays';
+import WeekSelector, { WeekSelectorProps } from './WeekSelector';
 
 export interface TimeSelectorProps {
   sundays: Date[];
@@ -11,13 +13,31 @@ export interface TimeSelectorProps {
 }
 
 const TimeSelectorSection = (props: TimeSelectorProps) => {
-  console.log(props);
-  return <Wrapper>TimeSelectorSection</Wrapper>;
+  const {
+    sundays,
+    weekIndex,
+    setWeekIndex,
+    timeSlots,
+    selectedSessions,
+    setSelectedSessions,
+  } = props;
+  const weekSelectorProps: WeekSelectorProps = {
+    sundays,
+    weekIndex,
+    setWeekIndex,
+  };
+
+  return (
+    <Wrapper>
+      <WeekSelector {...weekSelectorProps} />
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
   width: 350px;
   background-color: transparent;
+  height: 100px;
   margin: auto;
 `;
 

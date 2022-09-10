@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import TimeSelectorSection, {
   TimeSelectorProps,
 } from '../components/Book/TimeSelectorSection/TimeSelectorSection';
+import cl from '../colors';
 
 const timesUTC = [
   //sunday ↓
@@ -59,9 +60,16 @@ const Book = () => {
         <link rel="icon" href="/trig_tutor_logo.svg" />
       </Head>
       <ResponsiveAppBar />
-      <TimeSelectorSection {...timeSelectorProps} />
+      <TopSection>
+        <TimeSelectorSection {...timeSelectorProps} />
+      </TopSection>
     </div>
   );
 };
+
+const TopSection = styled.div`
+  background-color: ${cl.getHSL(cl.white)};
+  min-height: 500px;
+`;
 
 export default Book;
