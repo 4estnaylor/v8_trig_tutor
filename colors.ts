@@ -21,13 +21,13 @@ const getHSLA = (color: color, a: number) => {
 
 const black = { hue: 190, saturation: 30, lightness: 10 };
 const white = { hue: 190, saturation: 30, lightness: 99 };
-const gray_light = { hue: 190, saturation: 20, lightness: 90 };
-const gray_mid = { hue: 190, saturation: 20, lightness: 45 };
-const gray_dark = { hue: 190, saturation: 90, lightness: 30 };
+const gray_light = { hue: 190, saturation: 15, lightness: 90 };
+const gray_mid = { hue: 190, saturation: 15, lightness: 45 };
+const gray_dark = { hue: 190, saturation: 15, lightness: 30 };
 const red_light = { hue: 340, saturation: 100, lightness: 80 };
 const red = { hue: 340, saturation: 100, lightness: 50 };
 const red_dark = { hue: 340, saturation: 100, lightness: 30 };
-const blue_light = { hue: 190, saturation: 100, lightness: 80 };
+const blue_light = { hue: 190, saturation: 100, lightness: 85 };
 const blue = { hue: 190, saturation: 100, lightness: 40 };
 const blue_dark = { hue: 190, saturation: 100, lightness: 30 };
 

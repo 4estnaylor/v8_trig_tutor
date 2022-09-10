@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import useSundays from '../../../utils/hooks/useSundays';
+import Tiles from './Tiles';
 import WeekSelector, { WeekSelectorProps } from './WeekSelector';
 
 export interface TimeSelectorProps {
@@ -30,6 +31,7 @@ const TimeSelectorSection = (props: TimeSelectorProps) => {
   return (
     <Wrapper>
       <WeekSelector {...weekSelectorProps} />
+      <Tiles />
     </Wrapper>
   );
 };

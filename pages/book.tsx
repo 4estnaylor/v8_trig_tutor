@@ -60,6 +60,7 @@ const Book = () => {
         <link rel="icon" href="/trig_tutor_logo.svg" />
       </Head>
       <ResponsiveAppBar />
+      <Gap30 />
       <TopSection>
         <TimeSelectorSection {...timeSelectorProps} />
       </TopSection>
@@ -68,8 +69,11 @@ const Book = () => {
 };
 
 const TopSection = styled.div`
-  background-color: ${cl.getHSL(cl.white)};
-  min-height: 500px;
+  /* background-color: ${cl.getHSL(cl.white)}; */
+`;
+
+const Gap30 = styled.div`
+  height: 30px;
 `;
 
 export default Book;

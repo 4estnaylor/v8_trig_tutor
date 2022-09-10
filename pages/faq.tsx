@@ -10,7 +10,7 @@ const faq = () => {
         <link rel="icon" href="/trig_tutor_logo.svg" />
       </Head>
       <ResponsiveAppBar />
-      faq
+      <div>faq</div>
     </div>
   );
 };

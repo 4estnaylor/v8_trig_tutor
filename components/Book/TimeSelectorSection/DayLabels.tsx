@@ -17,14 +17,24 @@ const DayLabels = ({ sunday }: DayLabelsProps) => {
   }
 
   const dayLabels = visibleWeekDateTimes.map((dateTime) => {
+    let isSameDate = false;
+    let today = new Date();
+    if (
+      dateTime.getDate() === today.getDate() &&
+      dateTime.getMonth() === today.getMonth() &&
+      dateTime.getFullYear() === today.getFullYear()
+    ) {
+      isSameDate = true;
+    }
     return (
       <DayLabel key={dateTime.getTime()}>
         <DayLetter>
           {dateTime.toLocaleDateString('en-US', { weekday: 'narrow' })}
         </DayLetter>
-        <DateNumber>
+        <DateNumber marked={isSameDate}>
           {dateTime.toLocaleDateString('en-US', { day: 'numeric' })}{' '}
         </DateNumber>
+        {/* <CircleDot>&nbsp;</CircleDot> */}
       </DayLabel>
     );
   });
@@ -36,8 +46,23 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-const DateNumber = styled.div`
-  color: ${cl.getHSL(cl.gray_mid)};
+const DateNumber = styled.div<{ marked: boolean }>`
+  color: ${(p) => (p.marked ? cl.getHSL(cl.white) : cl.getHSL(cl.gray_mid))};
+  background-color: ${(p) => (p.marked ? cl.getHSL(cl.red) : 'transparent')};
+
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  aspect-ratio: 1;
+`;
+
+const CircleDot = styled.div``;
+
+const InvisibleCircleDot = styled(CircleDot)`
+  background-color: transparent;
 `;
 const DayLetter = styled.div`
   font-size: 1.5rem;
