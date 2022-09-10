@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
+export type useTimeSlotType = [
+  timeSlots: Date[],
+  setTimeSlots: React.Dispatch<React.SetStateAction<Date[]>>
+];
+
 const useTimeSlots = (sundays: Date[], timesUTC: number[][]) => {
   const [timeSlots, setTimeSlots] = useState<Date[]>([]);
 
@@ -39,7 +44,9 @@ const useTimeSlots = (sundays: Date[], timesUTC: number[][]) => {
   }, [sundays]);
   // following function gets all time slots and has an array of sub-arrays. Where each subarray represents a week
 
-  return [timeSlots, setTimeSlots];
+  const product: useTimeSlotType = [timeSlots, setTimeSlots];
+
+  return product;
 };
 
 export default useTimeSlots;

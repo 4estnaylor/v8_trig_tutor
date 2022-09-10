@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import Head from 'next/head';
 import useSundays from '../utils/hooks/useSundays';
-import useTimeSlots from '../utils/hooks/useTimeSlots';
+import useTimeSlots, { useTimeSlotType } from '../utils/hooks/useTimeSlots';
+import styled from 'styled-components';
+import TimeSelectorSection, {
+  TimeSelectorProps,
+} from '../components/Book/TimeSelectorSection/TimeSelectorSection';
 
 const timesUTC = [
   //sunday ↓
@@ -26,11 +30,14 @@ const Book = () => {
   const pricePerSession = 28;
 
   const [sundays, setSundays]: any = useSundays(weeksVisibleToUsers);
-  const [timeSlots, setTimeSlots] = useTimeSlots(sundays, timesUTC);
+  const [timeSlots, setTimeSlots]: useTimeSlotType = useTimeSlots(
+    sundays,
+    timesUTC
+  );
   const [weekIndex, setWeekIndex] = useState(0);
   const [selectedSessions, setSelectedSessions] = useState<Date[]>([]);
 
-  const timeSelectorProps = {
+  const timeSelectorProps: TimeSelectorProps = {
     sundays,
     weekIndex,
     setWeekIndex,
@@ -39,13 +46,11 @@ const Book = () => {
     setSelectedSessions,
   };
 
-  const paymentAreaProps = {
+  const paymentProps = {
     selectedSessions,
     setSelectedSessions,
     pricePerSession,
   };
-
-  console.log(timeSlots);
 
   return (
     <div>
@@ -54,8 +59,9 @@ const Book = () => {
         <link rel="icon" href="/trig_tutor_logo.svg" />
       </Head>
       <ResponsiveAppBar />
+      <TimeSelectorSection {...timeSelectorProps} />
     </div>
   );
 };
-// testing
+
 export default Book;
