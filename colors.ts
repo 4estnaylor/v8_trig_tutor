@@ -10,7 +10,7 @@ const getHSL = (color: color) => {
 };
 
 const getHSLA = (color: color, a: number) => {
-  const string = `hsla(${color.hue}, ${color.saturation}%, ${color.lightness}% / ${a})`;
+  const string = `hsla(${color.hue} ${color.saturation}% ${color.lightness}% / ${a})`;
   return string;
 };
 // export const turqouise: color = { hue: 174, saturation: 100, lightness: 50 };

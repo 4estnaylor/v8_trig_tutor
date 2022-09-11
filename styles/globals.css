@@ -21,7 +21,7 @@ a {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
@@ -29,4 +29,4 @@ a {
     background: 'hsla(190 30% 99%)';
     color: 'hsla(190 30% 10%)';
   }
-}
+} */

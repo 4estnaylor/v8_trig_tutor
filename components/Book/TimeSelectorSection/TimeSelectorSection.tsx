@@ -39,6 +39,7 @@ const TimeSelectorSection = (props: TimeSelectorProps) => {
   return (
     <Wrapper>
       <WeekSelector {...weekSelectorProps} />
+      <Gap30 />
       <Tiles {...tilesProps} />
     </Wrapper>
   );
@@ -49,6 +50,10 @@ const Wrapper = styled.div`
   background-color: transparent;
   height: 100px;
   margin: auto;
+`;
+
+const Gap30 = styled.div`
+  height: 30px;
 `;
 
 export default TimeSelectorSection;

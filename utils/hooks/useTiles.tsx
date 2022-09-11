@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import Tile from '../../components/Book/TimeSelectorSection/Tile';
 import tileThemes from '../../components/Book/TimeSelectorSection/TileThemes';
 import useBookedSessions from './useBookedSessions';
 
 export interface useTileProps {
   timeSlots: Date[];
   selectedSessions: Date[];
+  setSelectedSessions: React.Dispatch<React.SetStateAction<Date[]>>;
 }
 
 const useTiles = (props: useTileProps) => {
-  const { timeSlots, selectedSessions } = props;
+  const { timeSlots, selectedSessions, setSelectedSessions } = props;
   const [tiles, setTiles] = useState<JSX.Element[]>([]);
   const bookedSessions = useBookedSessions();
   const getTileTheme = (timeSlot: Date) => {
     let theme = tileThemes.past;
 
     //check if already booked
-    const isBooked = bookedSessions.filter(
-      (session) => session.meetTime.getTime() === timeSlot.getTime()
-    );
+    const isBooked =
+      bookedSessions.filter(
+        (session) => session.meetTime.getTime() === timeSlot.getTime()
+      ).length > 0;
 
     if (isBooked) {
       theme = tileThemes.booked;
@@ -61,15 +64,21 @@ const useTiles = (props: useTileProps) => {
   useEffect(() => {
     const convertedToTiles = timeSlots.map((timeSlot) => {
       const theme = getTileTheme(timeSlot);
+      const tileProps = {
+        timeSlot: timeSlot,
+        selectedSessions,
+        setSelectedSessions,
+        theme,
+      };
+
       return (
-        <div key={timeSlot.getTime()}>{timeSlot.toLocaleTimeString()}</div>
+        // <div key={timeSlot.getTime()}>{timeSlot.toLocaleTimeString()}</div>
+        <Tile key={timeSlot.getTime()} {...tileProps} />
       );
     });
 
-    console.log(convertedToTiles);
-
     setTiles(convertedToTiles);
-  }, [timeSlots]);
+  }, [timeSlots, bookedSessions, selectedSessions, setSelectedSessions]);
 
   return tiles;
 };
