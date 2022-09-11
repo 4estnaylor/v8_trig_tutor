@@ -78,8 +78,8 @@ const Wrapper = styled.div`
 `;
 
 const ButtonArea = styled.button<{ theme: TileTheme }>`
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
