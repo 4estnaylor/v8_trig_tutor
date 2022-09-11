@@ -56,8 +56,8 @@ const DateNumber = styled.div<{ marked: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4px;
-  aspect-ratio: 1;
+  width: 24px;
+  height: 24px;
 `;
 
 const CircleDot = styled.div``;
@@ -73,7 +73,7 @@ const DayLetter = styled.div`
 
 const DayLabel = styled.div`
   width: 50px;
-  height: 50px;
+
   display: flex;
   gap: 5px;
   align-items: center;

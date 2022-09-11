@@ -20,7 +20,7 @@ const tileThemes: {
   selectedForBooking: TileTheme;
 } = {
   available: {
-    color: cl.getHSL(cl.black),
+    color: cl.getHSL(cl.gray_dark),
     backgroundColor: 'transparent',
     hover: {
       backgroundColor: cl.getHSL(cl.black),
@@ -28,7 +28,7 @@ const tileThemes: {
     },
   },
   past: {
-    color: cl.getHSL(cl.black),
+    color: cl.getHSL(cl.gray_dark),
     backgroundColor: cl.getHSL(cl.white),
   },
   booked: {

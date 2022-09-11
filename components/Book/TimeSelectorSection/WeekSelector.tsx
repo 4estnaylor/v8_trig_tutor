@@ -99,7 +99,7 @@ const DateDisplay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${cl.gray_mid};
+  color: ${cl.getHSL(cl.black)};
   flex: 1;
   font-size: 1.25rem;
   opacity: 0.7; ;

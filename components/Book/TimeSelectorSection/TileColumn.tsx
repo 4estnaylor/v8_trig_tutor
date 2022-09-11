@@ -7,7 +7,6 @@ interface TileColumnProps {
 
 const TileColumn = (props: TileColumnProps) => {
   const { timeSlotTiles } = props;
-  console.log(timeSlotTiles);
   return <Wrapper>{timeSlotTiles}</Wrapper>;
 };
 

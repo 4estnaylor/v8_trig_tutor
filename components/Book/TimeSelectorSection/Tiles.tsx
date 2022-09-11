@@ -69,8 +69,6 @@ const Tiles = (props: TilesProps) => {
     return tilesForWeekDay;
   };
 
-  console.log(visibleTiles);
-
   return (
     <Wrapper>
       <TileColumn timeSlotTiles={getTilesForDayOfWeekByIndex(0)} />
