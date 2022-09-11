@@ -8,6 +8,8 @@ import TimeSelectorSection, {
   TimeSelectorProps,
 } from '../components/Book/TimeSelectorSection/TimeSelectorSection';
 import cl from '../colors';
+import Gap from '../components/Gaps/Gap';
+import BookingSection from '../components/Book/BookingSection/BookingSection';
 
 const timesUTC = [
   //sunday ↓
@@ -47,7 +49,7 @@ const Book = () => {
     setSelectedSessions,
   };
 
-  const paymentProps = {
+  const bookingProps = {
     selectedSessions,
     setSelectedSessions,
     pricePerSession,
@@ -60,16 +62,27 @@ const Book = () => {
         <link rel="icon" href="/trig_tutor_logo.svg" />
       </Head>
       <ResponsiveAppBar />
-      <Gap30 />
+
       <TopSection>
+        <Gap height={30} />
         <TimeSelectorSection {...timeSelectorProps} />
+        <Gap height={30} />
       </TopSection>
+
+      <BottomSection>
+        <Gap height={30} />
+        <BookingSection {...bookingProps} />
+      </BottomSection>
     </div>
   );
 };
 
 const TopSection = styled.div`
   /* background-color: ${cl.getHSL(cl.white)}; */
+`;
+
+const BottomSection = styled.div`
+  background-color: ${cl.getHSL(cl.black)};
 `;
 
 const Gap30 = styled.div`

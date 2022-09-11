@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import useSundays from '../../../utils/hooks/useSundays';
+import Gap from '../../Gaps/Gap';
 import Tiles from './Tiles';
 import WeekSelector, { WeekSelectorProps } from './WeekSelector';
 
@@ -39,7 +40,7 @@ const TimeSelectorSection = (props: TimeSelectorProps) => {
   return (
     <Wrapper>
       <WeekSelector {...weekSelectorProps} />
-      <Gap30 />
+      <Gap height={15} />
       <Tiles {...tilesProps} />
     </Wrapper>
   );
@@ -48,7 +49,6 @@ const TimeSelectorSection = (props: TimeSelectorProps) => {
 const Wrapper = styled.div`
   width: 350px;
   background-color: transparent;
-  height: 100px;
   margin: auto;
 `;
 
