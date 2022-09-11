@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import cl from '../../../colors';
+import SelectedSessionsList, {
+  SelectedSesionsListProps,
+} from './SelectedSessionsList';
 
 interface BookingSectionProps {
   selectedSessions: Date[];
@@ -10,7 +13,17 @@ interface BookingSectionProps {
 
 const BookingSection = (props: BookingSectionProps) => {
   const { selectedSessions, setSelectedSessions, pricePerSession } = props;
-  return <Wrapper>BookingSection</Wrapper>;
+
+  const selectedSessionsListProps: SelectedSesionsListProps = {
+    selectedSessions,
+    setSelectedSessions,
+  };
+
+  return (
+    <Wrapper>
+      <SelectedSessionsList {...selectedSessionsListProps} />
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
