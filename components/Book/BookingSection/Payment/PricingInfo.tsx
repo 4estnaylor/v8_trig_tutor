@@ -73,7 +73,7 @@ const Title = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 1.5rem;
+  font-size: 2rem;
 `;
 
 const FortyFiveMinCircle = styled.div`
@@ -104,13 +104,12 @@ const FortyFiveMinCircleText = styled.div`
 `;
 
 const Digit = styled.div`
-  font-size: 1.5rem;
+  font-size: 1rem;
 `;
 
 const Min = styled.div`
   font-size: 0.75rem;
-  position: absolute;
-  bottom: -15px;
+
   color: ${cl.getHSL(cl.white)};
 `;
 
