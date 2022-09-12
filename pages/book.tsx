@@ -82,7 +82,13 @@ const TopSection = styled.div`
 `;
 
 const BottomSection = styled.div`
-  background-color: ${cl.getHSL(cl.black)};
+  /* background-color: ${cl.getHSL(cl.black)}; */
+  background: linear-gradient(
+    -20deg,
+    ${cl.getHSL(cl.red_dark)},
+    ${cl.getHSL(cl.blue_dark)}
+  );
+  background-size: 200%;
 `;
 
 export default Book;

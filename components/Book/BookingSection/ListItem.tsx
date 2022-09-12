@@ -61,7 +61,7 @@ const ListItem = (props: ListItemProps) => {
 
 const Weekday = styled.div`
   width: 100px;
-  padding-left: 60px;
+  padding-left: 30px;
 `;
 const Month = styled.div`
   width: 100px;
@@ -86,7 +86,7 @@ const InnerHour = styled.div`
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  background-color: ${cl.getHSL(cl.black)};
+  background-color: transparent;
 `;
 
 const Digit = styled.div``;

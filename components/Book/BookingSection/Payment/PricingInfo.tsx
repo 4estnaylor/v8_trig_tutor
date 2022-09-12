@@ -60,7 +60,7 @@ const Wrapper = styled.div`
 `;
 
 const Price = styled.div`
-  font-size: 2rem;
+  font-size: 3.5rem;
   height: 50px;
   display: flex;
   justify-content: center;
