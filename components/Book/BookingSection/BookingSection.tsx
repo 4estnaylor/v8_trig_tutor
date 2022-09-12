@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import cl from '../../../colors';
+import Gap from '../../../components/Gaps/Gap';
+import Payment, { PaymentProps } from './Payment/Payment';
 import SelectedSessionsList, {
   SelectedSesionsListProps,
 } from './SelectedSessionsList';
@@ -19,9 +21,17 @@ const BookingSection = (props: BookingSectionProps) => {
     setSelectedSessions,
   };
 
+  const paymentProps: PaymentProps = {
+    selectedSessions,
+    pricePerSession,
+  };
+
   return (
     <Wrapper>
       <SelectedSessionsList {...selectedSessionsListProps} />
+      <Gap height={30} />
+      <Payment {...paymentProps} />
+      <Gap height={30} />
     </Wrapper>
   );
 };

@@ -30,7 +30,7 @@ const timesUTC = [
 
 const Book = () => {
   const weeksVisibleToUsers = 10;
-  const pricePerSession = 28;
+  const pricePerSession = 30;
 
   const [sundays, setSundays]: any = useSundays(weeksVisibleToUsers);
   const [timeSlots, setTimeSlots]: useTimeSlotType = useTimeSlots(
@@ -83,10 +83,6 @@ const TopSection = styled.div`
 
 const BottomSection = styled.div`
   background-color: ${cl.getHSL(cl.black)};
-`;
-
-const Gap30 = styled.div`
-  height: 30px;
 `;
 
 export default Book;
