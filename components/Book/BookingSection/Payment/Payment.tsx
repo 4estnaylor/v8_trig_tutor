@@ -2,6 +2,7 @@ import React from 'react';
 import { useSession } from 'next-auth/react';
 import PricingInfo from './PricingInfo';
 import styled from 'styled-components';
+import CheckoutButton, { CheckoutButtonProps } from './CheckoutButton';
 
 export interface PaymentProps {
   selectedSessions: Date[];
@@ -14,6 +15,11 @@ const Payment = (props: PaymentProps) => {
   const areSessionsSelected = selectedSessions.length > 0;
   const isLoggedIn = session?.user ? true : false;
 
+  const checkoutButtonProps: CheckoutButtonProps = {
+    pricePerSession,
+    selectedSessions,
+  };
+
   if (!areSessionsSelected) {
     return (
       <PricingInfoWrapper>
@@ -23,7 +29,11 @@ const Payment = (props: PaymentProps) => {
   } else if (!isLoggedIn) {
     return <div> Log In + inactive checkout button</div>;
   } else {
-    return <div> checkout button </div>;
+    return (
+      <div>
+        <CheckoutButton {...checkoutButtonProps} />
+      </div>
+    );
   }
 };
 
@@ -32,6 +42,7 @@ const PricingInfoWrapper = styled.div`
   /* background-color: red; */
   display: flex;
   justify-content: center;
+  position: relative;
 `;
 
 export default Payment;

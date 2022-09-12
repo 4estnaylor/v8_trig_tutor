@@ -31,7 +31,7 @@ const BookingSection = (props: BookingSectionProps) => {
       <SelectedSessionsList {...selectedSessionsListProps} />
       <Gap height={30} />
       <Payment {...paymentProps} />
-      <Gap height={30} />
+      <Gap height={10} />
     </Wrapper>
   );
 };

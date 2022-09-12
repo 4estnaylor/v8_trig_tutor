@@ -91,9 +91,9 @@ const BottomSection = styled.div`
   /* background-color: ${cl.getHSL(cl.black)}; */
   background: linear-gradient(
     -20deg,
-    ${cl.getHSL(cl.blue)},
+    ${cl.getHSL(cl.red)},
     hsla(225 32% 57%),
-    ${cl.getHSL(cl.red)}
+    ${cl.getHSL(cl.blue)}
   );
   background-size: 100%;
   background-position-x: 50%;

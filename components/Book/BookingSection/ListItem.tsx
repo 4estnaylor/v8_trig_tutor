@@ -107,6 +107,11 @@ const Wrapper = styled.div`
   justify-content: flex-start;
   align-items: baseline;
   padding-right: 0px;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: ${cl.getHSLA(cl.white, 0.2)};
+  }
 `;
 
 const FullDate = styled.div`
@@ -131,6 +136,10 @@ const DeleteButton = styled.button`
   align-items: center;
   position: absolute;
   right: 0;
+
+  &:hover {
+    color: ${cl.getHSL(cl.red)};
+  }
 `;
 
 export default ListItem;
