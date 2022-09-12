@@ -56,7 +56,7 @@ const Book = () => {
   };
 
   return (
-    <div>
+    <Wrapper>
       <Head>
         <title>book a session</title>
         <link rel="icon" href="/trig_tutor_logo.svg" />
@@ -73,9 +73,15 @@ const Book = () => {
         <Gap height={30} />
         <BookingSection {...bookingProps} />
       </BottomSection>
-    </div>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+`;
 
 const TopSection = styled.div`
   /* background-color: ${cl.getHSL(cl.white)}; */
@@ -85,10 +91,14 @@ const BottomSection = styled.div`
   /* background-color: ${cl.getHSL(cl.black)}; */
   background: linear-gradient(
     -20deg,
-    ${cl.getHSL(cl.red_dark)},
-    ${cl.getHSL(cl.blue_dark)}
+    ${cl.getHSL(cl.blue)},
+    hsla(225 32% 57%),
+    ${cl.getHSL(cl.red)}
   );
-  background-size: 200%;
+  background-size: 100%;
+  background-position-x: 50%;
+  background-position-y: 50%;
+  flex: 1;
 `;
 
 export default Book;
