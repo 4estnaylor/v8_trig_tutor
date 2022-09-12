@@ -5,6 +5,7 @@ import Image from 'next/image';
 import PersonIcon from '@mui/icons-material/Person';
 import Avatar from '@mui/material/Avatar';
 import { useSession, signIn, signOut } from 'next-auth/react';
+import { checkout } from '../../../../utils/checkout';
 
 export interface CheckoutButtonProps {
   pricePerSession: number;
@@ -12,10 +13,33 @@ export interface CheckoutButtonProps {
 }
 
 const CheckoutButton = (props: CheckoutButtonProps) => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
+  const callStripe = () => {
+    checkout({
+      lineItems: [
+        {
+          price: 'price_1LhMNgAu4BvCeixjPQaUBDfg',
+          quantity: selectedSessions.length,
+        },
+      ],
+    });
+  };
+
+  const handleCheckoutClick = () => {
+    if (status !== 'authenticated') {
+      signIn();
+    }
+    if (status === 'authenticated') {
+      callStripe();
+    }
+  };
   let avatar;
+
   if (session?.user?.image) {
     avatar = <Avatar src={session.user.image} />;
+  } else if (status === 'authenticated') {
+    avatar = <Avatar sx={{ background: 'limegreen' }}> ✓ </Avatar>;
   } else {
     avatar = <Avatar sx={{ background: 'transparent' }} />;
   }
@@ -23,7 +47,7 @@ const CheckoutButton = (props: CheckoutButtonProps) => {
   const { pricePerSession, selectedSessions } = props;
 
   return (
-    <Wrapper>
+    <Wrapper onClick={handleCheckoutClick}>
       <Price>{`$${pricePerSession * selectedSessions.length}`}</Price>
       <CartImageWrapper>
         {avatar}
@@ -48,7 +72,6 @@ const Wrapper = styled.button`
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      border: 2px solid ${cl.getHSL(cl.blue_light)};
       background-color: ${cl.getHSLA(cl.blue_light, 0.6)};
     }
   }

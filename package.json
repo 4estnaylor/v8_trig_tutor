@@ -23,9 +23,12 @@
     "next-auth": "^4.10.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "superjson": "^1.9.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.19.0",
+    "@babel/preset-env": "^7.19.0",
     "@types/node": "^18.7.16",
     "@types/react": "^18.0.18",
     "babel-plugin-styled-components": "^2.0.7",
