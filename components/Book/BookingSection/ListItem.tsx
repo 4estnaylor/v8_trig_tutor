@@ -62,9 +62,11 @@ const ListItem = (props: ListItemProps) => {
 const Weekday = styled.div`
   width: 100px;
   padding-left: 30px;
+  font-size: 1.25rem;
 `;
 const Month = styled.div`
   width: 100px;
+  font-size: 1.25rem;
   /* padding-left: 20px; */
 `;
 
@@ -76,8 +78,8 @@ const Hour = styled.div`
   width: 50px;
 `;
 const InnerHour = styled.div`
-  height: 45px;
-  width: 45px;
+  height: 50px;
+  width: 50px;
   border: 2px solid ${cl.getHSL(cl.white)};
   color: ${cl.getHSL(cl.white)};
   display: flex;
@@ -89,9 +91,13 @@ const InnerHour = styled.div`
   background-color: transparent;
 `;
 
-const Digit = styled.div``;
+const Digit = styled.div`
+  font-size: 1.25rem;
+  font-weight: 600;
+`;
 const AMPM = styled.div`
   font-size: 0.75rem;
+  font-weight: 600;
 `;
 
 const Wrapper = styled.div`
