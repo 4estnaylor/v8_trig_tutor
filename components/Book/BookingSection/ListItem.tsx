@@ -129,7 +129,7 @@ const DeleteButton = styled.button`
   height: 100%;
 
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.25rem;
 
   display: flex;
   justify-content: center;
@@ -138,7 +138,7 @@ const DeleteButton = styled.button`
   right: 0;
 
   &:hover {
-    color: ${cl.getHSL(cl.red)};
+    color: ${cl.getHSL(cl.black)};
   }
 `;
 

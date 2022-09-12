@@ -15,7 +15,7 @@ const CheckoutButton = (props: CheckoutButtonProps) => {
     <Wrapper>
       <Price>{`$${pricePerSession * selectedSessions.length}`}</Price>
       <CartImageWrapper>
-        <Image alt="cart icon" src="/cart.svg" width={40} height={40} />
+        <Image alt="cart icon" src="/cart.svg" width={35} height={35} />
       </CartImageWrapper>
     </Wrapper>
   );
@@ -31,7 +31,8 @@ const Wrapper = styled.button`
   display: flex;
   align-items: center;
   cursor: pointer;
-  width: 217px;
+  width: 350px;
+  height: 60px;
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
@@ -42,7 +43,7 @@ const Wrapper = styled.button`
 `;
 
 const CartImageWrapper = styled.div`
-  flex: 2;
+  flex: 1;
   /* position: absolute;
   left: 5px;
   display: flex;
@@ -50,7 +51,6 @@ const CartImageWrapper = styled.div`
 `;
 const Price = styled.div`
   width: 50px;
-  height: 100%;
   background-color: transparent;
   border-right: 2px solid ${cl.getHSL(cl.white)};
   flex: 1;
