@@ -13,43 +13,47 @@ const CheckoutButton = (props: CheckoutButtonProps) => {
 
   return (
     <Wrapper>
-      <CartImageWrapper>
-        <Image alt="cart icon" src="/cart.svg" width={50} height={50} />
-      </CartImageWrapper>
       <Price>{`$${pricePerSession * selectedSessions.length}`}</Price>
+      <CartImageWrapper>
+        <Image alt="cart icon" src="/cart.svg" width={40} height={40} />
+      </CartImageWrapper>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.button`
   background-color: ${cl.getHSLA(cl.white, 0.2)};
-  border: none;
   border: 2px solid ${cl.getHSL(cl.white)};
   color: ${cl.getHSL(cl.white)};
   border-radius: 8px;
-  padding: 10px;
-  font-size: 2rem;
-  width: 100%;
+
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
   cursor: pointer;
-  position: relative;
+  width: 217px;
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      border: 4px solid ${cl.getHSL(cl.blue_light)};
-      padding: 8px;
+      border: 2px solid ${cl.getHSL(cl.blue_light)};
     }
   }
+  padding: none;
 `;
 
 const CartImageWrapper = styled.div`
-  position: absolute;
+  flex: 2;
+  /* position: absolute;
   left: 5px;
   display: flex;
-  align-self: center;
+  align-self: center; */
 `;
 const Price = styled.div`
-  flex: 2;
+  width: 50px;
+  height: 100%;
+  background-color: transparent;
+  border-right: 2px solid ${cl.getHSL(cl.white)};
+  flex: 1;
 `;
+
 export default CheckoutButton;

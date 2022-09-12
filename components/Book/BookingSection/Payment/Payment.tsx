@@ -26,20 +26,13 @@ const Payment = (props: PaymentProps) => {
         <PricingInfo pricePerSession={pricePerSession} />
       </PricingInfoWrapper>
     );
-  } else if (!isLoggedIn) {
-    return <div> Log In + inactive checkout button</div>;
   } else {
-    return (
-      <div>
-        <CheckoutButton {...checkoutButtonProps} />
-      </div>
-    );
+    return <CheckoutButton {...checkoutButtonProps} />;
   }
 };
 
 const PricingInfoWrapper = styled.div`
   width: 100%;
-  /* background-color: red; */
   display: flex;
   justify-content: center;
   position: relative;
