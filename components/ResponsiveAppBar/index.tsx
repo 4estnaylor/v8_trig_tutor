@@ -22,7 +22,6 @@ import Link from 'next/link';
 // import Logo from './trig_tutor_logo.svg';
 
 import { useSession, signIn, signOut } from 'next-auth/react';
-import { off } from 'process';
 
 const pages = ['Book', 'About Me', 'FAQ'];
 
