@@ -23,7 +23,7 @@ const Tile = (props: TileProps) => {
   const ampmString = timeString.split(' ')[1];
 
   const handleClick = () => {
-    if (theme === tileThemes.booked) {
+    if (theme === tileThemes.booked || theme === tileThemes.past) {
       return;
     }
 
@@ -56,7 +56,14 @@ const Tile = (props: TileProps) => {
   };
 
   if (timeSlot.getTime() < new Date().getTime()) {
-    return <Wrapper></Wrapper>;
+    return (
+      <Wrapper>
+        <ButtonArea onClick={() => {}} theme={tileThemes.past}>
+          <HourDisplay>{hourString}</HourDisplay>
+          <AMPMDisplay>{ampmString}</AMPMDisplay>
+        </ButtonArea>
+      </Wrapper>
+    );
   } else {
     return (
       <Wrapper>

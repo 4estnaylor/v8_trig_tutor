@@ -14,7 +14,7 @@ const useTiles = (props: useTileProps) => {
   const [tiles, setTiles] = useState<JSX.Element[]>([]);
   const bookedSessions = useBookedSessions();
   const getTileTheme = (timeSlot: Date) => {
-    let theme = tileThemes.past;
+    let theme = tileThemes.booked;
 
     //check if already booked
     const isBooked =

@@ -30,11 +30,16 @@ const tileThemes: {
   past: {
     color: cl.getHSL(cl.gray_dark),
     backgroundColor: cl.getHSL(cl.white),
+    opacity: 0.2,
+    cursor: 'auto',
+    hover: {
+      opacity: 0.2,
+    },
   },
   booked: {
     color: cl.getHSL(cl.gray_light),
     backgroundColor: cl.getHSL(cl.white),
-    textDecoration: 'line-through',
+    // textDecoration: 'line-through',
     cursor: 'auto',
   },
   selectedForBooking: {
