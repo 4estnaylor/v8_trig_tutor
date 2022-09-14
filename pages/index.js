@@ -15,11 +15,13 @@ export default function Home() {
       <ResponsiveAppBar />
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Forrest2 to <a href="https://nextjs.org">Next.js!</a>
+          Forrest2 to <a href="https://nextjs.org"></a>
         </h1>
 
         <p className={styles.description}>
-          Get started by mo money ediing{' '}
+          TODO: Booking: stripe webhook + booking confirmation page TODO:
+          account page TODO: mySessions page TODO: google login portal TODO:
+          about page TODO: home page
           <code className={styles.code}>pages/index.js</code>
         </p>
 

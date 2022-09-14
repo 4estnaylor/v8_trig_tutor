@@ -30,7 +30,7 @@ const CheckoutButton = (props: CheckoutButtonProps) => {
   const { data: session, status } = useSession();
 
   const callStripe = async () => {
-    const response = await fetch('/api/hello', {
+    const response = await fetch('/api/stripe_checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
