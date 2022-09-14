@@ -19,7 +19,7 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          Get started by ediing{' '}
+          Get started by mo money ediing{' '}
           <code className={styles.code}>pages/index.js</code>
         </p>
 
