@@ -6,6 +6,20 @@ import PersonIcon from '@mui/icons-material/Person';
 import Avatar from '@mui/material/Avatar';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { checkout } from '../../../../utils/checkout';
+import { loadStripe } from '@stripe/stripe-js';
+
+const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
+
+const stripe_public_key = process.env.NEXT_PUBLIC_API_KEY!;
+
+let stripePromise: any = null;
+
+const getStripe = () => {
+  if (!stripePromise) {
+    stripePromise = loadStripe(stripe_public_key);
+  }
+  return stripePromise;
+};
 
 export interface CheckoutButtonProps {
   pricePerSession: number;
@@ -15,15 +29,24 @@ export interface CheckoutButtonProps {
 const CheckoutButton = (props: CheckoutButtonProps) => {
   const { data: session, status } = useSession();
 
-  const callStripe = () => {
-    checkout({
-      lineItems: [
-        {
-          price: 'price_1LhMNgAu4BvCeixjPQaUBDfg',
-          quantity: selectedSessions.length,
-        },
-      ],
+  const callStripe = async () => {
+    const response = await fetch('/api/hello', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(selectedSessions),
     });
+
+    const result = await response.json();
+    const stripe = await getStripe();
+
+    const resultStripe = await stripe.redirectToCheckout({
+      sessionId: result.id,
+    });
+    if (resultStripe.error) {
+      alert(resultStripe.error.message);
+    }
   };
 
   const handleCheckoutClick = () => {
