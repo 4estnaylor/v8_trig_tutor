@@ -4,20 +4,32 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
       const body = req.body;
-      console.log(body);
+      let lineItems = [];
+
+      body.forEach((session) => {
+        const date = new Date(session);
+        const DateTimestring = date.toLocaleDateString('en-US', {
+          month: 'long',
+          day: 'numeric',
+          weekday: 'long',
+          hour: 'numeric',
+          year: 'numeric',
+        });
+        const lineItem = {
+          quantity: 1,
+          currency: 'usd',
+          amount: 3000,
+          name: '45 min session',
+          description: DateTimestring,
+        };
+        console.log(lineItem);
+        lineItems.push(lineItem);
+      });
+      console.log(lineItems);
+
       // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create({
-        line_items: [
-          {
-            // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            // price: process.env.PRICE_ID,
-            quantity: 1,
-            currency: 'usd',
-            amount: 2800,
-            name: '45 min session',
-            description: 'test description',
-          },
-        ],
+        line_items: lineItems,
         metadata: { sessions: JSON.stringify(body) },
         mode: 'payment',
         success_url: `${req.headers.origin}/book/successfully_booked=true`,
