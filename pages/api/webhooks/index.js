@@ -15,10 +15,17 @@
 //   },
 // };
 
-export default function webhookHandler(req, res) {
+export default async function webhookHandler(req, res) {
   if (req.method === 'POST') {
     console.log('happening');
-    console.log(req.body.data);
+    const event = req.body;
+    console.log(event.data);
+    console.log(event.data.object);
+    console.log(event.data.object.metadata);
+    let sessions = event.data.object.metadata.sessions;
+    console.log(sessions);
+    let sessionsParsed = await JSON.parse(sessions);
+    console.log('sessions parsed: ', sessionsParsed);
     res.status(200).send();
   }
 
