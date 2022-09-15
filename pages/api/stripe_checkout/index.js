@@ -3,10 +3,10 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      const body = req.body;
+      const { selectedSessions, userId } = req.body;
       let lineItems = [];
 
-      body.forEach((session) => {
+      selectedSessions.forEach((session) => {
         const date = new Date(session);
         const DateTimestring = date.toLocaleDateString('en-US', {
           month: 'long',
@@ -22,15 +22,21 @@ export default async function handler(req, res) {
           name: '45 min session',
           description: DateTimestring,
         };
-        console.log(lineItem);
         lineItems.push(lineItem);
       });
-      console.log(lineItems);
+
+      const stringifiedSessions = JSON.stringify(selectedSessions);
+      const stringifiedUserId = JSON.stringify(userId);
+
+      const metaData = {
+        sessions: stringifiedSessions,
+        userId: stringifiedUserId,
+      };
 
       // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create({
         line_items: lineItems,
-        metadata: { sessions: JSON.stringify(body) },
+        metadata: metaData,
         mode: 'payment',
         success_url: `${req.headers.origin}/book/successfully_booked=true`,
         cancel_url: `${req.headers.origin}/book/?canceled=true`,

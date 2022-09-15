@@ -17,15 +17,26 @@
 
 export default async function webhookHandler(req, res) {
   if (req.method === 'POST') {
-    console.log('happening');
-    const event = req.body;
-    console.log(event.data);
-    console.log(event.data.object);
-    console.log(event.data.object.metadata);
-    let sessions = event.data.object.metadata.sessions;
-    console.log(sessions);
-    let sessionsParsed = await JSON.parse(sessions);
-    console.log('sessions parsed: ', sessionsParsed);
+    switch (req.body.type) {
+      case 'payment_intent.created':
+        console.log('payment intent created');
+        break;
+      case 'checkout.session.completed':
+        console.log('checkout.session.completed');
+        const event = req.body;
+        console.log('event', event);
+        console.log('data', event.data);
+        console.log('object', event.data.object);
+        console.log('metadata', event.data.object.metadata);
+        let sessions = event.data.object.metadata.sessions;
+        console.log(sessions);
+        break;
+      default:
+        console.log(req.body.type ? req.body.type : 'beep bop');
+    }
+
+    // let sessionsParsed = await JSON.parse(sessions);
+    // console.log('sessions parsed: ', sessionsParsed);
     res.status(200).send();
   }
 

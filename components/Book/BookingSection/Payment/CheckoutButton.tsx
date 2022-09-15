@@ -35,7 +35,10 @@ const CheckoutButton = (props: CheckoutButtonProps) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(selectedSessions),
+      body: JSON.stringify({
+        selectedSessions: selectedSessions,
+        userId: 'abc123',
+      }),
     });
 
     const result = await response.json();
