@@ -11,7 +11,7 @@ export interface Session {
 const useBookedSessions = () => {
   const [bookedSessions, setBookedSessions] = useState<Session[]>([]);
   const testingApi = async () => {
-    const response = await fetch('/api/getBookedSessions', {
+    const response = await fetch('/api/db/getBookedSessions', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

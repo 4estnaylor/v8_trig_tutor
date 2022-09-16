@@ -6,6 +6,14 @@ export default async function handler(req, res) {
       const { selectedSessions, userId } = req.body;
       let lineItems = [];
 
+      const stringifiedSessions = JSON.stringify(selectedSessions);
+      const stringifiedUserId = JSON.stringify(userId);
+
+      const metaData = {
+        sessions: stringifiedSessions,
+        userId: stringifiedUserId,
+      };
+
       selectedSessions.forEach((session) => {
         const date = new Date(session);
         const DateTimestring = date.toLocaleDateString('en-US', {
@@ -25,21 +33,13 @@ export default async function handler(req, res) {
         lineItems.push(lineItem);
       });
 
-      const stringifiedSessions = JSON.stringify(selectedSessions);
-      const stringifiedUserId = JSON.stringify(userId);
-
-      const metaData = {
-        sessions: stringifiedSessions,
-        userId: stringifiedUserId,
-      };
-
       // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create({
         line_items: lineItems,
         metadata: metaData,
         mode: 'payment',
-        success_url: `${req.headers.origin}/book/successfully_booked=true`,
-        cancel_url: `${req.headers.origin}/book/?canceled=true`,
+        success_url: `${req.headers.origin}/booking_review?success=true`,
+        cancel_url: `${req.headers.origin}/booking_review?canceled=true`,
       });
 
       res.json({ id: session.id });

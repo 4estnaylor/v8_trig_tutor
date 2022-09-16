@@ -43,7 +43,7 @@ const ResponsiveAppBar = () => {
   } else {
     logInOrOut = 'Login';
   }
-  let settings = ['Profile', 'My Sessions', logInOrOut];
+  let settings = ['Profile', logInOrOut];
   if (!session?.user) {
     settings = [logInOrOut];
   }
@@ -251,16 +251,27 @@ const ResponsiveAppBar = () => {
                     handler = signOut;
                     break;
                   case 'Login':
-                    handler = signIn;
+                    handler = () => {
+                      signIn('google');
+                    };
+                    break;
+                  case 'Profile':
+                    return (
+                      <Link key={'profile'} href="/profile">
+                        <MenuItem key={setting} onClick={handler}>
+                          <Typography textAlign="center">Profile</Typography>
+                        </MenuItem>
+                      </Link>
+                    );
                     break;
                   default:
                     handler = () => {
                       console.log('no handler');
                     };
                 }
-                if (setting === 'Logout') {
-                  handler = signOut;
-                }
+                // if (setting === 'Logout') {
+                //   handler = signOut;
+                // }
                 return (
                   <MenuItem key={setting} onClick={handler}>
                     <Typography textAlign="center">{setting}</Typography>

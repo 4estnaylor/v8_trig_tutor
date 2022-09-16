@@ -7,6 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { checkout } from '../../../../utils/checkout';
 import { loadStripe } from '@stripe/stripe-js';
+import useTrigUser from '../../../../utils/hooks/useTrigUser';
 
 const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
 
@@ -28,6 +29,7 @@ export interface CheckoutButtonProps {
 
 const CheckoutButton = (props: CheckoutButtonProps) => {
   const { data: session, status } = useSession();
+  const trigUser = useTrigUser();
 
   const callStripe = async () => {
     const response = await fetch('/api/stripe_checkout', {
@@ -37,7 +39,7 @@ const CheckoutButton = (props: CheckoutButtonProps) => {
       },
       body: JSON.stringify({
         selectedSessions: selectedSessions,
-        userId: 'abc123',
+        userId: trigUser.id,
       }),
     });
 

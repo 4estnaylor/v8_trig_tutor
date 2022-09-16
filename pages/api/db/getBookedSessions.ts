@@ -1,4 +1,4 @@
-import prisma from '../../lib/primsa';
+import prisma from '../../../lib/primsa';
 
 export default async function handle(req: any, res: any) {
   if (req.method === 'GET') {

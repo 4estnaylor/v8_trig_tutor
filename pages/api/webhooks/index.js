@@ -1,4 +1,5 @@
 // import Cors from 'micro-cors';
+import prisma from '../../../lib/primsa';
 
 // const cors = Cors({
 //   allowMethods: ['POST', 'HEAD'],
@@ -20,16 +21,28 @@ export default async function webhookHandler(req, res) {
     switch (req.body.type) {
       case 'payment_intent.created':
         console.log('payment intent created');
+        console.log(req.body);
         break;
       case 'checkout.session.completed':
         console.log('checkout.session.completed');
         const event = req.body;
-        console.log('event', event);
-        console.log('data', event.data);
-        console.log('object', event.data.object);
-        console.log('metadata', event.data.object.metadata);
-        let sessions = event.data.object.metadata.sessions;
-        console.log(sessions);
+        // console.log('event', event);
+        // console.log('data', event.data);
+        // console.log('object', event.data.object);
+        // console.log('metadata', event.data.object.metadata);
+        let studentId = await JSON.parse(event.data.object.metadata.userId);
+        let sessionsString = event.data.object.metadata.sessions;
+        let sessions = await JSON.parse(sessionsString);
+        sessions.forEach(async (session) => {
+          session = new Date(session);
+          const newSession = await prisma.session.create({
+            data: {
+              meetTime: session,
+              studentId: studentId,
+            },
+          });
+        });
+
         break;
       default:
         console.log(req.body.type ? req.body.type : 'beep bop');
