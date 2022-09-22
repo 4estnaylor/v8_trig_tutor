@@ -58,6 +58,7 @@ const DateNumber = styled.div<{ marked: boolean }>`
   align-items: center;
   width: 24px;
   height: 24px;
+  font-size: 0.9rem;
 `;
 
 const CircleDot = styled.div``;

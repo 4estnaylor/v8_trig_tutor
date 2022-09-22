@@ -1,14 +1,14 @@
 import prisma from '../../../../lib/primsa';
-import { useSession } from 'next-auth/react';
 
 export default async function (req: any, res: any) {
-  console.log('called');
   // const session = useSession();
   // const userName = session.data?.user?.name;
 
   if (req.method === 'GET') {
     try {
-      const userEmail = req.query.userEmail;
+      const userEmail = await req.query.userEmail;
+      console.log('user email given to api: ', userEmail);
+      if (!userEmail) return;
 
       let user = await prisma.user.findUnique({
         where: { email: userEmail },
@@ -35,8 +35,6 @@ export default async function (req: any, res: any) {
   } else {
     res.status(400);
   }
-
-  res.status(200);
 
   res.send();
 }
