@@ -40,6 +40,7 @@ const CheckoutButton = (props: CheckoutButtonProps) => {
       body: JSON.stringify({
         selectedSessions: selectedSessions,
         userId: trigUser.id,
+        price: pricePerSession,
       }),
     });
 

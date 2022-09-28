@@ -43,7 +43,7 @@ const ResponsiveAppBar = () => {
   } else {
     logInOrOut = 'Login';
   }
-  let settings = ['Profile', logInOrOut];
+  let settings = ['Sessions', 'Profile', logInOrOut];
   if (!session?.user) {
     settings = [logInOrOut];
   }

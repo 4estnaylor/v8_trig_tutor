@@ -3,7 +3,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      const { selectedSessions, userId } = req.body;
+      const { selectedSessions, userId, price } = req.body;
       let lineItems = [];
 
       const stringifiedSessions = JSON.stringify(selectedSessions);
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
         const lineItem = {
           quantity: 1,
           currency: 'usd',
-          amount: 3000,
+          amount: price * 100,
           name: '45 min session',
           description: DateTimestring,
         };

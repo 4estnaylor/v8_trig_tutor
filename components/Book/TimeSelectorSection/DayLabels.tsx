@@ -47,17 +47,17 @@ const Wrapper = styled.div`
 `;
 
 const DateNumber = styled.div<{ marked: boolean }>`
-  color: ${(p) => (p.marked ? cl.getHSL(cl.white) : cl.getHSL(cl.gray_mid))};
+  color: ${(p) => (p.marked ? cl.getHSL(cl.gray_mid) : cl.getHSL(cl.gray_mid))};
   background-color: ${(p) =>
-    p.marked ? cl.getHSLA(cl.red, 1) : 'transparent'};
+    p.marked ? cl.getHSLA(cl.blue, 0.3) : 'transparent'};
 
   border-radius: 50%;
 
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   font-size: 0.9rem;
 `;
 

@@ -7,6 +7,7 @@ import useTrigUser from '../utils/hooks/useTrigUser';
 import useUserSessions from '../utils/hooks/useUserSessions';
 import Book from './book';
 import useUserSessions2 from '../utils/hooks/useUserSessions2';
+import Button from '@mui/material/Button';
 
 const booking_review = () => {
   const { user, userSessions } = useUserSessions();
@@ -74,7 +75,7 @@ const booking_review = () => {
         </CodeButtonContainer>
       </ImportantInfo>
       <Gap height={30} />
-      <Htitle>some details</Htitle>
+      <Htitle>important details</Htitle>
       <Gap height={10} />
       <Instructions>
         20 minutes before each session a reminder will be sent to your email:{' '}
@@ -114,7 +115,7 @@ const handleGotItButtonClick = () => {
   window.location.href = 'http://localhost:3000/book';
 };
 
-const GotIt = styled.button`
+const GotIt = styled(Button)`
   height: 50px;
   width: 100%;
   background-color: ${cl.getHSL(cl.red)};
@@ -125,7 +126,8 @@ const GotIt = styled.button`
   cursor: pointer;
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      opacity: 0.8;
+      background-color: ${cl.getHSL(cl.red)};
+      font-size: 1.75rem;
     }
   }
 `;

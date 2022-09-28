@@ -8,18 +8,22 @@ const useTrigUser = () => {
   let userEmail = useSession().data?.user?.email;
 
   const fetchUser = async () => {
-    if (!userEmail) return;
-    const response = await fetch(`/api/db/getUser/${userEmail}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    try {
+      if (!userEmail) return;
+      const response = await fetch(`/api/db/getUser/${userEmail}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-    const data = await response.json();
-    const user = data.user;
-    console.log('user of orign: ', user);
-    setTrigUser(user);
+      const data = await response.json();
+      const user = data.user;
+      console.log('user of orign: ', user);
+      setTrigUser(user);
+    } catch (error) {
+      console.log('no internet');
+    }
   };
 
   useEffect(() => {
