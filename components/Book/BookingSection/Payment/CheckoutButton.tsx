@@ -8,6 +8,7 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 import { checkout } from '../../../../utils/checkout';
 import { loadStripe } from '@stripe/stripe-js';
 import useTrigUser from '../../../../utils/hooks/useTrigUser';
+import GoogleIcon from '@mui/icons-material/Google';
 
 const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
 
@@ -57,7 +58,7 @@ const CheckoutButton = (props: CheckoutButtonProps) => {
 
   const handleCheckoutClick = () => {
     if (status !== 'authenticated') {
-      signIn();
+      signIn('google');
     }
     if (status === 'authenticated') {
       callStripe();
@@ -70,7 +71,17 @@ const CheckoutButton = (props: CheckoutButtonProps) => {
   } else if (status === 'authenticated') {
     avatar = <Avatar sx={{ background: 'limegreen' }}> ✓ </Avatar>;
   } else {
-    avatar = <Avatar sx={{ background: 'transparent' }} />;
+    avatar = (
+      <GoogleIcon
+        style={{
+          height: '32px',
+          width: '32px',
+          padding: '20px;',
+          borderRadius: '50%',
+          alignSelf: 'center',
+        }}
+      />
+    );
   }
 
   const { pricePerSession, selectedSessions } = props;

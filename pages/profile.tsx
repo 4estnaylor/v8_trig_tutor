@@ -21,22 +21,61 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 
 const profile = () => {
-  const [userEnteredName, setUserEnteredName] = useState('');
-  const [userEnteredPhone, setUserEnteredPhone] = useState('');
-  const userEnteredPhoneWithoutPunctuation = userEnteredPhone.replace(' ', '');
-  const isUserEnteredPhoneValid = userEnteredPhoneWithoutPunctuation;
+  const meetLink = 'meet.google.com/svs-ntia-esz';
 
   const trigUser = useTrigUser();
   const googleUser = useSession().data?.user;
 
+  let trigUserName: string = trigUser?.name;
+  console.log(trigUserName);
+
+  const [userEnteredName, setUserEnteredName] = useState(trigUserName || '');
+  const [userEnteredPhone, setUserEnteredPhone] = useState('');
+  const [textReminder, setTextReminder] = useState(false);
+  const [callReminder, setCallReminder] = useState(false);
+  // const userEnteredPhoneWithoutPunctuation = userEnteredPhone.replace(' ', '');
+  // const isUserEnteredPhoneValid = userEnteredPhoneWithoutPunctuation;
+  const [copyTagOn, setCopyTagOn] = useState(false);
+  const [hasUserChangedInfo, setHasUserChangedInfo] = useState(false);
+  const [meetLinkDisplay, setMeetLinkDisplay] = useState(<div>{meetLink}</div>);
+
   const preferredName =
     trigUser?.name || googleUser?.name || trigUser?.email || 'loading';
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const formObject = {
+      name: userEnteredName,
+      phone: userEnteredPhone,
+      reminderPreferences: {
+        textReminder,
+        callReminder,
+      },
+    };
+
+    console.log('submitting', formObject);
+  };
+
+  const handleCopyButtonClick = () => {
+    console.log('happening!');
+    navigator.clipboard.writeText(meetLink);
+    setCopyTagOn(true);
+    setMeetLinkDisplay(<CopiedDisplay>COPIED ✓ </CopiedDisplay>);
+    setTimeout(() => {
+      setCopyTagOn(false);
+      setMeetLinkDisplay(<div>{meetLink}</div>);
+    }, 1200);
+  };
 
   return (
     <div>
       <ResponsiveAppBar />
       <Gap height={30} />
-      <Wrapper>
+      <Wrapper
+        onSubmit={(e) => {
+          handleFormSubmit(e);
+        }}
+      >
         <InfoItem>
           <InfoLabel> google acount </InfoLabel>
           <UserInfo>
@@ -57,14 +96,11 @@ const profile = () => {
         <InfoItem>
           <InfoLabel> meet link </InfoLabel>
           <UserInfo>
-            {' '}
-            meet.google.com/svs-ntia-esz
-            <EditButton
-              style={{ pointerEvents: 'none', paddingRight: '20px' }}
-              onClick={() => {}}
-            >
+            {meetLinkDisplay}
+
+            <CopyButton onClick={handleCopyButtonClick}>
               <ContentCopyIcon />
-            </EditButton>
+            </CopyButton>
           </UserInfo>
         </InfoItem>
         <InfoItem>
@@ -86,55 +122,75 @@ const profile = () => {
           <InfoLabel>{'phone (optional)'}</InfoLabel>
           <MyPhoneInput
             value={userEnteredPhone}
-            onChange={() => {
-              setUserEnteredPhone;
-            }}
+            onChange={setUserEnteredPhone}
+            defaultCountry="US"
             placeholder="123 456 7890"
           />
         </InfoItem>
         <InfoItem>
-          <InfoLabel>reminders</InfoLabel>
+          <InfoLabel>session reminders</InfoLabel>
           <RemindersOptions>
             <EmailReminder>
+              <Switch disabled defaultChecked />
               <EmailIcon className="BeforeIcon" />
               <ReminderNoticeTime>
-                30 mins <Before>before</Before>
+                20 mins <Before>before</Before>
               </ReminderNoticeTime>
-
-              <Switch disabled defaultChecked />
+              <CheckBlue> ✓ </CheckBlue>
             </EmailReminder>
             <TextReminder>
+              <Switch
+                onChange={() => {
+                  setTextReminder((prev) => !prev);
+                }}
+              />
               <TextsmsIcon className="AfterIcon" />
               <ReminderNoticeTime>
                 2 mins <After>after</After>
               </ReminderNoticeTime>
-
-              <Switch />
+              <CheckRed> &nbsp; {textReminder ? '✓' : ' '} </CheckRed>
             </TextReminder>
             <CallReminder>
+              <Switch
+                onChange={() => {
+                  setCallReminder((prev) => !prev);
+                }}
+              />
               <CallIcon className="AfterIcon" />
               <ReminderNoticeTime>
                 5 mins <After>after</After>
               </ReminderNoticeTime>
-
-              <Switch />
+              <CheckRed> &nbsp; {callReminder ? '✓' : ' '} </CheckRed>
             </CallReminder>
           </RemindersOptions>
         </InfoItem>
         <Gap height={15} />
-        <SaveButton variant="contained">Save Changes</SaveButton>
+
+        <SaveButton type="submit" variant="contained">
+          Save Changes
+        </SaveButton>
+        <Gap height={15} />
       </Wrapper>
     </div>
   );
 };
 
+const CheckBlue = styled.div`
+  color: ${cl.getHSL(cl.blue)};
+`;
+
+const CheckRed = styled.div`
+  color: ${cl.getHSL(cl.red)};
+`;
+
 const SaveButton = styled(Button)`
   background-color: ${cl.getHSL(cl.blue)};
 
-  &:hover {
-    background-color: ${cl.getHSLA(cl.blue, 0.5)};
-  }
   width: 100%;
+
+  &:hover {
+    background-color: ${cl.getHSL(cl.blue)};
+  }
 `;
 
 const RemindersOptions = styled.div`
@@ -144,8 +200,7 @@ const RemindersOptions = styled.div`
 `;
 
 const Gmail = styled.div`
-  flex: 2;
-  text-align: center;
+  padding-left: 10px;
 `;
 
 const Reminder = styled.div`
@@ -179,14 +234,25 @@ const After = styled.div`
   color: ${cl.getHSL(cl.red)};
 `;
 
-const EmailReminder = styled(Reminder)``;
+const EmailReminder = styled(Reminder)`
+  position: relative;
+  &:after {
+    content: '';
+    width: 0px;
+    height: 60px;
+    border-right: 2px dashed ${cl.getHSLA(cl.gray_mid, 0.5)};
+    position: absolute;
+    right: -4px;
+    top: 50px;
+  }
+`;
 
 const TextReminder = styled(Reminder)``;
 
 const CallReminder = styled(Reminder)``;
 
 const MyPhoneInput = styled(PhoneInputWithCountrySelect)`
-  padding-left: 10px;
+  padding-left: 15px;
   height: 50px;
 
   &.PhoneInput {
@@ -204,8 +270,15 @@ const MyPhoneInput = styled(PhoneInputWithCountrySelect)`
     border: none;
     font-size: 1rem;
     padding: 10px;
+    margin-left: 5px;
     border-radius: 8px;
     background-color: ${cl.getHSLA(cl.blue, 0.1)};
+  }
+
+  .PhoneInputCountrySelect {
+  }
+  .PhoneInputCountrySelectArrow {
+    width: 5px;
   }
 `;
 
@@ -253,7 +326,7 @@ const UserEmailInfo = styled.div`
 `;
 
 const UserInfo = styled.div`
-  cursor: pointer;
+  cursor: auto;
   border: none;
   display: flex;
   align-items: center;
@@ -278,12 +351,11 @@ const UserInfoInput = styled.input`
   color: ${cl.getHSL(cl.gray_dark)};
   font-size: 1rem;
 `;
-const EditButton = styled.div`
+const CopyButton = styled(Button)`
   cursor: pointer;
-  pointer-events: none;
   position: absolute;
 
-  right: 0;
+  right: 15px;
   height: 42px;
   width: 42px;
   display: flex;
@@ -291,10 +363,18 @@ const EditButton = styled.div`
   justify-content: center;
   border: none;
   border-radius: 8px 8px 8px 8px;
+  margin-right: 10px;
   /* border: 2px solid ${cl.getHSL(cl.blue)}; */
 
   background-color: ${cl.getHSL(cl.white)};
   color: ${cl.getHSL(cl.blue)};
+
+  @media (pointer: fine) and (hover: hover) {
+    &:hover {
+      background-color: ${cl.getHSLA(cl.blue, 0.1)};
+      /* color: ${cl.getHSL(cl.white)}; */
+    }
+  }
 `;
 
 const MeetCode = styled.input`
@@ -309,6 +389,13 @@ const MeetCode = styled.input`
   align-items: center;
   flex-grow: 1;
   border-right: none;
+`;
+
+const CopiedDisplay = styled.div`
+  color: ${cl.getHSL(cl.red)};
+  /* background-color: blue; */
+  text-align: center;
+  width: 300px;
 `;
 
 export default profile;

@@ -56,7 +56,7 @@ const booking_review = () => {
       <Gap height={30} />
       <CongratsMessage>Success!</CongratsMessage>
       <Gap height={30} />
-      <Htitle>your sessions</Htitle>
+      <Htitle>your upcoming sessions</Htitle>
       <Gap height={15} />
       <BookedSessionsDisplay>{displayBookedSessions}</BookedSessionsDisplay>
       <Gap height={30} />
@@ -92,7 +92,8 @@ const booking_review = () => {
         <br />
         <ReviewBookings>
           <ReviewText>
-            Review your bookings on the profile page any time.
+            Review your booked sessions on the profile page by clicking your
+            profile icon found at the top of the home page.
           </ReviewText>
           <ImageContainer>
             <Image
@@ -128,6 +129,7 @@ const GotIt = styled(Button)`
     &:hover {
       background-color: ${cl.getHSL(cl.red)};
       font-size: 1.75rem;
+      transition: font-size;
     }
   }
 `;

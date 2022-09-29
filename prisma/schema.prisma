@@ -24,6 +24,9 @@ model Session {
 model User {
   id            String       @default(cuid()) @id
   name          String?
+  phone         String?
+  textReminder  Boolean?
+  callReminder  Boolean?
   email         String?   @unique
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")

@@ -17,6 +17,7 @@ import prisma from '../../../lib/primsa';
 // };
 
 export default async function webhookHandler(req, res) {
+  console.log('happening');
   if (req.method === 'POST') {
     switch (req.body.type) {
       case 'payment_intent.created':
@@ -33,6 +34,7 @@ export default async function webhookHandler(req, res) {
         let studentId = await JSON.parse(event.data.object.metadata.userId);
         let sessionsString = event.data.object.metadata.sessions;
         let sessions = await JSON.parse(sessionsString);
+        console.log('SESSIONS', sessions);
         sessions.forEach(async (session) => {
           session = new Date(session);
           const newSession = await prisma.session.create({
@@ -50,6 +52,7 @@ export default async function webhookHandler(req, res) {
 
     // let sessionsParsed = await JSON.parse(sessions);
     // console.log('sessions parsed: ', sessionsParsed);
+    console.log('happening end');
     res.status(200).send();
   }
 
