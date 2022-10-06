@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import useTrigUser from '../utils/hooks/useTrigUser';
 import { useSession, signIn } from 'next-auth/react';
@@ -19,6 +19,8 @@ import CallIcon from '@mui/icons-material/Call';
 import Switch from '@mui/material/Switch';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
+import SaveIcon from '@mui/icons-material/Save';
+import { isValidPhoneNumber } from 'react-phone-number-input';
 
 const profile = () => {
   const meetLink = 'meet.google.com/svs-ntia-esz';
@@ -26,13 +28,38 @@ const profile = () => {
   const trigUser = useTrigUser();
   const googleUser = useSession().data?.user;
 
-  let trigUserName: string = trigUser?.name;
-  console.log(trigUserName);
+  let trigUserName: string = trigUser?.name || null;
 
-  const [userEnteredName, setUserEnteredName] = useState(trigUserName || '');
+  const [userEnteredName, setUserEnteredName] = useState('');
   const [userEnteredPhone, setUserEnteredPhone] = useState('');
   const [textReminder, setTextReminder] = useState(false);
   const [callReminder, setCallReminder] = useState(false);
+  const [isUserInfoChanged, setIsUserInfoChanged] = useState(false);
+
+  useEffect(() => {
+    setUserEnteredName(trigUser?.name);
+    setUserEnteredPhone(trigUser?.phone);
+    setTextReminder(trigUser?.textReminder);
+    setCallReminder(trigUser?.callReminder);
+  }, [trigUser]);
+
+  useEffect(() => {
+    let isChanged = false;
+    if (!trigUser) {
+      return;
+    }
+    if (
+      userEnteredName != trigUser.name ||
+      userEnteredPhone != trigUser.phone ||
+      textReminder != trigUser.textReminder ||
+      callReminder != trigUser.callReminder
+    ) {
+      isChanged = true;
+    }
+
+    setIsUserInfoChanged(isChanged);
+  }, [userEnteredName, userEnteredPhone, textReminder, callReminder]);
+
   // const userEnteredPhoneWithoutPunctuation = userEnteredPhone.replace(' ', '');
   // const isUserEnteredPhoneValid = userEnteredPhoneWithoutPunctuation;
   const [copyTagOn, setCopyTagOn] = useState(false);
@@ -42,18 +69,28 @@ const profile = () => {
   const preferredName =
     trigUser?.name || googleUser?.name || trigUser?.email || 'loading';
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('handling submit');
     const formObject = {
       name: userEnteredName,
       phone: userEnteredPhone,
-      reminderPreferences: {
-        textReminder,
-        callReminder,
-      },
+      textReminder,
+      callReminder,
+      trigUserId: trigUser.id,
     };
 
-    console.log('submitting', formObject);
+    console.log(formObject);
+
+    const response = await fetch('/api/db/updateUser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formObject),
+    });
+
+    const responseJSON = await response.json();
   };
 
   const handleCopyButtonClick = () => {
@@ -68,9 +105,9 @@ const profile = () => {
   };
 
   return (
-    <div>
+    <OuterWrapper>
       <ResponsiveAppBar />
-      <Gap height={30} />
+      <Gap height={0} />
       <Wrapper
         onSubmit={(e) => {
           handleFormSubmit(e);
@@ -104,10 +141,10 @@ const profile = () => {
           </UserInfo>
         </InfoItem>
         <InfoItem>
-          <InfoLabel>preferred name </InfoLabel>
+          <InfoLabel>{`preferred name`} </InfoLabel>
           <UserInfoInput
-            value={userEnteredName}
-            placeholder={preferredName || 'loading...'}
+            value={userEnteredName || ''}
+            placeholder={'Gandalf the Grey'}
             onChange={(e) => {
               setUserEnteredName(e.target.value);
             }}
@@ -119,9 +156,9 @@ const profile = () => {
           </EditButton> */}
         </InfoItem>
         <InfoItem>
-          <InfoLabel>{'phone (optional)'}</InfoLabel>
+          <InfoLabel>{'phone'}</InfoLabel>
           <MyPhoneInput
-            value={userEnteredPhone}
+            value={userEnteredPhone || ''}
             onChange={setUserEnteredPhone}
             defaultCountry="US"
             placeholder="123 456 7890"
@@ -140,7 +177,18 @@ const profile = () => {
             </EmailReminder>
             <TextReminder>
               <Switch
+                checked={
+                  isValidPhoneNumber(userEnteredPhone || '')
+                    ? textReminder
+                    : false
+                }
                 onChange={() => {
+                  if (!isValidPhoneNumber(userEnteredPhone || '')) {
+                    window.alert(
+                      'must enter valid phone number for text reminders. Check that the country selected is correct.'
+                    );
+                    return;
+                  }
                   setTextReminder((prev) => !prev);
                 }}
               />
@@ -152,7 +200,18 @@ const profile = () => {
             </TextReminder>
             <CallReminder>
               <Switch
+                checked={
+                  isValidPhoneNumber(userEnteredPhone || '')
+                    ? callReminder
+                    : false
+                }
                 onChange={() => {
+                  if (!isValidPhoneNumber(userEnteredPhone || '')) {
+                    window.alert(
+                      'Must enter valid phone number for call reminders. Check that the country selected is correct.'
+                    );
+                    return;
+                  }
                   setCallReminder((prev) => !prev);
                 }}
               />
@@ -160,20 +219,42 @@ const profile = () => {
               <ReminderNoticeTime>
                 5 mins <After>after</After>
               </ReminderNoticeTime>
-              <CheckRed> &nbsp; {callReminder ? '✓' : ' '} </CheckRed>
+              <CheckRed>
+                {' '}
+                &nbsp; {callReminder && userEnteredPhone ? '✓' : ' '}{' '}
+              </CheckRed>
             </CallReminder>
           </RemindersOptions>
         </InfoItem>
-        <Gap height={15} />
-
-        <SaveButton type="submit" variant="contained">
-          Save Changes
-        </SaveButton>
-        <Gap height={15} />
+        <SaveButtonWrapper>
+          {isUserInfoChanged ? (
+            <SaveButton type="submit" variant="contained">
+              Save
+              {/* <SaveIcon /> */}
+            </SaveButton>
+          ) : (
+            <></>
+          )}
+        </SaveButtonWrapper>
       </Wrapper>
-    </div>
+    </OuterWrapper>
   );
 };
+
+const SaveButtonWrapper = styled.div`
+  padding-top: 20px;
+  padding-bottom: 20px;
+`;
+
+const OuterWrapper = styled.div`
+  background-color: ${cl.getHSL(cl.white)};
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+`;
 
 const CheckBlue = styled.div`
   color: ${cl.getHSL(cl.blue)};
@@ -184,12 +265,30 @@ const CheckRed = styled.div`
 `;
 
 const SaveButton = styled(Button)`
-  background-color: ${cl.getHSL(cl.blue)};
+  display: flex;
+  gap: 20px;
+  background-color: ${cl.getHSLA(cl.white, 0.2)};
+  border: none;
+  border-top: none;
 
-  width: 100%;
+  background: linear-gradient(
+    -20deg,
+    ${cl.getHSL(cl.red)},
+    hsla(225 52% 60%),
+    ${cl.getHSL(cl.blue)}
+  );
+  background-size: 100%;
+  background-position-x: 50%;
+  background-position-y: 50%;
+
+  @media (min-width: 351px) {
+    border-radius: 8px;
+  }
+
+  width: 350px;
 
   &:hover {
-    background-color: ${cl.getHSL(cl.blue)};
+    background-color: ${cl.getHSLA(cl.white, 0.1)};
   }
 `;
 
@@ -284,8 +383,10 @@ const MyPhoneInput = styled(PhoneInputWithCountrySelect)`
 
 const Wrapper = styled.form`
   background-color: ${cl.getHSL(cl.white)};
-  max-width: 350px;
-  margin: auto;
+  width: 350px;
+  @media (min-width: 360px) {
+    border-radius: 8px 8px 0 0;
+  }
 `;
 
 const CopyIcon = styled.div``;

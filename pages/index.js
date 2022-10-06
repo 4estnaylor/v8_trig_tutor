@@ -19,8 +19,7 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          TODO: page TODO: account page TODO: mySessions page TODO: google login
-          portal TODO: about page TODO: home page
+          TODO: mySessions page TODO: about page TODO: home page
           <code className={styles.code}>pages/index.js</code>
         </p>
 

@@ -90,6 +90,7 @@ const ResponsiveAppBar = () => {
         color: cl.getHSL(cl.black),
         display: 'flex',
         alignItems: 'baseline',
+        zIndex: '100',
         // borderBottom: `2px solid ${cl.getHSL(cl.black)}`,
         // boxShadow: `0px 10px 10px ${cl.getHSL(cl.gray_dark)}`,
       }}
