@@ -3,10 +3,7 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import cl from '../colors';
 import Gap from '../components/Gaps/Gap';
-import useTrigUser from '../utils/hooks/useTrigUser';
 import useUserSessions from '../utils/hooks/useUserSessions';
-import Book from './book';
-import useUserSessions2 from '../utils/hooks/useUserSessions2';
 import Button from '@mui/material/Button';
 
 const booking_review = () => {
@@ -54,7 +51,7 @@ const booking_review = () => {
       <Gap height={30} />
       <SuccessCheck>✓</SuccessCheck>
       <Gap height={30} />
-      <CongratsMessage>Success!</CongratsMessage>
+      <CongratsMessage>Booked!</CongratsMessage>
       <Gap height={30} />
       <Htitle>your upcoming sessions</Htitle>
       <Gap height={15} />
@@ -106,7 +103,13 @@ const booking_review = () => {
         </ReviewBookings>
       </Instructions>
       <Gap height={30} />
-      <GotIt onClick={handleGotItButtonClick}> Got It 👍</GotIt>
+      <GotIt
+        onClick={handleGotItButtonClick}
+        color="secondary"
+        variant="contained"
+      >
+        got It 👍
+      </GotIt>
       <Gap height={15} />
     </Wrapper>
   );
@@ -119,19 +122,12 @@ const handleGotItButtonClick = () => {
 const GotIt = styled(Button)`
   height: 50px;
   width: 100%;
-  background-color: ${cl.getHSL(cl.red)};
+  max-width: 350px;
   border-radius: 8px;
   border: none;
-  color: ${cl.getHSL(cl.white)};
   font-size: 1.5rem;
   cursor: pointer;
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      background-color: ${cl.getHSL(cl.red)};
-      font-size: 1.75rem;
-      transition: font-size;
-    }
-  }
+  transition: all 0.3s;
 `;
 
 const ReviewBookings = styled.div`
@@ -151,11 +147,11 @@ const ImageContainer = styled.div`
 
   display: flex;
   justify-content: center;
-  margin: auto;
 `;
 
 const Wrapper = styled.div`
-  width: 350px;
+  min-width: 350px;
+  max-width: 700px;
   margin: auto;
   padding-left: 8px;
   padding-right: 8px;

@@ -75,8 +75,12 @@ const profile = () => {
     const formObject = {
       name: userEnteredName,
       phone: userEnteredPhone,
-      textReminder,
-      callReminder,
+      textReminder: isValidPhoneNumber(userEnteredPhone || '')
+        ? textReminder
+        : false,
+      callReminder: isValidPhoneNumber(userEnteredPhone || '')
+        ? callReminder
+        : false,
       trigUserId: trigUser.id,
     };
 
@@ -130,7 +134,7 @@ const profile = () => {
             <LockIcon />
           </EditButton> */}
         </InfoItem>
-        <InfoItem>
+        {/* <InfoItem>
           <InfoLabel> meet link </InfoLabel>
           <UserInfo>
             {meetLinkDisplay}
@@ -139,12 +143,12 @@ const profile = () => {
               <ContentCopyIcon />
             </CopyButton>
           </UserInfo>
-        </InfoItem>
+        </InfoItem> */}
         <InfoItem>
           <InfoLabel>{`preferred name`} </InfoLabel>
           <UserInfoInput
             value={userEnteredName || ''}
-            placeholder={'Gandalf the Grey'}
+            placeholder={'Gandalf'}
             onChange={(e) => {
               setUserEnteredName(e.target.value);
             }}
@@ -383,7 +387,8 @@ const MyPhoneInput = styled(PhoneInputWithCountrySelect)`
 
 const Wrapper = styled.form`
   background-color: ${cl.getHSL(cl.white)};
-  width: 350px;
+  min-width: 350px;
+  max-width: 700px;
   @media (min-width: 360px) {
     border-radius: 8px 8px 0 0;
   }

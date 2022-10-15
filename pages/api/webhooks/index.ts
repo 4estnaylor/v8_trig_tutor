@@ -4,6 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/primsa';
 
 import Stripe from 'stripe';
+import { ChargingStationRounded } from '@mui/icons-material';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2022-08-01',
@@ -63,7 +64,11 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       console.log('checkout.session.completed');
 
       // @ts-ignore
+      const paymentIntentId = event.data.object.payment_intent!;
+
+      // @ts-ignore
       const metadata = event.data.object.metadata;
+      console.log('metadata', metadata);
       let { userId, sessions } = metadata;
       userId = await JSON.parse(userId);
       sessions = await JSON.parse(sessions);
@@ -74,15 +79,16 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
           data: {
             meetTime: meetTime,
             studentId: userId,
+            paymentIntentId: paymentIntentId,
           },
         });
       });
 
-      console.log(userId, sessions);
-
       // let studentId = await JSON.parse(event.data.object.metadata.userId);
       // let sessionsString = event.data.object.metadata.sessions;
       // let sessions = await JSON.parse(sessionsString);
+    } else if (event.type === 'charge.refunded') {
+      console.log('refunded!', event);
     } else {
       console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`);
     }

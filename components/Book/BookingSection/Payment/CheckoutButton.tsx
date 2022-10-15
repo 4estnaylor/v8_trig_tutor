@@ -9,6 +9,8 @@ import { checkout } from '../../../../utils/checkout';
 import { loadStripe } from '@stripe/stripe-js';
 import useTrigUser from '../../../../utils/hooks/useTrigUser';
 import GoogleIcon from '@mui/icons-material/Google';
+import { Button } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
 
@@ -42,6 +44,7 @@ const CheckoutButton = (props: CheckoutButtonProps) => {
         selectedSessions: selectedSessions,
         userId: trigUser.id,
         price: pricePerSession,
+        email: trigUser.email,
       }),
     });
 
@@ -91,14 +94,16 @@ const CheckoutButton = (props: CheckoutButtonProps) => {
       <Price>{`$${pricePerSession * selectedSessions.length}`}</Price>
       <CartImageWrapper>
         {avatar}
+        {status === 'authenticated' ? '' : <ArrowForwardIcon />}
         <Image alt="cart icon" src="/cart.svg" width={35} height={35} />
       </CartImageWrapper>
+      <Message>{status === 'authenticated' ? '' : 'login to pay'}</Message>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.button`
-  background-color: ${cl.getHSLA(cl.white, 0.2)};
+const Wrapper = styled(Button)`
+  background-color: ${cl.getHSLA(cl.white, 0.3)};
   border: 2px solid ${cl.getHSL(cl.white)};
   color: ${cl.getHSL(cl.white)};
   border-radius: 8px;
@@ -118,10 +123,17 @@ const Wrapper = styled.button`
   padding: none;
 `;
 
+const Message = styled.div`
+  position: absolute;
+  bottom: -40px;
+  font-size: 1.25rem;
+`;
+
 const CartImageWrapper = styled.div`
-  flex: 1;
+  flex: 2;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   /* position: absolute;
   left: 5px;
   display: flex;

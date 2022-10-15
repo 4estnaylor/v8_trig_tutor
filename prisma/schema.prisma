@@ -1,8 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "darwin"]
 }
 
@@ -12,24 +9,25 @@ datasource db {
 }
 
 model Session {
-  id        String     @default(cuid()) @id
-  notes   String?
-  meetTime DateTime  @unique @map(name: "meet_time")
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  student    User?   @relation(fields: [studentId], references: [id])
-  studentId  String?
+  id              String   @id @default(cuid())
+  notes          String?
+  meetTime        DateTime @unique @map("meet_time")
+  createdAt       DateTime @default(now()) @map("created_at")
+  paymentIntentId String?
+  studentId       String?
+  student         User?    @relation(fields: [studentId], references: [id])
 }
 
-
 model User {
-  id            String       @default(cuid()) @id
-  name          String?
-  phone         String?
-  textReminder  Boolean?
-  callReminder  Boolean?
-  email         String?   @unique
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  sessions         Session[]
-  @@map(name: "users")
+  id           String    @id @default(cuid())
+  name         String?
+  phone        String?
+  textReminder Boolean?
+  callReminder Boolean?
+  email        String?   @unique
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+  sessions     Session[]
+
+  @@map("users")
 }

@@ -265,6 +265,15 @@ const ResponsiveAppBar = () => {
                       </Link>
                     );
                     break;
+                  case 'Sessions':
+                    return (
+                      <Link key={'sessions'} href="/sessions">
+                        <MenuItem key={setting} onClick={handler}>
+                          <Typography textAlign="center">Sessions</Typography>
+                        </MenuItem>
+                      </Link>
+                    );
+                    break;
                   default:
                     handler = () => {
                       console.log('no handler');

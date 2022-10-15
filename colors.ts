@@ -30,6 +30,7 @@ const red_dark = { hue: 340, saturation: 100, lightness: 30 };
 const blue_light = { hue: 190, saturation: 100, lightness: 85 };
 const blue = { hue: 190, saturation: 100, lightness: 40 };
 const blue_dark = { hue: 190, saturation: 100, lightness: 30 };
+const purple = { hue: 225, saturation: 52, lightness: 60 };
 
 const cl = {
   getHSL,
@@ -45,6 +46,7 @@ const cl = {
   blue,
   blue_light,
   blue_dark,
+  purple,
 };
 
 export default cl;

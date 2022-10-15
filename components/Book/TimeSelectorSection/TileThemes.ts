@@ -44,7 +44,7 @@ const tileThemes: {
   },
   selectedForBooking: {
     color: cl.getHSL(cl.white),
-    backgroundColor: cl.getHSL(cl.red),
+    backgroundColor: cl.getHSL(cl.purple),
     opacity: 1,
     hover: {
       opacity: 1,

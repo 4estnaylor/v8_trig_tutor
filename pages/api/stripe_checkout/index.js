@@ -3,7 +3,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      const { selectedSessions, userId, price } = req.body;
+      const { selectedSessions, userId, price, email } = req.body;
       let lineItems = [];
 
       const stringifiedSessions = JSON.stringify(selectedSessions);
@@ -38,6 +38,7 @@ export default async function handler(req, res) {
         line_items: lineItems,
         metadata: metaData,
         mode: 'payment',
+        customer_email: email,
         success_url: `${req.headers.origin}/booking_review?success=true`,
         cancel_url: `${req.headers.origin}/booking_review?canceled=true`,
       });
