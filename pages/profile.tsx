@@ -261,11 +261,11 @@ const OuterWrapper = styled.div`
 `;
 
 const CheckBlue = styled.div`
-  color: ${cl.getHSL(cl.blue)};
+  color: ${cl.getHSL(cl.purple)};
 `;
 
 const CheckRed = styled.div`
-  color: ${cl.getHSL(cl.red)};
+  color: ${cl.getHSL(cl.purple)};
 `;
 
 const SaveButton = styled(Button)`
@@ -275,12 +275,13 @@ const SaveButton = styled(Button)`
   border: none;
   border-top: none;
 
-  background: linear-gradient(
+  /* background: linear-gradient(
     -20deg,
     ${cl.getHSL(cl.red)},
     hsla(225 52% 60%),
     ${cl.getHSL(cl.blue)}
-  );
+  ); */
+  background-color: ${cl.getHSL(cl.purple)};
   background-size: 100%;
   background-position-x: 50%;
   background-position-y: 50%;
@@ -292,7 +293,7 @@ const SaveButton = styled(Button)`
   width: 350px;
 
   &:hover {
-    background-color: ${cl.getHSLA(cl.white, 0.1)};
+    background-color: ${cl.getHSL(cl.purple)};
   }
 `;
 
@@ -314,11 +315,11 @@ const Reminder = styled.div`
   gap: 10px;
 
   & .MuiSvgIcon-root.AfterIcon {
-    color: ${cl.getHSL(cl.red)};
+    color: ${cl.getHSL(cl.purple)};
   }
 
   & .MuiSvgIcon-root.BeforeIcon {
-    color: ${cl.getHSL(cl.blue)};
+    color: ${cl.getHSL(cl.purple)};
   }
 `;
 
@@ -330,11 +331,11 @@ const ReminderNoticeTime = styled.div`
 `;
 
 const Before = styled.div`
-  color: ${cl.getHSL(cl.blue)};
+  color: ${cl.getHSL(cl.purple)};
 `;
 
 const After = styled.div`
-  color: ${cl.getHSL(cl.red)};
+  color: ${cl.getHSL(cl.purple)};
 `;
 
 const EmailReminder = styled(Reminder)`
@@ -375,7 +376,7 @@ const MyPhoneInput = styled(PhoneInputWithCountrySelect)`
     padding: 10px;
     margin-left: 5px;
     border-radius: 8px;
-    background-color: ${cl.getHSLA(cl.blue, 0.1)};
+    background-color: ${cl.getHSLA(cl.purple, 0.1)};
   }
 
   .PhoneInputCountrySelect {
@@ -448,7 +449,7 @@ const UserInfoInput = styled.input`
   margin-left: 10px;
 
   border: none;
-  background-color: ${cl.getHSLA(cl.blue, 0.1)};
+  background-color: ${cl.getHSLA(cl.purple, 0.1)};
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -498,7 +499,7 @@ const MeetCode = styled.input`
 `;
 
 const CopiedDisplay = styled.div`
-  color: ${cl.getHSL(cl.red)};
+  color: ${cl.getHSL(cl.purple)};
   /* background-color: blue; */
   text-align: center;
   width: 300px;

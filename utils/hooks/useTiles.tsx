@@ -2,17 +2,25 @@ import React, { useEffect, useState } from 'react';
 import Tile from '../../components/Book/TimeSelectorSection/Tile';
 import tileThemes from '../../components/Book/TimeSelectorSection/TileThemes';
 import useBookedSessions from './useBookedSessions';
+import useUserSessions from './useUserSessions';
 
 export interface useTileProps {
   timeSlots: Date[];
   selectedSessions: Date[];
   setSelectedSessions: React.Dispatch<React.SetStateAction<Date[]>>;
+  setAlreadyBookedSession: React.Dispatch<React.SetStateAction<Date>>;
 }
 
 const useTiles = (props: useTileProps) => {
-  const { timeSlots, selectedSessions, setSelectedSessions } = props;
+  const {
+    timeSlots,
+    selectedSessions,
+    setSelectedSessions,
+    setAlreadyBookedSession,
+  } = props;
   const [tiles, setTiles] = useState<JSX.Element[]>([]);
   const bookedSessions = useBookedSessions();
+  const { user, userSessions } = useUserSessions();
   const getTileTheme = (timeSlot: Date) => {
     let theme = tileThemes.booked;
 
@@ -22,8 +30,17 @@ const useTiles = (props: useTileProps) => {
         (session) => session.meetTime.getTime() === timeSlot.getTime()
       ).length > 0;
 
+    const isBookedByUser =
+      userSessions.filter(
+        (session) => session.meetTime.getTime() === timeSlot.getTime()
+      ).length > 0;
+
     if (isBooked) {
       theme = tileThemes.booked;
+      if (isBookedByUser) {
+        console.log('booked by user!');
+        theme = tileThemes.bookedByUser;
+      }
       return theme;
     } else {
       theme = tileThemes.available;
@@ -69,6 +86,7 @@ const useTiles = (props: useTileProps) => {
         selectedSessions,
         setSelectedSessions,
         theme,
+        setAlreadyBookedSession,
       };
 
       return (
@@ -78,7 +96,13 @@ const useTiles = (props: useTileProps) => {
     });
 
     setTiles(convertedToTiles);
-  }, [timeSlots, bookedSessions, selectedSessions, setSelectedSessions]);
+  }, [
+    timeSlots,
+    bookedSessions,
+    selectedSessions,
+    setSelectedSessions,
+    userSessions,
+  ]);
 
   return tiles;
 };

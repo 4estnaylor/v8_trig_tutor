@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import cl from '../../../colors';
 import Gap from '../../../components/Gaps/Gap';
+import Alert from '@mui/material/Alert';
 import Payment, { PaymentProps } from './Payment/Payment';
+import { Button } from '@mui/material';
 import SelectedSessionsList, {
   SelectedSesionsListProps,
 } from './SelectedSessionsList';
@@ -11,14 +13,24 @@ interface BookingSectionProps {
   selectedSessions: Date[];
   setSelectedSessions: React.Dispatch<React.SetStateAction<Date[]>>;
   pricePerSession: number;
+  alreadyBookedSession: Date | null;
+  setAlreadyBookedSession: React.Dispatch<React.SetStateAction<Date>>;
 }
 
 const BookingSection = (props: BookingSectionProps) => {
-  const { selectedSessions, setSelectedSessions, pricePerSession } = props;
+  const {
+    selectedSessions,
+    setSelectedSessions,
+    pricePerSession,
+    alreadyBookedSession,
+    setAlreadyBookedSession,
+  } = props;
 
   const selectedSessionsListProps: SelectedSesionsListProps = {
     selectedSessions,
     setSelectedSessions,
+    alreadyBookedSession,
+    setAlreadyBookedSession,
   };
 
   const paymentProps: PaymentProps = {

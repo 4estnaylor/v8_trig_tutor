@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import cl from '../../../colors';
 import tileThemes, { TileTheme } from './TileThemes';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 
 interface TileProps {
   timeSlot: Date;
   selectedSessions: Date[];
   setSelectedSessions: React.Dispatch<React.SetStateAction<Date[]>>;
+  setAlreadyBookedSession: React.Dispatch<React.SetStateAction<Date>>;
   theme: TileTheme;
 }
 
 const Tile = (props: TileProps) => {
   const minutesInAdvance = 20;
-  const { timeSlot, selectedSessions, setSelectedSessions, theme } = props;
+  const {
+    timeSlot,
+    selectedSessions,
+    setSelectedSessions,
+    setAlreadyBookedSession,
+    theme,
+  } = props;
 
   const deadline = new Date(timeSlot.getTime());
   deadline.setMinutes(deadline.getMinutes() - minutesInAdvance);
@@ -24,6 +36,14 @@ const Tile = (props: TileProps) => {
 
   const handleClick = () => {
     if (theme === tileThemes.booked || theme === tileThemes.past) {
+      return;
+    }
+
+    if (theme === tileThemes.bookedByUser) {
+      setAlreadyBookedSession(timeSlot);
+      // setTimeout(() => {
+      //   setAlreadyBookedSession(null);
+      // }, );
       return;
     }
 
@@ -82,6 +102,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: ${cl.getHSL(cl.white)};
 `;
 
 const ButtonArea = styled.button<{ theme: TileTheme }>`
@@ -96,6 +117,12 @@ const ButtonArea = styled.button<{ theme: TileTheme }>`
   cursor: ${(p) => (p.theme.cursor ? p.theme.cursor : 'pointer')};
   color: ${(p) => p.theme.color};
   background-color: ${(p) => p.theme.backgroundColor};
+  background: ${(p) => p.theme.background};
+  background-clip: ${(p) =>
+    p.theme.backgroundClip ? p.theme.backgroundClip : 'inherit'};
+  -webkit-background-clip: ${(p) =>
+    p.theme.backgroundClip ? p.theme.backgroundClip : 'inherit'};
+  font-weight: ${(p) => (p.theme.fontWeight ? p.theme.fontWeight : 500)};
   text-decoration: ${(p) =>
     p.theme.textDecoration ? p.theme.textDecoration : 'none'};
   opacity: ${(p) => (p.theme.opacity ? p.theme.opacity : 1)};
@@ -119,7 +146,7 @@ const ButtonArea = styled.button<{ theme: TileTheme }>`
 const HourDisplay = styled.div`
   font-size: 1rem;
   background-color: transparent;
-  font-weight: 500;
+  font-weight: inherit;
 `;
 
 const AMPMDisplay = styled.div`

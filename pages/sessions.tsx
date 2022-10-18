@@ -172,7 +172,7 @@ const Sessions = () => {
 };
 
 const Cancel = styled(Button)`
-  color: ${cl.getHSL(cl.red)};
+  color: ${cl.getHSL(cl.purple)};
 `;
 
 const Video = styled(Button)`
@@ -194,15 +194,15 @@ const CopyButton = styled(Button)`
   border: none;
   border-radius: 8px 8px 8px 8px;
   margin-left: auto;
-  /* border: 2px solid ${cl.getHSL(cl.blue)}; */
+  /* border: 2px solid ${cl.getHSL(cl.purple)}; */
 
   background-color: ${cl.getHSL(cl.white)};
 
-  color: ${cl.getHSL(cl.blue)};
+  color: ${cl.getHSL(cl.purple)};
 
   @media (pointer: fine) and (hover: hover) {
     &:hover {
-      background-color: ${cl.getHSLA(cl.blue, 0.1)};
+      background-color: ${cl.getHSLA(cl.purple, 0.1)};
       /* color: ${cl.getHSL(cl.white)}; */
     }
   }
@@ -221,7 +221,6 @@ const MeetLinkWrappper = styled.div`
 `;
 const CopiedDisplay = styled.div`
   color: ${cl.getHSL(cl.red)};
-  /* background-color: blue; */
   text-align: center;
   flex: 1;
 `;

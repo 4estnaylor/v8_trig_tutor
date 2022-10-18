@@ -11,6 +11,7 @@ import useTrigUser from '../../../../utils/hooks/useTrigUser';
 import GoogleIcon from '@mui/icons-material/Google';
 import { Button } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import PaymentsIcon from '@mui/icons-material/Payments';
 
 const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
 
@@ -72,17 +73,11 @@ const CheckoutButton = (props: CheckoutButtonProps) => {
   if (session?.user?.image) {
     avatar = <Avatar src={session.user.image} />;
   } else if (status === 'authenticated') {
-    avatar = <Avatar sx={{ background: 'limegreen' }}> ✓ </Avatar>;
+    avatar = <Avatar sx={{ backgroundColor: cl.getHSL(cl.white) }}> ✓ </Avatar>;
   } else {
     avatar = (
       <GoogleIcon
-        style={{
-          height: '32px',
-          width: '32px',
-          padding: '20px;',
-          borderRadius: '50%',
-          alignSelf: 'center',
-        }}
+        sx={{ color: cl.getHSL(cl.white), height: '40px', widht: '40px' }}
       />
     );
   }
@@ -94,10 +89,16 @@ const CheckoutButton = (props: CheckoutButtonProps) => {
       <Price>{`$${pricePerSession * selectedSessions.length}`}</Price>
       <CartImageWrapper>
         {avatar}
-        {status === 'authenticated' ? '' : <ArrowForwardIcon />}
-        <Image alt="cart icon" src="/cart.svg" width={35} height={35} />
+        {status === 'authenticated' ? (
+          <PaymentsIcon
+            sx={{ color: cl.getHSL(cl.white), height: '30px', width: '30px' }}
+          />
+        ) : (
+          ''
+        )}
+        {/* <Image alt="cart icon" src="/cart.svg" width={35} height={35} /> */}
       </CartImageWrapper>
-      <Message>{status === 'authenticated' ? '' : 'login to pay'}</Message>
+      <Message> {status === 'authenticated' ? '' : 'Sign In to Pay'} </Message>
     </Wrapper>
   );
 };
@@ -105,20 +106,18 @@ const CheckoutButton = (props: CheckoutButtonProps) => {
 const Wrapper = styled(Button)`
   background-color: ${cl.getHSLA(cl.white, 0.3)};
   border: 2px solid ${cl.getHSL(cl.white)};
-  color: ${cl.getHSL(cl.white)};
   border-radius: 8px;
+  /* xpbox-shadow: 3px 4px 4px ${cl.getHSL(cl.black)}; */
 
   font-size: 1.5rem;
   display: flex;
   align-items: center;
-  cursor: pointer;
-  width: 350px;
+  width: 340px;
+  margin: auto;
+
   height: 60px;
 
   @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      background-color: ${cl.getHSLA(cl.blue_light, 0.6)};
-    }
   }
   padding: none;
 `;
@@ -127,6 +126,7 @@ const Message = styled.div`
   position: absolute;
   bottom: -40px;
   font-size: 1.25rem;
+  color: ${cl.getHSL(cl.white)};
 `;
 
 const CartImageWrapper = styled.div`
@@ -144,6 +144,7 @@ const Price = styled.div`
   background-color: transparent;
   border-right: 2px solid ${cl.getHSL(cl.white)};
   flex: 1;
+  color: ${cl.getHSL(cl.white)};
 `;
 
 export default CheckoutButton;

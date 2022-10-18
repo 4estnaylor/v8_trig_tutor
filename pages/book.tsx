@@ -39,6 +39,7 @@ const Book = () => {
   );
   const [weekIndex, setWeekIndex] = useState(0);
   const [selectedSessions, setSelectedSessions] = useState<Date[]>([]);
+  const [alreadyBookedSession, setAlreadyBookedSession] = useState<any>(null);
 
   const timeSelectorProps: TimeSelectorProps = {
     sundays,
@@ -47,12 +48,15 @@ const Book = () => {
     timeSlots,
     selectedSessions,
     setSelectedSessions,
+    setAlreadyBookedSession,
   };
 
   const bookingProps = {
     selectedSessions,
     setSelectedSessions,
     pricePerSession,
+    alreadyBookedSession,
+    setAlreadyBookedSession,
   };
 
   return (
@@ -88,12 +92,13 @@ const TopSection = styled.div`
 `;
 
 const BottomSection = styled.div`
-  /* background-color: ${cl.getHSL(cl.black)}; */
+  /* background-color: ${cl.getHSL(cl.purple)}; */
   background: linear-gradient(
     -120deg,
+    ${cl.getHSL(cl.blue_light)} 10%,
     ${cl.getHSL(cl.blue)},
-    ${cl.getHSL(cl.purple)},
-    ${cl.getHSL(cl.red)}
+    ${cl.getHSL(cl.purple)} 50%,
+    ${cl.getHSL(cl.red)} 90%
   );
   background-size: 190%;
   background-position-x: 50%;

@@ -12,6 +12,7 @@ export interface TimeSelectorProps {
   timeSlots: Date[];
   selectedSessions: Date[];
   setSelectedSessions: React.Dispatch<React.SetStateAction<Date[]>>;
+  setAlreadyBookedSession: React.Dispatch<React.SetStateAction<Date>>;
 }
 
 const TimeSelectorSection = (props: TimeSelectorProps) => {
@@ -22,6 +23,7 @@ const TimeSelectorSection = (props: TimeSelectorProps) => {
     timeSlots,
     selectedSessions,
     setSelectedSessions,
+    setAlreadyBookedSession,
   } = props;
   const weekSelectorProps: WeekSelectorProps = {
     sundays,
@@ -35,6 +37,7 @@ const TimeSelectorSection = (props: TimeSelectorProps) => {
     timeSlots,
     selectedSessions,
     setSelectedSessions,
+    setAlreadyBookedSession,
   };
 
   return (

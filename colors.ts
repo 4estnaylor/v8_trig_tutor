@@ -25,12 +25,15 @@ const gray_light = { hue: 190, saturation: 15, lightness: 90 };
 const gray_mid = { hue: 190, saturation: 15, lightness: 45 };
 const gray_dark = { hue: 190, saturation: 15, lightness: 30 };
 const red_light = { hue: 340, saturation: 100, lightness: 80 };
-const red = { hue: 340, saturation: 100, lightness: 50 };
+const red = { hue: 340, saturation: 90, lightness: 50 };
 const red_dark = { hue: 340, saturation: 100, lightness: 30 };
 const blue_light = { hue: 190, saturation: 100, lightness: 85 };
 const blue = { hue: 190, saturation: 100, lightness: 40 };
 const blue_dark = { hue: 190, saturation: 100, lightness: 30 };
-const purple = { hue: 225, saturation: 52, lightness: 60 };
+const purple = { hue: 225, saturation: 72, lightness: 60 };
+const purple_bright = { hue: 225, saturation: 92, lightness: 60 };
+const yellow = { hue: 32, saturation: 89, lightness: 50 };
+const green = { hue: 164, saturation: 50, lightness: 50 };
 
 const cl = {
   getHSL,
@@ -47,6 +50,8 @@ const cl = {
   blue_light,
   blue_dark,
   purple,
+  purple_bright,
+  yellow,
 };
 
 export default cl;

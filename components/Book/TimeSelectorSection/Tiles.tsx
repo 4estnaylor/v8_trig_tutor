@@ -8,6 +8,7 @@ import useVisibleTiles, {
 } from '../../../utils/hooks/useVisibleTiles';
 import TileColumn from './TileColumn';
 import tileThemes from './TileThemes';
+import useUserSessions from '../../../utils/hooks/useUserSessions';
 
 interface TilesProps {
   sundays: Date[];
@@ -15,6 +16,7 @@ interface TilesProps {
   timeSlots: Date[];
   selectedSessions: Date[];
   setSelectedSessions: React.Dispatch<React.SetStateAction<Date[]>>;
+  setAlreadyBookedSession: React.Dispatch<React.SetStateAction<Date>>;
 }
 
 const Tiles = (props: TilesProps) => {
@@ -24,6 +26,7 @@ const Tiles = (props: TilesProps) => {
     timeSlots,
     selectedSessions,
     setSelectedSessions,
+    setAlreadyBookedSession,
   } = props;
 
   // const [reservedSessions, setReservedSessions] = useState<Session[]>([]);
@@ -32,6 +35,7 @@ const Tiles = (props: TilesProps) => {
     timeSlots,
     selectedSessions,
     setSelectedSessions,
+    setAlreadyBookedSession,
   };
 
   const tiles = useTiles(useTilesProps);

@@ -61,12 +61,14 @@ const ButtonArea = styled.button`
   border: none;
 
   color: ${cl.getHSL(cl.white)};
-  background: linear-gradient(
-    -70deg,
+  /* background: linear-gradient(
+    -120deg,
+    ${cl.getHSL(cl.blue_light)} 10%,
     ${cl.getHSL(cl.blue)},
-    ${cl.getHSL(cl.purple)},
-    ${cl.getHSL(cl.red)}
-  );
+    ${cl.getHSL(cl.purple)} 50%,
+    ${cl.getHSL(cl.red)} 90%
+  ); */
+  background-color: ${cl.getHSL(cl.purple)};
 `;
 
 const HourDisplay = styled.div`

@@ -108,6 +108,7 @@ const Wrapper = styled.div`
   align-items: baseline;
   padding-right: 0px;
   border-radius: 8px;
+  margin: 5px;
 
   &:hover {
     background-color: ${cl.getHSLA(cl.white, 0.2)};
