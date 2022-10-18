@@ -12,7 +12,7 @@ export interface SelectedSesionsListProps {
   selectedSessions: Date[];
   setSelectedSessions: React.Dispatch<React.SetStateAction<Date[]>>;
   alreadyBookedSession: Date | null;
-  setAlreadyBookedSession: React.Dispatch<React.SetStateAction<Date>>;
+  setAlreadyBookedSession: React.Dispatch<React.SetStateAction<Date | null>>;
   // alreadySelectedSession: Date,
   // setAlreadySelectedSession: React.Dispatch<React.SetStateAction<Date[]>>;
 }

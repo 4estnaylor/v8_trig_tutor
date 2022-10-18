@@ -16,7 +16,7 @@ interface TilesProps {
   timeSlots: Date[];
   selectedSessions: Date[];
   setSelectedSessions: React.Dispatch<React.SetStateAction<Date[]>>;
-  setAlreadyBookedSession: React.Dispatch<React.SetStateAction<Date>>;
+  setAlreadyBookedSession: React.Dispatch<React.SetStateAction<Date | null>>;
 }
 
 const Tiles = (props: TilesProps) => {

@@ -12,7 +12,7 @@ export interface TimeSelectorProps {
   timeSlots: Date[];
   selectedSessions: Date[];
   setSelectedSessions: React.Dispatch<React.SetStateAction<Date[]>>;
-  setAlreadyBookedSession: React.Dispatch<React.SetStateAction<Date>>;
+  setAlreadyBookedSession: React.Dispatch<React.SetStateAction<Date | null>>;
 }
 
 const TimeSelectorSection = (props: TimeSelectorProps) => {

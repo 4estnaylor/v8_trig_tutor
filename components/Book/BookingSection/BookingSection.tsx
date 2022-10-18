@@ -14,7 +14,7 @@ interface BookingSectionProps {
   setSelectedSessions: React.Dispatch<React.SetStateAction<Date[]>>;
   pricePerSession: number;
   alreadyBookedSession: Date | null;
-  setAlreadyBookedSession: React.Dispatch<React.SetStateAction<Date>>;
+  setAlreadyBookedSession: React.Dispatch<React.SetStateAction<Date | null>>;
 }
 
 const BookingSection = (props: BookingSectionProps) => {

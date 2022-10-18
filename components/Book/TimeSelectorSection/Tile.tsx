@@ -11,7 +11,7 @@ interface TileProps {
   timeSlot: Date;
   selectedSessions: Date[];
   setSelectedSessions: React.Dispatch<React.SetStateAction<Date[]>>;
-  setAlreadyBookedSession: React.Dispatch<React.SetStateAction<Date>>;
+  setAlreadyBookedSession: React.Dispatch<React.SetStateAction<Date | null>>;
   theme: TileTheme;
 }
 
