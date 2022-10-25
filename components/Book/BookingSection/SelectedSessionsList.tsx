@@ -93,6 +93,7 @@ const CloseButton = styled.div`
   position: absolute;
   top: 30px;
   right: 30px;
+  cursor: pointer;
 `;
 
 const Wrapper = styled.div`

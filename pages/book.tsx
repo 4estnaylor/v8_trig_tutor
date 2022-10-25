@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import Head from 'next/head';
 import useSundays from '../utils/hooks/useSundays';
@@ -10,6 +10,7 @@ import TimeSelectorSection, {
 import cl from '../colors';
 import Gap from '../components/Gaps/Gap';
 import BookingSection from '../components/Book/BookingSection/BookingSection';
+import { RestaurantRounded } from '@mui/icons-material';
 
 const timesUTC = [
   //sunday ↓
@@ -37,6 +38,7 @@ const Book = () => {
     sundays,
     timesUTC
   );
+
   const [weekIndex, setWeekIndex] = useState(0);
   const [selectedSessions, setSelectedSessions] = useState<Date[]>([]);
   const [alreadyBookedSession, setAlreadyBookedSession] = useState<any>(null);
@@ -58,6 +60,50 @@ const Book = () => {
     alreadyBookedSession,
     setAlreadyBookedSession,
   };
+
+  const useComponentDidMount = () => {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = true;
+    }, []);
+    return ref.current;
+  };
+
+  const isComponentMounted = useComponentDidMount();
+
+  const getCachedSessions = async () => {
+    const cachedSelectedSessionsAsString = await localStorage.getItem(
+      'cachedSelectedSessions'
+    );
+    if (!cachedSelectedSessionsAsString) return;
+    const cachedSessionsParsed = await JSON.parse(
+      cachedSelectedSessionsAsString
+    );
+
+    const now = new Date();
+
+    const cachedSessions = cachedSessionsParsed.map((session: any) => {
+      const sessionDate = new Date(session);
+      if (sessionDate.getTime() < now.getTime()) {
+        return;
+      }
+      return sessionDate;
+    });
+
+    // setSelectedSessions(cachedSessions);
+    setSelectedSessions(cachedSessions);
+  };
+
+  useEffect(() => {
+    if (!isComponentMounted) {
+      getCachedSessions();
+      return;
+    }
+    localStorage.setItem(
+      'cachedSelectedSessions',
+      JSON.stringify(selectedSessions)
+    );
+  }, [selectedSessions]);
 
   return (
     <Wrapper>

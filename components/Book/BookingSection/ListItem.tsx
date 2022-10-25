@@ -15,10 +15,6 @@ const ListItem = (props: ListItemProps) => {
     setSelectedSessions((prev) => {
       const filtered = prev.filter((e) => e.getTime() !== session.getTime());
 
-      localStorage.setItem(
-        'timeSlotsSelectedForBooking',
-        JSON.stringify(filtered)
-      );
       return filtered;
     });
   };

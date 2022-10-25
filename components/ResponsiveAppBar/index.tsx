@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import GoogleIcon from '@mui/icons-material/Google';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
@@ -249,12 +250,32 @@ const ResponsiveAppBar = () => {
 
                 switch (setting) {
                   case 'Logout':
-                    handler = signOut;
+                    handler = () => {
+                      localStorage.setItem(
+                        'cachedSelectedSessions',
+                        JSON.stringify([])
+                      );
+                      signOut();
+                    };
                     break;
                   case 'Login':
                     handler = () => {
                       signIn('google');
                     };
+                    return (
+                      <MenuItem key={setting} onClick={handler}>
+                        <Typography
+                          textAlign="center"
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '10px',
+                          }}
+                        >
+                          <GoogleIcon color="primary" /> Sign In
+                        </Typography>
+                      </MenuItem>
+                    );
                     break;
                   case 'Profile':
                     return (
@@ -298,6 +319,11 @@ const ResponsiveAppBar = () => {
 
 const MyImage = styled(Image)`
   flex-shrink: 1;
+`;
+
+const LogInWrapper = styled.span`
+  display: flex;
+  gap: 10px;
 `;
 
 const CenteredTypography = styled(Typography)`

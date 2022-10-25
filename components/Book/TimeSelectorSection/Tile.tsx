@@ -55,10 +55,6 @@ const Tile = (props: TileProps) => {
         const daysSelectedForBookingMinusThisOne = prev.filter(
           (dateObj) => dateObj.getTime() !== timeSlot.getTime()
         );
-        localStorage.setItem(
-          'timeSlotsSelectedForBooking',
-          JSON.stringify(daysSelectedForBookingMinusThisOne)
-        );
 
         return [...daysSelectedForBookingMinusThisOne];
       } else {
@@ -66,10 +62,6 @@ const Tile = (props: TileProps) => {
           (a, b) => a.getTime() - b.getTime()
         );
 
-        localStorage.setItem(
-          'timeSlotsSelectedForBooking',
-          JSON.stringify(daysSelectedForBookingPlusThisOne)
-        );
         return daysSelectedForBookingPlusThisOne;
       }
     });

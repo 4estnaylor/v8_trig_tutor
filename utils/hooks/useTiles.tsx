@@ -38,7 +38,6 @@ const useTiles = (props: useTileProps) => {
     if (isBooked) {
       theme = tileThemes.booked;
       if (isBookedByUser) {
-        console.log('booked by user!');
         theme = tileThemes.bookedByUser;
       }
       return theme;

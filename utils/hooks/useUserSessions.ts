@@ -8,7 +8,6 @@ const useUserSessions = () => {
   const [userSessions, setUserSessions] = useState<any[]>([]);
 
   const fetchSessions = async () => {
-    console.log(user?.id);
     if (user?.id) {
       const response = await fetch(`/api/db/getUserSessions/${user?.id}`, {
         method: 'GET',

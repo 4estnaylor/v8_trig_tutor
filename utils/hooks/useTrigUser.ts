@@ -19,7 +19,6 @@ const useTrigUser = () => {
 
       const data = await response.json();
       const user = data.user;
-      console.log('user of orign: ', user);
       setTrigUser(user);
     } catch (error) {
       console.log('no internet');

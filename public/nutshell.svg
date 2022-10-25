@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created using Krita: https://krita.org -->
+<svg xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:krita="http://krita.org/namespaces/svg/krita"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    width="200pt"
+    height="200pt"
+    viewBox="0 0 200 200">
+<defs>
+  <linearGradient id="gradient0" gradientUnits="objectBoundingBox" x1="0" y1="0.486260708483702" x2="1" y2="0.459710323906999" spreadMethod="pad">
+   <stop stop-color="#0d1e26" offset="0" stop-opacity="0.211764705882353"/>
+   <stop stop-color="#0d1e26" offset="1" stop-opacity="1"/>
+  </linearGradient>
+  <linearGradient id="gradient1" gradientUnits="objectBoundingBox" x1="0.354935876552208" y1="0.777831673754185" x2="0.833829934787022" y2="-0.0406910828993017" spreadMethod="pad">
+   <stop stop-color="#492600" offset="0" stop-opacity="1"/>
+   <stop stop-color="#b17740" offset="1" stop-opacity="1"/>
+  </linearGradient>
+ </defs>
+<ellipse id="shape0" transform="matrix(0.999999974762514 0 0 0.999999974762514 14.8799267241645 133.527763498423)" rx="75.182789556361" ry="14.4950772249062" cx="75.182789556361" cy="14.4950772249062" opacity="0.43" fill="url(#gradient0)" fill-rule="evenodd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel"/><path id="shape01" transform="matrix(0.929483738884665 0.00424892783059635 -0.00522213513385605 1.14237988563252 11.5212442854336 27.0747268915399)" fill="url(#gradient1)" fill-rule="evenodd" stroke="#291500" stroke-width="3" stroke-linecap="square" stroke-linejoin="bevel" d="M179.207 96.4959C192.652 73.1159 186.158 76.3851 182.412 65.0725C181.641 52.5234 186.263 40.2769 173.675 27.9544C157.421 12.0411 154.197 15.5518 125.742 7.59631C97.2879 -0.359198 82.4626 -5.12488 42.542 9.18938C2.62145 23.5036 1.3816 30.2504 0.0426931 49.9849C-1.29621 69.7195 29.0552 99.4876 63.1716 109.061C97.2879 118.634 150.426 118.276 179.207 96.4959Z"/><path id="shape1" transform="matrix(0.929483738884665 0.00424892783059635 -0.00522213513385605 1.14237988563252 15.3847646060379 91.014216650402)" fill="none" stroke="#291500" stroke-width="4" stroke-linecap="square" stroke-linejoin="bevel" d="M0 0C65.3522 19.4159 124.827 22.8122 178.425 10.189"/><path id="shape2" transform="matrix(0.929483738884665 0.00424892783059635 -0.00522213513385605 1.14237988563252 21.335413688459 65.1828510704385)" fill="none" stroke="#291500" stroke-width="1.77" stroke-linecap="square" stroke-linejoin="bevel" d="M0 8.14871C10.7839 0.234655 25.2728 -1.91478 43.4667 1.7004C70.7575 7.12317 91.5274 2.33182 91.5274 1.25128"/><path id="shape3" transform="matrix(0.929483738884665 0.00424892783059635 -0.00522213513385605 1.14237988563252 69.6231013314388 38.5793990443695)" fill="none" stroke="#291500" stroke-width="1.77" stroke-linecap="square" stroke-linejoin="bevel" d="M0 7.64249C12.0433 -2.0101 29.2664 -2.51916 51.6694 6.11532"/><path id="shape4" transform="matrix(0.929483738884665 0.00424892783059635 -0.00522213513385605 1.14237988563252 95.9571662030621 83.2434197504011)" fill="none" stroke="#291500" stroke-width="1.77" stroke-linecap="square" stroke-linejoin="bevel" d="M0 9.64501C29.1608 15.3298 52.2666 12.1148 69.3176 0"/><path id="shape5" transform="matrix(0.929483738884665 0.00424892783059635 -0.00522213513385605 1.14237988563252 36.2207221622357 112.744626804791)" fill="none" stroke="#291500" stroke-width="1.77" stroke-linecap="square" stroke-linejoin="bevel" d="M0 0C30.8143 14.1629 55.9074 20.3151 75.2792 18.4569C104.337 15.6694 80.0408 10.2666 127.615 5.34307"/><path id="shape6" transform="matrix(0.929483738884665 0.00424892783059635 -0.00522213513385605 1.14237988563252 137.56963691752 130.587096513089)" fill="none" stroke="#291500" stroke-width="1.77" stroke-linecap="square" stroke-linejoin="bevel" d="M0 12.4675C20.9672 11.8586 33.9721 7.70278 39.0147 0"/><path id="shape7" transform="matrix(0.929483738884665 0.00424892783059635 -0.00522213513385605 1.14237988563252 62.0237650938513 142.155341850131)" fill="none" stroke="#291500" stroke-width="1.77" stroke-linecap="square" stroke-linejoin="bevel" d="M35.5035 8.84661C20.78 8.74843 8.94554 5.79956 0 0"/>
+</svg>

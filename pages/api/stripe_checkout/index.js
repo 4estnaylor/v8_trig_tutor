@@ -39,8 +39,8 @@ export default async function handler(req, res) {
         metadata: metaData,
         mode: 'payment',
         customer_email: email,
-        success_url: `${req.headers.origin}/booking_review?success=true`,
-        cancel_url: `${req.headers.origin}/booking_review?canceled=true`,
+        success_url: `${req.headers.origin}/sessions?success=true`,
+        cancel_url: `${req.headers.origin}/sessions?canceled=true`,
       });
 
       res.json({ id: session.id });

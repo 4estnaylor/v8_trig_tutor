@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import cl from '../colors';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
@@ -21,6 +22,16 @@ const Sessions = () => {
   const [sessionToCancel, setSessionToCancel] = useState<any>();
 
   const [deleteDialogueOn, setDeleteDialogueOn] = useState(false);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    const query = router.query;
+    if (query.success) {
+      localStorage.setItem('cachedSelectedSessions', JSON.stringify([]));
+    }
+  }, [router.isReady, router.query]);
 
   const style = {
     position: 'absolute' as 'absolute',
@@ -84,10 +95,8 @@ const Sessions = () => {
       </Item>
     );
   });
-  console.log(userSessions);
 
   const handleCopyButtonClick = () => {
-    console.log('happening!');
     navigator.clipboard.writeText(meetLink);
     setCopyTagOn(true);
     setMeetLinkDisplay(<CopiedDisplay>COPIED ✓ </CopiedDisplay>);
@@ -107,7 +116,7 @@ const Sessions = () => {
         <div>
           <Box sx={style}>
             <Typography component={'span'}>
-              Stuff happens! 😃
+              ¯\_(ツ)_/¯ &nbsp; Stuff happens!
               <br />
               <br />
               If you cancel this session, you will get a full $40 reimbursment.
@@ -180,8 +189,7 @@ const Video = styled(Button)`
 `;
 
 const Wrapper = styled.div`
-  min-width: 350px;
-  max-width: 500px;
+  max-width: 400px;
   margin: auto;
 `;
 
@@ -218,6 +226,7 @@ const MeetLinkWrappper = styled.div`
   overflow: hidden;
   color: ${cl.getHSL(cl.gray_dark)};
   border-radius: 8px;
+  width: 335px;
 `;
 const CopiedDisplay = styled.div`
   color: ${cl.getHSL(cl.red)};
