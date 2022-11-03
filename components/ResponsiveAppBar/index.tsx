@@ -137,7 +137,7 @@ const ResponsiveAppBar = () => {
                   cursor: 'pointer',
                 }}
               >
-                Trig Tutor
+                Trig-Tutor
               </Typography>
             </Box>
           </Link>

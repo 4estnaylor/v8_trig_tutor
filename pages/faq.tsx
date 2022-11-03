@@ -25,7 +25,7 @@ const faq = () => {
 
         <FAQSection
           question="Why Study Trigonometry?"
-          summary={`In ${new Date().getFullYear()}, triangles are, weirdly enough, extremely powerful.`}
+          summary={`In ${new Date().getFullYear()}, triangles are arguably, weirdly enough, the most outrageously powerful shape in mathematics.`}
         >
           <div>
             <ol>
@@ -74,7 +74,7 @@ const faq = () => {
               As bizarre as it sounds, the humble act of measuring triangles
               (with a great deal of care), has led us to both great and terrible
               things like the microwave oven and the current state of social
-              media.   If you're skeptical about my claim, that is entirely
+              media. If you're skeptical about my claim, that is entirely
               appropriate. After years of studying and teaching trigonometry,
               that the dinky 'lil shape is some outrageously powerful engine of
               mathematics still feels, way deep down in my bones, flippin'
