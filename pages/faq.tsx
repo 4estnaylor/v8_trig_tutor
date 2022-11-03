@@ -1,10 +1,12 @@
 import React from 'react';
+import Link from 'next/link';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import Head from 'next/head';
 import styled from 'styled-components';
 import FAQSection from '../components/FAQ/FAQSection';
 import Gap from '../components/Gaps/Gap';
 import cl from '../colors';
+import { Alert, AlertTitle } from '@mui/material';
 
 const faq = () => {
   return (
@@ -23,8 +25,7 @@ const faq = () => {
 
         <FAQSection
           question="Why Study Trigonometry?"
-          summary={`Trigonometry has been around for over 4000 years. There's actually still some pretty good reasons to learn
-          trigonometry in the year ${new Date().getFullYear()}.`}
+          summary={`In ${new Date().getFullYear()}, triangles are, weirdly enough, extremely powerful.`}
         >
           <div>
             <ol>
@@ -36,9 +37,8 @@ const faq = () => {
                 triangle measurements sooner or later. (Preferablly sooner!)
               </li>
               <li>
-                Along with statistics and probability, trig is probably the most
-                practically aplicable math taught in highschool "out of the
-                box".
+                Trig is one of the most "out of the box" practical applications
+                of math learned in highschool.
               </li>
               <li>
                 Trigonometry will stretch your mind by requiring you to approach
@@ -62,12 +62,12 @@ const faq = () => {
                 </ul> */}
               </li>
               <li>
-                Lastly, and maybe most importantly, it is interesting to study
-                Trig. In math we sometimes drown ourselves in self-seriousness
-                and efficiency. Try to go "off trail" and approach a solution to
-                a problem in a weird or unique way now and then. Even if it
-                doesn't get you the right answer what you may lose in efficiency
-                you'll probably more than make up for in richness and depth.
+                Lastly, and most overlooked, it is interesting to study. In math
+                we sometimes drown ourselves in self-seriousness and efficiency.
+                Try to go "off trail" and approach a solution to a problem in a
+                weird or unique way now and then. Even if it doesn't get you the
+                right answer what you may lose in efficiency you'll probably
+                more than make up for in richness and depth.
               </li>
             </ol>
             <p>
@@ -88,13 +88,108 @@ const faq = () => {
           </div>
         </FAQSection>
 
-        <FAQSection question="Good Free Trig Resources?" />
-        <FAQSection question="Difference Between Trig and Precalc?">
+        <FAQSection
+          question="Good Free Trig Resources?"
+          summary={`How to get good at measuring triangles (and other stuff too) without spending a red cent...`}
+        >
+          <div>
+            <ul>
+              <li>
+                <Link href="book">
+                  <a> Free Friday Tutoring Sessions</a>
+                </Link>
+                Book a single session on any Friday and it's free. Only catch is
+                that Friday sessions cannot be booked more than 1 week in
+                advance. (availability is limited, so try to book one early on
+                in the week if possible).
+                <br />
+                <br />
+                <Alert severity="info">
+                  <AlertTitle>
+                    Free on Fridays within US and Central Standard Timezone.
+                  </AlertTitle>
+                </Alert>
+              </li>
+
+              <li>
+                <a href="https://schoolyourself.org/learn">School Yourself </a>
+                My favorite resource to recommend for trig{' '}
+                {`(and other math subjects)`} that you have likely never heard
+                of. A lot of students tell me they love this as an alternative
+                to Khan Academy. The approach is really interactive, personally
+                I can't get enough of it. The creators have moved on to other,
+                not free, endeavours. Nonetheless, good free stuff is good free
+                stuff, and they are doing us a real solid by paying to keep it
+                online so it remains a great and totally free resource for us!
+              </li>
+              <li>
+                <a href="https://www.khanacademy.org/math/trigonometry">
+                  Khan Academy
+                </a>
+                I realize many math students are probably beyond well aware of
+                this one. Sal Khan's avuncular, made-for-radio voice and
+                accompanying exercises may be starting to become a bit of a
+                crutch for some math classrooms. In fairness, they're overused
+                for a reason. Beats the heck out of the most popularly used
+                Common Core compliant textbooks.
+                <br />
+                <br />
+                However, studying this "solo" outside of class will probably
+                leave a very different impression if you have only experienced
+                it as class-required material. Khan Academy was explicitly
+                designed to allow students to go at their own pace, so using it
+                in a way that suits you, free from class-mandated deadlines is
+                really playing to Khan Academy's strengths in my view.
+                {/* <br />
+                <br />I <em>really</em> encourage students to approach Khan
+                Academy "solo" if you've never tried it before. It is very made
+                for students to do at their own pace, and in my view has way
+                more impact when approached "solo" giving yourself the freedom
+                to spend your time exactly as you the student see fit and
+                necessary. */}
+              </li>
+              <li>
+                <a href="https://brownmath.com/twt/intro.htm">
+                  Trig without tears
+                </a>
+                A bit of a holy-grail for Trig teachers and students. An
+                oldschool text available free online with a series of practice
+                problems that doesn't hide behind any frills and just drills
+                down right into the essence of trig. If you want to really
+                understand trig inside-and-out there's no better resource. For
+                this one it may be usefull to have a math teacher/mentor if
+                you've never tried self-study from a text before since it is
+                more dense (but in a good way) than the other resources
+                mentioned on this list.
+              </li>
+            </ul>
+          </div>
+        </FAQSection>
+        <FAQSection
+          question="Difference Between Trig and Precalc?"
+          summary="The way these terms have come to be used in practice is quite frankly, a bit of a ****-show."
+        >
           <div> test</div>
         </FAQSection>
-        <FAQSection question="How Do Sessions Work?" />
-        <FAQSection question="Why Specifically Tutor Trigonometry?" />
-        <FAQSection question="Cancelling, Refunding, Switching Sessions?" />
+        <FAQSection
+          question="What to expect from a tutoring session?"
+          summary="First, what not to expect → Me doing a take-home test for you. 😐 Seriously, a student has asked me to do that."
+        />
+        {/* <FAQSection
+          question="Why tutor trig specifically?"
+          summary="It's where math starts to go off the rails for a ton of students. Insidiously, they often don't realize it until much later on."
+        /> */}
+        <FAQSection
+          question="Cancelling, Refunding, Switching Sessions?"
+          summary="Life is crazy enough, I try to keep scheduling as flexible as I can. There's really just one limit for you to keep in mind."
+        />
+        <FAQSection
+          id="free_sessions"
+          question="How do Free Friday Sessions Work?"
+          summary={`Pretty much the same as any other! But, you cannot book more than a week in advance.`}
+        >
+          <div id="FreeFridaySessions"></div>
+        </FAQSection>
       </Wrapper>
     </OuterWrapper>
   );
@@ -112,6 +207,19 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+
+  & a {
+    color: ${cl.getHSL(cl.red)};
+  }
+
+  & li {
+    padding-top: 30px;
+  }
+
+  & li a {
+    padding-bottom: 15px;
+    display: block;
+  }
 `;
 
 export default faq;

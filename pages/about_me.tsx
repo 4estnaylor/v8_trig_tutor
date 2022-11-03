@@ -48,19 +48,6 @@ const about_me = () => {
             in international and bilingual schools using both Common Core and IB
             compliant curricula.
           </p>
-
-          <ContactCard>
-            <ProfileImage
-              src="/about_photo.jpg"
-              alt="a picture of me, Forrest"
-              width={200}
-              height={200}
-            />
-            <ContactMe>
-              <div> forrest@trig-tutor.com</div>
-              <div> Don't hesitate to reach out! I check my email daily. </div>
-            </ContactMe>
-          </ContactCard>
         </InANutshell>
         <CourseRundown>
           <h4> math courses taught:</h4>
@@ -94,6 +81,18 @@ const about_me = () => {
             }
           </p>
         </CourseRundown>
+        <ContactCard>
+          <ProfileImage
+            src="/about_photo.jpg"
+            alt="a picture of me, Forrest"
+            width={200}
+            height={200}
+          />
+          <ContactMe>
+            <div> forrest@trig-tutor.com</div>
+            <div> Don't hesitate to reach out! I check my email daily. </div>
+          </ContactMe>
+        </ContactCard>
       </Wrapper>
     </div>
   );
@@ -121,7 +120,8 @@ const ContactCard = styled.div`
   justify-content: center;
   flex-direction: column;
   gap: 15px;
-  border-radius: 8px;
+  width: calc(100% + 14px);
+  border-radius: 0px 0px 8px 8px;
   @media (max-width: 700px) {
     border-radius: 0px;
   }
@@ -172,6 +172,7 @@ const Wrapper = styled.div`
   min-width: 350px;
   margin: auto;
   padding: 7px;
+  padding-top: 7px;
 
   & h2 {
     text-align: center;

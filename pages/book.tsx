@@ -62,7 +62,7 @@ const Book = () => {
   };
 
   const useComponentDidMount = () => {
-    const ref = useRef();
+    const ref = useRef<boolean>();
     useEffect(() => {
       ref.current = true;
     }, []);
@@ -85,7 +85,7 @@ const Book = () => {
     const cachedSessions = cachedSessionsParsed.map((session: any) => {
       const sessionDate = new Date(session);
       if (sessionDate.getTime() < now.getTime()) {
-        return;
+        return null;
       }
       return sessionDate;
     });
@@ -138,15 +138,15 @@ const TopSection = styled.div`
 `;
 
 const BottomSection = styled.div`
-  /* background-color: ${cl.getHSL(cl.purple)}; */
-  background: linear-gradient(
+  background-color: ${cl.getHSL(cl.purple)};
+  /* background: linear-gradient(
     -120deg,
     ${cl.getHSL(cl.blue_light)} 10%,
     ${cl.getHSL(cl.blue)},
     ${cl.getHSL(cl.purple)} 50%,
     ${cl.getHSL(cl.red)} 90%
-  );
-  background-size: 190%;
+  ); */
+  background-size: 180%;
   background-position-x: 50%;
   background-position-y: 50%;
   flex: 1;

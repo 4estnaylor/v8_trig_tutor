@@ -206,7 +206,7 @@ const ResponsiveAppBar = () => {
                   letterSpacing: '.3rem',
                 }}
               >
-                Trig Tutor
+                Trig-Tutor
               </Typography>
             </Box>
           </Link>

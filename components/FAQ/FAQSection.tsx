@@ -46,7 +46,8 @@ const FAQSection = (props: FAQSectionProps) => {
 
 const Wrapper = styled.div`
   font-size: 1.25rem;
-  box-shadow: 0px 2px 4px ${cl.getHSLA(cl.black, 0.4)};
+  box-shadow: 0px 0px 4px ${cl.getHSLA(cl.black, 0.4)};
+  /* border: 4px solid ${cl.getHSL(cl.purple)}; */
   border-radius: 8px;
   background-color: ${cl.getHSLA(cl.white, 1)};
 `;
@@ -70,7 +71,7 @@ const TopLayer = styled.div`
 `;
 
 const Question = styled.h3`
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   padding-left: 20px;
   display: flex;
   overflow: auto;
