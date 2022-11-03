@@ -184,12 +184,9 @@ const faq = () => {
           summary="Life is crazy enough, I try to keep scheduling as flexible as I can. There's really just one limit for you to keep in mind."
         />
         <FAQSection
-          id="free_sessions"
           question="How do Free Friday Sessions Work?"
           summary={`Pretty much the same as any other! But, you cannot book more than a week in advance.`}
-        >
-          <div id="FreeFridaySessions"></div>
-        </FAQSection>
+        />
       </Wrapper>
     </OuterWrapper>
   );
