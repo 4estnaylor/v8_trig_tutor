@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created using Krita: https://krita.org -->
+<svg xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:krita="http://krita.org/namespaces/svg/krita"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    width="1000pt"
+    height="1000pt"
+    viewBox="0 0 1000 1000">
+<defs>
+  <linearGradient id="gradient0" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1" spreadMethod="pad">
+   <stop stop-color="#00aacc" offset="0" stop-opacity="1"/>
+   <stop stop-color="#cdcdcd" offset="1" stop-opacity="1"/>
+  </linearGradient>
+  <linearGradient id="gradient1" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1" spreadMethod="pad">
+   <stop stop-color="#ffb2b7" offset="0" stop-opacity="1"/>
+   <stop stop-color="#ff0055" offset="1" stop-opacity="1"/>
+  </linearGradient>
+  <linearGradient id="gradient2" gradientUnits="objectBoundingBox" x1="0.00526276937245651" y1="0.53596768748312" x2="1" y2="0.550478713723834" spreadMethod="pad">
+   <stop stop-color="#ffb2b7" offset="0" stop-opacity="0"/>
+   <stop stop-color="#ff0055" offset="0.369918699186992" stop-opacity="0"/>
+   <stop stop-color="#ff0055" offset="1" stop-opacity="1"/>
+  </linearGradient>
+ </defs>
+<rect id="shape0" transform="translate(46.1296227310978, 345.052563851229)" fill="url(#gradient0)" fill-rule="evenodd" width="901" height="276" rx="8" ry="8"/><path id="shape0" transform="translate(533.454316710626, 345.012922424952)" fill="url(#gradient1)" fill-rule="evenodd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel" d="M12.1776 0L414.49 0L414.49 276L12.1776 276C11.948 253 -3.91825 249.478 12.1776 174.414C28.2735 99.3493 -21.98 124.921 12.1776 68.9118C46.3353 12.9028 11.8478 23 12.1776 0Z"/><path id="shape1" transform="translate(55.4655261376867, 646.644813937049)" fill="none" stroke="#f7fbfd" stroke-width="14" stroke-linecap="square" stroke-linejoin="bevel" d="M0 1.38618C28.0584 23.0106 118.051 37.7041 269.977 45.4667C421.903 53.2293 471.976 109.257 478.648 117.216C485.32 125.176 511.553 59.9754 540.981 59.0513C585.121 57.6651 910.531 48.5163 887.947 0"/><text id="shape2" krita:useRichText="true" transform="translate(148.40234375, 943.7521650873)" fill="#f7fbfd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel" font-family="Burst My Bubble" font-size="288" font-size-adjust="0.423873" font-stretch="normal" letter-spacing="0" word-spacing="0"><tspan x="0">Precalc</tspan></text><rect id="shape01" transform="matrix(0.999999963087622 0 0 0.999999963087622 525.116739041096 344.821972097145)" fill="url(#gradient2)" fill-rule="evenodd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel" width="430.650486003243" height="276" rx="7.64751140516303" ry="8"/><path id="shape3" transform="matrix(0.99967973604102 -0.025306626581957 0.025306626581957 0.99967973604102 61.589530836201 254.057971080042)" fill="none" stroke="#f7fbfd" stroke-width="14" stroke-linecap="square" stroke-linejoin="bevel" d="M0 80.1924C98.9697 28.4041 167.539 5.90092 205.708 12.6827C262.962 22.8554 240.669 36.2649 257.896 17.3067C275.122 -1.65153 268.472 -5.19235 273.17 7.4656C277.869 20.1236 289.816 39.964 305.523 26.5546C321.229 13.1451 454.991 56.6102 463.604 90.8275"/><text id="shape4" krita:useRichText="true" transform="translate(150.881154645288, 174.969410547233)" fill="#f7fbfd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel" font-family="Burst My Bubble" font-size="288" font-size-adjust="0.423873" font-stretch="normal" letter-spacing="0" word-spacing="0"><tspan x="0">Trig</tspan></text>
+</svg>

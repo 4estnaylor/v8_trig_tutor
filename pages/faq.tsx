@@ -193,54 +193,135 @@ const faq = () => {
         </FAQSection>
         <FAQSection
           question="Difference Between Trig and Precalc?"
-          summary="There's often a lot of confusion around where trigonometry ends and precalculus begins. I've made a little diagram to help clarify."
+          summary="There's often a lot of confusion around where trigonometry ends and precalculus begins. Here are some clarifying diagrams."
+          iconString="/trig_vs_precalc_simple.svg"
         >
           <div>
+            <div>
+              <Image
+                src="/trig_only.svg"
+                alt="diagram of trig"
+                width={300}
+                height={300}
+              />
+            </div>
             Trigonometry is about measuring and calculating the sides and angles
             of triangles. Some of the foundational skills and knowledge for
             measuring triangles are already familiar to students from geometry,
             but trigonometry goes deeper and further into the world of triangles
-            using all kinds of neat strategies.
+            using all kinds of neat strategies. Trig topics tend to progress
+            naturally from one to the next over a 1 semester course.
+            <div>
+              <Image
+                src="/precalc_full.svg"
+                alt="diagram of trig"
+                width={300}
+                height={300}
+              />
+            </div>
+            Precalculus was originally about preparing for a calculus course. In
+            practice its subject area is much less clear-cut than trig's. Its
+            definition can also vary signifigantly depending upon who you ask
+            and what the phase of the moon is when you ask.
             <br />
             <br />
-            Precalculus is, unsurprisingly about preparing for a calculus
-            course. It's definition is less clear-cut. It came into existence
-            not as a distinct field of math but because universities noticed
-            college freshman jumping into their first math class, calculus, much
-            in the same way they might jump into a brick wall. It was an overly
-            steep learning curve, so highschool math teachers adjusted their
-            curiculum to smooth students' transition into college level math.
+            For now, just know that Precalc is usually a two semester course.
+            The first semester is Trig, and the second one is, ummm, a little
+            wacky.
             <br />
             <br />
-            So what do trig and precalc have to do with one another anyway? Well
-            the biggest chunk of precalculus is getting really good at
+            You may have noticed the biggest chunk of precalculus by far is
             trigonometry.
-            <br /> <br />
-            precalculus = 50% trig + 50% some other stuff
+            <div>
+              <Image
+                src="/trig_other_stuff.svg"
+                alt="diagram of trig"
+                width={300}
+                height={300}
+              />
+            </div>
+            precalculus = 50%-ish trig + 50%-ish some other stuff
             <br /> <br />
             For this reason, it is very unusual for a student to take both
             trigonometry and precalculus since trigonometry is already included
-            in a precalculus course.
-            <br /> <br />
-            The "other stuff" you learn in precalculus is formally (and somewhat
-            unhelpfully) called math analysis.
+            in the first semester of a precalculus course.
             <br />
             <br />
-            What the heck is "math analysis"? Analyzing stuff with math? Sounds
-            very... vague.
+            The other, non-trig stuff taught in precalculus is formally (and
+            somewhat unhelpfully) called "math analysis".
+            <div>
+              <Image
+                src="/math_analysis.svg"
+                alt="diagram of trig"
+                width={300}
+                height={300}
+              />
+            </div>
+            What in the <em>Thundering Kittens of Ipala </em> is math analysis
+            you ask?
+            <br />
+            <br />
+            <div>
+              <Image
+                src="/thunder_kitten.png"
+                alt="diagram of trig"
+                width={300}
+                height={300}
+              />
+            </div>
+            <br />
+            <br />
+            Umm, Analyzing stuff with math... Okay I'd admit, sounds awfully
+            vague.
             <br />
             <br />
             Unlike trigonometry, the topics in math analysis don't have an
-            especially coherent mathematical theme apart from being useful
-            skills to have for a future calculus course. I don't particularly
-            like the term math analysis, but the good news is it isn't too
-            important to remember anyway.
-            <br></br>
-            (Pretty much only comes up when people are describing the difference
-            between trig and precalc.)
+            especially coherent mathematical theme apart from in general being
+            useful skills to have for future study of calculus and other college
+            math subjects. This thematic incoherence happened mostly because of
+            how precalculus came to be.
+            <div>
+              <Image
+                src="/math_analysis_explained.svg"
+                alt="diagram of trig"
+                width={300}
+                height={300}
+              />
+            </div>
+            Precalc was born not as a distinct field of math but because
+            universities noticed many college freshman jumping into their first
+            math class, calculus, much in the same way they might jump into a
+            brick wall. It was an overly steep learning curve, so highschool
+            math classes adjusted their curiculum to smooth students' transition
+            into college-level math. In some ambitious classrooms, precalc has
+            grown into preparing students for linear algebra courses as well.
+            <br />
+            <br />
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Image
+                src="/math_analysis_complicated.svg"
+                alt="diagram of trig"
+                width={300}
+                height={300}
+              />
+            </div>
+            {/* <Alert severity="info">
+              <AlertTitle>pre-calculus or pre-college?</AlertTitle>
+              Linear Algebra is taking an increasingly leading role in college
+              mathematics because of its many applications in computer and data
+              science. In response, precalc teachers are increasingly including
+              topics to bolster not just calc but linear algebra as well if they
+              can manage to stuff it all into just 2 semesters. About time we
+              consider a name change for this course and maybe pare it down a
+              bit while we're at it!
+            </Alert> */}
+            <br />I don't particularly like the term math analysis because of
+            how vague it is. I like to think of it more as a kind of "math trail
+            mix" your teachers load you up with before you hit your college math
+            journey to provide you nutrition and energy along the way.
             <br /> <br />
-            <Alert severity="info">
-              <AlertTitle>Important Takeaway</AlertTitle>
+            {/* <Alert severity="info">
+              <AlertTitle>Quick Takeaway</AlertTitle>
               <ul>
                 <li>
                   Trigonomtery is about studying triangles usually for 1
@@ -260,7 +341,7 @@ const faq = () => {
 
               <br />
               <br />
-            </Alert>
+            </Alert> */}
           </div>
         </FAQSection>
         <FAQSection
