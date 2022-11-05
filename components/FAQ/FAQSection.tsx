@@ -5,16 +5,19 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import styled from 'styled-components';
 import cl from '../../colors';
+import Image from 'next/image';
 
 interface FAQSectionProps {
   question: string;
   summary?: string;
   thumnail?: any;
   children?: JSX.Element;
+  id?: string;
+  iconString?: string;
 }
 
 const FAQSection = (props: FAQSectionProps) => {
-  const { question, children, summary } = props;
+  const { question, children, summary, iconString } = props;
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleToggleClick = () => {
@@ -23,7 +26,16 @@ const FAQSection = (props: FAQSectionProps) => {
   return (
     <Wrapper>
       <TopLayer>
-        <Thumbnail></Thumbnail>
+        <Thumbnail>
+          {iconString ? (
+            <Image
+              src={iconString}
+              alt="raised eyebrow triangle image"
+              width={100}
+              height={100}
+            />
+          ) : null}
+        </Thumbnail>
 
         <Question>{question}</Question>
         <ExpandButton onClick={handleToggleClick}>
@@ -49,7 +61,8 @@ const Wrapper = styled.div`
   box-shadow: 0px 0px 4px ${cl.getHSLA(cl.black, 0.4)};
   /* border: 4px solid ${cl.getHSL(cl.purple)}; */
   border-radius: 8px;
-  background-color: ${cl.getHSLA(cl.white, 1)};
+  background-color: ${cl.getHSLA(cl.white, 0.1)};
+  color: ${cl.getHSL(cl.white)};
 `;
 
 const BottomLayer = styled.div`
@@ -58,7 +71,7 @@ const BottomLayer = styled.div`
 `;
 
 const Thumbnail = styled.div`
-  background-color: ${cl.getHSL(cl.purple)};
+  /* background-color: ${cl.getHSL(cl.purple)}; */
   height: 100px;
   width: 100px;
   border-radius: 8px;
@@ -76,6 +89,7 @@ const Question = styled.h3`
   display: flex;
   overflow: auto;
   align-items: center;
+
   /* display: flex;
   align-items: center;
   justify-content: center; */
@@ -95,6 +109,7 @@ const Answer = styled.div`
 
 const ExpandButton = styled(Button)`
   margin-left: auto;
+  color: ${cl.getHSL(cl.white)};
 `;
 
 export default FAQSection;

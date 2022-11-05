@@ -7,6 +7,8 @@ import FAQSection from '../components/FAQ/FAQSection';
 import Gap from '../components/Gaps/Gap';
 import cl from '../colors';
 import { Alert, AlertTitle } from '@mui/material';
+import Image from 'next/image';
+import { flexbox } from '@mui/system';
 
 const faq = () => {
   return (
@@ -19,31 +21,36 @@ const faq = () => {
       <ResponsiveAppBar />
       <Wrapper>
         <Gap height={30} />
-        <h2 style={{ textAlign: 'center', color: cl.getHSL(cl.purple) }}>
+        <h2 style={{ textAlign: 'center', color: cl.getHSL(cl.white) }}>
           Frequently Asked Questions
         </h2>
 
         <FAQSection
           question="Why Study Trigonometry?"
-          summary={`In ${new Date().getFullYear()}, triangles are arguably, weirdly enough, the most outrageously powerful shape in mathematics.`}
+          iconString="/disappointedTriangleNoText.png"
+          summary={`Very weirdly, for over 6 thousand years measuring triangles has consistently been one of the most powerful tools in advancing the entire field of mathematics.`}
         >
           <div>
             <ol>
               <li>
                 Virtually all of modern mathematics and physical science are
                 underpinned by things we learn when measuring triangles. If you
-                have a desire to pursue work/education in science, techonology,
-                engineering, or math, you will have to become fluent speaker of
-                triangle measurements sooner or later. (Preferablly sooner!)
+                have a desire to pursue almost any field in science,
+                techonology, engineering, or math, it's pretty much mandatory to
+                become a fluent triangle-measurer sooner or later.
               </li>
               <li>
                 Trig is one of the most "out of the box" practical applications
-                of math learned in highschool.
+                of math learned in highschool. Caclulating lengths and angles of
+                triangles is immensely useful in so many walks of life because
+                of how frequently these simply, sturdy shapes appear in man-made
+                things whether we are talking about garden beds, a point of
+                perspective in an illustration, or mechancal pulleys...
               </li>
               <li>
                 Trigonometry will stretch your mind by requiring you to approach
                 complex systems. Carefully studied, trig will arm you with an
-                approach that allows you to build up and break down complex
+                approach that allows you to build up (and break down) complex
                 systems with much simpler parts. Approaching problems this way
                 is often useful even outside of mathematics.
                 {/* <ul>
@@ -73,27 +80,44 @@ const faq = () => {
             <p>
               As bizarre as it sounds, the humble act of measuring triangles
               (with a great deal of care), has led us to both great and terrible
-              things like the microwave oven and the current state of social
-              media. If you're skeptical about my claim, that is entirely
-              appropriate. After years of studying and teaching trigonometry,
-              that the dinky 'lil shape is some outrageously powerful engine of
-              mathematics still feels, way deep down in my bones, flippin'
-              weird. For all the complexity present in the modern world and the
-              increasingly intricate and specialized trees of math and science,
-              it feels like triangles should no longer be relevant much less
-              powerful. I mean look at it. Take a quick glance. What's to
-              understand even?
+              things like the microwave oven and cellphone apps needlessly
+              vacumming up your location data. If you're skeptical about my
+              claim, that is entirely appropriate. After years of studying and
+              teaching trigonometry, that this undeniably dinky shape is some
+              outrageously powerful engine of mathematics still feels, way deep
+              down in my bones, flippin' weird. For all the complexity present
+              in the modern world and the increasingly intricate and specialized
+              trees of math and science, it feels like triangles should no
+              longer be relevant much less powerful. I mean look at it. Take a
+              quick glance. What's to understand even?
             </p>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Image
+                src="/disappointedTriangle.png"
+                alt="eyebrow triangle"
+                width={300}
+                height={300}
+              />
+            </div>
             <p>More than you might expect!</p>
           </div>
         </FAQSection>
 
         <FAQSection
-          question="Good Free Trig Resources?"
-          summary={`How to get good at measuring triangles (and other stuff too) without spending a red cent...`}
+          question="Good &amp; Free Trig Resources?"
+          summary={`How to get good at measuring triangles (and other stuff too) without spending a cent...`}
+          iconString="/penny.svg"
         >
           <div>
             <ul>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <Image
+                  src="/penny.svg"
+                  alt="raised eyebrow triangle image"
+                  width={300}
+                  height={300}
+                />
+              </div>
               <li>
                 <Link href="book">
                   <a> Free Friday Tutoring Sessions</a>
@@ -106,7 +130,8 @@ const faq = () => {
                 <br />
                 <Alert severity="info">
                   <AlertTitle>
-                    Free on Fridays within US and Central Standard Timezone.
+                    Free on Fridays starting at 12:00 am CST and ending 11:59 pm
+                    CST.
                   </AlertTitle>
                 </Alert>
               </li>
@@ -116,11 +141,12 @@ const faq = () => {
                 My favorite resource to recommend for trig{' '}
                 {`(and other math subjects)`} that you have likely never heard
                 of. A lot of students tell me they love this as an alternative
-                to Khan Academy. The approach is really interactive, personally
-                I can't get enough of it. The creators have moved on to other,
-                not free, endeavours. Nonetheless, good free stuff is good free
-                stuff, and they are doing us a real solid by paying to keep it
-                online so it remains a great and totally free resource for us!
+                to Khan Academy. Video lectures our made more digestable by
+                splicing in a series of interactive comprehension questions as
+                you go. Personally I can't get enough of the stuff they've made!
+                While the creators have moved on to other projects, the good,
+                totally free stuff they made is still very much good, free, and
+                online!
               </li>
               <li>
                 <a href="https://www.khanacademy.org/math/trigonometry">
@@ -134,12 +160,12 @@ const faq = () => {
                 Common Core compliant textbooks.
                 <br />
                 <br />
-                However, studying this "solo" outside of class will probably
-                leave a very different impression if you have only experienced
-                it as class-required material. Khan Academy was explicitly
-                designed to allow students to go at their own pace, so using it
-                in a way that suits you, free from class-mandated deadlines is
-                really playing to Khan Academy's strengths in my view.
+                However, studying this "solo" outside of class may leave a very
+                different impression if you have only experienced it as
+                class-required material. Khan Academy was explicitly designed to
+                allow students to go at their own pace, so using it in a way
+                that suits you, free from class-mandated deadlines is really
+                playing to Khan Academy's strengths in my view.
                 {/* <br />
                 <br />I <em>really</em> encourage students to approach Khan
                 Academy "solo" if you've never tried it before. It is very made
@@ -150,7 +176,7 @@ const faq = () => {
               </li>
               <li>
                 <a href="https://brownmath.com/twt/intro.htm">
-                  Trig without tears
+                  Trig Without Tears
                 </a>
                 A bit of a holy-grail for Trig teachers and students. An
                 oldschool text available free online with a series of practice
@@ -167,13 +193,79 @@ const faq = () => {
         </FAQSection>
         <FAQSection
           question="Difference Between Trig and Precalc?"
-          summary="The way these terms have come to be used in practice is quite frankly, a bit of a ****-show."
+          summary="There's often a lot of confusion around where trigonometry ends and precalculus begins. I've made a little diagram to help clarify."
         >
-          <div> test</div>
+          <div>
+            Trigonometry is about measuring and calculating the sides and angles
+            of triangles. Some of the foundational skills and knowledge for
+            measuring triangles are already familiar to students from geometry,
+            but trigonometry goes deeper and further into the world of triangles
+            using all kinds of neat strategies.
+            <br />
+            <br />
+            Precalculus is, unsurprisingly about preparing for a calculus
+            course. It's definition is less clear-cut. It came into existence
+            not as a distinct field of math but because universities noticed
+            college freshman jumping into their first math class, calculus, much
+            in the same way they might jump into a brick wall. It was an overly
+            steep learning curve, so highschool math teachers adjusted their
+            curiculum to smooth students' transition into college level math.
+            <br />
+            <br />
+            So what do trig and precalc have to do with one another anyway? Well
+            the biggest chunk of precalculus is getting really good at
+            trigonometry.
+            <br /> <br />
+            precalculus = 50% trig + 50% some other stuff
+            <br /> <br />
+            For this reason, it is very unusual for a student to take both
+            trigonometry and precalculus since trigonometry is already included
+            in a precalculus course.
+            <br /> <br />
+            The "other stuff" you learn in precalculus is formally (and somewhat
+            unhelpfully) called math analysis.
+            <br />
+            <br />
+            What the heck is "math analysis"? Analyzing stuff with math? Sounds
+            very... vague.
+            <br />
+            <br />
+            Unlike trigonometry, the topics in math analysis don't have an
+            especially coherent mathematical theme apart from being useful
+            skills to have for a future calculus course. I don't particularly
+            like the term math analysis, but the good news is it isn't too
+            important to remember anyway.
+            <br></br>
+            (Pretty much only comes up when people are describing the difference
+            between trig and precalc.)
+            <br /> <br />
+            <Alert severity="info">
+              <AlertTitle>Important Takeaway</AlertTitle>
+              <ul>
+                <li>
+                  Trigonomtery is about studying triangles usually for 1
+                  semester.
+                </li>
+                <li>
+                  Precalculus is about getting ready for calculus, usually
+                  involving:
+                  <ul>
+                    <li>a semester of trigonometry</li>
+                    <li>
+                      another semester of an assortment of other math skills.
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+
+              <br />
+              <br />
+            </Alert>
+          </div>
         </FAQSection>
         <FAQSection
           question="What to expect from a tutoring session?"
-          summary="First, what not to expect → Me doing a take-home test for you. 😐 Seriously, a student has asked me to do that."
+          summary="You'll just need something to write with (and on), a google account, and ideally a comfortable place to sit."
         />
         {/* <FAQSection
           question="Why tutor trig specifically?"
@@ -181,8 +273,38 @@ const faq = () => {
         /> */}
         <FAQSection
           question="Cancelling, Refunding, Switching Sessions?"
-          summary="Life is crazy enough, I try to keep scheduling as flexible as I can. There's really just one limit for you to keep in mind."
-        />
+          summary="Life is crazy enough, so I try to keep scheduling as flexible as I can. There's really just one limit for you to keep in mind."
+        >
+          <div>
+            The one limit is that an account may only book up to 5 sessions,
+            including cancelled sessions until either:
+            <ol type="a">
+              <li> the account successfully completes a session </li>
+              <li>
+                A 10 day renewal period elapses from the time of the account's
+                last booking
+              </li>
+            </ol>
+            <br />
+            <span style={{ color: cl.getHSL(cl.red_light) }}>
+              {' '}
+              Please keep in mind this means if you cancel 5 sessions before
+              completing one, you will be unable to book another session for 10
+              days.{' '}
+            </span>
+            <br />
+            <br />
+            <Alert severity="info">
+              <AlertTitle>Why this policy?</AlertTitle>
+              Every online payment transaction, if it is secure, costs a little
+              bit of money. In the case of my lesson usually about $1.46
+              depending on taxes and how many sessions you book at once. This
+              policy is designed to prevent many transactions at once which
+              could accumulate into a large fee with my online payment platform,
+              Stripe.
+            </Alert>
+          </div>
+        </FAQSection>
         <FAQSection
           question="How do Free Friday Sessions Work?"
           summary={`Pretty much the same as any other! But, you cannot book more than a week in advance.`}
@@ -193,7 +315,13 @@ const faq = () => {
 };
 
 const OuterWrapper = styled.div`
-  background-color: ${cl.getHSLA(cl.purple, 0.05)};
+  /* background-color: ${cl.getHSLA(cl.purple, 0.05)}; */
+  background: linear-gradient(
+    20deg,
+    ${cl.getHSL(cl.purple)},
+    ${cl.getHSL(cl.black)}
+  );
+  background-size: 200%;
   min-height: 100vh;
 `;
 
@@ -206,11 +334,15 @@ const Wrapper = styled.div`
   gap: 15px;
 
   & a {
-    color: ${cl.getHSL(cl.red)};
+    color: ${cl.getHSL(cl.red_light)};
   }
 
   & li {
     padding-top: 30px;
+  }
+
+  & li li {
+    padding-top: 10px;
   }
 
   & li a {
