@@ -209,8 +209,16 @@ const faq = () => {
             of triangles. Some of the foundational skills and knowledge for
             measuring triangles are already familiar to students from geometry,
             but trigonometry goes deeper and further into the world of triangles
-            using all kinds of neat strategies. Trig topics tend to progress
-            naturally from one to the next over a 1 semester course.
+            using some clever strategies comparing the ratio between a
+            triangle's side lengths.
+            <br />
+            <br />
+            <Alert severity="info">
+              Trig topics tend to progress naturally from one to the next over a
+              1 semester course.
+            </Alert>
+            <br />
+            <br />
             <div>
               <Image
                 src="/precalc_full.svg"
@@ -225,9 +233,10 @@ const faq = () => {
             and what the phase of the moon is when you ask.
             <br />
             <br />
-            For now, just know that Precalc is usually a two semester course.
-            The first semester is Trig, and the second one is, ummm, a little
-            wacky.
+            <Alert severity="info">
+              Precalc is usually a two semester course. The first semester is
+              Trig, and the second one is, ummm, a little wacky
+            </Alert>
             <br />
             <br />
             You may have noticed the biggest chunk of precalculus by far is
@@ -267,6 +276,7 @@ const faq = () => {
                 alt="diagram of trig"
                 width={300}
                 height={300}
+                style={{ borderRadius: '30%' }}
               />
             </div>
             <br />
