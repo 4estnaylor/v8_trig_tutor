@@ -58,11 +58,13 @@ const FAQSection = (props: FAQSectionProps) => {
 
 const Wrapper = styled.div`
   font-size: 1.25rem;
-  box-shadow: 0px 0px 4px ${cl.getHSLA(cl.black, 0.4)};
+  /* box-shadow: 0px 0px 4px ${cl.getHSLA(cl.purple, 1)}; */
   /* border: 4px solid ${cl.getHSL(cl.purple)}; */
-  border-radius: 8px;
+  /* border-radius: 8px; */
+  border-bottom: 2px solid ${cl.getHSL(cl.black)};
   background-color: ${cl.getHSLA(cl.white, 0.1)};
-  color: ${cl.getHSL(cl.white)};
+  color: ${cl.getHSL(cl.black)};
+  margin-bottom: 20px;
 `;
 
 const BottomLayer = styled.div`
@@ -109,7 +111,7 @@ const Answer = styled.div`
 
 const ExpandButton = styled(Button)`
   margin-left: auto;
-  color: ${cl.getHSL(cl.white)};
+  color: ${cl.getHSL(cl.purple)};
 `;
 
 export default FAQSection;

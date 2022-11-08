@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import Head from 'next/head';
@@ -9,8 +9,12 @@ import cl from '../colors';
 import { Alert, AlertTitle } from '@mui/material';
 import Image from 'next/image';
 import { flexbox } from '@mui/system';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const faq = () => {
+  const [isThunderCatVisible, setIsThunderCatVisible] = useState(false);
+  const [areThunderKittensVisible, setAreThunderKittensVisible] =
+    useState(false);
   return (
     <OuterWrapper>
       <Head>
@@ -28,7 +32,7 @@ const faq = () => {
         <FAQSection
           question="Why Study Trigonometry?"
           iconString="/disappointedTriangleNoText.png"
-          summary={`Very weirdly, for over 6 thousand years measuring triangles has consistently been one of the most powerful tools in advancing the entire field of mathematics.`}
+          summary={`Oddly enough, for the last few thousand years the humble triangle has consistently been one of the most powerful tools in advancing human knowledge and technology.`}
         >
           <div>
             <ol>
@@ -37,15 +41,20 @@ const faq = () => {
                 underpinned by things we learn when measuring triangles. If you
                 have a desire to pursue almost any field in science,
                 techonology, engineering, or math, it's pretty much mandatory to
-                become a fluent triangle-measurer sooner or later.
+                learn how to fluently use a triangle sooner or later. I highly
+                recommend sooner.
               </li>
               <li>
                 Trig is one of the most "out of the box" practical applications
                 of math learned in highschool. Caclulating lengths and angles of
-                triangles is immensely useful in so many walks of life because
-                of how frequently these simply, sturdy shapes appear in man-made
-                things whether we are talking about garden beds, a point of
-                perspective in an illustration, or mechancal pulleys...
+                triangles is immensely useful even without getting into more
+                advanced math. These simply, sturdy shapes pop up all over the
+                place in almost any walk of life you can imagine. Personally,
+                I've made use of them for estimating how much mulch I need for a
+                garden bed, making a point of perspective in an illustration,
+                and jury-rigging mechancal pulleys... Once you get good at
+                triangles, you'll find the applications for them are
+                never-ending.
               </li>
               <li>
                 Trigonometry will stretch your mind by requiring you to approach
@@ -99,13 +108,12 @@ const faq = () => {
                 height={300}
               />
             </div>
-            <p>More than you might expect!</p>
           </div>
         </FAQSection>
 
         <FAQSection
           question="Good &amp; Free Trig Resources?"
-          summary={`How to get good at measuring triangles (and other stuff too) without spending a cent...`}
+          summary={`How to get good at measuring triangles (and other stuff too) without spending a red cent...`}
           iconString="/penny.svg"
         >
           <div>
@@ -123,9 +131,7 @@ const faq = () => {
                   <a> Free Friday Tutoring Sessions</a>
                 </Link>
                 Book a single session on any Friday and it's free. Only catch is
-                that Friday sessions cannot be booked more than 1 week in
-                advance. (availability is limited, so try to book one early on
-                in the week if possible).
+                that you can only book free sessions 1 week in advance.
                 <br />
                 <br />
                 <Alert severity="info">
@@ -139,25 +145,26 @@ const faq = () => {
               <li>
                 <a href="https://schoolyourself.org/learn">School Yourself </a>
                 My favorite resource to recommend for trig{' '}
-                {`(and other math subjects)`} that you have likely never heard
-                of. A lot of students tell me they love this as an alternative
-                to Khan Academy. Video lectures our made more digestable by
-                splicing in a series of interactive comprehension questions as
-                you go. Personally I can't get enough of the stuff they've made!
-                While the creators have moved on to other projects, the good,
-                totally free stuff they made is still very much good, free, and
-                online!
+                {`(and other math subjects)`} that you have probably never heard
+                of. A lot of students tell me they love this because of its
+                unique structure. Video lectures are interspersed with a series
+                of interactive comprehension questions as you go. It's rare to
+                watch for more than 30 seconds before the content checks your
+                comprehension and continues the video down different paths
+                depending on your response reminiscent of
+                choose-your-own-adventure style books. While the creators have
+                moved on to other projects, the good, totally free stuff they
+                made is still very much good, free, and online!
               </li>
               <li>
                 <a href="https://www.khanacademy.org/math/trigonometry">
                   Khan Academy
                 </a>
                 I realize many math students are probably beyond well aware of
-                this one. Sal Khan's avuncular, made-for-radio voice and
-                accompanying exercises may be starting to become a bit of a
-                crutch for some math classrooms. In fairness, they're overused
-                for a reason. Beats the heck out of the most popularly used
-                Common Core compliant textbooks.
+                this one. Some students have informed me that Sal Khan's
+                avuncular, made-for-radio voice and accompanying exercises may
+                be starting to become a too familiar crutch for some math
+                classrooms
                 <br />
                 <br />
                 However, studying this "solo" outside of class may leave a very
@@ -178,15 +185,14 @@ const faq = () => {
                 <a href="https://brownmath.com/twt/intro.htm">
                   Trig Without Tears
                 </a>
-                A bit of a holy-grail for Trig teachers and students. An
-                oldschool text available free online with a series of practice
-                problems that doesn't hide behind any frills and just drills
-                down right into the essence of trig. If you want to really
-                understand trig inside-and-out there's no better resource. For
-                this one it may be usefull to have a math teacher/mentor if
-                you've never tried self-study from a text before since it is
-                more dense (but in a good way) than the other resources
-                mentioned on this list.
+                An oldschool text available free online with a series of
+                practice problems that doesn't hide behind any frills and just
+                drills down right into the essence of trig. If you want to
+                really understand trig inside-and-out there's no better
+                resource. Material for this resource is a bit dense (but in a
+                good way). A math mentor may come in handy to work your way
+                through this one, but its still accesable enough for determined
+                self-learning.
               </li>
             </ul>
           </div>
@@ -197,7 +203,7 @@ const faq = () => {
           iconString="/trig_vs_precalc_simple.svg"
         >
           <div>
-            <div>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Image
                 src="/trig_only.svg"
                 alt="diagram of trig"
@@ -205,12 +211,10 @@ const faq = () => {
                 height={300}
               />
             </div>
-            Trigonometry is about measuring and calculating the sides and angles
-            of triangles. Some of the foundational skills and knowledge for
-            measuring triangles are already familiar to students from geometry,
-            but trigonometry goes deeper and further into the world of triangles
-            using some clever strategies comparing the ratio between a
-            triangle's side lengths.
+            Trigonometry is about measuring and comparing triangle proportions
+            (angles and sides).Trigonometry goes deeper and further into the
+            world of triangles than what you may have already seen in a geometry
+            class.
             <br />
             <br />
             <Alert severity="info">
@@ -219,7 +223,7 @@ const faq = () => {
             </Alert>
             <br />
             <br />
-            <div>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Image
                 src="/precalc_full.svg"
                 alt="diagram of trig"
@@ -227,10 +231,11 @@ const faq = () => {
                 height={300}
               />
             </div>
-            Precalculus was originally about preparing for a calculus course. In
-            practice its subject area is much less clear-cut than trig's. Its
-            definition can also vary signifigantly depending upon who you ask
-            and what the phase of the moon is when you ask.
+            Precalculus was originally about, as the name implies, preparing for
+            a calculus course. In practice its subject area has evolved over
+            time and is less clear-cut than trig's. Its definition can also vary
+            signifigantly depending upon who you ask and what the phase of the
+            moon is when you ask.
             <br />
             <br />
             <Alert severity="info">
@@ -241,7 +246,7 @@ const faq = () => {
             <br />
             You may have noticed the biggest chunk of precalculus by far is
             trigonometry.
-            <div>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Image
                 src="/trig_other_stuff.svg"
                 alt="diagram of trig"
@@ -249,16 +254,14 @@ const faq = () => {
                 height={300}
               />
             </div>
-            precalculus = 50%-ish trig + 50%-ish some other stuff
-            <br /> <br />
             For this reason, it is very unusual for a student to take both
             trigonometry and precalculus since trigonometry is already included
-            in the first semester of a precalculus course.
+            in the first semester of a typical precalculus course.
             <br />
             <br />
-            The other, non-trig stuff taught in precalculus is formally (and
-            somewhat unhelpfully) called "math analysis".
-            <div>
+            The other, non-trig stuff taught in precalculus is formally and
+            inscrutably called "math analysis".
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Image
                 src="/math_analysis.svg"
                 alt="diagram of trig"
@@ -266,31 +269,69 @@ const faq = () => {
                 height={300}
               />
             </div>
-            What in the <em>Thundering Kittens of Ipala </em> is math analysis
-            you ask?
+            I know, I know. You're probably thinking, "What in the
+            <b> Thundering Kittens of Ipala </b> is math analysis?!"
             <br />
             <br />
-            <div>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                position: 'relative',
+              }}
+            >
+              {/* <Image
+                src="/thunder_kittens.png"
+                alt="diagram of trig"
+                width={300}
+                height={300}
+                style={{ borderRadius: '30%' }}
+              /> */}
               <Image
-                src="/thunder_kitten.png"
+                src="/thunder_kittens.png"
                 alt="diagram of trig"
                 width={300}
                 height={300}
                 style={{ borderRadius: '30%' }}
               />
+              <ImageCover
+                visible={isThunderCatVisible}
+                onClick={() => {
+                  setIsThunderCatVisible(true);
+                }}
+              >
+                <Alert
+                  severity="error"
+                  style={{ backgroundColor: 'transparent', color: 'white' }}
+                >
+                  <AlertTitle> Some Things Cannot Be Unseen </AlertTitle>A photo
+                  of Ipalan Thunder Kittens.
+                  <br />
+                  <br />
+                  For both your safety, and that of society at large,
+                  <b> do not click. </b>
+                  Or do, whatever floats your boat.
+                </Alert>
+                <VisibilityIcon
+                  style={{ color: cl.getHSL(cl.white), fontSize: 'xx-large' }}
+                />
+              </ImageCover>
             </div>
             <br />
             <br />
-            Umm, Analyzing stuff with math... Okay I'd admit, sounds awfully
-            vague.
+            Simple really. Math analysis is, ummm, analyzing stuff with math.
+            Okay I admit, that could apply to any math subject. So vague as to
+            be meaningless.
             <br />
             <br />
-            Unlike trigonometry, the topics in math analysis don't have an
-            especially coherent mathematical theme apart from in general being
-            useful skills to have for future study of calculus and other college
-            math subjects. This thematic incoherence happened mostly because of
-            how precalculus came to be.
-            <div>
+            Unlike trigonometry, the topics in math analysis don't really have a
+            <b> mathematical theme </b>. Worse, there's too many of them! Often
+            classes have to skim ore even skip a couple of the topics to get to
+            reach the final section of the textbook. Precalc's second semester
+            is a kind of controlled chaos whose lack of logical, definite
+            structure has a lot to do with why precalculus was invented as a
+            class in the first place.
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Image
                 src="/math_analysis_explained.svg"
                 alt="diagram of trig"
@@ -298,13 +339,29 @@ const faq = () => {
                 height={300}
               />
             </div>
-            Precalc was born not as a distinct field of math but because
-            universities noticed many college freshman jumping into their first
-            math class, calculus, much in the same way they might jump into a
-            brick wall. It was an overly steep learning curve, so highschool
-            math classes adjusted their curiculum to smooth students' transition
-            into college-level math. In some ambitious classrooms, precalc has
-            grown into preparing students for linear algebra courses as well.
+            Precalc was born not as field or branch of math, but because
+            universities noticed something fascinating about freshman math
+            students. They were jumping into their first college math class,
+            calculus, exactly in the same way as a fly jumps into the windshield
+            of an oncoming 16-wheeler truck.
+            <br />
+            <br />
+            "Bam here's Calculus!", as it turned out, was a somewhat
+            questionable teaching strategy. That particular segment of the
+            learning curve was hitting like a brick wall. To this very day it
+            many grown people, perhaps some you know, when confronted by a
+            sinisterly long string of math symbols murmur with a far-off gaze
+            something like, "I hated math, I avoid it like the plague now." This
+            brick wall segment of the learning curve is often what's haunting
+            them.
+            <br />
+            <br />
+            Highschool math classes were called upon to adjust their curiculum
+            to smooth students' transition into college-level math and eat up as
+            much of the learning curve disparity as possible before calculus.
+            Precalc has increasingly grown into preparing students for linear
+            algebra courses as well. Maybe we should start calling it university
+            prep or something instead of precalc.
             <br />
             <br />
             <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -325,10 +382,11 @@ const faq = () => {
               consider a name change for this course and maybe pare it down a
               bit while we're at it!
             </Alert> */}
-            <br />I don't particularly like the term math analysis because of
-            how vague it is. I like to think of it more as a kind of "math trail
-            mix" your teachers load you up with before you hit your college math
-            journey to provide you nutrition and energy along the way.
+            <br />I avoid the term math analysis because of how vague it is. I
+            like to think of it more as a kind of "math trail mix". Your
+            teachers load you up with as much of it as they can before you hit
+            your college math journey to provide you nutrition, energy, and
+            insight along the way.
             <br /> <br />
             {/* <Alert severity="info">
               <AlertTitle>Quick Takeaway</AlertTitle>
@@ -377,7 +435,7 @@ const faq = () => {
               </li>
             </ol>
             <br />
-            <span style={{ color: cl.getHSL(cl.red_light) }}>
+            <span style={{ color: cl.getHSL(cl.red) }}>
               {' '}
               Please keep in mind this means if you cancel 5 sessions before
               completing one, you will be unable to book another session for 10
@@ -405,13 +463,35 @@ const faq = () => {
   );
 };
 
+const ImageCover = styled.div<{ visible: boolean }>`
+  height: 300px;
+  width: 300px;
+  background-color: ${cl.getHSLA(cl.black, 0.8)};
+  position: absolute;
+  backdrop-filter: blur(16px);
+  border-radius: 30%;
+  display: ${(p) => (p.visible ? 'none' : 'flex')};
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+`;
+
 const OuterWrapper = styled.div`
-  /* background-color: ${cl.getHSLA(cl.purple, 0.05)}; */
-  background: linear-gradient(
+  background-color: ${cl.getHSLA(cl.white, 1)};
+  /* background: linear-gradient(
     20deg,
     ${cl.getHSL(cl.purple)},
     ${cl.getHSL(cl.black)}
-  );
+  ); */
+  /* background: linear-gradient(
+    -120deg,
+    hsl(190, 100%, 85%) 10%,
+    hsl(190, 100%, 40%),
+    hsl(225, 72%, 60%) 50%,
+    hsl(340, 90%, 50%) 90%
+  ); */
   background-size: 200%;
   min-height: 100vh;
 `;
@@ -425,7 +505,7 @@ const Wrapper = styled.div`
   gap: 15px;
 
   & a {
-    color: ${cl.getHSL(cl.red_light)};
+    color: ${cl.getHSL(cl.purple)};
   }
 
   & li {
