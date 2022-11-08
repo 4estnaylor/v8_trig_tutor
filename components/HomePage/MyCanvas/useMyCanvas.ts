@@ -9,7 +9,13 @@ const useMyCanvas: (
 
   useEffect(() => {
     const canvas = canvasRef.current! as HTMLCanvasElement;
+    console.log('should get fired 1 time!');
+    canvas.addEventListener('mousemove', () => {
+      console.log('mouse has moved!');
+    });
+
     const context = canvas?.getContext('2d') as CanvasRenderingContext2D;
+    context.translate(0.5, 0.5);
     let animationFrameID: number;
     const scene = sceneGetter(context);
 
