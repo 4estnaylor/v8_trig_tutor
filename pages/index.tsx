@@ -3,6 +3,9 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import { checkout } from '../checkout';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
+import MyCanvas from '../components/HomePage/MyCanvas/MyCanvas';
+import styled from 'styled-components';
+import getHomepageScene from '../components/HomePage/MyCanvas/HomepageScene/getHomepageScene';
 
 export default function Home() {
   return (
@@ -13,17 +16,12 @@ export default function Home() {
         <link rel="icon" href="/trig_tutor_logo.svg" />
       </Head>
       <ResponsiveAppBar />
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Forrest2 to <a href="https://nextjs.org"></a>
-        </h1>
 
-        <p className={styles.description}>
-          TODO: mySessions page TODO: about page TODO: home page
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+      <TopSection>
+        <MyCanvas sceneGetter={getHomepageScene} />
+      </TopSection>
 
-        <div className={styles.grid}>
+      {/* <div className={styles.grid}>
           <div className={styles.card}>
             <h2>Documentation &rarr;</h2>
             <p>testd in-depth information about Next.js features and API.</p>
@@ -70,8 +68,7 @@ export default function Home() {
           >
             buy
           </button>
-        </div>
-      </main>
+        </div> */}
 
       <footer className={styles.footer}>
         <a
@@ -93,3 +90,22 @@ export default function Home() {
     </div>
   );
 }
+
+const TopSection = styled.div`
+  background: linear-gradient(
+    -120deg,
+    hsl(190, 100%, 85%) 10%,
+    hsl(190, 100%, 40%),
+    hsl(225, 72%, 60%) 50%,
+    hsl(340, 90%, 50%) 90%
+  );
+
+  background-size: 150%;
+  background-position-x: 50%;
+  background-position-y: 50%;
+  height: 390px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
