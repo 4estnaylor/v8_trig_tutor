@@ -25,7 +25,7 @@ const faq = () => {
       <ResponsiveAppBar />
       <Wrapper>
         <Gap height={30} />
-        <h2 style={{ textAlign: 'center', color: cl.getHSL(cl.white) }}>
+        <h2 style={{ textAlign: 'center', color: cl.getHSL(cl.purple) }}>
           Frequently Asked Questions
         </h2>
 
@@ -343,25 +343,31 @@ const faq = () => {
             universities noticed something fascinating about freshman math
             students. They were jumping into their first college math class,
             calculus, exactly in the same way as a fly jumps into the windshield
-            of an oncoming 16-wheeler truck.
+            of an oncoming 18-wheeler truck.
             <br />
             <br />
             "Bam here's Calculus!", as it turned out, was a somewhat
-            questionable teaching strategy. That particular segment of the
-            learning curve was hitting like a brick wall. To this very day it
-            many grown people, perhaps some you know, when confronted by a
-            sinisterly long string of math symbols murmur with a far-off gaze
-            something like, "I hated math, I avoid it like the plague now." This
-            brick wall segment of the learning curve is often what's haunting
-            them.
+            questionable teaching strategy. To this very day, many grown people,
+            perhaps some you know, when confronted by a sinisterly long string
+            of math symbols murmur with a far-off gaze something like, "I hated
+            math, I avoid it like the plague now." Getting repeatedly rammed
+            into this particularly harsh segment of math the learning curve is
+            often what causes people to so unamicably split with math.
             <br />
             <br />
             Highschool math classes were called upon to adjust their curiculum
             to smooth students' transition into college-level math and eat up as
-            much of the learning curve disparity as possible before calculus.
-            Precalc has increasingly grown into preparing students for linear
-            algebra courses as well. Maybe we should start calling it university
-            prep or something instead of precalc.
+            much of the learning curve disparity as possible. On top of this
+            precalc has increasingly grown into preparing students for other
+            college math courses as well.
+            <br /> <br />
+            Smoothing the learning curve is all well and good, but there was a
+            big problem. Math teachers and students couldn't spontaneously will
+            more classroom time out of thin air to make it happen. The result
+            was rather than getting a full two semesters (which it could easily
+            fill), the "math analysis" section of precalculus was joined to
+            trigonometry as a second semster. Attempting all of this in a single
+            highschool semester is a<em> very </em> tall order.
             <br />
             <br />
             <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -382,8 +388,8 @@ const faq = () => {
               consider a name change for this course and maybe pare it down a
               bit while we're at it!
             </Alert> */}
-            <br />I avoid the term math analysis because of how vague it is. I
-            like to think of it more as a kind of "math trail mix". Your
+            <br />I rarely use the term math analysis because of how vague it
+            is. I like to think of it more as a kind of "math trail mix". Your
             teachers load you up with as much of it as they can before you hit
             your college math journey to provide you nutrition, energy, and
             insight along the way.
