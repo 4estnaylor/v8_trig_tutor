@@ -26,9 +26,21 @@ const useMyCanvas: (
       cursorPosition.y = yPos;
     };
 
+    const getTouchPosition = function (e: TouchEvent) {
+      const xPos = e.touches[0].pageX - canvas.offsetLeft;
+      const yPos = e.touches[0].pageY - canvas.offsetTop;
+
+      cursorPosition.x = xPos;
+      cursorPosition.y = yPos;
+
+      console.log('touch: ', cursorPosition.x, cursorPosition.y);
+      e.preventDefault();
+    };
+
     const scene = sceneGetter(context, canvasEventHandlerConfig);
 
     handlers.mousemove.push(getCursorPosition);
+    handlers.touchstart.push(getTouchPosition);
 
     const handlersKeys = Object.getOwnPropertyNames(handlers);
 
@@ -41,6 +53,7 @@ const useMyCanvas: (
 
     const render = () => {
       context.clearRect(0, 0, canvas.width, canvas.height);
+      // console.log(canvasEventHandlerConfig.cursorStatus);
       // context.fillRect(0, 0, 100, 100);
       scene.draw();
       // console.log('is rendering');

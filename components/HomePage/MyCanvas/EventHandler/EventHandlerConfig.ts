@@ -45,9 +45,11 @@ class EventHandlerConfig {
     console.log('mouse is down click');
   };
 
-  defaultTouchStart = () => {
+  defaultTouchStart = (e: TouchEvent) => {
     this.cursorStatus.mouseIsDown = true;
-    console.log('mouse is down touch');
+    console.log(e.touches[0].clientX);
+
+    e.preventDefault();
   };
 
   defaultUp = () => {

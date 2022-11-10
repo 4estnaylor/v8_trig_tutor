@@ -5,6 +5,7 @@ class InteractivePoint {
   isBeingDragged: boolean;
   isVisible: boolean;
   listenerConfig: any;
+  transitionPeriod: number;
   // context: CanvasRenderingContext2D;
   constructor(
     public context: CanvasRenderingContext2D,
@@ -16,13 +17,14 @@ class InteractivePoint {
     public colorActive: string = 'yellow',
     public colorDrag: string = 'red',
     public isActive: boolean = false,
-    public form: 'hover' | 'selected' | 'grabbed' | 'default' = 'default',
+    public form: 'hover' | 'selected' | 'grabbing' | 'default' = 'default',
     public locked: boolean = false
   ) {
     this.isUnderCursor = false;
     this.isBeingDragged = false;
     this.isVisible = true;
     this.form = 'default';
+    this.transitionPeriod = 0.5;
   }
 
   draw() {
@@ -39,6 +41,9 @@ class InteractivePoint {
         break;
       case 'hover':
         this.drawHoveredPoint();
+        break;
+      case 'grabbing':
+        this.drawGrabbingPoint();
         break;
     }
 
@@ -66,8 +71,16 @@ class InteractivePoint {
 
   update() {
     this.checkIfMouseIsOver();
-    if (this.isUnderCursor) {
+    if (
+      this.isUnderCursor &&
+      !this.eventHandlerConfig.cursorStatus.mouseIsDown
+    ) {
       this.form = 'hover';
+    } else if (
+      this.isUnderCursor &&
+      this.eventHandlerConfig.cursorStatus.mouseIsDown
+    ) {
+      this.form = 'grabbing';
     } else {
       this.form = 'default';
     }
@@ -78,6 +91,10 @@ class InteractivePoint {
         break;
       case 'hover':
         this.setCursor('grab');
+        break;
+      case 'grabbing':
+        this.setCursor('grabbing');
+        console.log('grabbed!');
         break;
     }
   }
@@ -116,6 +133,7 @@ class InteractivePoint {
 
   drawHoveredPoint() {
     let context = this.context;
+    const hover_radius = this.radius;
     // this.drawPointHalo(2);
     context.beginPath();
     context.fillStyle = this.color;
@@ -130,6 +148,10 @@ class InteractivePoint {
     );
 
     context.fill();
+  }
+
+  drawGrabbingPoint() {
+    this.drawHovered();
   }
 
   drawHovered() {
