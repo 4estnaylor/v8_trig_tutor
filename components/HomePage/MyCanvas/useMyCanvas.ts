@@ -1,37 +1,12 @@
 import { useRef, useEffect } from 'react';
 import { SceneGetter } from './Scene/Scene';
 import React from 'react';
+import EventHandlerConfig from './EventHandler/EventHandlerConfig';
 
 const useMyCanvas: (
   sceneGetter: SceneGetter
 ) => React.MutableRefObject<null> = (sceneGetter) => {
   const canvasRef = useRef(null);
-
-  class EventHandlerConfig {
-    handlers = {
-      mousemove: [] as Function[],
-      mousedown: [] as Function[],
-      mouseup: [] as Function[],
-
-      mouseover: [] as Function[],
-      mouseout: [] as Function[],
-      click: [] as Function[],
-      dblclick: [] as Function[],
-      contextmenu: [] as Function[],
-    };
-
-    cursorPosition: {
-      x: number | null;
-      y: number | null;
-    };
-
-    constructor() {
-      this.cursorPosition = {
-        x: null,
-        y: null,
-      };
-    }
-  }
 
   useEffect(() => {
     const canvas = canvasRef.current! as HTMLCanvasElement;
@@ -39,9 +14,9 @@ const useMyCanvas: (
     const context = canvas?.getContext('2d') as CanvasRenderingContext2D;
     context.translate(0.5, 0.5);
     let animationFrameID: number;
-    const scene = sceneGetter(context);
-    const eventHandlerConfig = new EventHandlerConfig();
-    const { handlers, cursorPosition } = eventHandlerConfig;
+
+    const canvasEventHandlerConfig = new EventHandlerConfig();
+    const { handlers, cursorPosition } = canvasEventHandlerConfig;
 
     const getCursorPosition = function (e: MouseEvent) {
       const xPos = e.pageX - canvas.offsetLeft;
@@ -49,12 +24,11 @@ const useMyCanvas: (
 
       cursorPosition.x = xPos;
       cursorPosition.y = yPos;
-      console.log(cursorPosition);
     };
 
-    handlers.mousemove.push(getCursorPosition);
+    const scene = sceneGetter(context, canvasEventHandlerConfig);
 
-    console.log('should get fired 1 time!');
+    handlers.mousemove.push(getCursorPosition);
 
     const handlersKeys = Object.getOwnPropertyNames(handlers);
 

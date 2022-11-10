@@ -1,9 +1,14 @@
+import EventHandlerConfig from '../EventHandler/EventHandlerConfig';
+
 class Scene {
   public init: () => void;
   public draw: () => void;
   public assets: any;
 
-  constructor(public context: CanvasRenderingContext2D) {
+  constructor(
+    public context: CanvasRenderingContext2D,
+    public eventHandlerConfig: EventHandlerConfig
+  ) {
     this.init = () => {
       console.log('create init function');
     };
@@ -15,11 +20,17 @@ class Scene {
   }
 }
 
-export type SceneGetter = (context: CanvasRenderingContext2D) => Scene;
+export type SceneGetter = (
+  context: CanvasRenderingContext2D,
+  eventHandlerConfig: EventHandlerConfig
+) => Scene;
 
-const getScene = (context: CanvasRenderingContext2D) => {
+const getScene: SceneGetter = (
+  context: CanvasRenderingContext2D,
+  eventHandlerConfig: EventHandlerConfig
+) => {
   console.log('getting scene');
-  const scene = new Scene(context);
+  const scene = new Scene(context, eventHandlerConfig);
   scene.init = () => {
     console.log('init of scene');
   };

@@ -135,6 +135,7 @@ const Wrapper = styled.div`
 
 const TopSection = styled.div`
   /* background-color: ${cl.getHSL(cl.white)}; */
+  min-height: 390px;
 `;
 
 const BottomSection = styled.div`

@@ -357,17 +357,19 @@ const faq = () => {
             <br />
             Highschool math classes were called upon to adjust their curiculum
             to smooth students' transition into college-level math and eat up as
-            much of the learning curve disparity as possible. On top of this
-            precalc has increasingly grown into preparing students for other
-            college math courses as well.
+            much of the learning curve disparity as possible.
             <br /> <br />
             Smoothing the learning curve is all well and good, but there was a
             big problem. Math teachers and students couldn't spontaneously will
             more classroom time out of thin air to make it happen. The result
             was rather than getting a full two semesters (which it could easily
             fill), the "math analysis" section of precalculus was joined to
-            trigonometry as a second semster. Attempting all of this in a single
-            highschool semester is a<em> very </em> tall order.
+            trigonometry as a second semster. Attempting all, or even most, of
+            "math analysis" in a single highschool semester is a<em>
+              {' '}
+              very{' '}
+            </em>{' '}
+            tall order.
             <br />
             <br />
             <div style={{ display: 'flex', justifyContent: 'center' }}>
