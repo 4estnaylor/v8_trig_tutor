@@ -17,19 +17,29 @@ const getHomepageScene: SceneGetter = (
     scene.eventHandlerConfig,
     200,
     200,
-    15,
-    'white',
-    'white',
-    'white',
-    false,
-    'default'
+    []
   );
 
-  scene.assets = { listenFor: [testPoint] };
+  const testPoint2 = new InteractivePoint(
+    ctx,
+    scene.eventHandlerConfig,
+    260,
+    260,
+    []
+  );
+
+  const testPoint3 = new InteractivePoint(
+    ctx,
+    scene.eventHandlerConfig,
+    20,
+    20,
+    []
+  );
+
+  scene.assets = { listenFor: [testPoint, testPoint2, testPoint3] };
   scene.draw = () => {
     ctx.fillStyle = 'white';
 
-    ctx.fillRect(0, 0, 100, 100);
     scene.assets.listenFor.forEach((listenedForItem: any) => {
       listenedForItem.draw();
     });
