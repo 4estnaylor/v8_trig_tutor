@@ -17,7 +17,7 @@ const getHomepageScene: SceneGetter = (
     scene.eventHandlerConfig,
     200,
     200,
-    10,
+    15,
     'white',
     'white',
     'white',

@@ -135,15 +135,14 @@ class InteractivePoint {
 
   drawHoveredPoint() {
     let context = this.context;
-    const hover_radius = this.radius;
-    // this.drawPointHalo(2);
+    this.drawPointHalo(2.5);
     context.beginPath();
-    context.fillStyle = this.color;
+    context.fillStyle = 'white';
     context.ellipse(
       this.x,
       this.y,
-      this.radius * 1,
-      this.radius * 1,
+      this.radius,
+      this.radius,
       0,
       0,
       Math.PI * 2
@@ -153,7 +152,21 @@ class InteractivePoint {
   }
 
   drawGrabbingPoint() {
-    this.drawHovered();
+    let context = this.context;
+    this.drawPointHalo(2.5);
+    context.beginPath();
+    context.fillStyle = 'white';
+    context.ellipse(
+      this.x,
+      this.y,
+      this.radius,
+      this.radius,
+      0,
+      0,
+      Math.PI * 2
+    );
+
+    context.fill();
   }
 
   drawHovered() {
