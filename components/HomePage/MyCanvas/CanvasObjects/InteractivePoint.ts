@@ -2,10 +2,13 @@ import EventHandlerConfig from '../EventHandler/EventHandlerConfig';
 
 class InteractivePoint {
   isUnderCursor: boolean;
-  isBeingDragged: boolean;
   isVisible: boolean;
   listenerConfig: any;
   transitionPeriod: number;
+  initialCursorGrabDistance: {
+    x: number;
+    y: number;
+  };
   // context: CanvasRenderingContext2D;
   constructor(
     public context: CanvasRenderingContext2D,
@@ -23,18 +26,17 @@ class InteractivePoint {
     public locked: boolean = false
   ) {
     this.isUnderCursor = false;
-    this.isBeingDragged = false;
     this.isVisible = true;
     this.form = 'default';
     this.transitionPeriod = 0.5;
+    this.listenFor.push(this);
+    this.initialCursorGrabDistance = {
+      x: 0,
+      y: 0,
+    };
   }
 
   draw() {
-    let colorString;
-    let radiusSize;
-
-    const context = this.context;
-
     this.update();
 
     switch (this.form) {
@@ -49,24 +51,21 @@ class InteractivePoint {
         break;
     }
 
-    // if (this.isActive) {
-    //   colorString = this.colorActive;
-    // } else {
-    //   colorString = this.color;
-    // }
+    this.drawPointHalo();
+  }
 
-    radiusSize = this.radius;
-
-    // if (
-    //   this.isUnderCursor &&
-    //   this.eventHandlerConfig.cursorStatus.mouseIsDown
-    // ) {
-    //   colorString = this.colorDrag;
-    //   this.setCursor('grabbing');
-    // } else {
-    //   colorString = this.color;
-    //   this.setCursor('default');
-    // }
+  drawNoUpdate() {
+    switch (this.form) {
+      case 'default':
+        this.drawDefaultPoint();
+        break;
+      case 'hover':
+        this.drawHoveredPoint();
+        break;
+      case 'grabbing':
+        this.drawGrabbingPoint();
+        break;
+    }
 
     this.drawPointHalo();
   }
@@ -74,6 +73,21 @@ class InteractivePoint {
   update() {
     this.checkIfMouseIsOver();
     if (
+      this.form === 'grabbing' &&
+      this.eventHandlerConfig.cursorStatus.mouseIsDown
+    ) {
+      let cursorPosition = this.eventHandlerConfig.cursorPosition;
+      if (
+        !cursorPosition.x ||
+        !cursorPosition.y ||
+        !this.initialCursorGrabDistance
+      )
+        return;
+      this.x = cursorPosition.x + this.initialCursorGrabDistance.x;
+      this.y = cursorPosition.y + this.initialCursorGrabDistance.y;
+      // this.x += this.eventHandlerConfig.cursorPosition.movementX;
+      // this.y += this.eventHandlerConfig.cursorPosition.movementY;
+    } else if (
       this.isUnderCursor &&
       !this.eventHandlerConfig.cursorStatus.mouseIsDown
     ) {
@@ -83,6 +97,7 @@ class InteractivePoint {
       this.eventHandlerConfig.cursorStatus.mouseIsDown
     ) {
       this.form = 'grabbing';
+      this.getCursorAndInteractivePointPositionDifferenceOnGrab();
     } else {
       this.form = 'default';
     }
@@ -96,7 +111,6 @@ class InteractivePoint {
         break;
       case 'grabbing':
         this.setCursor('grabbing');
-        console.log('grabbed!');
         break;
     }
   }
@@ -109,13 +123,43 @@ class InteractivePoint {
     const pixelDistance = this.getPixelDistBetweenCursorAndPoint();
     if (!pixelDistance) return;
     if (pixelDistance < this.radius * 1.5) {
+      if (this.CheckIfItemAlreadyUnderCursor()) return;
       this.isUnderCursor = true;
+      this.listenFor.push(
+        this.listenFor.splice(this.listenFor.indexOf(this), 1)[0]
+      );
     } else {
       this.isUnderCursor = false;
     }
   };
 
+  getCursorAndInteractivePointPositionDifferenceOnGrab() {
+    let cursor = this.eventHandlerConfig.cursorPosition;
+
+    if (!cursor.x || !cursor.y) {
+      return;
+    }
+
+    let dx = this.x - cursor.x;
+    let dy = this.y - cursor.y;
+
+    this.initialCursorGrabDistance = {
+      x: dx,
+      y: dy,
+    };
+  }
+
   growRadius = () => {};
+
+  CheckIfItemAlreadyUnderCursor() {
+    let alreadyUnderCursor = false;
+    this.listenFor.forEach((item) => {
+      if (item.isUnderCursor) {
+        alreadyUnderCursor = true;
+      }
+    });
+    return alreadyUnderCursor;
+  }
 
   drawDefaultPoint() {
     let context = this.context;

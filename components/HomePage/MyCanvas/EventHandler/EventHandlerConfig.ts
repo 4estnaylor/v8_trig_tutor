@@ -16,6 +16,8 @@ class EventHandlerConfig {
   cursorPosition: {
     x: number | null;
     y: number | null;
+    movementX: number;
+    movementY: number;
   };
 
   cursorStatus: {
@@ -27,6 +29,8 @@ class EventHandlerConfig {
     this.cursorPosition = {
       x: null,
       y: null,
+      movementX: 0,
+      movementY: 0,
     };
 
     this.cursorStatus = {

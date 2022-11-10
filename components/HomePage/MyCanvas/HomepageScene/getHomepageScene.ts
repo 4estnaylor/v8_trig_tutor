@@ -11,35 +11,25 @@ const getHomepageScene: SceneGetter = (
   console.log(scene.eventHandlerConfig);
   const ctx = scene.context;
   let assets = scene.assets;
+  scene.assets.listenFor = [];
 
-  const testPoint = new InteractivePoint(
-    ctx,
-    scene.eventHandlerConfig,
-    200,
-    200,
-    []
-  );
+  const drawTestPoinsts = () => {
+    for (let i = 0; i < 3; i++) {
+      let interactivePoint = new InteractivePoint(
+        ctx,
+        eventHandlerConfig,
+        100,
+        100,
+        scene.assets.listenFor
+      );
+    }
+  };
 
-  const testPoint2 = new InteractivePoint(
-    ctx,
-    scene.eventHandlerConfig,
-    260,
-    260,
-    []
-  );
-
-  const testPoint3 = new InteractivePoint(
-    ctx,
-    scene.eventHandlerConfig,
-    20,
-    20,
-    []
-  );
-
-  scene.assets = { listenFor: [testPoint, testPoint2, testPoint3] };
+  drawTestPoinsts();
   scene.draw = () => {
     ctx.fillStyle = 'white';
 
+    let itemUnderCursor = 0;
     scene.assets.listenFor.forEach((listenedForItem: any) => {
       listenedForItem.draw();
     });
