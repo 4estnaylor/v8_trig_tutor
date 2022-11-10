@@ -11,6 +11,10 @@ const useMyCanvas: (
   useEffect(() => {
     const canvas = canvasRef.current! as HTMLCanvasElement;
 
+    canvas.addEventListener('touchmove', (e: TouchEvent) => {
+      console.log('touchmove', e);
+    });
+
     const context = canvas?.getContext('2d') as CanvasRenderingContext2D;
     context.translate(0.5, 0.5);
     let animationFrameID: number;
@@ -33,7 +37,6 @@ const useMyCanvas: (
       cursorPosition.x = xPos;
       cursorPosition.y = yPos;
 
-      console.log('touch: ', cursorPosition.x, cursorPosition.y);
       e.preventDefault();
     };
 
@@ -41,6 +44,7 @@ const useMyCanvas: (
 
     handlers.mousemove.push(getCursorPosition);
     handlers.touchstart.push(getTouchPosition);
+    handlers.touchmove.push(getTouchPosition);
 
     const handlersKeys = Object.getOwnPropertyNames(handlers);
 

@@ -1,6 +1,7 @@
 class EventHandlerConfig {
   handlers = {
     mousemove: [] as Function[],
+    touchmove: [] as Function[],
     mousedown: [] as Function[],
     touchstart: [] as Function[],
     mouseup: [] as Function[],
@@ -46,7 +47,6 @@ class EventHandlerConfig {
 
   defaultDown = () => {
     this.cursorStatus.mouseIsDown = true;
-    console.log('mouse is down click');
   };
 
   defaultTouchStart = (e: TouchEvent) => {
