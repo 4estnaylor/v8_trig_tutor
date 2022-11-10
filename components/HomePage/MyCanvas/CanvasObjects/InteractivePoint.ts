@@ -106,7 +106,7 @@ class InteractivePoint {
     }
     const pixelDistance = this.getPixelDistBetweenCursorAndPoint();
     if (!pixelDistance) return;
-    if (pixelDistance < this.radius) {
+    if (pixelDistance < this.radius * 1.5) {
       this.isUnderCursor = true;
     } else {
       this.isUnderCursor = false;
