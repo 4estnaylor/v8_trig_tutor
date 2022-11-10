@@ -47,7 +47,6 @@ class EventHandlerConfig {
 
   defaultTouchStart = (e: TouchEvent) => {
     this.cursorStatus.mouseIsDown = true;
-    console.log(e.touches[0].clientX);
 
     e.preventDefault();
   };
@@ -56,8 +55,11 @@ class EventHandlerConfig {
     this.cursorStatus.mouseIsDown = false;
   };
 
-  defaultTouchEnd = () => {
+  defaultTouchEnd = (e: TouchEvent) => {
     this.cursorStatus.mouseIsDown = false;
+    this.cursorPosition.x = null;
+    this.cursorPosition.y = null;
+    e.preventDefault();
     console.log('mouse is up touch');
   };
 }

@@ -15,7 +15,7 @@ class InteractivePoint {
     public radius: number,
     public color: string = 'white',
     public colorActive: string = 'yellow',
-    public colorDrag: string = 'red',
+    public colorDrag: string = 'white',
     public isActive: boolean = false,
     public form: 'hover' | 'selected' | 'grabbing' | 'default' = 'default',
     public locked: boolean = false
@@ -101,7 +101,9 @@ class InteractivePoint {
 
   checkIfMouseIsOver = () => {
     let { x: mouseX, y: mouseY } = this.eventHandlerConfig.cursorPosition;
-    if (!mouseX || !mouseY) return;
+    if (!mouseX || !mouseY) {
+      this.isUnderCursor = false;
+    }
     const pixelDistance = this.getPixelDistBetweenCursorAndPoint();
     if (!pixelDistance) return;
     if (pixelDistance < this.radius) {
@@ -117,7 +119,7 @@ class InteractivePoint {
     let context = this.context;
     this.drawPointHalo(1.5);
     context.beginPath();
-    context.fillStyle = this.color;
+    context.fillStyle = 'white';
     context.ellipse(
       this.x,
       this.y,
@@ -140,8 +142,8 @@ class InteractivePoint {
     context.ellipse(
       this.x,
       this.y,
-      this.radius * 1.5,
-      this.radius * 1.5,
+      this.radius * 1,
+      this.radius * 1,
       0,
       0,
       Math.PI * 2
