@@ -22,10 +22,15 @@ export default function Home() {
         <TopSection>
           <h2> Get Good At Trig.</h2>
           <MyCanvas sceneGetter={getHomepageScene} />
-          <h2>
-            {' '}
-            Really, <RainbowText>Really</RainbowText> Good.
-          </h2>
+          <Tester>
+            <TuftBird>
+              <img src="/tuftbird.svg" height="100px" loading="lazy" />
+            </TuftBird>
+
+            <h2>
+              Really, <RainbowText>Really</RainbowText> Good.
+            </h2>
+          </Tester>
         </TopSection>
         <BottomSection></BottomSection>
       </Wrapper>
@@ -100,10 +105,29 @@ export default function Home() {
   );
 }
 
+const TuftBird = styled.div`
+  position: absolute;
+  left: 10px;
+`;
+
+const Tester = styled.div`
+  width: 100%;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+`;
+
 const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
   min-height: 100vh;
+`;
+
+const BottomText = styled.div`
+  /* position: relative; */
+  width: 100%;
 `;
 
 const TopSection = styled.div`
