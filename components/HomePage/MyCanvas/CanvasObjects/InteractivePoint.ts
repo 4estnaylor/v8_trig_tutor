@@ -19,11 +19,8 @@ class InteractivePoint {
     public listenFor: any[] = [],
     public radius: number = 18,
     public color: string = 'white',
-    public colorActive: string = 'yellow',
-    public colorDrag: string = 'white',
-    public isActive: boolean = false,
-    public form: 'hover' | 'selected' | 'grabbing' | 'default' = 'default',
-    public locked: boolean = false
+
+    public form: 'hover' | 'selected' | 'grabbing' | 'default' = 'default'
   ) {
     this.isUnderCursor = false;
     this.isVisible = true;

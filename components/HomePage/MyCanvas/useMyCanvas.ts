@@ -11,10 +11,6 @@ const useMyCanvas: (
   useEffect(() => {
     const canvas = canvasRef.current! as HTMLCanvasElement;
 
-    canvas.addEventListener('touchmove', (e: TouchEvent) => {
-      console.log('touchmove', e);
-    });
-
     const context = canvas?.getContext('2d') as CanvasRenderingContext2D;
     context.translate(0.5, 0.5);
     let animationFrameID: number;

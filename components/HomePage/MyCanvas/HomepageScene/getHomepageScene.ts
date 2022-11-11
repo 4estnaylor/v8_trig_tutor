@@ -1,4 +1,5 @@
 import { ListItem } from '@mui/material';
+import cl from '../../../../colors';
 import InteractivePoint from '../CanvasObjects/InteractivePoint';
 import EventHandlerConfig from '../EventHandler/EventHandlerConfig';
 import { Scene, SceneGetter } from '../Scene/Scene';
@@ -13,26 +14,56 @@ const getHomepageScene: SceneGetter = (
   let assets = scene.assets;
   scene.assets.listenFor = [];
 
-  const drawTestPoinsts = () => {
+  const pointColors = [
+    cl.getHSL(cl.red),
+    cl.getHSL(cl.blue),
+    cl.getHSL(cl.purple),
+  ];
+
+  const getTestPoints = () => {
     for (let i = 0; i < 3; i++) {
       let interactivePoint = new InteractivePoint(
         ctx,
         eventHandlerConfig,
         100,
         100,
-        scene.assets.listenFor
+        scene.assets.listenFor,
+        20,
+        pointColors[i]
       );
     }
   };
 
-  drawTestPoinsts();
-  scene.draw = () => {
-    ctx.fillStyle = 'white';
+  getTestPoints();
 
-    let itemUnderCursor = 0;
+  const drawPoints = () => {
     scene.assets.listenFor.forEach((listenedForItem: any) => {
       listenedForItem.draw();
     });
+  };
+
+  const drawTriangle = () => {
+    let interativePoints = scene.assets.listenFor;
+    let [pointA, pointB, pointC] = interativePoints;
+
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 5;
+
+    ctx.beginPath();
+    ctx.moveTo(pointA.x, pointA.y);
+    ctx.lineTo(pointB.x, pointB.y);
+    ctx.lineTo(pointC.x, pointC.y);
+    ctx.lineTo(pointA.x, pointA.y);
+    ctx.stroke();
+
+    console.log(pointA);
+  };
+
+  scene.draw = () => {
+    ctx.fillStyle = 'white';
+
+    drawPoints();
+    drawTriangle();
   };
 
   return scene;
