@@ -13,7 +13,7 @@ const getHomepageScene: SceneGetter = (
   let assets = scene.assets;
   scene.assets.listenFor = [];
 
-  const pointColors = [
+  const blueColors = [
     cl.getHSL(cl.blue),
     cl.getHSL(cl.blue),
     cl.getHSL(cl.blue),
@@ -21,7 +21,7 @@ const getHomepageScene: SceneGetter = (
 
   const velocity = 0.1;
 
-  const getTestPoints = () => {
+  const getBluePoints = () => {
     for (let i = 0; i < 3; i++) {
       let interactivePoint = new InteractivePoint(
         ctx,
@@ -30,12 +30,12 @@ const getHomepageScene: SceneGetter = (
         ctx.canvas.width / 2,
         scene.assets.listenFor,
         20,
-        pointColors[i]
+        blueColors[i]
       );
     }
   };
 
-  getTestPoints();
+  getBluePoints();
 
   const pointVelocity = {
     x: -0.7,
@@ -78,7 +78,13 @@ const getHomepageScene: SceneGetter = (
 
   const drawPoints = () => {
     scene.assets.listenFor.forEach((listenedForItem: any) => {
-      listenedForItem.draw();
+      listenedForItem.draw(); // blue
+      // listenedForItem.x = ctx.canvas.width - listenedForItem.x;
+      // listenedForItem.draw();
+      // listenedForItem.color = cl.getHSL(cl.red);
+      // listenedForItem.x = scene.context.canvas.width - listenedForItem.x;
+      // ctx.beginPath();
+      // listenedForItem.draw();
     });
   };
 
@@ -103,6 +109,8 @@ const getHomepageScene: SceneGetter = (
     ctx.strokeStyle = 'white';
     ctx.lineWidth = 5;
     ctx.lineCap = 'round';
+
+    // blue;
 
     ctx.beginPath();
     ctx.moveTo(pointA.x, pointA.y);
@@ -135,18 +143,59 @@ const getHomepageScene: SceneGetter = (
       pointC.color
     );
 
+    const gradientAB2 = makeGradientToTransparency(
+      pointA.x,
+      pointA.y,
+      pointB.x,
+      pointB.y,
+      cl.getHSL(cl.red)
+    );
+
+    const gradientBC2 = makeGradientToTransparency(
+      pointB.x,
+      pointB.y,
+      pointC.x,
+      pointC.y,
+      cl.getHSL(cl.red)
+    );
+
+    const gradientCA2 = makeGradientToTransparency(
+      pointC.x,
+      pointC.y,
+      pointA.x,
+      pointA.y,
+      cl.getHSL(cl.red)
+    );
+
     ctx.fillStyle = gradientAB;
     ctx.fill();
     ctx.fillStyle = gradientBC;
     ctx.fill();
     ctx.fillStyle = gradientCA;
     ctx.fill();
+
+    // red
+    let canvasWidth = ctx.canvas.width;
+    ctx.beginPath();
+    ctx.moveTo(canvasWidth - pointA.x, pointA.y);
+    ctx.lineTo(canvasWidth - pointB.x, pointB.y);
+    ctx.lineTo(canvasWidth - pointC.x, pointC.y);
+    ctx.lineTo(canvasWidth - pointA.x, pointA.y);
+
+    ctx.fillStyle = gradientAB2;
+    ctx.fill();
+    ctx.fillStyle = gradientBC2;
+    ctx.fill();
+    ctx.fillStyle = gradientCA2;
+    ctx.fill();
   };
 
   scene.draw = () => {
     ctx.fillStyle = 'white';
     updateSelectedPoint();
+
     drawPoints();
+
     drawTriangle();
   };
 

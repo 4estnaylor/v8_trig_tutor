@@ -67,6 +67,8 @@ class InteractivePoint {
 
   update() {
     this.checkIfMouseIsOver();
+    this.ungrabIfOutOfCanvasBounds();
+
     if (
       this.form === 'grabbing' &&
       this.eventHandlerConfig.cursorStatus.mouseIsDown
@@ -109,6 +111,37 @@ class InteractivePoint {
         break;
     }
   }
+
+  ungrabIfOutOfCanvasBounds = () => {
+    const canvasWidth = this.context.canvas.width;
+    const canvasHeight = this.context.canvas.height;
+    let buffer = this.radius * 1.65;
+
+    if (this.x >= canvasWidth - buffer) {
+      this.form = 'default';
+      this.x = canvasWidth - buffer;
+      this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
+      this.isUnderCursor = false;
+    }
+    if (this.x < buffer) {
+      this.form = 'default';
+      this.x = buffer;
+      this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
+      this.isUnderCursor = false;
+    }
+    if (this.y >= canvasHeight - buffer) {
+      this.form = 'default';
+      this.y = canvasHeight - buffer;
+      this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
+      this.isUnderCursor = false;
+    }
+    if (this.y < buffer) {
+      this.form = 'default';
+      this.y = buffer;
+      this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
+      this.isUnderCursor = false;
+    }
+  };
 
   checkIfMouseIsOver = () => {
     let { x: mouseX, y: mouseY } = this.eventHandlerConfig.cursorPosition;
@@ -243,8 +276,8 @@ class InteractivePoint {
     this.context.ellipse(
       this.x,
       this.y,
-      this.radius * radiusScale,
-      this.radius * radiusScale,
+      this.radius,
+      this.radius,
       0,
       0,
       Math.PI * 2
