@@ -162,7 +162,7 @@ class InteractivePoint {
     let context = this.context;
     this.drawPointHalo(1.5);
     context.beginPath();
-    context.fillStyle = 'white';
+    context.fillStyle = this.color;
     context.ellipse(
       this.x,
       this.y,
@@ -180,7 +180,7 @@ class InteractivePoint {
     let context = this.context;
     this.drawPointHalo(2.5);
     context.beginPath();
-    context.fillStyle = 'white';
+    context.fillStyle = this.color;
     context.ellipse(
       this.x,
       this.y,
@@ -198,7 +198,7 @@ class InteractivePoint {
     let context = this.context;
     this.drawPointHalo(2.5);
     context.beginPath();
-    context.fillStyle = 'white';
+    context.fillStyle = this.color;
     context.ellipse(
       this.x,
       this.y,
@@ -230,7 +230,7 @@ class InteractivePoint {
   }
 
   drawRingAroundPoint() {
-    this.context.strokeStyle = this.colorDrag;
+    this.context.strokeStyle = this.color;
     this.context.stroke();
   }
 
@@ -238,6 +238,8 @@ class InteractivePoint {
     this.context.fillStyle = 'hsla(0  0% 100% / 0.5)';
 
     this.context.beginPath();
+    this.context.fillStyle = this.color;
+    this.context.globalAlpha = 0.15;
     this.context.ellipse(
       this.x,
       this.y,
@@ -248,6 +250,7 @@ class InteractivePoint {
       Math.PI * 2
     );
     this.context.fill();
+    this.context.globalAlpha = 1;
   }
 }
 

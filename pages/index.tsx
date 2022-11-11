@@ -92,13 +92,14 @@ export default function Home() {
 }
 
 const TopSection = styled.div`
-  background: linear-gradient(
+  /* background: linear-gradient(
     -120deg,
     hsl(190, 100%, 85%) 10%,
     hsl(190, 100%, 40%),
     hsl(225, 72%, 60%) 50%,
     hsl(340, 90%, 50%) 90%
-  );
+  ); */
+  background-color: white;
 
   background-size: 150%;
   background-position-x: 50%;

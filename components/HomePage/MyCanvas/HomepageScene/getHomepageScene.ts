@@ -20,13 +20,15 @@ const getHomepageScene: SceneGetter = (
     cl.getHSL(cl.purple),
   ];
 
+  const velocity = 0.1;
+
   const getTestPoints = () => {
     for (let i = 0; i < 3; i++) {
       let interactivePoint = new InteractivePoint(
         ctx,
         eventHandlerConfig,
-        100,
-        100,
+        ctx.canvas.width / 2,
+        ctx.canvas.width / 2,
         scene.assets.listenFor,
         20,
         pointColors[i]
@@ -36,10 +38,30 @@ const getHomepageScene: SceneGetter = (
 
   getTestPoints();
 
+  const pointVelocities = [
+    { dx: 0.1, dy: 0.1 },
+    { dx: -0.1, dy: -0.1 },
+    { dx: -0.1, dy: 0.1 },
+  ];
+
   const drawPoints = () => {
     scene.assets.listenFor.forEach((listenedForItem: any) => {
       listenedForItem.draw();
     });
+  };
+
+  const makeGradientToTransparency = (
+    x0: number,
+    y0: number,
+    x1: number,
+    y1: number,
+    color: string
+  ) => {
+    const gradient = ctx.createLinearGradient(x0, y0, x1, y1);
+    gradient.addColorStop(0, color);
+    gradient.addColorStop(1, `rgba(255,255,255,0)`);
+
+    return gradient;
   };
 
   const drawTriangle = () => {
@@ -48,13 +70,45 @@ const getHomepageScene: SceneGetter = (
 
     ctx.strokeStyle = 'white';
     ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
 
     ctx.beginPath();
     ctx.moveTo(pointA.x, pointA.y);
     ctx.lineTo(pointB.x, pointB.y);
     ctx.lineTo(pointC.x, pointC.y);
     ctx.lineTo(pointA.x, pointA.y);
-    ctx.stroke();
+    // ctx.stroke();
+
+    const gradientAB = makeGradientToTransparency(
+      pointA.x,
+      pointA.y,
+      pointB.x,
+      pointB.y,
+      pointA.color
+    );
+
+    const gradientBC = makeGradientToTransparency(
+      pointB.x,
+      pointB.y,
+      pointC.x,
+      pointC.y,
+      pointB.color
+    );
+
+    const gradientCA = makeGradientToTransparency(
+      pointC.x,
+      pointC.y,
+      pointA.x,
+      pointA.y,
+      pointC.color
+    );
+
+    ctx.fillStyle = gradientAB;
+    ctx.fill();
+    ctx.fillStyle = gradientBC;
+    ctx.fill();
+    ctx.fillStyle = gradientCA;
+    ctx.fill();
 
     console.log(pointA);
   };
