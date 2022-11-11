@@ -117,30 +117,30 @@ class InteractivePoint {
     const canvasHeight = this.context.canvas.height;
     let buffer = this.radius * 1.65;
 
-    if (this.x >= canvasWidth - buffer) {
-      this.form = 'default';
-      this.x = canvasWidth - buffer;
-      this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
-      this.isUnderCursor = false;
-    }
-    if (this.x < buffer) {
-      this.form = 'default';
-      this.x = buffer;
-      this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
-      this.isUnderCursor = false;
-    }
-    if (this.y >= canvasHeight - buffer) {
-      this.form = 'default';
-      this.y = canvasHeight - buffer;
-      this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
-      this.isUnderCursor = false;
-    }
-    if (this.y < buffer) {
-      this.form = 'default';
-      this.y = buffer;
-      this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
-      this.isUnderCursor = false;
-    }
+    // if (this.x >= canvasWidth - buffer) {
+    //   this.form = 'default';
+    //   this.x = canvasWidth - buffer;
+    //   this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
+    //   this.isUnderCursor = false;
+    // }
+    // if (this.x < buffer) {
+    //   this.form = 'default';
+    //   this.x = buffer;
+    //   this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
+    //   this.isUnderCursor = false;
+    // }
+    // if (this.y >= canvasHeight - buffer) {
+    //   this.form = 'default';
+    //   this.y = canvasHeight - buffer;
+    //   this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
+    //   this.isUnderCursor = false;
+    // }
+    // if (this.y < buffer) {
+    //   this.form = 'default';
+    //   this.y = buffer;
+    //   this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
+    //   this.isUnderCursor = false;
+    // }
   };
 
   checkIfMouseIsOver = () => {

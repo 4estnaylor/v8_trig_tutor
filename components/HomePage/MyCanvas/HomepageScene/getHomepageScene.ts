@@ -14,9 +14,9 @@ const getHomepageScene: SceneGetter = (
   scene.assets.listenFor = [];
 
   const blueColors = [
+    cl.getHSL(cl.red),
     cl.getHSL(cl.blue),
-    cl.getHSL(cl.blue),
-    cl.getHSL(cl.blue),
+    cl.getHSL(cl.purple),
   ];
 
   const velocity = 0.1;
@@ -26,8 +26,8 @@ const getHomepageScene: SceneGetter = (
       let interactivePoint = new InteractivePoint(
         ctx,
         eventHandlerConfig,
-        ctx.canvas.width / 2,
-        ctx.canvas.width / 2,
+        (ctx.canvas.width * (i + 1)) / 4,
+        (ctx.canvas.height * (i + 1)) / 4,
         scene.assets.listenFor,
         20,
         blueColors[i]
@@ -50,16 +50,20 @@ const getHomepageScene: SceneGetter = (
   const timerShuffleCurrentPoint = () => {
     currentPoint = scene.assets.listenFor[round % 3];
     round += 1;
-    pointVelocity.x = -2 + 4 * Math.random();
-    pointVelocity.y = -2 + 4 * Math.random();
+    pointVelocity.x = -1 + 2 * Math.random();
+    pointVelocity.y = -1 + 2 * Math.random();
     setTimeout(timerShuffleCurrentPoint, 3000);
   };
 
   timerShuffleCurrentPoint();
 
   const updateSelectedPoint = () => {
+    // scene.assets.listenFor.forEach((point: any) => {
+    //   point.color = 'white';
+    // });
     const currentPoint = scene.assets.listenFor[round % 3];
-    let buffer = currentPoint.radius * 1.5;
+    // currentPoint.color = blueColors[round % 3];
+    let buffer = 0;
     if (currentPoint.x >= ctx.canvas.width - buffer) {
       pointVelocity.x *= -1;
     }
@@ -143,29 +147,29 @@ const getHomepageScene: SceneGetter = (
       pointC.color
     );
 
-    const gradientAB2 = makeGradientToTransparency(
-      pointA.x,
-      pointA.y,
-      pointB.x,
-      pointB.y,
-      cl.getHSL(cl.red)
-    );
+    // const gradientAB2 = makeGradientToTransparency(
+    //   pointA.x,
+    //   pointA.y,
+    //   pointB.x,
+    //   pointB.y,
+    //   cl.getHSL(cl.red)
+    // );
 
-    const gradientBC2 = makeGradientToTransparency(
-      pointB.x,
-      pointB.y,
-      pointC.x,
-      pointC.y,
-      cl.getHSL(cl.red)
-    );
+    // const gradientBC2 = makeGradientToTransparency(
+    //   pointB.x,
+    //   pointB.y,
+    //   pointC.x,
+    //   pointC.y,
+    //   cl.getHSL(cl.red)
+    // );
 
-    const gradientCA2 = makeGradientToTransparency(
-      pointC.x,
-      pointC.y,
-      pointA.x,
-      pointA.y,
-      cl.getHSL(cl.red)
-    );
+    // const gradientCA2 = makeGradientToTransparency(
+    //   pointC.x,
+    //   pointC.y,
+    //   pointA.x,
+    //   pointA.y,
+    //   cl.getHSL(cl.red)
+    // );
 
     ctx.fillStyle = gradientAB;
     ctx.fill();
@@ -175,26 +179,27 @@ const getHomepageScene: SceneGetter = (
     ctx.fill();
 
     // red
-    let canvasWidth = ctx.canvas.width;
-    ctx.beginPath();
-    ctx.moveTo(canvasWidth - pointA.x, pointA.y);
-    ctx.lineTo(canvasWidth - pointB.x, pointB.y);
-    ctx.lineTo(canvasWidth - pointC.x, pointC.y);
-    ctx.lineTo(canvasWidth - pointA.x, pointA.y);
+    // let canvasWidth = ctx.canvas.width;
+    // let canvasHeight = ctx.canvas.height;
+    // ctx.beginPath();
+    // ctx.moveTo(canvasWidth - pointA.x, canvasHeight - pointA.y);
+    // ctx.lineTo(canvasWidth - pointB.x, canvasHeight - pointB.y);
+    // ctx.lineTo(canvasWidth - pointC.x, canvasHeight - pointC.y);
+    // ctx.lineTo(canvasWidth - pointA.x, canvasHeight - pointA.y);
 
-    ctx.fillStyle = gradientAB2;
-    ctx.fill();
-    ctx.fillStyle = gradientBC2;
-    ctx.fill();
-    ctx.fillStyle = gradientCA2;
-    ctx.fill();
+    // ctx.fillStyle = gradientAB2;
+    // ctx.fill();
+    // ctx.fillStyle = gradientBC2;
+    // ctx.fill();
+    // ctx.fillStyle = gradientCA2;
+    // ctx.fill();
   };
 
   scene.draw = () => {
     ctx.fillStyle = 'white';
     updateSelectedPoint();
 
-    drawPoints();
+    // drawPoints();
 
     drawTriangle();
   };
