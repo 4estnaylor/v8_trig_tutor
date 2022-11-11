@@ -47,8 +47,6 @@ class InteractivePoint {
         this.drawGrabbingPoint();
         break;
     }
-
-    this.drawPointHalo();
   }
 
   drawNoUpdate() {
@@ -166,8 +164,8 @@ class InteractivePoint {
     context.ellipse(
       this.x,
       this.y,
-      this.radius,
-      this.radius,
+      this.radius * 0.5,
+      this.radius * 0.5,
       0,
       0,
       Math.PI * 2

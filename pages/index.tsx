@@ -6,6 +6,7 @@ import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import MyCanvas from '../components/HomePage/MyCanvas/MyCanvas';
 import styled from 'styled-components';
 import getHomepageScene from '../components/HomePage/MyCanvas/HomepageScene/getHomepageScene';
+import cl from '../colors';
 
 export default function Home() {
   return (
@@ -16,10 +17,12 @@ export default function Home() {
         <link rel="icon" href="/trig_tutor_logo.svg" />
       </Head>
       <ResponsiveAppBar />
-
-      <TopSection>
-        <MyCanvas sceneGetter={getHomepageScene} />
-      </TopSection>
+      <Wrapper>
+        <TopSection>
+          <MyCanvas sceneGetter={getHomepageScene} />
+        </TopSection>
+        <BottomSection></BottomSection>
+      </Wrapper>
 
       {/* <div className={styles.grid}>
           <div className={styles.card}>
@@ -91,6 +94,12 @@ export default function Home() {
   );
 }
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+`;
+
 const TopSection = styled.div`
   /* background: linear-gradient(
     -120deg,
@@ -109,4 +118,18 @@ const TopSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const BottomSection = styled.div`
+  background: linear-gradient(
+    -120deg,
+    ${cl.getHSL(cl.blue_light)} 10%,
+    ${cl.getHSL(cl.blue)},
+    ${cl.getHSL(cl.purple)} 50%,
+    ${cl.getHSL(cl.red)} 90%
+  );
+  background-size: 180%;
+  background-position-x: 50%;
+  background-position-y: 50%;
+  flex: 1;
 `;
