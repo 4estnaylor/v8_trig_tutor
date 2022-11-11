@@ -9,15 +9,14 @@ const getHomepageScene: SceneGetter = (
   eventHandlerConfig: EventHandlerConfig
 ) => {
   const scene = new Scene(context, eventHandlerConfig);
-  console.log(scene.eventHandlerConfig);
   const ctx = scene.context;
   let assets = scene.assets;
   scene.assets.listenFor = [];
 
   const pointColors = [
-    cl.getHSL(cl.red),
     cl.getHSL(cl.blue),
-    cl.getHSL(cl.purple),
+    cl.getHSL(cl.blue),
+    cl.getHSL(cl.blue),
   ];
 
   const velocity = 0.1;
@@ -38,11 +37,44 @@ const getHomepageScene: SceneGetter = (
 
   getTestPoints();
 
-  const pointVelocities = [
-    { dx: 0.1, dy: 0.1 },
-    { dx: -0.1, dy: -0.1 },
-    { dx: -0.1, dy: 0.1 },
-  ];
+  const pointVelocity = {
+    x: -0.7,
+    y: 0.7,
+  };
+
+  const updatePointPositions = () => {};
+
+  let round = 0;
+  let currentPoint;
+
+  const timerShuffleCurrentPoint = () => {
+    currentPoint = scene.assets.listenFor[round % 3];
+    round += 1;
+    pointVelocity.x = -2 + 4 * Math.random();
+    pointVelocity.y = -2 + 4 * Math.random();
+    setTimeout(timerShuffleCurrentPoint, 3000);
+  };
+
+  timerShuffleCurrentPoint();
+
+  const updateSelectedPoint = () => {
+    const currentPoint = scene.assets.listenFor[round % 3];
+    let buffer = currentPoint.radius * 1.5;
+    if (currentPoint.x >= ctx.canvas.width - buffer) {
+      pointVelocity.x *= -1;
+    }
+    if (currentPoint.x <= buffer) {
+      pointVelocity.x *= -1;
+    }
+    if (currentPoint.y >= ctx.canvas.height - buffer) {
+      pointVelocity.y *= -1;
+    }
+    if (currentPoint.y <= buffer) {
+      pointVelocity.y *= -1;
+    }
+    currentPoint.x += pointVelocity.x;
+    currentPoint.y += pointVelocity.y;
+  };
 
   const drawPoints = () => {
     scene.assets.listenFor.forEach((listenedForItem: any) => {
@@ -59,7 +91,7 @@ const getHomepageScene: SceneGetter = (
   ) => {
     const gradient = ctx.createLinearGradient(x0, y0, x1, y1);
     gradient.addColorStop(0, color);
-    gradient.addColorStop(1, `rgba(255,255,255,0)`);
+    gradient.addColorStop(0.9, `rgba(255, 255,255,0.1)`);
 
     return gradient;
   };
@@ -109,13 +141,11 @@ const getHomepageScene: SceneGetter = (
     ctx.fill();
     ctx.fillStyle = gradientCA;
     ctx.fill();
-
-    console.log(pointA);
   };
 
   scene.draw = () => {
     ctx.fillStyle = 'white';
-
+    updateSelectedPoint();
     drawPoints();
     drawTriangle();
   };

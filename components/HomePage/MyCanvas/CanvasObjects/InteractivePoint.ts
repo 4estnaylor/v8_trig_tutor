@@ -161,6 +161,7 @@ class InteractivePoint {
     this.drawPointHalo(1.5);
     context.beginPath();
     context.fillStyle = this.color;
+    context.globalAlpha = 0.2;
     context.ellipse(
       this.x,
       this.y,
@@ -172,6 +173,7 @@ class InteractivePoint {
     );
 
     context.fill();
+    context.globalAlpha = 1;
   }
 
   drawHoveredPoint() {
@@ -237,7 +239,7 @@ class InteractivePoint {
 
     this.context.beginPath();
     this.context.fillStyle = this.color;
-    this.context.globalAlpha = 0.15;
+    this.context.globalAlpha = 0.2;
     this.context.ellipse(
       this.x,
       this.y,
