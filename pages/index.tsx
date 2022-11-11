@@ -7,6 +7,7 @@ import MyCanvas from '../components/HomePage/MyCanvas/MyCanvas';
 import styled from 'styled-components';
 import getHomepageScene from '../components/HomePage/MyCanvas/HomepageScene/getHomepageScene';
 import cl from '../colors';
+import CourseMap from '../components/HomePage/CourseMap/CourseMap';
 
 export default function Home() {
   return (
@@ -21,10 +22,15 @@ export default function Home() {
 
         <TopSection>
           <h2> Get Good At Trig.</h2>
-          <MyCanvas sceneGetter={getHomepageScene} />
+          <CanvasWrap>
+            <MathworkWrap>
+              <Image src="/mathwork.png" width={200} height={200} />
+            </MathworkWrap>
+            <MyCanvas sceneGetter={getHomepageScene} />
+          </CanvasWrap>
           <Tester>
             <TuftBird>
-              <img src="/tuftbird.svg" height="100px" loading="lazy" />
+              <img src="/tuftbird.svg" height="80px" loading="lazy" />
             </TuftBird>
 
             <h2>
@@ -32,7 +38,9 @@ export default function Home() {
             </h2>
           </Tester>
         </TopSection>
-        <BottomSection></BottomSection>
+        <BottomSection>
+          <CourseMap />
+        </BottomSection>
       </Wrapper>
 
       {/* <div className={styles.grid}>
@@ -107,7 +115,17 @@ export default function Home() {
 
 const TuftBird = styled.div`
   position: absolute;
-  left: 10px;
+  right: 10px;
+`;
+
+const CanvasWrap = styled.div`
+  position: relative;
+`;
+
+const MathworkWrap = styled.div`
+  background-color: transparent;
+  position: absolute;
+  right: 0;
 `;
 
 const Tester = styled.div`
