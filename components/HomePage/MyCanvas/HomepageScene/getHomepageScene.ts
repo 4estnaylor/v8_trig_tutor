@@ -38,8 +38,8 @@ const getHomepageScene: SceneGetter = (
   getBluePoints();
 
   const pointVelocity = {
-    x: -0.7,
-    y: 0.7,
+    x: 0,
+    y: 0,
   };
 
   const updatePointPositions = () => {};
@@ -199,7 +199,7 @@ const getHomepageScene: SceneGetter = (
     ctx.fillStyle = 'white';
     updateSelectedPoint();
 
-    // drawPoints();
+    drawPoints();
 
     drawTriangle();
   };

@@ -19,16 +19,21 @@ const useMyCanvas: (
     const { handlers, cursorPosition } = canvasEventHandlerConfig;
 
     const getCursorPosition = function (e: MouseEvent) {
-      const xPos = e.pageX - canvas.offsetLeft;
-      const yPos = e.pageY - canvas.offsetTop;
+      const offsetLeft = canvas.parentElement?.offsetLeft || 0;
+      const offsetTop = canvas.parentElement?.offsetTop || 0;
+      const xPos = e.pageX - offsetLeft;
+      const yPos = e.pageY - offsetTop;
 
       cursorPosition.x = xPos;
       cursorPosition.y = yPos;
     };
 
     const getTouchPosition = function (e: TouchEvent) {
-      const xPos = e.touches[0].pageX - canvas.offsetLeft;
-      const yPos = e.touches[0].pageY - canvas.offsetTop;
+      const offsetLeft = canvas.parentElement?.offsetLeft || 0;
+      const offsetTop = canvas.parentElement?.offsetTop || 0;
+
+      const xPos = e.touches[0].pageX - offsetLeft;
+      const yPos = e.touches[0].pageY - offsetTop;
 
       cursorPosition.x = xPos;
       cursorPosition.y = yPos;
@@ -49,6 +54,10 @@ const useMyCanvas: (
       current.forEach((element: any) => {
         canvas.addEventListener(key, element);
       });
+    });
+
+    canvas.addEventListener('mousedown', () => {
+      console.log('position', scene.eventHandlerConfig.cursorPosition);
     });
 
     const render = () => {

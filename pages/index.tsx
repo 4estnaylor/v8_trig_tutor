@@ -24,10 +24,11 @@ export default function Home() {
           <h2> Get Good At Trig.</h2>
           <CanvasWrap>
             <MathworkWrap>
-              <Image src="/mathwork.png" width={200} height={200} />
+              <img src="/mathwork.png" width={200} height={200} />
             </MathworkWrap>
             <MyCanvas sceneGetter={getHomepageScene} />
           </CanvasWrap>
+
           <Tester>
             <TuftBird>
               <img src="/tuftbird.svg" height="80px" loading="lazy" />
@@ -119,6 +120,7 @@ const TuftBird = styled.div`
 `;
 
 const CanvasWrap = styled.div`
+  pointer-events: none;
   position: relative;
 `;
 
@@ -126,6 +128,7 @@ const MathworkWrap = styled.div`
   background-color: transparent;
   position: absolute;
   right: 0;
+  pointer-events: none;
 `;
 
 const Tester = styled.div`

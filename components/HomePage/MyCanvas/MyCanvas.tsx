@@ -10,10 +10,11 @@ interface MyCanvasProps {
 const MyCanvas = (props: MyCanvasProps) => {
   const { sceneGetter } = props;
   const canvasRef = useMyCanvas(sceneGetter);
-  return <StyledCanvas ref={canvasRef} width="200" height="200" />;
+  return <StyledCanvas ref={canvasRef} width="350" height="200" />;
 };
 
 const StyledCanvas = styled.canvas`
+  pointer-events: auto;
   background: transparent;
   /* border: 2px solid white; */
   margin: auto;

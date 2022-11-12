@@ -153,6 +153,12 @@ class InteractivePoint {
     if (pixelDistance < this.radius * 1.5) {
       if (this.CheckIfItemAlreadyUnderCursor()) return;
       this.isUnderCursor = true;
+      // console.log(
+      //   'under cursors!',
+      //   this.eventHandlerConfig.cursorPosition,
+      //   this.x,
+      //   this.y
+      // );
       this.listenFor.push(
         this.listenFor.splice(this.listenFor.indexOf(this), 1)[0]
       );
