@@ -29,7 +29,7 @@ const getHomepageScene: SceneGetter = (
         (ctx.canvas.width * (i + 1)) / 4,
         (ctx.canvas.height * (i + 1)) / 4,
         scene.assets.listenFor,
-        20,
+        30,
         blueColors[i]
       );
     }
@@ -38,8 +38,8 @@ const getHomepageScene: SceneGetter = (
   getBluePoints();
 
   const pointVelocity = {
-    x: 0,
-    y: 0,
+    x: 0.7,
+    y: -0.7,
   };
 
   const updatePointPositions = () => {};
@@ -63,7 +63,7 @@ const getHomepageScene: SceneGetter = (
     // });
     const currentPoint = scene.assets.listenFor[round % 3];
     // currentPoint.color = blueColors[round % 3];
-    let buffer = 0;
+    let buffer = 1;
     if (currentPoint.x >= ctx.canvas.width - buffer) {
       pointVelocity.x *= -1;
     }

@@ -8,8 +8,10 @@ import styled from 'styled-components';
 import getHomepageScene from '../components/HomePage/MyCanvas/HomepageScene/getHomepageScene';
 import cl from '../colors';
 import CourseMap from '../components/HomePage/CourseMap/CourseMap';
+import useWindowSize from '../components/HomePage/MyCanvas/useWindowSize';
 
 export default function Home() {
+  const size = useWindowSize();
   return (
     <div>
       <Head>
@@ -21,23 +23,26 @@ export default function Home() {
         <ResponsiveAppBar />
 
         <TopSection>
-          <h2> Get Good At Trig.</h2>
+          <GetGoodAtTrig>Get Goood at Trig</GetGoodAtTrig>
           <CanvasWrap>
             <MathworkWrap>
-              <img src="/mathwork.png" width={200} height={200} />
+              <MathWorkImage
+                src="/mathwork.png"
+                width={size.width || 350}
+                height={size.width || 350}
+              />
             </MathworkWrap>
             <MyCanvas sceneGetter={getHomepageScene} />
+            <BottomBanner>
+              <TuftBird>
+                <img src="/tuftbird.svg" height="80px" loading="lazy" />
+              </TuftBird>
+
+              <h2>
+                Really, <RainbowText>Really</RainbowText> Good.
+              </h2>
+            </BottomBanner>
           </CanvasWrap>
-
-          <Tester>
-            <TuftBird>
-              <img src="/tuftbird.svg" height="80px" loading="lazy" />
-            </TuftBird>
-
-            <h2>
-              Really, <RainbowText>Really</RainbowText> Good.
-            </h2>
-          </Tester>
         </TopSection>
         <BottomSection>
           <CourseMap />
@@ -114,6 +119,16 @@ export default function Home() {
   );
 }
 
+const GetGoodAtTrig = styled.h2`
+  position: absolute;
+  top: 70;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+`;
+
 const TuftBird = styled.div`
   position: absolute;
   right: 10px;
@@ -122,6 +137,7 @@ const TuftBird = styled.div`
 const CanvasWrap = styled.div`
   pointer-events: none;
   position: relative;
+  overflow: hidden;
 `;
 
 const MathworkWrap = styled.div`
@@ -131,13 +147,15 @@ const MathworkWrap = styled.div`
   pointer-events: none;
 `;
 
-const Tester = styled.div`
+const BottomBanner = styled.div`
   width: 100%;
   display: flex;
   position: relative;
   justify-content: center;
   align-items: flex-end;
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  /* transform: translateY(-100%); */
 `;
 
 const Wrapper = styled.div`
@@ -149,6 +167,14 @@ const Wrapper = styled.div`
 const BottomText = styled.div`
   /* position: relative; */
   width: 100%;
+`;
+
+const MathWorkImage = styled(Image)`
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 `;
 
 const TopSection = styled.div`
@@ -164,7 +190,7 @@ const TopSection = styled.div`
   background-size: 150%;
   background-position-x: 50%;
   background-position-y: 50%;
-  height: 390px;
+  height: 490px;
   width: 100%;
   display: flex;
   align-items: center;

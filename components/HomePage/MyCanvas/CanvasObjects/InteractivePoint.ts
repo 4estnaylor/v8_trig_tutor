@@ -67,7 +67,6 @@ class InteractivePoint {
 
   update() {
     this.checkIfMouseIsOver();
-    this.ungrabIfOutOfCanvasBounds();
 
     if (
       this.form === 'grabbing' &&
@@ -110,37 +109,38 @@ class InteractivePoint {
         this.setCursor('grabbing');
         break;
     }
+    this.keepInBoundsOfCanvas();
   }
 
-  ungrabIfOutOfCanvasBounds = () => {
+  keepInBoundsOfCanvas = () => {
     const canvasWidth = this.context.canvas.width;
     const canvasHeight = this.context.canvas.height;
-    let buffer = this.radius * 1.65;
+    let buffer = 1;
 
-    // if (this.x >= canvasWidth - buffer) {
-    //   this.form = 'default';
-    //   this.x = canvasWidth - buffer;
-    //   this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
-    //   this.isUnderCursor = false;
-    // }
-    // if (this.x < buffer) {
-    //   this.form = 'default';
-    //   this.x = buffer;
-    //   this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
-    //   this.isUnderCursor = false;
-    // }
-    // if (this.y >= canvasHeight - buffer) {
-    //   this.form = 'default';
-    //   this.y = canvasHeight - buffer;
-    //   this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
-    //   this.isUnderCursor = false;
-    // }
-    // if (this.y < buffer) {
-    //   this.form = 'default';
-    //   this.y = buffer;
-    //   this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
-    //   this.isUnderCursor = false;
-    // }
+    if (this.x > canvasWidth) {
+      this.form = 'default';
+      this.x = canvasWidth - buffer;
+      this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
+      this.isUnderCursor = false;
+    }
+    if (this.x < 0) {
+      this.form = 'default';
+      this.x = buffer;
+      this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
+      this.isUnderCursor = false;
+    }
+    if (this.y > canvasHeight) {
+      this.form = 'default';
+      this.y = canvasHeight - buffer;
+      this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
+      this.isUnderCursor = false;
+    }
+    if (this.y < 0) {
+      this.form = 'default';
+      this.y = buffer;
+      this.eventHandlerConfig.cursorStatus.mouseIsDown = false;
+      this.isUnderCursor = false;
+    }
   };
 
   checkIfMouseIsOver = () => {
@@ -217,7 +217,7 @@ class InteractivePoint {
 
   drawHoveredPoint() {
     let context = this.context;
-    this.drawPointHalo(2.5);
+    this.drawPointHalo(2);
     context.beginPath();
     context.fillStyle = this.color;
     context.ellipse(
