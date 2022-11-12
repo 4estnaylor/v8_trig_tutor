@@ -26,8 +26,8 @@ const getHomepageScene: SceneGetter = (
       let interactivePoint = new InteractivePoint(
         ctx,
         eventHandlerConfig,
-        (ctx.canvas.width * (i + 1)) / 4,
-        (ctx.canvas.height * (i + 1)) / 4,
+        ctx.canvas.width / 2,
+        ctx.canvas.height / 2,
         scene.assets.listenFor,
         30,
         blueColors[i]
@@ -54,19 +54,28 @@ const getHomepageScene: SceneGetter = (
   };
 
   let canPointsMove = true;
+
+  const makePointsMoveTrue = () => {
+    canPointsMove = true;
+  };
+
+  let delayedMakePointsMoveTrue: any = null;
+
   const togglePointsCanMovme = () => {
     if (scene.eventHandlerConfig.cursorStatus.mouseIsDown === true) {
+      if (delayedMakePointsMoveTrue) {
+        clearTimeout(delayedMakePointsMoveTrue);
+      }
+
+      delayedMakePointsMoveTrue = setTimeout(makePointsMoveTrue, 6000);
+
       canPointsMove = false;
-      setTimeout(() => {
-        canPointsMove = true;
-      }, 6000);
     }
   };
 
   timerShuffleCurrentPoint();
 
   const updateSelectedPoint = () => {
-    togglePointsCanMovme();
     if (!canPointsMove) return;
     // scene.assets.listenFor.forEach((point: any) => {
     //   point.color = 'white';
@@ -207,6 +216,7 @@ const getHomepageScene: SceneGetter = (
 
   scene.draw = () => {
     ctx.fillStyle = 'white';
+    togglePointsCanMovme();
     updateSelectedPoint();
 
     drawPoints();

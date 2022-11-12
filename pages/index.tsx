@@ -128,6 +128,9 @@ const GetGoodAtTrig = styled.h2`
   -moz-user-select: none;
   -o-user-select: none;
   user-select: none;
+
+  padding: 5px;
+  border-radius: 8px;
 `;
 
 const TuftBird = styled.div`
@@ -196,7 +199,7 @@ const TopSection = styled.div`
   background-size: 150%;
   background-position-x: 50%;
   background-position-y: 50%;
-  height: 490px;
+  height: 390px;
   width: 100%;
   display: flex;
   align-items: center;
