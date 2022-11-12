@@ -121,6 +121,7 @@ export default function Home() {
 
 const GetGoodAtTrig = styled.h2`
   position: absolute;
+  z-index: 10;
   top: 70;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -145,6 +146,11 @@ const MathworkWrap = styled.div`
   position: absolute;
   right: 0;
   pointer-events: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 `;
 
 const BottomBanner = styled.div`
