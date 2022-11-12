@@ -42,8 +42,6 @@ const getHomepageScene: SceneGetter = (
     y: -0.7,
   };
 
-  const updatePointPositions = () => {};
-
   let round = 0;
   let currentPoint;
 
@@ -55,9 +53,21 @@ const getHomepageScene: SceneGetter = (
     setTimeout(timerShuffleCurrentPoint, 3000);
   };
 
+  let canPointsMove = true;
+  const togglePointsCanMovme = () => {
+    if (scene.eventHandlerConfig.cursorStatus.mouseIsDown === true) {
+      canPointsMove = false;
+      setTimeout(() => {
+        canPointsMove = true;
+      }, 6000);
+    }
+  };
+
   timerShuffleCurrentPoint();
 
   const updateSelectedPoint = () => {
+    togglePointsCanMovme();
+    if (!canPointsMove) return;
     // scene.assets.listenFor.forEach((point: any) => {
     //   point.color = 'white';
     // });
