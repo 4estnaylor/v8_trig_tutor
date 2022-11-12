@@ -26,7 +26,7 @@ const getHomepageScene: SceneGetter = (
       let interactivePoint = new InteractivePoint(
         ctx,
         eventHandlerConfig,
-        ctx.canvas.width / 2,
+        innerWidth / 2,
         ctx.canvas.height / 2,
         scene.assets.listenFor,
         30,
