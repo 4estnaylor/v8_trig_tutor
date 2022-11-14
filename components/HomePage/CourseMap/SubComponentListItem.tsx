@@ -22,18 +22,33 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { SubComponent } from './Courses';
+import { SubComponent, TopicComponent } from './Courses';
 import ListItem from './ListItem';
 
 interface SubComponentListItemProps {
   subComponent: SubComponent;
+  parentTopicComponent: TopicComponent;
 }
 
 const SubComponentListItem = (props: SubComponentListItemProps) => {
-  const { subComponent } = props;
+  const { subComponent, parentTopicComponent } = props;
+  if (!parentTopicComponent.subComponents) return <></>;
+
+  let isLast = false;
+
+  if (
+    parentTopicComponent.subComponents[
+      parentTopicComponent.subComponents.length - 1
+    ] === subComponent
+  ) {
+    isLast = true;
+  }
 
   return (
-    <ListItem isComplete={false} connectorType="straight">
+    <ListItem
+      isComplete={false}
+      connectorType={!isLast ? 'straight' : 'uptree'}
+    >
       <Title>{subComponent.title}</Title>
     </ListItem>
   );

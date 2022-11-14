@@ -18,6 +18,7 @@ const TopicSectionListItem = (props: TopicListItemProps) => {
       return (
         <TopicComponentListItem
           key={topicComponent.title}
+          parentTopicSection={topicSection}
           topicComponent={topicComponent}
         />
       );

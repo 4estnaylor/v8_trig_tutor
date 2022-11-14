@@ -1,21 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TopicComponent } from './Courses';
+import { TopicComponent, TopicSection } from './Courses';
 import ListItem from './ListItem';
 import SubComponentListItem from './SubComponentListItem';
 
 interface TopicComponentListItemProps {
   topicComponent: TopicComponent;
+  parentTopicSection: TopicSection;
 }
 
 const TopicComponentListItem = (props: TopicComponentListItemProps) => {
-  const { topicComponent } = props;
+  const { topicComponent, parentTopicSection } = props;
   const subComponents = topicComponent.subComponents;
-  const subComponentListItems = subComponents?.map((subComponent) => {
+  const subComponentListItems = subComponents?.map((subComponent, index) => {
     return (
       <SubComponentListItem
         key={subComponent.title}
         subComponent={subComponent}
+        parentTopicComponent={topicComponent}
       />
     );
   });

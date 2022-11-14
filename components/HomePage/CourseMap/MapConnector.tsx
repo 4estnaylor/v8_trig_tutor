@@ -38,10 +38,20 @@ const MapConnector = (props: MapConnectorProps) => {
         />
       );
       break;
+    case 'uptree':
+      connectorSVGSTUFF = (
+        <path
+          d="M53,25 C54,55 7,18 10,48"
+          fill="none"
+          stroke="white"
+          strokeWidth={5}
+        />
+      );
+      break;
   }
 
   return (
-    <Wrapper>
+    <Wrapper connectorType={connectorType || null}>
       {/* <path
         d="M6,6 C4,29 16,88 90,89"
         fill="none"
@@ -61,11 +71,13 @@ const MapConnector = (props: MapConnectorProps) => {
   );
 };
 
-const Wrapper = styled.svg`
+const Wrapper = styled.svg<{ connectorType: connectorType }>`
   width: 60px;
   height: 60px;
   position: absolute;
   transform: translateY(50%);
+  transform: ${(p) =>
+    p.connectorType === 'uptree' ? 'translate(-70%, 30%)' : null};
   /* border: 2px solid red; */
 `;
 
