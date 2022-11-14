@@ -9,6 +9,7 @@ import getHomepageScene from '../components/HomePage/MyCanvas/HomepageScene/getH
 import cl from '../colors';
 import CourseMap from '../components/HomePage/CourseMap/CourseMap';
 import useWindowSize from '../components/HomePage/MyCanvas/useWindowSize';
+import CourseMap2 from '../components/HomePage/CourseMap/CourseMap2';
 
 export default function Home() {
   const size = useWindowSize();
@@ -23,7 +24,7 @@ export default function Home() {
         <ResponsiveAppBar />
 
         <TopSection>
-          <GetGoodAtTrig>Get Goood at Trig</GetGoodAtTrig>
+          <GetGoodAtTrig>Get Good at Trig.</GetGoodAtTrig>
           <CanvasWrap>
             <MathworkWrap>
               <MathWorkImage
@@ -45,7 +46,7 @@ export default function Home() {
           </CanvasWrap>
         </TopSection>
         <BottomSection>
-          <CourseMap />
+          <CourseMap2 />
         </BottomSection>
       </Wrapper>
 
@@ -230,6 +231,7 @@ const RainbowText = styled.div`
   );
 
   background-size: 100%;
+
   color: transparent;
   -webkit-background-clip: text;
   -moz-background-clip: text;

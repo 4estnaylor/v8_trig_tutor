@@ -1,0 +1,15 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" 
+    
+    width="50"
+    height="50"
+
+>
+  <path
+            d="M2,0 C6,44 17,40 29,40"
+            strokeWidth="8px"
+     
+            stroke="white"
+            fill="none"
+          />
+</svg>

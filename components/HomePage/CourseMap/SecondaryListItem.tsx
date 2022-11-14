@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import NameHolder, { NameHolderTertiary } from './NameHolder';
 
 interface SecondaryItemsProps {
   name: string;
@@ -11,13 +12,17 @@ const SecondaryListItem = (props: SecondaryItemsProps) => {
   const tertiaryList = subItems.map((item, index) => {
     return (
       <Wrapper>
-        {<TertiaryListItem key={item.name}> {item.name} </TertiaryListItem>}
+        {
+          <TertiaryListItem key={item.name}>
+            <NameHolderTertiary>{item.name}</NameHolderTertiary>
+          </TertiaryListItem>
+        }
       </Wrapper>
     );
   });
   return (
     <Wrapper>
-      <Name>{name} </Name>
+      <NameHolder>{name}</NameHolder>
       <TertiaryList>{tertiaryList}</TertiaryList>
     </Wrapper>
   );
@@ -34,8 +39,6 @@ const TertiaryList = styled.div`
   padding-left: 40px;
 `;
 
-const TertiaryListItem = styled.div`
-  padding: 15px 0 15px 0;
-`;
+const TertiaryListItem = styled.div``;
 
 export default SecondaryListItem;

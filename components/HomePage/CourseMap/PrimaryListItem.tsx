@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import cl from '../../../colors';
+import NameHolder, { NameHolderPrimary } from './NameHolder';
 import SecondaryListItem from './SecondaryListItem';
 
 interface PrimaryListItemProps {
@@ -24,13 +25,15 @@ const PrimaryListItem = (props: PrimaryListItemProps) => {
   });
   return (
     <Wrapper>
-      <div>
-        <Name> {name} </Name>
-        <SecondaryItemsWrapper>{subItems}</SecondaryItemsWrapper>
-      </div>
+      <NameHolderPrimary>{name}</NameHolderPrimary>
+      <SecondaryItemsWrapper>{subItems}</SecondaryItemsWrapper>
     </Wrapper>
   );
 };
+
+const ConnectorContainer = styled.div`
+  display: inline;
+`;
 
 const Wrapper = styled.div`
   min-height: 40px;
@@ -51,7 +54,8 @@ const SecondaryItemsWrapper = styled.div`
 
 const Name = styled.div`
   font-size: 1rem;
-  padding: 15px 0px 15px 0px;
+  align-items: center;
+  display: flex;
 `;
 
 export default PrimaryListItem;
