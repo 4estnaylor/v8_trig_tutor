@@ -24,31 +24,48 @@ import React from 'react';
 import styled from 'styled-components';
 import { SubComponent, TopicComponent } from './Courses';
 import ListItem from './ListItem';
+import { connectorType } from './MapConnector';
 
 interface SubComponentListItemProps {
   subComponent: SubComponent;
-  parentTopicComponent: TopicComponent;
 }
 
 const SubComponentListItem = (props: SubComponentListItemProps) => {
-  const { subComponent, parentTopicComponent } = props;
+  const { subComponent } = props;
+  let parentTopicComponent = subComponent.parentTopicComponent;
   if (!parentTopicComponent.subComponents) return <></>;
 
-  let isLast = false;
-
-  if (
+  let isLastOfTopicComponent = false;
+  let lastSubComponentOfParent =
     parentTopicComponent.subComponents[
       parentTopicComponent.subComponents.length - 1
-    ] === subComponent
+    ];
+  if (subComponent === lastSubComponentOfParent) {
+    isLastOfTopicComponent = true;
+  }
+
+  let isLastOfTopic = false;
+  let owningTopicSection = parentTopicComponent.parentTopicSection;
+  if (
+    parentTopicComponent ===
+    owningTopicSection.topicComponents[
+      owningTopicSection.topicComponents.length - 1
+    ]
   ) {
-    isLast = true;
+    isLastOfTopic = true;
+  }
+
+  let connectorType: connectorType = null;
+  if (isLastOfTopic && isLastOfTopicComponent) {
+    connectorType = null;
+  } else if (isLastOfTopicComponent) {
+    connectorType = 'uptree';
+  } else {
+    connectorType = 'straight';
   }
 
   return (
-    <ListItem
-      isComplete={false}
-      connectorType={!isLast ? 'straight' : 'uptree'}
-    >
+    <ListItem isComplete={false} connectorType={connectorType}>
       <Title>{subComponent.title}</Title>
     </ListItem>
   );

@@ -1,20 +1,31 @@
+import { Topic } from '@mui/icons-material';
+
 export class TopicSection {
   topicComponents: TopicComponent[];
   constructor(public title: string, topicComponents: TopicComponent[]) {
     this.topicComponents = topicComponents || [];
+    this.topicComponents.forEach((topicComponent: TopicComponent) => {
+      topicComponent.parentTopicSection = this;
+    });
   }
 }
 
 export class TopicComponent {
   subComponents?: SubComponent[];
+  public parentTopicSection: TopicSection;
+
   constructor(public title: string, subComponents?: SubComponent[]) {
     this.subComponents = subComponents;
     this.title = title;
+    this.subComponents?.forEach((subComponent: SubComponent) => {
+      subComponent.parentTopicComponent = this;
+    });
   }
 }
 
 export class SubComponent {
   tags: 'grind' | 'deep thinking' | 'important'[] | null;
+  parentTopicComponent: TopicComponent;
   constructor(
     public title: string,
     tags?: 'grind' | 'deep thinking' | 'important'[]
@@ -22,9 +33,12 @@ export class SubComponent {
 }
 
 const introduction = new TopicSection('Introduction', [
-  new TopicComponent('welcome'),
-  new TopicComponent('course structure'),
-  new TopicComponent('mathematical fluency'),
+  new TopicComponent('welcome 🖖'),
+  new TopicComponent('Trig is the most important highschool math topic'),
+  new TopicComponent('get the most out of this course', [
+    new SubComponent('conceptual understanding'),
+    new SubComponent('fluency'),
+  ]),
 ]);
 
 const measurement = new TopicSection('Measuring Angles ∡', [
@@ -58,6 +72,14 @@ const ratios = new TopicSection('The Ratios of  Power', [
   new TopicComponent('secant & cosecant'),
 ]);
 
+console.log(measurement);
+
 const topicSections: TopicSection[] = [introduction, measurement, ratios];
+
+// const initializeTopicComponentWithParents = (topicSection: TopicSection) => {
+//   topicSection.topicComponents.forEach((topicComponent: TopicComponent) => {
+//     topicComponent.parentTopicSection = introduction;
+//   });
+// };
 
 export default topicSections;
