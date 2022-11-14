@@ -1,11 +1,16 @@
 export class TopicSection {
   topicComponents: TopicComponent[];
-  constructor(public title: string, topicComponents?: TopicComponent[]) {}
+  constructor(public title: string, topicComponents: TopicComponent[]) {
+    this.topicComponents = topicComponents || [];
+  }
 }
 
 export class TopicComponent {
-  subComponents: SubComponent[];
-  constructor(public title: string, subComponents?: SubComponent[]) {}
+  subComponents?: SubComponent[];
+  constructor(public title: string, subComponents?: SubComponent[]) {
+    this.subComponents = subComponents;
+    this.title = title;
+  }
 }
 
 export class SubComponent {
@@ -22,7 +27,7 @@ const introduction = new TopicSection('Introduction', [
   new TopicComponent('mathematical fluency'),
 ]);
 
-const measurement = new TopicSection('Measurement', [
+const measurement = new TopicSection('Measuring Angles ∡', [
   new TopicComponent('degrees or °', [
     new SubComponent('measuring with °'),
     new SubComponent('special angles in °'),
@@ -46,7 +51,7 @@ const measurement = new TopicSection('Measurement', [
   ]),
 ]);
 
-const ratios = new TopicSection('6 Ratios', [
+const ratios = new TopicSection('The Ratios of  Power', [
   new TopicComponent('sin'),
   new TopicComponent('cos'),
   new TopicComponent('tangent & cotangent'),

@@ -4,7 +4,7 @@ import cl from '../../../colors';
 import MapConnector, { connectorType } from './MapConnector';
 
 interface ListItemProps {
-  children: JSX.Element | 'string';
+  children: JSX.Element | string;
   isComplete: boolean;
   connectorType?: null | connectorType;
 }

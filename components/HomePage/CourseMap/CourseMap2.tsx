@@ -6,7 +6,12 @@ import TopicSectionListItem from './TopicSectionListItem';
 
 const CourseMap2 = () => {
   const topicListItems = topicSections.map((topicSection: TopicSection) => {
-    return <TopicSectionListItem topicSection={topicSection} />;
+    return (
+      <TopicSectionListItem
+        key={topicSection.title}
+        topicSection={topicSection}
+      />
+    );
   });
   return (
     <Wrapper>

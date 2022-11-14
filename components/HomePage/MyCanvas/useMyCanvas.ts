@@ -56,16 +56,10 @@ const useMyCanvas: (
       });
     });
 
-    canvas.addEventListener('mousedown', () => {
-      console.log('position', scene.eventHandlerConfig.cursorPosition);
-    });
-
     const render = () => {
       context.clearRect(0, 0, canvas.width, canvas.height);
-      // console.log(canvasEventHandlerConfig.cursorStatus);
       // context.fillRect(0, 0, 100, 100);
       scene.draw();
-      // console.log('is rendering');
       requestAnimationFrame(render);
     };
 
