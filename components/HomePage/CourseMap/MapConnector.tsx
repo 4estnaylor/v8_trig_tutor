@@ -10,7 +10,6 @@ interface MapConnectorProps {
 
 const MapConnector = (props: MapConnectorProps) => {
   const { connectorType } = props;
-  console.log(connectorType);
   let connectorSVGSTUFF;
 
   switch (connectorType) {
@@ -25,6 +24,16 @@ const MapConnector = (props: MapConnectorProps) => {
           x2="10"
           y2={38}
           stroke={cl.getHSL(cl.white)}
+          strokeWidth={5}
+        />
+      );
+      break;
+    case 'downtree':
+      connectorSVGSTUFF = (
+        <path
+          d="M10,14 C5,48 23,45 37,48"
+          fill="none"
+          stroke="white"
           strokeWidth={5}
         />
       );
@@ -53,8 +62,8 @@ const MapConnector = (props: MapConnectorProps) => {
 };
 
 const Wrapper = styled.svg`
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   position: absolute;
   transform: translateY(50%);
   /* border: 2px solid red; */

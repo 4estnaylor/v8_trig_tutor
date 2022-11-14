@@ -7,21 +7,25 @@ import TopicComponentListItem from './TopicComponentListItem';
 
 interface TopicListItemProps {
   topicSection: TopicSection;
+  index: number;
 }
 
 const TopicSectionListItem = (props: TopicListItemProps) => {
-  const { topicSection } = props;
-  console.log(topicSection);
+  const { topicSection, index } = props;
 
   const topicComponents = topicSection.topicComponents?.map(
     (topicComponent) => {
-      console.log(topicComponent);
-      return <TopicComponentListItem topicComponent={topicComponent} />;
+      return (
+        <TopicComponentListItem
+          key={topicComponent.title}
+          topicComponent={topicComponent}
+        />
+      );
     }
   );
   return (
     <>
-      <ListItem isComplete={true} connectorType="straight">
+      <ListItem isComplete={true} isTopicSection={true} index={index}>
         <Title>{topicSection.title}</Title>
       </ListItem>
       <TopicComponentList>{topicComponents}</TopicComponentList>

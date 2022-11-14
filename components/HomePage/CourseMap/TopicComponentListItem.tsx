@@ -10,15 +10,24 @@ interface TopicComponentListItemProps {
 
 const TopicComponentListItem = (props: TopicComponentListItemProps) => {
   const { topicComponent } = props;
-  const subComponents = topicComponent.subComponents?.map((subComponent) => {
-    return <SubComponentListItem subComponent={subComponent} />;
+  const subComponents = topicComponent.subComponents;
+  const subComponentListItems = subComponents?.map((subComponent) => {
+    return (
+      <SubComponentListItem
+        key={subComponent.title}
+        subComponent={subComponent}
+      />
+    );
   });
   return (
     <>
-      <ListItem isComplete={false} connectorType="straight">
+      <ListItem
+        isComplete={false}
+        connectorType={subComponents ? 'downtree' : null}
+      >
         <Title> {topicComponent.title} </Title>
       </ListItem>
-      <SubComponentList>{subComponents}</SubComponentList>
+      <SubComponentList>{subComponentListItems}</SubComponentList>
     </>
   );
 };

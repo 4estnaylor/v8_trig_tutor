@@ -5,14 +5,17 @@ import topicSections, { TopicSection } from './Courses';
 import TopicSectionListItem from './TopicSectionListItem';
 
 const CourseMap2 = () => {
-  const topicListItems = topicSections.map((topicSection: TopicSection) => {
-    return (
-      <TopicSectionListItem
-        key={topicSection.title}
-        topicSection={topicSection}
-      />
-    );
-  });
+  const topicListItems = topicSections.map(
+    (topicSection: TopicSection, index) => {
+      return (
+        <TopicSectionListItem
+          key={topicSection.title}
+          topicSection={topicSection}
+          index={index}
+        />
+      );
+    }
+  );
   return (
     <Wrapper>
       <Title> Map of Trig </Title>
