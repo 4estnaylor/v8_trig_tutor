@@ -28,27 +28,27 @@ const MapConnector = (props: MapConnectorProps) => {
           x2={10}
           y2={38}
           stroke={cl.getHSL(cl.white)}
-          strokeWidth={5}
+          strokeWidth={3}
         />
       );
       break;
     case 'downtree':
       connectorSVGSTUFF = (
         <path
-          d="M10,14 C5,48 23,45 37,48"
+          d="M48,50 C12,51 13,40 10,12"
           fill="none"
           stroke="white"
-          strokeWidth={5}
+          strokeWidth={3}
         />
       );
       break;
     case 'uptree':
       connectorSVGSTUFF = (
         <path
-          d="M53,25 C54,55 7,18 10,48"
+          d="M60,28 C68,63 11,11 10,52"
           fill="none"
           stroke="white"
-          strokeWidth={5}
+          strokeWidth={3}
         />
       );
       break;

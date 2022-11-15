@@ -67,7 +67,7 @@ const Wrapper1 = styled(Wrapper)<{
   &:before {
     content: '${(p) => (p.isComplete ? '✓' : '●')}';
     width: 20px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 800;
 
     display: flex;
