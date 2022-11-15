@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import convertToURL from './convertToURL';
 import { TopicComponent, TopicSection } from './Courses';
 import ListItem from './ListItem';
 import { connectorForm, connectorType } from './MapConnector';
@@ -46,9 +47,11 @@ const TopicComponentListItem = (props: TopicComponentListItemProps) => {
     indent: connectorIndent,
   };
 
+  let url = convertToURL(topicComponent.title);
+
   return (
     <>
-      <ListItem isComplete={false} connectorForm={connectorForm}>
+      <ListItem isComplete={false} connectorForm={connectorForm} href={url}>
         <Title> {topicComponent.title} </Title>
       </ListItem>
       <SubComponentList>{subComponentListItems}</SubComponentList>

@@ -67,7 +67,7 @@ const measurement = new TopicSection('Measuring Angles ∡', [
   new TopicComponent(` measurment  notes 📝  `),
 ]);
 
-const ratios = new TopicSection('The Ratios of  Power', [
+const ratios = new TopicSection('Ratios', [
   new TopicComponent('sin'),
   new TopicComponent('cos'),
   new TopicComponent('tangent & cotangent'),

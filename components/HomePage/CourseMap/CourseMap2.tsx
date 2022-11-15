@@ -18,7 +18,6 @@ const CourseMap2 = () => {
   );
   return (
     <Wrapper>
-      <Title> Map of Trig </Title>
       <TopicSectionsList>{topicListItems}</TopicSectionsList>
     </Wrapper>
   );

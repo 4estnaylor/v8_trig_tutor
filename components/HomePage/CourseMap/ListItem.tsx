@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 import cl from '../../../colors';
+import Gap from '../../Gaps/Gap';
 import MapConnector, { connectorForm, connectorType } from './MapConnector';
 
 interface ListItemProps {
@@ -12,24 +13,32 @@ interface ListItemProps {
   connectorIndent?: number;
   isTopicSection?: boolean;
   index?: number;
+  href?: string;
 }
 const ListItem = (props: ListItemProps) => {
-  const { isComplete, connectorType, connectorForm, isTopicSection, index } =
-    props;
+  const {
+    isComplete,
+    connectorType,
+    connectorForm,
+    isTopicSection,
+    index,
+    href,
+  } = props;
 
   if (isTopicSection && (index || index === 0)) {
     return (
-      <Link href={`/book`}>
+      <>
+        <Gap height={30} />
         <Wrapper2 isComplete={isComplete} index={index}>
           <MapConnector connectorForm={connectorForm} />
           {props.children}
         </Wrapper2>
-      </Link>
+      </>
     );
   }
 
   return (
-    <Link href={`/book`}>
+    <Link href={href || `/`}>
       <Wrapper1 isComplete={isComplete} indent={connectorForm?.indent || 0}>
         <MapConnector connectorForm={connectorForm} />
         {props.children}
@@ -50,14 +59,6 @@ const Wrapper = styled.li<{ isComplete: boolean }>`
   height: 50px;
   border-radius: 8px;
   color: ${cl.getHSLA(cl.white, 0.7)};
-
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      cursor: pointer;
-      background-color: ${cl.getHSLA(cl.white, 0.3)};
-      color: ${cl.getHSLA(cl.white, 1)};
-    }
-  }
 `;
 
 const Wrapper1 = styled(Wrapper)<{
@@ -74,6 +75,14 @@ const Wrapper1 = styled(Wrapper)<{
     align-items: center;
     justify-content: center;
     transform: translateX(${(p) => p.indent + 'px'});
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      cursor: pointer;
+      background-color: ${cl.getHSLA(cl.white, 0.3)};
+      color: ${cl.getHSLA(cl.white, 1)};
+    }
   }
 `;
 
