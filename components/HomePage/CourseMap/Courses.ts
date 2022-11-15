@@ -34,35 +34,37 @@ export class SubComponent {
 
 const introduction = new TopicSection('Introduction', [
   new TopicComponent('welcome 🖖'),
-  new TopicComponent('Trig is the most important highschool math topic'),
-  new TopicComponent('get the most out of this course', [
-    new SubComponent('conceptual understanding'),
+  new TopicComponent('double down'),
+  new TopicComponent('efficiency', [
+    new SubComponent('conceptual'),
     new SubComponent('fluency'),
   ]),
 ]);
 
 const measurement = new TopicSection('Measuring Angles ∡', [
-  new TopicComponent('degrees or °', [
-    new SubComponent('measuring with °'),
-    new SubComponent('special angles in °'),
-    new SubComponent('why 360°? why not 100°? '),
+  new TopicComponent('°', [
+    new SubComponent('measuring °'),
+    new SubComponent('special angles °'),
+    new SubComponent('why 360°?  '),
   ]),
 
-  new TopicComponent('tau radians or τ rad', [
-    new SubComponent('measuring with τ rad'),
-    new SubComponent('special angles with τ rad'),
-    new SubComponent('why have both τ rad and °'),
+  new TopicComponent('τ rad', [
+    new SubComponent(`what's a radian?`),
+    new SubComponent('measuring τ rad'),
+    new SubComponent('special angles τ rad'),
+    new SubComponent('° vs τ'),
   ]),
-  new TopicComponent('pi radians or  π rad', [
-    new SubComponent('measuring with  π rad'),
-    new SubComponent('special angles with  π rad'),
-    new SubComponent('why have both  π rad and °'),
+  new TopicComponent('π rad', [
+    new SubComponent('measuring π rad'),
+    new SubComponent('special angles π rad'),
+    new SubComponent(`friggin' π  `),
   ]),
 
   new TopicComponent('angle conversions', [
     new SubComponent('° ⟷ τ rad'),
     new SubComponent('τ rad ⟷ π rad'),
   ]),
+  new TopicComponent(` measurment  notes 📝  `),
 ]);
 
 const ratios = new TopicSection('The Ratios of  Power', [

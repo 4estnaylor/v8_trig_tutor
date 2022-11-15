@@ -24,7 +24,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { SubComponent, TopicComponent } from './Courses';
 import ListItem from './ListItem';
-import { connectorType } from './MapConnector';
+import { connectorForm, connectorType } from './MapConnector';
 
 interface SubComponentListItemProps {
   subComponent: SubComponent;
@@ -64,13 +64,22 @@ const SubComponentListItem = (props: SubComponentListItemProps) => {
     connectorType = 'straight';
   }
 
+  let connectorIndent = 70;
+
+  let connectorForm: connectorForm = {
+    type: connectorType,
+    indent: connectorIndent,
+  };
+
   return (
-    <ListItem isComplete={false} connectorType={connectorType}>
+    <ListItem isComplete={false} connectorForm={connectorForm}>
       <Title>{subComponent.title}</Title>
     </ListItem>
   );
 };
 
-const Title = styled.h3``;
+const Title = styled.h3`
+  padding-left: 70px;
+`;
 
 export default SubComponentListItem;

@@ -33,7 +33,9 @@ const TopicSectionListItem = (props: TopicListItemProps) => {
   );
 };
 
-const TopicComponentList = styled.ul``;
+const TopicComponentList = styled.ul`
+  padding: 0;
+`;
 
 const Title = styled.h3``;
 

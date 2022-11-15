@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { TopicComponent, TopicSection } from './Courses';
 import ListItem from './ListItem';
-import { connectorType } from './MapConnector';
+import { connectorForm, connectorType } from './MapConnector';
 import SubComponentListItem from './SubComponentListItem';
 
 interface TopicComponentListItemProps {
@@ -39,9 +39,16 @@ const TopicComponentListItem = (props: TopicComponentListItemProps) => {
     connectorType = null;
   }
 
+  let connectorIndent = 20;
+
+  let connectorForm: connectorForm = {
+    type: connectorType,
+    indent: connectorIndent,
+  };
+
   return (
     <>
-      <ListItem isComplete={false} connectorType={connectorType}>
+      <ListItem isComplete={false} connectorForm={connectorForm}>
         <Title> {topicComponent.title} </Title>
       </ListItem>
       <SubComponentList>{subComponentListItems}</SubComponentList>
@@ -49,7 +56,12 @@ const TopicComponentListItem = (props: TopicComponentListItemProps) => {
   );
 };
 
-const Title = styled.h3``;
-const SubComponentList = styled.ul``;
+const Title = styled.h3`
+  padding-left: 20px;
+`;
+const SubComponentList = styled.ul`
+  list-style-type: none;
+  padding: 0;
+`;
 
 export default TopicComponentListItem;

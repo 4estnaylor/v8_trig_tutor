@@ -2,23 +2,26 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 import cl from '../../../colors';
-import MapConnector, { connectorType } from './MapConnector';
+import MapConnector, { connectorForm, connectorType } from './MapConnector';
 
 interface ListItemProps {
   children: JSX.Element | string;
   isComplete: boolean;
   connectorType?: null | connectorType;
+  connectorForm?: connectorForm;
+  connectorIndent?: number;
   isTopicSection?: boolean;
   index?: number;
 }
 const ListItem = (props: ListItemProps) => {
-  const { isComplete, connectorType, isTopicSection, index } = props;
+  const { isComplete, connectorType, connectorForm, isTopicSection, index } =
+    props;
 
   if (isTopicSection && (index || index === 0)) {
     return (
       <Link href={`/book`}>
-        <Wrapper2 complete={isComplete} index={index}>
-          <MapConnector connectorType={connectorType} />
+        <Wrapper2 isComplete={isComplete} index={index}>
+          <MapConnector connectorForm={connectorForm} />
           {props.children}
         </Wrapper2>
       </Link>
@@ -27,17 +30,17 @@ const ListItem = (props: ListItemProps) => {
 
   return (
     <Link href={`/book`}>
-      <Wrapper complete={isComplete}>
-        <MapConnector connectorType={connectorType} />
+      <Wrapper1 isComplete={isComplete} indent={connectorForm?.indent || 0}>
+        <MapConnector connectorForm={connectorForm} />
         {props.children}
-      </Wrapper>
+      </Wrapper1>
     </Link>
   );
 };
 
-const Wrapper = styled.li<{ complete: boolean }>`
+const Wrapper = styled.li<{ isComplete: boolean }>`
   color: ${cl.getHSL(cl.white)};
-  font-size: 1rem;
+  font-size: 0.85rem;
   list-style: none;
   /* border: 2px solid white; */
   display: flex;
@@ -45,9 +48,24 @@ const Wrapper = styled.li<{ complete: boolean }>`
   justify-content: flex-start;
   gap: 10px;
   height: 50px;
+  border-radius: 8px;
+  color: ${cl.getHSLA(cl.white, 0.7)};
 
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      cursor: pointer;
+      background-color: ${cl.getHSLA(cl.white, 0.3)};
+      color: ${cl.getHSLA(cl.white, 1)};
+    }
+  }
+`;
+
+const Wrapper1 = styled(Wrapper)<{
+  isComplete: boolean;
+  indent: number;
+}>`
   &:before {
-    content: '${(p) => (p.complete ? '✓' : '●')}';
+    content: '${(p) => (p.isComplete ? '✓' : '●')}';
     width: 20px;
     font-size: 20px;
     font-weight: 800;
@@ -55,11 +73,12 @@ const Wrapper = styled.li<{ complete: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
+    transform: translateX(${(p) => p.indent + 'px'});
   }
 `;
 
-const Wrapper2 = styled.li<{ complete: boolean; index: number }>`
-  color: ${cl.getHSL(cl.white)};
+const Wrapper2 = styled(Wrapper)<{ isComplete: boolean; index: number }>`
+  /* color: ${cl.getHSL(cl.white)};
   font-size: 1rem;
   list-style: none;
   /* border: 2px solid white; */
@@ -68,6 +87,7 @@ const Wrapper2 = styled.li<{ complete: boolean; index: number }>`
   justify-content: flex-start;
   gap: 10px;
   height: 50px;
+  color: ${cl.getHSLA(cl.white, 1)};
 
   &:before {
     content: '${(p) => p.index}';
