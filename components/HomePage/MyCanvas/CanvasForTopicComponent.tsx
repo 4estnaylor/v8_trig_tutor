@@ -10,6 +10,7 @@
 
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import cl from '../../../colors';
 import { SceneGetter } from './Scene/Scene';
 import useMyCanvas from './useMyCanvas';
 import useMyCanvas2 from './useMyCanvas2';
@@ -18,6 +19,7 @@ import useWindowSize from './useWindowSize';
 
 interface MyCanvasProps {
   sceneGetter: SceneGetter;
+  height?: number;
 }
 
 const CanvasForTopicComponent = (props: MyCanvasProps) => {
@@ -35,7 +37,13 @@ const StyledCanvas = styled.canvas`
   /* background: transparent; */
   /* border: 2px solid white; */
 
-  background-color: red;
+  background: linear-gradient(
+    20deg,
+    ${cl.getHSL(cl.purple_bright)},
+    ${cl.getHSL(cl.blue)}
+  );
+
+  border-radius: 8px;
 `;
 
 export default CanvasForTopicComponent;

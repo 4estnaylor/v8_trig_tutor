@@ -10,11 +10,12 @@ import CanvasForTopicComponent from '../HomePage/MyCanvas/CanvasForTopicComponen
 
 interface TopicComponentBoilerPlateProps {
   title?: string | JSX.Element;
-  intro?: string | JSX.Element;
+
+  children: JSX.Element;
 }
 
 const TopicComponentBoilerPlate = (props: TopicComponentBoilerPlateProps) => {
-  const { title, intro } = props;
+  const { title, children } = props;
 
   return (
     <>
@@ -23,8 +24,8 @@ const TopicComponentBoilerPlate = (props: TopicComponentBoilerPlateProps) => {
         <Gap height={30} />
         <Wrapper>
           <Title>{title}</Title>
-          <CanvasForTopicComponent sceneGetter={getHomepageScene} />
-          <IntroductionText>{intro}</IntroductionText>
+          {/* <IntroductionText>{intro}</IntroductionText> */}
+          {children}
         </Wrapper>
       </Background>
     </>
@@ -36,7 +37,7 @@ const Background = styled.div`
 `;
 
 const Title = styled.h1`
-  color: ${cl.getHSL(cl.purple_bright)};
+  color: ${cl.getHSL(cl.black)};
   margin-left: auto;
   margin-right: auto;
 `;

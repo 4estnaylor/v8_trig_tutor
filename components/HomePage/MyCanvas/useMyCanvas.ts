@@ -26,8 +26,6 @@ const useMyCanvas: (
 
       cursorPosition.x = xPos;
       cursorPosition.y = yPos;
-
-      console.log('happening');
     };
 
     const getTouchPosition = function (e: TouchEvent) {

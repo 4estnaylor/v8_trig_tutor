@@ -34,6 +34,9 @@ const Title = styled.h2`
   color: ${cl.getHSL(cl.white)};
 `;
 
-const TopicSectionsList = styled.ul``;
+const TopicSectionsList = styled.ul`
+  margin: 0;
+  padding: 0;
+`;
 
 export default CourseMap2;

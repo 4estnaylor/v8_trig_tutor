@@ -14,7 +14,6 @@ class Scene {
     };
     this.draw = () => {
       console.log('create draw function');
-      console.log(this.context);
     };
     this.assets = {};
   }
