@@ -3,7 +3,7 @@ import { SceneGetter } from './Scene/Scene';
 import React from 'react';
 import EventHandlerConfig from './EventHandler/EventHandlerConfig';
 
-const useMyCanvas: (
+const useMyCanvas2: (
   sceneGetter: SceneGetter
 ) => React.MutableRefObject<null> = (sceneGetter) => {
   const canvasRef = useRef(null);
@@ -19,20 +19,18 @@ const useMyCanvas: (
     const { handlers, cursorPosition } = canvasEventHandlerConfig;
 
     const getCursorPosition = function (e: MouseEvent) {
-      const offsetLeft = canvas.parentElement?.offsetLeft || 0;
-      const offsetTop = canvas.parentElement?.offsetTop || 0;
+      const offsetLeft = canvas.offsetLeft || 0;
+      const offsetTop = canvas.offsetTop || 0;
       const xPos = e.pageX - offsetLeft;
       const yPos = e.pageY - offsetTop;
 
       cursorPosition.x = xPos;
       cursorPosition.y = yPos;
-
-      console.log('happening');
     };
 
     const getTouchPosition = function (e: TouchEvent) {
-      const offsetLeft = canvas.parentElement?.offsetLeft || 0;
-      const offsetTop = canvas.parentElement?.offsetTop || 0;
+      const offsetLeft = canvas.offsetLeft || 0;
+      const offsetTop = canvas.offsetTop || 0;
 
       const xPos = e.touches[0].pageX - offsetLeft;
       const yPos = e.touches[0].pageY - offsetTop;
@@ -82,4 +80,4 @@ const useMyCanvas: (
   return canvasRef;
 };
 
-export default useMyCanvas;
+export default useMyCanvas2;

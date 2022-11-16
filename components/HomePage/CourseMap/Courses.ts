@@ -35,7 +35,7 @@ export class SubComponent {
 const introduction = new TopicSection('Introduction', [
   new TopicComponent('welcome 🖖'),
   new TopicComponent('double down'),
-  new TopicComponent('efficiency', [
+  new TopicComponent('strategy', [
     new SubComponent('conceptual'),
     new SubComponent('fluency'),
   ]),
