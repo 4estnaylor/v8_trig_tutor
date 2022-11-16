@@ -3,6 +3,8 @@ import InteractivePoint from '../../HomePage/MyCanvas/CanvasObjects/InteractiveP
 import EventHandlerConfig from '../../HomePage/MyCanvas/EventHandler/EventHandlerConfig';
 import { Scene, SceneGetter } from '../../HomePage/MyCanvas/Scene/Scene';
 import cl from '../../../colors';
+import NonInteractivePoint from '../../HomePage/MyCanvas/CanvasObjects/NonInteractivePoint';
+import UnitCircle from '../../HomePage/MyCanvas/CanvasObjects/AngleCircle';
 
 const getSceneDegreesIntro: SceneGetter = (
   context: CanvasRenderingContext2D,
@@ -10,22 +12,31 @@ const getSceneDegreesIntro: SceneGetter = (
 ) => {
   let scene = new Scene(context, eventHandlerConfig);
 
+  const width = context.canvas.parentElement?.clientWidth || 0;
+
+  context.canvas.width = width;
+
   scene.assets.listenFor = [];
 
   const testPoint = new InteractivePoint(
     context,
     eventHandlerConfig,
-    100,
-    100,
+    context.canvas.width / 2,
+    context.canvas.height / 2,
     scene.assets.listenFor,
     30,
-    cl.getHSL(cl.white)
+    cl.getHSL(cl.purple)
   );
 
-  console.log(testPoint.x, testPoint.y);
+  const testUnitCirc = new UnitCircle(
+    context,
+    eventHandlerConfig,
+    width / 2,
+    context.canvas.height / 2
+  );
 
   scene.draw = () => {
-    testPoint.draw();
+    testUnitCirc.draw();
   };
 
   return scene;

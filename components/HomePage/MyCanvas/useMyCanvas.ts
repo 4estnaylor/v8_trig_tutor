@@ -10,6 +10,7 @@ const useMyCanvas: (
 
   useEffect(() => {
     const canvas = canvasRef.current! as HTMLCanvasElement;
+    console.log(canvas);
 
     const context = canvas?.getContext('2d') as CanvasRenderingContext2D;
     // context.translate(0.5, 0.5);

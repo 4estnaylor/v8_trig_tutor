@@ -9,6 +9,8 @@ class InteractivePoint {
     x: number;
     y: number;
   };
+  alpha: number;
+  alphaDifference: number;
   // context: CanvasRenderingContext2D;
   constructor(
     public context: CanvasRenderingContext2D,
@@ -31,6 +33,8 @@ class InteractivePoint {
       x: 0,
       y: 0,
     };
+    this.alphaDifference = 0.4;
+    this.alpha = 1;
   }
 
   draw() {
@@ -109,7 +113,7 @@ class InteractivePoint {
         this.setCursor('grabbing');
         break;
     }
-    this.keepInBoundsOfCanvas();
+    // this.keepInBoundsOfCanvas();
   }
 
   keepInBoundsOfCanvas = () => {
@@ -200,7 +204,7 @@ class InteractivePoint {
     this.drawPointHalo(1.5);
     context.beginPath();
     context.fillStyle = this.color;
-    context.globalAlpha = 0.2;
+    context.globalAlpha = 1 - this.alphaDifference;
     context.ellipse(
       this.x,
       this.y,
@@ -273,12 +277,12 @@ class InteractivePoint {
     this.context.stroke();
   }
 
-  drawPointHalo(radiusScale: number = 1) {
+  drawPointHalo(radiusScale: number = 1, alpha: number = 0.2) {
     this.context.fillStyle = 'hsla(0  0% 100% / 0.5)';
 
     this.context.beginPath();
     this.context.fillStyle = this.color;
-    this.context.globalAlpha = 0.2;
+    this.context.globalAlpha = alpha;
     this.context.ellipse(
       this.x,
       this.y,

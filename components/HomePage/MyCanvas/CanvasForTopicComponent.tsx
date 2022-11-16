@@ -37,11 +37,13 @@ const StyledCanvas = styled.canvas`
   /* background: transparent; */
   /* border: 2px solid white; */
 
-  background: linear-gradient(
+  /* background: linear-gradient(
     20deg,
     ${cl.getHSL(cl.purple_bright)},
     ${cl.getHSL(cl.blue)}
-  );
+  ); */
+
+  background-color: ${cl.getHSLA(cl.white, 1)};
 
   border-radius: 8px;
 `;

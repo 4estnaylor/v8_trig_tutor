@@ -3,6 +3,7 @@ import cl from '../../../../colors';
 import InteractivePoint from '../CanvasObjects/InteractivePoint';
 import EventHandlerConfig from '../EventHandler/EventHandlerConfig';
 import { Scene, SceneGetter } from '../Scene/Scene';
+import useWindowSize from '../useWindowSize';
 
 const getHomepageScene: SceneGetter = (
   context: CanvasRenderingContext2D,
@@ -21,12 +22,17 @@ const getHomepageScene: SceneGetter = (
 
   const velocity = 0.1;
 
+  const width = window.innerWidth;
+
+  ctx.canvas.width = width;
+
   const getBluePoints = () => {
+    console.log('canvas width', ctx.canvas.width);
     for (let i = 0; i < 3; i++) {
       let interactivePoint = new InteractivePoint(
         ctx,
         eventHandlerConfig,
-        innerWidth / 2,
+        width / 2,
         ctx.canvas.height / 2,
         scene.assets.listenFor,
         30,

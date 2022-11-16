@@ -10,6 +10,7 @@ interface MyCanvasProps {
 
 const MyCanvas = (props: MyCanvasProps) => {
   const size = useWindowSize();
+  console.log(size);
 
   const { sceneGetter } = props;
   const canvasRef = useMyCanvas(sceneGetter);
