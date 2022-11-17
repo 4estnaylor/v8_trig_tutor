@@ -43,7 +43,7 @@ const StyledCanvas = styled.canvas`
     ${cl.getHSL(cl.blue)}
   ); */
 
-  background-color: ${cl.getHSLA(cl.white, 1)};
+  background-color: transparent;
 
   border-radius: 8px;
 `;
