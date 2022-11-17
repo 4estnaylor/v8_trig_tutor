@@ -113,7 +113,7 @@ class InteractivePoint {
         this.setCursor('grabbing');
         break;
     }
-    // this.keepInBoundsOfCanvas();
+    this.keepInBoundsOfCanvas();
   }
 
   keepInBoundsOfCanvas = () => {

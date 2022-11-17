@@ -18,16 +18,6 @@ const getSceneDegreesIntro: SceneGetter = (
 
   scene.assets.listenFor = [];
 
-  const testPoint = new InteractivePoint(
-    context,
-    eventHandlerConfig,
-    context.canvas.width / 2,
-    context.canvas.height / 2,
-    scene.assets.listenFor,
-    30,
-    cl.getHSL(cl.purple)
-  );
-
   const testUnitCirc = new UnitCircle(
     context,
     eventHandlerConfig,

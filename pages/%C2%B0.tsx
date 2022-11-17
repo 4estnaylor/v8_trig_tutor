@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import getSceneDegreesIntro from '../components/getScenes/degrees/getSceneDegreesIntro';
+import getSceneInteriorAngles from '../components/getScenes/degrees/getSceneInteriorAngles';
 import CanvasForTopicComponent from '../components/HomePage/MyCanvas/CanvasForTopicComponent';
-import getHomepageScene from '../components/HomePage/MyCanvas/HomepageScene/getHomepageScene';
-import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import TopicComponentBoilerPlate from '../components/TopicComponents/TopicComponentBoilerPlate';
 
 const Degree = () => {
@@ -22,11 +21,38 @@ const Degree = () => {
             height={400}
           />
         </Canvas1Background>
-        <>{`The degree, or more formally, the arc degree, is one way to measure an angle. 360 of 'em make a complete circle. The symbol for the degree – ° – is, quite appropriately, a tiny little circle. Of the 2 measurments we will consider for trigonometry this one is by far the more popular. Degrees are the angle measurement you probably know and love. `}</>
+        <DegreeIntro>
+          The degree, or more formally, the{' '}
+          <span style={{ fontFamily: 'cursive' }}> ~ arc degree ~ </span>, is
+          one way to measure an angle.
+          <br /> <br />
+          360 of these bad boys smushed together make a complete circle.
+          <br /> <br />
+          The symbol for the degree – ° – is, quite appropriately, a lil' baby
+          circle.
+        </DegreeIntro>
+        <h3>Using degrees to measure triangles</h3>
+        <p>
+          Our eventual goal is to know everything there is to know about
+          triangles. For now, let's start by zeroing in on the angles of a
+          triangle rather than its sides.
+          <br />
+          <br />
+          At each corner or ~ <Fancy> vertex </Fancy> ~ of a triangle we will
+          find an <Fancy> interior </Fancy> (inside) angle, and an{' '}
+          <Fancy> exterior </Fancy> (outside) angle.
+        </p>
+        <CanvasForTopicComponent
+          sceneGetter={getSceneInteriorAngles}
+          height={400}
+        />
       </>
     </TopicComponentBoilerPlate>
   );
 };
+
+const DegreeIntro = styled.p``;
+const WhatDoesThisHaveToDoWithTrig = styled.p``;
 
 const Canvas1Background = styled.div`
   background: linear-gradient(
@@ -36,6 +62,10 @@ const Canvas1Background = styled.div`
     hsl(225, 72%, 60%) 50%,
     hsl(340, 90%, 50%) 90%
   );
+`;
+
+const Fancy = styled.span`
+  font-family: cursive;
 `;
 
 export default Degree;

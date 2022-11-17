@@ -12,6 +12,7 @@ class UnitCircle {
   vertex: InteractivePoint | NonInteractivePoint;
   zeroPoint: InteractivePoint | NonInteractivePoint;
   radialPoint: InteractivePoint | NonInteractivePoint;
+  listenForAssets: InteractivePoint | NonInteractivePoint[];
   constructor(
     public context: CanvasRenderingContext2D,
     public eventHandlerConfig: EventHandlerConfig,
@@ -21,6 +22,7 @@ class UnitCircle {
     public unit: angleMeasurmentUnit = 'radians',
     public radius: number = 100
   ) {
+    this.listenForAssets = [];
     // this.vertex = new NonInteractivePoint(this.context, this.x, this.y);
     this.zeroPoint = new NonInteractivePoint(
       this.context,
@@ -34,7 +36,7 @@ class UnitCircle {
       this.eventHandlerConfig,
       this.x,
       this.y,
-      [],
+      this.listenForAssets,
       30,
       cl.getHSL(cl.white)
     );
@@ -42,12 +44,14 @@ class UnitCircle {
     this.radialPoint = new InteractivePoint(
       this.context,
       this.eventHandlerConfig,
-      this.x + this.radius,
-      this.y,
-      [],
+      this.x + 80,
+      this.y - this.radius - 40,
+      this.listenForAssets,
       30,
       cl.getHSL(cl.white)
     );
+
+    this.listenForAssets = [this.vertex, this.zeroPoint, this.radialPoint];
   }
 
   update = () => {
@@ -85,11 +89,11 @@ class UnitCircle {
   draw = () => {
     this.update();
     // this.zeroPoint.draw();
-    this.vertex.draw();
-    this.radialPoint.draw();
-    this.drawAngle();
-    this.drawZeroStroke();
     this.drawDottedTouchConncetLine();
+    this.drawAngle();
+    this.vertex.draw();
+    this.drawZeroStroke();
+    this.radialPoint.draw();
   };
 
   drawZeroStroke = () => {
