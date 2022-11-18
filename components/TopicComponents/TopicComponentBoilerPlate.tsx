@@ -50,7 +50,8 @@ const IntroductionText = styled.p`
 
 const Wrapper = styled.div`
   max-width: 700px;
-  background-color: ${cl.getHSL(cl.white)};
+  /* background-color: ${cl.getHSL(cl.white)}; */
+  background-color: ${cl.getHSLA(cl.white, 0.8)};
 
   box-shadow: 0px 0px 6px ${cl.getHSLA(cl.black, 0.2)};
 

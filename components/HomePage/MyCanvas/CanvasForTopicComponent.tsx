@@ -26,7 +26,6 @@ const CanvasForTopicComponent = (props: MyCanvasProps) => {
   const { sceneGetter } = props;
   const canvasRef = useMyCanvas2(sceneGetter);
   const parentWidth = useParentElementSize(canvasRef);
-  console.log(parentWidth);
 
   return <StyledCanvas ref={canvasRef} width={parentWidth} height="390" />;
 };
@@ -45,7 +44,7 @@ const StyledCanvas = styled.canvas`
 
   background-color: transparent;
 
-  border-radius: 8px;
+  /* box-shadow: inset 0px 0px 4px black; */
 `;
 
 export default CanvasForTopicComponent;

@@ -6,8 +6,6 @@ const useParentElementSize = (canvasRef: any) => {
     const canvas = canvasRef?.current;
     const parent = canvas.parentElement;
 
-    console.log(parent);
-
     setWidth(parent.clientWidth);
   }, []);
 

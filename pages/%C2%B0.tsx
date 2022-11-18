@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import cl from '../colors';
 import getSceneDegreesIntro from '../components/getScenes/degrees/getSceneDegreesIntro';
 import getSceneInteriorAngles from '../components/getScenes/degrees/getSceneInteriorAngles';
 import CanvasForTopicComponent from '../components/HomePage/MyCanvas/CanvasForTopicComponent';
@@ -42,10 +43,12 @@ const Degree = () => {
           find an <Fancy> interior </Fancy> (inside) angle, and an{' '}
           <Fancy> exterior </Fancy> (outside) angle.
         </p>
-        <CanvasForTopicComponent
-          sceneGetter={getSceneInteriorAngles}
-          height={400}
-        />
+        <Canvas2Background>
+          <CanvasForTopicComponent
+            sceneGetter={getSceneInteriorAngles}
+            height={400}
+          />
+        </Canvas2Background>
       </>
     </TopicComponentBoilerPlate>
   );
@@ -62,6 +65,14 @@ const Canvas1Background = styled.div`
     hsl(225, 72%, 60%) 50%,
     hsl(340, 90%, 50%) 90%
   );
+  /* border-top: 5px solid ${cl.getHSLA(cl.purple, 0.5)};
+  border-bottom: 5px solid ${cl.getHSLA(cl.purple, 0.5)}; */
+`;
+
+const Canvas2Background = styled.div`
+  background: ${cl.getHSL(cl.white)};
+  /* border-top: 7px solid ${cl.getHSLA(cl.purple, 0.5)};
+  border-bottom: 7px solid ${cl.getHSLA(cl.purple, 0.5)}; */
 `;
 
 const Fancy = styled.span`

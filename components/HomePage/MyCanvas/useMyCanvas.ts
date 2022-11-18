@@ -67,7 +67,6 @@ const useMyCanvas: (
     render();
 
     return () => {
-      console.log('ending');
       cancelAnimationFrame(animationFrameID);
       handlersKeys.forEach((key) => {
         const current = handlers[key as keyof Object] as any;

@@ -73,7 +73,6 @@ class UnitCircle {
       theta += Tau;
     }
 
-    console.log('theta', theta);
     this.angle = theta;
   };
 

@@ -45,7 +45,7 @@ const getSceneInteriorAngles: SceneGetter = (
     pointA,
     pointB,
     pointC,
-    cl.getHSL(cl.black)
+    cl.getHSL(cl.gray_dark)
   );
 
   scene.draw = () => {

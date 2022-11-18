@@ -1,16 +1,27 @@
 import InteractivePoint from './InteractivePoint';
 import NonInteractivePoint from './NonInteractivePoint';
+import { Pi, Tau } from './UsefulConstants';
 
 type Point = InteractivePoint | NonInteractivePoint;
 class InteractiveTriangle {
   listenFor: any[];
+
+  angleA: number;
+  angleB: number;
+  angleC: number;
+
+  sideA: number;
+  sideB: number;
+  sideC: number;
 
   constructor(
     public pointA: Point,
     public pointB: Point,
     public pointC: Point,
     public sideColor?: string
-  ) {}
+  ) {
+    this.calculateSideLengths();
+  }
 
   intializeListenFor = () => {
     let points = [this.pointA, this.pointB, this.pointC];
@@ -23,9 +34,17 @@ class InteractiveTriangle {
     });
   };
 
+  update = () => {
+    this.calculateSideLengths();
+    this.calculateAngles();
+  };
+
   draw = () => {
-    this.drawPoints();
+    this.update();
     this.drawSides();
+    this.drawPoints();
+    console.log(this.angleA);
+    // this.drawAngle(this.pointA);
   };
 
   drawPoints = () => {
@@ -57,22 +76,130 @@ class InteractiveTriangle {
 
   drawAngles = () => {};
 
+  getDistance = (x0: number, y0: number, x1: number, y1: number) => {
+    let xDiff = x0 - x1;
+    let yDiff = y0 - y1;
+    let distance = Math.sqrt(xDiff ** 2 + yDiff ** 2);
+    return distance;
+  };
+
+  get_dx_dy = (x0: number, y0: number, x1: number, y1: number) => {
+    let xDiff = x1 - x0;
+    let yDiff = y1 - y0;
+
+    let distance = this.getDistance(x0, y0, x1, y1);
+
+    let dx = xDiff / distance;
+    let dy = yDiff / distance;
+
+    return { dx, dy };
+  };
+
+  calculateSideLengths = () => {
+    let [pointA, pointB, pointC] = [this.pointA, this.pointB, this.pointC];
+
+    let magnitudeSideC = this.getDistance(
+      pointA.x,
+      pointA.y,
+      pointB.x,
+      pointB.y
+    );
+    let magnitudeSideB = this.getDistance(
+      pointA.x,
+      pointA.y,
+      pointC.x,
+      pointC.y
+    );
+    let magnitudeSideA = this.getDistance(
+      pointB.x,
+      pointB.y,
+      pointC.x,
+      pointC.y
+    );
+
+    this.sideA = magnitudeSideA;
+    this.sideB = magnitudeSideB;
+    this.sideC = magnitudeSideC;
+    console.log(this.sideA);
+  };
+
+  getShortestSide = () => {
+    let allLengths = [this.sideA, this.sideB, this.sideC].sort((a, b) => a - b);
+    let shortestSide = allLengths[0];
+    return shortestSide;
+  };
+
+  calculateAngles = () => {
+    this.calculateSideLengths();
+    this.angleA = this.calculateAngleWithLawOfCosines(
+      this.sideA,
+      this.sideB,
+      this.sideC
+    );
+    this.angleB = this.calculateAngleWithLawOfCosines(
+      this.sideB,
+      this.sideA,
+      this.sideC
+    );
+    this.angleC = this.calculateAngleWithLawOfCosines(
+      this.sideC,
+      this.sideA,
+      this.sideB
+    );
+  };
+
+  calculateAngleWithLawOfCosines = (
+    oppositeSide: number,
+    side1: number,
+    side2: number
+  ) => {
+    let a = side1;
+    let b = side2;
+    let c = oppositeSide;
+
+    let angleC;
+
+    angleC = Math.acos((a ** 2 + b ** 2 - c ** 2) / (2 * a * b));
+
+    return angleC;
+  };
+
   drawAngle = (point: Point) => {
-    let radius = 60;
+    let context = point.context;
+    let radius = this.getShortestSide() / 4;
+
     let allPoints = [this.pointA, this.pointB, this.pointC];
+
     let otherPoints = allPoints.filter((arrayPoint) => arrayPoint !== point);
-    let diffX0 = point.x - otherPoints[0].x; // related to point in question
-    let diffY0 = point.y - otherPoints[0].y; // related to point in question
-    let diffX1 = point.x - otherPoints[1].x; // related to point in question
-    let diffY1 = point.y - otherPoints[1].y; // related to point in question
-    let diffXz = otherPoints[0].x - otherPoints[1].x;
-    let diffYz = otherPoints[0].y - otherPoints[1].y;
+    let [point1, point2] = otherPoints;
 
-    let magnitudeSide0 = Math.sqrt(diffX0 ** 2 + diffY0 ** 2);
-    let magnitudeSide1 = Math.sqrt(diffX1 ** 2 + diffY1 ** 2);
-    let magnitudeSideZ = Math.sqrt(diffXz ** 2 + diffYz ** 2);
+    let { dx: dx1, dy: dy1 } = this.get_dx_dy(
+      point.x,
+      point.y,
+      point1.x,
+      point1.y
+    );
 
-    let sideMagnitudes = [magnitudeSide0, magnitudeSide1, magnitudeSideZ];
+    let { dx: dx2, dy: dy2 } = this.get_dx_dy(
+      point.x,
+      point.y,
+      point2.x,
+      point2.y
+    );
+
+    let endpoint1 = { x: point.x + dx1 * radius, y: point.y + dy1 * radius };
+    let endpoint2 = { x: point.x + dx2 * radius, y: point.y + dy2 * radius };
+
+    // context.fillRect(endpoint1.x, endpoint1.y, 10, 10);
+    // context.fillRect(endpoint2.x, endpoint2.y, 10, 10);
+
+    context.strokeStyle = 'black';
+    context.lineWidth = 5;
+
+    context.beginPath();
+
+    context.arcTo(endpoint1.x, endpoint1.y, endpoint2.x, endpoint2.y, radius);
+    context.stroke();
   };
 }
 
