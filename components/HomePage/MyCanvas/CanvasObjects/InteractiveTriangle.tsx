@@ -14,22 +14,27 @@ class InteractiveTriangle {
   sideB: number;
   sideC: number;
 
+  angleTransparency: number;
+
   constructor(
     public pointA: Point,
     public pointB: Point,
     public pointC: Point,
     public sideColor?: string
   ) {
+    this.intializeListenFor();
     this.calculateSideLengths();
+    this.calculateAngles();
+    this.angleTransparency = 0.3;
   }
 
   intializeListenFor = () => {
-    let points = [this.pointA, this.pointB, this.pointC];
+    let allpoints = [this.pointA, this.pointB, this.pointC];
     this.listenFor = [];
-    points.forEach((point) => {
-      if (point.constructor.name === InteractivePoint.name) {
-        let interactivePoint = point as InteractivePoint;
-        interactivePoint.listenFor = this.listenFor;
+    allpoints.forEach((point: InteractivePoint | NonInteractivePoint) => {
+      if (point instanceof InteractivePoint) {
+        this.listenFor.push(point);
+        point.listenFor = this.listenFor;
       }
     });
   };
@@ -41,10 +46,11 @@ class InteractiveTriangle {
 
   draw = () => {
     this.update();
+    this.drawAngle(this.pointA, 0);
+    this.drawAngle(this.pointB, 0);
+    this.drawAngle(this.pointC, 0);
     this.drawSides();
     this.drawPoints();
-    console.log(this.angleA);
-    // this.drawAngle(this.pointA);
   };
 
   drawPoints = () => {
@@ -74,7 +80,7 @@ class InteractiveTriangle {
     context.beginPath();
   };
 
-  drawAngles = () => {};
+  drawAngles = (angleInRadians: number, x: number, y: number) => {};
 
   getDistance = (x0: number, y0: number, x1: number, y1: number) => {
     let xDiff = x0 - x1;
@@ -120,7 +126,6 @@ class InteractiveTriangle {
     this.sideA = magnitudeSideA;
     this.sideB = magnitudeSideB;
     this.sideC = magnitudeSideC;
-    console.log(this.sideA);
   };
 
   getShortestSide = () => {
@@ -164,7 +169,11 @@ class InteractiveTriangle {
     return angleC;
   };
 
-  drawAngle = (point: Point) => {
+  drawAngle = (
+    point: Point,
+    angle: number,
+    type: 'internal' | 'external' = 'internal'
+  ) => {
     let context = point.context;
     let radius = this.getShortestSide() / 4;
 
@@ -190,16 +199,56 @@ class InteractiveTriangle {
     let endpoint1 = { x: point.x + dx1 * radius, y: point.y + dy1 * radius };
     let endpoint2 = { x: point.x + dx2 * radius, y: point.y + dy2 * radius };
 
-    // context.fillRect(endpoint1.x, endpoint1.y, 10, 10);
-    // context.fillRect(endpoint2.x, endpoint2.y, 10, 10);
+    let angleStart = Math.atan2(dy1, dx1) + 2 * Math.PI;
+    let angleEnd = Math.atan2(dy2, dx2) + 2 * Math.PI;
 
-    context.strokeStyle = 'black';
+    if (angleEnd < angleStart) {
+      [angleStart, angleEnd] = [angleEnd, angleStart];
+    }
+
+    context.fillStyle = point.color;
+    context.strokeStyle = point.color;
     context.lineWidth = 5;
 
     context.beginPath();
+    if (point === this.pointA) {
+      console.log('anglestart', angleStart);
+      console.log('angleend', angleEnd);
+    }
 
-    context.arcTo(endpoint1.x, endpoint1.y, endpoint2.x, endpoint2.y, radius);
+    let condition;
+
+    if ('internal') {
+      condition = true;
+    } else {
+      condition = false;
+    }
+
+    if (angleEnd - angleStart > Math.PI) {
+      context.arc(point.x, point.y, radius, angleStart, angleEnd, condition);
+    } else {
+      context.arc(point.x, point.y, radius, angleStart, angleEnd, !condition);
+    }
+
     context.stroke();
+
+    context.lineTo(point.x, point.y);
+    context.closePath();
+
+    context.lineWidth = 3;
+
+    context.globalAlpha = this.angleTransparency;
+    context.fill();
+    context.globalAlpha = 1;
+    context.beginPath();
+
+    // context.fillRect(endpoint1.x, endpoint1.y, 10, 10);
+    // context.fillRect(endpoint2.x, endpoint2.y, 10, 10);
+
+    // context.beginPath();
+
+    // context.arcTo(endpoint1.x, endpoint1.y, endpoint2.x, endpoint2.y, radius);
+    // context.stroke();
   };
 }
 
