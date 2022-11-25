@@ -107,12 +107,12 @@ const InANutshell = styled.div`
 `;
 
 const ContactCard = styled.div`
-  /* background: linear-gradient(
-    0deg,
+  background: linear-gradient(
+    20deg,
     ${cl.getHSL(cl.purple)},
-    ${cl.getHSL(cl.black)}
-  ); */
-  background-color: ${cl.getHSL(cl.purple)};
+    ${cl.getHSL(cl.blue_dark)}
+  );
+  /* background-color: ${cl.getHSL(cl.gray_dark)}; */
   color: ${cl.getHSL(cl.white)};
   padding: 30px;
   display: flex;
