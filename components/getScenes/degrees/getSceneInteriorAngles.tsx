@@ -18,7 +18,7 @@ const getSceneInteriorAngles: SceneGetter = (
     eventHandlerConfig,
     100,
     100,
-    [],
+    scene.assets.listenfor,
     25,
     cl.getHSL(cl.red)
   );

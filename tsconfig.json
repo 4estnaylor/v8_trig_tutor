@@ -18,6 +18,12 @@
     "noImplicitThis": true,
     "strictNullChecks": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/login.jsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/login.jsx",
+    "pages/%C2&BO"
+  ],
   "exclude": ["node_modules"]
 }

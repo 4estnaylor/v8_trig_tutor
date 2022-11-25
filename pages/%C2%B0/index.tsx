@@ -2,11 +2,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
-import cl from '../colors';
-import getSceneDegreesIntro from '../components/getScenes/degrees/getSceneDegreesIntro';
-import getSceneInteriorAngles from '../components/getScenes/degrees/getSceneInteriorAngles';
-import CanvasForTopicComponent from '../components/HomePage/MyCanvas/CanvasForTopicComponent';
-import TopicComponentBoilerPlate from '../components/TopicComponents/TopicComponentBoilerPlate';
+import cl from '../../colors';
+import getScene360Divisibility from '../../components/getScenes/degrees/getScene360DivisibilityComparison';
+import getSceneDegreesIntro from '../../components/getScenes/degrees/getSceneDegreesIntro';
+import getSceneInteriorAngles from '../../components/getScenes/degrees/getSceneInteriorAngles';
+import CanvasForTopicComponent from '../../components/HomePage/MyCanvas/CanvasForTopicComponent';
+import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 
 const Degree = () => {
   return (
@@ -77,10 +78,25 @@ const Degree = () => {
         </P>
         <P>
           360's prime factorization turns out to be really good at dividing
-          "evenly" into most numbers less than 20, which is most of the numbers
-          we (as in humanity) normally want to divide a circle into.
+          evenly into most numbers less than 20, which is most of the numbers we
+          (as in humanity) normally want to divide a circle into.
         </P>
-        <h3>Using degrees to measure triangles</h3>
+        <h3>
+          See if you can find a number that divides evenly by more values than
+          360!
+        </h3>
+        <div
+          style={{
+            backgroundColor: 'tan',
+            position: 'relative',
+            display: 'flex',
+          }}
+        >
+          <CanvasForTopicComponent sceneGetter={getScene360Divisibility} />
+          <Div360NumInput type="number" min={0} max={1000} step={1} value="°" />
+          <Div360Title360>360°</Div360Title360>
+        </div>
+        {/* <h3>Using degrees to measure triangles</h3>
         <p>
           Our eventual goal is to know everything there is to know about
           triangles. For now, let's start by zeroing in on the angles of a
@@ -96,7 +112,7 @@ const Degree = () => {
             sceneGetter={getSceneInteriorAngles}
             height={400}
           />
-        </Canvas2Background>
+        </Canvas2Background> */}
       </>
     </TopicComponentBoilerPlate>
   );
@@ -104,6 +120,35 @@ const Degree = () => {
 
 const DegreeIntro = styled.p``;
 const WhatDoesThisHaveToDoWithTrig = styled.p``;
+
+const Div360NumInput = styled.input`
+  position: absolute;
+  right: calc(25% - 50px);
+  top: 10px;
+  width: 100px;
+  height: 50px;
+  flex: 1;
+  font-size: 36px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 4px solid ${cl.getHSL(cl.black)};
+  text-align: center;
+`;
+
+const Div360Title360 = styled.div`
+  position: absolute;
+  left: calc(25% - 50px);
+  top: 10px;
+  width: 100px;
+  height: 50px;
+  flex: 1;
+  font-size: 36px;
+  background-color: transparent;
+  border: none;
+  color: ${cl.getHSL(cl.purple)};
+
+  text-align: center;
+`;
 
 const Canvas1Background = styled.div`
   background: linear-gradient(

@@ -74,7 +74,7 @@ const SubComponentListItem = (props: SubComponentListItemProps) => {
 
   let url =
     convertToURL(subComponent.parentTopicComponent.title) +
-    '#' +
+    '/' +
     convertToURL(subComponent.title);
 
   return (

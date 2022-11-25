@@ -35,7 +35,7 @@ export class SubComponent {
 const introduction = new TopicSection('Introduction', [
   new TopicComponent('welcome 🖖'),
   new TopicComponent('double down'),
-  new TopicComponent('strategy', [
+  new TopicComponent('strat', [
     new SubComponent('conceptual'),
     new SubComponent('fluency'),
   ]),
@@ -43,6 +43,9 @@ const introduction = new TopicSection('Introduction', [
 
 const measurement = new TopicSection('Measuring Angles ∡', [
   new TopicComponent('°', [
+    new SubComponent('angle measuring conventions'),
+    new SubComponent('interior angles'),
+    new SubComponent('exterior angles'),
     new SubComponent('measuring °'),
     new SubComponent('special angles °'),
     new SubComponent('why 360°?  '),
