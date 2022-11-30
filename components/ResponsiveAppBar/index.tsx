@@ -24,7 +24,7 @@ import Link from 'next/link';
 
 import { useSession, signIn, signOut } from 'next-auth/react';
 
-const pages = ['Book', 'About Me', 'FAQ'];
+const pages = ['Tutoring', 'About Me', 'FAQ'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(

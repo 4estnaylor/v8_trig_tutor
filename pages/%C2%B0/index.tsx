@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
 import getScene360Divisibility from '../../components/getScenes/degrees/getScene360DivisibilityComparison';
@@ -10,6 +10,7 @@ import CanvasForTopicComponent from '../../components/HomePage/MyCanvas/CanvasFo
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 
 const Degree = () => {
+  const [userEnteredDegreeValue, setUserEnteredDegreeValue] = useState(100);
   return (
     <TopicComponentBoilerPlate
       title={
@@ -26,26 +27,25 @@ const Degree = () => {
           />
         </Canvas1Background>
         <DegreeIntro>
-          The degree, or as it is more fancily known, the
-          <Fancy> ~ arcdegree ~ </Fancy>, is one way to measure an angle.
+          The degree, or as it is more formily known, the
+          <Fancy> arcdegree </Fancy>, is one way to measure an angle.
           <br /> <br />
-          360 of these bad boys smushed together make a complete circle.
+          360 of them make a complete circle.
           <br /> <br />
-          The symbol for the degree – ° – is, quite appropriately, a lil' baby
+          The symbol for the degree – ° – is, quite appropriately, a tiny
           circle.
         </DegreeIntro>
         <h3>A natural question – why 360 °? Why not 100°</h3>
         <p>
           Degrees don't just exist in nature on there own. People had to invent
-          them . So why choose to divide circles into units of 360 pieces and
-          not choose some other more convenient number? Maybe some power of 10 —
-          100, 1000, or possibly even 1.
+          them . So why choose to divide circles into 360 pieces and not choose
+          some other more convenient number? Maybe some power of 10 — 100, 1000,
+          or possibly even 1.
           <br /> <br />
           ¯\_(ツ)_/¯ Admittedly, sometimes in math we (as in humanity) just get
-          stuck in our ways and make life more complicated than we need to.
-          But... this isn't one of those cases! 360 degrees is much easier than
-          100 to divide without leaving the nice round, whole world, integer
-          numbers.
+          stuck in our ways and make life more complicated than we need to. But,
+          this isn't one of those cases! 360 degrees is much easier than 100 to
+          divide without leaving the world of nice "round" or integer numbers.
           <br /> <br />
           To understand why let's examine the multiplicative DNA of 360 and 100.
           Here are the
@@ -92,8 +92,17 @@ const Degree = () => {
             display: 'flex',
           }}
         >
-          <CanvasForTopicComponent sceneGetter={getScene360Divisibility} />
-          <Div360NumInput type="number" min={0} max={1000} step={1} value="°" />
+          <CanvasForTopicComponent sceneGetter={getScene360Divisibility} e />
+          <Div360NumInput
+            type="number"
+            min={0}
+            max={1000}
+            step={1}
+            value={userEnteredDegreeValue}
+            onChange={(e) => {
+              setUserEnteredDegreeValue(Number(e.target.value));
+            }}
+          />
           <Div360Title360>360°</Div360Title360>
         </div>
         {/* <h3>Using degrees to measure triangles</h3>
@@ -152,11 +161,9 @@ const Div360Title360 = styled.div`
 
 const Canvas1Background = styled.div`
   background: linear-gradient(
-    -120deg,
-    hsl(190, 100%, 85%) 10%,
-    hsl(190, 100%, 40%),
-    hsl(225, 72%, 60%) 50%,
-    hsl(340, 90%, 50%) 90%
+    20deg,
+    ${cl.getHSL(cl.purple)},
+    ${cl.getHSL(cl.blue_dark)}
   );
   /* border-top: 5px solid ${cl.getHSLA(cl.purple, 0.5)};
   border-bottom: 5px solid ${cl.getHSLA(cl.purple, 0.5)}; */
@@ -173,7 +180,7 @@ const P = styled.div`
 `;
 
 const Fancy = styled.span`
-  font-family: cursive;
+  color: ${cl.getHSL(cl.purple_bright)};
 `;
 
 export default Degree;

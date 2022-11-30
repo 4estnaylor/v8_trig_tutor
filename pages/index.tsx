@@ -24,7 +24,12 @@ export default function Home() {
         <ResponsiveAppBar />
 
         <TopSection>
-          <GetGoodAtTrig>Get Good at Trig.</GetGoodAtTrig>
+          <GetGoodAtTrig>
+            Get Good at Trig.
+            <ReallyReallyGood>
+              Seriously. Really, <RainbowText>Really</RainbowText> Good.
+            </ReallyReallyGood>
+          </GetGoodAtTrig>
           <CanvasWrap>
             <MathworkWrap>
               <MathWorkImage
@@ -38,10 +43,6 @@ export default function Home() {
               <TuftBird>
                 <img src="/tuftbird.svg" height="80px" loading="lazy" />
               </TuftBird>
-
-              <h2>
-                Really, <RainbowText>Really</RainbowText> Good.
-              </h2>
             </BottomBanner>
           </CanvasWrap>
         </TopSection>
@@ -120,6 +121,10 @@ export default function Home() {
   );
 }
 
+const ReallyReallyGood = styled.div`
+  font-size: 0.85rem;
+`;
+
 const GetGoodAtTrig = styled.h2`
   position: absolute;
   z-index: 10;
@@ -129,6 +134,7 @@ const GetGoodAtTrig = styled.h2`
   -moz-user-select: none;
   -o-user-select: none;
   user-select: none;
+  pointer-events: none;
 
   padding: 5px;
   border-radius: 8px;
@@ -143,18 +149,6 @@ const CanvasWrap = styled.div`
   pointer-events: none;
   position: relative;
   overflow: hidden;
-`;
-
-const MathworkWrap = styled.div`
-  background-color: transparent;
-  position: absolute;
-  right: 0;
-  pointer-events: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -o-user-select: none;
-  user-select: none;
 `;
 
 const BottomBanner = styled.div`
@@ -179,7 +173,25 @@ const BottomText = styled.div`
   width: 100%;
 `;
 
+const MathworkWrap = styled.div`
+  background-color: transparent;
+  position: absolute;
+  left: calc(50%);
+  transform: translateX(-50%);
+
+  top: 100px;
+  width: 350px;
+  /* right: 0; */
+  pointer-events: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+`;
+
 const MathWorkImage = styled(Image)`
+  pointer-events: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
@@ -223,6 +235,7 @@ const BottomSection = styled.div`
 `;
 
 const RainbowText = styled.div`
+  display: inline;
   background: linear-gradient(
     90deg,
     ${cl.getHSL(cl.blue)},
