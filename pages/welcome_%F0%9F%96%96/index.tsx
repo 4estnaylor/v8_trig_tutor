@@ -53,16 +53,16 @@ const ColorGradient = styled.div`
 const SpockBlue = styled(ColorGradient)`
   background: radial-gradient(
     circle,
-    ${cl.getHSLA(cl.blue, 0.4)} 23%,
-    ${cl.getHSLA(cl.blue, 0)} 78%
+    ${cl.getHSLA(cl.blue, 0.4)} 13%,
+    ${cl.getHSLA(cl.blue, 0)} 58%
   );
   transform: translateX(-20%);
 `;
 const SpockRed = styled(ColorGradient)`
   background: radial-gradient(
     circle,
-    ${cl.getHSLA(cl.red, 0.4)} 23%,
-    ${cl.getHSLA(cl.red, 0)} 78%
+    ${cl.getHSLA(cl.red, 0.4)} 13%,
+    ${cl.getHSLA(cl.red, 0)} 58%
   );
   transform: translateX(20%);
 `;
@@ -70,8 +70,8 @@ const SpockRed = styled(ColorGradient)`
 const SpockPurple = styled(ColorGradient)`
   background: radial-gradient(
     circle,
-    ${cl.getHSLA(cl.purple, 0.4)} 23%,
-    ${cl.getHSLA(cl.purple, 0)} 78%
+    ${cl.getHSLA(cl.purple, 0.4)} 13%,
+    ${cl.getHSLA(cl.purple, 0)} 58%
   );
 `;
 

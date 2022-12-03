@@ -173,7 +173,7 @@ const TopicComponentBoilerPlate = (props: TopicComponentBoilerPlateProps) => {
           <Title>{title}</Title>
           {/* <IntroductionText>{intro}</IntroductionText> */}
           {children}
-          <NextButton href={nextHref} />
+          <NextButton href={nextHref || '/'} />
         </Wrapper>
       </Background>
     </>
