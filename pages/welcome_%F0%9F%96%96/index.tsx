@@ -10,12 +10,14 @@ const index = () => {
   return (
     <TopicComponentBoilerPlate title={<>Welcome 🖖</>}>
       <>
-        <p>
-          Hey, I'm glad you made it here. I hope this site can be useful to you
-          for learning trigonometry and/or precalculus. If you want to just
-          browse that's perfect! Or you can record your progress in this course
-          by signing in with Google.
-        </p>
+        <SpockQuote>
+          There is no reason that function should not be beautiful. In fact
+          beauty usually makes it more effective.
+          <br />
+          <br />
+          <ByLine>S'chn T'gai Spock</ByLine>
+          <CircaLine>circa 2266–2269, Prime Timeline</CircaLine>
+        </SpockQuote>
 
         <SpockWrapperOuter>
           <SpockWrapper>
@@ -25,18 +27,41 @@ const index = () => {
             <Image src="/spock.svg" width="1000" height="700" />
           </SpockWrapper>
         </SpockWrapperOuter>
-        <SpockQuote>
-          There is no reason that function should not be beautiful. In fact
-          beauty usually makes it more effective.
-          <br />
-          <br />
-          <ByLine>S'chn T'gai Spock</ByLine>
-          <CircaLine>circa 2266–2269, Prime Timeline</CircaLine>
-        </SpockQuote>
+        <p>
+          Hey, I'm glad you made it here. I hope this site can be useful to you
+          for learning trigonometry and/or precalculus. If you want to just
+          browse that's perfect! Or you can record your progress in this course
+          by signing in with a Google account.
+        </p>
+
+        <IframeWrappper>
+          <ResponsiveIframe
+            src="https://player.vimeo.com/video/238573128?h=b892d80ad2"
+            width="100vw"
+            frameBorder="0px"
+            allow="autoplay; fullscreen; picture-in-picture"
+          ></ResponsiveIframe>
+        </IframeWrappper>
       </>
     </TopicComponentBoilerPlate>
   );
 };
+
+const IframeWrappper = styled.div`
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+`;
+
+const ResponsiveIframe = styled.iframe`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+`;
 
 const SpockWrapperOuter = styled.div`
   position: relative;
@@ -77,14 +102,12 @@ const SpockPurple = styled(ColorGradient)`
 
 const SpockQuote = styled.div`
   padding: 15px;
-  /* border-left: 2px solid ${cl.getHSL(cl.purple)}; */
+  border-left: 2px solid ${cl.getHSL(cl.purple)};
   margin-top: 0px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 10%;
   max-width: 400px;
-  background-color: ${cl.getHSLA(cl.purple, 0.05)};
+  /* background-color: ${cl.getHSLA(cl.purple, 0.05)}; */
   font-size: 1rem;
-  /* font-style: italic; */
 `;
 
 const ByLine = styled.div`

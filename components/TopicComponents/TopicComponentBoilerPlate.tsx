@@ -27,7 +27,7 @@ const TopicComponentBoilerPlate = (props: TopicComponentBoilerPlateProps) => {
 
   const { title, children } = props;
 
-  let nextHref = null;
+  let nextHref: null | string = null;
 
   let matchingTopicComponent: null | TopicComponent = null;
   let matchingSubComponent: null | SubComponent = null;
@@ -84,7 +84,10 @@ const TopicComponentBoilerPlate = (props: TopicComponentBoilerPlateProps) => {
 
     if (isLastTopicComponent) {
       if (matchingTopicComponent.subComponents) {
-        nextHref = matchingTopicComponent.subComponents[0].title;
+        nextHref =
+          matchingTopicComponent.title +
+          '/' +
+          matchingTopicComponent.subComponents[0].title;
       } else {
         let indexOfParentTopicSection =
           topicSections.indexOf(parentTopicSection);
@@ -132,6 +135,8 @@ const TopicComponentBoilerPlate = (props: TopicComponentBoilerPlateProps) => {
 
     if (!isLastSubComponent) {
       nextHref =
+        matchingSubComponent.parentTopicComponent.title +
+        '/' +
         matchingSubComponent.parentTopicComponent.subComponents[
           indexOfMatchingSubComponent + 1
         ].title;
@@ -156,6 +161,20 @@ const TopicComponentBoilerPlate = (props: TopicComponentBoilerPlateProps) => {
 
   if (matchingTopicComponent) {
     getNextHrefForTopicComponent(matchingTopicComponent);
+    if (!nextHref) {
+      return <></>;
+    } else {
+      if (!nextHref) {
+        return <></>;
+      }
+      // let hrefSplit = nextHref.split("/");
+      nextHref = convertToURL(nextHref);
+      console.log(nextHref);
+    }
+  }
+
+  if (matchingSubComponent) {
+    getNextHrefForSubComponent(matchingSubComponent);
     if (!nextHref) {
       return <></>;
     } else {
