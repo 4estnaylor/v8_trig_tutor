@@ -126,8 +126,8 @@ class InteractiveTriangle {
 
     context.beginPath();
     if (point === this.pointA) {
-      console.log('anglestart', angleStart);
-      console.log('angleend', angleEnd);
+      // console.log('anglestart', angleStart);
+      // console.log('angleend', angleEnd);
     }
 
     let condition;

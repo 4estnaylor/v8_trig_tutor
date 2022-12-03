@@ -10,13 +10,7 @@ import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicCom
 
 const Degree = () => {
   return (
-    <TopicComponentBoilerPlate
-      title={
-        <>
-          degrees<span style={{ fontSize: '2.5rem' }}>°</span>
-        </>
-      }
-    >
+    <TopicComponentBoilerPlate title={<>interior angles</>}>
       <>
         <h3>Using degrees to measure triangles</h3>
         <p>

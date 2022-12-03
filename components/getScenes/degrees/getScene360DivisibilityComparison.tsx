@@ -10,7 +10,7 @@ const getScene360Divisibility: SceneGetter = (
   const scene = new Scene(context, eventHandlerConfig);
 
   const draw360Circle = () => {
-    console.log('drawing');
+    // console.log('drawing');
     let context = scene.context;
     context.beginPath();
     context.lineWidth = 7;
@@ -28,7 +28,7 @@ const getScene360Divisibility: SceneGetter = (
   };
 
   const drawOtherCircle = () => {
-    console.log('drawing');
+    // console.log('drawing');
     let context = scene.context;
     context.beginPath();
     context.lineWidth = 7;

@@ -77,8 +77,6 @@ const ratios = new TopicSection('Ratios', [
   new TopicComponent('secant & cosecant'),
 ]);
 
-console.log(measurement);
-
 const topicSections: TopicSection[] = [introduction, measurement, ratios];
 
 // const initializeTopicComponentWithParents = (topicSection: TopicSection) => {

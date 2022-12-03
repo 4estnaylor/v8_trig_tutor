@@ -27,7 +27,7 @@ export default function Home() {
           <GetGoodAtTrig>
             Get Good at Trig.
             <ReallyReallyGood>
-              Seriously. Really, <RainbowText>Really</RainbowText> Good.
+              Really, <RainbowText>Really</RainbowText> Good.
             </ReallyReallyGood>
           </GetGoodAtTrig>
           <CanvasWrap>
