@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
 import NextButton from '../../components/CourseMap/NextButton';
+import Gap from '../../components/Gaps/Gap';
 import topicSections from '../../components/HomePage/CourseMap/Courses';
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 
@@ -10,23 +11,6 @@ const index = () => {
   return (
     <TopicComponentBoilerPlate title={<>Welcome 🖖</>}>
       <>
-        <SpockQuote>
-          There is no reason that function should not be beautiful. In fact
-          beauty usually makes it more effective.
-          <br />
-          <br />
-          <ByLine>S'chn T'gai Spock</ByLine>
-          <CircaLine>circa 2266–2269, Prime Timeline</CircaLine>
-        </SpockQuote>
-
-        <SpockWrapperOuter>
-          <SpockWrapper>
-            <SpockBlue />
-            <SpockRed />
-            <SpockPurple />
-            <Image src="/spock.svg" width="1000" height="700" />
-          </SpockWrapper>
-        </SpockWrapperOuter>
         <p>
           Hey, I'm glad you made it here. I hope this site can be useful to you
           for learning trigonometry and/or precalculus. If you want to just
@@ -36,12 +20,29 @@ const index = () => {
 
         <IframeWrappper>
           <ResponsiveIframe
-            src="https://player.vimeo.com/video/238573128?h=b892d80ad2"
+            src="https://player.vimeo.com/video/777714892?h=dc4303ab13&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
             width="100vw"
             frameBorder="0px"
             allow="autoplay; fullscreen; picture-in-picture"
           ></ResponsiveIframe>
         </IframeWrappper>
+        <Gap height={40} />
+        <SpockQuote>
+          There is no reason that function should not be beautiful. In fact
+          beauty usually makes it more effective.
+          <ByLine>S'chn T'gai Spock</ByLine>
+          <CircaLine>circa 2266–2269, Prime Timeline</CircaLine>
+        </SpockQuote>
+        <Gap height={40} />
+
+        <SpockWrapperOuter>
+          <SpockWrapper>
+            <SpockBlue />
+            <SpockRed />
+            <SpockPurple />
+            <Image src="/spock.svg" width="1000" height="700" />
+          </SpockWrapper>
+        </SpockWrapperOuter>
       </>
     </TopicComponentBoilerPlate>
   );

@@ -20,7 +20,15 @@ const index = () => {
           if it doesn't apply. The important thing is just that you think
           strategically about how you learn best. Here is my "strategy guide"
           for this course.
-          <ul>
+          <IframeWrappper>
+            <ResponsiveIframe
+              src="https://player.vimeo.com/video/777714892?h=dc4303ab13&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              width="100vw"
+              frameBorder="0px"
+              allow="autoplay; fullscreen; picture-in-picture"
+            ></ResponsiveIframe>
+          </IframeWrappper>
+          <ol>
             <li>
               <Em>Pick a minimum time. Be consistent.</Em>
               <br />
@@ -66,9 +74,8 @@ const index = () => {
               <br />
               <br />
             </li>
-            <br />
-            <br />
-            <li>
+
+            {/* <li>
               Fluency is the end goal, not comprehension.
               <br />
               <br />
@@ -86,8 +93,8 @@ const index = () => {
               processing the actual meaning and significance fo the words they
               are reading. Similarly in trigonometry, you need to conceptually
               understand it before becoming fluent.
-            </li>
-          </ul>
+            </li> */}
+          </ol>
         </P>
       </>
     </TopicComponentBoilerPlate>
@@ -102,6 +109,24 @@ const Em = styled.div`
   display: inline;
   font-weight: 600;
   color: ${cl.getHSL(cl.purple)};
+`;
+
+const IframeWrappper = styled.div`
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;
+
+const ResponsiveIframe = styled.iframe`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
 `;
 
 export default index;

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
+import IntegerInputWithPi from '../../components/Inputs/IntegerInputWithPi';
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 
 const conceptual = () => {
@@ -16,12 +17,12 @@ const conceptual = () => {
           logical understanding of something.
           <br />
           <br />
-          Conceptual learning cannot be taught. It has to be learned. A talented
-          teacher knows how to support students' learning about a topic without
-          getting in the way. The support involves allowing students time,
-          space, and maybe presenting some relevant ideas conducive to allowing
-          students to investigate, experiment, and draw conclusions on their
-          own.
+          Conceptual learning cannot really be "taught". It has to be learned. A
+          talented teacher will support students' learn conceptually about a
+          topic without getting in the way. The support involves allowing
+          students time, space, questioning, and often floating some relevant
+          ideas conducive to allowing students to investigate, experiment, and
+          draw conclusions on their own.
           <br />
           <br />
           To give you a more concrete idea of what I mean by conceptual learning
@@ -35,6 +36,7 @@ const conceptual = () => {
               <CircleAreaImgWrap>
                 <Image src="/conceptual_circle.svg" width="200" height="200" />
               </CircleAreaImgWrap>
+              <IntegerInputWithPi />
               <br />
               <br />
               <CircleAreaAnswer>

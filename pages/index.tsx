@@ -222,10 +222,10 @@ const TopSection = styled.div`
 const BottomSection = styled.div`
   background: linear-gradient(
     -120deg,
-    ${cl.getHSL(cl.blue_light)} 10%,
-    ${cl.getHSL(cl.blue)},
-    ${cl.getHSL(cl.purple)} 50%,
-    ${cl.getHSL(cl.red)} 90%
+    ${cl.getHSLA(cl.blue_light, 0.5)} 10%,
+    ${cl.getHSLA(cl.blue, 1)},
+    ${cl.getHSLA(cl.purple, 1)} 50%,
+    ${cl.getHSLA(cl.red, 0.5)} 90%
   );
   /* background-color: white; */
   background-size: 180%;
