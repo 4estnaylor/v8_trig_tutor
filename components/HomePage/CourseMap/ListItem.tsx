@@ -48,7 +48,6 @@ const ListItem = (props: ListItemProps) => {
 };
 
 const Wrapper = styled.li<{ isComplete: boolean }>`
-  color: ${cl.getHSL(cl.white)};
   font-size: 0.85rem;
   list-style: none;
   /* border: 2px solid white; */
@@ -58,7 +57,7 @@ const Wrapper = styled.li<{ isComplete: boolean }>`
   gap: 10px;
   height: 50px;
   border-radius: 8px;
-  color: ${cl.getHSLA(cl.white, 0.7)};
+  color: ${cl.getHSLA(cl.white, 1)};
 `;
 
 const Wrapper1 = styled(Wrapper)<{

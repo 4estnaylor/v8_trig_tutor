@@ -17,11 +17,20 @@ const conceptual = () => {
           logical understanding of something.
           <br />
           <br />
-          Conceptual learning cannot really be "taught". It has to be learned. A
-          talented teacher will support students' learn conceptually about a
+          Conceptual learning cannot really be "taught" to students. It has to
+          be activley learned by them. Facts and algorithims can be taught, but
+          ideas or "concepts" are events that can only occur when actively
+          produced by the ol' noggin. Memorizing a series of facts may assist in
+          conceptual learning, but it is not conceptual learning in and of
+          itself.
+          <br />
+          <br />
+          <br />
+          <br />
+          A talented teacher often supports students' learn conceptually about a
           topic without getting in the way. The support involves allowing
           students time, space, questioning, and often floating some relevant
-          ideas conducive to allowing students to investigate, experiment, and
+          facts conducive to allowing students to investigate, experiment, and
           draw conclusions on their own.
           <br />
           <br />

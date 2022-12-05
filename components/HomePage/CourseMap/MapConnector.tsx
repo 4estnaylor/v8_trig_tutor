@@ -27,7 +27,7 @@ const MapConnector = (props: MapConnectorProps) => {
           y1={12}
           x2={10}
           y2={38}
-          stroke={cl.getHSL(cl.white)}
+          stroke={cl.getHSL(cl.gray_light)}
           strokeWidth={3}
         />
       );
@@ -37,7 +37,7 @@ const MapConnector = (props: MapConnectorProps) => {
         <path
           d="M48,50 C12,51 13,40 10,12"
           fill="none"
-          stroke="white"
+          stroke={cl.getHSL(cl.gray_light)}
           strokeWidth={3}
         />
       );
@@ -47,7 +47,7 @@ const MapConnector = (props: MapConnectorProps) => {
         <path
           d="M60,28 C68,63 11,11 10,52"
           fill="none"
-          stroke="white"
+          stroke={cl.getHSL(cl.gray_light)}
           strokeWidth={3}
         />
       );
