@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
+import NumberPad from './NumberPad';
 
 const IntegerInputWithPi = () => {
-  const [userEnteredValue, setUserEnteredValue] = useState('test');
+  const [userEnteredValue, setUserEnteredValue] = useState('');
+  const [showNumberPad, setShowNumberPad] = useState(true);
 
   useEffect(() => {
     addEventListener('click', () => {
-      console.log('test');
+      console.log('');
       console.log(document.activeElement);
     });
   }, []);
@@ -20,20 +22,22 @@ const IntegerInputWithPi = () => {
   };
 
   return (
-    <Wrapper>
-      <Equation>Area = </Equation>
-      <InputWrapper>
-        <Units>u²</Units>
-        <IntegerInput
-          tabIndex={0}
-          ref={integerInputRef}
-          onClick={(e) => handleFocusInputClick(e)}
-        >
-          {userEnteredValue}
-        </IntegerInput>
-      </InputWrapper>
-      <input type="number" />
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Equation>Area = </Equation>
+        <InputWrapper>
+          <Units>u²</Units>
+          <IntegerInput
+            tabIndex={0}
+            ref={integerInputRef}
+            onClick={(e) => handleFocusInputClick(e)}
+          >
+            {userEnteredValue}
+          </IntegerInput>
+        </InputWrapper>
+      </Wrapper>
+      {showNumberPad ? <NumberPad setValue={setUserEnteredValue} /> : null}
+    </>
   );
 };
 
@@ -45,7 +49,7 @@ const InputWrapper = styled.div`
 
 const Wrapper = styled.div`
   padding-top: 20px;
-  height: 50px;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;

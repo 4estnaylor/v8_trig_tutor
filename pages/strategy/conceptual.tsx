@@ -12,17 +12,29 @@ const conceptual = () => {
     <TopicComponentBoilerPlate title={<>Conceptual Learning</>}>
       <>
         <P>
-          Conceptual learning in math is about understanding how and why things
+          {/* Conceptual learning in math is about understanding how and why things
           are true. It is not a series of steps to find a missing value, but a
           logical understanding of something.
           <br />
           <br />
           Conceptual learning cannot really be "taught" to students. It has to
-          be activley learned by them. Facts and algorithims can be taught, but
-          ideas or "concepts" are events that can only occur when actively
-          produced by the ol' noggin. Memorizing a series of facts may assist in
-          conceptual learning, but it is not conceptual learning in and of
-          itself.
+          be activley learned. I realize the last two sentecnces sound like I'm
+          waxing poetic or parsing hairs – saying concepts can be learned but
+          not taught. I admit I'm having a hard time writing language to convey
+          this idea emphatically enough.
+          <br />
+          <br />
+          <Em>It is an essential distinction</Em> you will need to grapple with
+          to get really, really good at trig. If you are consciously aware of
+          this distinction it can also make you a much more efficient learner in
+          almost any context, not just math.
+          <br />
+          <br />
+          Facts and algorithims can be taught, but ideas or "concepts" are
+          events that can only occur when actively produced within the ol'
+          noggin. Memorizing a series of facts can be quite useful and often
+          assists with conceptual learning, but it is not conceptual learning in
+          and of itself.
           <br />
           <br />
           <br />
@@ -35,7 +47,7 @@ const conceptual = () => {
           <br />
           <br />
           To give you a more concrete idea of what I mean by conceptual learning
-          follow me through a short 2 step thought experiment.
+          follow me through a short 2 step thought experiment. */}
           <ul>
             <li>
               <Step> Step 1 </Step> Ask yourself, do you know what is the area
@@ -48,7 +60,7 @@ const conceptual = () => {
               <IntegerInputWithPi />
               <br />
               <br />
-              <CircleAreaAnswer>
+              {/* <CircleAreaAnswer>
                 <CircleAreaAnswerCover blurred={circleAreaAnswerBlurred} />
                 Maybe a typical math student, upon seeing this question thinks
                 something like:
@@ -61,7 +73,7 @@ const conceptual = () => {
 
                   <span>Simplify &rarr; A = 49π u² is the answer.</span>
                 </StudentThoughts>
-              </CircleAreaAnswer>
+              </CircleAreaAnswer> */}
             </li>
             <br />
             <br />
@@ -76,6 +88,11 @@ const conceptual = () => {
     </TopicComponentBoilerPlate>
   );
 };
+
+const Em = styled.span`
+  color: ${cl.getHSL(cl.purple)};
+  font-weight: 800;
+`;
 
 const P = styled.div`
   padding: 5px;

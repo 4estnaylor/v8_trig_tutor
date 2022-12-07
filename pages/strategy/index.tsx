@@ -57,9 +57,8 @@ const index = () => {
               <br />
               <br />
               Often the content of the videos and written content overlaps. The
-              reduncancy is very intentional. I find that absorbing information
-              twice (in two different ways), makes information much, much
-              stickier.
+              reduncancy is very intentional. I find that absorbing content
+              twice (in two different ways), makes it much, much stickier.
             </li>
             <br />
             <br />
@@ -70,7 +69,7 @@ const index = () => {
               <br />
               I'd recommend reading because what I write tends to be a litte
               more thorough than the videos which I try to keep short. But if
-              you're more comfortable with the videos, use those!
+              you're more comfortable with the videos, lean in to those!
               <br />
               <br />
             </li>

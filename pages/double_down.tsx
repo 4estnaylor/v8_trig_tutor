@@ -15,11 +15,15 @@ const double_down = () => {
         </DoubleDownWrapper>
         <Wrapper>
           <span>
-            If there is one single piece of advice I could give to highschool
-            math students, it is this: <br />
-            Invest effort in trigonometry. Not in the same way as you hopefully
-            would for other math subjects.{' '}
-            <b>Double-down for this particular subject more than any other.</b>
+            If there is one single piece of advice I could give to my past self
+            in highschool, it would be this: <br /> <br />
+            <b>Double-down for trig.</b>
+            <br />
+            <br />
+            The things you learn in trig will be used again, and again, and
+            again in future courses. If you invest the effort needed to build a
+            solid understanding, and even fluency in trigonometry, it will give
+            you an almost hilarious amount of mileage on your math journey.
             <br /> <br />
             <Alert severity="info">
               I teach a lot of math, and I should stress,
@@ -32,22 +36,25 @@ const double_down = () => {
               But, practically speaking... it's totally trig.
               <br />
               <br />
-              And, let's be honest,{' '}
+              And, if you ask me,{' '}
               <Link href="https://www.youtube.com/watch?v=Ixrje2rXLMA">
                 <a>Dolly Parton's cover of Jolene</a>
-              </Link>
-              .
+              </Link>{' '}
+              is peerless.
             </Alert>
           </span>
           <h3>The start-all, glue-all</h3>
           <span>
-            I would be lying to you viciouslly if I said trig was the end-all,
-            be-all of math. But, I really do think Trig is the start-all,
-            glue-all when it comes to STEM subjects.
+            Trig, nor any other subject can claim the title of the end-all,
+            be-all of math. But, I really do think Trig is somethign of a
+            start-all, glue-all for students transitioning from highschool to
+            college-level math. The humble triangle is an outrageously powerful
+            engine of modern mathematics as strange as that may seem.
             <br /> <br />
             Sweet mother of standards-compliant lesson plans, I have taught a
-            lot of different math (and math-ish) classes –
-            <ul>
+            lot of different math (and math-ish) classes. I have taken even more
+            as a physics undgrad student.
+            {/* <ul>
               <li>physics</li>
               <li>pre-algebra</li>
               <li>algebra 1</li>
@@ -59,17 +66,17 @@ const double_down = () => {
               <li>100 level undergraduate physics</li>
               <li>Newtonian mechanics</li>
               <li>calculus</li>
-            </ul>
-            Every one of these subjects benefits considerably from being really
-            good at Trig. Trig is a crazy powerful math nexus that kind of
-            enlaces its tentacles into everything else in the math world. I am
-            not making this website because I particularly love trig over any
-            other math subject. Don't get me wrong Trig is neat and all that.
-            But, I feel the same affection for pretty much any other math
-            course. Trig isn't special because its extra cool or something. Trig
-            is special because it's unusually central location within the math
-            universe. I made this website because in my experience as both a
-            teacher and a student, trig is
+            </ul> */}
+            Every class I have taught or studied benefits considerably from
+            being really good at Trig. Trig is a crazy powerful math nexus that
+            kind of enlaces its tentacles into everything else in the math
+            world. I am not making this website because I particularly love trig
+            over any other math subject. Don't get me wrong, Trig is full of
+            cleverness and surprises. But, I feel the same affection for pretty
+            much any other math course. What really makes trig stand out is it's
+            unusually central and pervasive role within the math universe. I
+            made this website because in my experience as both a teacher and a
+            student, trig is
             <b> the point of greatest mathematical leverage </b> for highschool
             students (and arguably undergraduate students).
             <br />
