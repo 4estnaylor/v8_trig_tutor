@@ -8,6 +8,10 @@ import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicCom
 
 const conceptual = () => {
   const [circleAreaAnswerBlurred, setCircleAreaAnswerBlurred] = useState(true);
+  const [questionOneAnswered, setQuestionOneAnswered] = useState(false);
+  const [questionTwoAnswered, setQuestionTwoAnswered] = useState(false);
+
+  const questionsAnswered = [questionOneAnswered, questionTwoAnswered];
   return (
     <TopicComponentBoilerPlate title={<>Conceptual Learning</>}>
       <>
@@ -60,7 +64,7 @@ const conceptual = () => {
               <IntegerInputWithPi />
               <br />
               <br />
-              {/* <CircleAreaAnswer>
+              <CircleAreaAnswer>
                 <CircleAreaAnswerCover blurred={circleAreaAnswerBlurred} />
                 Maybe a typical math student, upon seeing this question thinks
                 something like:
@@ -73,7 +77,7 @@ const conceptual = () => {
 
                   <span>Simplify &rarr; A = 49π u² is the answer.</span>
                 </StudentThoughts>
-              </CircleAreaAnswer> */}
+              </CircleAreaAnswer>
             </li>
             <br />
             <br />
@@ -105,7 +109,7 @@ const P = styled.div`
 const CircleAreaImgWrap = styled.div`
   display: flex;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-start;
 `;
 
 const Step = styled.div`
@@ -136,5 +140,9 @@ const StudentThoughts = styled.div`
   flex-direction: column;
   gap: 2rem;
 `;
+
+const Question1 = styled.div``;
+const Question2 = styled.div``;
+const Complete = styled.div``;
 
 export default conceptual;

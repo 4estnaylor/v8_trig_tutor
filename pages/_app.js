@@ -14,6 +14,14 @@ const muiTheme = createTheme({
     info: {
       main: '#647ece',
     },
+    success: {
+      main: '#43bd49',
+      contrastText: '#fcfdfd',
+    },
+    error: {
+      main: '#f20d59',
+      contrastText: '#fcfdfd',
+    },
   },
 });
 

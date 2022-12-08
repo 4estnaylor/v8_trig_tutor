@@ -14,12 +14,10 @@ const index = () => {
           <br />
           <br />
           At any given time I am usually using 2 to 3 online courses for work,
-          study, or hobbies. Every course meshes into my day in a slightly
-          different way. Below is some advice that has consistently worked for
-          me, I encourage you to adapt it to suit your needs or even ignore it
-          if it doesn't apply. The important thing is just that you think
-          strategically about how you learn best. Here is my "strategy guide"
-          for this course.
+          study, or hobbies. Below is some advice that has consistently worked
+          for me. I encourage you to adapt it to suit your needs or even ignore
+          it if it doesn't apply. The important thing is just that you think
+          strategically about how you learn best.
           <IframeWrappper>
             <ResponsiveIframe
               src="https://player.vimeo.com/video/777714892?h=dc4303ab13&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
@@ -30,10 +28,10 @@ const index = () => {
           </IframeWrappper>
           <ol>
             <li>
-              <Em>Pick a minimum time. Be consistent.</Em>
+              <BulletPoint>Pick a minimum time. Be consistent.</BulletPoint>
               <br />
               <br />
-              This is <b>the most important factor </b>
+              This is <Em>the most important factor </Em>
               determining my success in completing an online course. My minimum
               is usually very short. 5 mins works well for me. But I HAVE TO do
               those 5 minutes. My minimum time isn't to desigend to make me
@@ -53,7 +51,9 @@ const index = () => {
             <br />
 
             <li>
-              <Em>Ideally both read what is written and watch the videos.</Em>
+              <BulletPoint>
+                Ideally both read what is written and watch the videos.
+              </BulletPoint>
               <br />
               <br />
               Often the content of the videos and written content overlaps. The
@@ -64,7 +64,7 @@ const index = () => {
             <br />
 
             <li>
-              <Em>If you only have time for only one...</Em>
+              <BulletPoint>If you only have time for only one...</BulletPoint>
               <br />
               <br />
               I'd recommend reading because what I write tends to be a litte
@@ -108,6 +108,10 @@ const Em = styled.div`
   display: inline;
   font-weight: 600;
   color: ${cl.getHSL(cl.purple)};
+`;
+
+const BulletPoint = styled.span`
+  font-weight: 600;
 `;
 
 const IframeWrappper = styled.div`

@@ -23,7 +23,7 @@
     "**/*.ts",
     "**/*.tsx",
     "pages/login.jsx",
-    "pages/%C2&BO"
+    "pages/%C2&BO.tsx"
   ],
   "exclude": ["node_modules"]
 }

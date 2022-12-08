@@ -15,8 +15,8 @@ const double_down = () => {
         </DoubleDownWrapper>
         <Wrapper>
           <span>
-            If there is one single piece of advice I could give to my past self
-            in highschool, it would be this: <br /> <br />
+            If there is one single piece of math advice I could give to my past
+            self in highschool, it would be this: <br /> <br />
             <b>Double-down for trig.</b>
             <br />
             <br />
