@@ -3,16 +3,20 @@ import styled from 'styled-components';
 import QUERIES from '../../breakpoints';
 import cl from '../../colors';
 import DeleteButton from './DeleteButton';
+import DeletePiButton from './DeletePiButton';
+import { UserEnteredValueType } from './IntegerInputWithPi';
 import NumberButton from './NumberButton';
+import VariableButton from './VariableButton';
 
 interface NumberPadProps {
-  setValue: Dispatch<SetStateAction<string>>;
+  userEnteredValue: UserEnteredValueType;
+  setValue: Dispatch<SetStateAction<UserEnteredValueType>>;
 }
 
 const NumberPad = (props: NumberPadProps) => {
-  const { setValue } = props;
+  const { userEnteredValue, setValue } = props;
 
-  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 'π', 'τ', '.'];
+  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
   const numberButtons = numbers.map((number) => {
     return <NumberButton key={number} value={number} setValue={setValue} />;
@@ -20,7 +24,11 @@ const NumberPad = (props: NumberPadProps) => {
 
   return (
     <Wrapper>
-      {numberButtons} <DeleteButton setValue={setValue} />
+      {numberButtons}
+      <VariableButton symbol="π" value={userEnteredValue} setValue={setValue} />
+
+      <DeletePiButton setValue={setValue} />
+      <DeleteButton setValue={setValue} />
     </Wrapper>
   );
 };

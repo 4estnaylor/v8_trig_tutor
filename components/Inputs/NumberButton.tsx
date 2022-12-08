@@ -2,26 +2,32 @@ import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import QUERIES from '../../breakpoints';
 import cl from '../../colors';
+import { UserEnteredValueType } from './IntegerInputWithPi';
 
 interface NumberButtonProps {
-  value: number | string;
+  value: number;
 
-  setValue: Dispatch<SetStateAction<string>>;
+  setValue: Dispatch<SetStateAction<UserEnteredValueType>>;
 }
+
+const countOcurrancesofPiInString = (str: string) => {
+  let occurances = str.replace(/[^π]/g, '').length;
+  return occurances;
+};
 
 const NumberButton = (props: NumberButtonProps) => {
   const { value, setValue } = props;
   const handleClick = () => {
-    setValue((prev) => prev + value);
+    setValue((prev) => {
+      let updatedUserEnteredValue: UserEnteredValueType = {
+        numerical: prev.numerical
+          ? Number(prev.numerical.toString() + value)
+          : value,
+        pi: prev.pi,
+      };
+      return updatedUserEnteredValue;
+    });
   };
-
-  switch (value) {
-    case 'π':
-      return <PiWrapper onClick={handleClick}>{value}</PiWrapper>;
-      break;
-    default:
-      return <Wrapper onClick={handleClick}>{value}</Wrapper>;
-  }
 
   return <Wrapper onClick={handleClick}>{value}</Wrapper>;
 };
@@ -30,7 +36,8 @@ const Wrapper = styled.div`
   font-size: 1rem;
   color: ${cl.getHSL(cl.gray_mid)};
   /* background-color: ${cl.getHSLA(cl.black, 0.2)}; */
-  border: 0.5px solid ${cl.getHSLA(cl.gray_mid, 0.5)};
+
+  border: none;
   border-radius: 0px;
   max-width: 50px;
 
@@ -50,6 +57,7 @@ const Wrapper = styled.div`
 
   @media ${QUERIES.tabletAndUp} {
     border-radius: 4px;
+    border: 2px solid ${cl.getHSLA(cl.gray_mid, 0.5)};
   }
 `;
 

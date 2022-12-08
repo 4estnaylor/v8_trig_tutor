@@ -4,8 +4,22 @@ import cl from '../../colors';
 import CheckButton from './CheckButton';
 import NumberPad from './NumberPad';
 
-const IntegerInputWithPi = () => {
-  const [userEnteredValue, setUserEnteredValue] = useState('');
+interface IntegerInputWithPiProps {
+  answer: number;
+}
+
+export type UserEnteredValueType = {
+  numerical: number | null;
+  pi: number;
+};
+
+const IntegerInputWithPi = (props: IntegerInputWithPiProps) => {
+  const { answer } = props;
+  const [userEnteredValue, setUserEnteredValue] =
+    useState<UserEnteredValueType>({
+      numerical: null,
+      pi: 0,
+    });
   const [showNumberPad, setShowNumberPad] = useState(true);
 
   useEffect(() => {
@@ -31,15 +45,33 @@ const IntegerInputWithPi = () => {
                 ref={integerInputRef}
                 onClick={(e) => handleFocusInputClick(e)}
               >
-                {userEnteredValue}
+                {userEnteredValue?.numerical
+                  ? userEnteredValue.numerical.toString()
+                  : ''}
+                <VariableInput>
+                  {userEnteredValue.pi > 0 ? 'π' : ''}
+                  {
+                    <VariableExponent>
+                      {' '}
+                      {userEnteredValue.pi !== 1 && userEnteredValue.pi !== 0
+                        ? userEnteredValue.pi
+                        : ''}{' '}
+                    </VariableExponent>
+                  }
+                </VariableInput>
                 <Units>u²</Units>
               </IntegerInput>
             </InputWrapper>
-            <CheckButton />
+            <CheckButton userEnteredValue={userEnteredValue} answer={answer} />
           </InputAndCheck>
         </EquationAndInputWrapper>
 
-        {showNumberPad ? <NumberPad setValue={setUserEnteredValue} /> : null}
+        {showNumberPad ? (
+          <NumberPad
+            userEnteredValue={userEnteredValue}
+            setValue={setUserEnteredValue}
+          />
+        ) : null}
       </Wrapper>
     </>
   );
@@ -114,6 +146,21 @@ const IntegerInput = styled.div`
   &:focus {
     box-shadow: 1px 1px 5px ${cl.getHSL(cl.purple)};
   }
+`;
+
+const VariableInput = styled.div`
+  padding-left: 2px;
+  display: flex;
+  align-items: baseline;
+  color: ${cl.getHSL(cl.purple)};
+`;
+
+const VariableExponent = styled.div`
+  color: ${cl.getHSL(cl.gray_mid)};
+  font-size: 0.65rem;
+  height: 100%;
+  display: flex;
+  align-self: flex-start;
 `;
 
 const Units = styled(Equation)`

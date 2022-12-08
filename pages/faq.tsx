@@ -319,14 +319,13 @@ const faq = () => {
             </div>
             <br />
             <br />
-            Simple really. Math analysis is, ummm, analyzing stuff with math.
-            Okay I admit, that could apply to any math subject. So vague as to
-            be meaningless.
+            Simple really. Math analysis is, ummm, analyzing stuff with math. A
+            definition so vague as to be meaningless.
             <br />
             <br />
             Unlike trigonometry, the topics in math analysis don't really have a
             <b> mathematical theme </b>. Worse, there's too many of them! Often
-            classes have to skim ore even skip a couple of the topics to get to
+            classes have to skim ore even skip a couple of the topics if they
             reach the final section of the textbook. Precalc's second semester
             is a kind of controlled chaos whose lack of logical, definite
             structure has a lot to do with why precalculus was invented as a
@@ -342,17 +341,17 @@ const faq = () => {
             Precalc was born not as field or branch of math, but because
             universities noticed something fascinating about freshman math
             students. They were jumping into their first college math class,
-            calculus, exactly in the same way as a fly jumps into the windshield
-            of an oncoming 18-wheeler truck.
+            calculus, precisely in the same way as a fly jumps into the
+            windshield of an oncoming 18-wheeler truck.
             <br />
             <br />
             "Bam here's Calculus!", as it turned out, was a somewhat
-            questionable teaching strategy. To this very day, many grown people,
-            perhaps some you know, when confronted by a sinisterly long string
-            of math symbols murmur with a far-off gaze something like, "I hated
-            math, I avoid it like the plague now." Getting repeatedly rammed
-            into this particularly harsh segment of math the learning curve is
-            often what causes people to so unamicably split with math.
+            questionable teaching methodolgy. To this very day, many grown
+            people, perhaps some you know, when confronted by a sinisterly long
+            string of math symbols murmur with a far-off gaze something like, "I
+            hated math, I avoid it like the plague now." Getting repeatedly
+            rammed into this particularly harsh segment of math's learning curve
+            is often what causes people to so unamicably split with math.
             <br />
             <br />
             Highschool math classes were called upon to adjust their curiculum
@@ -360,16 +359,13 @@ const faq = () => {
             much of the learning curve disparity as possible.
             <br /> <br />
             Smoothing the learning curve is all well and good, but there was a
-            big problem. Math teachers and students couldn't spontaneously will
-            more classroom time out of thin air to make it happen. The result
-            was rather than getting a full two semesters (which it could easily
-            fill), the "math analysis" section of precalculus was joined to
-            trigonometry as a second semster. Attempting all, or even most, of
-            "math analysis" in a single highschool semester is a<em>
-              {' '}
-              very{' '}
-            </em>{' '}
-            tall order.
+            big problem. Math teachers and students couldn't spontaneously
+            conjure more classroom time out of thin air to make it happen. The
+            result was rather than getting a full two semesters (which it could
+            easily fill), the "math analysis" section of precalculus was joined
+            to trigonometry as a second semster. Attempting all, or even most,
+            of "math analysis" in a single highschool semester is a
+            <em> very </em> tall order.
             <br />
             <br />
             <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -390,8 +386,11 @@ const faq = () => {
               consider a name change for this course and maybe pare it down a
               bit while we're at it!
             </Alert> */}
-            <br />I rarely use the term math analysis because of how vague it
-            is. I like to think of it more as a kind of "math trail mix". Your
+            <br />I rarely use the term math analysis because of... well, how
+            bad and vague a term it is.
+            <br />
+            <br />
+            I like to think of it more as a kind of "math trail mix". Your
             teachers load you up with as much of it as they can before you hit
             your college math journey to provide you nutrition, energy, and
             insight along the way.

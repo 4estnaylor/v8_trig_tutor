@@ -61,7 +61,7 @@ const conceptual = () => {
               <CircleAreaImgWrap>
                 <Image src="/conceptual_circle.svg" width="200" height="200" />
               </CircleAreaImgWrap>
-              <IntegerInputWithPi />
+              <IntegerInputWithPi answer={49 * Math.PI} />
               <br />
               <br />
               <CircleAreaAnswer>

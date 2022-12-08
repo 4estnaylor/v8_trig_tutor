@@ -43,13 +43,14 @@ const double_down = () => {
               is peerless.
             </Alert>
           </span>
-          <h3>The start-all, glue-all</h3>
+          <h3>The Math Kraken</h3>
           <span>
             Trig, nor any other subject can claim the title of the end-all,
-            be-all of math. But, I really do think Trig is somethign of a
-            start-all, glue-all for students transitioning from highschool to
-            college-level math. The humble triangle is an outrageously powerful
-            engine of modern mathematics as strange as that may seem.
+            be-all of math. But, I really do think Trig is a kind of math kraken
+            for students navigating highschool to college-level math. If feared
+            and disregarded, trig will inevitably sink students, but if
+            understood and cared for, trig becomes a powerful ally. Trust me
+            when I say, this is a kraken you want on your side.
             <br /> <br />
             Sweet mother of standards-compliant lesson plans, I have taught a
             lot of different math (and math-ish) classes. I have taken even more
@@ -82,8 +83,8 @@ const double_down = () => {
             <br />
             <br />I repeat myself, but truly if there is one piece of advice I
             could give to any highschool student, especially my former self, it
-            would be –<b> Invest effort in trigonometry</b>. Mastery of trig
-            will pay for itself many, many times over.
+            would be –<b> double-down on trigonometry</b>. Mastery of trig will
+            pay for itself many, many times over.
           </span>
         </Wrapper>
       </>
