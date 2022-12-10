@@ -61,13 +61,13 @@ const conceptual = () => {
               <CircleAreaImgWrap>
                 <Image src="/conceptual_circle.svg" width="200" height="200" />
               </CircleAreaImgWrap>
-              <IntegerInputWithPi answer={49 * Math.PI} />
+              <IntegerInputWithPi answer={49 * Math.PI} placeholder={'?'} />
               <br />
               <br />
               <CircleAreaAnswer>
                 <CircleAreaAnswerCover blurred={circleAreaAnswerBlurred} />
-                Maybe a typical math student, upon seeing this question thinks
-                something like:
+                Maybe a typical math student, like me, upon seeing this question
+                thinks something like:
                 <br />
                 <br />
                 <StudentThoughts>

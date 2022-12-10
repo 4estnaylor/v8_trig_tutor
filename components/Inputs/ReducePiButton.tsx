@@ -4,39 +4,33 @@ import QUERIES from '../../breakpoints';
 import cl from '../../colors';
 import { UserEnteredValueType } from './IntegerInputWithPi';
 
-interface VariableButtonProps {
-  symbol: string;
-  value: UserEnteredValueType;
-
+interface ReducePiButtonProps {
   setValue: Dispatch<SetStateAction<UserEnteredValueType>>;
 }
 
-const VariableButton = (props: VariableButtonProps) => {
-  const { symbol, value, setValue } = props;
+const ReducePiButton = (props: ReducePiButtonProps) => {
+  const { setValue } = props;
 
-  const handleClick = () => {
+  const handleDeletePiClick = () => {
     setValue((prev) => {
-      let updatedValue: UserEnteredValueType = {
+      let updatedUserEnteredValue: UserEnteredValueType = {
         numerical: prev.numerical,
-        pi: prev.pi + 1,
+        pi: prev.pi > 0 ? prev.pi - 1 : 0,
       };
 
-      return updatedValue;
+      return updatedUserEnteredValue;
     });
   };
   return (
-    <Wrapper onClick={handleClick}>
-      {symbol}
-      <ExponentWrapper>+</ExponentWrapper>
+    <Wrapper onClick={handleDeletePiClick}>
+      π<ExponentWrapper>-</ExponentWrapper>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   position: relative;
-  font-size: 1rem;
-  color: ${cl.getHSL(cl.purple)};
-  /* background-color: ${cl.getHSLA(cl.black, 0.2)}; */
+  color: ${cl.getHSL(cl.red)};
 
   border-radius: 0px;
   max-width: 50px;
@@ -45,11 +39,12 @@ const Wrapper = styled.div`
 
   justify-content: center;
   align-items: center;
+  font-size: 1rem;
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       cursor: pointer;
-      background-color: ${cl.getHSL(cl.purple)};
+      background-color: ${cl.getHSL(cl.red_dark)};
       color: ${cl.getHSL(cl.white)};
       border: none;
     }
@@ -57,16 +52,22 @@ const Wrapper = styled.div`
 
   @media ${QUERIES.tabletAndUp} {
     border-radius: 4px;
-    border: 2px solid ${cl.getHSLA(cl.purple, 0.5)};
   }
 `;
 
 const ExponentWrapper = styled.div`
-  position: absolute;
   font-size: 0.75rem;
-  right: 4px;
+  position: absolute;
+  right: 5px;
   top: 5px;
   font-weight: 800;
 `;
 
-export default VariableButton;
+const DiagonalLine = styled.div`
+  height: 20px;
+  border-left: 2px solid white;
+
+  transform: translateY(2px) rotate(-75deg);
+`;
+
+export default ReducePiButton;

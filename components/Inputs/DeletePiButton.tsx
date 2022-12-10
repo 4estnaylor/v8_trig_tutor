@@ -23,7 +23,7 @@ const DeletePiButton = (props: DeletePiButtonProps) => {
   };
   return (
     <Wrapper onClick={handleDeletePiClick}>
-      π
+      π<ExponentWrapper>0</ExponentWrapper>
       <ClearIconWrapper>
         <DiagonalLine />
       </ClearIconWrapper>
@@ -45,7 +45,7 @@ const Wrapper = styled.div`
 
   justify-content: center;
   align-items: center;
-  font-size: 1.25rem;
+  font-size: 1rem;
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
@@ -59,6 +59,13 @@ const Wrapper = styled.div`
   @media ${QUERIES.tabletAndUp} {
     border-radius: 4px;
   }
+`;
+
+const ExponentWrapper = styled.div`
+  font-size: 0.75rem;
+  position: absolute;
+  right: 5px;
+  top: 5px;
 `;
 
 const ClearIconWrapper = styled.div`

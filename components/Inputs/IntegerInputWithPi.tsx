@@ -6,6 +6,7 @@ import NumberPad from './NumberPad';
 
 interface IntegerInputWithPiProps {
   answer: number;
+  placeholder?: string;
 }
 
 export type UserEnteredValueType = {
@@ -14,7 +15,7 @@ export type UserEnteredValueType = {
 };
 
 const IntegerInputWithPi = (props: IntegerInputWithPiProps) => {
-  const { answer } = props;
+  const { answer, placeholder } = props;
   const [userEnteredValue, setUserEnteredValue] =
     useState<UserEnteredValueType>({
       numerical: null,
@@ -45,6 +46,11 @@ const IntegerInputWithPi = (props: IntegerInputWithPiProps) => {
                 ref={integerInputRef}
                 onClick={(e) => handleFocusInputClick(e)}
               >
+                {userEnteredValue.numerical === null &&
+                userEnteredValue.pi === 0 &&
+                placeholder ? (
+                  <PlaceholderSpan> {placeholder} </PlaceholderSpan>
+                ) : null}
                 {userEnteredValue?.numerical
                   ? userEnteredValue.numerical.toString()
                   : ''}
@@ -84,6 +90,10 @@ const InputWrapper = styled.div`
   max-width: 100%;
   overflow: auto;
   border-radius: 4px;
+`;
+
+const PlaceholderSpan = styled.span`
+  color: ${cl.getHSL(cl.gray_mid)};
 `;
 
 const InputAndCheck = styled.div`

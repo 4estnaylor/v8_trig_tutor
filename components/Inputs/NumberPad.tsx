@@ -6,6 +6,7 @@ import DeleteButton from './DeleteButton';
 import DeletePiButton from './DeletePiButton';
 import { UserEnteredValueType } from './IntegerInputWithPi';
 import NumberButton from './NumberButton';
+import ReducePiButton from './ReducePiButton';
 import VariableButton from './VariableButton';
 
 interface NumberPadProps {
@@ -26,6 +27,7 @@ const NumberPad = (props: NumberPadProps) => {
     <Wrapper>
       {numberButtons}
       <VariableButton symbol="π" value={userEnteredValue} setValue={setValue} />
+      <ReducePiButton setValue={setValue} />
 
       <DeletePiButton setValue={setValue} />
       <DeleteButton setValue={setValue} />

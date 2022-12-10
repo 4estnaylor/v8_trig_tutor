@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 import cl from '../colors';
+import MultipleChoiceQuestion from '../components/Inputs/MultipleChoiceQuestion';
 import TopicComponentBoilerPlate from '../components/TopicComponents/TopicComponentBoilerPlate';
 
 const double_down = () => {
@@ -17,7 +18,16 @@ const double_down = () => {
           <span>
             If there is one single piece of math advice I could give to my past
             self in highschool, it would be this: <br /> <br />
-            <b>Double-down for trig.</b>
+            <b>Double-down on trig.</b>
+            <br />
+            <br />
+            You may be wondering if I mean that you should give your best effort
+            in trigonometry class like in any other math class. That is not what
+            I mean. What I mean is you should allocate extra effort for trig,
+            because effort spent in trig for most students produces
+            substantially more benefit in the long run than most other math
+            classes. Other classes are important too, just probably not as
+            important as trig in the long run.
             <br />
             <br />
             The things you learn in trig will be used again, and again, and
@@ -43,49 +53,16 @@ const double_down = () => {
               is peerless.
             </Alert>
           </span>
-          <h3>The Math Kraken</h3>
-          <span>
-            Trig, nor any other subject can claim the title of the end-all,
-            be-all of math. But, I really do think Trig is a kind of math kraken
-            for students navigating highschool to college-level math. If feared
-            and disregarded, trig will inevitably sink students, but if
-            understood and cared for, trig becomes a powerful ally. Trust me
-            when I say, this is a kraken you want on your side.
-            <br /> <br />
-            Sweet mother of standards-compliant lesson plans, I have taught a
-            lot of different math (and math-ish) classes. I have taken even more
-            as a physics undgrad student.
-            {/* <ul>
-              <li>physics</li>
-              <li>pre-algebra</li>
-              <li>algebra 1</li>
-              <li>algebra 2</li>
-              <li>geometry</li>
-              <li>probability &amp; statistics</li>
-              <li>introduction to programming</li>
-              <li>animation with JavaScript</li>
-              <li>100 level undergraduate physics</li>
-              <li>Newtonian mechanics</li>
-              <li>calculus</li>
-            </ul> */}
-            Every class I have taught or studied benefits considerably from
-            being really good at Trig. Trig is a crazy powerful math nexus that
-            kind of enlaces its tentacles into everything else in the math
-            world. I am not making this website because I particularly love trig
-            over any other math subject. Don't get me wrong, Trig is full of
-            cleverness and surprises. But, I feel the same affection for pretty
-            much any other math course. What really makes trig stand out is it's
-            unusually central and pervasive role within the math universe. I
-            made this website because in my experience as both a teacher and a
-            student, trig is
-            <b> the point of greatest mathematical leverage </b> for highschool
-            students (and arguably undergraduate students).
-            <br />
-            <br />I repeat myself, but truly if there is one piece of advice I
-            could give to any highschool student, especially my former self, it
-            would be –<b> double-down on trigonometry</b>. Mastery of trig will
-            pay for itself many, many times over.
-          </span>
+          <MultipleChoiceQuestion
+            question="What one single piece of math advice would the author give to his former self?"
+            correctOptions={['double-down on trig']}
+            incorrectOptions={[
+              'establish dominance by using crayon instead of pencil on math tests.',
+              'try extreme dietry fads to enhance your ability to think fast',
+              'Forget about math. Math is for robots now.',
+              'Pursue your interests and ask lots of questions along the way',
+            ]}
+          />
         </Wrapper>
       </>
     </TopicComponentBoilerPlate>
