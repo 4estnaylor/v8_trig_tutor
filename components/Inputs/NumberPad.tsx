@@ -52,7 +52,7 @@ const NumberPad = (props: NumberPadProps) => {
 const Wrapper = styled.div`
   min-width: 150px;
   background-color: ${cl.getHSLA(cl.black, 0.3)};
-  border-radius: 8px;
+  border-radius: 0px 8px 0px 8px;
   overflow: hidden;
   display: grid;
   grid-auto-flow: row;

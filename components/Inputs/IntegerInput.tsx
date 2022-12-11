@@ -3,23 +3,28 @@ import styled from 'styled-components';
 import cl from '../../colors';
 import CheckButton from './CheckButton';
 import NumberPad from './NumberPad';
+import VariablePad, { Variable } from './VariablePad';
 
 interface IntegerInputProps {
   answer: number;
   placeholder?: string;
+  variables: Variable[];
 }
 
 export type UserEnteredValueType = {
   numerical: number | null;
   pi: number;
+  variables?: Variable[];
 };
 
 const IntegerInput = (props: IntegerInputProps) => {
-  const { answer, placeholder } = props;
+  const { answer, placeholder, variables } = props;
+  console.log('variables', variables);
   const [userEnteredValue, setUserEnteredValue] =
     useState<UserEnteredValueType>({
       numerical: null,
       pi: 0,
+      variables: variables || [],
     });
   const [showNumberPad, setShowNumberPad] = useState(true);
 
@@ -33,6 +38,23 @@ const IntegerInput = (props: IntegerInputProps) => {
     if (!integerInputRef.current) return;
     integerInputRef.current.focus();
   };
+
+  const variableInputs =
+    userEnteredValue.variables?.map((variable) => {
+      return (
+        <VariableInput key={variable.symbol}>
+          {variable.degree > 0 ? variable.symbol : ''}
+          {
+            <VariableExponent>
+              {' '}
+              {variable.degree !== 1 && variable.degree !== 0
+                ? variable.degree
+                : ''}{' '}
+            </VariableExponent>
+          }
+        </VariableInput>
+      );
+    }) || [];
 
   return (
     <>
@@ -53,7 +75,7 @@ const IntegerInput = (props: IntegerInputProps) => {
                 {userEnteredValue?.numerical
                   ? userEnteredValue.numerical.toString()
                   : ''}
-                <VariableInput>
+                {/* <VariableInput>
                   {userEnteredValue.pi > 0 ? 'π' : ''}
                   {
                     <VariableExponent>
@@ -63,7 +85,8 @@ const IntegerInput = (props: IntegerInputProps) => {
                         : ''}{' '}
                     </VariableExponent>
                   }
-                </VariableInput>
+                </VariableInput> */}
+                {variableInputs}
                 <Units>u²</Units>
               </IntInput>
             </InputWrapper>
@@ -71,16 +94,27 @@ const IntegerInput = (props: IntegerInputProps) => {
           </InputAndCheck>
         </EquationAndInputWrapper>
 
-        {showNumberPad ? (
+        <ControlPad>
           <NumberPad
             userEnteredValue={userEnteredValue}
             setValue={setUserEnteredValue}
           />
-        ) : null}
+
+          <VariablePad
+            userEnteredValue={userEnteredValue}
+            setValue={setUserEnteredValue}
+          />
+        </ControlPad>
       </Wrapper>
     </>
   );
 };
+
+const ControlPad = styled.div`
+  display: flex;
+  margin-left: -20px;
+  margin-bottom: -20px;
+`;
 
 const InputWrapper = styled.div`
   position: relative;
@@ -88,7 +122,6 @@ const InputWrapper = styled.div`
   align-items: center;
   max-width: 100%;
   overflow: auto;
-  border-radius: 4px;
 `;
 
 const PlaceholderSpan = styled.span`
@@ -111,7 +144,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  max-width: 350px;
   gap: 10px;
   color: ${cl.getHSL(cl.gray_dark)};
 `;

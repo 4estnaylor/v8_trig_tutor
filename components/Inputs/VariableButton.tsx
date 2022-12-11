@@ -7,7 +7,6 @@ import { UserEnteredValueType } from './IntegerInput';
 interface VariableButtonProps {
   symbol: string;
   value: UserEnteredValueType;
-
   setValue: Dispatch<SetStateAction<UserEnteredValueType>>;
 }
 
@@ -17,8 +16,8 @@ const VariableButton = (props: VariableButtonProps) => {
   const handleClick = () => {
     setValue((prev) => {
       let updatedValue: UserEnteredValueType = {
-        numerical: prev.numerical,
-        pi: prev.pi + 1,
+        numerical: 5,
+        pi: 2,
       };
 
       return updatedValue;

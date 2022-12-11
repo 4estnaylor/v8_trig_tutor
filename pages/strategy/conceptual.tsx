@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
 import IntegerAnswerQuestion from '../../components/Inputs/IntegerAnswerQuestion';
+import { Variable } from '../../components/Inputs/VariablePad';
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 
 const conceptual = () => {
@@ -12,6 +13,19 @@ const conceptual = () => {
   const [questionTwoAnswered, setQuestionTwoAnswered] = useState(false);
 
   const questionsAnswered = [questionOneAnswered, questionTwoAnswered];
+
+  const variablesToUse: Variable[] = [
+    {
+      symbol: 'π',
+      value: Math.PI,
+      degree: 3,
+    },
+    {
+      symbol: 'N',
+      value: Math.PI * 2,
+      degree: 1,
+    },
+  ];
 
   const circleAreaDiagram = (
     <Image src="/conceptual_circle.svg" width="200" height="200" />
@@ -62,6 +76,7 @@ const conceptual = () => {
                 question="What is the area of the circle?"
                 answer={49 * Math.PI}
                 diagram={circleAreaDiagram}
+                variables={variablesToUse}
               />
               {/* <Step> Step 1 </Step> Ask yourself, do you know what is the area
               of this circle? */}

@@ -19,8 +19,8 @@ const DecimalButton = (props: DecimalButtonProps) => {
     setValue((prev) => {
       let updatedUserEnteredValue: UserEnteredValueType = {
         numerical: prev.numerical,
-
         pi: prev.pi,
+        variables: prev.variables,
       };
       return updatedUserEnteredValue;
     });
@@ -36,8 +36,8 @@ const Wrapper = styled.div`
 
   border: none;
   border-radius: 0px;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
 
   display: flex;
 

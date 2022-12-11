@@ -19,11 +19,13 @@ const DeleteButton = (props: DeleteButtonProps) => {
         return {
           numerical: null,
           pi: prev.pi,
+          variables: prev.variables,
         };
 
       let updatedUserEntedValue: UserEnteredValueType = {
         numerical: Number(prev.numerical.toString().slice(0, -1)),
         pi: prev.pi,
+        variables: prev.variables,
       };
 
       return updatedUserEntedValue;

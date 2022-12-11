@@ -24,6 +24,7 @@ const NumberButton = (props: NumberButtonProps) => {
           ? Number(prev.numerical.toString() + value)
           : value,
         pi: prev.pi,
+        variables: prev.variables,
       };
       return updatedUserEnteredValue;
     });
@@ -33,7 +34,7 @@ const NumberButton = (props: NumberButtonProps) => {
 };
 
 const Wrapper = styled.div`
-  font-size: 1rem;
+  font-size: 1.25rem;
   color: ${cl.getHSL(cl.white)};
   /* background-color: ${cl.getHSLA(cl.black, 0.2)}; */
 

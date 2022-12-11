@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import QUERIES from '../../breakpoints';
 import cl from '../../colors';
 import IntegerInput from './IntegerInput';
+import { Variable } from './VariablePad';
 
 interface IntegerAnswerQuestionProps {
   question: string;
   answer: number;
-  variables?: { symbol: string; value: number };
+  variables?: Variable[];
   diagram?: JSX.Element;
 }
 
@@ -18,7 +19,7 @@ const IntegerAnswerQuestion = (props: IntegerAnswerQuestionProps) => {
       <Header>Question</Header>
       <Question>{question}</Question>
       <Diagram>{diagram}</Diagram>
-      <IntegerInput answer={answer} />
+      <IntegerInput answer={answer} variables={variables || []} />
     </Wrapper>
   );
 };
