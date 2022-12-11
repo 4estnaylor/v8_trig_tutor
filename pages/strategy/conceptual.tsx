@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
 import IntegerAnswerQuestion from '../../components/Inputs/IntegerAnswerQuestion';
-import IntegerInputWithPi from '../../components/Inputs/IntegerInput';
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 
 const conceptual = () => {
