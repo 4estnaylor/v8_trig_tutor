@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import QUERIES from '../../breakpoints';
@@ -30,18 +31,26 @@ const NumberButton = (props: NumberButtonProps) => {
     });
   };
 
-  return <Wrapper onClick={handleClick}>{value}</Wrapper>;
+  return (
+    <Wrapper
+      onClick={handleClick}
+      variant="contained"
+      color="gray"
+      size="small"
+    >
+      {value}
+    </Wrapper>
+  );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled(Button)`
   font-size: 1.25rem;
   color: ${cl.getHSL(cl.white)};
   /* background-color: ${cl.getHSLA(cl.black, 0.2)}; */
 
   border: none;
-  border-radius: 0px;
-  width: 60px;
-  height: 60px;
+  max-width: 60px;
+  max-height: 60px;
 
   display: flex;
 
@@ -49,12 +58,12 @@ const Wrapper = styled.div`
   align-items: center;
 
   @media (hover: hover) and (pointer: fine) {
-    &:hover {
+    /* &:hover {
       cursor: pointer;
       background-color: ${cl.getHSL(cl.gray_mid)};
       color: ${cl.getHSL(cl.white)};
       border: none;
-    }
+    } */
   }
 
   @media ${QUERIES.tabletAndUp} {
@@ -68,7 +77,6 @@ const PiWrapper = styled(Wrapper)`
       cursor: pointer;
       background-color: ${cl.getHSL(cl.gray_mid)};
       color: ${cl.getHSLA(cl.white, 1)};
-      border: none;
     }
   }
 `;

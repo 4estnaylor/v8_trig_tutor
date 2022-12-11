@@ -1,7 +1,7 @@
 import React from 'react';
 
 const VariableButtonUp = () => {
-  return <div>VariableButtonUp</div>;
+  return <div>.</div>;
 };
 
 export default VariableButtonUp;

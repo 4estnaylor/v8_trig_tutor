@@ -22,6 +22,10 @@ const muiTheme = createTheme({
       main: '#f20d59',
       contrastText: '#fcfdfd',
     },
+    gray: {
+      main: '#8fa0a3',
+      contrastText: '#fcfdfd',
+    },
   },
 });
 

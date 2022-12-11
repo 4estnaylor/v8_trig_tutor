@@ -51,14 +51,14 @@ const NumberPad = (props: NumberPadProps) => {
 
 const Wrapper = styled.div`
   min-width: 150px;
-  background-color: ${cl.getHSLA(cl.black, 0.3)};
+  /* background-color: ${cl.getHSLA(cl.black, 0.3)}; */
   border-radius: 0px 8px 0px 8px;
-  overflow: hidden;
   display: grid;
   grid-auto-flow: row;
   grid-template-columns: repeat(3, 60px);
   grid-template-rows: repeat(4, 60px);
-  gap: 0px 0px;
+
+  gap: 8px 8px;
   @media ${QUERIES.tabletAndUp} {
   }
 
