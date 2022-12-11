@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import QUERIES from '../../breakpoints';
 import cl from '../../colors';
-import { UserEnteredValueType } from './IntegerInputWithPi';
+import { UserEnteredValueType } from './IntegerInput';
 
 interface VariableButtonProps {
   symbol: string;
