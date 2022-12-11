@@ -12,28 +12,21 @@ const double_down = () => {
     <TopicComponentBoilerPlate title={<>Double Down</>}>
       <>
         <DoubleDownWrapper>
-          <Image src="/double_down.svg" width={350} height={200} />
+          <Image src="/double_down.svg" width={700} height={400} />
         </DoubleDownWrapper>
         <Wrapper>
           <span>
             If there is one single piece of math advice I could give to my past
             self in highschool, it would be this: <br /> <br />
-            <b>Double-down on trig.</b>
-            <br />
-            <br />
-            You may be wondering if I mean that you should give your best effort
-            in trigonometry class like in any other math class. That is not what
-            I mean. What I mean is you should allocate extra effort for trig,
-            because effort spent in trig for most students produces
-            substantially more benefit in the long run than most other math
-            classes. Other classes are important too, just probably not as
-            important as trig in the long run.
+            <DoubleDownText> double-down on trig </DoubleDownText>
             <br />
             <br />
             The things you learn in trig will be used again, and again, and
             again in future courses. If you invest the effort needed to build a
             solid understanding, and even fluency in trigonometry, it will give
             you an almost hilarious amount of mileage on your math journey.
+            <br />
+            <br />
             <br /> <br />
             <Alert severity="info">
               I teach a lot of math, and I should stress,
@@ -78,6 +71,11 @@ const Wrapper = styled.div`
   a {
     color: ${cl.getHSL(cl.blue)};
   }
+`;
+
+const DoubleDownText = styled.div`
+  font-size: 3rem;
+  text-align: center;
 `;
 
 const BlueLink = styled(Link)`

@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
-import { UserEnteredValueType } from './IntegerInputWithPi';
+import { UserEnteredValueType } from './IntegerInput';
 
 interface CheckButtonProps {
   userEnteredValue: UserEnteredValueType;

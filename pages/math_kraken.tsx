@@ -15,16 +15,16 @@ const math_kraken = () => {
         <br /> <br />
         Sweet mother of standards-compliant lesson plans, I have taught a lot of
         different math (and math-ish) classes. I have taken even more as a
-        undgrad student. And, around 95% of them benefit substantially from
-        being really good at Trig. Trig is a crazy powerful math nexus that kind
-        of enlaces its tentacles into everything else in the math world.
-        Personally, trig is not my favorite subject area of all time. Trig is
-        really cool, but probability and orbital mechanics stole my heart .
+        student. And, around 95% of them benefit substantially from being really
+        good at Trig. Trig is a crazy powerful math nexus that kind of enlaces
+        its tentacles into everything else in the math world. Personally, trig
+        is not my favorite subject area. Don't get me wrong, trig is cool,
+        clever, and pretty fun .
         <br />
         <br />
-        What really makes trig stand out is it's unusually central and pervasive
-        role within the math universe. I made this website because in my
-        experience as both a teacher and a student, trig is
+        But, what really makes trig stand out is it's unusually central and
+        pervasive role within the math universe. I made this website because in
+        my experience as both a teacher and a student, trig is
         <b> the point of greatest leverage </b> for highschool students trying
         to improve their abilities in math. That is to say, trig gives the
         biggest bang for your buck if you want to pursue mathematics to the
