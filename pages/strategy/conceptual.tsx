@@ -3,7 +3,8 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
-import IntegerInputWithPi from '../../components/Inputs/IntegerInputWithPi';
+import IntegerAnswerQuestion from '../../components/Inputs/IntegerAnswerQuestion';
+import IntegerInputWithPi from '../../components/Inputs/IntegerInput';
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 
 const conceptual = () => {
@@ -12,6 +13,10 @@ const conceptual = () => {
   const [questionTwoAnswered, setQuestionTwoAnswered] = useState(false);
 
   const questionsAnswered = [questionOneAnswered, questionTwoAnswered];
+
+  const circleAreaDiagram = (
+    <Image src="/conceptual_circle.svg" width="200" height="200" />
+  );
   return (
     <TopicComponentBoilerPlate title={<>Conceptual Learning</>}>
       <>
@@ -54,14 +59,19 @@ const conceptual = () => {
           follow me through a short 2 step thought experiment. */}
           <ul>
             <li>
-              <Step> Step 1 </Step> Ask yourself, do you know what is the area
-              of this circle?
+              <IntegerAnswerQuestion
+                question="What is the area of the circle?"
+                answer={49 * Math.PI}
+                diagram={circleAreaDiagram}
+              />
+              {/* <Step> Step 1 </Step> Ask yourself, do you know what is the area
+              of this circle? */}
               <br />
               <br />
-              <CircleAreaImgWrap>
+              {/* <CircleAreaImgWrap>
                 <Image src="/conceptual_circle.svg" width="200" height="200" />
-              </CircleAreaImgWrap>
-              <IntegerInputWithPi answer={49 * Math.PI} placeholder={'?'} />
+              </CircleAreaImgWrap> */}
+              {/* <IntegerInputWithPi answer={49 * Math.PI} placeholder={'?'} /> */}
               <br />
               <br />
               <CircleAreaAnswer>
@@ -82,9 +92,9 @@ const conceptual = () => {
             <br />
             <br />
             <li>
-              <Step> Step 2 </Step> Ask yourself, do you know why A = πr² gives
+              {/* <Step> Step 2 </Step> Ask yourself, do you know why A = πr² gives
               the area of a circle? Can you explain to me where that equation
-              comes from with logic?
+              comes from with logic? */}
             </li>
           </ul>
         </P>

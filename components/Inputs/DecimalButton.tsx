@@ -4,9 +4,7 @@ import QUERIES from '../../breakpoints';
 import cl from '../../colors';
 import { UserEnteredValueType } from './IntegerInput';
 
-interface NumberButtonProps {
-  value: number;
-
+interface DecimalButtonProps {
   setValue: Dispatch<SetStateAction<UserEnteredValueType>>;
 }
 
@@ -15,21 +13,20 @@ const countOcurrancesofPiInString = (str: string) => {
   return occurances;
 };
 
-const NumberButton = (props: NumberButtonProps) => {
-  const { value, setValue } = props;
+const DecimalButton = (props: DecimalButtonProps) => {
+  const { setValue } = props;
   const handleClick = () => {
     setValue((prev) => {
       let updatedUserEnteredValue: UserEnteredValueType = {
-        numerical: prev.numerical
-          ? Number(prev.numerical.toString() + value)
-          : value,
+        numerical: prev.numerical,
+
         pi: prev.pi,
       };
       return updatedUserEnteredValue;
     });
   };
 
-  return <Wrapper onClick={handleClick}>{value}</Wrapper>;
+  return <Wrapper onClick={handleClick}>.</Wrapper>;
 };
 
 const Wrapper = styled.div`
@@ -72,4 +69,4 @@ const PiWrapper = styled(Wrapper)`
   }
 `;
 
-export default NumberButton;
+export default DecimalButton;

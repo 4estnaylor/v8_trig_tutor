@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
 import BackspaceIcon from '@mui/icons-material/Backspace';
-import { UserEnteredValueType } from './IntegerInputWithPi';
+import { UserEnteredValueType } from './IntegerInput';
 import QUERIES from '../../breakpoints';
 
 interface DeleteButtonProps {
@@ -40,22 +40,18 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${cl.getHSL(cl.black)};
   color: ${cl.getHSL(cl.white)};
-  grid-column: 10;
-  grid-row: 2;
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       cursor: pointer;
-      background-color: ${cl.getHSL(cl.red_dark)};
+      background-color: ${cl.getHSL(cl.red)};
       color: ${cl.getHSL(cl.white)};
       border: none;
     }
   }
 
   @media ${QUERIES.tabletAndUp} {
-    border-radius: 4px;
   }
 `;
 

@@ -4,7 +4,7 @@ import cl from '../../colors';
 import CheckButton from './CheckButton';
 import NumberPad from './NumberPad';
 
-interface IntegerInputWithPiProps {
+interface IntegerInputProps {
   answer: number;
   placeholder?: string;
 }
@@ -14,7 +14,7 @@ export type UserEnteredValueType = {
   pi: number;
 };
 
-const IntegerInputWithPi = (props: IntegerInputWithPiProps) => {
+const IntegerInput = (props: IntegerInputProps) => {
   const { answer, placeholder } = props;
   const [userEnteredValue, setUserEnteredValue] =
     useState<UserEnteredValueType>({
@@ -38,10 +38,9 @@ const IntegerInputWithPi = (props: IntegerInputWithPiProps) => {
     <>
       <Wrapper>
         <EquationAndInputWrapper>
-          <Equation>Area = </Equation>
           <InputAndCheck>
             <InputWrapper>
-              <IntegerInput
+              <IntInput
                 tabIndex={0}
                 ref={integerInputRef}
                 onClick={(e) => handleFocusInputClick(e)}
@@ -66,7 +65,7 @@ const IntegerInputWithPi = (props: IntegerInputWithPiProps) => {
                   }
                 </VariableInput>
                 <Units>u²</Units>
-              </IntegerInput>
+              </IntInput>
             </InputWrapper>
             <CheckButton userEnteredValue={userEnteredValue} answer={answer} />
           </InputAndCheck>
@@ -129,7 +128,7 @@ const Equation = styled.div`
   min-width: fit-content;
 `;
 
-const IntegerInput = styled.div`
+const IntInput = styled.div`
   height: 50px;
 
   font-size: 1.25rem;
@@ -179,4 +178,4 @@ const Units = styled(Equation)`
   color: ${cl.getHSL(cl.blue)};
 `;
 
-export default IntegerInputWithPi;
+export default IntegerInput;
