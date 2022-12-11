@@ -55,12 +55,12 @@ const double_down = () => {
           </span>
           <MultipleChoiceQuestion
             question="What one single piece of math advice would the author give to his former self?"
-            correctOptions={['double-down on trig']}
+            correctOptions={['Double-down on trig.']}
             incorrectOptions={[
-              'establish dominance by using crayon instead of pencil on math tests.',
-              'try extreme dietry fads to enhance your ability to think fast',
+              'Establish dominance by using crayon instead of pencil on math tests.',
+              'Try extreme dietry fads to enhance your ability to think fast.',
               'Forget about math. Math is for robots now.',
-              'Pursue your interests and ask lots of questions along the way',
+              'Pursue your interests and ask lots of questions along the way.',
             ]}
           />
         </Wrapper>

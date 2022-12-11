@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Radio from '@mui/material/Radio';
+import cl from '../../colors';
 
 interface MultipleChoiceOptionProps {
   radioKey: number;
@@ -33,7 +34,9 @@ const MultipleChoiceOption = (props: MultipleChoiceOptionProps) => {
         onClick={handleRadioClick}
         checked={selectedValues.includes(radioKey)}
       />
-      <OptionWrapper>{option}</OptionWrapper>
+      <OptionWrapper selected={selectedValues.includes(radioKey)}>
+        {option}
+      </OptionWrapper>
     </Wrapper>
   );
 };
@@ -43,8 +46,10 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const OptionWrapper = styled.div`
+const OptionWrapper = styled.div<{ selected: boolean }>`
   flex: 1;
+  color: ${(p) =>
+    p.selected ? cl.getHSL(cl.purple) : cl.getHSL(cl.gray_dark)};
 `;
 
 export default MultipleChoiceOption;
