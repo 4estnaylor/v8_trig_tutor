@@ -32,12 +32,7 @@ const NumberButton = (props: NumberButtonProps) => {
   };
 
   return (
-    <Wrapper
-      onClick={handleClick}
-      variant="contained"
-      color="gray"
-      size="small"
-    >
+    <Wrapper onClick={handleClick} variant="contained" size="small">
       {value}
     </Wrapper>
   );
@@ -46,24 +41,34 @@ const NumberButton = (props: NumberButtonProps) => {
 const Wrapper = styled(Button)`
   font-size: 1.25rem;
   color: ${cl.getHSL(cl.white)};
+  max-width: 50px;
+  min-width: 50px;
+  max-height: 50px;
+  min-height: 50px;
+  background-color: ${cl.getHSL(cl.gray_dark)};
+
   /* background-color: ${cl.getHSLA(cl.black, 0.2)}; */
 
   border: none;
-  max-width: 60px;
-  max-height: 60px;
 
   display: flex;
 
   justify-content: center;
   align-items: center;
+  &:hover {
+    cursor: pointer;
+    background-color: ${cl.getHSL(cl.gray_mid)};
+    color: ${cl.getHSL(cl.white)};
+    border: none;
+  }
 
   @media (hover: hover) and (pointer: fine) {
-    /* &:hover {
+    &:hover {
       cursor: pointer;
       background-color: ${cl.getHSL(cl.gray_mid)};
       color: ${cl.getHSL(cl.white)};
       border: none;
-    } */
+    }
   }
 
   @media ${QUERIES.tabletAndUp} {

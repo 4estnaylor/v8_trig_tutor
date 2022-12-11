@@ -36,8 +36,18 @@ const Wrapper = styled.div`
 
   border: none;
   border-radius: 0px;
-  width: 60px;
-  height: 60px;
+
+  max-width: 50px;
+  min-width: 50px;
+  max-height: 50px;
+  min-height: 50px;
+  background-color: ${cl.getHSL(cl.gray_dark)};
+  &:hover {
+    cursor: pointer;
+    background-color: ${cl.getHSL(cl.gray_mid)};
+    color: ${cl.getHSL(cl.white)};
+    border: none;
+  }
 
   display: flex;
 

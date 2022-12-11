@@ -14,8 +14,10 @@ const VariableButtonDown = (props: VariableButtonDownProps) => {
 };
 
 const Wrapper = styled(Button)`
-  height: 60px;
-  width: 60px;
+  max-width: 50px;
+  min-width: 50px;
+  max-height: 50px;
+  min-height: 50px;
 `;
 
 export default VariableButtonDown;

@@ -4,6 +4,7 @@ import cl from '../../colors';
 import BackspaceIcon from '@mui/icons-material/Backspace';
 import { UserEnteredValueType } from './IntegerInput';
 import QUERIES from '../../breakpoints';
+import { Button } from '@mui/material';
 
 interface DeleteButtonProps {
   setValue: Dispatch<SetStateAction<UserEnteredValueType>>;
@@ -38,11 +39,22 @@ const DeleteButton = (props: DeleteButtonProps) => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
   color: ${cl.getHSL(cl.white)};
+  max-width: 50px;
+  min-width: 50px;
+  max-height: 50px;
+  min-height: 50px;
+  background-color: ${cl.getHSL(cl.gray_dark)};
+  &:hover {
+    cursor: pointer;
+    background-color: ${cl.getHSL(cl.red)};
+    color: ${cl.getHSL(cl.white)};
+    border: none;
+  }
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {

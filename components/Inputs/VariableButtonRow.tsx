@@ -21,9 +21,11 @@ const VariableButtonRow = (props: VariableButtonRowProps) => {
 };
 
 const Wrapper = styled.div`
-  height: 60px;
+  height: 50px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 5px;
 `;
 
 export default VariableButtonRow;

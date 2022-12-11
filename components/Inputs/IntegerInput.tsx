@@ -112,8 +112,10 @@ const IntegerInput = (props: IntegerInputProps) => {
 
 const ControlPad = styled.div`
   display: flex;
-  margin-left: -20px;
-  margin-bottom: -20px;
+  margin-bottom: -12px;
+  margin-left: -12px;
+  margin-right: -12px;
+  width: calc(100% + 24px);
 `;
 
 const InputWrapper = styled.div`
