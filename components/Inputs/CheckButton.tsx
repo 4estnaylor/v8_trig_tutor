@@ -87,7 +87,7 @@ const CheckButton = (props: CheckButtonProps) => {
 
 const Wrapper = styled(Button)`
   background-color: transparent;
-  width: 105px;
+  width: 115px;
 `;
 
 const UnansweredWrapper = styled(Wrapper)``;

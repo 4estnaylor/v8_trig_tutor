@@ -41,8 +41,8 @@ const Wrapper = styled.div`
   display: grid;
 
   grid-template-columns: 105px;
-  grid-template-rows: repeat(4, 50px);
-  gap: 5px 5px;
+  grid-template-rows: repeat(4, 55px);
+  gap: 6px 6px;
   flex-direction: column;
   flex: 1;
 `;

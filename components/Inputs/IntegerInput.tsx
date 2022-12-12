@@ -179,11 +179,11 @@ const Equation = styled.div`
 `;
 
 const IntInput = styled.div`
-  height: 50px;
+  height: 55px;
 
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   padding-left: 10px;
-  min-width: 160px;
+  min-width: 175px;
   width: fit-content;
   max-width: 100% !important;
   overflow: auto;

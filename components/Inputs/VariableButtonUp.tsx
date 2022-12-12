@@ -53,10 +53,10 @@ const Wrapper = styled(Button)<{
   customcolor: string;
   $isclickable: boolean;
 }>`
-  max-width: 50px;
-  min-width: 50px;
-  max-height: 50px;
-  min-height: 50px;
+  max-width: 55px;
+  min-width: 55px;
+  max-height: 55px;
+  min-height: 55px;
   font-size: 1.25rem;
   display: flex;
   align-items: center;

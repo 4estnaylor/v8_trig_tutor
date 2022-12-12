@@ -55,10 +55,10 @@ const Wrapper = styled.div`
   border-radius: 0px 8px 0px 8px;
   display: grid;
   grid-auto-flow: row;
-  grid-template-columns: repeat(3, 50px);
-  grid-template-rows: repeat(4, 50px);
+  grid-template-columns: repeat(3, 55px);
+  grid-template-rows: repeat(4, 55px);
 
-  gap: 5px 5px;
+  gap: 6px 6px;
   @media ${QUERIES.tabletAndUp} {
   }
 

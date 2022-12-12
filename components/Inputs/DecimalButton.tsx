@@ -40,10 +40,10 @@ const Wrapper = styled(Button)`
 
   border: none;
 
-  max-width: 50px;
-  min-width: 50px;
-  max-height: 50px;
-  min-height: 50px;
+  max-width: 55px;
+  min-width: 55px;
+  max-height: 55px;
+  min-height: 55px;
   background-color: ${cl.getHSL(cl.gray_dark)};
   &:hover {
     cursor: pointer;

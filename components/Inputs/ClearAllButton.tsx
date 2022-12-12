@@ -38,10 +38,10 @@ const Wrapper = styled(Button)`
   align-items: center;
   justify-content: center;
   color: ${cl.getHSL(cl.white)};
-  max-width: 105px;
-  min-width: 105px;
-  max-height: 50px;
-  min-height: 50px;
+  max-width: 115px;
+  min-width: 115px;
+  max-height: 55px;
+  min-height: 55px;
   background-color: ${cl.getHSL(cl.gray_dark)};
   grid-row: 4;
 
