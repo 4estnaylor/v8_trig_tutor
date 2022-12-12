@@ -19,7 +19,7 @@ const math_kraken = () => {
         good at Trig. Trig is a crazy powerful math nexus that kind of enlaces
         its tentacles into everything else in the math world. Personally, trig
         is not my favorite subject area. Don't get me wrong, trig is cool,
-        clever, and pretty fun .
+        clever, fun even.
         <br />
         <br />
         But, what really makes trig stand out is it's unusually central and

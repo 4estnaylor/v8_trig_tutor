@@ -42,7 +42,10 @@ const IntegerInput = (props: IntegerInputProps) => {
   const variableInputs =
     userEnteredValue.variables?.map((variable) => {
       return (
-        <VariableInput key={variable.symbol}>
+        <VariableInput
+          key={variable.symbol}
+          customcolor={variable.color || cl.getHSL(cl.purple)}
+        >
           {variable.degree > 0 ? variable.symbol : ''}
           {
             <VariableExponent>
@@ -112,6 +115,7 @@ const IntegerInput = (props: IntegerInputProps) => {
 
 const ControlPad = styled.div`
   display: flex;
+  gap: 20px;
   margin-bottom: -12px;
   margin-left: -12px;
   margin-right: -12px;
@@ -135,6 +139,7 @@ const InputAndCheck = styled.div`
   overflow: hidden;
   max-width: max-content;
   min-width: fit-content;
+  gap: 20px;
 
   flex-wrap: wrap;
 `;
@@ -154,6 +159,7 @@ const EquationAndInputWrapper = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
+  margin-left: -12px;
 `;
 
 const Equation = styled.div`
@@ -167,11 +173,12 @@ const IntInput = styled.div`
 
   font-size: 1.25rem;
   padding-left: 10px;
-  min-width: 100px;
+  min-width: 160px;
   width: fit-content;
   max-width: 100% !important;
   overflow: auto;
   align-items: baseline;
+  border-bottom: 2px solid ${cl.getHSL(cl.gray_dark)};
 
   /* overflow-x: scroll; */
   flex: 1;
@@ -191,11 +198,11 @@ const IntInput = styled.div`
   }
 `;
 
-const VariableInput = styled.div`
+const VariableInput = styled.div<{ customcolor: string }>`
   padding-left: 2px;
   display: flex;
   align-items: baseline;
-  color: ${cl.getHSL(cl.purple)};
+  color: ${(p) => p.customcolor};
 `;
 
 const VariableExponent = styled.div`
@@ -209,7 +216,7 @@ const VariableExponent = styled.div`
 const Units = styled(Equation)`
   padding-left: 5px;
   padding-right: 10px;
-  color: ${cl.getHSL(cl.blue)};
+  color: ${cl.getHSLA(cl.gray_mid, 0.7)};
 `;
 
 export default IntegerInput;

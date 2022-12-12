@@ -30,7 +30,7 @@ export default function Home() {
           <GetGoodAtTrig>
             Get Good at Trig.
             <ReallyReallyGood>
-              Really, <RainbowText>Really</RainbowText> Good.
+              {'('}really, really Good.{')'}
             </ReallyReallyGood>
           </GetGoodAtTrig>
           <CanvasWrap>
@@ -124,12 +124,9 @@ export default function Home() {
   );
 }
 
-const ReallyReallyGood = styled.div`
-  font-size: 0.85rem;
-`;
-
 const GetGoodAtTrig = styled.h2`
   position: absolute;
+  color: 'black';
   z-index: 10;
   top: 70;
   -webkit-user-select: none;
@@ -141,6 +138,12 @@ const GetGoodAtTrig = styled.h2`
 
   padding: 5px;
   border-radius: 8px;
+`;
+
+const ReallyReallyGood = styled.div`
+  color: white;
+  font-size: 1rem;
+  text-align: center;
 `;
 
 const TuftBird = styled.div`

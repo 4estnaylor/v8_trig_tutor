@@ -19,11 +19,13 @@ const conceptual = () => {
       symbol: 'π',
       value: Math.PI,
       degree: 3,
+      color: cl.getHSL(cl.blue),
     },
     {
-      symbol: 'N',
+      symbol: 'τ',
       value: Math.PI * 2,
       degree: 1,
+      color: cl.getHSL(cl.red),
     },
   ];
 

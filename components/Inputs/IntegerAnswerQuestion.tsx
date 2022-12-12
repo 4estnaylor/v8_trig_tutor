@@ -19,7 +19,11 @@ const IntegerAnswerQuestion = (props: IntegerAnswerQuestionProps) => {
       <Header>Question</Header>
       <Question>{question}</Question>
       <Diagram>{diagram}</Diagram>
-      <IntegerInput answer={answer} variables={variables || []} />
+      <IntegerInput
+        answer={answer}
+        variables={variables || []}
+        placeholder="?"
+      />
     </Wrapper>
   );
 };

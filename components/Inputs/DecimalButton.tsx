@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import QUERIES from '../../breakpoints';
@@ -29,13 +30,12 @@ const DecimalButton = (props: DecimalButtonProps) => {
   return <Wrapper onClick={handleClick}>.</Wrapper>;
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled(Button)`
   font-size: 1rem;
   color: ${cl.getHSL(cl.white)};
   /* background-color: ${cl.getHSLA(cl.black, 0.2)}; */
 
   border: none;
-  border-radius: 0px;
 
   max-width: 50px;
   min-width: 50px;
