@@ -32,7 +32,7 @@ function shuffle(array: any[]) {
   return array;
 }
 
-type answerState =
+export type AnswerState =
   | 'unanswered'
   | 'correct'
   | 'incorrect'
@@ -45,7 +45,7 @@ const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
 
   const [selectedValues, setSelectedValues] = useState<number[]>([]);
 
-  const [answerState, setAnswerState] = useState<answerState>('unanswered');
+  const [answerState, setAnswerState] = useState<AnswerState>('unanswered');
 
   const correctSymbol = <CorrectSymbol> ✓ </CorrectSymbol>;
 

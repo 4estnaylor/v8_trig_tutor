@@ -15,7 +15,7 @@ const ReducePiButton = (props: ReducePiButtonProps) => {
     setValue((prev) => {
       let updatedUserEnteredValue: UserEnteredValueType = {
         numerical: prev.numerical,
-        pi: prev.pi > 0 ? prev.pi - 1 : 0,
+        decimalPlaceIndex: prev.decimalPlaceIndex,
       };
 
       return updatedUserEnteredValue;

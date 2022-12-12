@@ -24,7 +24,8 @@ const NumberButton = (props: NumberButtonProps) => {
         numerical: prev.numerical
           ? Number(prev.numerical.toString() + value)
           : value,
-        pi: prev.pi,
+        decimalPlaceIndex: prev.decimalPlaceIndex,
+
         variables: prev.variables,
       };
       return updatedUserEnteredValue;

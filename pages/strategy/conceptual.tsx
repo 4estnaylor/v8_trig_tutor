@@ -18,13 +18,13 @@ const conceptual = () => {
     {
       symbol: 'π',
       value: Math.PI,
-      degree: 3,
+      degree: 0,
       color: cl.getHSL(cl.blue),
     },
     {
       symbol: 'τ',
       value: Math.PI * 2,
-      degree: 1,
+      degree: 0,
       color: cl.getHSL(cl.red),
     },
   ];
@@ -79,6 +79,7 @@ const conceptual = () => {
                 answer={49 * Math.PI}
                 diagram={circleAreaDiagram}
                 variables={variablesToUse}
+                decimalPlaceIndex={null}
               />
               {/* <Step> Step 1 </Step> Ask yourself, do you know what is the area
               of this circle? */}

@@ -19,9 +19,31 @@ const CheckButton = (props: CheckButtonProps) => {
   const { userEnteredValue, answer, decimalPointPrecision } = props;
   const handleCheck = () => {
     console.log('checking answer', userEnteredValue, answer);
-    const userEnteredValueAsNumber: number | null = userEnteredValue.numerical
-      ? userEnteredValue.numerical * Math.pow(Math.PI, userEnteredValue.pi)
-      : null;
+    let totalValue: number;
+
+    let base: number = userEnteredValue.numerical || 1;
+    if (userEnteredValue.decimalPlaceIndex) {
+      let numericalStr = userEnteredValue.numerical?.toString() || '';
+      base = Number(
+        numericalStr.slice(0, userEnteredValue.decimalPlaceIndex) +
+          '.' +
+          numericalStr.slice(userEnteredValue.decimalPlaceIndex)
+      );
+    }
+
+    if (userEnteredValue.variables) {
+      userEnteredValue.variables.forEach((variable) => {
+        base *= Math.pow(variable.value, variable.degree);
+      });
+    } else {
+      base = 0;
+    }
+
+    totalValue = base;
+
+    // const userEnteredValueAsNumber: number | null = userEnteredValue.numerical
+    //   ? userEnteredValue.variables userEnteredValue.numerical
+    //   : null;
 
     let allowableDelta;
     switch (decimalPointPrecision) {
@@ -33,8 +55,7 @@ const CheckButton = (props: CheckButtonProps) => {
     }
 
     const withinRange =
-      userEnteredValueAsNumber &&
-      Math.abs(answer - userEnteredValueAsNumber) < allowableDelta
+      totalValue && Math.abs(answer - totalValue) < allowableDelta
         ? true
         : false;
 
@@ -44,7 +65,7 @@ const CheckButton = (props: CheckButtonProps) => {
       setCheckState('incorrect');
     }
 
-    console.log('comparision', userEnteredValueAsNumber, answer);
+    console.log('comparision', totalValue, answer);
   };
 
   switch (checkState) {
@@ -66,6 +87,7 @@ const CheckButton = (props: CheckButtonProps) => {
 
 const Wrapper = styled(Button)`
   background-color: transparent;
+  width: 105px;
 `;
 
 const UnansweredWrapper = styled(Wrapper)``;

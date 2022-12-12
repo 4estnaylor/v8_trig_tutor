@@ -18,10 +18,13 @@ const DecimalButton = (props: DecimalButtonProps) => {
   const { setValue } = props;
   const handleClick = () => {
     setValue((prev) => {
+      const numericalAsString = prev.numerical?.toString() || '';
+      const indexValue = numericalAsString.length;
+      console.log('indexValue', indexValue);
       let updatedUserEnteredValue: UserEnteredValueType = {
         numerical: prev.numerical,
-        pi: prev.pi,
         variables: prev.variables,
+        decimalPlaceIndex: indexValue,
       };
       return updatedUserEnteredValue;
     });

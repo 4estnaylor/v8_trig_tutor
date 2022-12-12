@@ -140,12 +140,19 @@ const TopSection = styled.div`
 
 const BottomSection = styled.div`
   /* background-color: ${cl.getHSL(cl.purple)}; */
-  background: linear-gradient(
+  /* background: linear-gradient(
     -120deg,
     ${cl.getHSL(cl.blue_light)} 10%,
     ${cl.getHSL(cl.blue)},
     ${cl.getHSL(cl.purple)} 50%,
     ${cl.getHSL(cl.red)} 90%
+  ); */
+  /* background-color: ${cl.getHSL(cl.purple)}; */
+  background: linear-gradient(
+    -120deg,
+
+    ${cl.getHSL(cl.gray_dark)},
+    ${cl.getHSL(cl.purple)}
   );
   background-size: 180%;
   background-position-x: 50%;

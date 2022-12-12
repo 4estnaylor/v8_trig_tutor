@@ -8,6 +8,7 @@ import { Variable } from './VariablePad';
 interface IntegerAnswerQuestionProps {
   question: string;
   answer: number;
+  decimalPlaceIndex: number | null;
   variables?: Variable[];
   diagram?: JSX.Element;
 }

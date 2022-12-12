@@ -17,7 +17,7 @@ const VariableButton = (props: VariableButtonProps) => {
     setValue((prev) => {
       let updatedValue: UserEnteredValueType = {
         numerical: 5,
-        pi: 2,
+        decimalPlaceIndex: 0,
       };
 
       return updatedValue;

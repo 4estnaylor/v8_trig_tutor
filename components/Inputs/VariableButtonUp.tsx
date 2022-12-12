@@ -28,7 +28,7 @@ const VariableButtonUp = (props: VariableButtonUpProps) => {
 
       let updatedValue: UserEnteredValueType = {
         numerical: prev.numerical,
-        pi: prev.pi,
+        decimalPlaceIndex: prev.decimalPlaceIndex,
         variables: updatedVariables,
       };
 
@@ -65,7 +65,7 @@ const Wrapper = styled(Button)<{
 
   text-transform: lowercase;
   position: relative;
-  opacity: ${(p) => (p.$isclickable ? 1 : 0.3)};
+  opacity: ${(p) => (p.$isclickable ? 1 : 0.1)};
 
   &:hover {
     background-color: ${(p) => p.customcolor};

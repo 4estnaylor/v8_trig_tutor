@@ -15,7 +15,7 @@ const DeletePiButton = (props: DeletePiButtonProps) => {
     setValue((prev) => {
       let updatedUserEnteredValue: UserEnteredValueType = {
         numerical: prev.numerical,
-        pi: 0,
+        decimalPlaceIndex: prev.decimalPlaceIndex,
       };
 
       return updatedUserEnteredValue;

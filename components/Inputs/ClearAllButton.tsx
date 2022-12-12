@@ -22,7 +22,7 @@ const ClearAllButton = (props: ClearAllButtonProps) => {
 
       const emptyValue: UserEnteredValueType = {
         numerical: null,
-        pi: 0,
+        decimalPlaceIndex: null,
         variables: variablesToZero,
       };
 

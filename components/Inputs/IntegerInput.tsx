@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
 import CheckButton from './CheckButton';
+import { AnswerState } from './MultipleChoiceQuestion';
 import NumberPad from './NumberPad';
 import VariablePad, { Variable } from './VariablePad';
 
@@ -13,8 +14,8 @@ interface IntegerInputProps {
 
 export type UserEnteredValueType = {
   numerical: number | null;
-  pi: number;
   variables?: Variable[];
+  decimalPlaceIndex: number | null;
 };
 
 const IntegerInput = (props: IntegerInputProps) => {
@@ -23,10 +24,23 @@ const IntegerInput = (props: IntegerInputProps) => {
   const [userEnteredValue, setUserEnteredValue] =
     useState<UserEnteredValueType>({
       numerical: null,
-      pi: 0,
       variables: variables || [],
+      decimalPlaceIndex: null,
     });
   const [showNumberPad, setShowNumberPad] = useState(true);
+  const [answerState, setAnswerState] = useState<AnswerState>('unanswered');
+  const numericalToString = userEnteredValue.numerical?.toString() || '';
+
+  let displayNumerical;
+
+  if (userEnteredValue.decimalPlaceIndex) {
+    displayNumerical =
+      numericalToString.slice(0, userEnteredValue.decimalPlaceIndex) +
+      '.' +
+      numericalToString.slice(userEnteredValue.decimalPlaceIndex);
+  } else {
+    displayNumerical = numericalToString;
+  }
 
   useEffect(() => {
     addEventListener('click', () => {});
@@ -70,14 +84,10 @@ const IntegerInput = (props: IntegerInputProps) => {
                 ref={integerInputRef}
                 onClick={(e) => handleFocusInputClick(e)}
               >
-                {userEnteredValue.numerical === null &&
-                userEnteredValue.pi === 0 &&
-                placeholder ? (
+                {userEnteredValue.numerical === null && placeholder ? (
                   <PlaceholderSpan> {placeholder} </PlaceholderSpan>
                 ) : null}
-                {userEnteredValue?.numerical
-                  ? userEnteredValue.numerical.toString()
-                  : ''}
+                {userEnteredValue?.numerical ? displayNumerical : ''}
                 {/* <VariableInput>
                   {userEnteredValue.pi > 0 ? 'π' : ''}
                   {
