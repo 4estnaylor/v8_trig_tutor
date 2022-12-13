@@ -3,20 +3,26 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
 import { UserEnteredValueType } from './IntegerInput';
+import { AnswerState } from './MultipleChoiceQuestion';
 
 interface CheckButtonProps {
   userEnteredValue: UserEnteredValueType;
   answer: number;
   decimalPointPrecision?: number;
+  answerState: AnswerState;
+  setAnswerState: React.Dispatch<React.SetStateAction<AnswerState>>;
 }
 
 const convertStringToNumber = (str: string) => {};
 
-type CheckStateType = 'correct' | 'incorrect' | 'unanswered';
-
 const CheckButton = (props: CheckButtonProps) => {
-  const [checkState, setCheckState] = useState<CheckStateType>('unanswered');
-  const { userEnteredValue, answer, decimalPointPrecision } = props;
+  const {
+    userEnteredValue,
+    answer,
+    decimalPointPrecision,
+    answerState,
+    setAnswerState,
+  } = props;
   const handleCheck = () => {
     console.log('checking answer', userEnteredValue, answer);
     let totalValue: number;
@@ -52,6 +58,7 @@ const CheckButton = (props: CheckButtonProps) => {
         break;
       default:
         allowableDelta = Math.pow(0.1, decimalPointPrecision);
+        break;
     }
 
     const withinRange =
@@ -60,15 +67,15 @@ const CheckButton = (props: CheckButtonProps) => {
         : false;
 
     if (withinRange) {
-      setCheckState('correct');
+      setAnswerState('correct');
     } else {
-      setCheckState('incorrect');
+      setAnswerState('incorrect');
     }
 
     console.log('comparision', totalValue, answer);
   };
 
-  switch (checkState) {
+  switch (answerState) {
     case 'unanswered':
       return (
         <Wrapper onClick={handleCheck} variant="outlined">
@@ -82,6 +89,12 @@ const CheckButton = (props: CheckButtonProps) => {
     case 'incorrect':
       return <IncorrectWrapper onClick={handleCheck}>Check</IncorrectWrapper>;
       break;
+    default:
+      return (
+        <Wrapper onClick={handleCheck} variant="outlined">
+          Check
+        </Wrapper>
+      );
   }
 };
 

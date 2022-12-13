@@ -10,6 +10,8 @@ interface IntegerInputProps {
   answer: number;
   placeholder?: string;
   variables: Variable[];
+  answerState: AnswerState;
+  setAnswerState: React.Dispatch<React.SetStateAction<AnswerState>>;
 }
 
 export type UserEnteredValueType = {
@@ -19,7 +21,7 @@ export type UserEnteredValueType = {
 };
 
 const IntegerInput = (props: IntegerInputProps) => {
-  const { answer, placeholder, variables } = props;
+  const { answer, placeholder, variables, answerState, setAnswerState } = props;
   console.log('variables', variables);
   const [userEnteredValue, setUserEnteredValue] =
     useState<UserEnteredValueType>({
@@ -28,7 +30,7 @@ const IntegerInput = (props: IntegerInputProps) => {
       decimalPlaceIndex: null,
     });
   const [showNumberPad, setShowNumberPad] = useState(true);
-  const [answerState, setAnswerState] = useState<AnswerState>('unanswered');
+  // const [answerState, setAnswerState] = useState<AnswerState>('unanswered');
   const numericalToString = userEnteredValue.numerical?.toString() || '';
 
   let displayNumerical;
@@ -103,11 +105,20 @@ const IntegerInput = (props: IntegerInputProps) => {
                 <Units>u²</Units>
               </IntInput>
             </InputWrapper>
-            <CheckButton userEnteredValue={userEnteredValue} answer={answer} />
+            {answerState === 'correct' ? (
+              <CorrectSymbol> ✓ </CorrectSymbol>
+            ) : (
+              <CheckButton
+                userEnteredValue={userEnteredValue}
+                answer={answer}
+                answerState={answerState}
+                setAnswerState={setAnswerState}
+              />
+            )}
           </InputAndCheck>
         </EquationAndInputWrapper>
 
-        <ControlPad>
+        <ControlPad $isvisible={answerState !== 'correct'}>
           <NumberPad
             userEnteredValue={userEnteredValue}
             setValue={setUserEnteredValue}
@@ -123,12 +134,10 @@ const IntegerInput = (props: IntegerInputProps) => {
   );
 };
 
-const ControlPad = styled.div`
-  display: flex;
+const ControlPad = styled.div<{ $isvisible: boolean }>`
+  display: ${(p) => (p.$isvisible ? 'flex' : 'none')};
   gap: 20px;
   margin-bottom: -12px;
-  margin-left: -12px;
-  margin-right: -12px;
   width: calc(100% + 24px);
 `;
 
@@ -138,6 +147,29 @@ const InputWrapper = styled.div`
   align-items: center;
   max-width: 100%;
   overflow: auto;
+`;
+
+const CorrectSymbol = styled.div`
+  height: 55px;
+  width: 55px;
+  position: absolute;
+  right: 15px;
+  bottom: -10px;
+
+  font-size: 2rem;
+  margin: auto;
+  margin-top: 13.25px;
+  margin-bottom: 13.25px;
+  color: ${cl.getHSL(cl.white)};
+  background: linear-gradient(
+    0deg,
+    ${cl.getHSL(cl.purple)},
+    ${cl.getHSL(cl.blue)}
+  );
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const PlaceholderSpan = styled.span`
@@ -152,6 +184,7 @@ const InputAndCheck = styled.div`
   gap: 20px;
 
   flex-wrap: wrap;
+  transition: all 0.5s linear;
 `;
 
 const Wrapper = styled.div`
@@ -163,13 +196,13 @@ const Wrapper = styled.div`
   align-items: flex-start;
   gap: 10px;
   color: ${cl.getHSL(cl.gray_dark)};
+  position: relative;
 `;
 
 const EquationAndInputWrapper = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
-  margin-left: -12px;
 `;
 
 const Equation = styled.div`

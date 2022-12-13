@@ -4,15 +4,22 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
 import IntegerAnswerQuestion from '../../components/Inputs/IntegerAnswerQuestion';
+import { AnswerState } from '../../components/Inputs/MultipleChoiceQuestion';
 import { Variable } from '../../components/Inputs/VariablePad';
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 
 const conceptual = () => {
   const [circleAreaAnswerBlurred, setCircleAreaAnswerBlurred] = useState(true);
-  const [questionOneAnswered, setQuestionOneAnswered] = useState(false);
-  const [questionTwoAnswered, setQuestionTwoAnswered] = useState(false);
+  const [sectionOneCompleted, setSectionOneCompleted] = useState(false);
+  const [questionOneAnswerState, setQuestionOneAnswerState] =
+    useState<AnswerState>('unanswered');
 
-  const questionsAnswered = [questionOneAnswered, questionTwoAnswered];
+  // const questionStatuses = [
+  //   question1Status,
+  //   question2Status,
+  //   question3Status,
+  //   question4Status,
+  // ];
 
   const variablesToUse: Variable[] = [
     {
@@ -36,8 +43,16 @@ const conceptual = () => {
     <TopicComponentBoilerPlate title={<>Conceptual Learning</>}>
       <>
         <P>
+          Conceptual learning is the absolute bees' knees. In may ways it is
+          math in it's purist form.
+          <br /> <br />
+          The ideal of conceptual learning inevitably falters in the every day
+          churn of most real-life math classes. This is normal and healthy, so
+          long as it gets resolved.
+          <br /> <br />
+          Let me explain by example:
           {/* Conceptual learning in math is about understanding how and why things
-          are true. It is not a series of steps to find a missing value, but a
+          are true. It is not a s peries of steps to find a missing value, but a
           logical understanding of something.
           <br />
           <br />
@@ -73,24 +88,26 @@ const conceptual = () => {
           To give you a more concrete idea of what I mean by conceptual learning
           follow me through a short 2 step thought experiment. */}
           <ul>
-            <li>
-              <IntegerAnswerQuestion
-                question="What is the area of the circle?"
-                answer={49 * Math.PI}
-                diagram={circleAreaDiagram}
-                variables={variablesToUse}
-                decimalPlaceIndex={null}
-              />
-              {/* <Step> Step 1 </Step> Ask yourself, do you know what is the area
+            <IntegerAnswerQuestion
+              question="What is the area of the circle?"
+              answer={49 * Math.PI}
+              diagram={circleAreaDiagram}
+              variables={variablesToUse}
+              decimalPlaceIndex={null}
+              answerState={questionOneAnswerState}
+              setAnswerState={setQuestionOneAnswerState}
+            />
+            {/* <Step> Step 1 </Step> Ask yourself, do you know what is the area
               of this circle? */}
-              <br />
-              <br />
-              {/* <CircleAreaImgWrap>
+            <br />
+            <br />
+            {/* <CircleAreaImgWrap>
                 <Image src="/conceptual_circle.svg" width="200" height="200" />
               </CircleAreaImgWrap> */}
-              {/* <IntegerInputWithPi answer={49 * Math.PI} placeholder={'?'} /> */}
-              <br />
-              <br />
+            {/* <IntegerInputWithPi answer={49 * Math.PI} placeholder={'?'} /> */}
+
+            <ContinuePrompts>complete the question to continue</ContinuePrompts>
+            <HiddenSection $isvisible={sectionOneCompleted}>
               <CircleAreaAnswer>
                 <CircleAreaAnswerCover blurred={circleAreaAnswerBlurred} />
                 Maybe a typical math student, like me, upon seeing this question
@@ -105,9 +122,10 @@ const conceptual = () => {
                   <span>Simplify &rarr; A = 49π u² is the answer.</span>
                 </StudentThoughts>
               </CircleAreaAnswer>
-            </li>
-            <br />
-            <br />
+              <br />
+              <br />
+              testing 123
+            </HiddenSection>
             <li>
               {/* <Step> Step 2 </Step> Ask yourself, do you know why A = πr² gives
               the area of a circle? Can you explain to me where that equation
@@ -139,11 +157,8 @@ const CircleAreaImgWrap = styled.div`
   justify-content: flex-start;
 `;
 
-const Step = styled.div`
-  color: ${cl.getHSL(cl.purple)};
-  font-weight: 600;
-  padding: 20px;
-  padding-left: 0px;
+const HiddenSection = styled.div<{ $isvisible: boolean }>`
+  display: ${(p) => (p.$isvisible ? 'block' : 'none')};
 `;
 
 const CircleAreaAnswer = styled.div`
@@ -166,6 +181,11 @@ const StudentThoughts = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+`;
+
+const ContinuePrompts = styled.div`
+  font-size: 1.25rem;
+  display: flex;
 `;
 
 const Question1 = styled.div``;

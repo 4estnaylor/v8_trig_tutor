@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import QUERIES from '../../breakpoints';
 import cl from '../../colors';
 import IntegerInput from './IntegerInput';
+import { AnswerState } from './MultipleChoiceQuestion';
 import { Variable } from './VariablePad';
 
 interface IntegerAnswerQuestionProps {
@@ -11,10 +12,13 @@ interface IntegerAnswerQuestionProps {
   decimalPlaceIndex: number | null;
   variables?: Variable[];
   diagram?: JSX.Element;
+  answerState: AnswerState;
+  setAnswerState: React.Dispatch<React.SetStateAction<AnswerState>>;
 }
 
 const IntegerAnswerQuestion = (props: IntegerAnswerQuestionProps) => {
-  const { question, answer, variables, diagram } = props;
+  const { question, answer, variables, diagram, answerState, setAnswerState } =
+    props;
   return (
     <Wrapper>
       <Header>Question</Header>
@@ -24,6 +28,8 @@ const IntegerAnswerQuestion = (props: IntegerAnswerQuestionProps) => {
         answer={answer}
         variables={variables || []}
         placeholder="?"
+        answerState={answerState}
+        setAnswerState={setAnswerState}
       />
     </Wrapper>
   );
@@ -39,7 +45,10 @@ const Wrapper = styled.div`
     margin: 10px;
   }
 
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 8px;
+  padding-right: 8px;
   border-radius: 8px;
 `;
 
