@@ -1,0 +1,23 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created using Krita: https://krita.org -->
+<svg xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:krita="http://krita.org/namespaces/svg/krita"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    width="1000pt"
+    height="1000pt"
+    viewBox="0 0 1000 1000">
+<defs>
+  <linearGradient id="gradient0" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="0.357301723408711" y2="0.992612663487456" spreadMethod="pad">
+   <stop stop-color="#50f330" offset="0" stop-opacity="1"/>
+   <stop stop-color="#00c664" offset="0.479338842975207" stop-opacity="1"/>
+   <stop stop-color="#44d1ed" offset="0.988888888888889" stop-opacity="1"/>
+  </linearGradient>
+  <linearGradient id="gradient1" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1" spreadMethod="pad">
+   <stop stop-color="#ff005d" offset="0" stop-opacity="1"/>
+   <stop stop-color="#44d1ed" offset="0.988888888888889" stop-opacity="1"/>
+  </linearGradient>
+ </defs>
+<circle id="shape1" transform="matrix(2.08338739772894 0 0 2.08338739772894 42.7364661984977 42.7364661984977)" r="219.5" cx="219.5" cy="219.5" fill="url(#gradient0)" stroke="url(#gradient1)" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel"/><path id="shape0" transform="matrix(2.08338739772894 0 0 2.08338739772894 512.883409850708 480.106997785334)" fill="none" stroke="#f6fdff" stroke-width="19.52" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M204.246 0L0 0"/><ellipse id="shape2" transform="matrix(2.08338739772894 0 0 2.08338739772894 470.621641570654 433.503083643175)" rx="21.5" ry="22" cx="21.5" cy="22" fill="#f6fdff" fill-rule="evenodd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel"/><text id="shape3" krita:useRichText="true" transform="matrix(2.08338739772894 0 0 2.08338739772894 647.232715713067 425.652780065221)" fill="#ffffff" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel" font-size="72" font-size-adjust="0.446903" font-stretch="normal" letter-spacing="0" word-spacing="0"><tspan x="0">4u</tspan></text>
+</svg>

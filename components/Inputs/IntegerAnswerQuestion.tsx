@@ -14,6 +14,7 @@ interface IntegerAnswerQuestionProps {
   diagram?: JSX.Element;
   answerState: AnswerState;
   setAnswerState: React.Dispatch<React.SetStateAction<AnswerState>>;
+  hint?: JSX.Element;
 }
 
 const IntegerAnswerQuestion = (props: IntegerAnswerQuestionProps) => {

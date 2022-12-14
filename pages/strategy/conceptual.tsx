@@ -28,12 +28,12 @@ const conceptual = () => {
       degree: 0,
       color: cl.getHSL(cl.blue),
     },
-    {
-      symbol: 'τ',
-      value: Math.PI * 2,
-      degree: 0,
-      color: cl.getHSL(cl.red),
-    },
+    // {
+    //   symbol: 'τ',
+    //   value: Math.PI * 2,
+    //   degree: 0,
+    //   color: cl.getHSL(cl.red),
+    // },
   ];
 
   const circleAreaDiagram = (
@@ -42,13 +42,19 @@ const conceptual = () => {
   return (
     <TopicComponentBoilerPlate title={<>Conceptual Learning</>}>
       <>
+        <Image
+          src="/beesknees.svg"
+          width={1000}
+          height={1000}
+          alt="bee's knees"
+        />
         <P>
           Conceptual learning is the absolute bees' knees. In may ways it is
           math in it's purist form.
           <br /> <br />
-          The ideal of conceptual learning inevitably falters in the every day
-          churn of most real-life math classes. This is normal and healthy, so
-          long as it gets resolved.
+          The ideal of conceptual learning inevitably gets gaps in the every day
+          churn of most real-life math classes. This is a normal and even
+          healthy part of any math diet, so long as it gets filled in.
           <br /> <br />
           Let me explain by example:
           {/* Conceptual learning in math is about understanding how and why things

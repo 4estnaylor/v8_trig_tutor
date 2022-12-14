@@ -2,9 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
 import CheckButton from './CheckButton';
-import { AnswerState } from './MultipleChoiceQuestion';
+import MultipleChoiceQuestion, { AnswerState } from './MultipleChoiceQuestion';
 import NumberPad from './NumberPad';
 import VariablePad, { Variable } from './VariablePad';
+
+import TheatersIcon from '@mui/icons-material/Theaters';
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import { Alert, Button, Typography } from '@mui/material';
+import Hint from './Hint';
+import WrittenExample from './WrittenExample';
+import Gap from '../Gaps/Gap';
 
 interface IntegerInputProps {
   answer: number;
@@ -23,6 +30,7 @@ export type UserEnteredValueType = {
 const IntegerInput = (props: IntegerInputProps) => {
   const { answer, placeholder, variables, answerState, setAnswerState } = props;
   console.log('variables', variables);
+  const [helpBarVisible, setHelpBarVisible] = useState(false);
   const [userEnteredValue, setUserEnteredValue] =
     useState<UserEnteredValueType>({
       numerical: null,
@@ -47,6 +55,12 @@ const IntegerInput = (props: IntegerInputProps) => {
   useEffect(() => {
     addEventListener('click', () => {});
   }, []);
+
+  useEffect(() => {
+    if (answerState === 'correct') {
+      setHelpBarVisible(true);
+    }
+  }, [answerState]);
 
   const integerInputRef = useRef<HTMLDivElement>(null);
 
@@ -129,10 +143,85 @@ const IntegerInput = (props: IntegerInputProps) => {
             setValue={setUserEnteredValue}
           />
         </ControlPad>
+        {answerState === 'incorrect' || helpBarVisible ? (
+          <HelpBar>
+            <Hint
+              hint={
+                <>
+                  <P>The area of a circle can be found with the equation: </P>
+                  <img
+                    src="/AreaOfCircleEqn.svg"
+                    width={100}
+                    height={100}
+                    style={{ margin: 'auto' }}
+                  />
+                  <P>where r is the radius of the circle</P>
+                </>
+              }
+            />
+            <WrittenExample
+              writtenExample={
+                <>
+                  <P> We will use the following equation:</P>
+                  <img
+                    src="/AreaOfCircleEqn.svg"
+                    width={100}
+                    height={100}
+                    style={{ margin: 'auto' }}
+                  />
+                  <P> consider the following circle:</P>
+                  <img
+                    src="/AreaOfCircleWrittenExample.svg"
+                    width={200}
+                    height={200}
+                  />
+                  <P> </P>
+                  <MultipleChoiceQuestion
+                    question={'What is the value of r, the radius?'}
+                    incorrectOptions={['8', '11']}
+                    correctOptions={['4']}
+                  />
+                  <Gap height={20} />
+                  <P>
+                    Once we have the value of the radius, we just need to
+                    replace r with its value in our equation.
+                  </P>
+                  <Gap height={20} />
+                  <MultipleChoiceQuestion
+                    question={
+                      'Which of the following equations will find us the answer?'
+                    }
+                    correctOptions={[
+                      <img src="/AIsPiRSquared.svg" width={100} height={50} />,
+                    ]}
+                    incorrectOptions={['incorrect1', 'incorrect2']}
+                  />
+                </>
+              }
+            />
+
+            <HelpBarIcon variant="outlined">
+              <TheatersIcon color="primary" />
+            </HelpBarIcon>
+          </HelpBar>
+        ) : (
+          <HelpButton
+            onClick={() => {
+              setHelpBarVisible(true);
+            }}
+          >
+            {' '}
+            help?{' '}
+          </HelpButton>
+        )}
       </Wrapper>
     </>
   );
 };
+
+const P = styled.div`
+  padding: 5px;
+`;
 
 const ControlPad = styled.div<{ $isvisible: boolean }>`
   display: ${(p) => (p.$isvisible ? 'flex' : 'none')};
@@ -141,12 +230,41 @@ const ControlPad = styled.div<{ $isvisible: boolean }>`
   width: calc(100% + 24px);
 `;
 
+const HelpBarIcon = styled(Button)`
+  min-width: 55px;
+  min-height: 55px;
+  max-width: 55px;
+  max-height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const InputWrapper = styled.div`
   position: relative;
   display: flex;
   align-items: center;
   max-width: 100%;
   overflow: auto;
+`;
+
+const HelpButton = styled(Button)`
+  min-width: 55px;
+  min-height: 55px;
+  max-width: 55px;
+  max-height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+`;
+
+const HelpBar = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 55px);
+  grid-template-rows: 55px;
+  gap: 5px 5px;
+  padding-top: 15px;
 `;
 
 const CorrectSymbol = styled.div`

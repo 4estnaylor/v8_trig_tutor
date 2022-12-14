@@ -8,8 +8,8 @@ import MultipleChoiceOption from './MultipleChoiceOption';
 
 interface MultipleChoiceQuestionProps {
   question: string;
-  incorrectOptions: string[];
-  correctOptions: string[];
+  incorrectOptions: (string | JSX.Element | React.ReactElement)[];
+  correctOptions: (string | JSX.Element | React.ReactElement)[];
 }
 
 function shuffle(array: any[]) {
@@ -124,7 +124,7 @@ const Wrapper = styled.div`
   margin: 2px;
 
   @media ${QUERIES.tabletAndUp} {
-    margin: 10px;
+    margin: 0px;
   }
 
   padding: 20px;
