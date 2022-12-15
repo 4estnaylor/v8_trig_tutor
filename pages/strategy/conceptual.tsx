@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
+import Gap from '../../components/Gaps/Gap';
 import IntegerAnswerQuestion from '../../components/Inputs/IntegerAnswerQuestion';
 import MultipleChoiceQuestion, {
   AnswerState,
@@ -52,19 +53,26 @@ const conceptual = () => {
           height={1000}
           alt="bee's knees"
         />
+
         <P>
-          Conceptual learning is the absolute bees' knees. In may ways it is
+          Conceptual learning is the absolute bees' knees. In many ways, it is
           math in it's purist form.
-          <br /> <br />A studen'ts in math inevitably gets gaps in the every day
-          churn of most real-life math classes. These gaps are a normal and even
-          healthy part of any math diet,
+          <Gap height={30} />
+          <EinsteinQuote>
+            Any fool can know. The point is to understand.
+            <ByLine>Probably Not Einstein</ByLine>
+          </EinsteinQuote>
+          <Gap height={30} />
+          Now and then, a student's conceptual understanding inevitably gets a
+          gap in the churn of a real-life math class. These gaps are a normal
+          and even healthy part of any math diet,
           <span style={{ color: cl.getHSL(cl.purple), fontWeight: 800 }}>
             {' '}
             so long as it gets returned to{' '}
           </span>{' '}
           and filled in.
           <br /> <br />
-          Let me explain by example:
+          Let me make a distinction by example:
           {/* Conceptual learning in math is about understanding how and why things
           are true. It is not a s peries of steps to find a missing value, but a
           logical understanding of something.
@@ -123,8 +131,8 @@ const conceptual = () => {
           </ContinuePrompts>
           <HiddenSection $isvisible={questionOneAnswerState === 'correct'}>
             <CircleAreaAnswer>
-              Maybe a typical math student, like me, upon seeing this question
-              thinks something like:
+              Maybe like me, upon seeing this question, you think something
+              along the lines of:
               <br />
               <br />
               <StudentThoughts>
@@ -137,13 +145,21 @@ const conceptual = () => {
             </CircleAreaAnswer>
             <br />
             <br />
-            We are not demonstrating conceptual learning in answering the
-            question this way. We are showing the technical ability to use an
+            We are <span style={{ fontWeight: 800 }}>not really</span>{' '}
+            demonstrating conceptual learning in answering the question this
+            way. Instead, we are only showing the technical ability to use an
             equation.
             <br />
             <br />
-            Imagine a different scenario. Your grandmother says you've got it
-            all wrong. She says the area of a circle is,
+            <Alert severity="info">
+              That's not a bad thing by the way! Being able to solve problems
+              technically, step-by-step, algorithm is the well earned fruit of
+              conceptual understanding.
+            </Alert>
+            <br />
+            <br />
+            Imagine a different scenario now. Your grandmother says you've got
+            it all wrong. She says the area of a circle is actually,
             <br />
             <br />
             <EquationContainer>
@@ -182,18 +198,18 @@ const conceptual = () => {
             <EinsteinQuote>
               You do not really understand something unless you can explain it
               to your grandmother.
-              <ByLine>Probably Not Einstein</ByLine>
+              <ByLine>Again, Probably Not Einstein</ByLine>
             </EinsteinQuote>
             <br />
             <br />
             <Alert severity="warning">
-              This quote, like so many others quotes regularly attributed to
-              Einstein, was probably not actually said by him. Still a good
-              quote though!
+              These quotes, like so many others regularly attributed to
+              Einstein, were probably not actually said by him. Still good
+              quotes though!
               <br />
               <br />I double-checked with the Ultimate Quotable Einstein
               published by Princeton University Press which also cannot verify
-              any source for this particular quote.
+              any source for these particular quotes.
             </Alert>
             <br />
             <br />
@@ -345,7 +361,8 @@ const EinsteinQuote = styled.div`
   flex-direction: column;
   border-left: 2px solid ${cl.getHSL(cl.purple)};
   margin-top: 0px;
-  margin-left: 10px;
+  margin-left: auto;
+  margin-right: auto;
   max-width: 300px;
   gap: 20px;
   /* background-color: ${cl.getHSLA(cl.purple, 0.05)}; */
