@@ -9,9 +9,9 @@ const math_kraken = () => {
     <TopicComponentBoilerPlate title={<>Math Kraken</>}>
       <Wrapper>
         If feared and disregarded, trig will inevitably sink students, but if
-        understood and cared for, trig becomes a powerful ally. Trust me when I
-        say, trig is a kraken you will want to be on friendly terms with as you
-        navigate the world of mathematics.
+        understood and cared for, trig becomes a powerful ally. Trig is a kraken
+        you will want to be on friendly terms with as you navigate the world of
+        mathematics.
         <br /> <br />
         Sweet mother of standards-compliant lesson plans, I have taught a lot of
         different math (and math-ish) classes. I have taken even more as a

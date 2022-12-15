@@ -1,3 +1,4 @@
+import { Alert } from '@mui/material';
 import { ST } from 'next/dist/shared/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -54,10 +55,9 @@ const conceptual = () => {
         <P>
           Conceptual learning is the absolute bees' knees. In may ways it is
           math in it's purist form.
-          <br /> <br />
-          The ideal of conceptual understanding in math inevitably gets gaps in
-          the every day churn of most real-life math classes. These gaps are a
-          normal and even healthy part of any math diet,
+          <br /> <br />A studen'ts in math inevitably gets gaps in the every day
+          churn of most real-life math classes. These gaps are a normal and even
+          healthy part of any math diet,
           <span style={{ color: cl.getHSL(cl.purple), fontWeight: 800 }}>
             {' '}
             so long as it gets returned to{' '}
@@ -142,11 +142,8 @@ const conceptual = () => {
             equation.
             <br />
             <br />
-            Consider a different scenario. Imagine your grandmother disagrees
-            with you not only about the answer, but the equation you are using
-            to use it. Your grandmother stubbornly says that you have
-            misremembered basic geometry; the equation for the area of a circle
-            is actually:
+            Imagine a different scenario. Your grandmother says you've got it
+            all wrong. She says the area of a circle is,
             <br />
             <br />
             <EquationContainer>
@@ -157,10 +154,10 @@ const conceptual = () => {
                 alt="wrong area of circle equation"
               />
             </EquationContainer>
-            The only hope to convince your grandmother, is to logically explain
-            why the area of circle must be described by the equation A = πr².
-            Could you explain not just the technique to use the equation, but
-            the underlying concept of where the equation comes from?
+            Could you explain to your grandmother why <em>your equation</em> is
+            the correct way to find the area and not hers? In other, could you
+            explain the underlying concept of where the equation comes from in
+            the first place?
             <br />
             <br />
             If so,{' '}
@@ -179,6 +176,25 @@ const conceptual = () => {
               </span>
             </Link>{' '}
             for you grandmother. `
+            <Image src="/einstein.svg" width={1000} height={1000} />
+            <br />
+            <br />
+            <EinsteinQuote>
+              You do not really understand something unless you can explain it
+              to your grandmother.
+              <ByLine>Probably Not Einstein</ByLine>
+            </EinsteinQuote>
+            <br />
+            <br />
+            <Alert severity="warning">
+              This quote, like so many others quotes regularly attributed to
+              Einstein, was probably not actually said by him. Still a good
+              quote though!
+              <br />
+              <br />I double-checked with the Ultimate Quotable Einstein
+              published by Princeton University Press which also cannot verify
+              any source for this particular quote.
+            </Alert>
             <br />
             <br />
             <MultipleChoiceQuestion
@@ -191,13 +207,13 @@ const conceptual = () => {
             />
             <br />
             <br />
-            Conceptual understanding is not only important because it is "pure"
+            {/* Conceptual understanding is not only important because it is "pure"
             or "the bee's knees".{' '}
             <span style={{ color: cl.getHSL(cl.blue), fontWeight: 800 }}>
               Conceptual understanding has practical importance.
             </span>
             <br />
-            <br />
+            <br /> */}
             {/* With conceptual understanding things "make sense". If you don't have
             conceptual understanding, math becomes shrouded in mystery and the
             techniques you are using become a mixture of memorization and
@@ -212,7 +228,7 @@ const conceptual = () => {
             an inability to memorize, but from a gap in conceptual knowledge.
             <br />
             <br />
-            Students (and teachers) understandably tend to focus more on math
+            {/* Students (and teachers) understandably tend to focus more on math
             techniques than the underlying math concepts. It often seems faster
             and more critical to learn technique, because after all, technique
             is what you will students are directly tested on.
@@ -231,17 +247,17 @@ const conceptual = () => {
             <br />
             Begs the question, why even bother with conceptual learning then?
             <br />
-            <br />
+            <br /> */}
             If you train solely technique, while developing holes in conceptual
             understanding, reliance on memorization grows beyond what most of us
             can manage. Technique will not be a logical strategy, but an
             ever-growing heap of arbitrary rules to follow. This heap, when
             grown sufficiently large, consumes most of the cognitive load your
-            brain can manage – effectively making it :
+            brain putting you in a place where it is:
             <ol>
               <li>
-                impossible to think clearly while wracking your memory for rule
-                after rule.
+                all but impossible to think clearly while wracking your memory
+                for rule after rule.
               </li>
               <li>
                 critical that you don't forget even the tiniest detail, because
@@ -253,16 +269,17 @@ const conceptual = () => {
             learn anything or test well.
             <br />
             <br />
-            If you are generally struggling with trig or any math course, the
-            first and most likely culprit is conceptual gaps.
+            If a student tells me they are generally struggling with trig or any
+            math course, the culprit that comes to mind first and foremost is a
+            conceptual gap.
             <br />
             <br />
-            Conceptual gaps are expected, and really not a big deal if nipped in
-            the bud. When you encounter them, rather than trying to keep at it,
-            or push ahead into new math ideas, move backwards. Move backwards
-            until just before you feel comfortable, and things make complete
-            sense. That is probably what you want to dig into, working your way
-            back up from there.
+            Conceptual gaps are expected, and not a big deal if nipped in the
+            bud. When you encounter them, rather than trying to keep at it, or
+            push ahead into new math ideas, move backwards. Move backwards until
+            just before you feel comfortable, and things make complete sense.
+            That is probably what you want to dig into, working your way back up
+            from there.
           </HiddenSection>
           <li>
             {/* <Step> Step 2 </Step> Ask yourself, do you know why A = πr² gives
@@ -320,6 +337,28 @@ const StudentThoughts = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+`;
+
+const EinsteinQuote = styled.div`
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid ${cl.getHSL(cl.purple)};
+  margin-top: 0px;
+  margin-left: 10px;
+  max-width: 300px;
+  gap: 20px;
+  /* background-color: ${cl.getHSLA(cl.purple, 0.05)}; */
+  font-size: 1rem;
+`;
+
+const ByLine = styled.div`
+  font-size: 0.8rem;
+  font-weight: 800;
+`;
+const CircaLine = styled.div`
+  padding-top: 10px;
+  font-size: 0.8rem;
 `;
 
 const ContinuePrompts = styled.div<{ $isvisible: boolean }>`
