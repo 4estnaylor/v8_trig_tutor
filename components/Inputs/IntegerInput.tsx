@@ -159,7 +159,7 @@ const IntegerInput = (props: IntegerInputProps) => {
                 </>
               }
             />
-            <WrittenExample
+            {/* <WrittenExample
               writtenExample={
                 <>
                   <P> We will use the following equation:</P>
@@ -198,7 +198,7 @@ const IntegerInput = (props: IntegerInputProps) => {
                   />
                 </>
               }
-            />
+            /> */}
 
             <HelpBarIcon variant="outlined">
               <TheatersIcon color="primary" />

@@ -10,6 +10,8 @@ interface MultipleChoiceQuestionProps {
   question: string;
   incorrectOptions: (string | JSX.Element | React.ReactElement)[];
   correctOptions: (string | JSX.Element | React.ReactElement)[];
+  answerState: AnswerState;
+  setAnswerState: React.Dispatch<React.SetStateAction<AnswerState>>;
 }
 
 function shuffle(array: any[]) {
@@ -39,13 +41,17 @@ export type AnswerState =
   | 'invalid amount of answers';
 
 const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
-  const { question, incorrectOptions, correctOptions } = props;
+  const {
+    question,
+    incorrectOptions,
+    correctOptions,
+    answerState,
+    setAnswerState,
+  } = props;
   // const shuffledOptions = shuffle([...incorrectOptions, ...correctOptions]);
   const [shuffledOptions, setShuffledOptions] = useState<any[]>([]);
 
   const [selectedValues, setSelectedValues] = useState<number[]>([]);
-
-  const [answerState, setAnswerState] = useState<AnswerState>('unanswered');
 
   const correctSymbol = <CorrectSymbol> ✓ </CorrectSymbol>;
 

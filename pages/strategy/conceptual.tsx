@@ -19,6 +19,9 @@ const conceptual = () => {
   const [questionOneAnswerState, setQuestionOneAnswerState] =
     useState<AnswerState>('unanswered');
 
+  const [questionTwoAnswerState, setQuestionTwoAnswerState] =
+    useState<AnswerState>('unanswered');
+
   // const questionStatuses = [
   //   question1Status,
   //   question2Status,
@@ -144,11 +147,8 @@ const conceptual = () => {
               </StudentThoughts>
             </CircleAreaAnswer>
             <br />
-            <br />
-            We are <span style={{ fontWeight: 800 }}>not really</span>{' '}
-            demonstrating conceptual learning in answering the question this
-            way. Instead, we are only showing the technical ability to use an
-            equation.
+            conceptual learning in answering the question this way. Instead, am
+            only showing the technical ability to use an equation.
             <br />
             <br />
             <Alert severity="info">
@@ -171,9 +171,9 @@ const conceptual = () => {
               />
             </EquationContainer>
             Could you explain to your grandmother why <em>your equation</em> is
-            the correct way to find the area and not hers? In other, could you
-            explain the underlying concept of where the equation comes from in
-            the first place?
+            the correct way to find the area and not hers? Could you explain the
+            underlying concept of where the equation comes from in the first
+            place?
             <br />
             <br />
             If so,{' '}
@@ -192,7 +192,6 @@ const conceptual = () => {
               </span>
             </Link>{' '}
             for you grandmother. `
-            <Image src="/einstein.svg" width={1000} height={1000} />
             <br />
             <br />
             <EinsteinQuote>
@@ -200,6 +199,7 @@ const conceptual = () => {
               to your grandmother.
               <ByLine>Again, Probably Not Einstein</ByLine>
             </EinsteinQuote>
+            <Image src="/einstein.svg" width={1000} height={1000} />
             <br />
             <br />
             <Alert severity="warning">
@@ -220,9 +220,13 @@ const conceptual = () => {
                 'Having a math formula memorized',
                 'Knowing how to use a math formula',
               ]}
+              answerState={questionTwoAnswerState}
+              setAnswerState={setQuestionTwoAnswerState}
             />
-            <br />
-            <br />
+          </HiddenSection>
+          <br />
+          <br />
+          <HiddenSection $isvisible={questionTwoAnswerState === 'correct'}>
             {/* Conceptual understanding is not only important because it is "pure"
             or "the bee's knees".{' '}
             <span style={{ color: cl.getHSL(cl.blue), fontWeight: 800 }}>
