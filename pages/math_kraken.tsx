@@ -1,10 +1,14 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import MultipleChoiceQuestion from '../components/Inputs/MultipleChoiceQuestion';
+import MultipleChoiceQuestion, {
+  AnswerState,
+} from '../components/Inputs/MultipleChoiceQuestion';
 import TopicComponentBoilerPlate from '../components/TopicComponents/TopicComponentBoilerPlate';
 
 const math_kraken = () => {
+  const [qTrigImportanceState, setQTrigImportanceState] =
+    useState<AnswerState>('unanswered');
   return (
     <TopicComponentBoilerPlate title={<>Math Kraken</>}>
       <Wrapper>
@@ -47,6 +51,8 @@ const math_kraken = () => {
             'It has many applications useful in every day life, engineering, and architecture.',
             'It gives insight into complex systems like few other subjects.',
           ]}
+          answerState={qTrigImportanceState}
+          setAnswerState={setQTrigImportanceState}
         />
       </Wrapper>
     </TopicComponentBoilerPlate>
