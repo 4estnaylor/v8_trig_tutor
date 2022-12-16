@@ -1,13 +1,18 @@
 import { Alert } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../colors';
-import MultipleChoiceQuestion from '../components/Inputs/MultipleChoiceQuestion';
+import MultipleChoiceQuestion, {
+  AnswerState,
+} from '../components/Inputs/MultipleChoiceQuestion';
 import TopicComponentBoilerPlate from '../components/TopicComponents/TopicComponentBoilerPlate';
 
 const double_down = () => {
+  const [adviceQuestionState, setAdviceQuestionState] =
+    useState<AnswerState>('unanswered');
+
   return (
     <TopicComponentBoilerPlate title={<>Double Down</>}>
       <>
@@ -55,6 +60,8 @@ const double_down = () => {
               'Forget about math. Math is for robots now.',
               'Pursue your interests and ask lots of questions along the way.',
             ]}
+            answerState={adviceQuestionState}
+            setAnswerState={setAdviceQuestionState}
           />
         </Wrapper>
       </>
