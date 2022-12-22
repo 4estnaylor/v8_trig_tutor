@@ -39,7 +39,6 @@ const TopicComponentBoilerPlate = (props: TopicComponentBoilerPlateProps) => {
 
       if (urlTitle === pathName) {
         matchingTopicComponent = topicComponent;
-        // console.log('truesy', matchingTopicComponent);
       }
 
       findMatchingSubComponents(topicComponent);
@@ -99,10 +98,6 @@ const TopicComponentBoilerPlate = (props: TopicComponentBoilerPlateProps) => {
     if (!isLastTopicComponent) {
       if (matchingTopicComponent.subComponents) {
         nextHref = matchingTopicComponent.subComponents[0].title;
-        console.log(
-          'should be happneing',
-          matchingTopicComponent.subComponents[0].title
-        );
       } else {
         nextHref =
           matchingTopicComponent.parentTopicSection.topicComponents[
@@ -169,17 +164,18 @@ const TopicComponentBoilerPlate = (props: TopicComponentBoilerPlateProps) => {
       }
       // let hrefSplit = nextHref.split("/");
       nextHref = convertToURL(nextHref);
-      console.log(nextHref);
     }
   }
 
   if (matchingSubComponent) {
     getNextHrefForSubComponent(matchingSubComponent);
     if (!nextHref) {
+      console.log(nextHref);
+      console.log("that's your problem!");
       return <></>;
     } else {
       nextHref = convertToURL(nextHref);
-      console.log(nextHref);
+      nextHref = nextHref.split('/')[1];
     }
   }
 

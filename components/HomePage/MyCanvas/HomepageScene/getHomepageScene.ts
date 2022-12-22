@@ -134,6 +134,9 @@ const getHomepageScene: SceneGetter = (
   const drawTriangle = () => {
     let interativePoints = scene.assets.listenFor;
     let [pointA, pointB, pointC] = interativePoints;
+    interativePoints.forEach((interactivePoint: InteractivePoint) => {
+      interactivePoint.radius = 35;
+    });
 
     ctx.strokeStyle = 'white';
     ctx.lineWidth = 5;

@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created using Krita: https://krita.org -->
+<svg xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:krita="http://krita.org/namespaces/svg/krita"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    width="1000pt"
+    height="1000pt"
+    viewBox="0 0 1000 1000">
+<defs>
+  <linearGradient id="gradient0" gradientUnits="objectBoundingBox" x1="0.5" y1="1.5" x2="0.5" y2="0.071428571428573" spreadMethod="pad">
+   <stop stop-color="#ffffff" offset="0" stop-opacity="1"/>
+   <stop stop-color="#4c4c4c" offset="1" stop-opacity="0.231372549019608"/>
+  </linearGradient>
+  <linearGradient id="gradient1" gradientUnits="objectBoundingBox" x1="-0.176238410806032" y1="0.581379896739605" x2="1.23492369450548" y2="0.522970341136738" spreadMethod="pad">
+   <stop stop-color="#ff0059" offset="0" stop-opacity="1"/>
+   <stop stop-color="#efe621" offset="1" stop-opacity="1"/>
+  </linearGradient>
+ </defs>
+<rect id="shape0" transform="translate(72.1398732659125, 784.505088354319)" fill="url(#gradient0)" fill-rule="evenodd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel" width="855.720253468175" height="122.715879742575" rx="12.2245750495454" ry="15.0264342541929"/><path id="shape0" transform="matrix(1.34754410133988 0 0 1.34754410133988 284.556798570201 199.94312600977)" fill="none" stroke="#122021" stroke-width="30" stroke-linecap="square" stroke-linejoin="bevel" d="M0 0C0.574822 43.5435 1.23053 98.6462 81.3526 93.5846"/><path id="shape1" transform="matrix(1.34754410133988 0 0 1.34754410133988 501.837843570021 430.040551643066)" fill="none" stroke="#122021" stroke-width="30" stroke-linecap="square" stroke-linejoin="bevel" d="M0 0L0.433677 59.1051"/><circle id="shape01" transform="matrix(1.34754403887925 0 0 1.34754403887925 437.689124865457 550.417488607775)" r="49.4974203889033" cx="49.4974203889033" cy="49.4974203889033" fill="#161cc1" fill-opacity="0.254901960784314" fill-rule="evenodd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel"/><text id="shape2" krita:useRichText="true" transform="translate(436.2421875, 372.247670358041)" fill="#161cc1" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel" font-size="140" font-size-adjust="0.446903" font-stretch="normal" font-weight="700" letter-spacing="0" word-spacing="0"><tspan x="0">✓</tspan></text><text id="shape02" krita:useRichText="true" transform="matrix(0.999999968963063 0 0 0.999999968963063 226.12649799755 151.233020546239)" fill="#161cc1" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel" font-size="140" font-size-adjust="0.446903" font-stretch="normal" font-weight="700" letter-spacing="0" word-spacing="0"><tspan x="0">✓</tspan></text><rect id="shape3" transform="translate(77.0781933394624, 796.164643385431)" fill="url(#gradient1)" fill-rule="evenodd" width="554.032045336638" height="98" rx="7.91474350480912" ry="12"/><text id="shape4" krita:useRichText="true" transform="translate(277.862996991513, 867.731411666201)" fill="#ffffff" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel" font-size="64" font-size-adjust="0.446903" font-stretch="normal" letter-spacing="0" word-spacing="0"><tspan x="0">62%</tspan></text>
+</svg>

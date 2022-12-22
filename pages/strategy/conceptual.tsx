@@ -75,7 +75,10 @@ const conceptual = () => {
           </span>{' '}
           and filled in.
           <br /> <br />
-          Let me make a distinction by example:
+          Let me make a distinction with two examples:
+          <br />
+          <br />
+          <h4>Example 1</h4>
           {/* Conceptual learning in math is about understanding how and why things
           are true. It is not a s peries of steps to find a missing value, but a
           logical understanding of something.
@@ -158,6 +161,7 @@ const conceptual = () => {
             </Alert>
             <br />
             <br />
+            <h4>Example 2</h4>
             Imagine a different scenario now. Your grandmother says you've got
             it all wrong. She says the area of a circle is actually,
             <br />
