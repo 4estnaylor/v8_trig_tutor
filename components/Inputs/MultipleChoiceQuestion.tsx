@@ -123,7 +123,12 @@ const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
 };
 
 const Wrapper = styled.div`
-  /* background-color: ${cl.getHSLA(cl.black, 0.5)}; */
+  background: linear-gradient(
+    0deg,
+    ${cl.getHSLA(cl.black, 0.8)},
+    ${cl.getHSLA(cl.black, 1)}
+  );
+
   box-shadow: 0px 0px 4px ${cl.getHSLA(cl.black, 0.5)};
   color: ${cl.getHSL(cl.gray_dark)};
 
@@ -137,10 +142,13 @@ const Wrapper = styled.div`
   border-radius: 8px;
 `;
 
-const Header = styled.h2``;
+const Header = styled.h2`
+  color: ${cl.getHSL(cl.white)};
+`;
 
 const Question = styled.div`
   font-size: 1.25rem;
+  color: ${cl.getHSL(cl.white)};
 `;
 
 const CorrectSymbol = styled.div`
@@ -187,7 +195,7 @@ const ChooseXOfY = styled.div<{ isHighlighted: boolean }>`
   background-color: ${(p) =>
     p.isHighlighted ? cl.getHSL(cl.red) : 'transparent'};
   color: ${(p) =>
-    p.isHighlighted ? cl.getHSL(cl.white) : cl.getHSL(cl.gray_mid)};
+    p.isHighlighted ? cl.getHSL(cl.white) : cl.getHSL(cl.white)};
   border-radius: 8px;
 `;
 

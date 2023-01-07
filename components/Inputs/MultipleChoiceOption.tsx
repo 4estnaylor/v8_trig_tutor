@@ -28,11 +28,14 @@ const MultipleChoiceOption = (props: MultipleChoiceOptionProps) => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper
+      onClick={handleRadioClick}
+      selected={selectedValues.includes(radioKey)}
+    >
       <Radio
         value={radioKey}
-        onClick={handleRadioClick}
         checked={selectedValues.includes(radioKey)}
+        sx={{ color: 'white' }}
       />
       <OptionWrapper selected={selectedValues.includes(radioKey)}>
         {option}
@@ -41,15 +44,20 @@ const MultipleChoiceOption = (props: MultipleChoiceOptionProps) => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ selected: boolean }>`
   display: flex;
   align-items: center;
+  background-color: ${(p) =>
+    p.selected ? cl.getHSLA(cl.white, 1) : 'transparent'};
+  border-radius: 8px;
 `;
 
 const OptionWrapper = styled.div<{ selected: boolean }>`
   flex: 1;
-  color: ${(p) =>
-    p.selected ? cl.getHSL(cl.purple) : cl.getHSL(cl.gray_dark)};
+  color: ${(p) => (p.selected ? cl.getHSL(cl.purple) : cl.getHSL(cl.white))};
+
+  border-radius: 8px;
+  padding: 10px;
 `;
 
 export default MultipleChoiceOption;

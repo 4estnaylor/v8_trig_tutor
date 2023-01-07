@@ -45,7 +45,7 @@ export default function Home() {
             <MyCanvas sceneGetter={getHomepageScene} />
             <BottomBanner>
               <TuftBird>
-                <ProgressBar />
+                <ProgressBar progress={0.94} />
                 {/* <img src="/tuftbird.svg" height="80px" loading="lazy" /> */}
               </TuftBird>
             </BottomBanner>

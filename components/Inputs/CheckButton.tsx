@@ -91,7 +91,11 @@ const CheckButton = (props: CheckButtonProps) => {
       break;
     default:
       return (
-        <Wrapper onClick={handleCheck} variant="outlined">
+        <Wrapper
+          onClick={handleCheck}
+          sx={{ color: 'white' }}
+          variant="outlined"
+        >
           Check
         </Wrapper>
       );
