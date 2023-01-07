@@ -10,6 +10,7 @@ import cl from '../colors';
 import CourseMap from '../components/HomePage/CourseMap/CourseMap';
 import useWindowSize from '../components/HomePage/MyCanvas/useWindowSize';
 import CourseMap2 from '../components/HomePage/CourseMap/CourseMap2';
+import ProgressBar from '../components/HomePage/ProgressBar';
 
 export default function Home() {
   const size = useWindowSize();
@@ -44,7 +45,8 @@ export default function Home() {
             <MyCanvas sceneGetter={getHomepageScene} />
             <BottomBanner>
               <TuftBird>
-                <img src="/tuftbird.svg" height="80px" loading="lazy" />
+                <ProgressBar />
+                {/* <img src="/tuftbird.svg" height="80px" loading="lazy" /> */}
               </TuftBird>
             </BottomBanner>
           </CanvasWrap>
@@ -148,7 +150,8 @@ const ReallyReallyGood = styled.div`
 
 const TuftBird = styled.div`
   position: absolute;
-  right: 10px;
+  right: 50%;
+  transform: translateX(50%);
 `;
 
 const CanvasWrap = styled.div`

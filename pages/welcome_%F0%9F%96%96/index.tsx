@@ -2,11 +2,13 @@ import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
-import NextButton from '../../components/CourseMap/NextButton';
+import NextButton, { Front } from '../../components/CourseMap/NextButton';
 import Gap from '../../components/Gaps/Gap';
 import topicSections from '../../components/HomePage/CourseMap/Courses';
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 import GoogleIcon from '@mui/icons-material/Google';
+import ProgressBar from '../../components/HomePage/ProgressBar';
+import { Button } from '@mui/material';
 
 const index = () => {
   return (
@@ -28,11 +30,15 @@ const index = () => {
         </IframeWrappper>
         <Gap height={20} />
 
-        <p>Here are two ways you can use this site:</p>
+        <p>Here are two options to consider using this site:</p>
 
         <SignInOptions>
           <BrowseCard>
-            <h4> browse 👀</h4>
+            <Number>option 1</Number>
+            <FakeButton>
+              {' '}
+              <span>👀</span>JUST BROWSE{' '}
+            </FakeButton>
             <FeaturesList>
               <li>
                 <Purple>✓</Purple>free
@@ -44,18 +50,26 @@ const index = () => {
                 <Red>✗</Red>record progress
               </li>
             </FeaturesList>
-            <Image
-              src="/just_browse.svg"
-              width={1000}
-              height={1000}
-              style={{ fontFamily: 'sans-serif' }}
-            />
+            <ImageShrinker>
+              <Image
+                src="/just_browse.svg"
+                width={100}
+                height={100}
+                style={{ fontFamily: 'sans-serif' }}
+              />
+            </ImageShrinker>
+            <ProgressBar progress={0} />
           </BrowseCard>
           <SignInCard>
-            <h4>
-              {' '}
+            <Number>option 2</Number>
+            <SignInButton
+              variant="outlined"
+              onClick={() => {
+                console.log('sign in!');
+              }}
+            >
               <GoogleIcon color="primary" /> sign in
-            </h4>
+            </SignInButton>
             <FeaturesList>
               <li>
                 <Purple>✓</Purple>free
@@ -67,12 +81,15 @@ const index = () => {
                 <Purple>✓</Purple>record progress
               </li>
             </FeaturesList>
-            <Image
-              src="/sign_in.svg"
-              width={1000}
-              height={1000}
-              style={{ fontFamily: 'sans-serif' }}
-            />
+            <ImageShrinker>
+              <Image
+                src="/sign_in.svg"
+                width={100}
+                height={100}
+                style={{ fontFamily: 'sans-serif' }}
+              />
+            </ImageShrinker>
+            <ProgressBar progress={0.73} />
           </SignInCard>
         </SignInOptions>
         <Gap height={40} />
@@ -96,10 +113,56 @@ const index = () => {
   );
 };
 
+const ImageShrinker = styled.div`
+  width: fit-content;
+`;
+
 const IframeWrappper = styled.div`
   position: relative;
   width: 100%;
   padding-top: 56.25%;
+`;
+
+const RainbowText = styled.div`
+  width: fit-content;
+  background: linear-gradient(
+    90deg,
+    ${cl.getHSL(cl.blue)},
+    ${cl.getHSL(cl.purple)},
+    ${cl.getHSL(cl.red)}
+  );
+
+  background-size: 100%;
+  color: transparent;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  animation: gradient 6s linear infinte;
+`;
+
+const SignInButton = styled(Button)`
+  box-shadow: 1px 1px 5px ${cl.getHSL(cl.purple)};
+  font-size: 1rem;
+  display: flex;
+  gap: 15px;
+  justify-content: flex-start;
+  width: fit-content;
+`;
+
+const FakeButton = styled(SignInButton)`
+  pointer-events: none;
+  box-shadow: none;
+  color: ${cl.getHSL(cl.black)};
+`;
+
+const NoSignInNecessary = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: ${cl.getHSL(cl.gray_dark)};
+  flex-grow: 1;
 `;
 
 const Purple = styled.span`
@@ -114,17 +177,28 @@ const Red = styled.span`
   font-weight: 800;
 `;
 
+const Number = styled(RainbowText)`
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding-bottom: 20px;
+  color: ${cl.getHSL(cl.black)};
+`;
+
 const Card = styled.div`
-  min-width: 200px;
+  min-width: 300px;
   & h4 {
     text-align: center;
     display: flex;
     align-items: center;
     gap: 5px;
     justify-content: center;
+    font-size: 1.25rem;
+    color: ${cl.getHSL(cl.purple)};
   }
+  display: flex;
+  flex-direction: column;
 
-  box-shadow: 1px 1px 4px ${cl.getHSL(cl.gray_mid)};
+  /* box-shadow: 1px 1px 4px ${cl.getHSL(cl.gray_mid)}; */
   border-radius: 8px;
   padding: 20px;
 `;

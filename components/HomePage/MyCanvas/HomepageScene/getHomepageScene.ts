@@ -135,10 +135,9 @@ const getHomepageScene: SceneGetter = (
     let interativePoints = scene.assets.listenFor;
     let [pointA, pointB, pointC] = interativePoints;
     interativePoints.forEach((interactivePoint: InteractivePoint) => {
-      interactivePoint.radius = 35;
+      interactivePoint.radius = 30;
     });
 
-    ctx.strokeStyle = 'white';
     ctx.lineWidth = 5;
     ctx.lineCap = 'round';
 

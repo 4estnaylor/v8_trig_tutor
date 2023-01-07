@@ -13,13 +13,18 @@ const NextButton = (props: NextButtonProps) => {
   const { href } = props;
 
   return (
-    <Wrapper>
+    <OuterWrapper>
+      <Wrapper>
+        <Link href={href}>
+          <Pushable style={{ background: cl.getHSL(cl.blue_dark) }}>
+            <Front>mark as complete ✓</Front>
+          </Pushable>
+        </Link>
+      </Wrapper>
       <Link href={href}>
-        <Pushable style={{ background: cl.getHSL(cl.blue_dark) }}>
-          <Front>mark as complete ✓</Front>
-        </Pushable>
+        <SkipButton>→ </SkipButton>
       </Link>
-    </Wrapper>
+    </OuterWrapper>
   );
 };
 
@@ -30,11 +35,26 @@ const Wrapper = styled.div`
   padding-bottom: 30px;
 `;
 
-const Front = styled.span`
+const OuterWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  position: relative;
+  align-items: baseline;
+`;
+
+const SkipButton = styled(Button)`
+  position: absolute;
+  right: 0;
+  height: 100%;
+  font-size: 1.5rem;
+  font-weight: 800;
+`;
+
+export const Front = styled.span`
   display: block;
-  padding: 12px 42px;
+  padding: 12px 20px;
   border-radius: 12px;
-  font-size: 1.25rem;
+  font-size: 1rem;
   background: linear-gradient(
     0deg,
     ${cl.getHSL(cl.blue)},

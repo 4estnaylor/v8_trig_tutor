@@ -54,6 +54,7 @@ const cl = {
   purple,
   purple_bright,
   yellow,
+  green,
 };
 
 export default cl;
