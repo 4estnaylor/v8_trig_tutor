@@ -11,6 +11,7 @@ import CourseMap from '../components/HomePage/CourseMap/CourseMap';
 import useWindowSize from '../components/HomePage/MyCanvas/useWindowSize';
 import CourseMap2 from '../components/HomePage/CourseMap/CourseMap2';
 import ProgressBar from '../components/HomePage/ProgressBar';
+import Gap from '../components/Gaps/Gap';
 
 export default function Home() {
   const size = useWindowSize();
@@ -47,6 +48,7 @@ export default function Home() {
               <TuftBird>
                 <ProgressBar progress={0.94} />
                 {/* <img src="/tuftbird.svg" height="80px" loading="lazy" /> */}
+                <Gap height={15} />
               </TuftBird>
             </BottomBanner>
           </CanvasWrap>
