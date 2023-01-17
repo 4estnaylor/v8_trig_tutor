@@ -1,4 +1,5 @@
-import { Alert } from '@mui/material';
+import { Alert, AlertTitle } from '@mui/material';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
@@ -59,17 +60,75 @@ const index = () => {
               Often the content of the videos and written content overlaps. The
               reduncancy is very intentional. I find that absorbing content
               twice (in two different ways), makes it much, much stickier.
+              <br />
+              <br />
+              If you only have time for one... I'd recommend reading because
+              what I write tends to be a litte more thorough than the videos
+              which I try to keep short.
             </li>
             <br />
             <br />
 
             <li>
-              <BulletPoint>If you only have time for only one...</BulletPoint>
+              <BulletPoint>Do your thing</BulletPoint>
               <br />
               <br />
-              I'd recommend reading because what I write tends to be a litte
-              more thorough than the videos which I try to keep short. But if
-              you're more comfortable with the videos, lean in to those!
+              Ultimately, if we're honest you are way more capable of learning
+              than I am of teaching you. <br />
+              <br />
+              You're a curious person. If you can develop and harness that
+              curiousity there isn't a math teacher on the planet who could stop
+              you from learning trig when sufficiently motivated.
+              <br />
+              <br />
+              Think of some area or domain you consider yourself pretty
+              knowledgable. It could be about college basketball, a video game,
+              water coloring, tropical bird calls, whatever. You probably did
+              some combination of practice, searching for info online, and
+              collaboration with other people to get that good. You probably did
+              those things strategically by learning about and identifying
+              skills and knowledge that would make you better. Do that. But for
+              trig.
+              <br />
+              <br />
+              <Alert severity="warning">
+                <AlertTitle>a very common pitfall</AlertTitle>
+                {/* <AlertTitle>A common pitfall</AlertTitle> */}
+                Sometimes students tend to focus more on getting a good grade
+                than actually understanding trig. Given the reality of academic
+                life, it's pretty understandable in my view. Still, I think
+                prioritizing your grade above all else is putting the cart
+                before the horse and often ends up making things even more
+                difficult and stressful than they need to be.
+                <br />
+                <br />
+                I highly encourage you to priortize understanding trig over
+                maximizing a grade in your trig course. If you approach
+                difficult problems and ideas with a mindset of "how do I figure
+                this out" rather than "how do I avoid losing points" you will
+                likely take away so much more from trig.
+                <br />
+                <br />
+                It may sound like just semantics, but in my experience it's a
+                shift in mentality that has a very real effect for students.
+                Ironically students that approach trig in this way get even
+                higher grades as a side-effect along with a much deeper
+                understanding of the subject matter.
+                <br />
+                <br />
+                A decent trig teacher is at least in theory attempting to
+                measure your ability in trig, not your ability to get good
+                grades.
+                <br />
+                <br />
+                Some students, when they encounter a difficult test or
+                assignment have a premonition of some poor score ultiamtely
+                leading you to die alone and destititue. Take a breath and
+                remeber – horse before cart.
+              </Alert>
+              <Image src="/horse_before_cart.svg" width={2000} height={1000} />
+              <br />
+              <br />
               <br />
               <br />
             </li>

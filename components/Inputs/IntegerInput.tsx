@@ -340,6 +340,7 @@ const IntInput = styled.div`
   overflow: auto;
   align-items: baseline;
   border-bottom: 2px solid ${cl.getHSL(cl.gray_dark)};
+  border-radius: 4px;
 
   /* overflow-x: scroll; */
   flex: 1;

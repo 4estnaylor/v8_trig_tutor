@@ -38,7 +38,12 @@ const IntegerAnswerQuestion = (props: IntegerAnswerQuestionProps) => {
 
 const Wrapper = styled.div`
   box-shadow: 0px 0px 4px ${cl.getHSLA(cl.black, 0.5)};
-  color: ${cl.getHSL(cl.gray_dark)};
+  color: ${cl.getHSL(cl.white)};
+  background: linear-gradient(
+    -5deg,
+    ${cl.getHSLA(cl.black, 0.8)} 75%,
+    ${cl.getHSLA(cl.purple, 1)}
+  );
 
   margin: 2px;
 

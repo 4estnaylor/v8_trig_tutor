@@ -17,84 +17,50 @@ import { useRouter } from 'next/router';
 import convertToURL from '../HomePage/CourseMap/convertToURL';
 import next from 'next';
 
-interface TopicComponentBoilerPlateProps {
+interface SubComponentBoilerPlateProps {
   title?: string | JSX.Element;
 
   children: JSX.Element;
 }
 
-const TopicComponentBoilerPlate = (props: TopicComponentBoilerPlateProps) => {
+const SubComponentBoilerPlate = (props: SubComponentBoilerPlateProps) => {
   const router = useRouter();
 
   const { title, children } = props;
 
   let nextHref: null | string = null;
 
-  let matchingTopicComponent: null | TopicComponent = null;
+  let matchingSubComponent: null | SubComponent = null;
 
-  const findMatchingTopicComponent = (topicSection: TopicSection) => {
+  const findMatchingSubComponent = (topicSection: TopicSection) => {
     topicSection.topicComponents.forEach((topicComponent) => {
       const urlTitle = convertToURL(topicComponent.title);
       const pathName = router.pathname.slice(1);
 
+      findMatchingSubComponents(topicComponent);
+    });
+  };
+
+  const findMatchingSubComponents = (topicComponent: TopicComponent) => {
+    if (
+      !topicComponent.subComponents ||
+      topicComponent.subComponents.length <= 1
+    ) {
+      return <></>;
+    }
+
+    topicComponent.subComponents.forEach((subComponent) => {
+      const urlTitle = convertToURL(subComponent.title);
+      const pathName = router.pathname.slice(1).split('/')[1];
       if (urlTitle === pathName) {
-        matchingTopicComponent = topicComponent;
+        matchingSubComponent = subComponent;
       }
     });
   };
 
   topicSections.forEach((topicSection) => {
-    findMatchingTopicComponent(topicSection);
+    findMatchingSubComponent(topicSection);
   });
-
-  const getNextHrefForTopicComponent = (
-    matchingTopicComponent: TopicComponent
-  ) => {
-    let isLastTopicComponent = false;
-
-    const parentTopicSection: TopicSection =
-      matchingTopicComponent.parentTopicSection;
-    let indexOfMatchingTopicComponent =
-      parentTopicSection.topicComponents.indexOf(matchingTopicComponent);
-    if (
-      indexOfMatchingTopicComponent ===
-      parentTopicSection.topicComponents.length - 1
-    ) {
-      isLastTopicComponent = true;
-    }
-
-    if (isLastTopicComponent) {
-      if (matchingTopicComponent.subComponents) {
-        nextHref =
-          matchingTopicComponent.title +
-          '/' +
-          matchingTopicComponent.subComponents[0].title;
-      } else {
-        let indexOfParentTopicSection =
-          topicSections.indexOf(parentTopicSection);
-        nextHref =
-          topicSections[indexOfParentTopicSection + 1].topicComponents[0].title;
-      }
-    }
-
-    if (!isLastTopicComponent) {
-      if (matchingTopicComponent.subComponents) {
-        nextHref = matchingTopicComponent.subComponents[0].title;
-      } else {
-        nextHref =
-          matchingTopicComponent.parentTopicSection.topicComponents[
-            indexOfMatchingTopicComponent + 1
-          ].title;
-      }
-    }
-
-    // if (isLastTopicComponent) {
-    // } else {
-    //   nextHref =
-    //     parentTopicSection.topicComponents[indexOfMatchingTopicComponent + 1]
-    //       .title;
-    // }
-  };
 
   const getNextHrefForSubComponent = (matchingSubComponent: SubComponent) => {
     let isLastSubComponent = false;
@@ -145,20 +111,38 @@ const TopicComponentBoilerPlate = (props: TopicComponentBoilerPlateProps) => {
       }
     } else if (!isLastSubComponent) {
       nextHref =
-        '/' + parentTopicComponent.title + '/' + matchingSubComponent.title;
+        parentTopicComponent.title +
+        '/' +
+        matchingSubComponent.parentTopicComponent.subComponents[
+          indexOfMatchingSubComponent + 1
+        ].title;
       console.log('dadio', nextHref);
     }
   };
 
-  if (matchingTopicComponent) {
+  if (!matchingSubComponent) {
     console.log('dadio2', nextHref);
-    getNextHrefForTopicComponent(matchingTopicComponent);
+
     if (!nextHref) return <></>;
     else {
       // let hrefSplit = nextHref.split("/");
       nextHref = convertToURL(nextHref);
     }
   }
+
+  if (matchingSubComponent) {
+    getNextHrefForSubComponent(matchingSubComponent);
+    console.log('messedup', nextHref);
+    if (!nextHref) {
+      return <></>;
+    } else {
+      // nextHref = convertToURL(nextHref);
+      // nextHref = nextHref.split('/')[1];
+      console.log('messedup2', nextHref);
+    }
+  }
+
+  console.log('yatzee', nextHref);
 
   return (
     <>
@@ -213,4 +197,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export default TopicComponentBoilerPlate;
+export default SubComponentBoilerPlate;

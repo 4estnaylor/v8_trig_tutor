@@ -102,44 +102,71 @@ const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
 
   return (
     <Wrapper>
-      <Header>Question</Header>
-      <Question> {question} </Question>
-      <ChooseXOfY isHighlighted={answerState === 'invalid amount of answers'}>
-        {'('}choose {correctOptions.length} of the {shuffledOptions.length}{' '}
-        options{')'}
-      </ChooseXOfY>
-      <Options>{options}</Options>
-      {answerState === 'correct' ? (
-        correctSymbol
-      ) : (
-        <CheckButtonWrapper>
-          <CheckButton variant="outlined" onClick={checkAnswer}>
-            Check
-          </CheckButton>
-        </CheckButtonWrapper>
-      )}
+      <TopPart>
+        <Header>Question</Header>
+        <Question> {question} </Question>
+        <ChooseXOfY isHighlighted={answerState === 'invalid amount of answers'}>
+          {'('}choose {correctOptions.length} of the {shuffledOptions.length}{' '}
+          options{')'}
+        </ChooseXOfY>
+      </TopPart>
+      <BottomPart>
+        <Options>{options}</Options>
+        {answerState === 'correct' ? (
+          correctSymbol
+        ) : (
+          <CheckButtonWrapper>
+            <CheckButton
+              variant="contained"
+              onClick={checkAnswer}
+              sx={{ color: 'white' }}
+            >
+              Check
+            </CheckButton>
+          </CheckButtonWrapper>
+        )}
+      </BottomPart>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
+const TopPart = styled.div`
   background: linear-gradient(
     0deg,
-    ${cl.getHSLA(cl.black, 0.8)},
-    ${cl.getHSLA(cl.black, 1)}
+    ${cl.getHSLA(cl.gray_dark, 1)},
+    ${cl.getHSLA(cl.purple_bright, 1)},
+    ${cl.getHSLA(cl.purple_dark, 1)}
   );
+  padding: 20px;
+`;
 
+const BottomPart = styled.div`
+  background: linear-gradient(
+    0deg,
+    ${cl.getHSLA(cl.gray_mid, 1)},
+    ${cl.getHSLA(cl.gray_dark, 1)}
+  );
+`;
+
+const Wrapper = styled.div`
   box-shadow: 0px 0px 4px ${cl.getHSLA(cl.black, 0.5)};
   color: ${cl.getHSL(cl.gray_dark)};
 
-  margin: 2px;
+  max-width: 500px;
+  margin: 5px;
+
+  margin-top: 30px;
+  margin-bottom: 30px;
 
   @media ${QUERIES.tabletAndUp} {
     margin: 0px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
 
-  padding: 20px;
   border-radius: 8px;
+  overflow: hidden;
 `;
 
 const Header = styled.h2`

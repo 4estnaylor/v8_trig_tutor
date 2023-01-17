@@ -11,6 +11,7 @@ import MultipleChoiceQuestion, {
   AnswerState,
 } from '../../components/Inputs/MultipleChoiceQuestion';
 import { Variable } from '../../components/Inputs/VariablePad';
+import SubComponentBoilerPlate from '../../components/TopicComponents/SubComponentBoilerPlate';
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 
 const conceptual = () => {
@@ -48,7 +49,7 @@ const conceptual = () => {
     <Image src="/conceptual_circle.svg" width="200" height="200" />
   );
   return (
-    <TopicComponentBoilerPlate title={<>Conceptual Learning</>}>
+    <SubComponentBoilerPlate title={<>Conceptual Learning</>}>
       <>
         <Image
           src="/beesknees.svg"
@@ -150,18 +151,32 @@ const conceptual = () => {
               </StudentThoughts>
             </CircleAreaAnswer>
             <br />
-            conceptual learning in answering the question this way. Instead, am
-            only showing the technical ability to use an equation.
+            Conceptual understanding is really not being used by me to answer
+            the question. All I am doing is practicing a technique where I fill
+            in values to an equation I memorized years ago. I am not at all
+            digging into logically why taking these numbers and mushing them
+            together just show gives me a physically tangible description of how
+            much 2d space is inside the circle.
             <br />
             <br />
             <Alert severity="info">
               That's not a bad thing by the way! Being able to solve problems
-              technically, step-by-step, algorithm is the well earned fruit of
-              conceptual understanding.
+              technically, step-by-step, almost mindlessly can be critical to
+              saving time and mental energy for other endevours. Constantly
+              flexing my conceptual understanding would be a really unecessarily
+              time consuming activity if I had to run through a proof of an
+              equation for the area of a circle every time I wanted a circle's
+              area!
             </Alert>
             <br />
             <br />
             <h4>Example 2</h4>
+            Okay so the above example demonstrates what conceptual learning
+            isn't and when it isn't helpful. But, ultimately, I am trying to
+            persuade you that conceptually learning is the secret sauce to
+            getting good at math.
+            <br />
+            <br />
             Imagine a different scenario now. Your grandmother says you've got
             it all wrong. She says the area of a circle is actually,
             <br />
@@ -312,7 +327,7 @@ const conceptual = () => {
           </li>
         </P>
       </>
-    </TopicComponentBoilerPlate>
+    </SubComponentBoilerPlate>
   );
 };
 

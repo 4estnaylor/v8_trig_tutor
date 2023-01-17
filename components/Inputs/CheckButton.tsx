@@ -78,32 +78,39 @@ const CheckButton = (props: CheckButtonProps) => {
   switch (answerState) {
     case 'unanswered':
       return (
-        <Wrapper onClick={handleCheck} variant="outlined">
+        <UnansweredWrapper onClick={handleCheck} variant="contained">
           Check
-        </Wrapper>
+        </UnansweredWrapper>
       );
       break;
     case 'correct':
-      return <CorrectWrapper onClick={handleCheck}>Check</CorrectWrapper>;
+      return (
+        <CorrectWrapper onClick={handleCheck} variant="contained">
+          Check
+        </CorrectWrapper>
+      );
       break;
     case 'incorrect':
-      return <IncorrectWrapper onClick={handleCheck}>Check</IncorrectWrapper>;
+      return (
+        <IncorrectWrapper
+          onClick={handleCheck}
+          variant="contained"
+          color="warning"
+        >
+          Check
+        </IncorrectWrapper>
+      );
       break;
     default:
       return (
-        <Wrapper
-          onClick={handleCheck}
-          sx={{ color: 'white' }}
-          variant="outlined"
-        >
-          Check
+        <Wrapper onClick={handleCheck} variant="contained" color="primary">
+          Check 2
         </Wrapper>
       );
   }
 };
 
 const Wrapper = styled(Button)`
-  background-color: transparent;
   width: 115px;
 `;
 
