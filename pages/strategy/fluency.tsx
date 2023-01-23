@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Quote from '../../components/Quote/Quote';
 import SubComponentBoilerPlate from '../../components/TopicComponents/SubComponentBoilerPlate';
+import SubComponentBoilerPlate2 from '../../components/TopicComponents/SubComponentBoilerPlate2';
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 import VideoPlayerResponsive from '../../components/VideoPlayerResponsive/VideoPlayerResponsive';
 
@@ -10,7 +11,7 @@ const fluency = () => {
 mentally knowing is not as good as putting into action;
 true learning is complete only when action has been put forth`;
   return (
-    <SubComponentBoilerPlate title={'Fluency'}>
+    <SubComponentBoilerPlate2 title={'Fluency'}>
       <>
         <Quote isLong={true} quote={quote1} byLine={`Xun Kuang, Xunzi`} />
         <Text>
@@ -68,7 +69,7 @@ Practice is crucial, but when I need to dredge old mostly-forgotten material up 
         />
         <h3>Aaaand let's get ready to rumble folks.</h3>
       </>
-    </SubComponentBoilerPlate>
+    </SubComponentBoilerPlate2>
   );
 };
 

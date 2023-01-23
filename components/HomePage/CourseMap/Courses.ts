@@ -32,7 +32,7 @@ export class SubComponent {
   ) {}
 }
 
-const introduction = new TopicSection('Introduction', [
+export const introduction = new TopicSection('Introduction', [
   new TopicComponent('welcome 🖖'),
   new TopicComponent('double down'),
   new TopicComponent('math kraken'),
@@ -42,7 +42,7 @@ const introduction = new TopicSection('Introduction', [
   ]),
 ]);
 
-const measurement = new TopicSection('Measuring Angles ∡', [
+export const measurement = new TopicSection('Measuring Angles ∡', [
   new TopicComponent('°', [
     new SubComponent('conventions'),
     new SubComponent('interior angles'),
@@ -71,7 +71,7 @@ const measurement = new TopicSection('Measuring Angles ∡', [
   new TopicComponent(` measurment  notes 📝  `),
 ]);
 
-const ratios = new TopicSection('Ratios', [
+export const ratios = new TopicSection('Ratios', [
   new TopicComponent('sin'),
   new TopicComponent('cos'),
   new TopicComponent('tangent & cotangent'),

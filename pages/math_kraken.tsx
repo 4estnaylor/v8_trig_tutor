@@ -5,12 +5,13 @@ import MultipleChoiceQuestion, {
   AnswerState,
 } from '../components/Inputs/MultipleChoiceQuestion';
 import TopicComponentBoilerPlate from '../components/TopicComponents/TopicComponentBoilerPlate';
+import TopicComponentBoilerPlate2 from '../components/TopicComponents/TopicComponentBoilerPlate2';
 
 const math_kraken = () => {
   const [qTrigImportanceState, setQTrigImportanceState] =
     useState<AnswerState>('unanswered');
   return (
-    <TopicComponentBoilerPlate title={<>Math Kraken</>}>
+    <TopicComponentBoilerPlate2 title={<>Math Kraken</>}>
       <Wrapper>
         If feared and disregarded, trig will inevitably sink students, but if
         understood and cared for, trig becomes a powerful ally. Trig is a kraken
@@ -29,10 +30,10 @@ const math_kraken = () => {
         But, what really makes trig stand out is it's unusually central and
         pervasive role within the math universe. I made this website because in
         my experience as both a teacher and a student, trig is
-        <b> the point of greatest leverage </b> for highschool students trying
-        to improve their abilities in math. That is to say, trig gives the
-        biggest bang for your buck if you want to pursue mathematics to the
-        level of calculus and beyond.
+        <b> the point of greatest leverage </b> for highschool students so much
+        as considering studying STEM subjects as an undergrad student . That is
+        to say, trig gives the biggest bang for your buck if you want to pursue
+        mathematics to the level of calculus and beyond.
         <br />
         <br />
         <Image
@@ -55,7 +56,7 @@ const math_kraken = () => {
           setAnswerState={setQTrigImportanceState}
         />
       </Wrapper>
-    </TopicComponentBoilerPlate>
+    </TopicComponentBoilerPlate2>
   );
 };
 

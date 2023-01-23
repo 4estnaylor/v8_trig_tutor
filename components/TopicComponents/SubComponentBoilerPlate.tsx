@@ -134,10 +134,10 @@ const SubComponentBoilerPlate = (props: SubComponentBoilerPlateProps) => {
     getNextHrefForSubComponent(matchingSubComponent);
     console.log('messedup', nextHref);
     if (!nextHref) {
-      return <></>;
+      console.log('hmmmar');
     } else {
       // nextHref = convertToURL(nextHref);
-      // nextHref = nextHref.split('/')[1];
+      // nextHref = nextHref.split('/')[1];x
       console.log('messedup2', nextHref);
     }
   }

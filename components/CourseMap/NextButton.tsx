@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from '@mui/material';
 import Link from 'next/link';
 import styled from 'styled-components';
 import cl from '../../colors';
 import Gap from '../Gaps/Gap';
+import useCoursePath from './NextButtonHooks/useCoursePath';
 
 interface NextButtonProps {
   href: string;
@@ -12,18 +13,23 @@ interface NextButtonProps {
 const NextButton = (props: NextButtonProps) => {
   const { href } = props;
 
+  const { currentPath, nextPath, previousPath } = useCoursePath();
+
+  console.log('next path: ', nextPath);
+
   return (
     <OuterWrapper>
       <Wrapper>
-        <Link href={href}>
+        <Link href={nextPath}>
           <Pushable style={{ background: cl.getHSL(cl.blue_dark) }}>
             <Front>mark as complete ✓</Front>
           </Pushable>
         </Link>
       </Wrapper>
-      <Link href={href}>
+      <Link href={nextPath}>
         <SkipButton>→ </SkipButton>
       </Link>
+      <div>{nextPath}</div>
     </OuterWrapper>
   );
 };
