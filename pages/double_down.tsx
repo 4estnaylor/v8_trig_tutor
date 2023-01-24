@@ -8,13 +8,14 @@ import MultipleChoiceQuestion, {
   AnswerState,
 } from '../components/Inputs/MultipleChoiceQuestion';
 import TopicComponentBoilerPlate from '../components/TopicComponents/TopicComponentBoilerPlate';
+import TopicComponentBoilerPlate2 from '../components/TopicComponents/TopicComponentBoilerPlate2';
 
 const double_down = () => {
   const [adviceQuestionState, setAdviceQuestionState] =
     useState<AnswerState>('unanswered');
 
   return (
-    <TopicComponentBoilerPlate title={<>Double Down</>}>
+    <TopicComponentBoilerPlate2 title={<>Double Down</>}>
       <>
         <DoubleDownWrapper>
           <Image src="/double_down.svg" width={700} height={400} />
@@ -65,7 +66,7 @@ const double_down = () => {
           />
         </Wrapper>
       </>
-    </TopicComponentBoilerPlate>
+    </TopicComponentBoilerPlate2>
   );
 };
 

@@ -6,19 +6,23 @@ import cl from '../../colors';
 import Gap from '../Gaps/Gap';
 import useCoursePath from './NextButtonHooks/useCoursePath';
 
-interface NextButtonProps {
-  href: string;
-}
-
-const NextButton = (props: NextButtonProps) => {
-  const { href } = props;
-
+const NextButton = () => {
   const { currentPath, nextPath, previousPath } = useCoursePath();
 
-  console.log('next path: ', nextPath);
+  // console.log('previous path: ', previousPath);
 
   return (
     <OuterWrapper>
+      {previousPath ? (
+        <Link href={previousPath}>
+          <SkipButton>←</SkipButton>
+        </Link>
+      ) : (
+        <div style={{ visibility: 'hidden' }}>
+          <SkipButton>←</SkipButton>
+        </div>
+      )}
+
       <Wrapper>
         <Link href={nextPath}>
           <Pushable style={{ background: cl.getHSL(cl.blue_dark) }}>
@@ -29,28 +33,25 @@ const NextButton = (props: NextButtonProps) => {
       <Link href={nextPath}>
         <SkipButton>→ </SkipButton>
       </Link>
-      <div>{nextPath}</div>
     </OuterWrapper>
   );
 };
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   padding-top: 30px;
   padding-bottom: 30px;
 `;
 
 const OuterWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   position: relative;
   align-items: baseline;
 `;
 
 const SkipButton = styled(Button)`
-  position: absolute;
-  right: 0;
   height: 100%;
   font-size: 1.5rem;
   font-weight: 800;

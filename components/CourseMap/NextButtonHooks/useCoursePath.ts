@@ -6,14 +6,15 @@ import topicSections, {
   TopicSection,
 } from '../../HomePage/CourseMap/Courses';
 
+type ComponentType = 'topic' | 'sub' | null;
+
 const useCoursePath = () => {
-  const [currentPath, setCurrentPath] = useState<null | string>(null);
   const [nextPath, setNextPath] = useState<string>('');
-  const [previousPath, setPreviousPath] = useState<string>('test');
+  const [previousPath, setPreviousPath] = useState<string>('');
 
   const [currentTopicComponent, setCurrentTopicComponent] =
     useState<TopicComponent | null>(null);
-  const [prevTopicComponent, setPreviousTopicComponent] =
+  const [previousTopicComponent, setPreviousTopicComponent] =
     useState<TopicComponent | null>(null);
 
   const [nextTopicComponent, setNextTopicComponent] =
@@ -27,7 +28,24 @@ const useCoursePath = () => {
     null
   );
 
+  const [currentSubComponent, setCurrentSubComponent] =
+    useState<TopicComponent | null>(null);
+  const [previousSubComponent, setPreviousSubComponent] =
+    useState<TopicComponent | null>(null);
+
+  const [nextSubComponent, setNextSubComponent] =
+    useState<TopicComponent | null>(null);
+
+  const [componentType, setComponent] = useState<ComponentType>(null);
+
   const router = useRouter();
+  const [currentPath, setCurrentPath] = useState<null | string>(router.route);
+
+  const getComponentType = () => {
+    let currentTopicComponentTitle = currentPath?.split('/')[1];
+
+    let currentSubComponentTitle = currentPath?.split('/')[2];
+  };
 
   const getCurrentTopicComponent = () => {
     topicSections.forEach((section) => {
@@ -39,6 +57,10 @@ const useCoursePath = () => {
         }
       });
     });
+  };
+
+  const getCurrentSubComponent = () => {
+    console.log('current sub', currentPath?.split('/')[2]);
   };
 
   const getCurrentTopicSection = () => {
@@ -105,8 +127,8 @@ const useCoursePath = () => {
 
   const findNextPath = () => {
     // is topicComponent or subComponent?
-    type componentType = 'topic' | 'sub' | null;
-    let typeOfComponent: componentType;
+
+    let typeOfComponent: ComponentType;
 
     let currentTopicComponentTitle = currentPath?.split('/')[1];
 
@@ -120,10 +142,12 @@ const useCoursePath = () => {
 
     if (typeOfComponent === 'topic') {
       findNextPathForTopicComponent();
+      findPreviousPathForTopicComponent();
     }
 
     if (typeOfComponent === 'sub') {
       findNextPathForSubComponent();
+      findPreviousPathForSubComponent();
     }
 
     // 1 topicComponent to topicComponent
@@ -157,18 +181,47 @@ const useCoursePath = () => {
     // const isSubComponentInTopicComponent =
   };
 
-  const pathIfTopicComponentHasSubComponent = () => {};
+  const findPreviousPathForTopicComponent = () => {
+    let prevPath: null | string = null;
+    if (
+      previousTopicComponent?.subComponents &&
+      previousTopicComponent.subComponents.length >= 1
+    ) {
+      console.log('happening');
+      prevPath =
+        '/' +
+        convertToURL(previousTopicComponent.title) +
+        '/' +
+        previousTopicComponent.subComponents[
+          previousTopicComponent.subComponents.length - 1
+        ].title;
+      setPreviousPath(prevPath);
+    }
+
+    console.log(previousTopicComponent?.subComponents?.length);
+    if (
+      previousTopicComponent &&
+      (previousTopicComponent?.subComponents?.length === 0 ||
+        !previousTopicComponent.subComponents)
+    ) {
+      console.log('is happening');
+      prevPath = '/' + convertToURL(previousTopicComponent.title);
+      setPreviousPath(prevPath);
+    }
+  };
 
   const findNextPathForSubComponent = () => {};
 
+  const findPreviousPathForSubComponent = () => {};
+
   useEffect(() => {
-    setCurrentPath(router.route);
     getCurrentTopicComponent();
     getCurrentTopicSection();
     findNextPath();
   }, [
-    currentPath,
     currentTopicComponent,
+    nextTopicComponent,
+    previousTopicComponent,
     currentTopicSection,
     nextTopicSection,
     previousTopicSection,
@@ -184,19 +237,17 @@ const useCoursePath = () => {
     currentTopicSection,
   ]);
 
-  useEffect(() => {}, [nextTopicSection]);
+  // useEffect(() => {}, [nextTopicSection]);
 
-  console.log(prevTopicComponent, nextTopicComponent);
-
-  console.log({
-    currentPath,
-    nextPath,
-    previousPath,
-  });
+  // console.log({
+  //   currentPath,
+  //   nextPath,
+  //   previousPath,
+  // });
 
   return {
     currentPath,
-    nextPath,
+    nextPath: convertToURL(nextPath),
     previousPath,
   };
 };

@@ -9,10 +9,11 @@ import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicCom
 import GoogleIcon from '@mui/icons-material/Google';
 import ProgressBar from '../../components/HomePage/ProgressBar';
 import { Button } from '@mui/material';
+import TopicComponentBoilerPlate2 from '../../components/TopicComponents/TopicComponentBoilerPlate2';
 
 const index = () => {
   return (
-    <TopicComponentBoilerPlate title={<>Welcome 🖖</>}>
+    <TopicComponentBoilerPlate2 title={<>Welcome 🖖</>}>
       <>
         <p>
           Hey, I'm glad you made it here. I hope this site can be useful to you
@@ -109,7 +110,7 @@ const index = () => {
           </SpockWrapper>
         </SpockWrapperOuter>
       </>
-    </TopicComponentBoilerPlate>
+    </TopicComponentBoilerPlate2>
   );
 };
 

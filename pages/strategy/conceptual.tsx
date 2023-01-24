@@ -12,6 +12,7 @@ import MultipleChoiceQuestion, {
 } from '../../components/Inputs/MultipleChoiceQuestion';
 import { Variable } from '../../components/Inputs/VariablePad';
 import SubComponentBoilerPlate from '../../components/TopicComponents/SubComponentBoilerPlate';
+import SubComponentBoilerPlate2 from '../../components/TopicComponents/SubComponentBoilerPlate2';
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 
 const conceptual = () => {
@@ -49,7 +50,7 @@ const conceptual = () => {
     <Image src="/conceptual_circle.svg" width="200" height="200" />
   );
   return (
-    <SubComponentBoilerPlate title={<>Conceptual Learning</>}>
+    <SubComponentBoilerPlate2 title={<>Conceptual Learning</>}>
       <>
         <Image
           src="/beesknees.svg"
@@ -327,7 +328,7 @@ const conceptual = () => {
           </li>
         </P>
       </>
-    </SubComponentBoilerPlate>
+    </SubComponentBoilerPlate2>
   );
 };
 

@@ -34,8 +34,7 @@ const TopicComponentBoilerPlate2 = (props: TopicComponentBoilerPlateProps) => {
           <Title>{title}</Title>
           {/* <IntroductionText>{intro}</IntroductionText> */}
           {children}
-          <NextButton href={'/'} />
-          <a href={'/'}> {'next path'}</a>
+          <NextButton />
         </Wrapper>
       </Background>
     </>

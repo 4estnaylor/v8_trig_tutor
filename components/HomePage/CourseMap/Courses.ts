@@ -32,7 +32,7 @@ export class SubComponent {
   ) {}
 }
 
-export const introduction = new TopicSection('Introduction', [
+export const introduction = new TopicSection('Intro', [
   new TopicComponent('welcome 🖖'),
   new TopicComponent('double down'),
   new TopicComponent('math kraken'),

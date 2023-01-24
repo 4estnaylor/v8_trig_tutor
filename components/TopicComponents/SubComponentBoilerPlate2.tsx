@@ -21,7 +21,7 @@ const SubComponentBoilerPlate2 = (props: SubComponentBoilerPlateProps) => {
         <Wrapper>
           <Title>{title}</Title>
           {children}
-          <NextButton href="/" />
+          <NextButton />
         </Wrapper>
       </Background>
     </>
