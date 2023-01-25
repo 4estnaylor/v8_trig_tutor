@@ -239,15 +239,13 @@ const BottomSection = styled.div`
     ${cl.getHSL(cl.red)} 90%
   ); */
   /* background: ${cl.getHSL(cl.gray_dark)}; */
-  /* background: linear-gradient(
-    0deg,
-    ${cl.getHSL(cl.red)},
-    ${cl.getHSL(cl.purple)},
-    ${cl.getHSL(cl.blue)},
-    ${cl.getHSL(cl.blue_dark)},
-    ${cl.getHSL(cl.gray_dark)} 90%
-  ); */
-  background-color: ${cl.getHSL(cl.gray_dark)};
+  background: linear-gradient(
+    -90deg,
+    ${cl.getHSLA(cl.red, 0.1)},
+    ${cl.getHSLA(cl.purple, 0.2)},
+    ${cl.getHSLA(cl.blue, 0.1)}
+  );
+  /* background-color: ${cl.getHSL(cl.gray_dark)}; */
   background-size: 100%;
   background-position-x: 50%;
   background-position-y: 50%;

@@ -153,7 +153,7 @@ const SubComponentBoilerPlate = (props: SubComponentBoilerPlateProps) => {
           <Title>{title}</Title>
           {/* <IntroductionText>{intro}</IntroductionText> */}
           {children}
-          <NextButton href={'/' + nextHref || '/'} />
+          <NextButton />
           <a href={nextHref || '/'}> {nextHref}</a>
         </Wrapper>
       </Background>

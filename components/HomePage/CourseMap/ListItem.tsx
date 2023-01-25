@@ -57,7 +57,7 @@ const Wrapper = styled.li<{ isComplete: boolean }>`
   gap: 10px;
   height: 50px;
   border-radius: 8px;
-  color: ${cl.getHSLA(cl.white, 1)};
+  color: ${cl.getHSLA(cl.black, 1)};
 `;
 
 const Wrapper1 = styled(Wrapper)<{
@@ -80,7 +80,7 @@ const Wrapper1 = styled(Wrapper)<{
     &:hover {
       cursor: pointer;
       background-color: ${cl.getHSLA(cl.white, 0.3)};
-      color: ${cl.getHSLA(cl.white, 1)};
+      color: ${cl.getHSLA(cl.purple, 1)};
     }
   }
 `;
@@ -95,7 +95,7 @@ const Wrapper2 = styled(Wrapper)<{ isComplete: boolean; index: number }>`
   justify-content: flex-start;
   gap: 10px;
   height: 50px;
-  color: ${cl.getHSLA(cl.white, 1)};
+  color: ${cl.getHSLA(cl.black, 1)};
 
   &:before {
     content: '${(p) => p.index}';
