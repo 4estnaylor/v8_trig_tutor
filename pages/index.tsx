@@ -134,7 +134,7 @@ export default function Home() {
 }
 
 const MaxPixContainer = styled.div`
-  max-height: 500px;
+  max-height: 200px;
   overflow: hidden;
 `;
 
@@ -245,7 +245,7 @@ const TopSection = styled.div`
   background-size: 150%;
   background-position-x: 50%;
   background-position-y: 50%;
-  height: 390px;
+  height: 290px;
   width: 100%;
   display: flex;
   align-items: center;

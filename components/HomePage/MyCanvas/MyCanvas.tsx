@@ -15,7 +15,7 @@ const MyCanvas = (props: MyCanvasProps) => {
   const { sceneGetter } = props;
   const canvasRef = useMyCanvas(sceneGetter);
 
-  return <StyledCanvas ref={canvasRef} width={size.width} height="390" />;
+  return <StyledCanvas ref={canvasRef} width={size.width} height="290" />;
 };
 
 const StyledCanvas = styled.canvas`
