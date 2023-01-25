@@ -177,7 +177,7 @@ const index = () => {
   );
 };
 
-const P = styled.div`
+export const P = styled.div`
   padding: 5px;
 `;
 

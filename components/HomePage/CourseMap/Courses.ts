@@ -35,11 +35,12 @@ export class SubComponent {
 export const introduction = new TopicSection('Intro', [
   new TopicComponent('welcome 🖖'),
   new TopicComponent('double down'),
-  new TopicComponent('math kraken'),
+  new TopicComponent('math kraken 🐙'),
   new TopicComponent('strategy', [
     new SubComponent('conceptual'),
     new SubComponent('fluency'),
   ]),
+  new TopicComponent('mindset'),
 ]);
 
 export const measurement = new TopicSection('Measuring Angles ∡', [
