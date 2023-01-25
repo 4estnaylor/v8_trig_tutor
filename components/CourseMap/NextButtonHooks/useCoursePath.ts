@@ -252,7 +252,7 @@ const useCoursePath = () => {
       console.log('happening');
       prevPath =
         '/' +
-        convertToURL(previousTopicComponent.title) +
+        previousTopicComponent.title +
         '/' +
         previousTopicComponent.subComponents[
           previousTopicComponent.subComponents.length - 1
@@ -267,7 +267,7 @@ const useCoursePath = () => {
         !previousTopicComponent.subComponents)
     ) {
       console.log('is happening');
-      prevPath = '/' + convertToURL(previousTopicComponent.title);
+      prevPath = '/' + previousTopicComponent.title;
       setPreviousPath(prevPath);
     }
   };

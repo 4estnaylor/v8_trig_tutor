@@ -59,6 +59,7 @@ const index = () => {
                 style={{ fontFamily: 'sans-serif' }}
               />
             </ImageShrinker>
+            <Gap height={15} />
             <ProgressBar progress={0} />
           </BrowseCard>
           <SignInCard>
@@ -90,6 +91,7 @@ const index = () => {
                 style={{ fontFamily: 'sans-serif' }}
               />
             </ImageShrinker>
+            <Gap height={15} />
             <ProgressBar progress={0.73} />
           </SignInCard>
         </SignInOptions>

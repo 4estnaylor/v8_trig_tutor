@@ -10,10 +10,10 @@ const ProgressBar = (props: ProgressBarProps) => {
 
   return (
     <Wrapper>
-      <WrittenPercentage>{Math.round(progress * 100)}%</WrittenPercentage>
       <BarPlaceHolder>
         <BarFill progress={progress}></BarFill>
       </BarPlaceHolder>
+      <WrittenPercentage>{Math.round(progress * 100)}%</WrittenPercentage>
     </Wrapper>
   );
 };
@@ -31,7 +31,7 @@ const Wrapper = styled.div`
 `;
 
 const WrittenPercentage = styled.div`
-  font-size: 2rem;
+  font-size: 1rem;
   color: ${cl.getHSL(cl.gray_dark)};
 `;
 

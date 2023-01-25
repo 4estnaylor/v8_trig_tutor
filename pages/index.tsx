@@ -30,7 +30,7 @@ export default function Home() {
 
         <TopSection>
           <GetGoodAtTrig>
-            Get Good at Trig.
+            Get <RainbowText>Good</RainbowText> at Trig.
             <ReallyReallyGood>
               {'('}really, really Good.{')'}
             </ReallyReallyGood>
@@ -44,16 +44,21 @@ export default function Home() {
               />
             </MathworkWrap>
             <MyCanvas sceneGetter={getHomepageScene} />
-            <BottomBanner>
-              <TuftBird>
-                <ProgressBar progress={0.94} />
-                {/* <img src="/tuftbird.svg" height="80px" loading="lazy" /> */}
-                <Gap height={15} />
-              </TuftBird>
-            </BottomBanner>
           </CanvasWrap>
         </TopSection>
         <BottomSection>
+          <MaxPixContainer>
+            <NonSelectableContainer>
+              <Image src="/trianglefall.svg" height={1000} width={2000} />
+            </NonSelectableContainer>
+          </MaxPixContainer>
+          <ProgressBarWrapper>
+            <h2>Crash Course</h2>
+            <ProgressBar progress={0.0} />
+            {/* <img src="/tuftbird.svg" height="80px" loading="lazy" /> */}
+          </ProgressBarWrapper>
+          <Image src="/crashcoursebanner.svg" width={2000} height={1000} />
+
           <CourseMap2 />
         </BottomSection>
       </Wrapper>
@@ -128,8 +133,23 @@ export default function Home() {
   );
 }
 
-const GetGoodAtTrig = styled.h2`
+const MaxPixContainer = styled.div`
+  max-height: 500px;
+  overflow: hidden;
+`;
+
+const ProgressBarWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+`;
+
+const GetGoodAtTrig = styled.div`
+  padding: 30px;
   position: absolute;
+  font-size: 1.25rem;
   color: 'black';
   z-index: 10;
   top: 70;
@@ -140,13 +160,11 @@ const GetGoodAtTrig = styled.h2`
   user-select: none;
   pointer-events: none;
 
-  padding: 5px;
   border-radius: 8px;
 `;
 
 const ReallyReallyGood = styled.div`
   color: white;
-  font-size: 1rem;
   text-align: center;
 `;
 
@@ -160,6 +178,10 @@ const CanvasWrap = styled.div`
   pointer-events: none;
   position: relative;
   overflow: hidden;
+`;
+
+const NonSelectableContainer = styled.div`
+  pointer-events: none;
 `;
 
 const BottomBanner = styled.div`
@@ -239,16 +261,17 @@ const BottomSection = styled.div`
     ${cl.getHSL(cl.red)} 90%
   ); */
   /* background: ${cl.getHSL(cl.gray_dark)}; */
-  background: linear-gradient(
+  /* background: linear-gradient(
     -90deg,
     ${cl.getHSLA(cl.red, 0.1)},
     ${cl.getHSLA(cl.purple, 0.2)},
     ${cl.getHSLA(cl.blue, 0.1)}
-  );
-  /* background-color: ${cl.getHSL(cl.gray_dark)}; */
+  ); */
+  background-color: ${cl.getHSL(cl.white)};
   background-size: 100%;
   background-position-x: 50%;
   background-position-y: 50%;
+  /* border-top: 5px dashed ${cl.getHSL(cl.gray_light)}; */
   flex: 1;
 `;
 
