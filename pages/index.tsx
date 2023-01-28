@@ -12,9 +12,20 @@ import useWindowSize from '../components/HomePage/MyCanvas/useWindowSize';
 import CourseMap2 from '../components/HomePage/CourseMap/CourseMap2';
 import ProgressBar from '../components/HomePage/ProgressBar';
 import Gap from '../components/Gaps/Gap';
+import goodSynonyms from '../components/goodSynonyms';
+import { useEffect, useState } from 'react';
+import QUERIES from '../breakpoints';
 
 export default function Home() {
   const size = useWindowSize();
+
+  const [goodAdjective, setGoodAdjective] = useState('');
+
+  useEffect(() => {
+    setGoodAdjective(
+      goodSynonyms[Math.floor(Math.random() * goodSynonyms.length)]
+    );
+  }, []);
   return (
     <div>
       <Head>
@@ -30,34 +41,31 @@ export default function Home() {
 
         <TopSection>
           <GetGoodAtTrig>
-            Get <RainbowText>Good</RainbowText> at Trig.
+            Get <RainbowText>{goodAdjective}</RainbowText> at Trig.
             <ReallyReallyGood>
               {'('}really, really Good.{')'}
             </ReallyReallyGood>
           </GetGoodAtTrig>
           <CanvasWrap>
-            <MathworkWrap>
+            {/* <MathworkWrap>
               <MathWorkImage
                 src="/mathwork.png"
                 width={size.width || 350}
                 height={size.width || 350}
               />
-            </MathworkWrap>
-            <MyCanvas sceneGetter={getHomepageScene} />
+            </MathworkWrap> */}
+            <MyCanvas sceneGetter={getHomepageScene} height={290} />
           </CanvasWrap>
         </TopSection>
         <BottomSection>
-          <MaxPixContainer>
-            <NonSelectableContainer>
-              <Image src="/trianglefall.svg" height={1000} width={2000} />
-            </NonSelectableContainer>
-          </MaxPixContainer>
+          <HomepageIllustration aria-hidden="true" tabIndex={-1}>
+            <InnerImg src="/crashcoursebanner.svg" />
+          </HomepageIllustration>
           <ProgressBarWrapper>
             <h2>Crash Course</h2>
-            <ProgressBar progress={0.0} />
+            <ProgressBar progress={0.43} />
             {/* <img src="/tuftbird.svg" height="80px" loading="lazy" /> */}
           </ProgressBarWrapper>
-          <Image src="/crashcoursebanner.svg" width={2000} height={1000} />
 
           <CourseMap2 />
         </BottomSection>
@@ -133,9 +141,49 @@ export default function Home() {
   );
 }
 
-const MaxPixContainer = styled.div`
-  max-height: 200px;
+const HomepageIllustration = styled.div`
+  pointer-events: 'none';
+
+  width: 100%;
+
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  /* background-color: red; */
+  margin-top: -80px;
+  @media ${QUERIES.tabletAndUp} {
+    height: 400px;
+    margin-top: -150px;
+  }
+  z-index: 100;
+`;
+
+const InnerImg = styled.img`
+  width: 100%;
+  height: 250px;
+
+  @media ${QUERIES.tabletAndUp} {
+    height: 400px;
+  }
+`;
+
+const WhiteText = styled.span`
+  display: inline;
+  color: ${cl.getHSL(cl.white)};
+  border-bottom: 2px solid ${cl.getHSL(cl.black)};
+`;
+
+const MaxPixContainer = styled.div`
+  max-height: 300px;
+  background-color: transparent;
+  @media ${QUERIES.tabletAndUp} {
+    max-height: 500px;
+  }
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  margin-top: -290px;
+  z-index: -1000;
 `;
 
 const ProgressBarWrapper = styled.div`

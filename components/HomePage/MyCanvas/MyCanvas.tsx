@@ -6,6 +6,7 @@ import useWindowSize from './useWindowSize';
 
 interface MyCanvasProps {
   sceneGetter: SceneGetter;
+  height: number;
 }
 
 const MyCanvas = (props: MyCanvasProps) => {
@@ -15,7 +16,7 @@ const MyCanvas = (props: MyCanvasProps) => {
   const { sceneGetter } = props;
   const canvasRef = useMyCanvas(sceneGetter);
 
-  return <StyledCanvas ref={canvasRef} width={size.width} height="290" />;
+  return <StyledCanvas ref={canvasRef} width={size.width} height={290} />;
 };
 
 const StyledCanvas = styled.canvas`
