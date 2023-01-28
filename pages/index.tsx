@@ -25,6 +25,7 @@ export default function Home() {
     setGoodAdjective(
       goodSynonyms[Math.floor(Math.random() * goodSynonyms.length)]
     );
+    setGoodAdjective('really good');
   }, []);
   return (
     <div>
@@ -47,20 +48,20 @@ export default function Home() {
             </ReallyReallyGood>
           </GetGoodAtTrig>
           <CanvasWrap>
-            {/* <MathworkWrap>
+            <MathworkWrap>
               <MathWorkImage
                 src="/mathwork.png"
                 width={size.width || 350}
                 height={size.width || 350}
               />
-            </MathworkWrap> */}
-            <MyCanvas sceneGetter={getHomepageScene} height={290} />
+            </MathworkWrap>
+            <MyCanvas sceneGetter={getHomepageScene} height={490} />
+            <HomepageIllustration aria-hidden="true" tabIndex={-1}>
+              <InnerImg src="/crashcoursebanner.svg" />
+            </HomepageIllustration>
           </CanvasWrap>
         </TopSection>
         <BottomSection>
-          <HomepageIllustration aria-hidden="true" tabIndex={-1}>
-            <InnerImg src="/crashcoursebanner.svg" />
-          </HomepageIllustration>
           <ProgressBarWrapper>
             <h2>Crash Course</h2>
             <ProgressBar progress={0.43} />
@@ -143,6 +144,8 @@ export default function Home() {
 
 const HomepageIllustration = styled.div`
   pointer-events: 'none';
+  position: absolute;
+  bottom: 0;
 
   width: 100%;
 
@@ -150,20 +153,20 @@ const HomepageIllustration = styled.div`
   display: flex;
   justify-content: center;
   /* background-color: red; */
-  margin-top: -80px;
+  max-height: 220px;
+
   @media ${QUERIES.tabletAndUp} {
-    height: 400px;
-    margin-top: -150px;
+    height: 220px;
   }
-  z-index: 100;
 `;
 
 const InnerImg = styled.img`
   width: 100%;
-  height: 250px;
+  opacity: 0.9;
+  max-height: 220px;
 
   @media ${QUERIES.tabletAndUp} {
-    height: 400px;
+    height: 220px;
   }
 `;
 
@@ -182,7 +185,7 @@ const MaxPixContainer = styled.div`
   overflow: hidden;
   display: flex;
   align-items: flex-end;
-  margin-top: -290px;
+
   z-index: -1000;
 `;
 
@@ -293,7 +296,7 @@ const TopSection = styled.div`
   background-size: 150%;
   background-position-x: 50%;
   background-position-y: 50%;
-  height: 290px;
+  /* height: 490px; */
   width: 100%;
   display: flex;
   align-items: center;

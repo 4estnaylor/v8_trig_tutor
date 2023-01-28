@@ -27,13 +27,23 @@ const getHomepageScene: SceneGetter = (
   ctx.canvas.width = width;
 
   const getBluePoints = () => {
-    console.log('canvas width', ctx.canvas.width);
     for (let i = 0; i < 3; i++) {
+      let yPosDiff = 0;
+      let xPosDiff = 0;
+      if (i > 0) {
+        yPosDiff = 120;
+      }
+      if (i === 1) {
+        xPosDiff = -80;
+      }
+      if (i === 2) {
+        xPosDiff = 80;
+      }
       let interactivePoint = new InteractivePoint(
         ctx,
         eventHandlerConfig,
-        width / 2,
-        ctx.canvas.height / 2,
+        width / 2 + xPosDiff,
+        ctx.canvas.height / 4 + yPosDiff,
         scene.assets.listenFor,
         30,
         blueColors[i]
@@ -44,8 +54,8 @@ const getHomepageScene: SceneGetter = (
   getBluePoints();
 
   const pointVelocity = {
-    x: 0.7,
-    y: -0.7,
+    x: 0,
+    y: -0,
   };
 
   let round = 0;
@@ -54,15 +64,15 @@ const getHomepageScene: SceneGetter = (
   const timerShuffleCurrentPoint = () => {
     currentPoint = scene.assets.listenFor[round % 3];
     round += 1;
-    pointVelocity.x = -1 + 2 * Math.random();
-    pointVelocity.y = -1 + 2 * Math.random();
-    setTimeout(timerShuffleCurrentPoint, 3000);
+    pointVelocity.x = -0.5 + Math.random();
+    pointVelocity.y = -0.5 + Math.random();
+    setTimeout(timerShuffleCurrentPoint, 6000);
   };
 
-  let canPointsMove = true;
+  let canPointsMove = false;
 
   const makePointsMoveTrue = () => {
-    canPointsMove = true;
+    canPointsMove = false;
   };
 
   let delayedMakePointsMoveTrue: any = null;
@@ -148,6 +158,7 @@ const getHomepageScene: SceneGetter = (
     ctx.lineTo(pointB.x, pointB.y);
     ctx.lineTo(pointC.x, pointC.y);
     ctx.lineTo(pointA.x, pointA.y);
+    ctx.strokeStyle = cl.getHSL(cl.white);
     // ctx.stroke();
 
     const gradientAB = makeGradientToTransparency(

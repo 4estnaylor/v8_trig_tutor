@@ -72,6 +72,12 @@ class InteractivePoint {
   update() {
     this.checkIfMouseIsOver();
 
+    // if (this.form !== 'default') {
+    //   this.context.canvas.onscroll = function () {
+    //     window.scrollTo(0, 0);
+    //   };
+    // }
+
     if (
       this.form === 'grabbing' &&
       this.eventHandlerConfig.cursorStatus.mouseIsDown
@@ -191,6 +197,7 @@ class InteractivePoint {
 
   CheckIfItemAlreadyUnderCursor() {
     let alreadyUnderCursor = false;
+
     this.listenFor.forEach((item) => {
       if (item.isUnderCursor) {
         alreadyUnderCursor = true;
