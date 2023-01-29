@@ -10,6 +10,11 @@ import GoogleIcon from '@mui/icons-material/Google';
 import ProgressBar from '../../components/HomePage/ProgressBar';
 import { Button } from '@mui/material';
 import TopicComponentBoilerPlate2 from '../../components/TopicComponents/TopicComponentBoilerPlate2';
+import { useSession, signIn } from 'next-auth/react';
+
+const googleSignIn = () => {
+  signIn('google');
+};
 
 const index = () => {
   return (
@@ -64,12 +69,7 @@ const index = () => {
           </BrowseCard>
           <SignInCard>
             <Number>2</Number>
-            <SignInButton
-              variant="outlined"
-              onClick={() => {
-                console.log('sign in!');
-              }}
-            >
+            <SignInButton variant="outlined" onClick={googleSignIn}>
               <GoogleIcon color="primary" /> sign in
             </SignInButton>
             <FeaturesList>

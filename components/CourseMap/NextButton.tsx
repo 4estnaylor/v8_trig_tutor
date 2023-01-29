@@ -5,13 +5,24 @@ import styled from 'styled-components';
 import cl from '../../colors';
 import Gap from '../Gaps/Gap';
 import useCoursePath from './NextButtonHooks/useCoursePath';
+import useTrigUser from '../../utils/hooks/useTrigUser';
+import { useSession, signIn } from 'next-auth/react';
+import GoogleIcon from '@mui/icons-material/Google';
 
 const NextButton = () => {
   const { currentPath, nextPath, previousPath } = useCoursePath();
+  const user = useTrigUser();
+  const isGoogleAuthenticated = useSession().status;
+
+  const googleSignIn = () => {
+    signIn('google');
+  };
+
+  console.log('trig user', user);
 
   // console.log('previous path: ', previousPath);
 
-  return (
+  const displayIfAuthenticated = (
     <OuterWrapper>
       {previousPath ? (
         <Link href={previousPath}>
@@ -35,7 +46,73 @@ const NextButton = () => {
       </Link>
     </OuterWrapper>
   );
+
+  const displayIfLoading = (
+    <OuterWrapper>
+      {previousPath ? (
+        <Link href={previousPath}>
+          <SkipButton>←</SkipButton>
+        </Link>
+      ) : (
+        <div style={{ visibility: 'hidden' }}>
+          <SkipButton>←</SkipButton>
+        </div>
+      )}
+
+      <Wrapper>
+        {/* <Link href={nextPath}>
+          <Pushable style={{ background: cl.getHSL(cl.blue_dark) }}>
+            <Front>mark as complete ✓</Front>
+          </Pushable>
+        </Link> */}
+        loading... profile
+      </Wrapper>
+      <Link href={nextPath}>
+        <SkipButton>→ </SkipButton>
+      </Link>
+    </OuterWrapper>
+  );
+
+  const displayIfNotAuthenticaed = (
+    <OuterWrapper>
+      {previousPath ? (
+        <Link href={previousPath}>
+          <SkipButton>←</SkipButton>
+        </Link>
+      ) : (
+        <div style={{ visibility: 'hidden' }}>
+          <SkipButton>←</SkipButton>
+        </div>
+      )}
+
+      <Wrapper>
+        {/* <Link href={nextPath}>
+          <Pushable style={{ background: cl.getHSL(cl.blue_dark) }}>
+            <Front>mark as complete ✓</Front>
+          </Pushable>
+        </Link> */}
+        <SignInButton variant="outlined" onClick={googleSignIn}>
+          {' '}
+          <GoogleIcon /> Sign In to record progress{' '}
+        </SignInButton>
+      </Wrapper>
+      <Link href={nextPath}>
+        <SkipButton>→ </SkipButton>
+      </Link>
+    </OuterWrapper>
+  );
+
+  return isGoogleAuthenticated === 'authenticated'
+    ? displayIfAuthenticated
+    : isGoogleAuthenticated === 'loading'
+    ? displayIfLoading
+    : displayIfNotAuthenticaed;
 };
+
+const SignInButton = styled(Button)`
+  display: flex;
+  gap: 10px;
+`;
 
 const Wrapper = styled.div`
   display: flex;

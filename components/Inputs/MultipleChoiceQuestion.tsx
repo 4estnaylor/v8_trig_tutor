@@ -103,7 +103,29 @@ const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
   return (
     <Wrapper>
       <TopPart>
-        <Header>Question</Header>
+        <Header>
+          Question{' '}
+          {answerState === 'correct' ? (
+            correctSymbol
+          ) : (
+            <CheckButtonWrapper>
+              <CheckButton
+                variant="contained"
+                onClick={checkAnswer}
+                sx={{
+                  color: `${cl.getHSL(cl.white)}`,
+                  fontWeight: '800',
+                  background: `linear-gradient(15deg, ${cl.getHSL(
+                    cl.red_light
+                  )}, ${cl.getHSL(cl.purple)}, ${cl.getHSL(cl.blue_light)})`,
+                  backgroundSize: '200%',
+                }}
+              >
+                Check
+              </CheckButton>
+            </CheckButtonWrapper>
+          )}
+        </Header>
         <Question> {question} </Question>
         <ChooseXOfY isHighlighted={answerState === 'invalid amount of answers'}>
           {'('}choose {correctOptions.length} of the {shuffledOptions.length}{' '}
@@ -112,40 +134,25 @@ const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
       </TopPart>
       <BottomPart>
         <Options>{options}</Options>
-        {answerState === 'correct' ? (
-          correctSymbol
-        ) : (
-          <CheckButtonWrapper>
-            <CheckButton
-              variant="contained"
-              onClick={checkAnswer}
-              sx={{ color: 'white' }}
-            >
-              Check
-            </CheckButton>
-          </CheckButtonWrapper>
-        )}
       </BottomPart>
     </Wrapper>
   );
 };
 
 const TopPart = styled.div`
-  background: linear-gradient(
-    0deg,
-    ${cl.getHSLA(cl.gray_dark, 1)},
-    ${cl.getHSLA(cl.purple_bright, 1)},
-    ${cl.getHSLA(cl.purple_dark, 1)}
-  );
-  padding: 20px;
+  background: ${cl.getHSL(cl.gray_dark)};
+  padding: 15px;
 `;
 
 const BottomPart = styled.div`
   background: linear-gradient(
-    0deg,
-    ${cl.getHSLA(cl.gray_mid, 1)},
-    ${cl.getHSLA(cl.gray_dark, 1)}
+    160deg,
+    ${cl.getHSLA(cl.blue_dark, 1)},
+    ${cl.getHSLA(cl.purple_dark, 1)} 80%,
+    ${cl.getHSLA(cl.red, 1)}
   );
+  background-size: 200%;
+  padding: 15px;
 `;
 
 const Wrapper = styled.div`
@@ -171,6 +178,12 @@ const Wrapper = styled.div`
 
 const Header = styled.h2`
   color: ${cl.getHSL(cl.white)};
+
+  display: flex;
+
+  position: relative;
+  height: 50px;
+  align-items: center;
 `;
 
 const Question = styled.div`
@@ -179,17 +192,19 @@ const Question = styled.div`
 `;
 
 const CorrectSymbol = styled.div`
-  height: 50px;
-  width: 50px;
-  font-size: 2rem;
-  margin: auto;
-  margin-top: 13.25px;
-  margin-bottom: 13.25px;
+  height: 70px;
+  width: 70px;
+  font-size: 2.5rem;
+  position: absolute;
+  right: 0;
+  box-shadow: 1px 1px 2px ${cl.getHSL(cl.black)};
+
   color: ${cl.getHSL(cl.white)};
   background: linear-gradient(
-    0deg,
-    ${cl.getHSL(cl.purple)},
-    ${cl.getHSL(cl.blue)}
+    15deg,
+    ${cl.getHSL(cl.green)},
+    ${cl.getHSL(cl.green)},
+    ${cl.getHSL(cl.green)}
   );
   border-radius: 50%;
   display: flex;
@@ -198,9 +213,12 @@ const CorrectSymbol = styled.div`
 `;
 
 const CheckButtonWrapper = styled.div`
+  height: 50px;
   display: flex;
   justify-content: center;
-  padding: 20px;
+  position: absolute;
+  right: 0;
+  bottom: 10;
 `;
 
 const CheckButton = styled(Button)``;
@@ -209,9 +227,6 @@ const Options = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  padding-left: 15px;
-  padding-top: 15px;
-  padding-right: 5px;
 `;
 
 const ChooseXOfY = styled.div<{ isHighlighted: boolean }>`
