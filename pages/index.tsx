@@ -244,7 +244,7 @@ const BottomBanner = styled.div`
   width: 100%;
   display: flex;
   position: relative;
-  justify-content: center;
+  justify-content: centr;
   align-items: flex-end;
   position: absolute;
   bottom: 0;
