@@ -31,14 +31,14 @@ const index = () => {
         </IframeWrappper>
         <Gap height={20} />
 
-        <p>Here are two options to consider using this site:</p>
+        <h3>There are 2 ways you can use the site. </h3>
 
         <SignInOptions>
           <BrowseCard>
-            <Number>option 1</Number>
+            <Number>1</Number>
             <FakeButton>
               {' '}
-              <span>👀</span>JUST BROWSE{' '}
+              <span>👀</span>BROWSE{' '}
             </FakeButton>
             <FeaturesList>
               <li>
@@ -63,7 +63,7 @@ const index = () => {
             <ProgressBar progress={0} />
           </BrowseCard>
           <SignInCard>
-            <Number>option 2</Number>
+            <Number>2</Number>
             <SignInButton
               variant="outlined"
               onClick={() => {
@@ -180,16 +180,19 @@ const Red = styled.span`
   font-weight: 800;
 `;
 
-const Number = styled(RainbowText)`
-  font-size: 1.5rem;
+const Number = styled.div`
+  font-size: 3.5rem;
   font-weight: 600;
   padding-bottom: 20px;
+  text-align: center;
   color: ${cl.getHSL(cl.black)};
 `;
 
 const Card = styled.div`
-  min-width: 300px;
+  /* min-width: 300px; */
+  width: fit-content;
   & h4 {
+    width: fit-content;
     text-align: center;
     display: flex;
     align-items: center;
@@ -201,18 +204,14 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
 
-  /* box-shadow: 1px 1px 4px ${cl.getHSL(cl.gray_mid)}; */
+  box-shadow: 1px 1px 4px ${cl.getHSL(cl.gray_mid)};
   border-radius: 8px;
   padding: 20px;
 `;
 
-const BrowseCard = styled(Card)`
-  flex: 1;
-`;
+const BrowseCard = styled(Card)``;
 
-const SignInCard = styled(Card)`
-  flex: 1;
-`;
+const SignInCard = styled(Card)``;
 
 const FeaturesList = styled.ul`
   display: flex;

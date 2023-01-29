@@ -31,13 +31,13 @@ const getHomepageScene: SceneGetter = (
       let yPosDiff = 0;
       let xPosDiff = 0;
       if (i > 0) {
-        yPosDiff = 120;
+        yPosDiff = 86.6;
       }
       if (i === 1) {
-        xPosDiff = -80;
+        xPosDiff = -50;
       }
       if (i === 2) {
-        xPosDiff = 80;
+        xPosDiff = 50;
       }
       let interactivePoint = new InteractivePoint(
         ctx,

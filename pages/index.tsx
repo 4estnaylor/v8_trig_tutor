@@ -164,6 +164,11 @@ const InnerImg = styled.img`
   width: 100%;
   opacity: 0.9;
   max-height: 220px;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 
   @media ${QUERIES.tabletAndUp} {
     height: 220px;

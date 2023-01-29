@@ -39,7 +39,7 @@ const useMyCanvas: (
       cursorPosition.x = xPos;
       cursorPosition.y = yPos;
 
-      // e.preventDefault();
+      e.preventDefault();
     };
 
     const scene = sceneGetter(context, canvasEventHandlerConfig);

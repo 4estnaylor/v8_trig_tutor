@@ -83,7 +83,22 @@ const Wrapper = styled.div`
 
 const DoubleDownText = styled.div`
   font-size: 3rem;
+
+  background: linear-gradient(
+    90deg,
+    ${cl.getHSL(cl.blue)},
+    ${cl.getHSL(cl.purple)},
+    ${cl.getHSL(cl.red)}
+  );
+
+  background-size: 80%;
+
   text-align: center;
+  color: transparent;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
 `;
 
 const BlueLink = styled(Link)`
