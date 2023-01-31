@@ -50,7 +50,10 @@ const conceptual = () => {
     <Image src="/conceptual_circle.svg" width="200" height="200" />
   );
   return (
-    <SubComponentBoilerPlate2 title={<>Conceptual Learning</>}>
+    <SubComponentBoilerPlate2
+      title={<>Conceptual Learning</>}
+      questions={[questionOneAnswerState, questionTwoAnswerState]}
+    >
       <>
         <Image
           src="/beesknees.svg"
@@ -68,15 +71,6 @@ const conceptual = () => {
             <ByLine>Probably Not Einstein</ByLine>
           </EinsteinQuote>
           <Gap height={30} />
-          Now and then, a student's conceptual understanding inevitably gets a
-          gap in the churn of a real-life math class. These gaps are a normal
-          and even healthy part of any math diet,
-          <span style={{ color: cl.getHSL(cl.purple), fontWeight: 800 }}>
-            {' '}
-            so long as it gets returned to{' '}
-          </span>{' '}
-          and filled in.
-          <br /> <br />
           Let me make a distinction with two examples:
           <br />
           <br />
@@ -268,6 +262,15 @@ const conceptual = () => {
             an inability to memorize, but from a gap in conceptual knowledge.
             <br />
             <br />
+            Now and then, a student's conceptual understanding inevitably gets a
+            gap in the churn of a real-life math class. These gaps are a normal
+            and even healthy part of any math diet,
+            <span style={{ color: cl.getHSL(cl.purple), fontWeight: 800 }}>
+              {' '}
+              so long as it gets returned to{' '}
+            </span>{' '}
+            and filled in.
+            <br /> <br />
             {/* Students (and teachers) understandably tend to focus more on math
             techniques than the underlying math concepts. It often seems faster
             and more critical to learn technique, because after all, technique
@@ -288,9 +291,9 @@ const conceptual = () => {
             Begs the question, why even bother with conceptual learning then?
             <br />
             <br /> */}
-            If you train solely technique, while developing holes in conceptual
-            understanding, reliance on memorization grows beyond what most of us
-            can manage. Technique will not be a logical strategy, but an
+            However, if you do not fill in holes in conceptual understanding
+            over time, reliance on memorization grows beyond what most of us can
+            manage. Technique will not be a logical strategy, but an
             ever-growing heap of arbitrary rules to follow. This heap, when
             grown sufficiently large, consumes most of the cognitive load your
             brain putting you in a place where it is:

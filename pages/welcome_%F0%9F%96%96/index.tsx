@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
 import NextButton, { Front } from '../../components/CourseMap/NextButton';
@@ -11,14 +11,21 @@ import ProgressBar from '../../components/HomePage/ProgressBar';
 import { Button } from '@mui/material';
 import TopicComponentBoilerPlate2 from '../../components/TopicComponents/TopicComponentBoilerPlate2';
 import { useSession, signIn } from 'next-auth/react';
+import MultipleChoiceQuestion, {
+  AnswerState,
+} from '../../components/Inputs/MultipleChoiceQuestion';
 
 const googleSignIn = () => {
   signIn('google');
 };
 
 const index = () => {
+  const [questionOne, setQuestionOne] = useState<AnswerState>('unanswered');
   return (
-    <TopicComponentBoilerPlate2 title={<>Welcome 🖖</>}>
+    <TopicComponentBoilerPlate2
+      title={<>Welcome 🖖</>}
+      questions={[questionOne]}
+    >
       <>
         <p>
           Hey, I'm glad you made it here. I hope this site can be useful to you
@@ -107,10 +114,20 @@ const index = () => {
           <SpockWrapper>
             <SpockBlue />
             <SpockRed />
-            <SpockPurple />
             <Image src="/spock.svg" width="1000" height="700" />
           </SpockWrapper>
         </SpockWrapperOuter>
+        <MultipleChoiceQuestion
+          question="What one feature is gained by logging in to google on this website?"
+          correctOptions={['recording your progress']}
+          incorrectOptions={[
+            'additional content',
+            `earn bitcoin ₿ by answering questions`,
+            'personalized ads',
+          ]}
+          answerState={questionOne}
+          setAnswerState={setQuestionOne}
+        ></MultipleChoiceQuestion>
       </>
     </TopicComponentBoilerPlate2>
   );
@@ -118,6 +135,7 @@ const index = () => {
 
 const ImageShrinker = styled.div`
   width: fit-content;
+  align-self: center;
 `;
 
 const IframeWrappper = styled.div`

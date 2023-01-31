@@ -37,6 +37,7 @@ const purple_dark = { hue: 225, saturation: 72, lightness: 30 };
 // 151, 68%, 15%
 const purple_bright = { hue: 225, saturation: 92, lightness: 60 };
 const yellow = { hue: 32, saturation: 89, lightness: 50 };
+const yellow_light = { hue: 32, saturation: 89, lightness: 80 };
 const green = { hue: 164, saturation: 50, lightness: 50 };
 
 const cl = {
@@ -58,6 +59,7 @@ const cl = {
   purple_light,
   purple_dark,
   yellow,
+  yellow_light,
   green,
 };
 

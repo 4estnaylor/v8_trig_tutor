@@ -15,7 +15,10 @@ const double_down = () => {
     useState<AnswerState>('unanswered');
 
   return (
-    <TopicComponentBoilerPlate2 title={<>Double Down</>}>
+    <TopicComponentBoilerPlate2
+      title={<>Double Down</>}
+      questions={[adviceQuestionState]}
+    >
       <>
         <DoubleDownWrapper>
           <Image src="/double_down.svg" width={700} height={400} />

@@ -44,7 +44,7 @@ export default function Home() {
           <GetGoodAtTrig>
             Get <RainbowText>{goodAdjective}</RainbowText> at Trig.
             <ReallyReallyGood>
-              {'('}really, really Good.{')'}
+              {'('}it's worth the effort{')'}
             </ReallyReallyGood>
           </GetGoodAtTrig>
           <CanvasWrap>
@@ -222,6 +222,7 @@ const GetGoodAtTrig = styled.div`
 const ReallyReallyGood = styled.div`
   color: white;
   text-align: center;
+  padding-top: 5px;
 `;
 
 const TuftBird = styled.div`

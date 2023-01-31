@@ -11,7 +11,10 @@ const math_kraken = () => {
   const [qTrigImportanceState, setQTrigImportanceState] =
     useState<AnswerState>('unanswered');
   return (
-    <TopicComponentBoilerPlate2 title={<>Math Kraken</>}>
+    <TopicComponentBoilerPlate2
+      title={<>Math Kraken</>}
+      questions={[qTrigImportanceState]}
+    >
       <Wrapper>
         If feared and disregarded, trig will inevitably sink students, but if
         understood and cared for, trig becomes a powerful ally. Trig is a kraken

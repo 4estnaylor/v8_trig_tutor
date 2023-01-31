@@ -3,16 +3,19 @@ import styled from 'styled-components';
 import cl from '../../colors';
 import NextButton from '../CourseMap/NextButton';
 import Gap from '../Gaps/Gap';
+import { AnswerState } from '../Inputs/MultipleChoiceQuestion';
 import ResponsiveAppBar from '../ResponsiveAppBar';
 
 interface SubComponentBoilerPlateProps {
   title?: string | JSX.Element;
 
   children?: JSX.Element;
+  questions?: AnswerState[];
 }
 
 const SubComponentBoilerPlate2 = (props: SubComponentBoilerPlateProps) => {
-  const { title, children } = props;
+  const { title, children, questions } = props;
+  console.log('questions', questions);
   return (
     <>
       <ResponsiveAppBar />
@@ -21,7 +24,7 @@ const SubComponentBoilerPlate2 = (props: SubComponentBoilerPlateProps) => {
         <Wrapper>
           <Title>{title}</Title>
           {children}
-          <NextButton />
+          <NextButton questions={questions} />
         </Wrapper>
       </Background>
     </>

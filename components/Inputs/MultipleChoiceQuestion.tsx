@@ -140,14 +140,18 @@ const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
 };
 
 const TopPart = styled.div`
-  background: ${cl.getHSL(cl.gray_dark)};
+  background: linear-gradient(
+    160deg,
+    ${cl.getHSLA(cl.purple_dark, 1)},
+    ${cl.getHSLA(cl.black, 1)}
+  );
   padding: 15px;
 `;
 
 const BottomPart = styled.div`
   background: linear-gradient(
     160deg,
-    ${cl.getHSLA(cl.blue_dark, 1)},
+    ${cl.getHSLA(cl.purple_dark, 0.7)},
     ${cl.getHSLA(cl.purple_dark, 1)} 80%,
     ${cl.getHSLA(cl.red, 1)}
   );
@@ -202,9 +206,9 @@ const CorrectSymbol = styled.div`
   color: ${cl.getHSL(cl.white)};
   background: linear-gradient(
     15deg,
-    ${cl.getHSL(cl.green)},
-    ${cl.getHSL(cl.green)},
-    ${cl.getHSL(cl.green)}
+    ${cl.getHSL(cl.purple_bright)},
+    ${cl.getHSL(cl.blue)},
+    ${cl.getHSL(cl.blue)}
   );
   border-radius: 50%;
   display: flex;
