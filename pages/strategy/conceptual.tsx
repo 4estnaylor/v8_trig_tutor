@@ -16,8 +16,8 @@ import SubComponentBoilerPlate2 from '../../components/TopicComponents/SubCompon
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 
 const conceptual = () => {
-  const [circleAreaAnswerBlurred, setCircleAreaAnswerBlurred] = useState(true);
-  const [sectionOneCompleted, setSectionOneCompleted] = useState(false);
+  // const [circleAreaAnswerBlurred, setCircleAreaAnswerBlurred] = useState(true);
+  // const [sectionOneCompleted, setSectionOneCompleted] = useState(false);
   const [questionOneAnswerState, setQuestionOneAnswerState] =
     useState<AnswerState>('unanswered');
 
@@ -227,7 +227,7 @@ const conceptual = () => {
             </Alert>
             <br />
             <br />
-            <MultipleChoiceQuestion
+            {/* <MultipleChoiceQuestion
               question={'Which best demonstrates conceptual understanding?'}
               correctOptions={['Recreating a math formula if you forget it.']}
               incorrectOptions={[
@@ -236,7 +236,7 @@ const conceptual = () => {
               ]}
               answerState={questionTwoAnswerState}
               setAnswerState={setQuestionTwoAnswerState}
-            />
+            /> */}
           </HiddenSection>
           <br />
           <br />
