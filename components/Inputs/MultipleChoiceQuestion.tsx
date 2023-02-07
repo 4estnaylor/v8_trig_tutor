@@ -4,7 +4,10 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import QUERIES from '../../breakpoints';
 import cl from '../../colors';
+import useTrigUser from '../../utils/hooks/useTrigUser';
 import MultipleChoiceOption from './MultipleChoiceOption';
+
+type Option = string | JSX.Element | React.ReactElement;
 
 interface MultipleChoiceQuestionProps {
   question: string;
@@ -12,6 +15,7 @@ interface MultipleChoiceQuestionProps {
   correctOptions: (string | JSX.Element | React.ReactElement)[];
   answerState: AnswerState;
   setAnswerState: React.Dispatch<React.SetStateAction<AnswerState>>;
+  questionId: string;
 }
 
 function shuffle(array: any[]) {
@@ -47,15 +51,19 @@ const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
     correctOptions,
     answerState,
     setAnswerState,
+    questionId,
   } = props;
+
   // const shuffledOptions = shuffle([...incorrectOptions, ...correctOptions]);
   const [shuffledOptions, setShuffledOptions] = useState<any[]>([]);
 
   const [selectedValues, setSelectedValues] = useState<number[]>([]);
 
+  const trigUser = useTrigUser();
+
   const correctSymbol = <CorrectSymbol> ✓ </CorrectSymbol>;
 
-  const checkAnswer = () => {
+  const checkAnswer = async () => {
     const selectedOptions = selectedValues.map((selectedValue) => {
       return shuffledOptions[selectedValue];
     });
@@ -66,15 +74,38 @@ const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
       return;
     }
 
-    const allUserAnswersCorrect = selectedOptions.every((option) =>
-      correctOptions.includes(option)
-    );
+    // const allUserAnswersCorrect = selectedOptions.every((option) =>
+    //   correctOptions.includes(option)
+    // );
     const allAnswersInUserAnswers = correctOptions.every((answer) =>
       selectedOptions.includes(answer)
     );
 
     if (allAnswersInUserAnswers && allAnswersInUserAnswers) {
       setAnswerState('correct');
+      //trigUserId, questionId, answerState, attemptIncrement
+
+      const bodyForQuestionUpsert = {
+        trigUserId: trigUser.id,
+        questionId: questionId,
+        answerState: 'correct',
+        attemptIncrement: 1,
+      };
+
+      const response = await fetch('/api/db/updateAnswerObject', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bodyForQuestionUpsert),
+      });
+
+      const responseJSON = await response.json();
+
+      console.log('response JSON', responseJSON);
+
+      console.log(bodyForQuestionUpsert);
+
       console.log('correct!');
       return;
     } else {
@@ -96,6 +127,8 @@ const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
         key={index}
         setSelectedValues={setSelectedValues}
         selectedValues={selectedValues}
+        questionAnswerState={answerState}
+        correctOptions={correctOptions}
       />
     );
   });

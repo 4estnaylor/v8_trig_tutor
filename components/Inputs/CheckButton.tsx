@@ -78,7 +78,14 @@ const CheckButton = (props: CheckButtonProps) => {
   switch (answerState) {
     case 'unanswered':
       return (
-        <UnansweredWrapper onClick={handleCheck} variant="outlined">
+        <UnansweredWrapper
+          onClick={handleCheck}
+          variant="outlined"
+          sx={{
+            background: `linear-gradient(15deg, hsl(340, 100%, 80%), hsl(225, 72%, 60%), hsl(190, 100%, 85%))`,
+            color: `${cl.getHSL(cl.white)}`,
+          }}
+        >
           Check
         </UnansweredWrapper>
       );

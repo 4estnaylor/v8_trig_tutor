@@ -22,16 +22,20 @@ const IntegerAnswerQuestion = (props: IntegerAnswerQuestionProps) => {
     props;
   return (
     <Wrapper>
-      <Header>Question</Header>
-      <Question>{question}</Question>
-      <Diagram>{diagram}</Diagram>
-      <IntegerInput
-        answer={answer}
-        variables={variables || []}
-        placeholder="?"
-        answerState={answerState}
-        setAnswerState={setAnswerState}
-      />
+      <TopPart>
+        <Header>Question</Header>
+        <Question>{question}</Question>
+        <Diagram>{diagram}</Diagram>
+      </TopPart>
+      <BottomPart>
+        <IntegerInput
+          answer={answer}
+          variables={variables || []}
+          placeholder="?"
+          answerState={answerState}
+          setAnswerState={setAnswerState}
+        />
+      </BottomPart>
     </Wrapper>
   );
 };
@@ -39,22 +43,18 @@ const IntegerAnswerQuestion = (props: IntegerAnswerQuestionProps) => {
 const Wrapper = styled.div`
   box-shadow: 0px 0px 4px ${cl.getHSLA(cl.black, 0.5)};
   color: ${cl.getHSL(cl.white)};
-  background: linear-gradient(
-    -5deg,
-    ${cl.getHSLA(cl.black, 0.8)} 75%,
-    ${cl.getHSLA(cl.purple, 1)}
-  );
 
   margin: 2px;
 
   @media ${QUERIES.tabletAndUp} {
     margin: 10px;
   }
+  overflow: hidden;
 
-  padding-top: 20px;
+  /* padding-top: 20px;
   padding-bottom: 20px;
   padding-left: 8px;
-  padding-right: 8px;
+  padding-right: 8px; */
   border-radius: 8px;
 `;
 
@@ -63,7 +63,35 @@ const Diagram = styled.div`
   padding-bottom: 20px;
 `;
 
-const Header = styled.h2``;
+const TopPart = styled.div`
+  background: linear-gradient(
+    160deg,
+    ${cl.getHSLA(cl.purple_dark, 1)},
+    ${cl.getHSLA(cl.black, 1)}
+  );
+  padding: 15px;
+`;
+
+const BottomPart = styled.div`
+  background: linear-gradient(
+    160deg,
+    hsla(225 72% 30% / 0.7),
+    hsla(225 72% 30% / 1) 80%,
+    hsla(340 90% 50% / 1)
+  );
+  background-size: 200%;
+  padding: 15px;
+`;
+
+const Header = styled.h2`
+  color: ${cl.getHSL(cl.white)};
+
+  display: flex;
+
+  position: relative;
+  height: 50px;
+  align-items: center;
+`;
 
 const Question = styled.div`
   font-size: 1.25rem;

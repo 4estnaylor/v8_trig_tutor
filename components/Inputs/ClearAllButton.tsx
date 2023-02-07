@@ -43,6 +43,8 @@ const Wrapper = styled(Button)`
   max-height: 55px;
   min-height: 55px;
   background-color: ${cl.getHSL(cl.gray_dark)};
+  /* box-shadow: 0px 4px 8px ${cl.getHSLA(cl.red, 0.3)}; */
+  background: ${cl.getHSLA(cl.white, 0.1)};
   grid-row: 4;
 
   &:hover {

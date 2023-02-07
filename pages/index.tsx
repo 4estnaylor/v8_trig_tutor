@@ -25,7 +25,7 @@ export default function Home() {
     setGoodAdjective(
       goodSynonyms[Math.floor(Math.random() * goodSynonyms.length)]
     );
-    setGoodAdjective('really good');
+    setGoodAdjective('good');
   }, []);
   return (
     <div>

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import mathKrakenQuestions from '../components/HomePage/CourseMap/MathKrakenQuestions';
 import MultipleChoiceQuestion, {
   AnswerState,
 } from '../components/Inputs/MultipleChoiceQuestion';
@@ -8,12 +9,20 @@ import TopicComponentBoilerPlate from '../components/TopicComponents/TopicCompon
 import TopicComponentBoilerPlate2 from '../components/TopicComponents/TopicComponentBoilerPlate2';
 
 const math_kraken = () => {
-  const [qTrigImportanceState, setQTrigImportanceState] =
-    useState<AnswerState>('unanswered');
+  // const [qTrigImportanceState, setQTrigImportanceState] =
+  //   useState<AnswerState>('unanswered');
+
+  let questionAnswerStates: AnswerState[] = [];
+  mathKrakenQuestions.forEach((question) => {
+    if (question.answerState) {
+      questionAnswerStates.push(question.answerState);
+    } else {
+    }
+  });
   return (
     <TopicComponentBoilerPlate2
       title={<>Math Kraken</>}
-      questions={[qTrigImportanceState]}
+      questions={questionAnswerStates}
     >
       <Wrapper>
         If feared and disregarded, trig will inevitably sink students, but if
@@ -45,7 +54,7 @@ const math_kraken = () => {
           height={1000}
           alt="kraken image"
         />
-        <MultipleChoiceQuestion
+        {/* <MultipleChoiceQuestion
           question="Why is trig especially important for math students according to me?"
           correctOptions={[
             'Trig holds a central and pervasive role within the math universe.',
@@ -57,7 +66,8 @@ const math_kraken = () => {
           ]}
           answerState={qTrigImportanceState}
           setAnswerState={setQTrigImportanceState}
-        />
+        /> */}
+        {mathKrakenQuestions[0].createMCQuestionElement()}
       </Wrapper>
     </TopicComponentBoilerPlate2>
   );

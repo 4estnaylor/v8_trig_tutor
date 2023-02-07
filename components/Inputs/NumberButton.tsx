@@ -41,12 +41,12 @@ const NumberButton = (props: NumberButtonProps) => {
 
 const Wrapper = styled(Button)`
   font-size: 1.25rem;
-  color: ${cl.getHSL(cl.white)};
+  color: ${cl.getHSL(cl.gray_light)};
   max-width: 55px;
   min-width: 55px;
   max-height: 55px;
   min-height: 55px;
-  background-color: ${cl.getHSL(cl.gray_dark)};
+  background: ${cl.getHSLA(cl.white, 0.1)};
 
   /* background-color: ${cl.getHSLA(cl.black, 0.2)}; */
 

@@ -80,11 +80,8 @@ const useCoursePath = () => {
     currentTopicComponent.subComponents?.forEach((subComponent) => {
       if (convertToURL(subComponent.title) === currentSubComponentTitle) {
         setCurrentSubComponent(subComponent);
-        console.log('set to: ', subComponent);
       }
     });
-
-    console.log('current subcomponent title', currentSubComponentTitle);
   };
 
   const getPreviousAndNextSubCompoents = () => {
@@ -94,7 +91,6 @@ const useCoursePath = () => {
       !currentTopicComponent.subComponents
     )
       return;
-    console.log('getting next sub component');
     const indexOfCurrentSubComponent =
       currentTopicComponent.subComponents?.indexOf(currentSubComponent);
     if (
@@ -107,10 +103,6 @@ const useCoursePath = () => {
       setNextSubComponent(
         currentTopicComponent.subComponents[indexOfCurrentSubComponent + 1]
       );
-      console.log(
-        'setting next sub component',
-        currentTopicComponent.subComponents[indexOfCurrentSubComponent + 1]
-      );
     }
 
     if (
@@ -120,10 +112,6 @@ const useCoursePath = () => {
       setPreviousSubComponent(null);
     } else {
       setPreviousSubComponent(
-        currentTopicComponent.subComponents[indexOfCurrentSubComponent - 1]
-      );
-      console.log(
-        'previous sub component',
         currentTopicComponent.subComponents[indexOfCurrentSubComponent - 1]
       );
     }
@@ -164,7 +152,6 @@ const useCoursePath = () => {
 
     if (isCurrentTopicComponentLastInSection) {
       if (!nextTopicSection) {
-        console.log('no next topic section');
         return;
       }
       setNextTopicComponent(nextTopicSection.topicComponents[0]);
@@ -249,7 +236,6 @@ const useCoursePath = () => {
       previousTopicComponent?.subComponents &&
       previousTopicComponent.subComponents.length >= 1
     ) {
-      console.log('happening');
       prevPath =
         '/' +
         previousTopicComponent.title +
@@ -260,13 +246,11 @@ const useCoursePath = () => {
       setPreviousPath(prevPath);
     }
 
-    console.log(previousTopicComponent?.subComponents?.length);
     if (
       previousTopicComponent &&
       (previousTopicComponent?.subComponents?.length === 0 ||
         !previousTopicComponent.subComponents)
     ) {
-      console.log('is happening');
       prevPath = '/' + previousTopicComponent.title;
       setPreviousPath(prevPath);
     }
@@ -283,9 +267,6 @@ const useCoursePath = () => {
     } else if (!nextSubComponent && nextTopicComponent) {
       path = '/' + nextTopicComponent.title;
     }
-
-    console.log('hmmr', nextSubComponent);
-    console.log('sub path', path);
 
     setNextPath(path);
   };

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../colors';
+import doubleDownQuestions from '../components/HomePage/CourseMap/DoubleDownQuestions';
 import MultipleChoiceQuestion, {
   AnswerState,
 } from '../components/Inputs/MultipleChoiceQuestion';
@@ -11,13 +12,18 @@ import TopicComponentBoilerPlate from '../components/TopicComponents/TopicCompon
 import TopicComponentBoilerPlate2 from '../components/TopicComponents/TopicComponentBoilerPlate2';
 
 const double_down = () => {
-  const [adviceQuestionState, setAdviceQuestionState] =
-    useState<AnswerState>('unanswered');
+  let questionAnswerStates: AnswerState[] = [];
+  doubleDownQuestions.forEach((question) => {
+    if (question.answerState) {
+      questionAnswerStates.push(question.answerState);
+    } else {
+    }
+  });
 
   return (
     <TopicComponentBoilerPlate2
       title={<>Double Down</>}
-      questions={[adviceQuestionState]}
+      questions={questionAnswerStates}
     >
       <>
         <DoubleDownWrapper>
@@ -55,7 +61,7 @@ const double_down = () => {
               is pretty close to peerless.
             </Alert>
           </span>
-          <MultipleChoiceQuestion
+          {/* <MultipleChoiceQuestion
             question="What one single piece of math advice would the author give to his former self?"
             correctOptions={['Double-down on trig.']}
             incorrectOptions={[
@@ -66,7 +72,8 @@ const double_down = () => {
             ]}
             answerState={adviceQuestionState}
             setAnswerState={setAdviceQuestionState}
-          />
+          /> */}
+          {doubleDownQuestions[0].createMCQuestionElement()}
         </Wrapper>
       </>
     </TopicComponentBoilerPlate2>

@@ -14,19 +14,38 @@ import { useSession, signIn } from 'next-auth/react';
 import MultipleChoiceQuestion, {
   AnswerState,
 } from '../../components/Inputs/MultipleChoiceQuestion';
+import QUERIES from '../../breakpoints';
+import MCQuestion from '../../components/Inputs/MCQuestion';
+import welcomeQuestions from '../../components/HomePage/CourseMap/WelcomeQuestions';
 
 const googleSignIn = () => {
   signIn('google');
 };
 
 const index = () => {
-  const [questionOne, setQuestionOne] = useState<AnswerState>('unanswered');
+  // const [questionOne, setQuestionOne] = useState<AnswerState>('unanswered');
+
+  let topicQuestions: AnswerState[] = [];
+  welcomeQuestions.forEach((question) => {
+    if (question.answerState) {
+      topicQuestions.push(question.answerState);
+    } else {
+    }
+  });
+
   return (
     <TopicComponentBoilerPlate2
       title={<>Welcome 🖖</>}
-      questions={[questionOne]}
+      questions={topicQuestions}
     >
       <>
+        <SpockWrapperOuter>
+          <SpockWrapper>
+            <SpockBlue />
+            <SpockRed />
+            <Image src="/spock.svg" width="1000" height="700" />
+          </SpockWrapper>
+        </SpockWrapperOuter>
         <p>
           Hey, I'm glad you made it here. I hope this site can be useful to you
           for learning trigonometry and/or precalculus.
@@ -35,7 +54,7 @@ const index = () => {
         </p>
         <IframeWrappper>
           <ResponsiveIframe
-            src="https://player.vimeo.com/video/777714892?h=dc4303ab13&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+            src="https://player.vimeo.com/video/796468904?h=dc4303ab13&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
             width="100vw"
             frameBorder="0px"
             allow="autoplay; fullscreen; picture-in-picture"
@@ -102,22 +121,8 @@ const index = () => {
             <ProgressBar progress={0.73} />
           </SignInCard>
         </SignInOptions>
-        <Gap height={40} />
-        <SpockQuote>
-          There is no reason that function should not be beautiful. In fact
-          beauty usually makes it more effective.
-          <ByLine>S'chn T'gai Spock</ByLine>
-          <CircaLine>circa 2266–2269, Prime Timeline</CircaLine>
-        </SpockQuote>
-        <Gap height={40} />
-        <SpockWrapperOuter>
-          <SpockWrapper>
-            <SpockBlue />
-            <SpockRed />
-            <Image src="/spock.svg" width="1000" height="700" />
-          </SpockWrapper>
-        </SpockWrapperOuter>
-        <MultipleChoiceQuestion
+
+        {/* <MultipleChoiceQuestion
           question="What one feature is gained by logging in to google on this website?"
           correctOptions={['recording your progress']}
           incorrectOptions={[
@@ -127,7 +132,16 @@ const index = () => {
           ]}
           answerState={questionOne}
           setAnswerState={setQuestionOne}
-        ></MultipleChoiceQuestion>
+        ></MultipleChoiceQuestion> */}
+        {welcomeQuestions[0].createMCQuestionElement()}
+        {/* <Gap height={40} />
+        <SpockQuote>
+          There is no reason that function should not be beautiful. In fact
+          beauty usually makes it more effective.
+          <ByLine>S'chn T'gai Spock</ByLine>
+          <CircaLine>circa 2266–2269, Prime Timeline</CircaLine>
+        </SpockQuote>
+        <Gap height={40} /> */}
       </>
     </TopicComponentBoilerPlate2>
   );
@@ -208,7 +222,13 @@ const Number = styled.div`
 
 const Card = styled.div`
   /* min-width: 300px; */
-  width: fit-content;
+  /* width: fit-content; */
+  width: 70%;
+  min-width: 300px;
+  @media ${QUERIES.tabletAndUp} {
+    width: 40%;
+    min-width: 250px;
+  }
   & h4 {
     width: fit-content;
     text-align: center;

@@ -1,4 +1,6 @@
 import { Topic } from '@mui/icons-material';
+import MCQuestion from '../../Inputs/MCQuestion';
+import welcomeQuestions from './WelcomeQuestions';
 
 export class TopicSection {
   topicComponents: TopicComponent[];
@@ -14,7 +16,11 @@ export class TopicComponent {
   subComponents?: SubComponent[];
   public parentTopicSection: TopicSection;
 
-  constructor(public title: string, subComponents?: SubComponent[]) {
+  constructor(
+    public title: string,
+    subComponents?: SubComponent[],
+    public questions?: MCQuestion[]
+  ) {
     this.subComponents = subComponents;
     this.title = title;
     this.subComponents?.forEach((subComponent: SubComponent) => {
@@ -26,6 +32,8 @@ export class TopicComponent {
 export class SubComponent {
   tags: 'grind' | 'deep thinking' | 'important'[] | null;
   parentTopicComponent: TopicComponent;
+  public questions?: MCQuestion[];
+
   constructor(
     public title: string,
     tags?: 'grind' | 'deep thinking' | 'important'[]
@@ -33,7 +41,7 @@ export class SubComponent {
 }
 
 export const introduction = new TopicSection('Intro', [
-  new TopicComponent('welcome 🖖'),
+  new TopicComponent('welcome 🖖', [], welcomeQuestions),
   new TopicComponent('double down'),
   new TopicComponent('math kraken 🐙'),
   new TopicComponent('strategy', [

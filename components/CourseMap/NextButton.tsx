@@ -48,8 +48,6 @@ const NextButton = (props: NextButtonProps) => {
     signIn('google');
   };
 
-  console.log('trig user', user);
-
   let completionDots = null;
   if (questions && questions?.length > 0) {
     completionDots = questions.map((question, index) => {
@@ -60,7 +58,6 @@ const NextButton = (props: NextButtonProps) => {
   }
 
   const handeClickOnOuterWrapper = (e: Event) => {
-    console.log('handling click on inner wrapepr');
     e.stopPropagation();
   };
 
@@ -140,6 +137,7 @@ const NextButton = (props: NextButtonProps) => {
 
   const displayIfNotAuthenticaed = (
     <OuterWrapper>
+      <CompletionDots>{completionDots}</CompletionDots>`
       {previousPath ? (
         <Link href={previousPath}>
           <SkipButton>←</SkipButton>
@@ -149,8 +147,14 @@ const NextButton = (props: NextButtonProps) => {
           <SkipButton>←</SkipButton>
         </div>
       )}
-
-      <Wrapper>
+      <Wrapper
+        style={{
+          opacity: '1',
+          flex: '1',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
         {/* <Link href={nextPath}>
           <Pushable style={{ background: cl.getHSL(cl.blue_dark) }}>
             <Front>mark as complete ✓</Front>
@@ -171,7 +175,7 @@ const NextButton = (props: NextButtonProps) => {
     ? displayIfAuthenticated
     : isGoogleAuthenticated === 'loading'
     ? displayIfLoading
-    : displayIfAuthenticated;
+    : displayIfNotAuthenticaed;
 };
 
 const NoLink = styled.div`
