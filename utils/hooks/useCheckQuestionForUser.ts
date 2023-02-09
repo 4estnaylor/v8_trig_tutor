@@ -43,7 +43,7 @@ const useCheckQuestionForUser = (props: useCheckQuestionForUserProps) => {
     try {
       if (!questionObject) return;
       const response = await fetch(
-        `/api/db/getUserAnswers/?userId=${currentUser.id}&questionId=${questionObject.id}`,
+        `/api/db/getUserAnswer/?userId=${currentUser.id}&questionId=${questionObject.id}`,
         {
           method: 'GET',
           headers: {

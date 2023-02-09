@@ -17,15 +17,19 @@ import { useRouter } from 'next/router';
 import convertToURL from '../HomePage/CourseMap/convertToURL';
 import next from 'next';
 import { AnswerState } from '../Inputs/MultipleChoiceQuestion';
+import MCQuestion from '../Inputs/MCQuestion';
+import useTrigUser from '../../utils/hooks/useTrigUser';
+import useAnswerObjects from '../../utils/hooks/useAnswerObjects';
 
 interface TopicComponentBoilerPlateProps {
   title?: string | JSX.Element;
   children: JSX.Element;
   questions?: AnswerState[];
+  questionObjects?: MCQuestion[];
 }
 
 const TopicComponentBoilerPlate2 = (props: TopicComponentBoilerPlateProps) => {
-  const { title, children, questions } = props;
+  const { title, children, questions, questionObjects } = props;
 
   return (
     <>
@@ -36,7 +40,7 @@ const TopicComponentBoilerPlate2 = (props: TopicComponentBoilerPlateProps) => {
           <Title>{title}</Title>
           {/* <IntroductionText>{intro}</IntroductionText> */}
           {children}
-          <NextButton questions={questions} />
+          <NextButton questions={questions} questionObjects={questionObjects} />
         </Wrapper>
       </Background>
     </>

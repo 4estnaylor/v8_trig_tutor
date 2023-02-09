@@ -37,6 +37,7 @@ const index = () => {
     <TopicComponentBoilerPlate2
       title={<>Welcome test 🖖</>}
       questions={topicQuestions}
+      questionObjects={welcomeQuestions}
     >
       <>
         <SpockWrapperOuter>

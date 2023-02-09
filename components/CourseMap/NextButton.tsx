@@ -9,22 +9,36 @@ import useTrigUser from '../../utils/hooks/useTrigUser';
 import { useSession, signIn } from 'next-auth/react';
 import GoogleIcon from '@mui/icons-material/Google';
 import { AnswerState } from '../Inputs/MultipleChoiceQuestion';
+import MCQuestion from '../Inputs/MCQuestion';
+import useAnswerObjects from '../../utils/hooks/useAnswerObjects';
 
 interface NextButtonProps {
   questions?: AnswerState[];
+  questionObjects?: MCQuestion[];
 }
+
+const isAnswerObjectCorrect = (answerObject: any) =>
+  answerObject.answerState === 'correct';
+
 const NextButton = (props: NextButtonProps) => {
-  const { questions } = props;
+  const { questions, questionObjects } = props;
+
+  let retreivedAnswerObjects: any[] = [];
+  if (questionObjects) {
+    retreivedAnswerObjects = useAnswerObjects(questionObjects);
+  }
+
+  const [isComplete, setIsComplete] = useState(false);
   const [completionPercent, setCompletionPercent] = useState(0);
   const [numberOfCorrectAnswers, setNumberOfCorrectAnswers] = useState(0);
 
   useEffect(() => {
     setNumberOfCorrectAnswers(0);
-    if (!questions || questions.length === 0) {
+    if (retreivedAnswerObjects.length === 0) {
       setCompletionPercent(1);
     } else {
-      questions.forEach((question) => {
-        if (question === 'correct') {
+      retreivedAnswerObjects.forEach((answerObject: any) => {
+        if (answerObject.answerState === 'correct') {
           setNumberOfCorrectAnswers((prev) => prev + 1);
         }
       });
@@ -36,23 +50,44 @@ const NextButton = (props: NextButtonProps) => {
   const isGoogleAuthenticated = useSession().status;
 
   let areQuestionsCompleted = false;
-  if (!questions || questions.length === 0) {
-    areQuestionsCompleted = true;
-  } else {
-    if (numberOfCorrectAnswers === questions.length) {
-      areQuestionsCompleted = true;
+  // if (!questions || questions.length === 0) {
+  //   areQuestionsCompleted = true;
+  // } else {
+  //   questionObjects?.forEach(()=>{})
+  // }
+
+  const checkAreQuestionObjectsComplete = async () => {
+    if (!questionObjects || questionObjects.length === 0) {
+      return true;
     }
-  }
+
+    let numberOfCorrectAnswers = 0;
+
+    retreivedAnswerObjects.forEach((answerObject) => {
+      if (answerObject.answerState === 'correct') {
+        numberOfCorrectAnswers += 1;
+      }
+    });
+
+    if (numberOfCorrectAnswers === retreivedAnswerObjects.length) {
+      setIsComplete(true);
+    } else {
+      setIsComplete(false);
+    }
+  };
 
   const googleSignIn = () => {
     signIn('google');
   };
 
   let completionDots = null;
-  if (questions && questions?.length > 0) {
-    completionDots = questions.map((question, index) => {
+  if (retreivedAnswerObjects && retreivedAnswerObjects?.length > 0) {
+    completionDots = retreivedAnswerObjects.map((answerObject, index) => {
       return (
-        <CompletionDot key={index} questionState={question}></CompletionDot>
+        <CompletionDot
+          key={index}
+          questionState={answerObject.answerState}
+        ></CompletionDot>
       );
     });
   }
@@ -74,7 +109,6 @@ const NextButton = (props: NextButtonProps) => {
       <Front>mark complete ✓</Front>
     </Pushable>
   );
-  // console.log('previous path: ', previousPath);
 
   const displayIfAuthenticated = (
     <OuterWrapper>
@@ -89,21 +123,23 @@ const NextButton = (props: NextButtonProps) => {
         </div>
       )}
 
-      <Wrapper $completed={areQuestionsCompleted}>
+      <Wrapper $completed={retreivedAnswerObjects.every(isAnswerObjectCorrect)}>
         {/* <Link href={nextPath}>
           <Pushable style={{ background: cl.getHSL(cl.blue_dark) }}>
             <Front>mark complete ✓</Front>
           </Pushable>
         </Link> */}
-        {areQuestionsCompleted ? activeLink : nonActiveLink}
+        {retreivedAnswerObjects.every(isAnswerObjectCorrect)
+          ? activeLink
+          : nonActiveLink}
       </Wrapper>
       <Link href={nextPath}>
         <SkipButton>→ </SkipButton>
       </Link>
 
-      <CompletionFraction $completed={areQuestionsCompleted}>
-        {questions && questions.length > 0
-          ? `${numberOfCorrectAnswers} of ${questions.length} questions complete`
+      <CompletionFraction $completed={isComplete}>
+        {retreivedAnswerObjects && retreivedAnswerObjects.length > 0
+          ? `${numberOfCorrectAnswers} of ${retreivedAnswerObjects.length} questions complete`
           : null}
       </CompletionFraction>
     </OuterWrapper>
