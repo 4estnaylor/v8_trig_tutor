@@ -35,7 +35,7 @@ const index = () => {
 
   return (
     <TopicComponentBoilerPlate2
-      title={<>Welcome 🖖</>}
+      title={<>Welcome test 🖖</>}
       questions={topicQuestions}
     >
       <>
