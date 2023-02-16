@@ -85,15 +85,15 @@ const index = () => {
               serious, rigid, delicate, and pristine method of thinking about
               things. And while those are often characteristics we can and
               should strive for in math, they are definitely not starting
-              points. The reality for mortals like me, is coming to understand
-              math requires us to be just as messy and playful as anything else.
-              A lot of erasing, crossing stuff out, and outright dead ends.
-              Sure, by the time the exam roles around I hope to have polished a
-              lot of the messiness away. But, if a student holds themself to a
-              standard of making no errors from the start, as a fair amount of
-              students seem to, they run the risk of parylzing themselves.
-              Better to embrace a bit of messy chaos as you learn things and try
-              to whittle it away overtime.
+              points. The reality for mortals like us, is coming to understand
+              math efficiently requires us to be just as messy and playful as
+              anything else. A lot of erasing, crossing stuff out, and outright
+              dead ends. Sure, by the time the exam roles around I hope to have
+              polished a lot of the messiness away. But, if a student holds
+              themself to a standard of making no errors from the start, as a
+              fair amount of students seem to, they run the risk of parylzing
+              themselves. Far better to embrace a bit of messy chaos as you
+              learn things and try to whittle it away overtime.
               <br />
               <br />
               <br />
@@ -133,7 +133,7 @@ export const P = styled.div`
 const Em = styled.div`
   display: inline;
   font-weight: 600;
-  color: ${cl.getHSL(cl.purple)};
+  color: ${cl.getHSL(cl.red)};
 `;
 
 const BulletPoint = styled.span`

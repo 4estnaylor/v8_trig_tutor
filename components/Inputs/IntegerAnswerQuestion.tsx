@@ -73,12 +73,13 @@ const TopPart = styled.div`
 `;
 
 const BottomPart = styled.div`
-  background: linear-gradient(
+  /* background: linear-gradient(
     160deg,
     hsla(225 72% 30% / 0.7),
     hsla(225 72% 30% / 1) 80%,
     hsla(340 90% 50% / 1)
-  );
+  ); */
+  background: transparent;
   background-size: 200%;
   padding: 15px;
 `;

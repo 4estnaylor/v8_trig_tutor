@@ -319,6 +319,8 @@ const useCoursePath = () => {
     currentPath,
     nextPath: convertToURL(nextPath),
     previousPath: convertToURL(previousPath),
+    currentTopicComponent,
+    currentSubComponent,
   };
 };
 

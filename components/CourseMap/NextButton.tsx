@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 import Link from 'next/link';
@@ -11,17 +13,23 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { AnswerState } from '../Inputs/MultipleChoiceQuestion';
 import MCQuestion from '../Inputs/MCQuestion';
 import useAnswerObjects from '../../utils/hooks/useAnswerObjects';
+import { TopicComponent } from '../HomePage/CourseMap/Courses';
+import { useRouter } from 'next/router';
 
 interface NextButtonProps {
   questions?: AnswerState[];
   questionObjects?: MCQuestion[];
+  topicComponentTitle?: string | JSX.Element | undefined;
 }
 
 const isAnswerObjectCorrect = (answerObject: any) =>
-  answerObject.answerState === 'correct';
+  answerObject && answerObject.answerState === 'correct';
 
 const NextButton = (props: NextButtonProps) => {
-  const { questions, questionObjects } = props;
+  const trigUser = useTrigUser();
+  const router = useRouter();
+
+  const { questions, questionObjects, topicComponentTitle } = props;
 
   let retreivedAnswerObjects: any[] = [];
   if (questionObjects) {
@@ -38,15 +46,47 @@ const NextButton = (props: NextButtonProps) => {
       setCompletionPercent(1);
     } else {
       retreivedAnswerObjects.forEach((answerObject: any) => {
-        if (answerObject.answerState === 'correct') {
+        if (answerObject?.answerState === 'correct') {
           setNumberOfCorrectAnswers((prev) => prev + 1);
         }
       });
     }
   }, [questions]);
 
-  const { currentPath, nextPath, previousPath } = useCoursePath();
-  const user = useTrigUser();
+  const {
+    currentPath,
+    nextPath,
+    previousPath,
+    currentTopicComponent,
+    currentSubComponent,
+  } = useCoursePath();
+
+  const handleMarkAsComplete = async () => {
+    console.log('marking complete beep bop', router);
+    const response = await fetch(`/api/db/markComponentComplete?trigUserId`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        trigUserId: trigUser.id,
+        pathName: router.pathname,
+        currentTopicComponentTitle: currentTopicComponent
+          ? currentTopicComponent.title
+          : null,
+        currentSubComponent: currentSubComponent
+          ? currentSubComponent.title
+          : null,
+      }),
+    });
+
+    const result = await response.json();
+
+    console.log('api result', result);
+
+    // router.push(nextPath);
+  };
+
   const isGoogleAuthenticated = useSession().status;
 
   let areQuestionsCompleted = false;
@@ -83,11 +123,17 @@ const NextButton = (props: NextButtonProps) => {
   let completionDots = null;
   if (retreivedAnswerObjects && retreivedAnswerObjects?.length > 0) {
     completionDots = retreivedAnswerObjects.map((answerObject, index) => {
+      let innerText = '?';
+      if (answerObject?.answerState === 'correct') {
+        innerText = '✓';
+      }
       return (
         <CompletionDot
           key={index}
-          questionState={answerObject.answerState}
-        ></CompletionDot>
+          questionState={answerObject?.answerState || 'unanswered'}
+        >
+          {innerText}
+        </CompletionDot>
       );
     });
   }
@@ -97,11 +143,14 @@ const NextButton = (props: NextButtonProps) => {
   };
 
   const activeLink = (
-    <Link href={nextPath}>
+    <div
+      // href={nextPath}
+      onClick={handleMarkAsComplete}
+    >
       <Pushable style={{ background: cl.getHSL(cl.blue_dark) }}>
         <Front>mark complete ✓</Front>
       </Pushable>
-    </Link>
+    </div>
   );
 
   const nonActiveLink = (
@@ -112,6 +161,11 @@ const NextButton = (props: NextButtonProps) => {
 
   const displayIfAuthenticated = (
     <OuterWrapper>
+      <CompletionFraction $completed={isComplete}>
+        {retreivedAnswerObjects && retreivedAnswerObjects.length > 0
+          ? `${numberOfCorrectAnswers} of ${retreivedAnswerObjects.length} questions complete`
+          : null}
+      </CompletionFraction>
       <CompletionDots>{completionDots}</CompletionDots>
       {previousPath ? (
         <Link href={previousPath}>
@@ -136,12 +190,6 @@ const NextButton = (props: NextButtonProps) => {
       <Link href={nextPath}>
         <SkipButton>→ </SkipButton>
       </Link>
-
-      <CompletionFraction $completed={isComplete}>
-        {retreivedAnswerObjects && retreivedAnswerObjects.length > 0
-          ? `${numberOfCorrectAnswers} of ${retreivedAnswerObjects.length} questions complete`
-          : null}
-      </CompletionFraction>
     </OuterWrapper>
   );
 
@@ -173,7 +221,6 @@ const NextButton = (props: NextButtonProps) => {
 
   const displayIfNotAuthenticaed = (
     <OuterWrapper>
-      <CompletionDots>{completionDots}</CompletionDots>`
       {previousPath ? (
         <Link href={previousPath}>
           <SkipButton>←</SkipButton>
@@ -223,10 +270,11 @@ const CompletionDots = styled.div`
   /* background-color: red; */
   top: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -40%);
   display: flex;
   justify-content: space-evenly;
   gap: 15px;
+  height: 30px;
 `;
 
 const CompletionDot = styled.div<{ questionState: AnswerState }>`
@@ -234,13 +282,23 @@ const CompletionDot = styled.div<{ questionState: AnswerState }>`
     p.questionState === 'correct'
       ? cl.getHSL(cl.purple)
       : cl.getHSL(cl.gray_light)};
+  color: ${(p) =>
+    p.questionState === 'correct'
+      ? cl.getHSL(cl.white)
+      : cl.getHSL(cl.gray_dark)};
+
   box-shadow: ${(p) =>
     p.questionState === 'correct'
       ? `0px 1px 4px ${cl.getHSL(cl.purple)}`
       : `inset 1px 1px 2px ${cl.getHSL(cl.black)};`};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+
   border-radius: 50%;
-  height: 15px;
-  width: 15px;
+  height: 25px;
+  width: 25px;
 
   background: ${(p) =>
     p.questionState === 'correct'
@@ -271,12 +329,16 @@ const OuterWrapper = styled.div`
   align-items: baseline;
 `;
 
+const OuterOuterWrapper = styled.div``;
+
+const QuestionOverview = styled.div``;
+
 const CompletionFraction = styled.div<{ $completed: boolean }>`
   position: absolute;
 
-  bottom: 20px;
+  top: 0px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -180%);
 
   color: ${(p) =>
     p.$completed ? cl.getHSL(cl.purple) : cl.getHSL(cl.gray_mid)};

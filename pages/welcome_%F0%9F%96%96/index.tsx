@@ -35,11 +35,18 @@ const index = () => {
 
   return (
     <TopicComponentBoilerPlate2
-      title={<>Welcome test 🖖</>}
+      title={<>Welcome 🖖</>}
       questions={topicQuestions}
       questionObjects={welcomeQuestions}
     >
       <>
+        <p>
+          Hey, I'm glad you made it here. I hope this site can be useful to you
+          for learning trigonometry and/or precalculus.
+          <br />
+          <br />
+        </p>
+
         <SpockWrapperOuter>
           <SpockWrapper>
             <SpockBlue />
@@ -47,12 +54,16 @@ const index = () => {
             <Image src="/spock.svg" width="1000" height="700" />
           </SpockWrapper>
         </SpockWrapperOuter>
-        <p>
-          Hey, I'm glad you made it here. I hope this site can be useful to you
-          for learning trigonometry and/or precalculus.
-          <br />
-          <br />
-        </p>
+
+        <SpockQuote>
+          There is no reason that function should not be beautiful. In fact
+          beauty usually makes it more effective.
+          <ByLine>S'chn T'gai Spock</ByLine>
+          <CircaLine>circa 2266–2269, Prime Timeline</CircaLine>
+        </SpockQuote>
+        <br />
+        <br />
+
         <IframeWrappper>
           <ResponsiveIframe
             src="https://player.vimeo.com/video/796468904?h=dc4303ab13&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
@@ -135,13 +146,9 @@ const index = () => {
           setAnswerState={setQuestionOne}
         ></MultipleChoiceQuestion> */}
         {welcomeQuestions[0].createMCQuestionElement()}
+
         {/* <Gap height={40} />
-        <SpockQuote>
-          There is no reason that function should not be beautiful. In fact
-          beauty usually makes it more effective.
-          <ByLine>S'chn T'gai Spock</ByLine>
-          <CircaLine>circa 2266–2269, Prime Timeline</CircaLine>
-        </SpockQuote>
+       
         <Gap height={40} /> */}
       </>
     </TopicComponentBoilerPlate2>

@@ -2,7 +2,7 @@ import MCQuestion from '../../Inputs/MCQuestion';
 import { TopicComponent } from './Courses';
 
 const LoginFeatureGainQ = new MCQuestion(
-  'What one feature is gained by login into Google on this website',
+  'What one feature is gained using Google login on this website?',
   ['recording your progress'],
   [
     'additional content',

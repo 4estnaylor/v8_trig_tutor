@@ -53,9 +53,9 @@ const MultipleChoiceOption = (props: MultipleChoiceOptionProps) => {
           value={radioKey}
           checked={selectedValues.includes(radioKey)}
           sx={{
-            color: cl.getHSL(cl.white),
+            color: cl.getHSL(cl.black),
             '&.Mui-checked': {
-              color: cl.getHSL(cl.white),
+              color: cl.getHSL(cl.purple),
             },
           }}
           answerstate={questionAnswerState}
@@ -77,7 +77,7 @@ const MultipleChoiceOption = (props: MultipleChoiceOptionProps) => {
 const RadioCheckContainer = styled.div<{ displayAsCorrect: boolean }>`
   position: relative;
   /* background-color: ${(p) =>
-    p.displayAsCorrect ? cl.getHSL(cl.white) : null}; */
+    p.displayAsCorrect ? cl.getHSL(cl.black) : null}; */
 `;
 
 const Wrapper = styled.div<{
@@ -88,10 +88,10 @@ const Wrapper = styled.div<{
   overflow: hidden;
   display: flex;
   align-items: center;
-  background-color: ${(p) =>
+  /* background-color: ${(p) =>
     p.selected || p.displayAsCorrect
-      ? cl.getHSLA(cl.white, 0.3)
-      : 'transparent'};
+      ? cl.getHSLA(cl.purple, 0.3)
+      : 'transparent'}; */
   border-radius: 8px;
   /* border: ${(p) =>
     p.answerstate === 'correct' ? `3px solid ${cl.getHSL(cl.white)}` : null};
@@ -128,7 +128,7 @@ const MiniCheckMark = styled.div<{ displayAsCorrect: boolean }>`
   -moz-background-clip: text;
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
-  color: ${cl.getHSL(cl.white)};
+  color: ${cl.getHSL(cl.black)};
   /* border: 2px solid ${cl.getHSL(cl.purple)}; */
   border-radius: 50%;
   height: 30px;
@@ -148,7 +148,8 @@ const MiniCheckMarkBackgroundCircle = styled.div<{ displayAsCorrect: boolean }>`
   height: 30px;
   width: 30px;
   border-radius: 50%;
-  background-color: white;
+  background-color: black;
+  background-color: transparent;
 `;
 
 const MyRadio = styled(Radio)<{ answerstate: AnswerState }>`
@@ -162,8 +163,12 @@ const OptionWrapper = styled.div<{
   flex: 1;
   color: ${(p) =>
     p.selected || p.displayAsCorrect
-      ? cl.getHSL(cl.white)
-      : cl.getHSLA(cl.white, 0.5)};
+      ? cl.getHSL(cl.black)
+      : cl.getHSLA(cl.black, 0.5)};
+  background-color: ${(p) =>
+    p.selected || p.displayAsCorrect
+      ? cl.getHSLA(cl.purple, 0.3)
+      : 'transparent'};
 
   border-radius: 8px;
   padding: 10px;

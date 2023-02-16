@@ -182,12 +182,13 @@ const TopPart = styled.div`
 `;
 
 const BottomPart = styled.div`
-  background: linear-gradient(
+  /* background: linear-gradient(
     160deg,
     ${cl.getHSLA(cl.purple_dark, 0.7)},
     ${cl.getHSLA(cl.purple_dark, 1)} 80%,
     ${cl.getHSLA(cl.red, 1)}
-  );
+  ); */
+  background: transparent;
   background-size: 200%;
   padding: 15px;
 `;

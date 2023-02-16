@@ -24,6 +24,7 @@ const double_down = () => {
     <TopicComponentBoilerPlate2
       title={<>Double Down</>}
       questions={questionAnswerStates}
+      questionObjects={doubleDownQuestions}
     >
       <>
         <DoubleDownWrapper>

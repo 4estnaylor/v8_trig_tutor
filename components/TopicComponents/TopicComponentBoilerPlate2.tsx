@@ -40,7 +40,11 @@ const TopicComponentBoilerPlate2 = (props: TopicComponentBoilerPlateProps) => {
           <Title>{title}</Title>
           {/* <IntroductionText>{intro}</IntroductionText> */}
           {children}
-          <NextButton questions={questions} questionObjects={questionObjects} />
+          <NextButton
+            questions={questions}
+            questionObjects={questionObjects}
+            topicComponentTitle={title}
+          />
         </Wrapper>
       </Background>
     </>

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import cl from '../colors';
 import mathKrakenQuestions from '../components/HomePage/CourseMap/MathKrakenQuestions';
 import MultipleChoiceQuestion, {
   AnswerState,
@@ -23,6 +24,7 @@ const math_kraken = () => {
     <TopicComponentBoilerPlate2
       title={<>Math Kraken</>}
       questions={questionAnswerStates}
+      questionObjects={mathKrakenQuestions}
     >
       <Wrapper>
         If feared and disregarded, trig will inevitably sink students, but if
@@ -39,13 +41,21 @@ const math_kraken = () => {
         clever, fun even.
         <br />
         <br />
-        But, what really makes trig stand out is it's unusually central and
-        pervasive role within the math universe. I made this website because in
-        my experience as both a teacher and a student, trig is
-        <b> the point of greatest leverage </b> for highschool students so much
-        as considering studying STEM subjects as an undergrad student . That is
-        to say, trig gives the biggest bang for your buck if you want to pursue
-        mathematics to the level of calculus and beyond.
+        But, what really makes trig stand out is it's{' '}
+        <b style={{ color: cl.getHSL(cl.red) }}>
+          {' '}
+          unusually central and pervasive role within the math universe{' '}
+        </b>
+        . I made this website because in my experience as both a teacher and a
+        student, trig is
+        <b style={{ color: cl.getHSL(cl.red) }}>
+          {' '}
+          the point of greatest leverage{' '}
+        </b>{' '}
+        for highschool students so much as considering studying STEM subjects as
+        an undergrad student . That is to say, trig gives the biggest bang for
+        your buck if you want to pursue mathematics to the level of calculus and
+        beyond.
         <br />
         <br />
         <Image

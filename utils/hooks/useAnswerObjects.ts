@@ -46,7 +46,18 @@ const useAnswerObjects = (questionObjects: QuestionObject[]) => {
 
     // make sure answer objects are unique
 
-    setAnswerObjects((prev) => [...prev, userAnswerObj]);
+    setAnswerObjects((prev) => {
+      const areMatchingIds = prev.filter(
+        (answerObj) => answerObj?.id === userAnswerObj?.id
+      );
+
+      // make sure to remove duplicates
+      if (areMatchingIds.length > 0) {
+        return prev;
+      } else {
+        return [...prev, userAnswerObj];
+      }
+    });
   };
 
   const getAllAnswerObjects = async () => {

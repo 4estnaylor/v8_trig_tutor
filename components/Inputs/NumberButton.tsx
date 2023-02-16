@@ -46,7 +46,11 @@ const Wrapper = styled(Button)`
   min-width: 55px;
   max-height: 55px;
   min-height: 55px;
-  background: ${cl.getHSLA(cl.white, 0.1)};
+  background: linear-gradient(
+    -20deg,
+    ${cl.getHSLA(cl.purple, 0.7)},
+    ${cl.getHSLA(cl.purple_dark, 0.9)}
+  );
 
   /* background-color: ${cl.getHSLA(cl.black, 0.2)}; */
 
