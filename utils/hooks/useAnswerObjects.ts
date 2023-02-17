@@ -20,7 +20,6 @@ const useAnswerObjects = (questionObjects: QuestionObject[]) => {
 
       const data = await response.json();
       const questionId = data.matchingQuestion.id as string;
-      console.log('matching question id', questionId);
 
       return questionId;
     } catch (error) {}
@@ -61,7 +60,6 @@ const useAnswerObjects = (questionObjects: QuestionObject[]) => {
   };
 
   const getAllAnswerObjects = async () => {
-    console.log('happening');
     questionObjects.forEach((questionObject) => {
       if (!trigUser) return;
       addAnswerObjectToAnswerObjectsArray(trigUser.id, questionObject);

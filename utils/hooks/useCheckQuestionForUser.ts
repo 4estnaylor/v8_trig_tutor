@@ -31,7 +31,6 @@ const useCheckQuestionForUser = (props: useCheckQuestionForUserProps) => {
       });
 
       const data = await response.json();
-      console.log('matching question id', data.matchingQuestion.id);
       setQuestionObject(data.matchingQuestion);
       setQuestionId(data.matchingQuestion.id);
 

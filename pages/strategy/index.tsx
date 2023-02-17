@@ -22,7 +22,7 @@ const index = () => {
           strategically about how you learn best.
           <IframeWrappper>
             <ResponsiveIframe
-              src="https://player.vimeo.com/video/777714892?h=dc4303ab13&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              src="https://player.vimeo.com/video/796100475?h=6601b97b87&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
               width="100vw"
               frameBorder="0px"
               allow="autoplay; fullscreen; picture-in-picture"

@@ -29,29 +29,37 @@ const NextButton = (props: NextButtonProps) => {
   const trigUser = useTrigUser();
   const router = useRouter();
 
-  const { questions, questionObjects, topicComponentTitle } = props;
-
-  let retreivedAnswerObjects: any[] = [];
-  if (questionObjects) {
-    retreivedAnswerObjects = useAnswerObjects(questionObjects);
+  let { questions, questionObjects, topicComponentTitle } = props;
+  if (!questionObjects) {
+    questionObjects = [];
   }
+
+  const [retreivedAnswerObjects, setRetreivedAnswerObjects] = useState<any>(
+    useAnswerObjects(questionObjects)
+  );
+
+  let answerObjects = useAnswerObjects(questionObjects);
+
+  useEffect(() => {
+    setRetreivedAnswerObjects(answerObjects);
+  }, [answerObjects]);
 
   const [isComplete, setIsComplete] = useState(false);
   const [completionPercent, setCompletionPercent] = useState(0);
   const [numberOfCorrectAnswers, setNumberOfCorrectAnswers] = useState(0);
+  const [completionDotsDisplay, setCompletionDotsDisplay] = useState<
+    JSX.Element[] | null
+  >(null);
 
   useEffect(() => {
     setNumberOfCorrectAnswers(0);
-    if (retreivedAnswerObjects.length === 0) {
-      setCompletionPercent(1);
-    } else {
-      retreivedAnswerObjects.forEach((answerObject: any) => {
-        if (answerObject?.answerState === 'correct') {
-          setNumberOfCorrectAnswers((prev) => prev + 1);
-        }
-      });
-    }
-  }, [questions]);
+
+    retreivedAnswerObjects.forEach((answerObject: any) => {
+      if (answerObject?.answerState === 'correct') {
+        setNumberOfCorrectAnswers((prev) => prev + 1);
+      }
+    });
+  }, [questionObjects, retreivedAnswerObjects]);
 
   const {
     currentPath,
@@ -62,7 +70,6 @@ const NextButton = (props: NextButtonProps) => {
   } = useCoursePath();
 
   const handleMarkAsComplete = async () => {
-    console.log('marking complete beep bop', router);
     const response = await fetch(`/api/db/markComponentComplete?trigUserId`, {
       method: 'POST',
       headers: {
@@ -81,8 +88,6 @@ const NextButton = (props: NextButtonProps) => {
     });
 
     const result = await response.json();
-
-    console.log('api result', result);
 
     // router.push(nextPath);
   };
@@ -103,7 +108,7 @@ const NextButton = (props: NextButtonProps) => {
 
     let numberOfCorrectAnswers = 0;
 
-    retreivedAnswerObjects.forEach((answerObject) => {
+    retreivedAnswerObjects.forEach((answerObject: any) => {
       if (answerObject.answerState === 'correct') {
         numberOfCorrectAnswers += 1;
       }
@@ -120,23 +125,29 @@ const NextButton = (props: NextButtonProps) => {
     signIn('google');
   };
 
-  let completionDots = null;
-  if (retreivedAnswerObjects && retreivedAnswerObjects?.length > 0) {
-    completionDots = retreivedAnswerObjects.map((answerObject, index) => {
-      let innerText = '?';
-      if (answerObject?.answerState === 'correct') {
-        innerText = '✓';
-      }
-      return (
-        <CompletionDot
-          key={index}
-          questionState={answerObject?.answerState || 'unanswered'}
-        >
-          {innerText}
-        </CompletionDot>
+  // let completionDots = null;
+
+  useEffect(() => {
+    if (retreivedAnswerObjects?.length > 0) {
+      let completionDots = retreivedAnswerObjects.map(
+        (answerObject: any, index: any) => {
+          let innerText = '?';
+          if (answerObject?.answerState === 'correct') {
+            innerText = '✓';
+          }
+          return (
+            <CompletionDot
+              key={index}
+              questionState={answerObject?.answerState || 'unanswered'}
+            >
+              {innerText}
+            </CompletionDot>
+          );
+        }
       );
-    });
-  }
+      setCompletionDotsDisplay(completionDots);
+    }
+  }, [retreivedAnswerObjects, questionObjects]);
 
   const handeClickOnOuterWrapper = (e: Event) => {
     e.stopPropagation();
@@ -160,63 +171,81 @@ const NextButton = (props: NextButtonProps) => {
   );
 
   const displayIfAuthenticated = (
-    <OuterWrapper>
-      <CompletionFraction $completed={isComplete}>
-        {retreivedAnswerObjects && retreivedAnswerObjects.length > 0
-          ? `${numberOfCorrectAnswers} of ${retreivedAnswerObjects.length} questions complete`
-          : null}
-      </CompletionFraction>
-      <CompletionDots>{completionDots}</CompletionDots>
-      {previousPath ? (
-        <Link href={previousPath}>
-          <SkipButton>←</SkipButton>
-        </Link>
-      ) : (
-        <div style={{ visibility: 'hidden' }}>
-          <SkipButton>←</SkipButton>
-        </div>
-      )}
+    <OuterOuterWrapper>
+      <QuestionOverview>
+        <CompletionFraction $completed={isComplete}>
+          {retreivedAnswerObjects && retreivedAnswerObjects.length > 0
+            ? `${numberOfCorrectAnswers} of ${retreivedAnswerObjects.length} questions complete`
+            : 'fetching your question results...'}
+        </CompletionFraction>
+        <CompletionDots>{completionDotsDisplay}</CompletionDots>
+      </QuestionOverview>
+      <OuterWrapper>
+        {previousPath ? (
+          <Link href={previousPath}>
+            <SkipButton>←</SkipButton>
+          </Link>
+        ) : (
+          <div style={{ visibility: 'hidden' }}>
+            <SkipButton>←</SkipButton>
+          </div>
+        )}
 
-      <Wrapper $completed={retreivedAnswerObjects.every(isAnswerObjectCorrect)}>
-        {/* <Link href={nextPath}>
+        <Wrapper
+          $completed={retreivedAnswerObjects?.every(isAnswerObjectCorrect)}
+        >
+          {/* <Link href={nextPath}>
           <Pushable style={{ background: cl.getHSL(cl.blue_dark) }}>
             <Front>mark complete ✓</Front>
           </Pushable>
         </Link> */}
-        {retreivedAnswerObjects.every(isAnswerObjectCorrect)
-          ? activeLink
-          : nonActiveLink}
-      </Wrapper>
-      <Link href={nextPath}>
-        <SkipButton>→ </SkipButton>
-      </Link>
-    </OuterWrapper>
+          {retreivedAnswerObjects?.every(isAnswerObjectCorrect)
+            ? activeLink
+            : nonActiveLink}
+        </Wrapper>
+        <Link href={nextPath}>
+          <SkipButton>→ </SkipButton>
+        </Link>
+      </OuterWrapper>
+    </OuterOuterWrapper>
   );
 
   const displayIfLoading = (
-    <OuterWrapper>
-      {previousPath ? (
-        <Link href={previousPath}>
-          <SkipButton>←</SkipButton>
-        </Link>
-      ) : (
-        <div style={{ visibility: 'hidden' }}>
-          <SkipButton>←</SkipButton>
-        </div>
-      )}
+    <OuterOuterWrapper>
+      <QuestionOverview>
+        <CompletionFraction $completed={isComplete}>
+          {retreivedAnswerObjects?.length > 0
+            ? `${numberOfCorrectAnswers} of ${retreivedAnswerObjects.length} questions complete`
+            : 'loading'}
+        </CompletionFraction>
+        <CompletionDots>Loading Your Question Results</CompletionDots>
+        Loading Your Question Results
+      </QuestionOverview>
 
-      <Wrapper>
-        {/* <Link href={nextPath}>
+      <OuterWrapper>
+        {previousPath ? (
+          <Link href={previousPath}>
+            <SkipButton>←</SkipButton>
+          </Link>
+        ) : (
+          <div style={{ visibility: 'hidden' }}>
+            <SkipButton>←</SkipButton>
+          </div>
+        )}
+
+        <Wrapper>
+          {/* <Link href={nextPath}>
           <Pushable style={{ background: cl.getHSL(cl.blue_dark) }}>
             <Front>mark as complete ✓</Front>
           </Pushable>
         </Link> */}
-        loading... profile
-      </Wrapper>
-      <Link href={nextPath}>
-        <SkipButton>→ </SkipButton>
-      </Link>
-    </OuterWrapper>
+          loading... profile
+        </Wrapper>
+        <Link href={nextPath}>
+          <SkipButton>→ </SkipButton>
+        </Link>
+      </OuterWrapper>
+    </OuterOuterWrapper>
   );
 
   const displayIfNotAuthenticaed = (
@@ -266,11 +295,7 @@ const NoLink = styled.div`
 `;
 
 const CompletionDots = styled.div`
-  position: absolute;
   /* background-color: red; */
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -40%);
   display: flex;
   justify-content: space-evenly;
   gap: 15px;
@@ -331,15 +356,14 @@ const OuterWrapper = styled.div`
 
 const OuterOuterWrapper = styled.div``;
 
-const QuestionOverview = styled.div``;
+const QuestionOverview = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+`;
 
 const CompletionFraction = styled.div<{ $completed: boolean }>`
-  position: absolute;
-
-  top: 0px;
-  left: 50%;
-  transform: translate(-50%, -180%);
-
   color: ${(p) =>
     p.$completed ? cl.getHSL(cl.purple) : cl.getHSL(cl.gray_mid)};
 `;

@@ -31,7 +31,7 @@ const timesUTC = [
 
 const Book = () => {
   const weeksVisibleToUsers = 10;
-  const pricePerSession = 40;
+  const pricePerSession = 10;
 
   const [sundays, setSundays]: any = useSundays(weeksVisibleToUsers);
   const [timeSlots, setTimeSlots]: useTimeSlotType = useTimeSlots(

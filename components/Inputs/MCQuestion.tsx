@@ -36,8 +36,6 @@ export default class MCQuestion {
       question: this.question,
     });
 
-    console.log('here we go~!', questionId);
-
     this.answerState = answerState;
     this.setAnswerState = setAnswerState;
 

@@ -46,7 +46,7 @@ const math_kraken = () => {
           {' '}
           unusually central and pervasive role within the math universe{' '}
         </b>
-        . I made this website because in my experience as both a teacher and a
+        s. I made this website because in my experience as both a teacher and a
         student, trig is
         <b style={{ color: cl.getHSL(cl.red) }}>
           {' '}

@@ -53,3 +53,13 @@ model User {
 }
 
 
+model Component {
+   id           String    @id @default(cuid()) 
+   title String?
+   type String?
+
+}
+
+
+
+
