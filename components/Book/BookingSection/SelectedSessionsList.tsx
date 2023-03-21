@@ -31,6 +31,7 @@ const SelectedSessionsList = (props: SelectedSesionsListProps) => {
   } = props;
 
   const listItems = selectedSessions.map((session) => {
+    if (session === null) return;
     const listItemsProps: ListItemProps = {
       selectedSessions,
       setSelectedSessions,

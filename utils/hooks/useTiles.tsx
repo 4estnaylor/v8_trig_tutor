@@ -47,7 +47,7 @@ const useTiles = (props: useTileProps) => {
 
     // check if is already selected
     if (
-      selectedSessions.filter((e) => e.getTime() === timeSlot.getTime())
+      selectedSessions.filter((e) => e?.getTime() === timeSlot.getTime())
         .length > 0
     ) {
       theme = tileThemes.selectedForBooking;

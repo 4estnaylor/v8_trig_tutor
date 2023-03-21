@@ -11,6 +11,7 @@ import cl from '../colors';
 import Gap from '../components/Gaps/Gap';
 import BookingSection from '../components/Book/BookingSection/BookingSection';
 import { RestaurantRounded } from '@mui/icons-material';
+import Image from 'next/image';
 
 const timesUTC = [
   //sunday ↓
@@ -127,6 +128,11 @@ const Book = () => {
   );
 };
 
+const DeskWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -151,7 +157,7 @@ const BottomSection = styled.div`
   background: linear-gradient(
     -120deg,
 
-    ${cl.getHSL(cl.gray_dark)},
+    ${cl.getHSL(cl.black)},
     ${cl.getHSL(cl.purple)}
   );
   background-size: 180%;

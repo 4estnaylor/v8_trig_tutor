@@ -49,17 +49,17 @@ const Tile = (props: TileProps) => {
 
     setSelectedSessions((prev) => {
       const isBooked =
-        prev.filter((e) => e.getTime() === timeSlot.getTime()).length > 0;
+        prev.filter((e) => e?.getTime() === timeSlot.getTime()).length > 0;
 
       if (isBooked) {
         const daysSelectedForBookingMinusThisOne = prev.filter(
-          (dateObj) => dateObj.getTime() !== timeSlot.getTime()
+          (dateObj) => dateObj?.getTime() !== timeSlot.getTime()
         );
 
         return [...daysSelectedForBookingMinusThisOne];
       } else {
         const daysSelectedForBookingPlusThisOne = [...prev, timeSlot].sort(
-          (a, b) => a.getTime() - b.getTime()
+          (a, b) => a?.getTime() - b?.getTime()
         );
 
         return daysSelectedForBookingPlusThisOne;

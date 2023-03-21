@@ -1,3 +1,5 @@
+import { Desk } from '@mui/icons-material';
+import Image from 'next/image';
 import React from 'react';
 import styled, { isStyledComponent } from 'styled-components';
 import cl from '../../../../colors';
@@ -12,20 +14,44 @@ const PricingInfo = ({ pricePerSession }: PricingInfoProps) => {
     <Wrapper>
       <Card>
         <Title>
+          <Price> ${pricePerSession} each </Price>
+          <Spacer40 />
           <FortyFiveMinCircle>
             <FortyFiveMinCircleText>
               <Digit>45</Digit>
               <Min>MIN</Min>
             </FortyFiveMinCircleText>
           </FortyFiveMinCircle>
-          sessions
+          <Spacer10 />
+          session
         </Title>
+
         <Gap height={30} />
-        <Price> ${pricePerSession} </Price>
+
+        <DeskWrapper>
+          <Image src="/desk.svg" width="1000" height="450" />
+        </DeskWrapper>
+
+        <Gap height={30} />
       </Card>
     </Wrapper>
   );
 };
+
+const Spacer40 = styled.div`
+  width: 40px;
+`;
+
+const Spacer10 = styled.div`
+  width: 10px;
+`;
+
+const DeskWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100vw;
+`;
 
 const CardBorder = styled.div`
   padding: 40px;
@@ -60,7 +86,6 @@ const Wrapper = styled.div`
 `;
 
 const Price = styled.div`
-  font-size: 3.5rem;
   height: 50px;
   display: flex;
   justify-content: center;
@@ -72,8 +97,12 @@ const Price = styled.div`
 const Title = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+
   font-size: 2rem;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
 
 const FortyFiveMinCircle = styled.div`

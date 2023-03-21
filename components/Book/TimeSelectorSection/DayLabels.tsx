@@ -49,7 +49,7 @@ const Wrapper = styled.div`
 const DateNumber = styled.div<{ marked: boolean }>`
   color: ${(p) => (p.marked ? cl.getHSL(cl.gray_mid) : cl.getHSL(cl.gray_mid))};
   background-color: ${(p) =>
-    p.marked ? cl.getHSLA(cl.blue_light, 1) : 'transparent'};
+    p.marked ? cl.getHSLA(cl.purple_light, 1) : 'transparent'};
 
   border-radius: 50%;
 

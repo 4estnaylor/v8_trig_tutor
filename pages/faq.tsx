@@ -320,7 +320,7 @@ const faq = () => {
             <br />
             <br />
             Simple really. Math analysis is, ummm, analyzing stuff with math. A
-            definition so vague as to be meaningless.
+            definition admittedly so vague as to be meaningless.
             <br />
             <br />
             Unlike trigonometry, the topics in math analysis don't really have a
@@ -386,8 +386,8 @@ const faq = () => {
               consider a name change for this course and maybe pare it down a
               bit while we're at it!
             </Alert> */}
-            <br />I rarely use the term math analysis because of... well, how
-            bad and vague a term it is.
+            <br />I rarely use the term math analysis because of, well, how bad
+            and undescriptive it is.
             <br />
             <br />
             I like to think of it more as a kind of "math trail mix". Your
@@ -456,8 +456,8 @@ const faq = () => {
               bit of money. In the case of my lesson usually about $1.46
               depending on taxes and how many sessions you book at once. This
               policy is designed to prevent many transactions at once which
-              could accumulate into a large fee with my online payment platform,
-              Stripe.
+              could accumulate into a large fee with the online payment platform
+              I have opted to use for this website, Stripe.
             </Alert>
           </div>
         </FAQSection>

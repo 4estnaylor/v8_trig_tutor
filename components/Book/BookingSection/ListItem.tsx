@@ -13,7 +13,7 @@ const ListItem = (props: ListItemProps) => {
 
   const handleDeleteButtonClick = () => {
     setSelectedSessions((prev) => {
-      const filtered = prev.filter((e) => e.getTime() !== session.getTime());
+      const filtered = prev.filter((e) => e?.getTime() !== session.getTime());
 
       return filtered;
     });
