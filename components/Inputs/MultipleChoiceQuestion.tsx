@@ -86,7 +86,7 @@ const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
       //trigUserId, questionId, answerState, attemptIncrement
 
       const bodyForQuestionUpsert = {
-        trigUserId: trigUser.id,
+        trigUserId: trigUser?.id,
         questionId: questionId,
         answerState: 'correct',
         attemptIncrement: 1,

@@ -146,22 +146,17 @@ const conceptual = () => {
               </StudentThoughts>
             </CircleAreaAnswer>
             <br />
-            Conceptual understanding is really not being used by me to answer
-            the question. All I am doing is practicing a technique where I fill
-            in values to an equation I memorized years ago. I am not at all
-            digging into logically why taking these numbers and mushing them
-            together just show gives me a physically tangible description of how
-            much 2d space is inside the circle.
+            This is not conceptual understanding. All I am doing is practicing a
+            technique where I fill in values to an equation I memorized years
+            ago. I am not at all digging into logically why taking these numbers
+            and mushing them together just show gives me a physically tangible
+            description of how much 2d space is inside the circle.
             <br />
             <br />
             <Alert severity="info">
               That's not a bad thing by the way! Being able to solve problems
               technically, step-by-step, almost mindlessly can be critical to
-              saving time and mental energy for other endevours. Constantly
-              flexing my conceptual understanding would be a really unecessarily
-              time consuming activity if I had to run through a proof of an
-              equation for the area of a circle every time I wanted a circle's
-              area!
+              saving time and mental energy for other endevours.
             </Alert>
             <br />
             <br />
@@ -222,8 +217,8 @@ const conceptual = () => {
               quotes though!
               <br />
               <br />I double-checked with the Ultimate Quotable Einstein
-              published by Princeton University Press which also cannot verify
-              any source for these particular quotes.
+              published by Princeton University Press which explains there is no
+              record of Einstein actually saying either of these quotes.
             </Alert>
             <br />
             <br />

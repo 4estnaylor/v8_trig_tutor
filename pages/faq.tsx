@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import ResponsiveAppBar from '../components/ResponsiveAppBar';
+import ResponsiveAppBar from '../../components/ResponsiveAppBar';
 import Head from 'next/head';
 import styled from 'styled-components';
-import FAQSection from '../components/FAQ/FAQSection';
-import Gap from '../components/Gaps/Gap';
-import cl from '../colors';
+import FAQSection from '../../components/FAQ/FAQSection';
+import Gap from '../../components/Gaps/Gap';
+import cl from '../../colors';
 import { Alert, AlertTitle } from '@mui/material';
 import Image from 'next/image';
 import { flexbox } from '@mui/system';

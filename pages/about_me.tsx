@@ -39,7 +39,7 @@ const about_me = () => {
           </Alert>
           <p>
             I learn math best through lots of visuals, practice, open-ended
-            inquiry, and pauses for thought . So, I make every effort to
+            questions, and pauses for thought . So, I make every effort to
             incorporate those things into my teaching.
           </p>
           <p>

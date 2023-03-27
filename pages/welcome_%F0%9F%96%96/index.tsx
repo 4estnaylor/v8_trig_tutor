@@ -91,7 +91,15 @@ const index = () => {
                 <Purple>✓</Purple>access all content
               </li>
               <li>
-                <Red>✗</Red>record progress
+                <Red>✗</Red>
+                <div
+                  style={{
+                    textDecoration: 'line-through',
+                    textDecorationColor: cl.getHSL(cl.black),
+                  }}
+                >
+                  record progress
+                </div>
               </li>
             </FeaturesList>
             <ImageShrinker>
