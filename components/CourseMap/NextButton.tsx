@@ -47,7 +47,6 @@ const NextButton = (props: NextButtonProps) => {
 
   let answerObjects = useAnswerObjects(questionObjects);
   useEffect(() => {
-    let areAllQuestionStatesCorrect = true;
     console.log(
       questionObjects?.forEach((qobject) =>
         console.log('change occuring: ', qobject)
@@ -162,6 +161,7 @@ const NextButton = (props: NextButtonProps) => {
     });
 
     if (numberOfCorrectAnswers === retreivedAnswerObjects.length) {
+      console.log('is happening alfredo!');
       setIsComplete(true);
     } else {
       setIsComplete(false);
@@ -176,6 +176,7 @@ const NextButton = (props: NextButtonProps) => {
 
   useEffect(() => {
     checkAreQuestionObjectsComplete();
+
     if (retreivedAnswerObjects?.length > 0) {
       let completionDots = retreivedAnswerObjects.map(
         (answerObject: any, index: any) => {
@@ -218,15 +219,30 @@ const NextButton = (props: NextButtonProps) => {
     </Pushable>
   );
 
+  let completiondots2 = questionObjects.map((questionObject) => {
+    return (
+      <CompletionDot questionState={questionObject.answerState || 'incorrect'}>
+        {questionObject.answerState === 'correct' ? '✓' : ''}
+      </CompletionDot>
+    );
+  });
+
+  let correctAnswers2 = 0;
+  questionObjects.forEach((questionObject) => {
+    if (questionObject.answerState === 'correct') {
+      correctAnswers2 += 1;
+    }
+  });
+
   const displayIfAuthenticated = (
     <OuterOuterWrapper>
       <QuestionOverview>
-        <CompletionFraction $completed={isComplete}>
+        <CompletionFraction $completed={false}>
           {retreivedAnswerObjects && retreivedAnswerObjects.length > 0
-            ? `${numberOfCorrectAnswers} of ${retreivedAnswerObjects.length} questions complete`
+            ? `${correctAnswers2} of ${questionObjects.length} questions complete`
             : `...`}
         </CompletionFraction>
-        <CompletionDots>{completionDotsDisplay}</CompletionDots>
+        <CompletionDots>{completiondots2}</CompletionDots>
       </QuestionOverview>
       <OuterWrapper>
         {previousPath ? (
@@ -294,10 +310,10 @@ const NextButton = (props: NextButtonProps) => {
       <QuestionOverview>
         <CompletionFraction $completed={isComplete}>
           {retreivedAnswerObjects && retreivedAnswerObjects.length > 0
-            ? `${numberOfCorrectAnswers} of ${retreivedAnswerObjects.length} questions complete`
+            ? `${correctAnswers2} of ${questionObjects.length} questions complete`
             : `...`}
         </CompletionFraction>
-        <CompletionDots>{completionDotsDisplay}</CompletionDots>
+        <CompletionDots>{completiondots2}</CompletionDots>
       </QuestionOverview>
       <OuterWrapper>
         {previousPath ? (
