@@ -47,7 +47,7 @@ export default function Home() {
   // },[])
   return (
     <>
-      <Script
+      {/* <Script
         src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"
         strategy="afterInteractive"
       />
@@ -78,9 +78,8 @@ export default function Home() {
   
       `}
 
-        {/* color1: 0xff0055,
-        color2: 0x42cbe7, */}
-      </Script>
+
+      </Script> */}
 
       <div>
         <Head>
