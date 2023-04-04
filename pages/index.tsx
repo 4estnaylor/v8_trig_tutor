@@ -55,24 +55,32 @@ export default function Home() {
         src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"
         strategy="afterInteractive"
       />
-      {/* <Script strategy="afterInteractive">
+      <Script strategy="afterInteractive">
         {`
-        
-        VANTA.BIRDS({
-          el: '#testaroo',
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 200.0,
-          minWidth: 200.0,
-          scale: 1.0,
-          scaleMobile: 1.0,
-          backgroundColor: 0xebebeb,
-          colorMode: 'lerpGradient',
-          birdSize: 2.3,
-          quantity: 2.0,
-        })`}
-      </Script> */}
+      VANTA.BIRDS({
+        el: "#testaroo",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        backgroundColor: 0xffffff,
+     color1: 0x000000,
+     color2: 0x000000,
+        colorMode: "lerpGradient",
+        birdSize: 2.00,
+        wingSpan: 33.00,
+        quantity: 1.00,
+        backgroundAlpha: 0
+      })
+  
+      `}
+
+        {/* color1: 0xff0055,
+        color2: 0x42cbe7, */}
+      </Script>
 
       <div>
         <Head>
@@ -86,7 +94,8 @@ export default function Home() {
         <Wrapper>
           <ResponsiveAppBar />
 
-          <TopSection id="testaroo">
+          <TopSection>
+            <Vanta id="testaroo"></Vanta>
             <GetGoodAtTrig>
               Get <RainbowText>{goodAdjective}</RainbowText> at Trig.
               <ReallyReallyGood>
@@ -188,6 +197,13 @@ export default function Home() {
     </>
   );
 }
+
+const Vanta = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 400px;
+  /* border: 2px solid red; */
+`;
 
 const HomepageIllustration = styled.div`
   pointer-events: 'none';

@@ -30,20 +30,25 @@ const getHomepageScene: SceneGetter = (
     for (let i = 0; i < 3; i++) {
       let yPosDiff = 0;
       let xPosDiff = 0;
+      // let dX = 50;
+      // let dY = 50;
+      let dX = 2;
+      let dY = 0;
       if (i > 0) {
-        yPosDiff = 86.6;
+        // yPosDiff = 86.6;
+        yPosDiff = dY;
       }
       if (i === 1) {
-        xPosDiff = -50;
+        xPosDiff = -dX;
       }
       if (i === 2) {
-        xPosDiff = 50;
+        xPosDiff = dX;
       }
       let interactivePoint = new InteractivePoint(
         ctx,
         eventHandlerConfig,
-        width / 2 + xPosDiff,
-        ctx.canvas.height / 4 + yPosDiff,
+        (2 * width) / 3 + xPosDiff,
+        ctx.canvas.height / 3 + yPosDiff,
         scene.assets.listenFor,
         30,
         blueColors[i]
