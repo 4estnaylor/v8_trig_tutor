@@ -56,7 +56,7 @@ export const measurement = new TopicSection('Measuring Angles ∡', [
   new TopicComponent('°'),
 
   new TopicComponent('negative angles'),
-  new TopicComponent(`big ol' angles`),
+  new TopicComponent(`big angles`),
   new TopicComponent('radians', [
     new SubComponent('τ radians'),
     new SubComponent('π radians'),

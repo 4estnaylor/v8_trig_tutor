@@ -15,6 +15,9 @@ import Gap from '../components/Gaps/Gap';
 import goodSynonyms from '../components/goodSynonyms';
 import { useEffect, useState } from 'react';
 import QUERIES from '../breakpoints';
+import Script from 'next/script';
+import { UserProgress } from '../components/HomePage/CourseMap/TopicSectionListItem';
+import useUserProgress from '../utils/hooks/useUserProgress';
 
 export default function Home() {
   const size = useWindowSize();
@@ -27,52 +30,95 @@ export default function Home() {
     );
     setGoodAdjective('good');
   }, []);
+
+  const userProgress: UserProgress = useUserProgress();
+
+  const completedTitles =
+    userProgress?.subTopicsComplete.length +
+    userProgress?.topicsComplete.length;
+  const totalTitles = 46;
+
+  const totalProgress = completedTitles / totalTitles;
+
+  let BIRDS;
+
+  // useEffect(()=>{
+
+  // },[])
   return (
-    <div>
-      <Head>
-        <title>Trig Tutor</title>
-        <meta
-          name="description"
-          content="Learn Trigonometry Really Well. Tutoring offered for Trigonometry and Precalculus."
-        />
-        <link rel="icon" href="/trig_tutor_logo.svg" />
-      </Head>
-      <Wrapper>
-        <ResponsiveAppBar />
+    <>
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"
+        strategy="afterInteractive"
+      />
+      <Script
+        src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"
+        strategy="afterInteractive"
+      />
+      {/* <Script strategy="afterInteractive">
+        {`
+        
+        VANTA.BIRDS({
+          el: '#testaroo',
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.0,
+          minWidth: 200.0,
+          scale: 1.0,
+          scaleMobile: 1.0,
+          backgroundColor: 0xebebeb,
+          colorMode: 'lerpGradient',
+          birdSize: 2.3,
+          quantity: 2.0,
+        })`}
+      </Script> */}
 
-        <TopSection>
-          <GetGoodAtTrig>
-            Get <RainbowText>{goodAdjective}</RainbowText> at Trig.
-            <ReallyReallyGood>
-              {'('}it's worth the effort{')'}
-            </ReallyReallyGood>
-          </GetGoodAtTrig>
-          <CanvasWrap>
-            <MathworkWrap>
-              <MathWorkImage
-                src="/mathwork.png"
-                width={size.width || 350}
-                height={size.width || 350}
-              />
-            </MathworkWrap>
-            <MyCanvas sceneGetter={getHomepageScene} height={490} />
-            <HomepageIllustration aria-hidden="true" tabIndex={-1}>
-              <InnerImg src="/crashcoursebanner.svg" />
-            </HomepageIllustration>
-          </CanvasWrap>
-        </TopSection>
-        <BottomSection>
-          <ProgressBarWrapper>
-            <h2>Crash Course</h2>
-            <ProgressBar progress={0.43} />
-            {/* <img src="/tuftbird.svg" height="80px" loading="lazy" /> */}
-          </ProgressBarWrapper>
+      <div>
+        <Head>
+          <title>Trig Tutor</title>
+          <meta
+            name="description"
+            content="Learn Trigonometry Really Well. Tutoring offered for Trigonometry and Precalculus."
+          />
+          <link rel="icon" href="/trig_tutor_logo.svg" />
+        </Head>
+        <Wrapper>
+          <ResponsiveAppBar />
 
-          <CourseMap2 />
-        </BottomSection>
-      </Wrapper>
+          <TopSection id="testaroo">
+            <GetGoodAtTrig>
+              Get <RainbowText>{goodAdjective}</RainbowText> at Trig.
+              <ReallyReallyGood>
+                {'('}it's worth the effort{')'}
+              </ReallyReallyGood>
+            </GetGoodAtTrig>
+            <CanvasWrap>
+              <MathworkWrap>
+                <MathWorkImage
+                  src="/mathwork.png"
+                  width={size.width || 350}
+                  height={size.width || 350}
+                />
+              </MathworkWrap>
+              <MyCanvas sceneGetter={getHomepageScene} height={490} />
+              <HomepageIllustration aria-hidden="true" tabIndex={-1}>
+                <InnerImg src="/crashcoursebanner.svg" />
+              </HomepageIllustration>
+            </CanvasWrap>
+          </TopSection>
+          <BottomSection>
+            <ProgressBarWrapper>
+              <h2>Crash Course</h2>
+              <ProgressBar progress={totalProgress || 0} />
+              {/* <img src="/tuftbird.svg" height="80px" loading="lazy" /> */}
+            </ProgressBarWrapper>
 
-      {/* <div className={styles.grid}>
+            <CourseMap2 />
+          </BottomSection>
+        </Wrapper>
+
+        {/* <div className={styles.grid}>
           <div className={styles.card}>
             <h2>Documentation &rarr;</h2>
             <p>testd in-depth information about Next.js features and API.</p>
@@ -121,24 +167,25 @@ export default function Home() {
           </button>
         </div> */}
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image
-              src="/trig_tutor_logo.svg"
-              alt="trig tutor Logo"
-              width={72}
-              height={16}
-            />
-          </span>
-        </a>
-      </footer>
-    </div>
+        <footer className={styles.footer}>
+          <a
+            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Powered by{' '}
+            <span className={styles.logo}>
+              <Image
+                src="/trig_tutor_logo.svg"
+                alt="trig tutor Logo"
+                width={72}
+                height={16}
+              />
+            </span>
+          </a>
+        </footer>
+      </div>
+    </>
   );
 }
 

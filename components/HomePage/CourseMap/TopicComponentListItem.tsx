@@ -1,26 +1,52 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import useUserProgress from '../../../utils/hooks/useUserProgress';
 import convertToURL from './convertToURL';
 import { TopicComponent, TopicSection } from './Courses';
 import ListItem from './ListItem';
 import { connectorForm, connectorType } from './MapConnector';
 import SubComponentListItem from './SubComponentListItem';
+import { UserProgress } from './TopicSectionListItem';
 
 interface TopicComponentListItemProps {
   topicComponent: TopicComponent;
+  userProgress: UserProgress;
 }
 
 const TopicComponentListItem = (props: TopicComponentListItemProps) => {
-  const { topicComponent } = props;
+  const { topicComponent, userProgress } = props;
+  console.log('HEEERE', userProgress);
+
+  const isTopicComponentComplete = userProgress?.topicsComplete.includes(
+    topicComponent.title
+  );
+
   const subComponents = topicComponent.subComponents;
-  const subComponentListItems = subComponents?.map((subComponent, index) => {
-    return (
-      <SubComponentListItem
-        key={subComponent.title}
-        subComponent={subComponent}
-      />
-    );
-  });
+
+  let subComponentListItems = [];
+  subComponentListItems =
+    subComponents?.map((subComponent, index) => {
+      return (
+        <SubComponentListItem
+          key={subComponent.title}
+          subComponent={subComponent}
+          userProgress={userProgress}
+        />
+      );
+    }) || [];
+
+  useEffect(() => {
+    subComponentListItems =
+      subComponents?.map((subComponent, index) => {
+        return (
+          <SubComponentListItem
+            key={subComponent.title}
+            subComponent={subComponent}
+            userProgress={userProgress}
+          />
+        );
+      }) || [];
+  }, [userProgress]);
 
   let lastOfTopicSection = false;
   let parentTopicSection = topicComponent.parentTopicSection;
@@ -51,7 +77,11 @@ const TopicComponentListItem = (props: TopicComponentListItemProps) => {
 
   return (
     <>
-      <ListItem isComplete={false} connectorForm={connectorForm} href={url}>
+      <ListItem
+        isComplete={isTopicComponentComplete}
+        connectorForm={connectorForm}
+        href={url}
+      >
         <Title> {topicComponent.title} </Title>
       </ListItem>
       <SubComponentList>{subComponentListItems}</SubComponentList>

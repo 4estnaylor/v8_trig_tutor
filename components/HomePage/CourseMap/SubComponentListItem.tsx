@@ -26,13 +26,19 @@ import convertToURL from './convertToURL';
 import { SubComponent, TopicComponent } from './Courses';
 import ListItem from './ListItem';
 import { connectorForm, connectorType } from './MapConnector';
+import { UserProgress } from './TopicSectionListItem';
 
 interface SubComponentListItemProps {
   subComponent: SubComponent;
+  userProgress: UserProgress;
 }
 
 const SubComponentListItem = (props: SubComponentListItemProps) => {
-  const { subComponent } = props;
+  const { subComponent, userProgress } = props;
+
+  console.log(subComponent.title, userProgress?.subTopicsComplete);
+
+  let isComplete = userProgress?.subTopicsComplete.includes(subComponent.title);
   let parentTopicComponent = subComponent.parentTopicComponent;
   if (!parentTopicComponent.subComponents) return <></>;
 
@@ -78,7 +84,7 @@ const SubComponentListItem = (props: SubComponentListItemProps) => {
     convertToURL(subComponent.title);
 
   return (
-    <ListItem isComplete={false} connectorForm={connectorForm} href={url}>
+    <ListItem isComplete={isComplete} connectorForm={connectorForm} href={url}>
       <Title>{subComponent.title}</Title>
     </ListItem>
   );

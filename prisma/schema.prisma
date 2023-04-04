@@ -10,7 +10,7 @@ datasource db {
 
 model Session {
   id              String   @id @default(cuid())
-  notes          String?
+  notes           String?
   meetTime        DateTime @unique @map("meet_time")
   createdAt       DateTime @default(now()) @map("created_at")
   paymentIntentId String?
@@ -19,20 +19,21 @@ model Session {
 }
 
 model Question {
-  id              String   @id @default(cuid())
-  question          String?
-  answers Answer[]
+  id       String   @id @default(cuid())
+  question String?
+  answers  Answer[]
 }
 
 model Answer {
-  id String    @id @default(cuid())
-  question Question @relation(fields: [questionId], references: [id])
-  questionId String
-  answerState String
+  id                 String   @id @default(cuid())
+  question           Question @relation(fields: [questionId], references: [id])
+  questionId         String
+  answerState        String
   userWrittenContent String?
-  user User @relation(fields: [userId], references: [id])
-  userId String
-  attempt Int  @default(0)
+  user               User     @relation(fields: [userId], references: [id])
+  userId             String
+  attempt            Int      @default(0)
+
   @@unique([userId, questionId], name: "userId_questionId")
 }
 
@@ -46,20 +47,17 @@ model User {
   createdAt    DateTime  @default(now()) @map("created_at")
   updatedAt    DateTime  @updatedAt @map("updated_at")
   sessions     Session[]
-  answers Answer[]
- 
+  answers      Answer[]
+  userCourseProgress UserCourseProgress?
 
   @@map("users")
 }
 
-
-model Component {
-   id           String    @id @default(cuid()) 
-   title String?
-   type String?
-
+model UserCourseProgress {
+  id String @id @default(cuid())
+  userId String @unique
+  user User @relation(fields:[userId], references: [id])
+  topicSectionsComplete String[]
+  topicsComplete String[]
+  subTopicsComplete String[]
 }
-
-
-
-

@@ -66,6 +66,10 @@ const Wrapper1 = styled(Wrapper)<{
 }>`
   &:before {
     content: '${(p) => (p.isComplete ? '✓' : '●')}';
+    /* color: '${(p) => (p.isComplete ? 'red' : 'inherit')}'; */
+    color: ${(p) =>
+      p.isComplete ? cl.getHSL(cl.purple) : cl.getHSL(cl.black)};
+
     width: 20px;
     font-size: 16px;
     font-weight: 800;

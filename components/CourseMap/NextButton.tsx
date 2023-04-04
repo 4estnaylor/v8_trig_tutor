@@ -13,8 +13,12 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { AnswerState } from '../Inputs/MultipleChoiceQuestion';
 import MCQuestion from '../Inputs/MCQuestion';
 import useAnswerObjects from '../../utils/hooks/useAnswerObjects';
+
 import { TopicComponent } from '../HomePage/CourseMap/Courses';
 import { useRouter } from 'next/router';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import useUserProgress from '../../utils/hooks/useUserProgress';
 
 interface NextButtonProps {
   questions?: AnswerState[];
@@ -38,13 +42,24 @@ const NextButton = (props: NextButtonProps) => {
     useAnswerObjects(questionObjects)
   );
 
+  const [displayLoading, setDisplayLoading] = useState<boolean>(false);
+  const [isMarkedComplete, setIsMarkedComplete] = useState<boolean>(false);
+
   let answerObjects = useAnswerObjects(questionObjects);
+  useEffect(() => {
+    let areAllQuestionStatesCorrect = true;
+    console.log(
+      questionObjects?.forEach((qobject) =>
+        console.log('change occuring: ', qobject)
+      )
+    );
+  }, [answerObjects, questions, questionObjects]);
 
   useEffect(() => {
     setRetreivedAnswerObjects(answerObjects);
-  }, [answerObjects]);
-
+  }, [answerObjects, questions, questionObjects]);
   const [isComplete, setIsComplete] = useState(false);
+
   const [completionPercent, setCompletionPercent] = useState(0);
   const [numberOfCorrectAnswers, setNumberOfCorrectAnswers] = useState(0);
   const [completionDotsDisplay, setCompletionDotsDisplay] = useState<
@@ -53,12 +68,14 @@ const NextButton = (props: NextButtonProps) => {
 
   useEffect(() => {
     setNumberOfCorrectAnswers(0);
+    console.log('bloop');
 
-    retreivedAnswerObjects.forEach((answerObject: any) => {
-      if (answerObject?.answerState === 'correct') {
+    questionObjects?.forEach((questionObject: any) => {
+      if (questionObject?.answerState === 'correct') {
         setNumberOfCorrectAnswers((prev) => prev + 1);
       }
     });
+    checkIfCurrentTopicOrSubComponentComplete();
   }, [questionObjects, retreivedAnswerObjects]);
 
   const {
@@ -69,7 +86,34 @@ const NextButton = (props: NextButtonProps) => {
     currentSubComponent,
   } = useCoursePath();
 
+  const userProgress = useUserProgress();
+
+  const checkIfCurrentTopicOrSubComponentComplete = () => {
+    if (!userProgress) {
+      return;
+    }
+    if (
+      currentSubComponent &&
+      userProgress.subTopicsComplete.includes(currentSubComponent.title)
+    ) {
+      setIsMarkedComplete(true);
+    }
+    if (
+      !currentSubComponent &&
+      currentTopicComponent &&
+      userProgress.topicsComplete.includes(currentTopicComponent.title)
+    ) {
+      setIsMarkedComplete(true);
+    }
+  };
+
+  useEffect(() => {
+    checkIfCurrentTopicOrSubComponentComplete();
+  }, [userProgress, questionObjects]);
+
   const handleMarkAsComplete = async () => {
+    setDisplayLoading(true);
+
     const response = await fetch(`/api/db/markComponentComplete?trigUserId`, {
       method: 'POST',
       headers: {
@@ -88,8 +132,11 @@ const NextButton = (props: NextButtonProps) => {
     });
 
     const result = await response.json();
+    console.log(result);
+    setDisplayLoading(false);
+    console.log('loading state finished');
 
-    // router.push(nextPath);
+    router.push(nextPath);
   };
 
   const isGoogleAuthenticated = useSession().status;
@@ -106,11 +153,11 @@ const NextButton = (props: NextButtonProps) => {
       return true;
     }
 
-    let numberOfCorrectAnswers = 0;
+    setNumberOfCorrectAnswers(0);
 
     retreivedAnswerObjects.forEach((answerObject: any) => {
-      if (answerObject.answerState === 'correct') {
-        numberOfCorrectAnswers += 1;
+      if (answerObject?.answerState === 'correct') {
+        setNumberOfCorrectAnswers((prev) => prev + 1);
       }
     });
 
@@ -128,6 +175,7 @@ const NextButton = (props: NextButtonProps) => {
   // let completionDots = null;
 
   useEffect(() => {
+    checkAreQuestionObjectsComplete();
     if (retreivedAnswerObjects?.length > 0) {
       let completionDots = retreivedAnswerObjects.map(
         (answerObject: any, index: any) => {
@@ -176,7 +224,78 @@ const NextButton = (props: NextButtonProps) => {
         <CompletionFraction $completed={isComplete}>
           {retreivedAnswerObjects && retreivedAnswerObjects.length > 0
             ? `${numberOfCorrectAnswers} of ${retreivedAnswerObjects.length} questions complete`
-            : 'fetching your question results...'}
+            : `...`}
+        </CompletionFraction>
+        <CompletionDots>{completionDotsDisplay}</CompletionDots>
+      </QuestionOverview>
+      <OuterWrapper>
+        {previousPath ? (
+          <Link href={previousPath}>
+            <SkipButton>←</SkipButton>
+          </Link>
+        ) : (
+          <div style={{ visibility: 'hidden' }}>
+            <SkipButton>←</SkipButton>
+          </div>
+        )}
+
+        <Wrapper $completed={questionObjects?.every(isAnswerObjectCorrect)}>
+          {/* <Link href={nextPath}>
+          <Pushable style={{ background: cl.getHSL(cl.blue_dark) }}>
+            <Front>mark complete ✓</Front>
+          </Pushable>
+        </Link> */}
+          {questionObjects?.every(isAnswerObjectCorrect)
+            ? activeLink
+            : nonActiveLink}
+        </Wrapper>
+        <Link href={nextPath}>
+          <SkipButton>→ </SkipButton>
+        </Link>
+      </OuterWrapper>
+    </OuterOuterWrapper>
+  );
+
+  const displayIfLoading = (
+    <OuterOuterWrapper>
+      <QuestionOverview></QuestionOverview>
+
+      <OuterWrapper>
+        {previousPath ? (
+          <Link href={previousPath}>
+            <SkipButton>←</SkipButton>
+          </Link>
+        ) : (
+          <div style={{ visibility: 'hidden' }}>
+            <SkipButton>←</SkipButton>
+          </div>
+        )}
+
+        <Wrapper>
+          {/* <Link href={nextPath}>
+          <Pushable style={{ background: cl.getHSL(cl.blue_dark) }}>
+            <Front>mark as complete ✓</Front>
+          </Pushable>
+        </Link> */}
+
+          <Box sx={{ display: 'flex' }}>
+            <CircularProgress />
+          </Box>
+        </Wrapper>
+        <Link href={nextPath}>
+          <SkipButton>→ </SkipButton>
+        </Link>
+      </OuterWrapper>
+    </OuterOuterWrapper>
+  );
+
+  const displayIfComplete = (
+    <OuterOuterWrapper>
+      <QuestionOverview>
+        <CompletionFraction $completed={isComplete}>
+          {retreivedAnswerObjects && retreivedAnswerObjects.length > 0
+            ? `${numberOfCorrectAnswers} of ${retreivedAnswerObjects.length} questions complete`
+            : `...`}
         </CompletionFraction>
         <CompletionDots>{completionDotsDisplay}</CompletionDots>
       </QuestionOverview>
@@ -199,47 +318,10 @@ const NextButton = (props: NextButtonProps) => {
             <Front>mark complete ✓</Front>
           </Pushable>
         </Link> */}
-          {retreivedAnswerObjects?.every(isAnswerObjectCorrect)
+          {/* {retreivedAnswerObjects?.every(isAnswerObjectCorrect)
             ? activeLink
-            : nonActiveLink}
-        </Wrapper>
-        <Link href={nextPath}>
-          <SkipButton>→ </SkipButton>
-        </Link>
-      </OuterWrapper>
-    </OuterOuterWrapper>
-  );
-
-  const displayIfLoading = (
-    <OuterOuterWrapper>
-      <QuestionOverview>
-        <CompletionFraction $completed={isComplete}>
-          {retreivedAnswerObjects?.length > 0
-            ? `${numberOfCorrectAnswers} of ${retreivedAnswerObjects.length} questions complete`
-            : 'loading'}
-        </CompletionFraction>
-        <CompletionDots>Loading Your Question Results</CompletionDots>
-        Loading Your Question Results
-      </QuestionOverview>
-
-      <OuterWrapper>
-        {previousPath ? (
-          <Link href={previousPath}>
-            <SkipButton>←</SkipButton>
-          </Link>
-        ) : (
-          <div style={{ visibility: 'hidden' }}>
-            <SkipButton>←</SkipButton>
-          </div>
-        )}
-
-        <Wrapper>
-          {/* <Link href={nextPath}>
-          <Pushable style={{ background: cl.getHSL(cl.blue_dark) }}>
-            <Front>mark as complete ✓</Front>
-          </Pushable>
-        </Link> */}
-          loading... profile
+            : nonActiveLink} */}
+          Completed!
         </Wrapper>
         <Link href={nextPath}>
           <SkipButton>→ </SkipButton>
@@ -282,6 +364,15 @@ const NextButton = (props: NextButtonProps) => {
       </Link>
     </OuterWrapper>
   );
+
+  if (displayLoading) {
+    return displayIfLoading;
+  }
+
+  if (isMarkedComplete) {
+    console.log('is marked complete!');
+    return displayIfComplete;
+  }
 
   return isGoogleAuthenticated === 'authenticated'
     ? displayIfAuthenticated

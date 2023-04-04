@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import Script from 'next/script';
 import { SessionProvider } from 'next-auth/react';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
@@ -31,11 +32,14 @@ const muiTheme = createTheme({
 
 function MyApp({ Component, pageProps, session }) {
   return (
-    <SessionProvider session={session}>
-      <ThemeProvider theme={muiTheme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </SessionProvider>
+    <>
+      <Script src="https://cdn.jsdelivr.net/gh/ncase/nutshell/nutshell.js" />
+      <SessionProvider session={session}>
+        <ThemeProvider theme={muiTheme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </SessionProvider>
+    </>
   );
 }
 

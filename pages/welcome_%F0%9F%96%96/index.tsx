@@ -17,6 +17,7 @@ import MultipleChoiceQuestion, {
 import QUERIES from '../../breakpoints';
 import MCQuestion from '../../components/Inputs/MCQuestion';
 import welcomeQuestions from '../../components/HomePage/CourseMap/WelcomeQuestions';
+import Script from 'next/script';
 
 const googleSignIn = () => {
   signIn('google');
@@ -34,115 +35,118 @@ const index = () => {
   });
 
   return (
-    <TopicComponentBoilerPlate2
-      title={<>Welcome 🖖</>}
-      questions={topicQuestions}
-      questionObjects={welcomeQuestions}
-    >
-      <>
-        <p>
-          Hey, I'm glad you made it here. I hope this site can be useful to you
-          for learning trigonometry and/or precalculus.
+    <>
+      <TopicComponentBoilerPlate2
+        title={<>Welcome 🖖</>}
+        questions={topicQuestions}
+        questionObjects={welcomeQuestions}
+      >
+        <>
+          <h2 id="testing">Testing 123</h2>
+          <p>
+            Hey, I'm glad you made it here. I hope this site can be useful to
+            you for learning trigonometry and/or precalculus.
+            <br />
+            <br />
+          </p>
+          <a href="#testing">:testing</a>
+
+          <SpockWrapperOuter>
+            <SpockWrapper>
+              <SpockBlue />
+              <SpockRed />
+              <Image src="/spock.svg" width="1000" height="700" />
+            </SpockWrapper>
+          </SpockWrapperOuter>
+
+          <SpockQuote>
+            There is no reason that function should not be beautiful. In fact
+            beauty usually makes it more effective.
+            <ByLine>S'chn T'gai Spock</ByLine>
+            <CircaLine>circa 2266–2269, Prime Timeline</CircaLine>
+          </SpockQuote>
           <br />
           <br />
-        </p>
 
-        <SpockWrapperOuter>
-          <SpockWrapper>
-            <SpockBlue />
-            <SpockRed />
-            <Image src="/spock.svg" width="1000" height="700" />
-          </SpockWrapper>
-        </SpockWrapperOuter>
+          <IframeWrappper>
+            <ResponsiveIframe
+              src="https://player.vimeo.com/video/796468904?h=dc4303ab13&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              width="100vw"
+              frameBorder="0px"
+              allow="autoplay; fullscreen; picture-in-picture"
+            ></ResponsiveIframe>
+          </IframeWrappper>
+          <Gap height={20} />
 
-        <SpockQuote>
-          There is no reason that function should not be beautiful. In fact
-          beauty usually makes it more effective.
-          <ByLine>S'chn T'gai Spock</ByLine>
-          <CircaLine>circa 2266–2269, Prime Timeline</CircaLine>
-        </SpockQuote>
-        <br />
-        <br />
+          <h3>There are 2 ways you can use the site. </h3>
 
-        <IframeWrappper>
-          <ResponsiveIframe
-            src="https://player.vimeo.com/video/796468904?h=dc4303ab13&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-            width="100vw"
-            frameBorder="0px"
-            allow="autoplay; fullscreen; picture-in-picture"
-          ></ResponsiveIframe>
-        </IframeWrappper>
-        <Gap height={20} />
+          <SignInOptions>
+            <BrowseCard>
+              <Number>1</Number>
+              <FakeButton>
+                {' '}
+                <span>👀</span>BROWSE{' '}
+              </FakeButton>
+              <FeaturesList>
+                <li>
+                  <Purple>✓</Purple>free
+                </li>
+                <li>
+                  <Purple>✓</Purple>access all content
+                </li>
+                <li>
+                  <Red>✗</Red>
+                  <div
+                    style={{
+                      textDecoration: 'line-through',
+                      textDecorationColor: cl.getHSL(cl.black),
+                    }}
+                  >
+                    record progress
+                  </div>
+                </li>
+              </FeaturesList>
+              <ImageShrinker>
+                <Image
+                  src="/just_browse.svg"
+                  width={100}
+                  height={100}
+                  style={{ fontFamily: 'sans-serif' }}
+                />
+              </ImageShrinker>
+              <Gap height={15} />
+              <ProgressBar progress={0} />
+            </BrowseCard>
+            <SignInCard>
+              <Number>2</Number>
+              <SignInButton variant="outlined" onClick={googleSignIn}>
+                <GoogleIcon color="primary" /> sign in
+              </SignInButton>
+              <FeaturesList>
+                <li>
+                  <Purple>✓</Purple>free
+                </li>
+                <li>
+                  <Purple>✓</Purple>access all content
+                </li>
+                <li>
+                  <Purple>✓</Purple>record progress
+                </li>
+              </FeaturesList>
+              <ImageShrinker>
+                <Image
+                  src="/sign_in.svg"
+                  width={100}
+                  height={100}
+                  style={{ fontFamily: 'sans-serif' }}
+                />
+              </ImageShrinker>
+              <Gap height={15} />
+              <ProgressBar progress={0.73} />
+            </SignInCard>
+          </SignInOptions>
 
-        <h3>There are 2 ways you can use the site. </h3>
-
-        <SignInOptions>
-          <BrowseCard>
-            <Number>1</Number>
-            <FakeButton>
-              {' '}
-              <span>👀</span>BROWSE{' '}
-            </FakeButton>
-            <FeaturesList>
-              <li>
-                <Purple>✓</Purple>free
-              </li>
-              <li>
-                <Purple>✓</Purple>access all content
-              </li>
-              <li>
-                <Red>✗</Red>
-                <div
-                  style={{
-                    textDecoration: 'line-through',
-                    textDecorationColor: cl.getHSL(cl.black),
-                  }}
-                >
-                  record progress
-                </div>
-              </li>
-            </FeaturesList>
-            <ImageShrinker>
-              <Image
-                src="/just_browse.svg"
-                width={100}
-                height={100}
-                style={{ fontFamily: 'sans-serif' }}
-              />
-            </ImageShrinker>
-            <Gap height={15} />
-            <ProgressBar progress={0} />
-          </BrowseCard>
-          <SignInCard>
-            <Number>2</Number>
-            <SignInButton variant="outlined" onClick={googleSignIn}>
-              <GoogleIcon color="primary" /> sign in
-            </SignInButton>
-            <FeaturesList>
-              <li>
-                <Purple>✓</Purple>free
-              </li>
-              <li>
-                <Purple>✓</Purple>access all content
-              </li>
-              <li>
-                <Purple>✓</Purple>record progress
-              </li>
-            </FeaturesList>
-            <ImageShrinker>
-              <Image
-                src="/sign_in.svg"
-                width={100}
-                height={100}
-                style={{ fontFamily: 'sans-serif' }}
-              />
-            </ImageShrinker>
-            <Gap height={15} />
-            <ProgressBar progress={0.73} />
-          </SignInCard>
-        </SignInOptions>
-
-        {/* <MultipleChoiceQuestion
+          {/* <MultipleChoiceQuestion
           question="What one feature is gained by logging in to google on this website?"
           correctOptions={['recording your progress']}
           incorrectOptions={[
@@ -153,13 +157,14 @@ const index = () => {
           answerState={questionOne}
           setAnswerState={setQuestionOne}
         ></MultipleChoiceQuestion> */}
-        {welcomeQuestions[0].createMCQuestionElement()}
+          {welcomeQuestions[0].createMCQuestionElement()}
 
-        {/* <Gap height={40} />
+          {/* <Gap height={40} />
        
         <Gap height={40} /> */}
-      </>
-    </TopicComponentBoilerPlate2>
+        </>
+      </TopicComponentBoilerPlate2>
+    </>
   );
 };
 

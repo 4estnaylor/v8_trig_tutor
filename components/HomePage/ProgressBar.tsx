@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
+import useUserProgress from '../../utils/hooks/useUserProgress';
+import { UserProgress } from './CourseMap/TopicSectionListItem';
 
 interface ProgressBarProps {
   progress: number;
