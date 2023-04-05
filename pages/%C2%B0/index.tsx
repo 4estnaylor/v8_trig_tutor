@@ -28,24 +28,33 @@ const Degree = () => {
         </Canvas1Background>
         <DegreeIntro>
           The degree, or as it is more formily known, the
-          <Fancy> arcdegree </Fancy>, is one way to measure an angle.
-          <br /> <br />
-          360 of them make a complete circle.
-          <br /> <br />
-          The symbol for the degree – ° – is, quite appropriately, a tiny
-          circle.
+          <Fancy> arcdegree </Fancy>, is one way to measure an angle. 360 of
+          them form a complete circle. The symbol for the degree {`(`} ° {`)`}{' '}
+          is, quite appropriately, a tiny circle.
         </DegreeIntro>
-        <h3>A natural question – why 360 °? Why not 100°</h3>
+        <h3>Why 360? Why not some other number</h3>
         <p>
-          Degrees don't just exist in nature on there own. People had to invent
-          them . So why choose to divide circles into 360 pieces and not choose
-          some other more convenient number? Maybe some power of 10 — 100, 1000,
-          or possibly even 1.
-          <br /> <br />
-          ¯\_(ツ)_/¯ Admittedly, sometimes in math we (as in humanity) just get
+          Circles don't just exist in nature divided into 360 discrete slices.
+          People had to decide on that somehow. So why choose 360 and not some
+          other more convenient number? Maybe some power of 10 — 100, 1000, or
+          possibly even 1.
+          <br />
+          <br />
+          ¯\_(ツ)_/¯ ultimately, because somebody started doing it that way and
+          people went along with it. No law of <em>nature </em> dictates that we
+          couldn't all to agree to making it standard to divide a circle into 7
+          units instead of 360.
+          <br />
+          <br />
+          But, laws of <em>convenience </em> make a very, very strong case for
+          360 degrees. It all boils down to 360 dividing itself into many useful
+          fractions (halves, thirds, quarters, fifths, sixths, sevenths, tenths,
+          twelfths, ...) without every having to deal with decimal numbers.
+          {/* <br /> <br /> */}
+          {/* ¯\_(ツ)_/¯ Admittedly, sometimes in math we (as in humanity) just get
           stuck in our ways and make life more complicated than we need to. But,
           this isn't one of those cases! 360 degrees is much easier than 100 to
-          divide without leaving the world of nice "round" or integer numbers.
+          divide without leaving the world of nice "round" or integer numbers. */}
           <br /> <br />
           To understand why let's examine the multiplicative DNA of 360 and 100.
           Here are the
@@ -161,8 +170,8 @@ const Div360Title360 = styled.div`
 const Canvas1Background = styled.div`
   background: linear-gradient(
     20deg,
-    ${cl.getHSL(cl.purple)},
-    ${cl.getHSL(cl.blue_dark)}
+    ${cl.getHSL(cl.purple_dark)},
+    ${cl.getHSL(cl.black)}
   );
   /* border-top: 5px solid ${cl.getHSLA(cl.purple, 0.5)};
   border-bottom: 5px solid ${cl.getHSLA(cl.purple, 0.5)}; */

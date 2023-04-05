@@ -78,12 +78,13 @@ const faq = () => {
                 </ul> */}
               </li>
               <li>
-                Lastly, and most overlooked, it is interesting to study. In math
-                we sometimes drown ourselves in self-seriousness and efficiency.
-                Try to go "off trail" and approach a solution to a problem in a
-                weird or unique way now and then. Even if it doesn't get you the
-                right answer what you may lose in efficiency you'll probably
-                more than make up for in richness and depth.
+                Lastly, and too easily overlooked, it can be{' '}
+                <em>interesting </em>. In math we sometimes drown ourselves in
+                self-seriousness and efficiency. Try to go "off trail" and
+                approach a solution to a problem in a weird or unique way now
+                and then. Even if it doesn't get you the right answer what you
+                may lose in efficiency you'll probably more than make up for in
+                richness and depth.
               </li>
             </ol>
             <p>

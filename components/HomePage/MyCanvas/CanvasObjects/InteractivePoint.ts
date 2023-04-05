@@ -215,8 +215,8 @@ class InteractivePoint {
     context.ellipse(
       this.x,
       this.y,
-      this.radius * 0.5,
-      this.radius * 0.5,
+      this.radius * 0.75,
+      this.radius * 0.75,
       0,
       0,
       Math.PI * 2

@@ -8,7 +8,7 @@ import { Tau } from './UsefulConstants';
 
 type angleMeasurmentUnit = 'radians' | 'degrees';
 
-class UnitCircle {
+class AngleCircle {
   vertex: InteractivePoint | NonInteractivePoint;
   zeroPoint: InteractivePoint | NonInteractivePoint;
   radialPoint: InteractivePoint | NonInteractivePoint;
@@ -57,6 +57,7 @@ class UnitCircle {
   update = () => {
     this.updatePosition();
     this.updateAngle();
+    // console.log('angle', (this.angle * 180) / Math.PI);
   };
 
   updateAngle = () => {
@@ -93,6 +94,8 @@ class UnitCircle {
     this.vertex.draw();
     this.drawZeroStroke();
     this.radialPoint.draw();
+    this.drawAngleInDegrees();
+    this.drawAngleLabel();
   };
 
   drawZeroStroke = () => {
@@ -102,6 +105,33 @@ class UnitCircle {
     this.context.strokeStyle = cl.getHSL(cl.white);
     this.context.lineWidth = 3;
     this.context.stroke();
+  };
+
+  drawAngleInDegrees = () => {
+    this.context.fillStyle = 'white';
+    this.context.font = ' 30px system-ui';
+    let x_offset = this.context.measureText(
+      Math.round((this.angle * 180) / Math.PI) + '°'
+    ).width;
+    this.context.fillText(
+      Math.round((this.angle * 180) / Math.PI) + '°',
+      this.context.canvas.width - x_offset - 10,
+      30
+    );
+  };
+
+  drawAngleLabel = () => {
+    this.context.fillStyle = cl.getHSL(cl.white);
+    this.context.font = ' 16px system-ui';
+    let x_offset =
+      this.context.measureText(
+        Math.round((100 * (this.angle * 180)) / Math.PI) / 100 + '°'
+      ).width / 4;
+    this.context.fillText(
+      Math.round((this.angle * 180) / Math.PI) + '°',
+      this.radialPoint.x - x_offset,
+      this.radialPoint.y + 7
+    );
   };
 
   drawDottedTouchConncetLine = () => {
@@ -140,4 +170,4 @@ class UnitCircle {
   };
 }
 
-export default UnitCircle;
+export default AngleCircle;

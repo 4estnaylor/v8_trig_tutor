@@ -4,7 +4,7 @@ import EventHandlerConfig from '../../HomePage/MyCanvas/EventHandler/EventHandle
 import { Scene, SceneGetter } from '../../HomePage/MyCanvas/Scene/Scene';
 import cl from '../../../colors';
 import NonInteractivePoint from '../../HomePage/MyCanvas/CanvasObjects/NonInteractivePoint';
-import UnitCircle from '../../HomePage/MyCanvas/CanvasObjects/AngleCircle';
+import AngleCircle from '../../HomePage/MyCanvas/CanvasObjects/AngleCircle';
 
 const getSceneDegreesIntro: SceneGetter = (
   context: CanvasRenderingContext2D,
@@ -18,7 +18,7 @@ const getSceneDegreesIntro: SceneGetter = (
 
   scene.assets.listenFor = [];
 
-  const testUnitCirc = new UnitCircle(
+  const testUnitCirc = new AngleCircle(
     context,
     eventHandlerConfig,
     width / 2,
