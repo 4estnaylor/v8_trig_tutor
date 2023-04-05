@@ -92,7 +92,7 @@ const Degree = () => {
             display: 'flex',
           }}
         >
-          <CanvasForTopicComponent sceneGetter={getScene360Divisibility} e />
+          <CanvasForTopicComponent sceneGetter={getScene360Divisibility} />
           <Div360NumInput
             type="number"
             min={0}
