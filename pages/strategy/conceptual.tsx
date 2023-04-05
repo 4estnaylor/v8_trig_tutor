@@ -70,11 +70,22 @@ const conceptual = () => {
             Any fool can know. The point is to understand.
             <ByLine>Probably Not Einstein</ByLine>
           </EinsteinQuote>
+          <br />
+          <br />
+          <Alert severity="warning">
+            This quote, like so many others regularly attributed to Einstein,
+            was probably not actually said by him.
+            <br />
+            <br />I double-checked with the Ultimate Quotable Einstein published
+            by Princeton University Press which dedicates a very large section
+            to explaining how this quote (and many, many others) were most
+            likely not actually said by Einstein.
+          </Alert>
           <Gap height={30} />
-          Let me make a distinction with two examples:
+          <h4>Counter Example</h4>
+          Let's consider what conceptual learning isn't for a moment.
           <br />
           <br />
-          <h4>Example 1</h4>
           {/* Conceptual learning in math is about understanding how and why things
           are true. It is not a s peries of steps to find a missing value, but a
           logical understanding of something.
@@ -148,27 +159,27 @@ const conceptual = () => {
             <br />
             This is not conceptual understanding. All I am doing is practicing a
             technique where I fill in values to an equation I memorized years
-            ago. I am not at all digging into logically why taking these numbers
-            and mushing them together just show gives me a physically tangible
+            ago. I am not at all digging into logically <em>why</em> taking
+            these numbers and performing certain aritmetic operations
+            (multiplication and squaring) on them gives me a physically tangible
             description of how much 2d space is inside the circle.
             <br />
             <br />
             <Alert severity="info">
               That's not a bad thing by the way! Being able to solve problems
               technically, step-by-step, almost mindlessly can be critical to
-              saving time and mental energy for other endevours.
+              saving time and mental energy for other things.
             </Alert>
             <br />
             <br />
-            <h4>Example 2</h4>
-            Okay so the above example demonstrates what conceptual learning
-            isn't and when it isn't helpful. But, ultimately, I am trying to
-            persuade you that conceptually learning is the secret sauce to
-            getting good at math.
+            <h4>Actual Example</h4>
+            Okay, so the above example demonstrates what conceptual learning
+            isn't and when it isn't helpful. Now let's talk about what it{' '}
+            <em>is</em> and when it <em>is helpful</em>.
             <br />
             <br />
-            Imagine a different scenario now. Your grandmother says you've got
-            it all wrong. She says the area of a circle is actually,
+            Imagine a different scenario. Your grandmother says you've got it
+            all wrong. She says the area of a circle is actually,
             <br />
             <br />
             <EquationContainer>
@@ -211,17 +222,6 @@ const conceptual = () => {
             <Image src="/einstein.svg" width={1000} height={1000} />
             <br />
             <br />
-            <Alert severity="warning">
-              These quotes, like so many others regularly attributed to
-              Einstein, were probably not actually said by him. Still good
-              quotes though!
-              <br />
-              <br />I double-checked with the Ultimate Quotable Einstein
-              published by Princeton University Press which explains there is no
-              record of Einstein actually saying either of these quotes.
-            </Alert>
-            <br />
-            <br />
             {/* <MultipleChoiceQuestion
               question={'Which best demonstrates conceptual understanding?'}
               correctOptions={['Recreating a math formula if you forget it.']}
@@ -260,11 +260,7 @@ const conceptual = () => {
             Now and then, a student's conceptual understanding inevitably gets a
             gap in the churn of a real-life math class. These gaps are a normal
             and even healthy part of any math diet,
-            <span style={{ color: cl.getHSL(cl.purple), fontWeight: 800 }}>
-              {' '}
-              so long as it gets returned to{' '}
-            </span>{' '}
-            and filled in.
+            <span> so long as it gets returned to </span> and filled in.
             <br /> <br />
             {/* Students (and teachers) understandably tend to focus more on math
             techniques than the underlying math concepts. It often seems faster
@@ -286,12 +282,15 @@ const conceptual = () => {
             Begs the question, why even bother with conceptual learning then?
             <br />
             <br /> */}
-            However, if you do not fill in holes in conceptual understanding
-            over time, reliance on memorization grows beyond what most of us can
-            manage. Technique will not be a logical strategy, but an
-            ever-growing heap of arbitrary rules to follow. This heap, when
-            grown sufficiently large, consumes most of the cognitive load your
-            brain putting you in a place where it is:
+            However,{' '}
+            <span style={{ color: cl.getHSL(cl.purple), fontWeight: 800 }}>
+              if you do not fill in holes in conceptual understanding over time,
+              reliance on memorization grows beyond what most of us can manage.{' '}
+            </span>
+            Math will not be a logical strategy, but an ever-growing heap of
+            arbitrary rules to follow. This heap, when grown sufficiently large,
+            consumes most of the cognitive load your brain putting you in a
+            place where it is:
             <ol>
               <li>
                 all but impossible to think clearly while wracking your memory
@@ -352,7 +351,7 @@ const CircleAreaImgWrap = styled.div`
 `;
 
 const HiddenSection = styled.div<{ $isvisible: boolean }>`
-  display: ${(p) => (p.$isvisible ? 'block' : 'none')};
+  /* display: ${(p) => (p.$isvisible ? 'block' : 'none')}; */
 `;
 
 const CircleAreaAnswer = styled.div`

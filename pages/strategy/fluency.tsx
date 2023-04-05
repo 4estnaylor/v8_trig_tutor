@@ -22,12 +22,17 @@ true learning is complete only when action has been put forth`;
         <br />
         <h3>Bare with me here...</h3>
         <Text>
-          {` I am going to make an analogy between math and literacy. 
+          {` I am going to make an analogy between math and literacy.`}
+          <br />
+          <br />
+          {` 
         Conceptually most students by first grade "get" the alphabet. It's a bit rocky, they have to pause and hault through longer words,
-        but usually well before second grade they've got the idea! They understand the concept of connecting letters on the page
-        with certain sounds. They have the conceptual understanding of how literacy works.
-        
-        
+        but usually well before second grade they've got the idea of connecting letters on the page
+        with certain sounds. They have the conceptual understanding of how literacy works.`}
+
+          <br />
+          <br />
+          {`
         But it will be still be years more of practice before they are prepared to read long dense passages of words. If students stopped practicing the alphabet after they "get it", they would never be able to
         read with the fluency needed to get through something like the Count of Monte Cristo. Imagine haltingly mouthing the sound of words through a 700+ page novel and trying to retain the information at the same time!
         If students cannot almost effortlessly glide over the words, the deeper meaning behind more difficult texts is likely to escape them. When a student becomes so practiced at reading that they can almost 
@@ -37,12 +42,11 @@ true learning is complete only when action has been put forth`;
           <br />
           <br />
           <Text>
-            {`Likewise, before getting a degree of fluency in Trigonometry, a lot of the math content that relies on it won't be accessible. Not because the ideas are qualitatively harder than anything else you've already seen, but because you will be stuck tangling with the trig rather than the deeper content you will be trying to get at later on.
+            {`Likewise, before getting a degree of fluency in trigonometry, a lot of the math content that relies on it won't be accessible. Not because the ideas are qualitatively harder than anything else you've already seen, but because you will be stuck tangling with the trig rather than the deeper content you will be trying to get at later on.
         `}
           </Text>
           <Text>
-            {`A focus on both conceptual understanding and fluency brings feels like a paradox. A student may well ask, should I practice conceptual understanding by logically and carefully thinking everything through? Or should my goal be fluency, to be able to quickly breeze through the content without pausing for thought? 
-              Here is a quote from a real life anonymous stranger on the internet addressing this question far better than I would.
+            {`Conceptual and technical learning can sometimes feel like arch nemesis vying for your time and effort. In reality they have a symbiotic relationship, each supporting the other. Here is a quote from a real life anonymous stranger on the internet explaining the symbiosis more articulately than I would.
 
               
             `}

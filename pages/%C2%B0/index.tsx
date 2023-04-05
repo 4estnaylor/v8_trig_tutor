@@ -92,7 +92,7 @@ const Degree = () => {
             display: 'flex',
           }}
         >
-          <CanvasForTopicComponent sceneGetter={getScene360Divisibility} />
+          <CanvasForTopicComponent sceneGetter={getScene360Divisibility} e />
           <Div360NumInput
             type="number"
             min={0}
@@ -155,7 +155,6 @@ const Div360Title360 = styled.div`
   background-color: transparent;
   border: none;
   color: ${cl.getHSL(cl.purple)};
-
   text-align: center;
 `;
 

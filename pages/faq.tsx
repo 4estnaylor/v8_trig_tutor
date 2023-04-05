@@ -40,9 +40,9 @@ const faq = () => {
                 Virtually all of modern mathematics and physical science are
                 underpinned by things we learn when measuring triangles. If you
                 have a desire to pursue almost any field in science,
-                techonology, engineering, or math, it's pretty much mandatory to
-                learn how to fluently use a triangle sooner or later. I highly
-                recommend sooner.
+                techonology, engineering, or math, it's damn close to mandatory
+                to learn how to fluently use a triangle sooner or later. I
+                highly recommend sooner.
               </li>
               <li>
                 Trig is one of the most "out of the box" practical applications
@@ -87,18 +87,14 @@ const faq = () => {
               </li>
             </ol>
             <p>
-              As bizarre as it sounds, the humble act of measuring triangles
-              (with a great deal of care), has led us to both great and terrible
-              things like the microwave oven and cellphone apps needlessly
-              vacumming up your location data. If you're skeptical about my
-              claim, that is entirely appropriate. After years of studying and
-              teaching trigonometry, that this undeniably dinky shape is some
-              outrageously powerful engine of mathematics still feels, way deep
-              down in my bones, flippin' weird. For all the complexity present
-              in the modern world and the increasingly intricate and specialized
-              trees of math and science, it feels like triangles should no
-              longer be relevant much less powerful. I mean look at it. Take a
-              quick glance. What's to understand even?
+              After years of studying and teaching trigonometry, that this
+              undeniably dinky shape is some outrageously powerful engine of
+              mathematics still feels, way deep down in my bones, flippin'
+              weird. For all the complexity present in the modern world and the
+              increasingly intricate and specialized trees of math and science,
+              it feels like triangles should no longer be relevant much less
+              powerful. I mean look at it. Take a quick glance. What's to
+              understand even?
             </p>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Image
@@ -130,8 +126,10 @@ const faq = () => {
                 <Link href="book">
                   <a> Free Friday Tutoring Sessions</a>
                 </Link>
-                Book a single session on any Friday and it's free. Only catch is
-                that you can only book free sessions 1 week in advance.
+                Book a single session for the soonest Friday and it's free. Only
+                catch is that you can only book 1 session per week, and you
+                cannot book it more than 1 week in advance (rather than the
+                normal 10 weeks).
                 <br />
                 <br />
                 <Alert severity="info">
@@ -199,7 +197,7 @@ const faq = () => {
         </FAQSection>
         <FAQSection
           question="Difference Between Trig and Precalc?"
-          summary="There's often a lot of confusion around where trigonometry ends and precalculus begins. Here are some clarifying diagrams."
+          summary="There's often a lot of confusion around where trigonometry ends and precalculus begins. This confusion is widely and correctly believed to be intentionally manufactured by us math teachers just for the fun of it. Here are some clarifying diagrams."
           iconString="/trig_vs_precalc_simple.svg"
         >
           <div>
@@ -306,11 +304,6 @@ const faq = () => {
                 >
                   <AlertTitle> Some Things Cannot Be Unseen </AlertTitle>A photo
                   of Ipalan Thunder Kittens.
-                  <br />
-                  <br />
-                  For both your safety, and that of society at large,
-                  <b> do not click. </b>
-                  Or do, whatever floats your boat.
                 </Alert>
                 <VisibilityIcon
                   style={{ color: cl.getHSL(cl.white), fontSize: 'xx-large' }}
@@ -320,16 +313,19 @@ const faq = () => {
             <br />
             <br />
             Simple really. Math analysis is, ummm, analyzing stuff with math. A
-            definition admittedly so vague as to be meaningless.
+            term carefully invented by math educators to sound as fancy as
+            possible while still being vague enough to be meaningless. Everyone
+            likes a fancy term, it sounds more impressive that way.
             <br />
             <br />
-            Unlike trigonometry, the topics in math analysis don't really have a
-            <b> mathematical theme </b>. Worse, there's too many of them! Often
-            classes have to skim ore even skip a couple of the topics if they
-            reach the final section of the textbook. Precalc's second semester
-            is a kind of controlled chaos whose lack of logical, definite
-            structure has a lot to do with why precalculus was invented as a
-            class in the first place.
+            Why did the term chosen have to be so vague though? Unlike
+            trigonometry, the topics in math analysis don't really have a
+            <b> theme </b>. Worse, there's too many of them! Often classes have
+            to skim or even skip a couple of the topics if they reach the final
+            section of the textbook. Precalc's second semester is a kind of
+            controlled chaos whose lack of logical, definite structure has a lot
+            to do with why precalculus was invented as a class in the first
+            place.
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Image
                 src="/math_analysis_explained.svg"
@@ -346,26 +342,43 @@ const faq = () => {
             <br />
             <br />
             "Bam here's Calculus!", as it turned out, was a somewhat
-            questionable teaching methodolgy. To this very day, many grown
-            people, perhaps some you know, when confronted by a sinisterly long
-            string of math symbols murmur with a far-off gaze something like, "I
-            hated math, I avoid it like the plague now." Getting repeatedly
-            rammed into this particularly harsh segment of math's learning curve
-            is often what causes people to so unamicably split with math.
+            questionable teaching methodolgy.
+            <br />
+            <br />
+            Many grown people, perhaps some you know, when confronted by a
+            sinisterly long string of math symbols murmur with a far-off gaze
+            something like, "I hated math, I avoid it like the plague now."
+            Getting repeatedly rammed into this particularly steep and thorny
+            segment of math's learning curve is often the source of this
+            math-phobia.
             <br />
             <br />
             Highschool math classes were called upon to adjust their curiculum
             to smooth students' transition into college-level math and eat up as
-            much of the learning curve disparity as possible.
+            much of the learning curve disparity as possible. It mostly worked!
             <br /> <br />
             Smoothing the learning curve is all well and good, but there was a
-            big problem. Math teachers and students couldn't spontaneously
-            conjure more classroom time out of thin air to make it happen. The
-            result was rather than getting a full two semesters (which it could
-            easily fill), the "math analysis" section of precalculus was joined
-            to trigonometry as a second semster. Attempting all, or even most,
-            of "math analysis" in a single highschool semester is a
-            <em> very </em> tall order.
+            little bit of a problem. Math teachers and highschool students
+            couldn't spontaneously conjure more classroom time out of thin air
+            to make it happen. The result was rather than getting a full two
+            semesters (which it could easily fill), the "math analysis" section
+            of precalculus was joined to trigonometry as a second semster.
+            Attempting all, or even most, of "math analysis" in a single
+            highschool semester is a<em> very </em> tall order. In reality, most
+            classes skip over considerably chunks of the math analysis section
+            of their pre-calc textbooks. Topics normally given priority are
+            those most likely to appear on SAT/ACT testing and/or the teacher's
+            preferences.
+            <br />
+            <br />
+            To add just a dash more of confusion – what is considered
+            pre-calculus' territory in math curricula has been shifting and
+            expanding over the years. Linear algebra and probability are taking
+            an increasingly leading role in college mathematics because of thier
+            many applications in computer and data science. In response, precalc
+            teachers are increasingly including topics to bolster not just calc
+            but college-level math more broadly to the extent that they can
+            manage to stuff it all into just 2 semesters.
             <br />
             <br />
             <div style={{ display: 'flex', justifyContent: 'center' }}>
