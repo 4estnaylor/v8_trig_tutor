@@ -12,6 +12,15 @@ const getSceneDegreesIntro: SceneGetter = (
 ) => {
   let scene = new Scene(context, eventHandlerConfig);
 
+  // @ts-ignore
+  // ingoring missing ev for onclick;
+  const passedObject = context?.canvas?.onclick?.();
+  const { targetValueObjs, setTargetValueObjs } = passedObject;
+
+  console.log('passed Object', targetValueObjs, setTargetValueObjs);
+
+  setTargetValueObjs([{ value: 9, completed: true }]);
+
   const width = context.canvas.parentElement?.clientWidth || 0;
 
   context.canvas.width = width;

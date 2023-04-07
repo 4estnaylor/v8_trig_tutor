@@ -13,6 +13,7 @@ class AngleCircle {
   zeroPoint: InteractivePoint | NonInteractivePoint;
   radialPoint: InteractivePoint | NonInteractivePoint;
   listenForAssets: InteractivePoint | NonInteractivePoint[];
+  testFunction: any;
   constructor(
     public context: CanvasRenderingContext2D,
     public eventHandlerConfig: EventHandlerConfig,
@@ -51,6 +52,8 @@ class AngleCircle {
       cl.getHSL(cl.white)
     );
 
+    this.testFunction = this.context.canvas.onclick;
+
     this.listenForAssets = [this.vertex, this.zeroPoint, this.radialPoint];
   }
 
@@ -88,6 +91,7 @@ class AngleCircle {
 
   draw = () => {
     this.update();
+
     // this.zeroPoint.draw();
     this.drawDottedTouchConncetLine();
     this.drawAngle();
@@ -96,6 +100,7 @@ class AngleCircle {
     this.radialPoint.draw();
     this.drawAngleInDegrees();
     this.drawAngleLabel();
+    this.testFunction();
   };
 
   drawZeroStroke = () => {

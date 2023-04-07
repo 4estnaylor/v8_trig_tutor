@@ -9,8 +9,20 @@ import getSceneInteriorAngles from '../../components/getScenes/degrees/getSceneI
 import CanvasForTopicComponent from '../../components/HomePage/MyCanvas/CanvasForTopicComponent';
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 
+export interface TargetValueObjs {
+  value: number;
+  completed: boolean;
+}
+
 const Degree = () => {
   const [userEnteredDegreeValue, setUserEnteredDegreeValue] = useState(100);
+  const [targetValueObjs, setTargetValueObjs] = useState<TargetValueObjs[]>([
+    { value: 0, completed: false },
+    { value: 90, completed: false },
+    { value: 45, completed: false },
+    { value: 63, completed: false },
+  ]);
+
   return (
     <TopicComponentBoilerPlate
       title={
@@ -24,8 +36,10 @@ const Degree = () => {
           <CanvasForTopicComponent
             sceneGetter={getSceneDegreesIntro}
             height={400}
+            objectPassedToScene={{ targetValueObjs, setTargetValueObjs }}
           />
         </Canvas1Background>
+        <div>{targetValueObjs[0].value}</div>
         <DegreeIntro>
           The degree, or as it is more formily known, the
           <Fancy> arcdegree </Fancy>, is one way to measure an angle. 360 of

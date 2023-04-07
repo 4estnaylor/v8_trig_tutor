@@ -19,15 +19,27 @@ import useWindowSize from './useWindowSize';
 
 interface MyCanvasProps {
   sceneGetter: SceneGetter;
+  objectPassedToScene?: any;
   height?: number;
 }
 
 const CanvasForTopicComponent = (props: MyCanvasProps) => {
-  const { sceneGetter } = props;
-  const canvasRef = useMyCanvas2(sceneGetter);
+  const { sceneGetter, objectPassedToScene } = props;
+  const canvasRef = useMyCanvas2(sceneGetter, objectPassedToScene);
   const parentWidth = useParentElementSize(canvasRef);
 
-  return <StyledCanvas ref={canvasRef} width={parentWidth} height="390" />;
+  let testFunction = () => {
+    console.log('blueberries');
+  };
+
+  return (
+    <StyledCanvas
+      ref={canvasRef}
+      width={parentWidth}
+      onClick={testFunction}
+      height="390"
+    />
+  );
 };
 
 const StyledCanvas = styled.canvas`

@@ -4,12 +4,19 @@ import React from 'react';
 import EventHandlerConfig from './EventHandler/EventHandlerConfig';
 
 const useMyCanvas2: (
-  sceneGetter: SceneGetter
-) => React.MutableRefObject<null> = (sceneGetter) => {
+  sceneGetter: SceneGetter,
+  objectPassedToScene?: any
+) => React.MutableRefObject<null> = (sceneGetter, objectPassedToScene?) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current! as HTMLCanvasElement;
+
+    console.log('darklajdf', objectPassedToScene);
+
+    canvas.onclick = () => {
+      return objectPassedToScene;
+    };
 
     const context = canvas?.getContext('2d') as CanvasRenderingContext2D;
     // context.translate(0.5, 0.5);
