@@ -20,10 +20,10 @@ export interface TargetValueObj {
 const Degree = () => {
   const [userEnteredDegreeValue, setUserEnteredDegreeValue] = useState(100);
   const [targetValueObjs, setTargetValueObjs] = useState<TargetValueObj[]>([
-    { value: 30, completed: false },
-    { value: 0, completed: false },
-    { value: 265, completed: false },
-    { value: 0, completed: false },
+    { value: 34, completed: false },
+    { value: 122, completed: false },
+    { value: 223, completed: false },
+    { value: 360, completed: false },
   ]);
 
   return (
