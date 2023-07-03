@@ -7,20 +7,23 @@ import getScene360Divisibility from '../../components/getScenes/degrees/getScene
 import getSceneDegreesIntro from '../../components/getScenes/degrees/getSceneDegreesIntro';
 import getSceneInteriorAngles from '../../components/getScenes/degrees/getSceneInteriorAngles';
 import CanvasForTopicComponent from '../../components/HomePage/MyCanvas/CanvasForTopicComponent';
+import InteractiveCanvas from '../../components/HomePage/MyCanvas/InteractiveCanvas';
+import AngleQue from '../../components/Question/AngleQue';
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 
-export interface TargetValueObjs {
+export interface TargetValueObj {
   value: number;
   completed: boolean;
+  current?: boolean;
 }
 
 const Degree = () => {
   const [userEnteredDegreeValue, setUserEnteredDegreeValue] = useState(100);
-  const [targetValueObjs, setTargetValueObjs] = useState<TargetValueObjs[]>([
+  const [targetValueObjs, setTargetValueObjs] = useState<TargetValueObj[]>([
+    { value: 30, completed: false },
     { value: 0, completed: false },
-    { value: 90, completed: false },
-    { value: 45, completed: false },
-    { value: 63, completed: false },
+    { value: 265, completed: false },
+    { value: 0, completed: false },
   ]);
 
   return (
@@ -32,20 +35,23 @@ const Degree = () => {
       }
     >
       <>
-        <Canvas1Background>
-          <CanvasForTopicComponent
-            sceneGetter={getSceneDegreesIntro}
-            height={400}
-            objectPassedToScene={{ targetValueObjs, setTargetValueObjs }}
-          />
-        </Canvas1Background>
-        <div>{targetValueObjs[0].value}</div>
+        <InteractiveDegreeDragWrapper>
+          <Canvas1Background>
+            <CanvasForTopicComponent
+              sceneGetter={getSceneDegreesIntro}
+              height={400}
+              objectPassedToScene={{ targetValueObjs, setTargetValueObjs }}
+            />
+          </Canvas1Background>
+        </InteractiveDegreeDragWrapper>
+        <AngleQue targetValueObjs={targetValueObjs} />
         <DegreeIntro>
           The degree, or as it is more formily known, the
           <Fancy> arcdegree </Fancy>, is one way to measure an angle. 360 of
           them form a complete circle. The symbol for the degree {`(`} ° {`)`}{' '}
           is, quite appropriately, a tiny circle.
         </DegreeIntro>
+        <InteractiveCanvas />
         <h3>Why 360? Why not some other number</h3>
         <p>
           Circles don't just exist in nature divided into 360 discrete slices.
@@ -167,6 +173,11 @@ const Div360NumInput = styled.input`
   text-align: center;
 `;
 
+const InteractiveDegreeDragWrapper = styled.div`
+  /* position: relative; */
+  /* position: static; */
+`;
+
 const Div360Title360 = styled.div`
   position: absolute;
   left: calc(25% - 50px);
@@ -182,10 +193,11 @@ const Div360Title360 = styled.div`
 `;
 
 const Canvas1Background = styled.div`
+  /* position: relative; */
   background: linear-gradient(
-    20deg,
-    ${cl.getHSL(cl.purple_dark)},
-    ${cl.getHSL(cl.black)}
+    0deg,
+    ${cl.getHSL(cl.gray_mid)},
+    ${cl.getHSL(cl.gray_dark)}
   );
   /* border-top: 5px solid ${cl.getHSLA(cl.purple, 0.5)};
   border-bottom: 5px solid ${cl.getHSLA(cl.purple, 0.5)}; */

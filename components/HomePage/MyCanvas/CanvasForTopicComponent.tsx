@@ -28,15 +28,11 @@ const CanvasForTopicComponent = (props: MyCanvasProps) => {
   const canvasRef = useMyCanvas2(sceneGetter, objectPassedToScene);
   const parentWidth = useParentElementSize(canvasRef);
 
-  let testFunction = () => {
-    console.log('blueberries');
-  };
-
   return (
     <StyledCanvas
       ref={canvasRef}
       width={parentWidth}
-      onClick={testFunction}
+      data-passedtoscene={objectPassedToScene}
       height="390"
     />
   );

@@ -7,7 +7,8 @@ class NonInteractivePoint {
     public x: number,
     public y: number,
     public color: string = cl.getHSL(cl.black),
-    public radius = 10
+    public radius = 10,
+    public isUnderCursor = null
   ) {}
 
   draw = () => {

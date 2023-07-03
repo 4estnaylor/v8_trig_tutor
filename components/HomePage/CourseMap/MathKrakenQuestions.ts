@@ -11,14 +11,15 @@ import { TopicComponent } from './Courses';
 // ]}
 
 const LoginFeatureGainQ = new MCQuestion(
-  'Why is trig especially important for math students according to me?',
+  'Why did I make a website about trig?',
   [
-    'Trig holds a central and pervasive role within the math universe.',
-    `Trig is a point of great leverage in a student's math education.`,
+    `Trig is the point of greatest leverage for most students in highschool math.`,
   ],
   [
     'It has many applications useful in every day life, engineering, and architecture.',
     'It gives insight into complex systems like few other subjects.',
+    "It's my favorite.",
+    'I had a vivid, lifechanging dream telling me to make a website about trig.',
   ]
 );
 

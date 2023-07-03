@@ -92,6 +92,8 @@ const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
         attemptIncrement: 1,
       };
 
+      console.log('is happening fard0');
+
       const response = await fetch('/api/db/updateAnswerObject', {
         method: 'POST',
         headers: {

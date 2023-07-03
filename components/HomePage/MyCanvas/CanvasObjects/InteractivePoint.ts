@@ -26,7 +26,7 @@ class InteractivePoint {
   ) {
     this.isUnderCursor = false;
     this.isVisible = true;
-    this.form = 'default';
+    this.form = form;
     this.transitionPeriod = 0.5;
     this.listenFor.push(this);
     this.initialCursorGrabDistance = {
@@ -104,8 +104,13 @@ class InteractivePoint {
     ) {
       this.form = 'grabbing';
       this.getCursorAndInteractivePointPositionDifferenceOnGrab();
-    } else {
+    } else if (
+      !this.isUnderCursor &&
+      !this.eventHandlerConfig.cursorStatus.mouseIsDown
+    ) {
       this.form = 'default';
+
+      // console.log('is happening');
     }
 
     switch (this.form) {

@@ -19,6 +19,10 @@ const useMyCanvas2: (
     };
 
     const context = canvas?.getContext('2d') as CanvasRenderingContext2D;
+
+    //@ts-ignore
+    context.objectPassedToScene = objectPassedToScene;
+
     // context.translate(0.5, 0.5);
     let animationFrameID: number;
 

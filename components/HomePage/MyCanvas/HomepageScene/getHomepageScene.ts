@@ -35,13 +35,13 @@ const getHomepageScene: SceneGetter = (
       let dX = 0;
       let dY = 0;
       if (i > 0) {
-        yPosDiff = 86.6;
+        yPosDiff = 100;
       }
       if (i === 1) {
-        xPosDiff = -50;
+        xPosDiff = -57.7;
       }
       if (i === 2) {
-        xPosDiff = 50;
+        xPosDiff = 57.7;
       }
       let interactivePoint = new InteractivePoint(
         ctx,
@@ -69,14 +69,16 @@ const getHomepageScene: SceneGetter = (
     currentPoint = scene.assets.listenFor[round % 3];
     round += 1;
     pointVelocity.x = -0.5 + Math.random();
+    pointVelocity.x /= 3;
     pointVelocity.y = -0.5 + Math.random();
-    setTimeout(timerShuffleCurrentPoint, 6000);
+    pointVelocity.y /= 3;
+    setTimeout(timerShuffleCurrentPoint, 8000);
   };
 
-  let canPointsMove = false;
+  let canPointsMove = true;
 
   const makePointsMoveTrue = () => {
-    canPointsMove = false;
+    canPointsMove = true;
   };
 
   let delayedMakePointsMoveTrue: any = null;
@@ -89,7 +91,7 @@ const getHomepageScene: SceneGetter = (
 
       delayedMakePointsMoveTrue = setTimeout(makePointsMoveTrue, 6000);
 
-      canPointsMove = false;
+      canPointsMove = true;
     }
   };
 
@@ -237,14 +239,66 @@ const getHomepageScene: SceneGetter = (
     // ctx.fill();
   };
 
+  const drawEye = (posX: number, posY: number) => {
+    ctx.beginPath();
+    ctx.fillStyle = cl.getHSL(cl.black);
+    let eyeRadius = 7;
+    ctx.ellipse(posX, posY, eyeRadius, eyeRadius, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.fillStyle = cl.getHSL(cl.white);
+    let eye1offset = 2.5;
+    let eye2offset = 3.5;
+    ctx.ellipse(
+      posX - eye1offset,
+      posY - eye1offset,
+      eyeRadius / 3,
+      eyeRadius / 3,
+      0,
+      0,
+      Math.PI * 2
+    );
+    ctx.ellipse(
+      posX + 2,
+      posY - eye2offset,
+      eyeRadius / 5,
+      eyeRadius / 5,
+      0,
+      0,
+      Math.PI * 2
+    );
+    ctx.fill();
+  };
+
+  const drawSmile = () => {
+    ctx.beginPath();
+    ctx.strokeStyle = cl.getHSL(cl.black);
+    ctx.lineWidth = 3;
+    ctx.moveTo(ctx.canvas.width / 2 - 20, ctx.canvas.height / 3 + 25);
+    ctx.bezierCurveTo(
+      ctx.canvas.width / 2 - 10,
+      ctx.canvas.height / 3 + 40,
+      ctx.canvas.width / 2 + 10,
+      ctx.canvas.height / 3 + 40,
+      ctx.canvas.width / 2 + 20,
+      ctx.canvas.height / 3 + 25
+    );
+    ctx.stroke();
+  };
+
+  let eyeOffset = 12;
+
   scene.draw = () => {
     ctx.fillStyle = 'white';
     togglePointsCanMovme();
     updateSelectedPoint();
 
-    drawPoints();
+    // drawPoints();
 
     drawTriangle();
+    // drawEye(ctx.canvas.width / 2 - eyeOffset, ctx.canvas.height / 3);
+    // drawEye(ctx.canvas.width / 2 + eyeOffset, ctx.canvas.height / 3);
+    // drawSmile();
   };
 
   return scene;

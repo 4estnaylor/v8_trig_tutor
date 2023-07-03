@@ -23,7 +23,7 @@ const useCheckQuestionForUser = (props: useCheckQuestionForUserProps) => {
 
   const fetchQuestionObjByQuestion = async () => {
     try {
-      const response = await fetch(`api/db/getQuestionObject/${question}`, {
+      const response = await fetch(`../api/db/getQuestionObject/${question}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ const useCheckQuestionForUser = (props: useCheckQuestionForUserProps) => {
     try {
       if (!questionObject) return;
       const response = await fetch(
-        `/api/db/getUserAnswer/?userId=${currentUser.id}&questionId=${questionObject.id}`,
+        `../api/db/getUserAnswer/?userId=${currentUser.id}&questionId=${questionObject.id}`,
         {
           method: 'GET',
           headers: {

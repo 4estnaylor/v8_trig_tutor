@@ -40,8 +40,12 @@ export class SubComponent {
   ) {}
 }
 
-export const introduction = new TopicSection('Intro', [
+export const introduction = new TopicSection('Intro: Sharpen your axe 🪓', [
   new TopicComponent('welcome 🖖'),
+  new TopicComponent('motivation', [
+    new SubComponent('why you should study trig'),
+    new SubComponent("why you shouldn't not study trig"),
+  ]),
 
   new TopicComponent('double down'),
   new TopicComponent('math kraken 🐙'),

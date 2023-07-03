@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import InteractivePoint from '../../HomePage/MyCanvas/CanvasObjects/InteractivePoint';
 import EventHandlerConfig from '../../HomePage/MyCanvas/EventHandler/EventHandlerConfig';
 import { Scene, SceneGetter } from '../../HomePage/MyCanvas/Scene/Scene';
 import cl from '../../../colors';
 import NonInteractivePoint from '../../HomePage/MyCanvas/CanvasObjects/NonInteractivePoint';
 import AngleCircle from '../../HomePage/MyCanvas/CanvasObjects/AngleCircle';
+import { TargetValueObj } from '../../../pages/%C2%B0';
 
 const getSceneDegreesIntro: SceneGetter = (
   context: CanvasRenderingContext2D,
@@ -14,12 +15,22 @@ const getSceneDegreesIntro: SceneGetter = (
 
   // @ts-ignore
   // ingoring missing ev for onclick;
-  const passedObject = context?.canvas?.onclick?.();
-  const { targetValueObjs, setTargetValueObjs } = passedObject;
+  const passedObject = context?.objectPassedToScene;
+  const {
+    targetValueObjs,
+    setTargetValueObjs,
+  }: { targetValueObjs: TargetValueObj[]; setTargetValueObjs: any } =
+    passedObject;
 
   console.log('passed Object', targetValueObjs, setTargetValueObjs);
 
-  setTargetValueObjs([{ value: 9, completed: true }]);
+  let currentTargetValue = targetValueObjs.find((targetValueObj) => {
+    return targetValueObj.completed === false;
+  });
+
+  console.log('currento', currentTargetValue);
+
+  // setTargetValueObjs([{ value: 9, completed: true }]);
 
   const width = context.canvas.parentElement?.clientWidth || 0;
 
@@ -27,12 +38,45 @@ const getSceneDegreesIntro: SceneGetter = (
 
   scene.assets.listenFor = [];
 
+  const checkDragValue = () => {
+    console.log(
+      'checking drag value compared to ',
+      currentTargetValue,
+      (testUnitCirc.angle * 180) / Math.PI
+    );
+    let userSelectedValueInDegrees = (testUnitCirc.angle * 180) / Math.PI;
+    if (
+      (!currentTargetValue?.value && currentTargetValue?.value !== 0) ||
+      !currentTargetValue
+    ) {
+      console.log('uh oh');
+      return;
+    }
+    let valueDelta = Math.abs(
+      userSelectedValueInDegrees - currentTargetValue?.value
+    );
+
+    if (!currentTargetValue?.value && currentTargetValue?.value !== 0) return;
+    if (valueDelta < 0.5) {
+      console.log('matcharoonee!', targetValueObjs.indexOf(currentTargetValue));
+      let indexOfCurrentValue = targetValueObjs.indexOf(currentTargetValue);
+      let updatedTargetValueObjs = [...targetValueObjs];
+      updatedTargetValueObjs[indexOfCurrentValue].completed = true;
+      setTargetValueObjs([...updatedTargetValueObjs]);
+      currentTargetValue = targetValueObjs.find((targetValueObj) => {
+        return targetValueObj.completed === false;
+      });
+    }
+  };
+
   const testUnitCirc = new AngleCircle(
     context,
     eventHandlerConfig,
     width / 2,
     context.canvas.height / 2
   );
+
+  testUnitCirc.checkDragValueToCorrect = checkDragValue;
 
   scene.draw = () => {
     testUnitCirc.draw();

@@ -42,14 +42,13 @@ const index = () => {
         questionObjects={welcomeQuestions}
       >
         <>
-          <h2 id="testing">Testing 123</h2>
           <p>
             Hey, I'm glad you made it here. I hope this site can be useful to
             you for learning trigonometry and/or precalculus.
             <br />
             <br />
           </p>
-          <a href="#testing">:testing</a>
+          {/* <a href="#testing">:testing</a> */}
 
           <SpockWrapperOuter>
             <SpockWrapper>
@@ -102,6 +101,17 @@ const index = () => {
                       textDecorationColor: cl.getHSL(cl.black),
                     }}
                   >
+                    book tutoring sessions
+                  </div>
+                </li>
+                <li>
+                  <Red>✗</Red>
+                  <div
+                    style={{
+                      textDecoration: 'line-through',
+                      textDecorationColor: cl.getHSL(cl.black),
+                    }}
+                  >
                     record progress
                   </div>
                 </li>
@@ -128,6 +138,10 @@ const index = () => {
                 </li>
                 <li>
                   <Purple>✓</Purple>access all content
+                </li>
+                <li>
+                  {' '}
+                  <Purple>✓</Purple>book tutoring sessions
                 </li>
                 <li>
                   <Purple>✓</Purple>record progress

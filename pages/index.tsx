@@ -109,9 +109,9 @@ export default function Home() {
                   height={size.width || 350}
                 />
               </MathworkWrap>
-              <MyCanvas sceneGetter={getHomepageScene} height={490} />
+              <MyCanvas sceneGetter={getHomepageScene} height={350} />
               <HomepageIllustration aria-hidden="true" tabIndex={-1}>
-                <InnerImg src="/crashcoursebanner.svg" />
+                <InnerImg src="/trig_glasses.svg" />
               </HomepageIllustration>
             </CanvasWrap>
           </TopSection>
@@ -267,7 +267,7 @@ const ProgressBarWrapper = styled.div`
 const GetGoodAtTrig = styled.div`
   padding: 30px;
   position: absolute;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   color: 'black';
   z-index: 10;
   top: 70;

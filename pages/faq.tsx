@@ -198,7 +198,7 @@ const faq = () => {
         </FAQSection>
         <FAQSection
           question="Difference Between Trig and Precalc?"
-          summary="There's often a lot of confusion around where trigonometry ends and precalculus begins. This confusion is widely and correctly believed to be intentionally manufactured by us math teachers just for the fun of it. Here are some clarifying diagrams."
+          summary="There's often a lot of confusion around where trigonometry ends and precalculus begins. This confusion is widely, and correctly, believed to be intentionally manufactured by math teachers just for the joy of tormenting students. Here are some clarifying diagrams."
           iconString="/trig_vs_precalc_simple.svg"
         >
           <div>
@@ -213,12 +213,15 @@ const faq = () => {
             Trigonometry is about measuring and comparing triangle proportions
             (angles and sides).Trigonometry goes deeper and further into the
             world of triangles than what you may have already seen in a geometry
-            class.
+            class. Trig topics tend to progress naturally from one to the next
+            over a 1 semester course.
             <br />
             <br />
             <Alert severity="info">
-              Trig topics tend to progress naturally from one to the next over a
-              1 semester course.
+              The word trigonometry comes from the Greek words trigonon
+              (“triangle”) and metron (“to measure”). And that's precisely what
+              trigonometry is. The term gets 5/5 stars for being clear and
+              concise.
             </Alert>
             <br />
             <br />
@@ -234,12 +237,15 @@ const faq = () => {
             a calculus course. In practice its subject area has evolved over
             time and is less clear-cut than trig's. Its definition can also vary
             signifigantly depending upon who you ask and what the phase of the
-            moon is when you ask.
+            moon is when you ask. Precalc is usually a two semester course. The
+            first semester is Trig, and the second one is, ummm, a little wacky.
             <br />
             <br />
             <Alert severity="info">
-              Precalc is usually a two semester course. The first semester is
-              Trig, and the second one is, ummm, a little wacky
+              The word pre-calculus from Latin prae ("before") and calculus ("A
+              small pebble", because what transistors are to modern calculators,
+              small pebbles were to the acubus). Precalc gets 2/5 stars as a
+              term for being kinda bad.
             </Alert>
             <br />
             <br />
@@ -253,9 +259,9 @@ const faq = () => {
                 height={300}
               />
             </div>
-            For this reason, it is very unusual for a student to take both
-            trigonometry and precalculus since trigonometry is already included
-            in the first semester of a typical precalculus course.
+            It is very unusual for a student to take both trigonometry and
+            precalculus since trigonometry is already included in the first
+            semester of a typical precalculus course.
             <br />
             <br />
             The other, non-trig stuff taught in precalculus is formally and
@@ -268,8 +274,9 @@ const faq = () => {
                 height={300}
               />
             </div>
-            I know, I know. You're probably thinking, "What in the
-            <b> Thundering Kittens of Ipala </b> is math analysis?!"
+            The reader may ask a question I asked as a student myself, "What in
+            the
+            <em> Thundering Kittens of Ipala </em> is math analysis?!"
             <br />
             <br />
             <div
@@ -313,20 +320,27 @@ const faq = () => {
             </div>
             <br />
             <br />
-            Simple really. Math analysis is, ummm, analyzing stuff with math. A
-            term carefully invented by math educators to sound as fancy as
-            possible while still being vague enough to be meaningless. Everyone
-            likes a fancy term, it sounds more impressive that way.
+            Simple really. Math analysis is, errrm, analyzing stuff with math?
+            My impression after having taught it for a few years is that "math
+            analysis" is a term carefully invented by math educators to sound
+            fancy, technical, and precise while still being just vague enough to
+            be meaningless.
             <br />
             <br />
-            Why did the term chosen have to be so vague though? Unlike
-            trigonometry, the topics in math analysis don't really have a
-            <b> theme </b>. Worse, there's too many of them! Often classes have
-            to skim or even skip a couple of the topics if they reach the final
-            section of the textbook. Precalc's second semester is a kind of
-            controlled chaos whose lack of logical, definite structure has a lot
-            to do with why precalculus was invented as a class in the first
-            place.
+            <Alert severity="info">
+              Math analysis gets -9001/5 as a term for being the absolute worst.
+            </Alert>
+            <br />
+            <br />
+            Why choose such an awful, vage term? Maybe because, unlike
+            trigonometry, the topics in math analysis don't have a
+            <b> mathematical theme </b> . Worse, there's too many of them! Often
+            classes have to skim or even skip a couple of the topics if they
+            reach the final section of the textbook. Precalc's second semester
+            is a kind of controlled chaos whose lack of logical, definite
+            structure has a lot to do with why precalculus was invented as a
+            class in the first place. It may not have a mathematical theme, but
+            it does at least have a <b> practical theme</b>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Image
                 src="/math_analysis_explained.svg"
@@ -338,8 +352,8 @@ const faq = () => {
             Precalc was born not as field or branch of math, but because
             universities noticed something fascinating about freshman math
             students. They were jumping into their first college math class,
-            calculus, precisely in the same way as a fly jumps into the
-            windshield of an oncoming 18-wheeler truck.
+            calculus, precisely in the same way a fly jumps into the windshield
+            of an oncoming 18-wheeler truck.
             <br />
             <br />
             "Bam here's Calculus!", as it turned out, was a somewhat
@@ -362,24 +376,25 @@ const faq = () => {
             little bit of a problem. Math teachers and highschool students
             couldn't spontaneously conjure more classroom time out of thin air
             to make it happen. The result was rather than getting a full two
-            semesters (which it could easily fill), the "math analysis" section
-            of precalculus was joined to trigonometry as a second semster.
+            semesters, which it could easily fill, the "math analysis" section
+            of precalculus was tacked on to trigonometry as a second semster.
             Attempting all, or even most, of "math analysis" in a single
             highschool semester is a<em> very </em> tall order. In reality, most
-            classes skip over considerably chunks of the math analysis section
+            classes skip over considerable chunks of the math analysis section
             of their pre-calc textbooks. Topics normally given priority are
-            those most likely to appear on SAT/ACT testing and/or the teacher's
-            preferences.
+            those deemed most likely to appear on standarized testing and/or the
+            teacher's preferences.
             <br />
             <br />
-            To add just a dash more of confusion – what is considered
-            pre-calculus' territory in math curricula has been shifting and
-            expanding over the years. Linear algebra and probability are taking
-            an increasingly leading role in college mathematics because of thier
-            many applications in computer and data science. In response, precalc
-            teachers are increasingly including topics to bolster not just calc
-            but college-level math more broadly to the extent that they can
-            manage to stuff it all into just 2 semesters.
+            To add just a dash more spice (and by spice, I mean confusion) –
+            what is considered pre-calculus' territory in math curricula has
+            been shifting and expanding over the years. Linear algebra and
+            probability are taking an increasingly leading role in college
+            mathematics because of thier many applications in computer and data
+            science. In response, precalc teachers are increasingly including
+            topics to bolster not just calc but college-level math more broadly
+            to the extent that they can manage to stuff it all into just 2
+            semesters.
             <br />
             <br />
             <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -400,13 +415,13 @@ const faq = () => {
               consider a name change for this course and maybe pare it down a
               bit while we're at it!
             </Alert> */}
-            <br />I rarely use the term math analysis because of, well, how bad
-            and undescriptive it is.
+            <br />I rarely use the term math analysis because of, well, what a
+            uselessly undescriptive term it is.
             <br />
             <br />
-            I like to think of it more as a kind of "math trail mix". Your
-            teachers load you up with as much of it as they can before you hit
-            your college math journey to provide you nutrition, energy, and
+            I like to think of it more as a kind of "collegiate math trail mix".
+            Your teachers load you up with as much of it as they can before you
+            hit your college math journey to provide you nutrition, energy, and
             insight along the way.
             <br /> <br />
             {/* <Alert severity="info">

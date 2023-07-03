@@ -14,6 +14,7 @@ class AngleCircle {
   radialPoint: InteractivePoint | NonInteractivePoint;
   listenForAssets: InteractivePoint | NonInteractivePoint[];
   testFunction: any;
+  checkDragValueToCorrect: any;
   constructor(
     public context: CanvasRenderingContext2D,
     public eventHandlerConfig: EventHandlerConfig,
@@ -53,13 +54,14 @@ class AngleCircle {
     );
 
     this.testFunction = this.context.canvas.onclick;
-
+    //@ts-ignore
     this.listenForAssets = [this.vertex, this.zeroPoint, this.radialPoint];
   }
 
   update = () => {
     this.updatePosition();
     this.updateAngle();
+    this.checkValueWhenNotDragging();
     // console.log('angle', (this.angle * 180) / Math.PI);
   };
 
@@ -101,6 +103,9 @@ class AngleCircle {
     this.drawAngleInDegrees();
     this.drawAngleLabel();
     this.testFunction();
+    if (this.radialPoint instanceof InteractivePoint) {
+      console.log('form', this.radialPoint.form);
+    }
   };
 
   drawZeroStroke = () => {
@@ -114,7 +119,8 @@ class AngleCircle {
 
   drawAngleInDegrees = () => {
     this.context.fillStyle = 'white';
-    this.context.font = ' 30px system-ui';
+    this.context.font =
+      " 30px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
     let x_offset = this.context.measureText(
       Math.round((this.angle * 180) / Math.PI) + '°'
     ).width;
@@ -127,7 +133,8 @@ class AngleCircle {
 
   drawAngleLabel = () => {
     this.context.fillStyle = cl.getHSL(cl.white);
-    this.context.font = ' 16px system-ui';
+    this.context.font =
+      " 16px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
     let x_offset =
       this.context.measureText(
         Math.round((100 * (this.angle * 180)) / Math.PI) / 100 + '°'
@@ -137,6 +144,16 @@ class AngleCircle {
       this.radialPoint.x - x_offset,
       this.radialPoint.y + 7
     );
+  };
+
+  checkValueWhenNotDragging = () => {
+    if (
+      this.radialPoint instanceof InteractivePoint &&
+      this.radialPoint.form !== 'grabbing'
+    ) {
+      console.log('not dragging', this.radialPoint.form);
+      this.checkDragValueToCorrect();
+    }
   };
 
   drawDottedTouchConncetLine = () => {
