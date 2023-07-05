@@ -11,7 +11,10 @@ const InteractiveProgressBar = (props: InteractiveProgressBarProps) => {
   const { targetValueObjs } = props;
   const completionChunks = targetValueObjs.map((targetValueObj, index) => {
     return (
-      <CompletionChunk $completed={targetValueObj.completed}></CompletionChunk>
+      <CompletionChunk
+        key={targetValueObj.value}
+        $completed={targetValueObj.completed}
+      ></CompletionChunk>
     );
   });
   return <Wrapper>{completionChunks}</Wrapper>;
@@ -30,7 +33,7 @@ const CompletionChunk = styled.div<{ $completed: boolean }>`
     p.$completed ? cl.getHSLA(cl.blue_light, 1) : cl.getHSLA(cl.white, 0.2)};
   width: 10px;
   height: 100%;
-  border-right: ${(p) => (p.$completed ? 'none' : '2px solid transparent')};
+  border-right: ${(p) => (p.$completed ? 'none' : '2px solid white')};
 
   flex: 1;
 

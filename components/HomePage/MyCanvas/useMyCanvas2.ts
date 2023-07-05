@@ -12,8 +12,6 @@ const useMyCanvas2: (
   useEffect(() => {
     const canvas = canvasRef.current! as HTMLCanvasElement;
 
-    console.log('darklajdf', objectPassedToScene);
-
     canvas.onclick = () => {
       return objectPassedToScene;
     };

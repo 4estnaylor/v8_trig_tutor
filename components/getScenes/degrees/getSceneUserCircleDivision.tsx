@@ -8,30 +8,30 @@ import AngleCircle from '../../HomePage/MyCanvas/CanvasObjects/AngleCircle';
 import { TargetValueObj } from '../../../pages/%C2%B0';
 import { Tau } from '../../HomePage/MyCanvas/CanvasObjects/UsefulConstants';
 
-const getSceneDegreesIntro: SceneGetter = (
+const getSceneUserCicrcleDivision: SceneGetter = (
   context: CanvasRenderingContext2D,
   eventHandlerConfig: EventHandlerConfig
 ) => {
   let scene = new Scene(context, eventHandlerConfig);
 
+  let maxDivisions = 500;
+
   // @ts-ignore
   // ingoring missing ev for onclick;
   const passedObject = context?.objectPassedToScene;
   const {
-    targetValueObjs,
-    setTargetValueObjs,
-    userEnteredDegreeValue,
-    setUserEnteredDegreeValue,
+    userCircleDivisions,
+    setUserCircleDivisions,
   }: {
     targetValueObjs: TargetValueObj[];
     setTargetValueObjs: any;
-    userEnteredDegreeValue: number;
-    setUserEnteredDegreeValue: any;
+    userCircleDivisions: number;
+    setUserCircleDivisions: any;
   } = passedObject;
 
-  let currentTargetValue = targetValueObjs.find((targetValueObj) => {
-    return targetValueObj.completed === false;
-  });
+  console.log(userCircleDivisions, setUserCircleDivisions);
+
+  let numberOfDivisions = 5;
 
   // setTargetValueObjs([{ value: 9, completed: true }]);
 
@@ -41,38 +41,6 @@ const getSceneDegreesIntro: SceneGetter = (
 
   scene.assets.listenFor = [];
 
-  const checkDragValue = () => {
-    let userSelectedValueInDegrees = (testUnitCirc.angle * 180) / Math.PI;
-
-    if (
-      (!currentTargetValue?.value && currentTargetValue?.value !== 0) ||
-      !currentTargetValue
-    ) {
-      return;
-    }
-    let valueDelta = Math.abs(
-      userSelectedValueInDegrees - currentTargetValue?.value
-    );
-
-    if (valueDelta > 358) {
-      valueDelta = 360 - valueDelta;
-    }
-
-    if (!currentTargetValue?.value && currentTargetValue?.value !== 0) return;
-    if (valueDelta < 0.5) {
-      let indexOfCurrentValue = targetValueObjs.indexOf(currentTargetValue);
-      let updatedTargetValueObjs = [...targetValueObjs];
-      updatedTargetValueObjs[indexOfCurrentValue].completed = true;
-      setTargetValueObjs([...updatedTargetValueObjs]);
-      currentTargetValue = targetValueObjs.find((targetValueObj) => {
-        return targetValueObj.completed === false;
-      });
-      testUnitCirc.radialPoint.x = testUnitCirc.x + testUnitCirc.radius;
-      testUnitCirc.radialPoint.y = testUnitCirc.y - 0.1;
-      // testUnitCirc.angle = 0;
-    }
-  };
-
   const testUnitCirc = new AngleCircle(
     context,
     eventHandlerConfig,
@@ -80,16 +48,78 @@ const getSceneDegreesIntro: SceneGetter = (
     context.canvas.height / 2
   );
 
-  testUnitCirc.checkDragValueToCorrect = checkDragValue;
+  testUnitCirc.radius *= 1;
+
+  let moveToOrigin = () => {
+    context.moveTo(testUnitCirc.x, testUnitCirc.y);
+  };
+
+  let lineToCirclePerimeter = (angle: number) => {
+    let x0 = testUnitCirc.x;
+    let y0 = testUnitCirc.y;
+
+    let x1 = x0 + testUnitCirc.radius * 1.05 * Math.cos(angle);
+    let y1 = y0 + testUnitCirc.radius * 1.05 * Math.sin(angle);
+
+    let x2 = x0 + testUnitCirc.radius * 0.95 * Math.cos(angle);
+    let y2 = y0 + testUnitCirc.radius * 0.95 * Math.sin(angle);
+    context.moveTo(x1, y1);
+    context.lineTo(x2, y2);
+  };
+
+  const drawDivisions = () => {
+    // drawBaseCircle();
+    let angleIncrement = Tau / numberOfDivisions;
+    if (numberOfDivisions > 500) {
+      angleIncrement = Tau / 500;
+    }
+
+    context.strokeStyle = cl.getHSL(cl.white);
+    context.lineWidth = 2;
+
+    let finalIteration = numberOfDivisions;
+    if (numberOfDivisions > 500) {
+      finalIteration = 500;
+    }
+
+    for (let i = 0; i < finalIteration; i++) {
+      context.beginPath();
+
+      lineToCirclePerimeter(angleIncrement * i);
+      context.stroke();
+    }
+    drawBaseCircle();
+  };
+
+  const drawBaseCircle = () => {
+    context.beginPath();
+    context.ellipse(
+      testUnitCirc.x,
+      testUnitCirc.y,
+      testUnitCirc.radius,
+      testUnitCirc.radius,
+      0,
+      0,
+      Tau
+    );
+    context.lineWidth = 5;
+    context.strokeStyle = cl.getHSLA(cl.white, 0.2);
+    context.stroke();
+  };
 
   scene.draw = () => {
     testUnitCirc.draw();
+    setUserCircleDivisions((prev: number) => {
+      numberOfDivisions = prev;
+      return prev;
+    });
+    drawDivisions();
   };
 
   return scene;
 };
 
-export default getSceneDegreesIntro;
+export default getSceneUserCicrcleDivision;
 
 // import { ListItem } from '@mui/material';
 // import cl from '../../../../colors';

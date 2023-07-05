@@ -146,12 +146,10 @@ const TopicComponentBoilerPlate = (props: TopicComponentBoilerPlateProps) => {
     } else if (!isLastSubComponent) {
       nextHref =
         '/' + parentTopicComponent.title + '/' + matchingSubComponent.title;
-      console.log('dadio', nextHref);
     }
   };
 
   if (matchingTopicComponent) {
-    console.log('dadio2', nextHref);
     getNextHrefForTopicComponent(matchingTopicComponent);
     if (!nextHref) return <></>;
     else {

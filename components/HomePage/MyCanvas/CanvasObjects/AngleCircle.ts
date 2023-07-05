@@ -15,6 +15,7 @@ class AngleCircle {
   listenForAssets: InteractivePoint | NonInteractivePoint[];
   testFunction: any;
   checkDragValueToCorrect: any;
+  valueCheckedSinceLastDrag: boolean;
   constructor(
     public context: CanvasRenderingContext2D,
     public eventHandlerConfig: EventHandlerConfig,
@@ -31,6 +32,7 @@ class AngleCircle {
       this.x + this.radius,
       this.y
     );
+    this.valueCheckedSinceLastDrag = true;
 
     this.zeroPoint.color = cl.getHSL(cl.white);
     this.vertex = new InteractivePoint(
@@ -43,11 +45,13 @@ class AngleCircle {
       cl.getHSL(cl.white)
     );
 
+    this.checkDragValueToCorrect = () => {};
+
     this.radialPoint = new InteractivePoint(
       this.context,
       this.eventHandlerConfig,
-      this.x + 80,
-      this.y - this.radius - 40,
+      this.x + this.radius,
+      this.y - 0.1,
       this.listenForAssets,
       30,
       cl.getHSL(cl.white)
@@ -103,9 +107,9 @@ class AngleCircle {
     this.drawAngleInDegrees();
     this.drawAngleLabel();
     this.testFunction();
-    if (this.radialPoint instanceof InteractivePoint) {
-      console.log('form', this.radialPoint.form);
-    }
+    // if (this.radialPoint instanceof InteractivePoint) {
+    //   console.log('form', this.radialPoint.form);
+    // }
   };
 
   drawZeroStroke = () => {
@@ -149,10 +153,23 @@ class AngleCircle {
   checkValueWhenNotDragging = () => {
     if (
       this.radialPoint instanceof InteractivePoint &&
-      this.radialPoint.form !== 'grabbing'
+      this.radialPoint.form !== 'grabbing' &&
+      !this.valueCheckedSinceLastDrag
     ) {
       console.log('not dragging', this.radialPoint.form);
       this.checkDragValueToCorrect();
+      this.valueCheckedSinceLastDrag = true;
+    } else {
+      this.resetCheckedSinceLastDragWhenDragging();
+    }
+  };
+
+  resetCheckedSinceLastDragWhenDragging = () => {
+    if (
+      this.radialPoint instanceof InteractivePoint &&
+      this.radialPoint.form === 'grabbing'
+    ) {
+      this.valueCheckedSinceLastDrag = false;
     }
   };
 

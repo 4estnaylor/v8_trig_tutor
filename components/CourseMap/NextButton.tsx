@@ -46,13 +46,7 @@ const NextButton = (props: NextButtonProps) => {
   const [isMarkedComplete, setIsMarkedComplete] = useState<boolean>(false);
 
   let answerObjects = useAnswerObjects(questionObjects);
-  useEffect(() => {
-    console.log(
-      questionObjects?.forEach((qobject) =>
-        console.log('change occuring: ', qobject)
-      )
-    );
-  }, [answerObjects, questions, questionObjects]);
+  useEffect(() => {}, [answerObjects, questions, questionObjects]);
 
   useEffect(() => {
     setRetreivedAnswerObjects(answerObjects);
@@ -67,7 +61,6 @@ const NextButton = (props: NextButtonProps) => {
 
   useEffect(() => {
     setNumberOfCorrectAnswers(0);
-    console.log('bloop');
 
     questionObjects?.forEach((questionObject: any) => {
       if (questionObject?.answerState === 'correct') {
@@ -131,9 +124,7 @@ const NextButton = (props: NextButtonProps) => {
     });
 
     const result = await response.json();
-    console.log(result);
     setDisplayLoading(false);
-    console.log('loading state finished');
 
     router.push(nextPath);
   };
@@ -161,7 +152,6 @@ const NextButton = (props: NextButtonProps) => {
     });
 
     if (numberOfCorrectAnswers === retreivedAnswerObjects.length) {
-      console.log('is happening alfredo!');
       setIsComplete(true);
     } else {
       setIsComplete(false);
@@ -386,7 +376,6 @@ const NextButton = (props: NextButtonProps) => {
   }
 
   if (isMarkedComplete) {
-    console.log('is marked complete!');
     return displayIfComplete;
   }
 

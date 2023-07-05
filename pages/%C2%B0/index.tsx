@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
 import getScene360Divisibility from '../../components/getScenes/degrees/getScene360DivisibilityComparison';
@@ -10,6 +10,10 @@ import CanvasForTopicComponent from '../../components/HomePage/MyCanvas/CanvasFo
 import InteractiveCanvas from '../../components/HomePage/MyCanvas/InteractiveCanvas';
 import AngleQue from '../../components/Question/AngleQue';
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
+import FactorsButtonBar from '../../components/Inputs/FactorsButtonBar';
+import NumberInput from '../../components/Inputs/NumberInput';
+import getSceneUserCicrcleDivision from '../../components/getScenes/degrees/getSceneUserCircleDivision';
+import AddFactorsButtonBar from '../../components/Inputs/AddFactorsButtonsBar';
 
 export interface TargetValueObj {
   value: number;
@@ -18,13 +22,38 @@ export interface TargetValueObj {
 }
 
 const Degree = () => {
-  const [userEnteredDegreeValue, setUserEnteredDegreeValue] = useState(100);
+  const [userEnteredDegreeValue, setUserEnteredDegreeValue] = useState(1);
+  const [changeMe, setChangeMe] = useState(5);
+  const [userCircleDivisions, setUserCircleDivisions] = useState(1);
   const [targetValueObjs, setTargetValueObjs] = useState<TargetValueObj[]>([
-    { value: 34, completed: false },
-    { value: 122, completed: false },
-    { value: 223, completed: false },
+    { value: 32, completed: false },
+    { value: 123, completed: false },
+    { value: 206, completed: false },
     { value: 360, completed: false },
   ]);
+
+  const circleDivsionsCanvas = (
+    <InteractiveDegreeDragWrapper>
+      <AddFactorsButtonBar setUserEnteredValue={setUserCircleDivisions} />
+
+      <Canvas1Background>
+        <CanvasForTopicComponent
+          sceneGetter={getSceneUserCicrcleDivision}
+          height={400}
+          objectPassedToScene={{
+            targetValueObjs,
+            setTargetValueObjs,
+            userCircleDivisions,
+            setUserCircleDivisions,
+          }}
+        />
+      </Canvas1Background>
+      <NumberInput
+        value={userCircleDivisions}
+        setValue={setUserCircleDivisions}
+      />
+    </InteractiveDegreeDragWrapper>
+  );
 
   return (
     <TopicComponentBoilerPlate
@@ -35,41 +64,53 @@ const Degree = () => {
       }
     >
       <>
+        <DegreeIntro>
+          The degree, or more formally, the
+          <Fancy> arcdegree </Fancy>, is one way to measure an angle. 360 of
+          them form a complete circle. The symbol for the degree {`(`} ° {`)`}{' '}
+          is quite appropriately a tiny circle.
+        </DegreeIntro>
+
+        <br />
         <InteractiveDegreeDragWrapper>
           <Canvas1Background>
             <CanvasForTopicComponent
               sceneGetter={getSceneDegreesIntro}
               height={400}
-              objectPassedToScene={{ targetValueObjs, setTargetValueObjs }}
+              objectPassedToScene={{
+                targetValueObjs,
+                setTargetValueObjs,
+                userEnteredDegreeValue,
+                setUserEnteredDegreeValue,
+              }}
             />
+            <AngleQue targetValueObjs={targetValueObjs} />
           </Canvas1Background>
         </InteractiveDegreeDragWrapper>
-        <AngleQue targetValueObjs={targetValueObjs} />
-        <DegreeIntro>
-          The degree, or as it is more formily known, the
-          <Fancy> arcdegree </Fancy>, is one way to measure an angle. 360 of
-          them form a complete circle. The symbol for the degree {`(`} ° {`)`}{' '}
-          is, quite appropriately, a tiny circle.
-        </DegreeIntro>
-        <InteractiveCanvas />
+
         <h3>Why 360? Why not some other number</h3>
         <p>
-          Circles don't just exist in nature divided into 360 discrete slices.
-          People had to decide on that somehow. So why choose 360 and not some
-          other more convenient number? Maybe some power of 10 — 100, 1000, or
-          possibly even 1.
+          That a circle has exactly 360° probably feels familiar, maybe even
+          natural. Circles don't just divide themselves into 360 discrete slices
+          in nature. People had to decide on that very specific value of 360
+          somehow. So why choose 360 and not some other more convenient number?
+          Maybe some power of 10 — 100, 1000, or possibly even 1.
           <br />
           <br />
           ¯\_(ツ)_/¯ ultimately, because somebody started doing it that way and
           people went along with it. No law of <em>nature </em> dictates that we
           couldn't all to agree to making it standard to divide a circle into 7
-          units instead of 360.
+          units instead of 360. Nothing is stopping us from choosing any other
+          number we want. Still, 360 feels too... specific to just be a entirely
+          randomly selected number.
           <br />
           <br />
-          But, laws of <em>convenience </em> make a very, very strong case for
-          360 degrees. It all boils down to 360 dividing itself into many useful
-          fractions (halves, thirds, quarters, fifths, sixths, sevenths, tenths,
-          twelfths, ...) without every having to deal with decimal numbers.
+          While laws of nature have no preference for 360 divisions in a circle,
+          laws of <em>convenience </em> make a very, very strong case for having
+          360 degrees instead of say 10 or 100. It all boils down to 360's
+          marvelous ability to divide itself into many useful fractions (halves,
+          thirds, quarters, fifths, sixths, sevenths, tenths, twelfths, ...)
+          without every having to deal with decimal numbers.
           {/* <br /> <br /> */}
           {/* ¯\_(ツ)_/¯ Admittedly, sometimes in math we (as in humanity) just get
           stuck in our ways and make life more complicated than we need to. But,
@@ -98,42 +139,33 @@ const Degree = () => {
           that last sentence is <em> still </em> an earful. If it has been
           awhile since you've used Common Factors (GCFs and LCMs), it may make
           more sense with a concrete example: */}
-          The reason we care about this, is that any number which can be made by
-          multiplying elements from prime factorizations can divide evenly into
-          that number with no decimals involved.{' '}
-          <Link href="https://sciencing.com/factors-number-quickly-easily-5192972.html">
+          The reason we care about this, is that any other number which can be
+          made by multiplying the factors of a number's prime factorizations can
+          divide evenly into that number with no decimals involved.{' '}
+          <Link href="https://www.cuemath.com/numbers/prime-factorization/">
             A more detailed explanation here.
           </Link>
         </P>
         <P>
           360's prime factorization turns out to be really good at dividing
-          evenly into most numbers less than 20, which is most of the numbers we
-          (as in humanity) normally want to divide a circle into.
+          evenly into most numbers less than 20, which is most of the numbers
+          that in practice, historically we have normally want to divide a
+          circle into.
         </P>
         <h3>
-          See if you can find a number that divides evenly by more values than
-          360!
+          See if you can find an alternative that divides evenly by more values
+          than 360!
         </h3>
-        <div
-          style={{
-            backgroundColor: 'tan',
-            position: 'relative',
-            display: 'flex',
-          }}
-        >
-          <CanvasForTopicComponent sceneGetter={getScene360Divisibility} />
-          <Div360NumInput
-            type="number"
-            min={0}
-            max={1000}
-            step={1}
-            value={userEnteredDegreeValue}
-            onChange={(e) => {
-              setUserEnteredDegreeValue(Number(e.target.value));
-            }}
-          />
-          <Div360Title360>360°</Div360Title360>
-        </div>
+
+        <P>
+          {' '}
+          I'd encourage you to use the tool below to work backwards. Rather than
+          starting at a final number, try building up your number by "feeding"
+          it more prime factors!
+        </P>
+        <br />
+
+        {circleDivsionsCanvas}
         {/* <h3>Using degrees to measure triangles</h3>
         <p>
           Our eventual goal is to know everything there is to know about
@@ -161,15 +193,17 @@ const WhatDoesThisHaveToDoWithTrig = styled.p``;
 
 const Div360NumInput = styled.input`
   position: absolute;
-  right: calc(25% - 50px);
+  left: calc(25% - 110px);
   top: 10px;
-  width: 100px;
+  width: 220px;
   height: 50px;
   flex: 1;
   font-size: 36px;
-  background-color: transparent;
+  background-color: ${cl.getHSLA(cl.white, 0.2)};
+  border-radius: 10px 10px 0px 0px;
   border: none;
-  border-bottom: 4px solid ${cl.getHSL(cl.black)};
+  border-bottom: 2px solid ${cl.getHSL(cl.white)};
+  color: ${cl.getHSL(cl.white)};
   text-align: center;
 `;
 
@@ -188,7 +222,7 @@ const Div360Title360 = styled.div`
   font-size: 36px;
   background-color: transparent;
   border: none;
-  color: ${cl.getHSL(cl.purple)};
+  color: ${cl.getHSL(cl.purple_light)};
   text-align: center;
 `;
 
