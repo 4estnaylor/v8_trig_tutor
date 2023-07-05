@@ -58,11 +58,13 @@ const getSceneUserCicrcleDivision: SceneGetter = (
     let x0 = testUnitCirc.x;
     let y0 = testUnitCirc.y;
 
-    let x1 = x0 + testUnitCirc.radius * 1.05 * Math.cos(angle);
-    let y1 = y0 + testUnitCirc.radius * 1.05 * Math.sin(angle);
+    const multiplier = testUnitCirc.radius;
 
-    let x2 = x0 + testUnitCirc.radius * 0.95 * Math.cos(angle);
-    let y2 = y0 + testUnitCirc.radius * 0.95 * Math.sin(angle);
+    let x1 = x0 + multiplier * 1.35 * Math.cos(angle);
+    let y1 = y0 + multiplier * 1.35 * Math.sin(angle);
+
+    let x2 = x0 + multiplier * 1.2 * Math.cos(angle);
+    let y2 = y0 + multiplier * 1.2 * Math.sin(angle);
     context.moveTo(x1, y1);
     context.lineTo(x2, y2);
   };
@@ -75,7 +77,14 @@ const getSceneUserCicrcleDivision: SceneGetter = (
     }
 
     context.strokeStyle = cl.getHSL(cl.white);
-    context.lineWidth = 2;
+    let lineWidth = 50 / numberOfDivisions;
+    if (lineWidth > 3) {
+      lineWidth = 3;
+    }
+    if (lineWidth < 1) {
+      lineWidth = 1;
+    }
+    context.lineWidth = lineWidth;
 
     let finalIteration = numberOfDivisions;
     if (numberOfDivisions > 500) {
@@ -88,7 +97,7 @@ const getSceneUserCicrcleDivision: SceneGetter = (
       lineToCirclePerimeter(angleIncrement * i);
       context.stroke();
     }
-    drawBaseCircle();
+    // drawBaseCircle();
   };
 
   const drawBaseCircle = () => {
@@ -96,13 +105,13 @@ const getSceneUserCicrcleDivision: SceneGetter = (
     context.ellipse(
       testUnitCirc.x,
       testUnitCirc.y,
-      testUnitCirc.radius,
-      testUnitCirc.radius,
+      testUnitCirc.radius - 5,
+      testUnitCirc.radius - 5,
       0,
       0,
       Tau
     );
-    context.lineWidth = 5;
+    context.lineWidth = 10;
     context.strokeStyle = cl.getHSLA(cl.white, 0.2);
     context.stroke();
   };

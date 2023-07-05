@@ -16,7 +16,7 @@ type NumberInputProps = {
   max?: number;
 };
 
-const NumberInput = (props: NumberInputProps) => {
+const InputForUserCircleDivisions = (props: NumberInputProps) => {
   const { value, setValue } = props;
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(Number(e.target.value));
@@ -28,10 +28,12 @@ const NumberInput = (props: NumberInputProps) => {
         type="number"
         value={value}
         onChange={onChangeHandler}
-        endAdornment={'divisions'}
       />
 
-      <FormHelperText id="userNumberOfDivisisons">
+      <FormHelperText
+        id="userNumberOfDivisisons"
+        style={{ color: cl.getHSL(cl.white) }}
+      >
         Number of Divisions
       </FormHelperText>
     </Wrapper>
@@ -40,12 +42,15 @@ const NumberInput = (props: NumberInputProps) => {
 
 const Wrapper = styled.div`
   padding: 5px;
-  /* background-color: ${cl.getHSL(cl.gray_dark)}; */
+  background-color: ${cl.getHSL(cl.gray_dark)};
 `;
 const MyInput = styled(OutlinedInput)`
   height: 40px;
   border-radius: 5px;
   font-size: 1.25rem;
+  background-color: ${cl.getHSLA(cl.white, 0.1)};
+  color: ${cl.getHSL(cl.white)};
+  width: 120px;
 `;
 
-export default NumberInput;
+export default InputForUserCircleDivisions;

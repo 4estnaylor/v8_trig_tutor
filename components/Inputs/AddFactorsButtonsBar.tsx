@@ -47,7 +47,7 @@ const AddFactorsButtonBar = (props: FactorButtonsProps) => {
 
 const Wrapper = styled(ButtonGroup)``;
 const OutterWrapper = styled.div`
-  background: ${cl.getHSL(cl.gray_dark)};
+  background: ${cl.getHSL(cl.gray_mid)};
   display: flex;
   gap: 10px;
   padding-left: 5px;
@@ -57,11 +57,11 @@ const OutterWrapper = styled.div`
   padding-top: 10px;
   padding-bottom: 10px;
   flex-wrap: wrap;
+  margin-top: -1px;
 `;
 
 const SpecialButton = styled(Button)`
   &:hover {
-    background-color: green;
   }
 `;
 

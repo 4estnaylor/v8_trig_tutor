@@ -47,8 +47,8 @@ export const introduction = new TopicSection('Intro: Sharpen your axe 🪓', [
     new SubComponent("why you shouldn't not study trig"),
   ]),
 
-  new TopicComponent('double down'),
-  new TopicComponent('math kraken 🐙'),
+  // new TopicComponent('double down'),
+  // new TopicComponent('math kraken 🐙'),
   new TopicComponent('strategy', [
     new SubComponent('conceptual'),
     new SubComponent('fluency'),

@@ -11,9 +11,10 @@ import InteractiveCanvas from '../../components/HomePage/MyCanvas/InteractiveCan
 import AngleQue from '../../components/Question/AngleQue';
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 import FactorsButtonBar from '../../components/Inputs/FactorsButtonBar';
-import NumberInput from '../../components/Inputs/NumberInput';
+import NumberInput from '../../components/Inputs/InputForUserCircleDivisions';
 import getSceneUserCicrcleDivision from '../../components/getScenes/degrees/getSceneUserCircleDivision';
 import AddFactorsButtonBar from '../../components/Inputs/AddFactorsButtonsBar';
+import InputForUserCircleDivisions from '../../components/Inputs/InputForUserCircleDivisions';
 
 export interface TargetValueObj {
   value: number;
@@ -34,8 +35,6 @@ const Degree = () => {
 
   const circleDivsionsCanvas = (
     <InteractiveDegreeDragWrapper>
-      <AddFactorsButtonBar setUserEnteredValue={setUserCircleDivisions} />
-
       <Canvas1Background>
         <CanvasForTopicComponent
           sceneGetter={getSceneUserCicrcleDivision}
@@ -48,7 +47,8 @@ const Degree = () => {
           }}
         />
       </Canvas1Background>
-      <NumberInput
+      <AddFactorsButtonBar setUserEnteredValue={setUserCircleDivisions} />
+      <InputForUserCircleDivisions
         value={userCircleDivisions}
         setValue={setUserCircleDivisions}
       />
@@ -93,24 +93,28 @@ const Degree = () => {
           That a circle has exactly 360° probably feels familiar, maybe even
           natural. Circles don't just divide themselves into 360 discrete slices
           in nature. People had to decide on that very specific value of 360
-          somehow. So why choose 360 and not some other more convenient number?
-          Maybe some power of 10 — 100, 1000, or possibly even 1.
+          somehow. So why choose 360 and not some other more straight forward
+          number? Maybe some power of 10 — 100, 1000, or possibly even 1?
           <br />
           <br />
-          ¯\_(ツ)_/¯ ultimately, because somebody started doing it that way and
-          people went along with it. No law of <em>nature </em> dictates that we
-          couldn't all to agree to making it standard to divide a circle into 7
-          units instead of 360. Nothing is stopping us from choosing any other
-          number we want. Still, 360 feels too... specific to just be a entirely
-          randomly selected number.
+          The simplest answer for why we use 360 – because somebody started
+          doing it that way and the rest of humanity went a long with it
+          ¯\_(ツ)_/¯.
+          <br />
+          <br />
+          No law of <em>nature </em> dictates that we couldn't all to agree to
+          making it standard to divide a circle into 7 units instead of 360.
+          Nothing is stopping us from choosing any other number we want. Still,
+          360 feels too... specific to just be a entirely randomly selected
+          number.
           <br />
           <br />
           While laws of nature have no preference for 360 divisions in a circle,
           laws of <em>convenience </em> make a very, very strong case for having
-          360 degrees instead of say 10 or 100. It all boils down to 360's
-          marvelous ability to divide itself into many useful fractions (halves,
-          thirds, quarters, fifths, sixths, sevenths, tenths, twelfths, ...)
-          without every having to deal with decimal numbers.
+          360 degrees instead of say 10 or 100. It boils down to 360's marvelous
+          ability to divide itself into many useful fractions (halves, thirds,
+          quarters, fifths, sixths, sevenths, tenths, twelfths, ...) without
+          every having to deal with decimal numbers.
           {/* <br /> <br /> */}
           {/* ¯\_(ツ)_/¯ Admittedly, sometimes in math we (as in humanity) just get
           stuck in our ways and make life more complicated than we need to. But,
@@ -139,18 +143,19 @@ const Degree = () => {
           that last sentence is <em> still </em> an earful. If it has been
           awhile since you've used Common Factors (GCFs and LCMs), it may make
           more sense with a concrete example: */}
-          The reason we care about this, is that any other number which can be
-          made by multiplying the factors of a number's prime factorizations can
-          divide evenly into that number with no decimals involved.{' '}
+          The reason we care about prime factorization, is that any other number
+          which can be made by multiplying the factors of a number's prime
+          factorizations can divide evenly into that number with no decimals
+          involved.{' '}
           <Link href="https://www.cuemath.com/numbers/prime-factorization/">
             A more detailed explanation here.
           </Link>
         </P>
         <P>
-          360's prime factorization turns out to be really good at dividing
-          evenly into most numbers less than 20, which is most of the numbers
-          that in practice, historically we have normally want to divide a
-          circle into.
+          360's prime factorization is abnormally good at dividing evenly into
+          most numbers less than 20, which is most of the numbers that in
+          practice, historically — especially for sailors navigating celestial,
+          humanity has wanted to precisely divide a circle into.
         </P>
         <h3>
           See if you can find an alternative that divides evenly by more values
@@ -159,9 +164,10 @@ const Degree = () => {
 
         <P>
           {' '}
-          I'd encourage you to use the tool below to work backwards. Rather than
-          starting at a final number, try building up your number by "feeding"
-          it more prime factors!
+          I'd encourage you to take advantage of the feature to add prime
+          factors. Rather than starting at a final number and testing by trial
+          and error, try building your number from the ground up by "feeding" it
+          more prime factors to meet the requirements!
         </P>
         <br />
 

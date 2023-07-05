@@ -332,15 +332,15 @@ const faq = () => {
             </Alert>
             <br />
             <br />
-            Why choose such an awful, vage term? Maybe because, unlike
+            Why choose such an unclear, vague term? Maybe because, unlike
             trigonometry, the topics in math analysis don't have a
             <b> mathematical theme </b> . Worse, there's too many of them! Often
             classes have to skim or even skip a couple of the topics if they
             reach the final section of the textbook. Precalc's second semester
-            is a kind of controlled chaos whose lack of logical, definite
-            structure has a lot to do with why precalculus was invented as a
-            class in the first place. It may not have a mathematical theme, but
-            it does at least have a <b> practical theme</b>
+            is a kind of controlled chaos. The lack of logical, definite
+            structure stems from why precalculus was invented as a class in the
+            first place. It was not built around a <em>mathematical </em> theme,
+            but around a <em> practical </em> theme.
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Image
                 src="/math_analysis_explained.svg"
