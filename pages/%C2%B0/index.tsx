@@ -15,6 +15,7 @@ import NumberInput from '../../components/Inputs/InputForUserCircleDivisions';
 import getSceneUserCicrcleDivision from '../../components/getScenes/degrees/getSceneUserCircleDivision';
 import AddFactorsButtonBar from '../../components/Inputs/AddFactorsButtonsBar';
 import InputForUserCircleDivisions from '../../components/Inputs/InputForUserCircleDivisions';
+import getSceneTensHundredsDivisions from '../../components/getScenes/degrees/getSceneTensHundredsDivisions';
 
 export interface TargetValueObj {
   value: number;
@@ -57,18 +58,17 @@ const Degree = () => {
 
   const tenHundredThousand = (
     <InteractiveDegreeDragWrapper>
-      <Canvas1Background>
-        <CanvasForTopicComponent
-          sceneGetter={getSceneUserCicrcleDivision}
-          height={400}
-          objectPassedToScene={{
-            targetValueObjs,
-            setTargetValueObjs,
-            userCircleDivisions,
-            setUserCircleDivisions,
-          }}
-        />
-      </Canvas1Background>
+      <CanvasForTopicComponent
+        sceneGetter={getSceneTensHundredsDivisions}
+        height={400}
+        objectPassedToScene={{
+          targetValueObjs,
+          setTargetValueObjs,
+          userCircleDivisions,
+          setUserCircleDivisions,
+        }}
+      />
+
       {/* <AddFactorsButtonBar setUserEnteredValue={setUserCircleDivisions} />
       <InputForUserCircleDivisions
         value={userCircleDivisions}
@@ -263,8 +263,9 @@ const Canvas1Background = styled.div`
   /* position: relative; */
   background: linear-gradient(
     0deg,
-    ${cl.getHSL(cl.gray_mid)},
-    ${cl.getHSL(cl.gray_dark)}
+    ${cl.getHSL(cl.blue_light)},
+    ${cl.getHSL(cl.purple_light)},
+    ${cl.getHSL(cl.red_light)}
   );
   /* border-top: 5px solid ${cl.getHSLA(cl.purple, 0.5)};
   border-bottom: 5px solid ${cl.getHSLA(cl.purple, 0.5)}; */

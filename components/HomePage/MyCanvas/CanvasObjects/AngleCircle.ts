@@ -18,6 +18,7 @@ class AngleCircle {
   valueCheckedSinceLastDrag: boolean;
   customUnitDivisions?: number;
   decimalPlaces: number;
+  labelColor: string;
 
   constructor(
     public context: CanvasRenderingContext2D,
@@ -26,7 +27,8 @@ class AngleCircle {
     public y: number,
     public angle: number = 0,
     public unit: angleMeasurmentUnit = 'radians',
-    public radius: number = 100
+    public radius: number = 100,
+    public color: string = cl.getHSL(cl.white)
   ) {
     this.listenForAssets = [];
     // this.vertex = new NonInteractivePoint(this.context, this.x, this.y);
@@ -35,10 +37,11 @@ class AngleCircle {
       this.x + this.radius,
       this.y
     );
+    this.labelColor = cl.getHSL(cl.white);
     this.valueCheckedSinceLastDrag = true;
     this.decimalPlaces = 0;
 
-    this.zeroPoint.color = cl.getHSL(cl.white);
+    this.zeroPoint.color = this.color;
     this.vertex = new InteractivePoint(
       this.context,
       this.eventHandlerConfig,
@@ -46,7 +49,7 @@ class AngleCircle {
       this.y,
       this.listenForAssets,
       30,
-      cl.getHSL(cl.white)
+      this.color
     );
 
     this.checkDragValueToCorrect = () => {};
@@ -58,7 +61,7 @@ class AngleCircle {
       this.y - 0.1,
       this.listenForAssets,
       30,
-      cl.getHSL(cl.white)
+      this.color
     );
 
     this.testFunction = this.context.canvas.onclick;
@@ -120,13 +123,13 @@ class AngleCircle {
     this.context.beginPath();
     this.context.moveTo(this.zeroPoint.x, this.zeroPoint.y);
     this.context.lineTo(this.zeroPoint.x - 15, this.zeroPoint.y);
-    this.context.strokeStyle = cl.getHSL(cl.white);
+    this.context.strokeStyle = this.color;
     this.context.lineWidth = 3;
     this.context.stroke();
   };
 
   drawAngleInDegrees = () => {
-    if (this.unit) this.context.fillStyle = 'white';
+    if (this.unit) this.context.fillStyle = this.color;
     this.context.font =
       " 30px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
 
@@ -161,7 +164,7 @@ class AngleCircle {
   drawAngleInSpecialUnit = () => {};
 
   drawAngleLabel = () => {
-    this.context.fillStyle = cl.getHSL(cl.white);
+    this.context.fillStyle = this.labelColor;
     this.context.font =
       " 16px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
 
@@ -203,12 +206,69 @@ class AngleCircle {
     let y0 = this.y - this.radius * Math.sin(this.angle);
     this.context.beginPath();
     this.context.moveTo(x0, y0);
-    this.context.lineTo(this.radialPoint.x, this.radialPoint.y);
-    this.context.strokeStyle = cl.getHSL(cl.white);
+    this.context.lineTo(
+      this.radialPoint.x - this.radialPoint.radius * Math.cos(this.angle),
+      this.radialPoint.y + this.radialPoint.radius * Math.sin(this.angle)
+    );
+    this.context.strokeStyle = this.color;
     this.context.lineWidth = 2;
     this.context.setLineDash([4, 7]);
     this.context.stroke();
     this.context.setLineDash([]);
+  };
+
+  lineToCirclePerimeter = (angle: number) => {
+    let x0 = this.x;
+    let y0 = this.y;
+
+    const multiplier = this.radius;
+
+    let x1 = x0 + multiplier * 1.35 * Math.cos(angle);
+    let y1 = y0 + multiplier * 1.35 * Math.sin(angle);
+
+    let x2 = x0 + multiplier * 1.2 * Math.cos(angle);
+    let y2 = y0 + multiplier * 1.2 * Math.sin(angle);
+    this.context.moveTo(x1, y1);
+    this.context.lineTo(x2, y2);
+  };
+
+  drawDivisionTicks = () => {
+    if (!this.customUnitDivisions) return;
+    let numberOfDecimalPlaces;
+    if (this.customUnitDivisions <= 1) {
+      numberOfDecimalPlaces = 1;
+    } else if (this.customUnitDivisions <= 10) {
+      numberOfDecimalPlaces = 1;
+    } else {
+      numberOfDecimalPlaces = 0;
+    }
+    this.decimalPlaces = numberOfDecimalPlaces;
+    let angleIncrement = Tau / this.customUnitDivisions;
+    if (this.customUnitDivisions > 500) {
+      angleIncrement = Tau / 500;
+    }
+
+    this.context.strokeStyle = this.color;
+    let lineWidth = 50 / this.customUnitDivisions;
+    if (lineWidth > 3) {
+      lineWidth = 3;
+    }
+    if (lineWidth < 1) {
+      lineWidth = 1;
+    }
+    this.context.lineWidth = lineWidth;
+
+    let finalIteration = this.customUnitDivisions;
+    if (this.customUnitDivisions > 500) {
+      finalIteration = 500;
+    }
+
+    for (let i = 0; i < finalIteration; i++) {
+      this.context.beginPath();
+
+      this.lineToCirclePerimeter(angleIncrement * i);
+      this.context.stroke();
+    }
   };
 
   drawAngle = () => {
@@ -224,13 +284,33 @@ class AngleCircle {
     // angleGradient.addColorStop(0, cl.getHSL(cl.blue));
     // angleGradient.addColorStop(0.33, cl.getHSL(cl.purple)),
     //   angleGradient.addColorStop(0.66, cl.getHSL(cl.red));
+    context.globalAlpha = 0.5;
 
-    context.fillStyle = cl.getHSLA(cl.white, 0.5);
+    context.fillStyle = this.color;
     context.fill();
+    context.globalAlpha = 1;
 
     // context.closePath();
 
     // context.stroke();
+  };
+
+  drawFixedAngle = (angle: number) => {
+    let context = this.context;
+    context.beginPath();
+    context.moveTo(this.x, this.y);
+    context.lineTo(this.zeroPoint.x, this.zeroPoint.y);
+    context.arc(this.x, this.y, this.radius, 0, Tau - angle, true);
+    context.closePath();
+    // let angleGradient = context.createConicGradient(0, this.x, this.y);
+    // angleGradient.addColorStop(0, cl.getHSL(cl.blue));
+    // angleGradient.addColorStop(0.33, cl.getHSL(cl.purple)),
+    //   angleGradient.addColorStop(0.66, cl.getHSL(cl.red));
+    context.globalAlpha = 0.5;
+
+    context.fillStyle = this.color;
+    context.fill();
+    context.globalAlpha = 1;
   };
 }
 

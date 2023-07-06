@@ -50,89 +50,15 @@ const getSceneUserCicrcleDivision: SceneGetter = (
 
   testUnitCirc.radius *= 1;
 
-  let moveToOrigin = () => {
-    context.moveTo(testUnitCirc.x, testUnitCirc.y);
-  };
-
-  let lineToCirclePerimeter = (angle: number) => {
-    let x0 = testUnitCirc.x;
-    let y0 = testUnitCirc.y;
-
-    const multiplier = testUnitCirc.radius;
-
-    let x1 = x0 + multiplier * 1.35 * Math.cos(angle);
-    let y1 = y0 + multiplier * 1.35 * Math.sin(angle);
-
-    let x2 = x0 + multiplier * 1.2 * Math.cos(angle);
-    let y2 = y0 + multiplier * 1.2 * Math.sin(angle);
-    context.moveTo(x1, y1);
-    context.lineTo(x2, y2);
-  };
-
-  const drawDivisions = () => {
-    // drawBaseCircle();
-    testUnitCirc.customUnitDivisions = numberOfDivisions;
-    let numberOfDecimalPlaces;
-    if (testUnitCirc.customUnitDivisions <= 1) {
-      numberOfDecimalPlaces = 1;
-    } else if (testUnitCirc.customUnitDivisions <= 10) {
-      numberOfDecimalPlaces = 1;
-    } else {
-      numberOfDecimalPlaces = 0;
-    }
-    testUnitCirc.decimalPlaces = numberOfDecimalPlaces;
-    let angleIncrement = Tau / numberOfDivisions;
-    if (numberOfDivisions > 500) {
-      angleIncrement = Tau / 500;
-    }
-
-    context.strokeStyle = cl.getHSL(cl.white);
-    let lineWidth = 50 / numberOfDivisions;
-    if (lineWidth > 3) {
-      lineWidth = 3;
-    }
-    if (lineWidth < 1) {
-      lineWidth = 1;
-    }
-    context.lineWidth = lineWidth;
-
-    let finalIteration = numberOfDivisions;
-    if (numberOfDivisions > 500) {
-      finalIteration = 500;
-    }
-
-    for (let i = 0; i < finalIteration; i++) {
-      context.beginPath();
-
-      lineToCirclePerimeter(angleIncrement * i);
-      context.stroke();
-    }
-    // drawBaseCircle();
-  };
-
-  // const drawBaseCircle = () => {
-  //   context.beginPath();
-  //   context.ellipse(
-  //     testUnitCirc.x,
-  //     testUnitCirc.y,
-  //     testUnitCirc.radius - 5,
-  //     testUnitCirc.radius - 5,
-  //     0,
-  //     0,
-  //     Tau
-  //   );
-  //   context.lineWidth = 10;
-  //   context.strokeStyle = cl.getHSLA(cl.white, 0.2);
-  //   context.stroke();
-  // };
-
   scene.draw = () => {
+    testUnitCirc.customUnitDivisions = numberOfDivisions;
     testUnitCirc.draw();
     setUserCircleDivisions((prev: number) => {
       numberOfDivisions = prev;
       return prev;
     });
-    drawDivisions();
+    // drawDivisions();
+    testUnitCirc.drawDivisionTicks();
   };
 
   return scene;

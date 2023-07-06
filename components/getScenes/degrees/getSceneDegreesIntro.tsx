@@ -82,6 +82,8 @@ const getSceneDegreesIntro: SceneGetter = (
 
   testUnitCirc.checkDragValueToCorrect = checkDragValue;
 
+  testUnitCirc.color = cl.getHSL(cl.white);
+
   scene.draw = () => {
     testUnitCirc.draw();
   };
