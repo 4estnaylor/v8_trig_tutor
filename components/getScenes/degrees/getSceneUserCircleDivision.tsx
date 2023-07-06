@@ -71,6 +71,16 @@ const getSceneUserCicrcleDivision: SceneGetter = (
 
   const drawDivisions = () => {
     // drawBaseCircle();
+    testUnitCirc.customUnitDivisions = numberOfDivisions;
+    let numberOfDecimalPlaces;
+    if (testUnitCirc.customUnitDivisions <= 1) {
+      numberOfDecimalPlaces = 1;
+    } else if (testUnitCirc.customUnitDivisions <= 10) {
+      numberOfDecimalPlaces = 1;
+    } else {
+      numberOfDecimalPlaces = 0;
+    }
+    testUnitCirc.decimalPlaces = numberOfDecimalPlaces;
     let angleIncrement = Tau / numberOfDivisions;
     if (numberOfDivisions > 500) {
       angleIncrement = Tau / 500;
@@ -100,21 +110,21 @@ const getSceneUserCicrcleDivision: SceneGetter = (
     // drawBaseCircle();
   };
 
-  const drawBaseCircle = () => {
-    context.beginPath();
-    context.ellipse(
-      testUnitCirc.x,
-      testUnitCirc.y,
-      testUnitCirc.radius - 5,
-      testUnitCirc.radius - 5,
-      0,
-      0,
-      Tau
-    );
-    context.lineWidth = 10;
-    context.strokeStyle = cl.getHSLA(cl.white, 0.2);
-    context.stroke();
-  };
+  // const drawBaseCircle = () => {
+  //   context.beginPath();
+  //   context.ellipse(
+  //     testUnitCirc.x,
+  //     testUnitCirc.y,
+  //     testUnitCirc.radius - 5,
+  //     testUnitCirc.radius - 5,
+  //     0,
+  //     0,
+  //     Tau
+  //   );
+  //   context.lineWidth = 10;
+  //   context.strokeStyle = cl.getHSLA(cl.white, 0.2);
+  //   context.stroke();
+  // };
 
   scene.draw = () => {
     testUnitCirc.draw();

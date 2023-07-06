@@ -55,6 +55,28 @@ const Degree = () => {
     </InteractiveDegreeDragWrapper>
   );
 
+  const tenHundredThousand = (
+    <InteractiveDegreeDragWrapper>
+      <Canvas1Background>
+        <CanvasForTopicComponent
+          sceneGetter={getSceneUserCicrcleDivision}
+          height={400}
+          objectPassedToScene={{
+            targetValueObjs,
+            setTargetValueObjs,
+            userCircleDivisions,
+            setUserCircleDivisions,
+          }}
+        />
+      </Canvas1Background>
+      {/* <AddFactorsButtonBar setUserEnteredValue={setUserCircleDivisions} />
+      <InputForUserCircleDivisions
+        value={userCircleDivisions}
+        setValue={setUserCircleDivisions}
+      /> */}
+    </InteractiveDegreeDragWrapper>
+  );
+
   return (
     <TopicComponentBoilerPlate
       title={
@@ -97,6 +119,11 @@ const Degree = () => {
           number? Maybe some power of 10 — 100, 1000, or possibly even 1?
           <br />
           <br />
+        </p>
+        {tenHundredThousand}
+        <br />
+        <br />
+        <p>
           The simplest answer for why we use 360 – because somebody started
           doing it that way and the rest of humanity went a long with it
           ¯\_(ツ)_/¯.

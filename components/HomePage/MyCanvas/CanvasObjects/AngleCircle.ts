@@ -6,7 +6,7 @@ import InteractivePoint from './InteractivePoint';
 import NonInteractivePoint from './NonInteractivePoint';
 import { Tau } from './UsefulConstants';
 
-type angleMeasurmentUnit = 'radians' | 'degrees';
+type angleMeasurmentUnit = 'radians' | 'degrees' | 'custom';
 
 class AngleCircle {
   vertex: InteractivePoint | NonInteractivePoint;
@@ -16,6 +16,9 @@ class AngleCircle {
   testFunction: any;
   checkDragValueToCorrect: any;
   valueCheckedSinceLastDrag: boolean;
+  customUnitDivisions?: number;
+  decimalPlaces: number;
+
   constructor(
     public context: CanvasRenderingContext2D,
     public eventHandlerConfig: EventHandlerConfig,
@@ -33,6 +36,7 @@ class AngleCircle {
       this.y
     );
     this.valueCheckedSinceLastDrag = true;
+    this.decimalPlaces = 0;
 
     this.zeroPoint.color = cl.getHSL(cl.white);
     this.vertex = new InteractivePoint(
@@ -122,29 +126,50 @@ class AngleCircle {
   };
 
   drawAngleInDegrees = () => {
-    this.context.fillStyle = 'white';
+    if (this.unit) this.context.fillStyle = 'white';
     this.context.font =
       " 30px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
-    let x_offset = this.context.measureText(
-      Math.round((this.angle * 180) / Math.PI) + '°'
-    ).width;
+
+    let displayValue = this.getDisplayValue();
+
+    let x_offset = this.context.measureText(displayValue).width;
     this.context.fillText(
-      Math.round((this.angle * 180) / Math.PI) + '°',
+      displayValue,
       this.context.canvas.width - x_offset - 10,
       30
     );
   };
 
+  getDisplayValue = () => {
+    let decimalConstant = Math.pow(10, this.decimalPlaces);
+    let displayValue =
+      (
+        Math.round((decimalConstant * (this.angle * 180)) / Math.PI) /
+        decimalConstant
+      ).toString() + '°';
+    if (this.customUnitDivisions) {
+      displayValue =
+        Math.round(
+          (decimalConstant * (this.angle * this.customUnitDivisions)) / Tau
+        ) /
+          decimalConstant +
+        'ᵘ';
+    }
+    return displayValue;
+  };
+
+  drawAngleInSpecialUnit = () => {};
+
   drawAngleLabel = () => {
     this.context.fillStyle = cl.getHSL(cl.white);
     this.context.font =
       " 16px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
-    let x_offset =
-      this.context.measureText(
-        Math.round((100 * (this.angle * 180)) / Math.PI) / 100 + '°'
-      ).width / 4;
+
+    let displayValue = this.getDisplayValue();
+    let x_offset = this.context.measureText(displayValue).width / 2;
+
     this.context.fillText(
-      Math.round((this.angle * 180) / Math.PI) + '°',
+      displayValue,
       this.radialPoint.x - x_offset,
       this.radialPoint.y + 7
     );
@@ -180,8 +205,8 @@ class AngleCircle {
     this.context.moveTo(x0, y0);
     this.context.lineTo(this.radialPoint.x, this.radialPoint.y);
     this.context.strokeStyle = cl.getHSL(cl.white);
-    this.context.lineWidth = 1;
-    this.context.setLineDash([3, 7]);
+    this.context.lineWidth = 2;
+    this.context.setLineDash([4, 7]);
     this.context.stroke();
     this.context.setLineDash([]);
   };
