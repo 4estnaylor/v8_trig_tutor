@@ -18,20 +18,12 @@ const getSceneDegreesIntro: SceneGetter = (
   // ingoring missing ev for onclick;
   const passedObject = context?.objectPassedToScene;
   const {
-    targetValueObjs,
-    setTargetValueObjs,
-    userEnteredDegreeValue,
-    setUserEnteredDegreeValue,
+    introCircleDegree,
+    setIntroCircleDegree,
   }: {
-    targetValueObjs: TargetValueObj[];
-    setTargetValueObjs: any;
-    userEnteredDegreeValue: number;
-    setUserEnteredDegreeValue: any;
+    introCircleDegree: number;
+    setIntroCircleDegree: any;
   } = passedObject;
-
-  let currentTargetValue = targetValueObjs.find((targetValueObj) => {
-    return targetValueObj.completed === false;
-  });
 
   // setTargetValueObjs([{ value: 9, completed: true }]);
 
@@ -39,38 +31,15 @@ const getSceneDegreesIntro: SceneGetter = (
 
   context.canvas.width = width;
 
+  // context.canvas.style.background = `linear-gradient(0deg, ${cl.getHSL(
+  //   cl.purple_light
+  // )}, ${cl.getHSL(cl.blue_light)} )`;
+  // context.canvas.style.border = `1px solid ${cl.getHSL(cl.gray_dark)}`;
+
   scene.assets.listenFor = [];
 
   const checkDragValue = () => {
-    let userSelectedValueInDegrees = (testUnitCirc.angle * 180) / Math.PI;
-
-    if (
-      (!currentTargetValue?.value && currentTargetValue?.value !== 0) ||
-      !currentTargetValue
-    ) {
-      return;
-    }
-    let valueDelta = Math.abs(
-      userSelectedValueInDegrees - currentTargetValue?.value
-    );
-
-    if (valueDelta > 358) {
-      valueDelta = 360 - valueDelta;
-    }
-
-    if (!currentTargetValue?.value && currentTargetValue?.value !== 0) return;
-    if (valueDelta < 0.5) {
-      let indexOfCurrentValue = targetValueObjs.indexOf(currentTargetValue);
-      let updatedTargetValueObjs = [...targetValueObjs];
-      updatedTargetValueObjs[indexOfCurrentValue].completed = true;
-      setTargetValueObjs([...updatedTargetValueObjs]);
-      currentTargetValue = targetValueObjs.find((targetValueObj) => {
-        return targetValueObj.completed === false;
-      });
-      testUnitCirc.radialPoint.x = testUnitCirc.x + testUnitCirc.radius;
-      testUnitCirc.radialPoint.y = testUnitCirc.y - 0.1;
-      // testUnitCirc.angle = 0;
-    }
+    let userSelectedValueInDegrees = (testUnitCirc.angle * 1.1) / Math.PI;
   };
 
   const testUnitCirc = new AngleCircle(
@@ -82,10 +51,57 @@ const getSceneDegreesIntro: SceneGetter = (
 
   testUnitCirc.checkDragValueToCorrect = checkDragValue;
 
-  testUnitCirc.color = cl.getHSL(cl.white);
+  testUnitCirc.color = cl.getHSL(cl.purple);
+  testUnitCirc.radialPoint.color = 'transparent';
+  testUnitCirc.labelColor = cl.getHSLA(cl.purple, 0);
+  testUnitCirc.vertex.color = cl.getHSL(cl.purple);
+
+  const updateAnglePosition = (angle: number) => {
+    let x = testUnitCirc.x + testUnitCirc.radius * 1.65 * Math.cos(angle);
+
+    let y = testUnitCirc.y - testUnitCirc.radius * 1.65 * Math.sin(angle);
+    testUnitCirc.radialPoint.x = x;
+
+    testUnitCirc.radialPoint.y = y;
+  };
+
+  let t0 = new Date().getTime();
+
+  let tLast = t0;
+  console.log('happening');
+
+  const getDt = () => {
+    let tNow = new Date().getTime();
+    let dt = tNow - tLast;
+    tLast = tNow;
+    return dt;
+  };
+
+  let angle = introCircleDegree;
+  let velocity = 0.000015;
+  testUnitCirc.vertex.color = 'transparent';
+
+  const updateAngle = () => {
+    let dt = getDt();
+    angle += velocity * dt;
+    setIntroCircleDegree(Math.floor((angle * 180) / Math.PI));
+    console.log('new angle', Math.floor((angle * 180) / Math.PI));
+  };
+
+  // testUnitCirc.customUnitDivisions = 360;
 
   scene.draw = () => {
+    setIntroCircleDegree((prev: any) => {
+      angle = (prev * Math.PI) / 180;
+      return prev;
+    });
     testUnitCirc.draw();
+
+    testUnitCirc.drawDivisionTicks(180);
+    // updateAngle();
+    updateAnglePosition(angle);
+
+    // updateT();
   };
 
   return scene;

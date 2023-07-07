@@ -47,7 +47,7 @@ const useMyCanvas2: (
       cursorPosition.x = xPos;
       cursorPosition.y = yPos;
 
-      e.preventDefault();
+      // e.preventDefault();
     };
 
     const scene = sceneGetter(context, canvasEventHandlerConfig);

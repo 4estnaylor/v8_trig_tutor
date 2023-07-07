@@ -16,6 +16,8 @@ import getSceneUserCicrcleDivision from '../../components/getScenes/degrees/getS
 import AddFactorsButtonBar from '../../components/Inputs/AddFactorsButtonsBar';
 import InputForUserCircleDivisions from '../../components/Inputs/InputForUserCircleDivisions';
 import getSceneTensHundredsDivisions from '../../components/getScenes/degrees/getSceneTensHundredsDivisions';
+import getSceneDegreesBasicPractice from '../../components/getScenes/degrees/getSceneDegreeBasicPractice';
+import { Slider } from '@mui/material';
 
 export interface TargetValueObj {
   value: number;
@@ -26,13 +28,71 @@ export interface TargetValueObj {
 const Degree = () => {
   const [userEnteredDegreeValue, setUserEnteredDegreeValue] = useState(1);
   const [changeMe, setChangeMe] = useState(5);
+  const [introCircleDegree, setIntroCircleDegree] = useState(16);
   const [userCircleDivisions, setUserCircleDivisions] = useState(1);
+  const [userSelectedPowerOfTen, setUserSelectedPowerOfTen] = useState(1);
   const [targetValueObjs, setTargetValueObjs] = useState<TargetValueObj[]>([
     { value: 32, completed: false },
     { value: 123, completed: false },
     { value: 206, completed: false },
     { value: 360, completed: false },
   ]);
+
+  const introMarks = [
+    {
+      value: 0,
+      label: '0°',
+    },
+    {
+      value: 360,
+      label: '360°',
+    },
+  ];
+
+  const powersOfTenMarks = [
+    {
+      value: 0,
+      label: '1',
+    },
+    {
+      value: 1,
+      label: '10',
+    },
+    {
+      value: 2,
+      label: '100',
+    },
+    {
+      value: 3,
+      label: '1000',
+    },
+  ];
+
+  const IntroDegrees = (
+    <InteractiveDegreeDragWrapper>
+      <Canvas1Background>
+        <CanvasForTopicComponent
+          sceneGetter={getSceneDegreesIntro}
+          height={400}
+          objectPassedToScene={{
+            introCircleDegree,
+            setIntroCircleDegree,
+          }}
+        />
+      </Canvas1Background>
+      <MySliderWrapper>
+        <MySlider
+          max={360}
+          value={introCircleDegree}
+          onChange={(e: Event, newValue: number | number[]) => {
+            setIntroCircleDegree(newValue as number);
+          }}
+          valueLabelDisplay="auto"
+          marks={introMarks}
+        />
+      </MySliderWrapper>
+    </InteractiveDegreeDragWrapper>
+  );
 
   const circleDivsionsCanvas = (
     <InteractiveDegreeDragWrapper>
@@ -56,7 +116,7 @@ const Degree = () => {
     </InteractiveDegreeDragWrapper>
   );
 
-  const tenHundredThousand = (
+  const tenHundredThousan2 = (
     <InteractiveDegreeDragWrapper>
       <CanvasForTopicComponent
         sceneGetter={getSceneTensHundredsDivisions}
@@ -77,6 +137,69 @@ const Degree = () => {
     </InteractiveDegreeDragWrapper>
   );
 
+  const tenHundredThousand = (
+    <InteractiveDegreeDragWrapper>
+      <Canvas1Background>
+        <CanvasForTopicComponent
+          sceneGetter={getSceneTensHundredsDivisions}
+          height={400}
+          objectPassedToScene={{
+            introCircleDegree,
+            setIntroCircleDegree,
+          }}
+        />
+      </Canvas1Background>
+      <MySliderWrapper>
+        <MySlider
+          max={360}
+          value={introCircleDegree}
+          onChange={(e: Event, newValue: number | number[]) => {
+            setIntroCircleDegree(newValue as number);
+          }}
+          valueLabelDisplay="auto"
+          marks={introMarks}
+        />
+      </MySliderWrapper>
+
+      {/* <PowersOfTenSlider>
+        <MySlider
+          sx={{
+            '& input[type="range"]': {
+              WebkitAppearance: 'slider-vertical',
+            },
+            height: '150px',
+          }}
+          max={3}
+          value={introCircleDegree}
+          onChange={(e: Event, newValue: number | number[]) => {
+            setIntroCircleDegree(newValue as number);
+          }}
+          valueLabelDisplay="auto"
+          marks={powersOfTenMarks}
+          orientation="vertical"
+        />
+      </PowersOfTenSlider> */}
+    </InteractiveDegreeDragWrapper>
+  );
+
+  const basicPractice = (
+    <InteractiveDegreeDragWrapper>
+      <Canvas1Background>
+        <CanvasForTopicComponent
+          sceneGetter={getSceneDegreesBasicPractice}
+          height={400}
+          objectPassedToScene={{
+            targetValueObjs,
+            setTargetValueObjs,
+            userEnteredDegreeValue,
+            setUserEnteredDegreeValue,
+          }}
+        />
+        <AngleQue targetValueObjs={targetValueObjs} />
+      </Canvas1Background>
+    </InteractiveDegreeDragWrapper>
+  );
+
   return (
     <TopicComponentBoilerPlate
       title={
@@ -94,29 +217,14 @@ const Degree = () => {
         </DegreeIntro>
 
         <br />
-        <InteractiveDegreeDragWrapper>
-          <Canvas1Background>
-            <CanvasForTopicComponent
-              sceneGetter={getSceneDegreesIntro}
-              height={400}
-              objectPassedToScene={{
-                targetValueObjs,
-                setTargetValueObjs,
-                userEnteredDegreeValue,
-                setUserEnteredDegreeValue,
-              }}
-            />
-            <AngleQue targetValueObjs={targetValueObjs} />
-          </Canvas1Background>
-        </InteractiveDegreeDragWrapper>
 
-        <h3>Why 360? Why not some other number</h3>
+        {IntroDegrees}
+        <p>Why 360? Why not some other number?</p>
         <p>
-          That a circle has exactly 360° probably feels familiar, maybe even
-          natural. Circles don't just divide themselves into 360 discrete slices
-          in nature. People had to decide on that very specific value of 360
-          somehow. So why choose 360 and not some other more straight forward
-          number? Maybe some power of 10 — 100, 1000, or possibly even 1?
+          That a circle has exactly 360° feels very specific. People had to have
+          something in mind when deciding on 360 right? Why not keep things nice
+          and metric by choosing some power of 10 like 100 1000, or even 1
+          instead?
           <br />
           <br />
         </p>
@@ -124,9 +232,14 @@ const Degree = () => {
         <br />
         <br />
         <p>
-          The simplest answer for why we use 360 – because somebody started
-          doing it that way and the rest of humanity went a long with it
-          ¯\_(ツ)_/¯.
+          The speed of light is <em>natural</em>. If two intelligent lifeforms
+          at far ends of the galaxy accurately measure the speed of light, they
+          are helpless but to discover the same value — 2.99792458 × 10⁸ meters
+          per second. not created by us, but found that way in the wild.
+          However, 360 was not.
+          <em>convenient</em>. The simplest answer for why we use 360 – because
+          somebody started doing it that way and the rest of humanity went a
+          long with it ¯\_(ツ)_/¯.
           <br />
           <br />
           No law of <em>nature </em> dictates that we couldn't all to agree to
@@ -221,6 +334,21 @@ const Degree = () => {
   );
 };
 
+const MySliderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  color: ${cl.getHSLA(cl.purple, 1)};
+`;
+
+const PowersOfTenSlider = styled.div`
+  display: 'absolute';
+`;
+
+const MySlider = styled(Slider)`
+  color: inherit;
+`;
+
 const DegreeIntro = styled.p``;
 const WhatDoesThisHaveToDoWithTrig = styled.p``;
 
@@ -261,14 +389,13 @@ const Div360Title360 = styled.div`
 
 const Canvas1Background = styled.div`
   /* position: relative; */
-  background: linear-gradient(
+  /* background: linear-gradient(
     0deg,
     ${cl.getHSL(cl.blue_light)},
     ${cl.getHSL(cl.purple_light)},
     ${cl.getHSL(cl.red_light)}
-  );
-  /* border-top: 5px solid ${cl.getHSLA(cl.purple, 0.5)};
-  border-bottom: 5px solid ${cl.getHSLA(cl.purple, 0.5)}; */
+  ); */
+  /* /* border-top: 5px solid ${cl.getHSLA(cl.purple, 0.5)}; */
 `;
 
 const Canvas2Background = styled.div`

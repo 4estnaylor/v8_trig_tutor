@@ -12,7 +12,7 @@ class AngleCircle {
   vertex: InteractivePoint | NonInteractivePoint;
   zeroPoint: InteractivePoint | NonInteractivePoint;
   radialPoint: InteractivePoint | NonInteractivePoint;
-  listenForAssets: InteractivePoint | NonInteractivePoint[];
+  listenForAssets: (InteractivePoint | any)[];
   testFunction: any;
   checkDragValueToCorrect: any;
   valueCheckedSinceLastDrag: boolean;
@@ -66,7 +66,16 @@ class AngleCircle {
 
     this.testFunction = this.context.canvas.onclick;
     //@ts-ignore
-    this.listenForAssets = [this.vertex, this.zeroPoint, this.radialPoint];
+    this.listenForAssets = [];
+    [this.vertex, this.radialPoint].forEach((point) => {
+      if (point instanceof InteractivePoint) {
+        this.listenForAssets.push(point);
+      }
+    });
+    this.vertex.listenFor = this.listenForAssets;
+    if (this.radialPoint instanceof InteractivePoint) {
+      this.radialPoint.listenFor = this.listenForAssets;
+    }
   }
 
   update = () => {
@@ -232,24 +241,27 @@ class AngleCircle {
     this.context.lineTo(x2, y2);
   };
 
-  drawDivisionTicks = () => {
-    if (!this.customUnitDivisions) return;
+  drawDivisionTicks = (numberOfTicks?: number) => {
+    let numOfTicks;
+
+    numOfTicks = numberOfTicks || this.customUnitDivisions || 12;
+
     let numberOfDecimalPlaces;
-    if (this.customUnitDivisions <= 1) {
+    if (numOfTicks <= 1) {
       numberOfDecimalPlaces = 1;
-    } else if (this.customUnitDivisions <= 10) {
+    } else if (numOfTicks <= 10) {
       numberOfDecimalPlaces = 1;
     } else {
       numberOfDecimalPlaces = 0;
     }
     this.decimalPlaces = numberOfDecimalPlaces;
-    let angleIncrement = Tau / this.customUnitDivisions;
-    if (this.customUnitDivisions > 500) {
+    let angleIncrement = Tau / numOfTicks;
+    if (numOfTicks > 500) {
       angleIncrement = Tau / 500;
     }
 
     this.context.strokeStyle = this.color;
-    let lineWidth = 50 / this.customUnitDivisions;
+    let lineWidth = 50 / numOfTicks;
     if (lineWidth > 3) {
       lineWidth = 3;
     }
@@ -259,11 +271,11 @@ class AngleCircle {
     this.context.lineWidth = lineWidth;
 
     let finalIteration = this.customUnitDivisions;
-    if (this.customUnitDivisions > 500) {
+    if (numOfTicks > 500) {
       finalIteration = 500;
     }
 
-    for (let i = 0; i < finalIteration; i++) {
+    for (let i = 0; i < numOfTicks; i++) {
       this.context.beginPath();
 
       this.lineToCirclePerimeter(angleIncrement * i);
@@ -278,7 +290,28 @@ class AngleCircle {
     context.beginPath();
     context.moveTo(this.x, this.y);
     context.lineTo(this.zeroPoint.x, this.zeroPoint.y);
-    context.arc(this.x, this.y, this.radius, 0, Tau - this.angle, true);
+    if (this.angle === Tau) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        Tau - this.angle + 0.0001,
+        true
+      );
+    } else if (this.angle === 0) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        Tau - this.angle - 0.0001,
+        true
+      );
+    } else {
+      context.arc(this.x, this.y, this.radius, 0, Tau - this.angle, true);
+    }
+
     context.closePath();
     // let angleGradient = context.createConicGradient(0, this.x, this.y);
     // angleGradient.addColorStop(0, cl.getHSL(cl.blue));

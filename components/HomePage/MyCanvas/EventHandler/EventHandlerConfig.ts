@@ -51,8 +51,7 @@ class EventHandlerConfig {
 
   defaultTouchStart = (e: TouchEvent) => {
     this.cursorStatus.mouseIsDown = true;
-
-    // e.preventDefault();
+    e.preventDefault();
   };
 
   defaultUp = () => {

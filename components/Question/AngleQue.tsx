@@ -34,7 +34,7 @@ const AngleQue = (props: AngleQueProps) => {
       <BackgroundBlur />
       <InteractiveProgressBar targetValueObjs={targetValueObjs} />
       <Prompt>
-        {incompleteTargetValues.length !== 0 ? 'set the angle to' + ' ' : null}
+        {incompleteTargetValues.length !== 0 ? 'drag to' + ' ' : null}
         {targetValueDisplays}
         {incompleteTargetValues.length === 0 ? completeDisplay : null}
       </Prompt>
@@ -64,7 +64,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
-  background-color: ${cl.getHSL(cl.gray_dark)};
+  background-color: ${cl.getHSL(cl.purple_dark)};
 
   /* position: absolute; */
 
@@ -102,7 +102,7 @@ const TargetValueContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${cl.getHSL(cl.purple_light)};
+  color: ${cl.getHSL(cl.white)};
   /* font-weight: 800; */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

@@ -35,7 +35,13 @@ class InteractivePoint {
     };
     this.alphaDifference = 0.4;
     this.alpha = 1;
+
+    this.tester();
   }
+
+  tester = () => {
+    console.log('shizzle');
+  };
 
   draw() {
     this.update();
@@ -281,6 +287,9 @@ class InteractivePoint {
   }
 
   setCursor(cursorStyle: 'grab' | 'grabbing' | 'default') {
+    // if (this.context.canvas) {
+    //   console.log(this.context.canvas.DOCUMENT_POSITION_CONTAINED_BY);
+    // }
     document.body.style.cursor = cursorStyle;
   }
 

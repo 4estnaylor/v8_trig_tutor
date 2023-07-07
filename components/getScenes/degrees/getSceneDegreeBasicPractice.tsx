@@ -8,7 +8,7 @@ import AngleCircle from '../../HomePage/MyCanvas/CanvasObjects/AngleCircle';
 import { TargetValueObj } from '../../../pages/%C2%B0';
 import { Tau } from '../../HomePage/MyCanvas/CanvasObjects/UsefulConstants';
 
-const getSceneDegreesIntro: SceneGetter = (
+const getSceneDegreesBasicPractice: SceneGetter = (
   context: CanvasRenderingContext2D,
   eventHandlerConfig: EventHandlerConfig
 ) => {
@@ -18,12 +18,20 @@ const getSceneDegreesIntro: SceneGetter = (
   // ingoring missing ev for onclick;
   const passedObject = context?.objectPassedToScene;
   const {
-    introCircleDegree,
-    setIntroCircleDegree,
+    targetValueObjs,
+    setTargetValueObjs,
+    userEnteredDegreeValue,
+    setUserEnteredDegreeValue,
   }: {
-    introCircleDegree: number;
-    setIntroCircleDegree: any;
+    targetValueObjs: TargetValueObj[];
+    setTargetValueObjs: any;
+    userEnteredDegreeValue: number;
+    setUserEnteredDegreeValue: any;
   } = passedObject;
+
+  let currentTargetValue = targetValueObjs.find((targetValueObj) => {
+    return targetValueObj.completed === false;
+  });
 
   // setTargetValueObjs([{ value: 9, completed: true }]);
 
@@ -38,36 +46,59 @@ const getSceneDegreesIntro: SceneGetter = (
 
   scene.assets.listenFor = [];
 
-  // testUnitCirc.customUnitDivisions = 360;
-  const angleCircles: AngleCircle[] = [];
-  for (let i = 0; i < 4; i++) {
-    let angleCircle = new AngleCircle(
-      context,
-      eventHandlerConfig,
-      (context.canvas.width / 5) * (i + 1),
-      context.canvas.height / 2,
-      45
+  const checkDragValue = () => {
+    let userSelectedValueInDegrees = (testUnitCirc.angle * 180) / Math.PI;
+
+    if (
+      (!currentTargetValue?.value && currentTargetValue?.value !== 0) ||
+      !currentTargetValue
+    ) {
+      return;
+    }
+    let valueDelta = Math.abs(
+      userSelectedValueInDegrees - currentTargetValue?.value
     );
-    angleCircle.color = cl.getHSL(cl.purple);
-    angleCircle.radius = context.canvas.width / 20;
-    angleCircle.radialPoint.radius = 0.1;
-    angleCircle.vertex.color = 'transparent';
-    angleCircles.push(angleCircle);
-    angleCircle.customUnitDivisions = Math.pow(10, i);
-  }
+
+    if (valueDelta > 358) {
+      valueDelta = 360 - valueDelta;
+    }
+
+    if (!currentTargetValue?.value && currentTargetValue?.value !== 0) return;
+    if (valueDelta < 0.5) {
+      let indexOfCurrentValue = targetValueObjs.indexOf(currentTargetValue);
+      let updatedTargetValueObjs = [...targetValueObjs];
+      updatedTargetValueObjs[indexOfCurrentValue].completed = true;
+      setTargetValueObjs([...updatedTargetValueObjs]);
+      currentTargetValue = targetValueObjs.find((targetValueObj) => {
+        return targetValueObj.completed === false;
+      });
+      testUnitCirc.radialPoint.x = testUnitCirc.x + testUnitCirc.radius;
+      testUnitCirc.radialPoint.y = testUnitCirc.y - 0.1;
+      // testUnitCirc.angle = 0;
+    }
+  };
+
+  const testUnitCirc = new AngleCircle(
+    context,
+    eventHandlerConfig,
+    width / 2,
+    context.canvas.height / 2
+  );
+
+  testUnitCirc.checkDragValueToCorrect = checkDragValue;
+
+  testUnitCirc.color = cl.getHSL(cl.purple);
+  testUnitCirc.radialPoint.color = cl.getHSL(cl.purple);
+  testUnitCirc.vertex.color = cl.getHSL(cl.purple);
 
   scene.draw = () => {
-    angleCircles.forEach((angleCircle) => {
-      angleCircle.draw();
-      angleCircle.drawDivisionTicks();
-    });
-    // updateT();
+    testUnitCirc.draw();
   };
 
   return scene;
 };
 
-export default getSceneDegreesIntro;
+export default getSceneDegreesBasicPractice;
 
 // import { ListItem } from '@mui/material';
 // import cl from '../../../../colors';

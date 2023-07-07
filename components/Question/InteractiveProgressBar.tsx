@@ -28,10 +28,12 @@ const Wrapper = styled.div`
   gap: 0px;
 `;
 
+const gradient = `linear-gradient(0deg, red, blue)`;
+
 const CompletionChunk = styled.div<{ $completed: boolean }>`
-  background-color: ${(p) =>
-    p.$completed ? cl.getHSLA(cl.blue_light, 1) : cl.getHSLA(cl.white, 0.2)};
-  width: 10px;
+  background: ${(p) =>
+    p.$completed ? cl.getHSL(cl.green) : cl.getHSLA(cl.white, 0.2)};
+  width: 20px;
   height: 100%;
   border-right: ${(p) => (p.$completed ? 'none' : '2px solid white')};
 
