@@ -30,10 +30,8 @@ const Degree = () => {
   const [changeMe, setChangeMe] = useState(5);
   const [introCircleDegree, setIntroCircleDegree] = useState(16);
   const [userCircleDivisions, setUserCircleDivisions] = useState(1);
-  const [
-    userSelectedPowerOfTenAngleValue,
-    setUserSelectedPowerOfTenAngleValue,
-  ] = useState(180);
+  const [userSelectedPowerOfTenValue, setUserSelectedPowerOfTenValue] =
+    useState(2);
   const [targetValueObjs, setTargetValueObjs] = useState<TargetValueObj[]>([
     { value: 32, completed: false },
     { value: 123, completed: false },
@@ -66,6 +64,10 @@ const Degree = () => {
       label: '100',
     },
     {
+      value: 2.55630250077,
+      label: '360',
+    },
+    {
       value: 3,
       label: '1000',
     },
@@ -83,7 +85,7 @@ const Degree = () => {
           }}
         />
       </Canvas1Background>
-      <MySliderWrapper>
+      {/* <MySliderWrapper>
         <MySlider
           max={360}
           value={introCircleDegree}
@@ -93,7 +95,7 @@ const Degree = () => {
           valueLabelDisplay="auto"
           marks={introMarks}
         />
-      </MySliderWrapper>
+      </MySliderWrapper> */}
     </InteractiveDegreeDragWrapper>
   );
 
@@ -140,6 +142,10 @@ const Degree = () => {
     </InteractiveDegreeDragWrapper>
   );
 
+  const calculateTenScale = (value: number) => {
+    return Math.round(10 ** value);
+  };
+
   const tenHundredThousand = (
     <InteractiveDegreeDragWrapper>
       <Canvas1Background>
@@ -147,12 +153,12 @@ const Degree = () => {
           sceneGetter={getSceneTensHundredsDivisions}
           height={400}
           objectPassedToScene={{
-            introCircleDegree,
-            setIntroCircleDegree,
+            userSelectedPowerOfTenValue,
+            setUserSelectedPowerOfTenValue,
           }}
         />
       </Canvas1Background>
-      <MySliderWrapper>
+      {/* <MySliderWrapper>
         <MySlider
           max={360}
           value={userSelectedPowerOfTenAngleValue}
@@ -162,26 +168,28 @@ const Degree = () => {
           valueLabelDisplay="auto"
           marks={introMarks}
         />
-      </MySliderWrapper>
+      </MySliderWrapper> */}
 
-      {/* <PowersOfTenSlider>
+      <MySliderWrapper>
         <MySlider
-          sx={{
-            '& input[type="range"]': {
-              WebkitAppearance: 'slider-vertical',
-            },
-            height: '150px',
-          }}
+          // sx={{
+          //   '& input[type="range"]': {
+          //     WebkitAppearance: 'slider-vertical',
+          //   },
+          //   height: '150px',
+          // }}
           max={3}
-          value={introCircleDegree}
+          step={0.001}
+          value={userSelectedPowerOfTenValue}
+          scale={calculateTenScale}
           onChange={(e: Event, newValue: number | number[]) => {
-            setIntroCircleDegree(newValue as number);
+            setUserSelectedPowerOfTenValue(newValue as number);
           }}
           valueLabelDisplay="auto"
           marks={powersOfTenMarks}
-          orientation="vertical"
+          // orientation="vertical"
         />
-      </PowersOfTenSlider> */}
+      </MySliderWrapper>
     </InteractiveDegreeDragWrapper>
   );
 
@@ -222,10 +230,10 @@ const Degree = () => {
         {IntroDegrees}
         <p>Why 360? Why not some other number?</p>
         <p>
-          That a circle has exactly 360° feels very... specific. People had to
+          That a circle has exactly 360° feels weirdly arbitrary. People had to
           have something in mind when deciding on 360 right? Why didn't we keep
           things nice and metric by choosing some power of 10 like 100 1000, or
-          even 1 instead?
+          even 1 instead of 360?
           <br />
           <br />
         </p>
@@ -237,12 +245,12 @@ const Degree = () => {
         we use are logically necesarry and inextricably linked to the nature of
         reality.
         <p>
-          The speed of light is <em>natural</em>. If two intelligent lifeforms
-          at far ends of the galaxy accurately measure the speed of light, they
-          are helpless but to discover the same value — 2.99792458 × 10⁸ meters
-          per second. Personally, I would love to change the speed of light to 3
-          × 10⁸, it's <em> so so sooooo </em>close. Sadly, I cannot change it.
-          The speed of light is a value found in nature. It is a value to be
+          The speed of light is one such number. If two intelligent lifeforms at
+          far ends of the galaxy accurately measure the speed of light, they are
+          helpless but to discover the same value — 2.99792458 × 10⁸ meters per
+          second. Personally, I would love to change the speed of light to 3 ×
+          10⁸, it's <em> so so sooooo </em>close. Sadly, I cannot change it. The
+          speed of light is a value found in nature. It is a value to be
           <em> discovered </em>, not one to be created.
           <br />
           <br />A value we could change is the length of a meter.

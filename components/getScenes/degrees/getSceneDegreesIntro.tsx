@@ -52,9 +52,15 @@ const getSceneDegreesIntro: SceneGetter = (
   testUnitCirc.checkDragValueToCorrect = checkDragValue;
 
   testUnitCirc.color = cl.getHSL(cl.purple);
-  testUnitCirc.radialPoint.color = 'transparent';
+  testUnitCirc.radialPoint.color = cl.getHSL(cl.purple);
   testUnitCirc.labelColor = cl.getHSLA(cl.purple, 0);
   testUnitCirc.vertex.color = cl.getHSL(cl.purple);
+
+  // testUnitCirc.radialPoint.x =
+  //   testUnitCirc.x + Math.cos((Math.PI * 2) / 3) * testUnitCirc.radius * 1.8;
+  // testUnitCirc.radialPoint.y =
+  //   testUnitCirc.y - Math.sin((Math.PI * 2) / 3) * testUnitCirc.radius * 1.8;
+  testUnitCirc.moveRadiusToAngle((Math.PI * 2) / 3);
 
   const updateAnglePosition = (angle: number) => {
     let x = testUnitCirc.x + testUnitCirc.radius * 1.65 * Math.cos(angle);
@@ -91,16 +97,16 @@ const getSceneDegreesIntro: SceneGetter = (
   // testUnitCirc.customUnitDivisions = 360;
 
   scene.draw = () => {
-    setIntroCircleDegree((prev: any) => {
-      angle = (prev * Math.PI) / 180;
-      return prev;
-    });
+    // setIntroCircleDegree((prev: any) => {
+    //   angle = (prev * Math.PI) / 180;
+    //   return prev;
+    // });
     testUnitCirc.draw();
     testUnitCirc.drawAngleInUpperRight();
 
     testUnitCirc.drawDivisionTicks(180);
     // updateAngle();
-    updateAnglePosition(angle);
+    // updateAnglePosition(angle);
 
     // updateT();
   };

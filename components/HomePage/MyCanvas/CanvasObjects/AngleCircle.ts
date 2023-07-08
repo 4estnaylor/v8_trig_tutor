@@ -27,7 +27,7 @@ class AngleCircle {
     public y: number,
     public angle: number = 0,
     public unit: angleMeasurmentUnit = 'radians',
-    public radius: number = 100,
+    public radius: number = 80,
     public color: string = cl.getHSL(cl.white)
   ) {
     this.listenForAssets = [];
@@ -83,6 +83,12 @@ class AngleCircle {
     this.updateAngle();
     this.checkValueWhenNotDragging();
     // console.log('angle', (this.angle * 180) / Math.PI);
+  };
+
+  moveRadiusToAngle = (angle: number, distanceInRadians: number = 1.8) => {
+    let distance = distanceInRadians * this.radius;
+    this.radialPoint.x = this.x + Math.cos(angle) * distance;
+    this.radialPoint.y = this.y - Math.sin(angle) * distance;
   };
 
   updateAngle = () => {
