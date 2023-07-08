@@ -30,7 +30,10 @@ const Degree = () => {
   const [changeMe, setChangeMe] = useState(5);
   const [introCircleDegree, setIntroCircleDegree] = useState(16);
   const [userCircleDivisions, setUserCircleDivisions] = useState(1);
-  const [userSelectedPowerOfTen, setUserSelectedPowerOfTen] = useState(1);
+  const [
+    userSelectedPowerOfTenAngleValue,
+    setUserSelectedPowerOfTenAngleValue,
+  ] = useState(180);
   const [targetValueObjs, setTargetValueObjs] = useState<TargetValueObj[]>([
     { value: 32, completed: false },
     { value: 123, completed: false },
@@ -152,9 +155,9 @@ const Degree = () => {
       <MySliderWrapper>
         <MySlider
           max={360}
-          value={introCircleDegree}
+          value={userSelectedPowerOfTenAngleValue}
           onChange={(e: Event, newValue: number | number[]) => {
-            setIntroCircleDegree(newValue as number);
+            setUserSelectedPowerOfTenAngleValue(newValue as number);
           }}
           valueLabelDisplay="auto"
           marks={introMarks}
@@ -215,28 +218,34 @@ const Degree = () => {
           them form a complete circle. The symbol for the degree {`(`} ° {`)`}{' '}
           is quite appropriately a tiny circle.
         </DegreeIntro>
-
         <br />
-
         {IntroDegrees}
         <p>Why 360? Why not some other number?</p>
         <p>
-          That a circle has exactly 360° feels very specific. People had to have
-          something in mind when deciding on 360 right? Why not keep things nice
-          and metric by choosing some power of 10 like 100 1000, or even 1
-          instead?
+          That a circle has exactly 360° feels very... specific. People had to
+          have something in mind when deciding on 360 right? Why didn't we keep
+          things nice and metric by choosing some power of 10 like 100 1000, or
+          even 1 instead?
           <br />
           <br />
         </p>
         {tenHundredThousand}
         <br />
         <br />
+        <h4> Are we going to tear the fabric of reality</h4>
+        First we need to ask if we even can change the 360 value. Some numbers
+        we use are logically necesarry and inextricably linked to the nature of
+        reality.
         <p>
           The speed of light is <em>natural</em>. If two intelligent lifeforms
           at far ends of the galaxy accurately measure the speed of light, they
           are helpless but to discover the same value — 2.99792458 × 10⁸ meters
-          per second. not created by us, but found that way in the wild.
-          However, 360 was not.
+          per second. Personally, I would love to change the speed of light to 3
+          × 10⁸, it's <em> so so sooooo </em>close. Sadly, I cannot change it.
+          The speed of light is a value found in nature. It is a value to be
+          <em> discovered </em>, not one to be created.
+          <br />
+          <br />A value we could change is the length of a meter.
           <em>convenient</em>. The simplest answer for why we use 360 – because
           somebody started doing it that way and the rest of humanity went a
           long with it ¯\_(ツ)_/¯.
@@ -301,7 +310,6 @@ const Degree = () => {
           See if you can find an alternative that divides evenly by more values
           than 360!
         </h3>
-
         <P>
           {' '}
           I'd encourage you to take advantage of the feature to add prime
@@ -310,8 +318,7 @@ const Degree = () => {
           more prime factors to meet the requirements!
         </P>
         <br />
-
-        {circleDivsionsCanvas}
+        {basicPractice}
         {/* <h3>Using degrees to measure triangles</h3>
         <p>
           Our eventual goal is to know everything there is to know about

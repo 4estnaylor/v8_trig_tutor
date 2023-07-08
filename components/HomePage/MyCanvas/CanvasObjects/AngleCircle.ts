@@ -120,7 +120,7 @@ class AngleCircle {
     this.vertex.draw();
     this.drawZeroStroke();
     this.radialPoint.draw();
-    this.drawAngleInDegrees();
+
     this.drawAngleLabel();
     this.testFunction();
     // if (this.radialPoint instanceof InteractivePoint) {
@@ -137,14 +137,26 @@ class AngleCircle {
     this.context.stroke();
   };
 
-  drawAngleInDegrees = () => {
-    if (this.unit) this.context.fillStyle = this.color;
+  drawAngleInDegrees = (posX: number, posY: number, fontSize: number = 20) => {
+    this.context.fillStyle = this.color;
+    this.context.font = `${fontSize}px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif`;
+
+    let displayValue = this.getDisplayValue();
+
+    let x_offset = this.context.measureText(displayValue).width;
+
+    this.context.fillText(displayValue, posX - x_offset / 2, posY);
+  };
+
+  drawAngleInUpperRight = (posX?: number, posY?: number) => {
+    this.context.fillStyle = this.color;
     this.context.font =
       " 30px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
 
     let displayValue = this.getDisplayValue();
 
     let x_offset = this.context.measureText(displayValue).width;
+
     this.context.fillText(
       displayValue,
       this.context.canvas.width - x_offset - 10,

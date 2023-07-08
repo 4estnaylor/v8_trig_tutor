@@ -96,6 +96,7 @@ const getSceneDegreesIntro: SceneGetter = (
       return prev;
     });
     testUnitCirc.draw();
+    testUnitCirc.drawAngleInUpperRight();
 
     testUnitCirc.drawDivisionTicks(180);
     // updateAngle();

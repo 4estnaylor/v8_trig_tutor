@@ -30,6 +30,7 @@ const getSceneDegreesIntro: SceneGetter = (
   const width = context.canvas.parentElement?.clientWidth || 0;
 
   context.canvas.width = width;
+  context.canvas.height = width / 3;
 
   // context.canvas.style.background = `linear-gradient(0deg, ${cl.getHSL(
   //   cl.purple_light
@@ -45,20 +46,37 @@ const getSceneDegreesIntro: SceneGetter = (
       context,
       eventHandlerConfig,
       (context.canvas.width / 5) * (i + 1),
-      context.canvas.height / 2,
+      (context.canvas.height * 2) / 3,
       45
     );
+
     angleCircle.color = cl.getHSL(cl.purple);
+    angleCircle.labelColor = 'transparent';
     angleCircle.radius = context.canvas.width / 20;
     angleCircle.radialPoint.radius = 0.1;
+    angleCircle.radialPoint.x = angleCircle.x - angleCircle.radius;
     angleCircle.vertex.color = 'transparent';
     angleCircles.push(angleCircle);
     angleCircle.customUnitDivisions = Math.pow(10, i);
   }
 
+  // let angleCircle = new AngleCircle(context, eventHandlerConfig, context.canvas.width/2, context.canvas.height/2);
+  // angleCircle.color = cl.getHSL(cl.purple);
+  // angleCircle.vertex.color = 'transparent';
+
+  const t0 = new Date().getTime();
+  let tLast = t0;
+
+  const updateAngle = (angleCircle: AngleCircle) => {};
+
   scene.draw = () => {
     angleCircles.forEach((angleCircle) => {
       angleCircle.draw();
+      angleCircle.drawAngleInDegrees(
+        angleCircle.x,
+        angleCircle.y - angleCircle.radius * 1.8,
+        16
+      );
       angleCircle.drawDivisionTicks();
     });
     // updateT();
