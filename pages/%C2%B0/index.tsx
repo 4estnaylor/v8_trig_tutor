@@ -18,6 +18,7 @@ import InputForUserCircleDivisions from '../../components/Inputs/InputForUserCir
 import getSceneTensHundredsDivisions from '../../components/getScenes/degrees/getSceneTensHundredsDivisions';
 import getSceneDegreesBasicPractice from '../../components/getScenes/degrees/getSceneDegreeBasicPractice';
 import { Slider } from '@mui/material';
+import Quote from '../../components/Quote/Quote';
 
 export interface TargetValueObj {
   value: number;
@@ -240,20 +241,89 @@ const Degree = () => {
         {tenHundredThousand}
         <br />
         <br />
-        <h4> Are we going to tear the fabric of reality</h4>
-        First we need to ask if we even can change the 360 value. Some numbers
-        we use are logically necesarry and inextricably linked to the nature of
-        reality.
+        <h4> Does Nature or Logic Dictate the Value? </h4>
+        As a rule of thumb, a good question to ask before tinkering with things
+        in math is – Are we going to tear the fabric of reality? First we need
+        to consider if we even can change the 360 value. Some numbers we use are
+        logically necesarry and inextricably linked to the nature of reality.
         <p>
           The speed of light is one such number. If two intelligent lifeforms at
           far ends of the galaxy accurately measure the speed of light, they are
           helpless but to discover the same value — 2.99792458 × 10⁸ meters per
           second. Personally, I would love to change the speed of light to 3 ×
           10⁸, it's <em> so so sooooo </em>close. Sadly, I cannot change it. The
-          speed of light is a value found in nature. It is a value to be
+          speed of light is a value found in nature. It is a constant {'('}i.e.
+          unchanging {')'} value to be
           <em> discovered </em>, not one to be created.
           <br />
-          <br />A value we could change is the length of a meter.
+          <br />
+          360 is not a number we found hidden in the nature of a circle. The
+          fabric of reality doesn't break when we divide our pizzas into 8
+          slices instead of 360. So that means 360 is a number we chose
+          ourselves. How did we land on it as the standard value?
+          <br />
+          <br />
+        </p>
+        <h4>Historical Convention?</h4>
+        <br />
+        <br />
+        <p>
+          The number 360 was adopted by the ancient Greeks as they developed
+          methods for measuring angles for geometry from conventions in{' '}
+          <MyLink
+            style={{ display: 'inline' }}
+            href="https://www.scientificamerican.com/article/babylonians-tracked-jupiter-with-fancy-math-tablet-reveals/"
+          >
+            Babylonian astronomy
+          </MyLink>
+          . Naturally, 360 degrees coming from the Babylonian astronomy has led
+          many people to incorrectly conjecture that the basis of chosing 360
+          was due to the Babylonian's base 60 counting system{' '}
+          {`(as opposed to the modern era's base 10 counting system)`}.
+        </p>
+        <Quote
+          isLong={true}
+          quote={`In school we learn there are 360 degrees in a circle, but where did the 360 come from? When it is pointed out that the Babylonians counted to base-60, rather than base-10 as we do, people often ask if there is a connection. The short answer is no. The longer answer involves Babylonian astronomy...
+          `}
+        />
+        The explanation for how the 360 value comes from Babylonian astronomy,
+        but not Babylonon base-60 counting is a bit of a tangent, but it's kind
+        of fascinating. I won't include all of it here but feel free to follow
+        the source's link below!
+        <Quote
+          isLong={true}
+          source={`https://www.historytoday.com/history-matters/full-circle#:~:text=So%2C%20although%20angles%20come%20from,degrees%20comes%20from%20Babylonian%20astronomy.`}
+          byLine="Mark Ronana, Honorary Professor of Mathematics at University College London"
+          quote={`... As Greek geometry developed, it created the concept of an angle as a magnitude – for example, adding the angles of a triangle yields the same as two right-angles – but in Euclid’s Elements (c.300 BC) there is no unit of measurement apart from the right-angle. Then, in the second century BC, the Greek astronomer Hipparchos of Rhodes began applying geometry to Babylonian astronomy. He needed a method of measuring angles and naturally followed the Babylonian division of the ecliptic into 360 degrees, dividing the circle the same way. So, although angles come from the Greeks, the 360 degrees comes from Babylonian astronomy.
+          `}
+        />
+        <BabylonTabletGroup>
+          <BabylonImgGroup>
+            <Image src="/BabylonTablet43cm.png" width={400} height={400} />
+            <Image src="/BabylonAvgSpeed.png" width={400} height={400} />
+          </BabylonImgGroup>
+          <br />
+          <br />
+          <BabylonImgCaption>
+            A Babylonian tablet reveals the path of Jupiter using the mean speed
+            theorem, a type of precalculus previously thought to have been
+            invented much later by the English. I particularly enjoyed that this
+            tiny tablet, small enough to fit in your palm,x is considered to be
+            hastily and untidly produced, much like my own handwriting seen on
+            the right. <br />
+            <br />
+            <MyLink href="https://www.scientificamerican.com/article/babylonians-tracked-jupiter-with-fancy-math-tablet-reveals/">
+              Credit: Trustees of the British Museum{' '}
+            </MyLink>
+          </BabylonImgCaption>
+        </BabylonTabletGroup>
+        <br />
+        <br />
+        <h4>Utility</h4>
+        <br />
+        <br />
+        <p>
+          A value we could change is the length of a meter.
           <em>convenient</em>. The simplest answer for why we use 360 – because
           somebody started doing it that way and the rest of humanity went a
           long with it ¯\_(ツ)_/¯.
@@ -364,6 +434,10 @@ const MySlider = styled(Slider)`
   color: inherit;
 `;
 
+const MyLink = styled.a`
+  color: ${cl.getHSL(cl.purple)};
+`;
+
 const DegreeIntro = styled.p``;
 const WhatDoesThisHaveToDoWithTrig = styled.p``;
 
@@ -400,6 +474,27 @@ const Div360Title360 = styled.div`
   border: none;
   color: ${cl.getHSL(cl.purple_light)};
   text-align: center;
+`;
+
+const BabylonTabletGroup = styled.div`
+  max-width: 800px;
+`;
+const BabylonImgCaption = styled.div`
+  font-size: small;
+  max-width: 500px;
+  margin: auto;
+`;
+
+const BabylonImgGroup = styled.div`
+  display: flex;
+  max-width: 500px;
+  margin: auto;
+`;
+
+const LongQuote = styled(Quote)`
+  width: 500px;
+  min-width: 240px;
+  max-width: 500px;
 `;
 
 const Canvas1Background = styled.div`

@@ -49,7 +49,8 @@ const Wrapper = styled.div<{ $isLong: boolean }>`
   margin-left: auto;
   margin-right: auto;
 
-  max-width: 300px;
+  max-width: 500px;
+  min-width: 240px;
 
   @media ${QUERIES.tabletAndUp} {
     max-width: ${(p) => (p.$isLong ? '600px' : '300px')};
