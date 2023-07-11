@@ -17,8 +17,9 @@ import AddFactorsButtonBar from '../../components/Inputs/AddFactorsButtonsBar';
 import InputForUserCircleDivisions from '../../components/Inputs/InputForUserCircleDivisions';
 import getSceneTensHundredsDivisions from '../../components/getScenes/degrees/getSceneTensHundredsDivisions';
 import getSceneDegreesBasicPractice from '../../components/getScenes/degrees/getSceneDegreeBasicPractice';
-import { Slider } from '@mui/material';
+import { Alert, AlertTitle, Button, Collapse, Slider } from '@mui/material';
 import Quote from '../../components/Quote/Quote';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 export interface TargetValueObj {
   value: number;
@@ -27,6 +28,7 @@ export interface TargetValueObj {
 }
 
 const Degree = () => {
+  const [open, setOpen] = useState(false);
   const [userEnteredDegreeValue, setUserEnteredDegreeValue] = useState(1);
   const [changeMe, setChangeMe] = useState(5);
   const [introCircleDegree, setIntroCircleDegree] = useState(16);
@@ -229,74 +231,66 @@ const Degree = () => {
         </DegreeIntro>
         <br />
         {IntroDegrees}
-        <p>Why 360? Why not some other number?</p>
-        <p>
-          That a circle has exactly 360° feels weirdly arbitrary. People had to
-          have something in mind when deciding on 360 right? Why didn't we keep
-          things nice and metric by choosing some power of 10 like 100 1000, or
-          even 1 instead of 360?
-          <br />
-          <br />
-        </p>
+        Why 360? Why not some other number? That a circle has exactly 360° feels
+        weirdly arbitrary. People had to have something in mind when deciding on
+        360 right? Why didn't we keep things nice and metric by choosing some
+        power of 10 like 100 1000, or even 1 instead of 360?
+        <br />
+        <br />
         {tenHundredThousand}
         <br />
         <br />
-        <h4> Does Nature or Logic Dictate the Value? </h4>
-        As a rule of thumb, a good question to ask before tinkering with things
-        in math is – Are we going to tear the fabric of reality? First we need
-        to consider if we even can change the 360 value. Some numbers we use are
-        logically necesarry and inextricably linked to the nature of reality.
-        <p>
-          The speed of light is one such number. If two intelligent lifeforms at
-          far ends of the galaxy accurately measure the speed of light, they are
-          helpless but to discover the same value — 2.99792458 × 10⁸ meters per
-          second. Personally, I would love to change the speed of light to 3 ×
-          10⁸, it's <em> so so sooooo </em>close. Sadly, I cannot change it. The
-          speed of light is a value found in nature. It is a constant {'('}i.e.
-          unchanging {')'} value to be
+        <h4> Natural Origin? </h4>
+        <P>
+          As a rule of thumb, a good question to ask before tinkering with
+          things in math is – Are we going to tear the fabric of reality? First
+          we need to consider if we even can change the 360 value. Some values
+          we use are logically necesarry and inextricably linked to the nature
+          of reality.
+          <br />
+          <br />
+          <Pi>π</Pi> is one such value. Imagine two intelligent lifeforms at far
+          ends of the galaxy accurately measure the ratio of two lengths, a
+          circle's diameter and its circumference. They are helpless to converge
+          at the same familiar value of 3.14159... Personally, I would love to
+          change the value of <Pi>π</Pi> to 3. It's <em> kinda </em>
+          close. Sadly, I do not have the power to will univseral constants into
+          nice, friendly whole numbers. <Pi>π</Pi> is a value found in nature in
+          all circles and coldly indifferent to my preferences. It is a constant{' '}
+          {'('}i.e. unchanging {')'} value to be
           <em> discovered </em>, not one to be created.
           <br />
           <br />
-          360 is not a number we found hidden in the nature of a circle. The
+          360 is not a value we found hidden in the nature of a circle. The
           fabric of reality doesn't break when we divide our pizzas into 8
-          slices instead of 360. So that means 360 is a number we chose
-          ourselves. How did we land on it as the standard value?
+          slices instead of 360. 360 degrees has not <em> natural </em> origin.
+          So that means 360 is a number we got to choose for ourselves. How did
+          that happen?
+        </P>
+        <h4>Historical Origin </h4>
+        <P>
+          2 and a half thousand years ago Jupiter was in retrograde. And, in a
+          sense, we have measured circles using 360 divisions pretty much ever
+          since because of that.
           <br />
           <br />
-        </p>
-        <h4>Historical Convention?</h4>
-        <br />
-        <br />
-        <p>
-          The number 360 was adopted by the ancient Greeks as they developed
-          methods for measuring angles for geometry from conventions in{' '}
-          <MyLink
-            style={{ display: 'inline' }}
-            href="https://www.scientificamerican.com/article/babylonians-tracked-jupiter-with-fancy-math-tablet-reveals/"
-          >
-            Babylonian astronomy
+          Babylonian preists believed in a flavor of astrology where knowing the
+          motion of Jupiter could give a lot of very useful information about
+          life on earth. Knowing Jupiter's trajectory they believed would give
+          them insight into the level of the Eurphrates, the price of grain,
+          weather events, that kind of thing. Knowing the motion of Jupiter was
+          of such high priority that these preists developed outrageously
+          sophisticated astronomy. So impressive that the Babylonians were
+          making leaps in mathematical abstraction and proto-calculus about 1500
+          years ahead of the scholars in France and England who were credited
+          with the discovery of these ideas until{' '}
+          <MyLink href="https://www.science.org/doi/10.1126/science.aad8085">
+            a tiny, hastily scrawled cuneform tablet was discovered in 2016
           </MyLink>
-          . Naturally, 360 degrees coming from the Babylonian astronomy has led
-          many people to incorrectly conjecture that the basis of chosing 360
-          was due to the Babylonian's base 60 counting system{' '}
-          {`(as opposed to the modern era's base 10 counting system)`}.
-        </p>
-        <Quote
-          isLong={true}
-          quote={`In school we learn there are 360 degrees in a circle, but where did the 360 come from? When it is pointed out that the Babylonians counted to base-60, rather than base-10 as we do, people often ask if there is a connection. The short answer is no. The longer answer involves Babylonian astronomy...
-          `}
-        />
-        The explanation for how the 360 value comes from Babylonian astronomy,
-        but not Babylonon base-60 counting is a bit of a tangent, but it's kind
-        of fascinating. I won't include all of it here but feel free to follow
-        the source's link below!
-        <Quote
-          isLong={true}
-          source={`https://www.historytoday.com/history-matters/full-circle#:~:text=So%2C%20although%20angles%20come%20from,degrees%20comes%20from%20Babylonian%20astronomy.`}
-          byLine="Mark Ronana, Honorary Professor of Mathematics at University College London"
-          quote={`... As Greek geometry developed, it created the concept of an angle as a magnitude – for example, adding the angles of a triangle yields the same as two right-angles – but in Euclid’s Elements (c.300 BC) there is no unit of measurement apart from the right-angle. Then, in the second century BC, the Greek astronomer Hipparchos of Rhodes began applying geometry to Babylonian astronomy. He needed a method of measuring angles and naturally followed the Babylonian division of the ecliptic into 360 degrees, dividing the circle the same way. So, although angles come from the Greeks, the 360 degrees comes from Babylonian astronomy.
-          `}
-        />
+          .
+        </P>
+        <br />
+        <br />
         <BabylonTabletGroup>
           <BabylonImgGroup>
             <Image src="/BabylonTablet43cm.png" width={400} height={400} />
@@ -305,53 +299,108 @@ const Degree = () => {
           <br />
           <br />
           <BabylonImgCaption>
-            A Babylonian tablet reveals the path of Jupiter using the mean speed
-            theorem, a type of precalculus previously thought to have been
-            invented much later by the English. I particularly enjoyed that this
-            tiny tablet, small enough to fit in your palm,x is considered to be
-            hastily and untidly produced, much like my own handwriting seen on
-            the right. <br />
+            A Babylonian tablet reveals using geometry of trapezoids to produce
+            the mean speed theorem around 100 BC. A type of calculus-like
+            abstraction previously thought to have been discovered much later by
+            a collaboration between English and French scholars in 1350 AD. The
+            cuneform lettering on this tiny tablet
+            {'(small enough to fit in the palm of your hand)'} is considered to
+            be unusually messy, probably not much better than my own handwriting
+            seen on the right. <br />
             <br />
             <MyLink href="https://www.scientificamerican.com/article/babylonians-tracked-jupiter-with-fancy-math-tablet-reveals/">
-              Credit: Trustees of the British Museum{' '}
+              Photo Credit: Trustees of the British Museum{' '}
             </MyLink>
           </BabylonImgCaption>
         </BabylonTabletGroup>
-        <br />
-        <br />
+        <P>
+          <br />
+          <br />
+          This sophsiticated astronomy was not suited to the Babylonian lunar
+          calendar, so the preists studying the elliptical paths of planets and
+          moons developed a more fitting calendar with 12 months of 30 days aka
+          360 divisions. Later on a Greek astronomer, Hipparchos of Rhodes,
+          began applying Euclidean Geometry to Babylonian astronomy. Up to that
+          point, only right angles were used in Euclidean geometry so the
+          mathematician decided to borrow the Babylonian astronomer-preists'
+          convention of 360 to more precisely measure other angles.
+          <br />
+          <br />
+          Just for fun, I thought I would include an excerpt from
+          astrology.com's description of how Jupiter being in retrograde affects
+          life on earth.
+          <Quote
+            isLong={true}
+            source="https://www.astrology.com/retrograde/jupiter-retrograde#:~:text=for%20just%20%241.99!-,Jupiter%20Retrograde%20Meaning,the%20sign%20it%20is%20transiting."
+            quote={`[It is] a phase of deep philosophical questioning, or a deep dive into esoteric, religious, spiritual, and metaphysical studies...`}
+          />
+          Moral of the story, be very attentive of your horoscope when Jupiter
+          is in retrograde. Otherwise, you might unexpectedly standardize basic
+          mathematical units for a few milenia.
+          <br />
+          <br />
+          <Alert severity="info" sx={{ position: 'relative' }}>
+            <AlertTitle>Common Misconception</AlertTitle>
+            <Button
+              onClick={() => {
+                setOpen(!open);
+              }}
+              sx={{ position: 'absolute', right: 0, top: '10px' }}
+            >
+              {open ? <ExpandLess /> : <ExpandMore />}
+            </Button>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              The Babylonians famously used a base-60 counting system, although
+              the reality is{' '}
+              <MyLink href="https://ia800708.us.archive.org/12/items/TheExactSciencesInAntiquity/The%20Exact%20Sciences%20in%20Antiquity.pdf">
+                more complex{' '}
+              </MyLink>
+              . People have understandably, but incorrectly, connected dots
+              between that and the value 360 being 60², the counterpart of 100
+              in a base-10 system. 360 seems to instead owe its origins to a
+              convergence of Babylonian myth and the need to create a practical
+              astronomic calendar. A more complete explanation is found in the
+              source link below.
+              <Quote
+                isLong={true}
+                source={`https://www.historytoday.com/history-matters/full-circle#:~:text=So%2C%20although%20angles%20come%20from,degrees%20comes%20from%20Babylonian%20astronomy.`}
+                byLine="Mark Ronana, Honorary Professor of Mathematics at University College London"
+                quote={`In school we learn there are 360 degrees in a circle, but where did the 360 come from? When it is pointed out that the Babylonians counted to base-60, rather than base-10 as we do, people often ask if there is a connection. The short answer is no. The longer answer involves Babylonian astronomy...
+          `}
+              />
+            </Collapse>
+          </Alert>
+        </P>
         <h4>Utility</h4>
         <br />
+        <br />A value we could change is the length of a meter.
+        <em>convenient</em>. The simplest answer for why we use 360 – because
+        somebody started doing it that way and the rest of humanity went a long
+        with it ¯\_(ツ)_/¯.
         <br />
-        <p>
-          A value we could change is the length of a meter.
-          <em>convenient</em>. The simplest answer for why we use 360 – because
-          somebody started doing it that way and the rest of humanity went a
-          long with it ¯\_(ツ)_/¯.
-          <br />
-          <br />
-          No law of <em>nature </em> dictates that we couldn't all to agree to
-          making it standard to divide a circle into 7 units instead of 360.
-          Nothing is stopping us from choosing any other number we want. Still,
-          360 feels too... specific to just be a entirely randomly selected
-          number.
-          <br />
-          <br />
-          While laws of nature have no preference for 360 divisions in a circle,
-          laws of <em>convenience </em> make a very, very strong case for having
-          360 degrees instead of say 10 or 100. It boils down to 360's marvelous
-          ability to divide itself into many useful fractions (halves, thirds,
-          quarters, fifths, sixths, sevenths, tenths, twelfths, ...) without
-          every having to deal with decimal numbers.
-          {/* <br /> <br /> */}
-          {/* ¯\_(ツ)_/¯ Admittedly, sometimes in math we (as in humanity) just get
+        <br />
+        No law of <em>nature </em> dictates that we couldn't all to agree to
+        making it standard to divide a circle into 7 units instead of 360.
+        Nothing is stopping us from choosing any other number we want. Still,
+        360 feels too... specific to just be a entirely randomly selected
+        number.
+        <br />
+        <br />
+        While laws of nature have no preference for 360 divisions in a circle,
+        laws of <em>convenience </em> make a very, very strong case for having
+        360 degrees instead of say 10 or 100. It boils down to 360's marvelous
+        ability to divide itself into many useful fractions (halves, thirds,
+        quarters, fifths, sixths, sevenths, tenths, twelfths, ...) without every
+        having to deal with decimal numbers.
+        {/* <br /> <br /> */}
+        {/* ¯\_(ツ)_/¯ Admittedly, sometimes in math we (as in humanity) just get
           stuck in our ways and make life more complicated than we need to. But,
           this isn't one of those cases! 360 degrees is much easier than 100 to
           divide without leaving the world of nice "round" or integer numbers. */}
-          <br /> <br />
-          To understand why let's examine the multiplicative DNA of 360 and 100.
-          Here are the
-          <Fancy> prime factorizations </Fancy> for 360 and another for 100.
-        </p>
+        <br /> <br />
+        To understand why let's examine the multiplicative DNA of 360 and 100.
+        Here are the
+        <Fancy> prime factorizations </Fancy> for 360 and another for 100.
         <div
           style={{
             width: '100%',
@@ -436,6 +485,7 @@ const MySlider = styled(Slider)`
 
 const MyLink = styled.a`
   color: ${cl.getHSL(cl.purple)};
+  display: inline-flex;
 `;
 
 const DegreeIntro = styled.p``;
@@ -474,6 +524,13 @@ const Div360Title360 = styled.div`
   border: none;
   color: ${cl.getHSL(cl.purple_light)};
   text-align: center;
+`;
+
+const Pi = styled.div`
+  color: ${cl.getHSL(cl.purple)};
+  font-weight: 400;
+  initial-value: 3;
+  display: inline;
 `;
 
 const BabylonTabletGroup = styled.div`
