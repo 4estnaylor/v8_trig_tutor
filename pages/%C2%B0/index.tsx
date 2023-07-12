@@ -20,6 +20,7 @@ import getSceneDegreesBasicPractice from '../../components/getScenes/degrees/get
 import { Alert, AlertTitle, Button, Collapse, Slider } from '@mui/material';
 import Quote from '../../components/Quote/Quote';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import ExpandableBullet from '../../components/ExpandableBullet';
 
 export interface TargetValueObj {
   value: number;
@@ -29,6 +30,7 @@ export interface TargetValueObj {
 
 const Degree = () => {
   const [open, setOpen] = useState(false);
+  const [fromScratchValue, setFromScratchValue] = useState(1);
   const [userEnteredDegreeValue, setUserEnteredDegreeValue] = useState(1);
   const [changeMe, setChangeMe] = useState(5);
   const [introCircleDegree, setIntroCircleDegree] = useState(16);
@@ -153,6 +155,7 @@ const Degree = () => {
     <InteractiveDegreeDragWrapper>
       <Canvas1Background>
         <CanvasForTopicComponent
+          // style={{position:'relative'}}
           sceneGetter={getSceneTensHundredsDivisions}
           height={400}
           objectPassedToScene={{
@@ -174,6 +177,29 @@ const Degree = () => {
       </MySliderWrapper> */}
 
       <MySliderWrapper>
+        {/* <div
+          style={{
+            position: 'relative',
+            // width: '620px',
+            // height: '100px',
+            // top: '0',
+            // left: '0',
+            marginLeft: '40px',
+            marginRight: '40px',
+          }}
+        > */}
+        <ExponentialBackground>
+          <ExponentialBackgroundFill
+            fillValue={userSelectedPowerOfTenValue / 3}
+          />
+          <ExponentialImage
+            src={'/tenExponential.svg'}
+            // layout="fill"
+            width="620px"
+            height="100px"
+          />
+        </ExponentialBackground>
+        {/* </div> */}
         <MySlider
           // sx={{
           //   '& input[type="range"]': {
@@ -214,6 +240,29 @@ const Degree = () => {
     </InteractiveDegreeDragWrapper>
   );
 
+  const scoreMultipliers = {
+    Ten: 4,
+    Hundred: 3,
+    Thousand: 2,
+  };
+
+  const notTooBigCollapsable = (
+    <NotTooBigWrapper>
+      <div>
+        The priority is to pick smaller numbers to make things easier on our
+        computers and pencils. 10,000 is the max number you can choose from.
+        <ul>
+          <li>
+            {`numbers under 10 get a score multiplier of ${scoreMultipliers.Ten}`}{' '}
+          </li>
+          <li>{`numbers under 100 get a score multiplier of ${scoreMultipliers.Hundred}`}</li>
+          <li>{`numbers under 1000 get a score multiplier of ${scoreMultipliers.Thousand}`}</li>
+          <li>{`numbers over 1000 get no score multiplier`}</li>
+        </ul>
+      </div>
+    </NotTooBigWrapper>
+  );
+
   return (
     <TopicComponentBoilerPlate
       title={
@@ -223,6 +272,14 @@ const Degree = () => {
       }
     >
       <>
+        <Criteria>
+          <ExpandableBullet pre={1} title={`not too big ${fromScratchValue}`}>
+            {notTooBigCollapsable}
+          </ExpandableBullet>
+          <ExpandableBullet pre={2} title={'divides neeatly into many groups'}>
+            divides neatly into many groups
+          </ExpandableBullet>
+        </Criteria>
         <DegreeIntro>
           The degree, or more formally, the
           <Fancy> arcdegree </Fancy>, is one way to measure an angle. 360 of
@@ -231,10 +288,7 @@ const Degree = () => {
         </DegreeIntro>
         <br />
         {IntroDegrees}
-        Why 360? Why not some other number? That a circle has exactly 360° feels
-        weirdly arbitrary. People had to have something in mind when deciding on
-        360 right? Why didn't we keep things nice and metric by choosing some
-        power of 10 like 100 1000, or even 1 instead of 360?
+        Why 360? Why not choose 100, 1000, or any other number of units?
         <br />
         <br />
         {tenHundredThousand}
@@ -242,22 +296,21 @@ const Degree = () => {
         <br />
         <h4> Natural Origin? </h4>
         <P>
-          As a rule of thumb, a good question to ask before tinkering with
-          things in math is – Are we going to tear the fabric of reality? First
-          we need to consider if we even can change the 360 value. Some values
+          As a rule of thumb, a good question to ask before changing with things
+          in math is – Are we going to tear the fabric of reality? Some values
           we use are logically necesarry and inextricably linked to the nature
-          of reality.
+          of reality. They cannot be changed.
           <br />
           <br />
           <Pi>π</Pi> is one such value. Imagine two intelligent lifeforms at far
           ends of the galaxy accurately measure the ratio of two lengths, a
           circle's diameter and its circumference. They are helpless to converge
           at the same familiar value of 3.14159... Personally, I would love to
-          change the value of <Pi>π</Pi> to 3. It's <em> kinda </em>
-          close. Sadly, I do not have the power to will univseral constants into
-          nice, friendly whole numbers. <Pi>π</Pi> is a value found in nature in
-          all circles and coldly indifferent to my preferences. It is a constant{' '}
-          {'('}i.e. unchanging {')'} value to be
+          change the value of <Pi>π</Pi> to exactly 3. Just for convenience.
+          Sadly I cannot change the value of <Pi>π</Pi> because I cannot change
+          the underlying gemoetry of a circle. <Pi>π</Pi> is a value found in
+          nature in all circles and coldly indifferent to my preferences. It is
+          a constant {'('}i.e. unchanging {')'} value to be
           <em> discovered </em>, not one to be created.
           <br />
           <br />
@@ -370,10 +423,30 @@ const Degree = () => {
               />
             </Collapse>
           </Alert>
+          <br />
+          <br />
+          Landing on 360 based on an ancient myth hardly sounds like a terrible
+          way to choose such a commonly used value. So let's cast 360 aside for
+          now and start from scratch.
         </P>
-        <h4>Utility</h4>
-        <br />
-        <br />A value we could change is the length of a meter.
+        <h4>From Scratch</h4>
+        For starters, I am going to establish 2 criteria desired for potential
+        candidate numbers for dividing a circle. Try to find the value with the
+        most points you can!
+        {/* <li>divides neatly into many different sized groupings</li>
+          <li>
+            First is simple enough. It must be a number small enough that it
+            won't wear out are pencils and break our computers. Let's say it has
+            to be less than 10,000. But the smaller the better.
+          </li>
+          <li>
+            It should divide neatly into as many common whole number groups as
+            possible. i.e If I divide it into 2, 3, 4, etc... sections a circle
+            shouldn't be 34.578... units. 35 units would do though.
+          </li> */}
+        = It suggests to me there is a large possibility we could come up with
+        an even better number if we based it off of logic or convenience. A
+        value we could change is the length of a meter.
         <em>convenient</em>. The simplest answer for why we use 360 – because
         somebody started doing it that way and the rest of humanity went a long
         with it ¯\_(ツ)_/¯.
@@ -468,11 +541,31 @@ const Degree = () => {
   );
 };
 
+const ExponentialBackground = styled.div`
+  position: relative;
+  background-color: ${cl.getHSLA(cl.purple_light, 0.2)};
+`;
+
+const ExponentialBackgroundFill = styled.div<{ fillValue: number }>`
+  position: absolute;
+  background-color: ${cl.getHSLA(cl.purple, 0.7)};
+  height: 100%;
+  width: ${(props) => `${props.fillValue * 100}%`};
+`;
+
+const ExponentialImage = styled(Image)``;
+
 const MySliderWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  /* justify-content: center; */
   padding: 40px;
+  padding-top: 0px;
   color: ${cl.getHSLA(cl.purple, 1)};
+  /* transform: translateY(-50%); */
+  /* z-index: -100; */
 `;
 
 const PowersOfTenSlider = styled.div`
@@ -481,6 +574,8 @@ const PowersOfTenSlider = styled.div`
 
 const MySlider = styled(Slider)`
   color: inherit;
+  background: 'transparent';
+  margin-top: -8px;
 `;
 
 const MyLink = styled.a`
@@ -510,6 +605,11 @@ const Div360NumInput = styled.input`
 const InteractiveDegreeDragWrapper = styled.div`
   /* position: relative; */
   /* position: static; */
+`;
+
+const Criteria = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const Div360Title360 = styled.div`
@@ -575,8 +675,14 @@ const P = styled.div`
   padding: 5px;
 `;
 
+const Multiplier = styled.span`
+  color: ${cl.getHSL(cl.purple)};
+`;
+
 const Fancy = styled.span`
   color: ${cl.getHSL(cl.purple_bright)};
 `;
+
+const NotTooBigWrapper = styled.div``;
 
 export default Degree;
