@@ -564,6 +564,7 @@ const MySliderWrapper = styled.div`
   padding: 40px;
   padding-top: 0px;
   color: ${cl.getHSLA(cl.purple, 1)};
+
   /* transform: translateY(-50%); */
   /* z-index: -100; */
 `;
@@ -576,6 +577,7 @@ const MySlider = styled(Slider)`
   color: inherit;
   background: 'transparent';
   margin-top: -8px;
+  padding-top: 0px;
 `;
 
 const MyLink = styled.a`
