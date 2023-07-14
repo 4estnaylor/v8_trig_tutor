@@ -246,21 +246,63 @@ const Degree = () => {
     Thousand: 2,
   };
 
+  const divisiblityPoints = {
+    Ten: 8,
+    Twenty: 4,
+    Fifty: 2,
+    Hundered: 1,
+  };
+
   const notTooBigCollapsable = (
     <NotTooBigWrapper>
       <div>
-        The priority is to pick smaller numbers to make things easier on our
-        computers and pencils. 10,000 is the max number you can choose from.
+        The priority is to pick smaller values to make things easier on our
+        computers and pencils. So that computers/phones don't have to work too
+        hard, 10,000 is the largest allowable number for this exercise.
         <ul>
           <li>
-            {`numbers under 10 get a score multiplier of ${scoreMultipliers.Ten}`}{' '}
+            {`numbers up to 10 get a score multiplier of`} <br />
+            <Multiplier>× {scoreMultipliers.Ten}</Multiplier>
           </li>
-          <li>{`numbers under 100 get a score multiplier of ${scoreMultipliers.Hundred}`}</li>
-          <li>{`numbers under 1000 get a score multiplier of ${scoreMultipliers.Thousand}`}</li>
+          <li>
+            {`numbers up to 100 get a score multiplier of`}
+            <br />
+          </li>
+          <Multiplier>× {scoreMultipliers.Hundred}</Multiplier>
+          <li>
+            {`numbers up to 1000 get a score multiplier of`}
+            <br />
+          </li>
+          <Multiplier>× {scoreMultipliers.Thousand}</Multiplier>
           <li>{`numbers over 1000 get no score multiplier`}</li>
         </ul>
       </div>
     </NotTooBigWrapper>
+  );
+
+  const dividesNeatlyCollapsable = (
+    <div>
+      priority given to integers that divide into your selected value.
+      <ul>
+        <li>
+          {`numbers up to 10 that divide the value`} rewarded{' '}
+          <Points>{divisiblityPoints.Ten} points</Points>
+        </li>
+        <li>
+          {`numbers up to 20 that divide the value`} rewarded{' '}
+          <Points>{divisiblityPoints.Twenty} points</Points>
+        </li>
+        <li>
+          {`numbers up to 50 that divide the value`} rewarded{' '}
+          <Points>{divisiblityPoints.Fifty} points</Points>
+        </li>
+        <li>
+          {`numbers up to 100 that divide the value`} rewarded{' '}
+          <Points>{divisiblityPoints.Hundered} point</Points>
+        </li>
+        <li>{`numbers over 100`} rewarded no points.</li>
+      </ul>
+    </div>
   );
 
   return (
@@ -276,8 +318,8 @@ const Degree = () => {
           <ExpandableBullet pre={1} title={`not too big ${fromScratchValue}`}>
             {notTooBigCollapsable}
           </ExpandableBullet>
-          <ExpandableBullet pre={2} title={'divides neeatly into many groups'}>
-            divides neatly into many groups
+          <ExpandableBullet pre={2} title={'whole number divisibility '}>
+            {dividesNeatlyCollapsable}
           </ExpandableBullet>
         </Criteria>
         <DegreeIntro>
@@ -312,6 +354,23 @@ const Degree = () => {
           nature in all circles and coldly indifferent to my preferences. It is
           a constant {'('}i.e. unchanging {')'} value to be
           <em> discovered </em>, not one to be created.
+          <br />
+          <br />
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              fontSize: '.75rem',
+            }}
+          >
+            <Image src="/tearInReality.png" width={400} height={400} />
+            <br />
+            <MyLink href="https://webbtelescope.org/contents/media/images/2023/129/01H2TX5S12Y7AKPEDF0EBF2QQF?Category=03-galaxies&Category=04-nebulas&Category=05-stars&Category=08-webb-mission&page=1">
+              Photo Credit: Webb Space Telescope
+            </MyLink>
+          </div>
           <br />
           <br />
           360 is not a value we found hidden in the nature of a circle. The
@@ -548,7 +607,7 @@ const ExponentialBackground = styled.div`
 
 const ExponentialBackgroundFill = styled.div<{ fillValue: number }>`
   position: absolute;
-  background-color: ${cl.getHSLA(cl.purple, 0.7)};
+  background-color: ${cl.getHSLA(cl.purple, 0.6)};
   height: 100%;
   width: ${(props) => `${props.fillValue * 100}%`};
 `;
@@ -678,6 +737,9 @@ const P = styled.div`
 `;
 
 const Multiplier = styled.span`
+  color: ${cl.getHSL(cl.purple)};
+`;
+const Points = styled.div`
   color: ${cl.getHSL(cl.purple)};
 `;
 

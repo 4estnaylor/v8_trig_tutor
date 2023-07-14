@@ -36,11 +36,17 @@ const TopSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+
+  width: 100%;
 `;
 
 const MyAlert = styled(Alert)`
   margin: 0px 5px;
+  width: 100%;
+
+  & .MuiAlert-message {
+    width: 100%;
+  }
 `;
 
 const Pre = styled.div`
