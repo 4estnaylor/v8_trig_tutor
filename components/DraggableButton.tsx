@@ -2,28 +2,53 @@ import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../colors';
+import Draggable from 'react-draggable';
 
 const DraggableButton = () => {
   const [isDraggable, setIsDraggable] = useState(false);
+  const [controlledPosition, setControlledPosition] = useState({
+    x: 50,
+    y: 50,
+  });
+
+  const onControlledDrag = (e: Event, position: { x: number; y: number }) => {
+    const { x, y } = position;
+    setControlledPosition({ x, y });
+  };
   return (
-    <Wrapper
-      onClick={() => {
-        console.log('clickclack');
+    <Draggable
+      onDrag={(e: any, position) => {
+        onControlledDrag(e, position);
+        console.log('position', position);
       }}
-      onMouseDown={(e) => {
-        console.log('mouse is down');
-        setIsDraggable(true);
-      }}
-      onMouseUp={(e) => {
-        console.log('mouse up');
-        setIsDraggable(false);
-      }}
-      onMouseLeave={(e) => {
-        setIsDraggable(false);
-      }}
+      position={controlledPosition}
     >
-      <InnerDot>{isDraggable ? 'T' : 'F'}</InnerDot>
-    </Wrapper>
+      <Wrapper
+      // onClick={() => {
+      //   console.log('clickclack');
+      // }}
+      // onMouseDown={(e) => {
+      //   console.log('mouse is down');
+      //   setIsDraggable(true);
+      // }}
+      // onMouseUp={(e) => {
+      //   console.log('mouse up');
+      //   setIsDraggable(false);
+      // }}
+      // onMouseLeave={(e) => {
+      //   setIsDraggable(false);
+      // }}
+      // onMouseMove={(e) => {
+      //   // console.log('mouse moving', e);
+      // }}
+      // onDrag={(e) => {
+      //   e.dataTransfer.setData("text", e.target.id)
+      //   console.log('dragging');
+      // }}
+      >
+        <InnerDot>{isDraggable ? 'T' : 'F'}</InnerDot>
+      </Wrapper>
+    </Draggable>
   );
 };
 
@@ -45,6 +70,7 @@ const Wrapper = styled.button`
     background-color: ${cl.getHSLA(cl.purple, 1)};
   }
   &:active {
+    background-color: ${cl.getHSLA(cl.purple, 1)};
     cursor: grabbing;
   }
 `;
