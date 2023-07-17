@@ -16,6 +16,8 @@ const DraggableButton = (props: DraggableButtonProps) => {
   const { controlledPosition, setControlledPosition } = props;
   const [isDraggable, setIsDraggable] = useState(false);
 
+  const [haloOpacity, setHaloOpacity] = useState(0.2);
+
   const onControlledDrag = (e: Event, position: { x: number; y: number }) => {
     const { x, y } = position;
     setControlledPosition({ x, y });
@@ -24,32 +26,38 @@ const DraggableButton = (props: DraggableButtonProps) => {
     <Draggable
       onDrag={(e: any, position) => {
         onControlledDrag(e, position);
-        console.log('position', position);
+      }}
+      onStart={() => {
+        setHaloOpacity(1);
+      }}
+      onStop={() => {
+        setHaloOpacity(0.2);
       }}
       position={controlledPosition}
     >
       <Wrapper
-      // onClick={() => {
-      //   console.log('clickclack');
-      // }}
-      // onMouseDown={(e) => {
-      //   console.log('mouse is down');
-      //   setIsDraggable(true);
-      // }}
-      // onMouseUp={(e) => {
-      //   console.log('mouse up');
-      //   setIsDraggable(false);
-      // }}
-      // onMouseLeave={(e) => {
-      //   setIsDraggable(false);
-      // }}
-      // onMouseMove={(e) => {
-      //   // console.log('mouse moving', e);
-      // }}
-      // onDrag={(e) => {
-      //   e.dataTransfer.setData("text", e.target.id)
-      //   console.log('dragging');
-      // }}
+        haloOpacity={haloOpacity}
+        // onClick={() => {
+        //   console.log('clickclack');
+        // }}
+        // onMouseDown={(e) => {
+        //   console.log('mouse is down');
+        //   setIsDraggable(true);
+        // }}
+        // onMouseUp={(e) => {
+        //   console.log('mouse up');
+        //   setIsDraggable(false);
+        // }}
+        // onMouseLeave={(e) => {
+        //   setIsDraggable(false);
+        // }}
+        // onMouseMove={(e) => {
+        //   // console.log('mouse moving', e);
+        // }}
+        // onDrag={(e) => {
+        //   e.dataTransfer.setData("text", e.target.id)
+        //   console.log('dragging');
+        // }}
       >
         <InnerDot>
           <ControlCameraIcon />
@@ -59,9 +67,9 @@ const DraggableButton = (props: DraggableButtonProps) => {
   );
 };
 
-const Wrapper = styled.button`
+const Wrapper = styled.button<{ haloOpacity: number }>`
   position: absolute;
-  background-color: ${cl.getHSLA(cl.purple, 0.2)};
+  background-color: ${(props) => cl.getHSLA(cl.purple, props.haloOpacity)};
   color: ${cl.getHSL(cl.white)};
   border-radius: 50%;
   height: 50px;
@@ -74,10 +82,10 @@ const Wrapper = styled.button`
   transition: background-color 0.3s ease-in-out;
   &:hover {
     cursor: grab;
-    background-color: ${cl.getHSLA(cl.purple, 1)};
+    /* background-color: ${cl.getHSLA(cl.purple, 1)}; */
   }
   &:active {
-    background-color: ${cl.getHSLA(cl.purple, 1)};
+    /* background-color: ${cl.getHSLA(cl.purple, 1)}; */
     cursor: grabbing;
   }
 `;

@@ -33,8 +33,6 @@ const getSceneUserCicrcleDivision: SceneGetter = (
     controlledPosition: { x: number; y: number };
   } = passedObject;
 
-  console.log('controlled position', controlledPosition);
-
   let numberOfDivisions = 5;
 
   // setTargetValueObjs([{ value: 9, completed: true }]);
@@ -61,13 +59,7 @@ const getSceneUserCicrcleDivision: SceneGetter = (
     setControlledPosition((prev: { x: number; y: number }) => {
       testUnitCirc.radialPoint.x = prev.x + 25;
       testUnitCirc.radialPoint.y = prev.y + 25;
-      console.log(
-        { x: prev.x, y: prev.y },
-        {
-          radialx: testUnitCirc.radialPoint.x + 25,
-          radialY: testUnitCirc.radialPoint.y + 25,
-        }
-      );
+
       return prev;
     });
     testUnitCirc.customUnitDivisions = numberOfDivisions;
