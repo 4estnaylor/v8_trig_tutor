@@ -47,6 +47,9 @@ const getSceneUserCicrcleDivision: SceneGetter = (
     width / 2,
     context.canvas.height / 2
   );
+  testUnitCirc.color = cl.getHSL(cl.purple);
+  testUnitCirc.radialPoint.color = cl.getHSL(cl.purple);
+  testUnitCirc.vertex.color = cl.getHSL(cl.purple);
 
   testUnitCirc.radius *= 1;
 

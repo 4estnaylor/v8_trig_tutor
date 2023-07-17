@@ -121,13 +121,13 @@ class InteractivePoint {
 
     switch (this.form) {
       case 'default':
-        this.setCursor('default');
+        // this.setCursor('default');
         break;
       case 'hover':
-        this.setCursor('grab');
+        // this.setCursor('grab');
         break;
       case 'grabbing':
-        this.setCursor('grabbing');
+        // this.setCursor('grabbing');
         break;
     }
     this.keepInBoundsOfCanvas();
@@ -290,7 +290,7 @@ class InteractivePoint {
     // if (this.context.canvas) {
     //   console.log(this.context.canvas.DOCUMENT_POSITION_CONTAINED_BY);
     // }
-    document.body.style.cursor = cursorStyle;
+    // document.body.style.cursor = cursorStyle;
   }
 
   drawRingAroundPoint() {

@@ -21,6 +21,7 @@ import { Alert, AlertTitle, Button, Collapse, Slider } from '@mui/material';
 import Quote from '../../components/Quote/Quote';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import ExpandableBullet from '../../components/ExpandableBullet';
+import DraggableButton from '../../components/DraggableButton';
 
 export interface TargetValueObj {
   value: number;
@@ -30,6 +31,7 @@ export interface TargetValueObj {
 
 const Degree = () => {
   const [open, setOpen] = useState(false);
+  const [tabletCaptionOpen, setTabletCaptionOpen] = useState(false);
   const [fromScratchValue, setFromScratchValue] = useState(1);
   const [userEnteredDegreeValue, setUserEnteredDegreeValue] = useState(1);
   const [changeMe, setChangeMe] = useState(5);
@@ -104,26 +106,107 @@ const Degree = () => {
     </InteractiveDegreeDragWrapper>
   );
 
+  type betterUnitsModes = 'circle' | 'factors' | 'score breakdown';
+
+  const scoreMultipliers = {
+    Ten: 4,
+    Hundred: 3,
+    Thousand: 2,
+  };
+
+  const divisiblityPoints = {
+    Ten: 8,
+    Twenty: 4,
+    Fifty: 2,
+    Hundered: 1,
+  };
+
+  const notTooBigCollapsable = (
+    <NotTooBigWrapper>
+      <div>
+        The advantage of smaller values is things become manageable for our
+        computers and pencils. 10,000 is the largest allowable number for this
+        exercise.
+        <CollapsableList>
+          <li>
+            {`numbers up to 10 get base points `}
+            <Multiplier>× {scoreMultipliers.Ten}</Multiplier>
+          </li>
+          <li>
+            {`numbers up to 100 get base points `}
+
+            <Multiplier>× {scoreMultipliers.Hundred}</Multiplier>
+          </li>
+          <li>
+            {`numbers up to 1000 get base points `}
+
+            <Multiplier>× {scoreMultipliers.Thousand}</Multiplier>
+          </li>
+          <li>{`numbers over 1000 get no bonus.`}</li>
+        </CollapsableList>
+      </div>
+    </NotTooBigWrapper>
+  );
+
+  const dividesNeatlyCollapsable = (
+    <div>
+      Priority given to integers that divide into your selected value. The
+      advantage is the utility in being able to divide a circle into many
+      integer values i.e. halves, thirds, fifths, etc..
+      <CollapsableList>
+        <li>
+          {`numbers up to 10 that divide the value`} reward{' '}
+          <Points>+ {divisiblityPoints.Ten} points</Points>
+        </li>
+        <li>
+          {`numbers up to 20 that divide the value`} reward{' '}
+          <Points>+ {divisiblityPoints.Twenty} points</Points>
+        </li>
+        <li>
+          {`numbers up to 50 that divide the value`} reward{' '}
+          <Points>+ {divisiblityPoints.Fifty} points</Points>
+        </li>
+        <li>
+          {`numbers up to 100 that divide the value`} reward{' '}
+          <Points>+ {divisiblityPoints.Hundered} point</Points>
+        </li>
+        <li>{`numbers over 100`} rewarded no points.</li>
+      </CollapsableList>
+    </div>
+  );
+
   const circleDivsionsCanvas = (
-    <InteractiveDegreeDragWrapper>
-      <Canvas1Background>
-        <CanvasForTopicComponent
-          sceneGetter={getSceneUserCicrcleDivision}
-          height={400}
-          objectPassedToScene={{
-            targetValueObjs,
-            setTargetValueObjs,
-            userCircleDivisions,
-            setUserCircleDivisions,
-          }}
+    <>
+      <Criteria>
+        <ExpandableBullet pre={2} title={'more divisible'}>
+          {dividesNeatlyCollapsable}
+        </ExpandableBullet>
+        <ExpandableBullet pre={1} title={`smaller`}>
+          {notTooBigCollapsable}
+        </ExpandableBullet>
+      </Criteria>
+
+      <InteractiveDegreeDragWrapper>
+        <DraggableButton />
+        <Canvas1Background>
+          <CanvasForTopicComponent
+            sceneGetter={getSceneUserCicrcleDivision}
+            height={400}
+            objectPassedToScene={{
+              targetValueObjs,
+              setTargetValueObjs,
+              userCircleDivisions,
+              setUserCircleDivisions,
+            }}
+          ></CanvasForTopicComponent>
+        </Canvas1Background>
+        <AddFactorsButtonBar setUserEnteredValue={setUserCircleDivisions} />
+        <InputForUserCircleDivisions
+          value={userCircleDivisions}
+          setValue={setUserCircleDivisions}
         />
-      </Canvas1Background>
-      <AddFactorsButtonBar setUserEnteredValue={setUserCircleDivisions} />
-      <InputForUserCircleDivisions
-        value={userCircleDivisions}
-        setValue={setUserCircleDivisions}
-      />
-    </InteractiveDegreeDragWrapper>
+      </InteractiveDegreeDragWrapper>
+    </>
   );
 
   const tenHundredThousan2 = (
@@ -240,71 +323,6 @@ const Degree = () => {
     </InteractiveDegreeDragWrapper>
   );
 
-  const scoreMultipliers = {
-    Ten: 4,
-    Hundred: 3,
-    Thousand: 2,
-  };
-
-  const divisiblityPoints = {
-    Ten: 8,
-    Twenty: 4,
-    Fifty: 2,
-    Hundered: 1,
-  };
-
-  const notTooBigCollapsable = (
-    <NotTooBigWrapper>
-      <div>
-        The priority is to pick smaller values to make things easier on our
-        computers and pencils. So that computers/phones don't have to work too
-        hard, 10,000 is the largest allowable number for this exercise.
-        <ul>
-          <li>
-            {`numbers up to 10 get a score multiplier of`} <br />
-            <Multiplier>× {scoreMultipliers.Ten}</Multiplier>
-          </li>
-          <li>
-            {`numbers up to 100 get a score multiplier of`}
-            <br />
-          </li>
-          <Multiplier>× {scoreMultipliers.Hundred}</Multiplier>
-          <li>
-            {`numbers up to 1000 get a score multiplier of`}
-            <br />
-          </li>
-          <Multiplier>× {scoreMultipliers.Thousand}</Multiplier>
-          <li>{`numbers over 1000 get no score multiplier`}</li>
-        </ul>
-      </div>
-    </NotTooBigWrapper>
-  );
-
-  const dividesNeatlyCollapsable = (
-    <div>
-      priority given to integers that divide into your selected value.
-      <ul>
-        <li>
-          {`numbers up to 10 that divide the value`} rewarded{' '}
-          <Points>{divisiblityPoints.Ten} points</Points>
-        </li>
-        <li>
-          {`numbers up to 20 that divide the value`} rewarded{' '}
-          <Points>{divisiblityPoints.Twenty} points</Points>
-        </li>
-        <li>
-          {`numbers up to 50 that divide the value`} rewarded{' '}
-          <Points>{divisiblityPoints.Fifty} points</Points>
-        </li>
-        <li>
-          {`numbers up to 100 that divide the value`} rewarded{' '}
-          <Points>{divisiblityPoints.Hundered} point</Points>
-        </li>
-        <li>{`numbers over 100`} rewarded no points.</li>
-      </ul>
-    </div>
-  );
-
   return (
     <TopicComponentBoilerPlate
       title={
@@ -314,14 +332,7 @@ const Degree = () => {
       }
     >
       <>
-        <Criteria>
-          <ExpandableBullet pre={1} title={`not too big ${fromScratchValue}`}>
-            {notTooBigCollapsable}
-          </ExpandableBullet>
-          <ExpandableBullet pre={2} title={'whole number divisibility '}>
-            {dividesNeatlyCollapsable}
-          </ExpandableBullet>
-        </Criteria>
+        {circleDivsionsCanvas}
         <DegreeIntro>
           The degree, or more formally, the
           <Fancy> arcdegree </Fancy>, is one way to measure an angle. 360 of
@@ -338,21 +349,18 @@ const Degree = () => {
         <br />
         <h4> Natural Origin? </h4>
         <P>
-          As a rule of thumb, a good question to ask before changing with things
-          in math is – Are we going to tear the fabric of reality? Some values
-          we use are logically necesarry and inextricably linked to the nature
+          A good question to ask before tinkering with mathematical conventions
+          – Are we going to accidentally tear the fabric of reality? Some values
+          we use are logically necessary and inextricably linked to the nature
           of reality. They cannot be changed.
           <br />
           <br />
-          <Pi>π</Pi> is one such value. Imagine two intelligent lifeforms at far
-          ends of the galaxy accurately measure the ratio of two lengths, a
-          circle's diameter and its circumference. They are helpless to converge
-          at the same familiar value of 3.14159... Personally, I would love to
-          change the value of <Pi>π</Pi> to exactly 3. Just for convenience.
-          Sadly I cannot change the value of <Pi>π</Pi> because I cannot change
-          the underlying gemoetry of a circle. <Pi>π</Pi> is a value found in
-          nature in all circles and coldly indifferent to my preferences. It is
-          a constant {'('}i.e. unchanging {')'} value to be
+          <Pi>π</Pi> is one such value. Two intelligent lifeforms on far-flung,
+          spiraling arms of the galaxy decide to accurately measure the ratio of
+          a circle's circumeference to its diameter. They are helpless to
+          converge at 3.14159.... They could not change the value of <Pi>π</Pi>{' '}
+          without changing the underlying gemoetry of a circle. <Pi>π</Pi> is a
+          value to be
           <em> discovered </em>, not one to be created.
           <br />
           <br />
@@ -373,33 +381,34 @@ const Degree = () => {
           </div>
           <br />
           <br />
-          360 is not a value we found hidden in the nature of a circle. The
-          fabric of reality doesn't break when we divide our pizzas into 8
-          slices instead of 360. 360 degrees has not <em> natural </em> origin.
-          So that means 360 is a number we got to choose for ourselves. How did
-          that happen?
+          Divisions of a circle, however, are not a value we found embedded in
+          the intrinsic nature of all circles. We are as free to divide our
+          pizzas into 8 slices as we are to divide our compasses into 360. 360
+          degrees has no <em> natural </em> origin. So that means 360 is a
+          number we got to choose for ourselves. How did that happen?
         </P>
-        <h4>Historical Origin </h4>
+        <h4>Some History </h4>
         <P>
-          2 and a half thousand years ago Jupiter was in retrograde. And, in a
-          sense, we have measured circles using 360 divisions pretty much ever
-          since because of that.
+          2 and a half thousand years ago there were some preists who were
+          really into astrology. Like, really <em>really</em> into it. Nowadays,
+          some people use the position of the stars to inform who they should
+          date. The ancient Babylon kings used the position of the stars to
+          craft economic policy.
           <br />
           <br />
-          Babylonian preists believed in a flavor of astrology where knowing the
-          motion of Jupiter could give a lot of very useful information about
-          life on earth. Knowing Jupiter's trajectory they believed would give
-          them insight into the level of the Eurphrates, the price of grain,
-          weather events, that kind of thing. Knowing the motion of Jupiter was
-          of such high priority that these preists developed outrageously
-          sophisticated astronomy. So impressive that the Babylonians were
-          making leaps in mathematical abstraction and proto-calculus about 1500
-          years ahead of the scholars in France and England who were credited
-          with the discovery of these ideas until{' '}
+          They believed knowing Jupiter's trajectory would give them insight
+          into the level of the Eurphrates river, the price of grain, that kind
+          of thing. This pseudo-scientific reverance of astrology, whatever
+          chaotic effects it may have had on their society, led Babylonians down
+          inroads into a genuine science, astronomy. The preists, eager to more
+          accurately determine how Jupiter might affect grain prices, made a
+          mathematical leap, a type of proto-calculus, about 1500 years ahead of
+          the scholars in France and England who were credited with the
+          discovery of these ideas. A tiny, hastily scrawled cuneform tablet{' '}
           <MyLink href="https://www.science.org/doi/10.1126/science.aad8085">
-            a tiny, hastily scrawled cuneform tablet was discovered in 2016
-          </MyLink>
-          .
+            was translated{' '}
+          </MyLink>{' '}
+          in 2016 allowing us to give them credit for their earlier discovery. .
         </P>
         <br />
         <br />
@@ -410,35 +419,53 @@ const Degree = () => {
           </BabylonImgGroup>
           <br />
           <br />
-          <BabylonImgCaption>
-            A Babylonian tablet reveals using geometry of trapezoids to produce
-            the mean speed theorem around 100 BC. A type of calculus-like
-            abstraction previously thought to have been discovered much later by
-            a collaboration between English and French scholars in 1350 AD. The
-            cuneform lettering on this tiny tablet
-            {'(small enough to fit in the palm of your hand)'} is considered to
-            be unusually messy, probably not much better than my own handwriting
-            seen on the right. <br />
-            <br />
-            <MyLink href="https://www.scientificamerican.com/article/babylonians-tracked-jupiter-with-fancy-math-tablet-reveals/">
-              Photo Credit: Trustees of the British Museum{' '}
-            </MyLink>
-          </BabylonImgCaption>
+          <PhotoCredit>
+            <BabylonImgCaption>
+              <div style={{ display: 'flex' }}>
+                A Babylonian tablet reveals using geometry of trapezoids to
+                produce the mean speed theorem around 100 BC.
+                <Button
+                  onClick={() => {
+                    setTabletCaptionOpen(!tabletCaptionOpen);
+                  }}
+                >
+                  {tabletCaptionOpen ? <ExpandLess /> : <ExpandMore />}
+                </Button>
+              </div>
+              <br />
+              <br />
+              <Collapse in={tabletCaptionOpen}>
+                An especially significant finding because the sides of the
+                trapezoid represented abstract concepts — velocity and time
+                rather than an actual physical trapezoid. The tablet showed the
+                Babylonians understood finding the area inside the trapezoid,
+                essentially calculating an integral in calculus, would yield the
+                total distance traveled. Small enough to fit in the palm of your
+                hand, the tablet is considered to be unusually messy, probably
+                not much better than my own handwriting seen on the right.{' '}
+                <br />
+                <br />
+              </Collapse>
+              <MyLink href="https://www.scientificamerican.com/article/babylonians-tracked-jupiter-with-fancy-math-tablet-reveals/">
+                Photo Credit: Trustees of the British Museum{' '}
+              </MyLink>
+            </BabylonImgCaption>
+          </PhotoCredit>
         </BabylonTabletGroup>
         <P>
           <br />
           <br />
-          This sophsiticated astronomy was not suited to the Babylonian lunar
-          calendar, so the preists studying the elliptical paths of planets and
-          moons developed a more fitting calendar with 12 months of 30 days aka
-          360 divisions. Later on a Greek astronomer, Hipparchos of Rhodes,
-          began applying Euclidean Geometry to Babylonian astronomy. Up to that
-          point, only right angles were used in Euclidean geometry so the
-          mathematician decided to borrow the Babylonian astronomer-preists'
-          convention of 360 to more precisely measure other angles.
+          Astronomy was not suited to the Babylonian lunar calendar, so the
+          preists studying the elliptical paths of planets and moons developed a
+          more fitting calendar with 12 months of 30 days aka 360 divisions
+          which were chosen as a nod to Babylonian myth. Later on a Greek
+          astronomer, Hipparchos of Rhodes, began applying Euclidean Geometry to
+          astronomy. Up to that point, only right angles were used in Euclidean
+          geometry so the mathematician decided to borrow the Babylonian
+          preists' convention of 360 to more precisely measure other angles.
           <br />
           <br />
-          Just for fun, I thought I would include an excerpt from
+          {/* Just for fun, I thought I would include an excerpt from
           astrology.com's description of how Jupiter being in retrograde affects
           life on earth.
           <Quote
@@ -450,7 +477,7 @@ const Degree = () => {
           is in retrograde. Otherwise, you might unexpectedly standardize basic
           mathematical units for a few milenia.
           <br />
-          <br />
+          <br /> */}
           <Alert severity="info" sx={{ position: 'relative' }}>
             <AlertTitle>Common Misconception</AlertTitle>
             <Button
@@ -484,9 +511,9 @@ const Degree = () => {
           </Alert>
           <br />
           <br />
-          Landing on 360 based on an ancient myth hardly sounds like a terrible
-          way to choose such a commonly used value. So let's cast 360 aside for
-          now and start from scratch.
+          Using an ancient Babylonian myth as a basis for modern geometry sounds
+          questionable at best. Let's cast 360 aside for now and start from
+          scratch.
         </P>
         <h4>From Scratch</h4>
         For starters, I am going to establish 2 criteria desired for potential
@@ -599,6 +626,13 @@ const Degree = () => {
     </TopicComponentBoilerPlate>
   );
 };
+
+const PhotoCredit = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  border-left: 2px solid ${cl.getHSL(cl.purple)};
+`;
 
 const ExponentialBackground = styled.div`
   position: relative;
@@ -726,6 +760,15 @@ const Canvas1Background = styled.div`
   /* /* border-top: 5px solid ${cl.getHSLA(cl.purple, 0.5)}; */
 `;
 
+const CollapsableList = styled.ul`
+  list-style: none;
+  padding-left: 10px;
+
+  & li {
+    padding-top: 10px;
+  }
+`;
+
 const Canvas2Background = styled.div`
   background: ${cl.getHSL(cl.white)};
   /* border-top: 7px solid ${cl.getHSLA(cl.purple, 0.5)};
@@ -738,6 +781,7 @@ const P = styled.div`
 
 const Multiplier = styled.span`
   color: ${cl.getHSL(cl.purple)};
+  display: inline;
 `;
 const Points = styled.div`
   color: ${cl.getHSL(cl.purple)};

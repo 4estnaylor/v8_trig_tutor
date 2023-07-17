@@ -57,7 +57,7 @@ export const introduction = new TopicSection('Intro: Sharpen your axe 🪓', [
 ]);
 
 export const measurement = new TopicSection('Measuring Angles ∡', [
-  new TopicComponent('°'),
+  new TopicComponent('°', [new SubComponent("Let's invent a unit")]),
 
   new TopicComponent('negative angles'),
   new TopicComponent(`big angles`),
