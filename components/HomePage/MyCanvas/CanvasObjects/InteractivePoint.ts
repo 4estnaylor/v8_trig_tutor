@@ -46,17 +46,17 @@ class InteractivePoint {
   draw() {
     this.update();
 
-    switch (this.form) {
-      case 'default':
-        this.drawDefaultPoint();
-        break;
-      case 'hover':
-        this.drawHoveredPoint();
-        break;
-      case 'grabbing':
-        this.drawGrabbingPoint();
-        break;
-    }
+    // switch (this.form) {
+    //   case 'default':
+    //     this.drawDefaultPoint();
+    //     break;
+    //   case 'hover':
+    //     this.drawHoveredPoint();
+    //     break;
+    //   case 'grabbing':
+    //     this.drawGrabbingPoint();
+    //     break;
+    // }
   }
 
   drawNoUpdate() {

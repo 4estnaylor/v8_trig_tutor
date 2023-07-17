@@ -46,6 +46,16 @@ const Degree = () => {
     { value: 360, completed: false },
   ]);
 
+  const [controlledPosition, setControlledPosition] = useState({
+    x: 50,
+    y: 50,
+  });
+
+  const onControlledDrag = (e: Event, position: { x: number; y: number }) => {
+    const { x, y } = position;
+    setControlledPosition({ x, y });
+  };
+
   const introMarks = [
     {
       value: 0,
@@ -187,7 +197,10 @@ const Degree = () => {
       </Criteria>
 
       <InteractiveDegreeDragWrapper>
-        <DraggableButton />
+        <DraggableButton
+          controlledPosition={controlledPosition}
+          setControlledPosition={setControlledPosition}
+        />
         <Canvas1Background>
           <CanvasForTopicComponent
             sceneGetter={getSceneUserCicrcleDivision}
@@ -197,6 +210,8 @@ const Degree = () => {
               setTargetValueObjs,
               userCircleDivisions,
               setUserCircleDivisions,
+              setControlledPosition,
+              controlledPosition,
             }}
           ></CanvasForTopicComponent>
         </Canvas1Background>

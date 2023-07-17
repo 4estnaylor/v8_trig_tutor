@@ -22,14 +22,18 @@ const getSceneUserCicrcleDivision: SceneGetter = (
   const {
     userCircleDivisions,
     setUserCircleDivisions,
+    setControlledPosition,
+    controlledPosition,
   }: {
     targetValueObjs: TargetValueObj[];
     setTargetValueObjs: any;
     userCircleDivisions: number;
     setUserCircleDivisions: any;
+    setControlledPosition: any;
+    controlledPosition: { x: number; y: number };
   } = passedObject;
 
-  console.log(userCircleDivisions, setUserCircleDivisions);
+  console.log('controlled position', controlledPosition);
 
   let numberOfDivisions = 5;
 
@@ -54,6 +58,18 @@ const getSceneUserCicrcleDivision: SceneGetter = (
   testUnitCirc.radius *= 1;
 
   scene.draw = () => {
+    setControlledPosition((prev: { x: number; y: number }) => {
+      testUnitCirc.radialPoint.x = prev.x + 25;
+      testUnitCirc.radialPoint.y = prev.y + 25;
+      console.log(
+        { x: prev.x, y: prev.y },
+        {
+          radialx: testUnitCirc.radialPoint.x + 25,
+          radialY: testUnitCirc.radialPoint.y + 25,
+        }
+      );
+      return prev;
+    });
     testUnitCirc.customUnitDivisions = numberOfDivisions;
     testUnitCirc.draw();
     setUserCircleDivisions((prev: number) => {
@@ -62,6 +78,7 @@ const getSceneUserCicrcleDivision: SceneGetter = (
     });
     // drawDivisions();
     testUnitCirc.drawDivisionTicks();
+    context.fillStyle = 'black';
   };
 
   return scene;

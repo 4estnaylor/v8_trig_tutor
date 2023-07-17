@@ -39,10 +39,10 @@ class EventHandlerConfig {
       dragging: false,
     };
 
-    this.handlers.mousedown.push(this.defaultDown);
-    this.handlers.mouseup.push(this.defaultUp);
-    this.handlers.touchstart.push(this.defaultTouchStart);
-    this.handlers.touchend.push(this.defaultTouchEnd);
+    // this.handlers.mousedown.push(this.defaultDown);
+    // this.handlers.mouseup.push(this.defaultUp);
+    // this.handlers.touchstart.push(this.defaultTouchStart);
+    // this.handlers.touchend.push(this.defaultTouchEnd);
   }
 
   defaultDown = () => {

@@ -3,13 +3,18 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../colors';
 import Draggable from 'react-draggable';
+import ControlCameraIcon from '@mui/icons-material/ControlCamera';
 
-const DraggableButton = () => {
+type DraggableButtonProps = {
+  controlledPosition: { x: number; y: number };
+  setControlledPosition: React.Dispatch<
+    React.SetStateAction<{ x: number; y: number }>
+  >;
+};
+
+const DraggableButton = (props: DraggableButtonProps) => {
+  const { controlledPosition, setControlledPosition } = props;
   const [isDraggable, setIsDraggable] = useState(false);
-  const [controlledPosition, setControlledPosition] = useState({
-    x: 50,
-    y: 50,
-  });
 
   const onControlledDrag = (e: Event, position: { x: number; y: number }) => {
     const { x, y } = position;
@@ -46,7 +51,9 @@ const DraggableButton = () => {
       //   console.log('dragging');
       // }}
       >
-        <InnerDot>{isDraggable ? 'T' : 'F'}</InnerDot>
+        <InnerDot>
+          <ControlCameraIcon />
+        </InnerDot>
       </Wrapper>
     </Draggable>
   );
