@@ -272,13 +272,18 @@ const useCoursePath = () => {
   };
 
   const findPreviousPathForSubComponent = () => {
+    console.log(
+      'is happening correct?',
+      previousTopicComponent,
+      currentTopicComponent
+    );
     if (!currentTopicComponent) return;
     let path = '/';
     if (previousSubComponent) {
       path =
         '/' + currentTopicComponent?.title + '/' + previousSubComponent.title;
     } else if (!previousSubComponent && previousTopicComponent) {
-      path = '/' + previousTopicComponent.title;
+      path = '/' + currentTopicComponent.title;
     }
 
     setPreviousPath(path);

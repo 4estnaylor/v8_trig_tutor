@@ -714,6 +714,7 @@ const Div360NumInput = styled.input`
 
 const InteractiveDegreeDragWrapper = styled.div`
   /* position: relative; */
+  position: relative;
   /* position: static; */
 `;
 

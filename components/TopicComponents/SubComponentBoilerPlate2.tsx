@@ -32,7 +32,7 @@ const SubComponentBoilerPlate2 = (props: SubComponentBoilerPlateProps) => {
 };
 
 const Background = styled.div`
-  background-color: ${cl.getHSLA(cl.purple, 0.2)};
+  background-color: ${cl.getHSLA(cl.purple, 0)};
 `;
 const Title = styled.h1`
   color: ${cl.getHSL(cl.black)};
@@ -45,7 +45,7 @@ const Wrapper = styled.div`
   /* background-color: ${cl.getHSL(cl.white)}; */
   background-color: ${cl.getHSLA(cl.white, 0.8)};
 
-  box-shadow: 0px 0px 6px ${cl.getHSLA(cl.black, 0.2)};
+  /* box-shadow: 0px 0px 6px ${cl.getHSLA(cl.black, 0.2)}; */
 
   display: flex;
   flex-direction: column;

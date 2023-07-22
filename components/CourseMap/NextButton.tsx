@@ -78,6 +78,8 @@ const NextButton = (props: NextButtonProps) => {
     currentSubComponent,
   } = useCoursePath();
 
+  // console.log('use Course Path', useCoursePath());
+
   const userProgress = useUserProgress();
 
   const checkIfCurrentTopicOrSubComponentComplete = () => {

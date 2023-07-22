@@ -46,7 +46,9 @@ export type AnswerState =
   | 'incorrect'
   | 'invalid amount of answers';
 
-const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
+const MultipleChoiceQuestionForSeries = (
+  props: MultipleChoiceQuestionProps
+) => {
   const {
     question,
     incorrectOptions,
@@ -122,6 +124,12 @@ const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
 
   useEffect(() => {
     setShuffledOptions(shuffle([...incorrectOptions, ...correctOptions]));
+  }, []);
+
+  useEffect(() => {
+    console.log('resetting');
+
+    setSelectedValues([]);
   }, [question]);
 
   const options = shuffledOptions.map((option, index) => {
@@ -141,6 +149,10 @@ const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
   return (
     <Wrapper>
       <TopPart>
+        <ExtraPadding />
+        {/* <Header>
+          Question {answerState === 'correct' ? correctSymbol : null}
+        </Header> */}
         <Question> {question} </Question>
         <ChooseXOfY isHighlighted={answerState === 'invalid amount of answers'}>
           {'('}choose {correctOptions.length} of the {shuffledOptions.length}{' '}
@@ -151,15 +163,20 @@ const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
         <Options>{options}</Options>
       </BottomPart>
       <CheckButtonWrapper>
-        <CheckButton
-          variant="outlined"
-          onClick={checkAnswer}
-          sx={{
-            color: `${cl.getHSL(cl.purple)}`,
-          }}
-        >
-          Check
-        </CheckButton>
+        {answerState === 'correct' ? (
+          correctSymbol
+        ) : (
+          <CheckButton
+            variant="outlined"
+            onClick={checkAnswer}
+            sx={{
+              color: `${cl.getHSL(cl.purple)}`,
+              fontWeight: '400',
+            }}
+          >
+            Check
+          </CheckButton>
+        )}
       </CheckButtonWrapper>
     </Wrapper>
   );
@@ -172,8 +189,13 @@ const TopPart = styled.div`
     ${cl.getHSLA(cl.black, 1)}
   );
   padding: 15px;
-  padding-top: 30px;
+
   width: 100%;
+`;
+
+const ExtraPadding = styled.div`
+  height: 50px;
+  /* background-color: red; */
 `;
 
 const BottomPart = styled.div`
@@ -203,8 +225,7 @@ const Wrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
 
-  margin-top: 30px;
-
+  /* margin-top: 30px; */
   margin-bottom: 30px;
 
   @media ${QUERIES.tabletAndUp} {
@@ -230,20 +251,23 @@ const Question = styled.div`
 `;
 
 const CorrectSymbol = styled.div`
-  height: 70px;
-  width: 70px;
-  font-size: 2.5rem;
-  position: absolute;
-  right: 0;
-  box-shadow: 1px 1px 2px ${cl.getHSL(cl.black)};
+  height: 50px;
+  width: 50px;
+  font-size: 2rem;
+  font-weight: 600;
+  /* position: absolute; */
+  /* right: 0; */
+  /* box-shadow: 1px 1px 2px ${cl.getHSL(cl.black)}; */
 
   color: ${cl.getHSL(cl.white)};
   background: linear-gradient(
     15deg,
-    ${cl.getHSL(cl.purple_bright)},
-    ${cl.getHSL(cl.blue)},
+    ${cl.getHSL(cl.red_light)},
+    ${cl.getHSL(cl.purple)},
     ${cl.getHSL(cl.blue)}
   );
+  /* -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -280,4 +304,4 @@ const ChooseXOfY = styled.div<{ isHighlighted: boolean }>`
   border-radius: 8px;
 `;
 
-export default MultipleChoiceQuestion;
+export default MultipleChoiceQuestionForSeries;

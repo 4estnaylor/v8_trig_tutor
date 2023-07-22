@@ -4,6 +4,7 @@ import useCheckQuestionForUser, {
 } from '../../utils/hooks/useCheckQuestionForUser';
 import useTrigUser from '../../utils/hooks/useTrigUser';
 import MultipleChoiceQuestion, { AnswerState } from './MultipleChoiceQuestion';
+import MultipleChoiceQuestionForSeries from './MultipleChocieQuestionForSeries';
 
 type Option = string | JSX.Element | React.ReactElement;
 
@@ -11,6 +12,7 @@ export default class MCQuestion {
   answerState: AnswerState | null;
   setAnswerState: React.Dispatch<React.SetStateAction<AnswerState>> | null;
   additionalContent: string | JSX.Element | React.ReactElement;
+  isOrdered: boolean;
   constructor(
     public question: string,
     public correctOptions: Option[],
@@ -21,6 +23,7 @@ export default class MCQuestion {
     this.incorrectOptions = incorrectOptions;
     this.answerState = null;
     this.setAnswerState = null;
+    this.isOrdered = false;
     // const test = useCheckQuestionForUser({
     //   question: this.question,
     // });
@@ -43,6 +46,28 @@ export default class MCQuestion {
 
     return (
       <MultipleChoiceQuestion
+        question={this.question}
+        correctOptions={this.correctOptions}
+        incorrectOptions={this.incorrectOptions}
+        answerState={this.answerState}
+        setAnswerState={this.setAnswerState}
+        questionId={questionId}
+      />
+    );
+  };
+
+  createMCQuestionElementForSeries = () => {
+    const [answerState, setAnswerState, questionId] = useCheckQuestionForUser({
+      question: this.question,
+    });
+
+    this.answerState = answerState;
+    this.setAnswerState = setAnswerState;
+
+    // const trigUser = useTrigUser();
+
+    return (
+      <MultipleChoiceQuestionForSeries
         question={this.question}
         correctOptions={this.correctOptions}
         incorrectOptions={this.incorrectOptions}

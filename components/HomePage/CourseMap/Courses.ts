@@ -46,7 +46,6 @@ export const introduction = new TopicSection('Intro: Sharpen your axe 🪓', [
     new SubComponent('why you should study trig'),
     new SubComponent("why you shouldn't not study trig"),
   ]),
-
   // new TopicComponent('double down'),
   // new TopicComponent('math kraken 🐙'),
   new TopicComponent('strategy', [
@@ -57,14 +56,17 @@ export const introduction = new TopicSection('Intro: Sharpen your axe 🪓', [
 ]);
 
 export const measurement = new TopicSection('Measuring Angles ∡', [
-  new TopicComponent('°', [new SubComponent("Let's invent a unit")]),
+  new TopicComponent('°', [
+    new SubComponent('origin of 360'),
+    new SubComponent('smallness and divisibility'),
+  ]),
 
-  new TopicComponent('negative angles'),
-  new TopicComponent(`big angles`),
   new TopicComponent('radians', [
     new SubComponent('τ radians'),
     new SubComponent('π radians'),
   ]),
+  new TopicComponent('negative angles'),
+  new TopicComponent(`big angles`),
   new TopicComponent('conversions', [
     new SubComponent('τ radians ↔ π radians'),
     new SubComponent('° ↔ τ radians'),
@@ -103,14 +105,14 @@ export const measurement = new TopicSection('Measuring Angles ∡', [
 ]);
 
 export const specialAngles = new TopicSection('Special Angles', [
-  new TopicComponent('°', [
-    new SubComponent('halves'),
-    new SubComponent('thirds'),
-    new SubComponent('quarters'),
-    new SubComponent('sixths'),
-    new SubComponent('twelfths'),
-    new SubComponent('all together'),
-  ]),
+  // new TopicComponent('°', [
+  //   new SubComponent('halves'),
+  //   new SubComponent('thirds'),
+  //   new SubComponent('quarters'),
+  //   new SubComponent('sixths'),
+  //   new SubComponent('twelfths'),
+  //   new SubComponent('all together'),
+  // ]),
   new TopicComponent('τ', [
     new SubComponent('halves'),
     new SubComponent('thirds'),
