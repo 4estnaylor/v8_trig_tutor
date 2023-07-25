@@ -3,13 +3,17 @@ import styled from 'styled-components';
 import MCQuestion from '../Inputs/MCQuestion';
 import { Button, MobileStepper } from '@mui/material';
 import cl from '../../colors';
+import MultipleChoiceQuestionForSeries from '../Inputs/MultipleChocieQuestionForSeries';
 
 type QuestionSeriesProps = {
-  questions: MCQuestion[] | any[];
+  questions: MCQuestion[];
 };
 
 const QuestionSeries = (props: QuestionSeriesProps) => {
   const { questions } = props;
+  const questionObjs = questions.map((question) => {
+    return question.createMCQuestionElementForSeries();
+  });
   const [questionIndex, setQuestionIndex] = useState(0);
 
   const handleNext = () => {
@@ -57,7 +61,7 @@ const QuestionSeries = (props: QuestionSeriesProps) => {
   return (
     <Wrapper>
       {stepper}
-      {questions[questionIndex]}
+      {questionObjs[questionIndex]}
     </Wrapper>
   );
 };

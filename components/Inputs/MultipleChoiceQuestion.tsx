@@ -151,15 +151,19 @@ const MultipleChoiceQuestion = (props: MultipleChoiceQuestionProps) => {
         <Options>{options}</Options>
       </BottomPart>
       <CheckButtonWrapper>
-        <CheckButton
-          variant="outlined"
-          onClick={checkAnswer}
-          sx={{
-            color: `${cl.getHSL(cl.purple)}`,
-          }}
-        >
-          Check
-        </CheckButton>
+        {answerState === 'correct' ? (
+          correctSymbol
+        ) : (
+          <CheckButton
+            variant="outlined"
+            onClick={checkAnswer}
+            sx={{
+              color: `${cl.getHSL(cl.purple)}`,
+            }}
+          >
+            Check
+          </CheckButton>
+        )}
       </CheckButtonWrapper>
     </Wrapper>
   );
@@ -230,20 +234,23 @@ const Question = styled.div`
 `;
 
 const CorrectSymbol = styled.div`
-  height: 70px;
-  width: 70px;
-  font-size: 2.5rem;
-  position: absolute;
-  right: 0;
-  box-shadow: 1px 1px 2px ${cl.getHSL(cl.black)};
+  height: 50px;
+  width: 50px;
+  font-size: 2rem;
+  font-weight: 600;
+  /* position: absolute; */
+  /* right: 0; */
+  /* box-shadow: 1px 1px 2px ${cl.getHSL(cl.black)}; */
 
   color: ${cl.getHSL(cl.white)};
   background: linear-gradient(
     15deg,
-    ${cl.getHSL(cl.purple_bright)},
-    ${cl.getHSL(cl.blue)},
+    ${cl.getHSL(cl.red_light)},
+    ${cl.getHSL(cl.purple)},
     ${cl.getHSL(cl.blue)}
   );
+  /* -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
   border-radius: 50%;
   display: flex;
   justify-content: center;

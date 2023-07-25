@@ -52,12 +52,12 @@ const origin_of_360 = () => {
           <br />
           <br />
           <Pi /> is one such value. Two intelligent lifeforms on far-flung,
-          spiraling arms of the galaxy decide to accurately measure the ratio of
-          a circle's circumeference to its diameter. They are helpless to
-          converge at 3.14159.... They could not change the value of <Pi />{' '}
-          without changing the underlying gemoetry of a circle. <Pi /> is a
-          value to be
-          <Em> discovered </Em>, not one to be created.
+          spiraling arms of a distant galaxy decide to accurately measure the
+          ratio of a circle's circumeference to its diameter. They are helpless
+          to converge at 3.14159-ish {`(depending on their accuracy)`}. They
+          could not change the value of <Pi /> without changing the underlying
+          gemoetry of a circle. <Pi /> is not a value to be created, but to
+          glean from <Em>nature</Em>.
           <br />
           <br />
           <div
@@ -78,13 +78,14 @@ const origin_of_360 = () => {
           <br />
           <br />
           Divisions of a circle, however, are not a value we found embedded in
-          the intrinsic nature of all circles. We are as free to divide our
-          pizzas into 11 slices {`(although that would be a warcrime)`} as we
-          are into 8. Likewise, nature permits us to divide circles into 81
-          sections just as much as it allows us to divide them into 360. 360
-          degrees has no <Em> natural </Em> origin. So that means 360 is a
-          number we got to choose for ourselves. How did that happen?
-          <QuestionSeries questions={[question1, question2]} />
+          the intrinsic nature of all circles. No law of nature dictates we
+          couldn't divide a pizza into 11 slices instead of 8{' '}
+          {`(although basic human decency does)`}. Likewise, 360 degrees has no{' '}
+          <Em> naturally determined </Em> origin. So that means 360 is a number
+          we got to choose for ourselves. How did that happen?
+          <QuestionSeries
+            questions={[MCQuestionsFor360[0], MCQuestionsFor360[1]]}
+          />
         </P>
         <h4>some history</h4>
         <P>
@@ -92,14 +93,21 @@ const origin_of_360 = () => {
           really into astrology. Like, really <em>really</em> into it. Nowadays,
           some people use the position of the stars to inform who they should
           date. The ancient Babylon kings used the position of the stars to
-          craft economic policy.
+          craft economic policy or designate people as sacrifical kings...
+          <br />
+          <br />
+          <Quote
+            quote={` For instance, Høyrup said, if the astrologer was certain the king was going to die, the Babylonians could install a proxy king for six months, kill him at the end of his service, and let the original king return to the throne.`}
+            source="https://www.scientificamerican.com/article/babylonians-tracked-jupiter-with-fancy-math-tablet-reveals/"
+          ></Quote>
           <br />
           <br />
           They believed knowing Jupiter's trajectory would give them insight
-          into the level of the Eurphrates river, the price of grain, that kind
-          of thing. This pseudo-scientific reverance of astrology, whatever
-          chaotic effects it may have had on their society, led Babylonians down
-          inroads into a genuine science, astronomy.
+          into the level of the Eurphrates river, the price of grain, a king's
+          imminent death, that kind of thing. This pseudo-scientific reverance
+          of astrology, whatever chaotic or murderous effects it may have had on
+          their society, led Babylonians down inroads into a genuine science,
+          astronomy.
           {/* The preists, eager to more
           accurately determine how Jupiter might affect grain prices, made a
           mathematical leap, a type of proto-calculus, about 1500 years ahead of
@@ -160,16 +168,22 @@ const origin_of_360 = () => {
           <br />
           <br />
           Studying the eliptical paths of planets was not suited to the
-          Babylonian lunar calendar, so the preists developed a more fitting
-          calendar with 12 months of 30 days {'('}360 divisions total{')'}. The
-          numbers of 12 and 30 were chosen based on Babylonian myth.
+          Babylonian use of a lunar calendar which shifted over time, so the
+          preists developed a more fitting calendar to track planets with 12
+          months of 30 days — meaning {'('}360 calendar days in total{')'}. The
+          divisions of 12 and 30 were inspired by {` `}
+          <MyLink href="https://www.historytoday.com/history-matters/full-circle#:~:text=So%2C%20although%20angles%20come%20from,degrees%20comes%20from%20Babylonian%20astronomy.">
+            Babylonian myth
+          </MyLink>
+          {` `}where the god Marduk establishes 3 stars for a series of 12
+          months.
           <br />
           <br />
-          Later on a Greek astronomer, Hipparchos of Rhodes, began applying
-          Euclidean Geometry to astronomy. Up to that point, only right angles
-          were used in Euclidean geometry so the mathematician decided to borrow
-          the Babylonian preists' convention of 360 to more precisely measure
-          other angles.
+          Around 200 BC, a Greek astronomer, Hipparchos of Rhodes, began
+          applying Euclidean Geometry to astronomy. Up to that point, only right
+          angles were used in Euclidean geometry so the mathematician decided to
+          borrow the Babylonian preists' convention of 360 to precisely measure
+          angles.
           <br />
           <br />
           {/* Just for fun, I thought I would include an excerpt from
@@ -221,11 +235,13 @@ const origin_of_360 = () => {
           </Alert>
           <br />
           <br />
+          {MCQuestionsFor360[2].createMCQuestionElement()}
+          <br />
+          <br />
           Using an ancient Babylonian myth as a basis for modern geometry sounds
-          questionable at best. Let's cast 360 aside for now and start from
-          scratch.
+          questionable at best. Let's cast 360 aside for now and start with a
+          clean slate in the next section.
         </P>
-        {/* {MCQuestionsFor360[1].createMCQuestionElement()} */}
       </P>
     </TopicComponentBoilerPlate2>
   );
