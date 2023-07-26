@@ -18,7 +18,7 @@ interface MultipleChoiceQuestionProps {
   setAnswerState: React.Dispatch<React.SetStateAction<AnswerState>>;
   questionId: string;
   questionSeries?: MCQuestion[];
-  setIndex: any;
+  setIndex: Function;
 }
 
 function shuffle(array: any[]) {
@@ -90,9 +90,9 @@ const MultipleChoiceQuestionForSeries = (
 
     if (allAnswersInUserAnswers && allAnswersInUserAnswers) {
       setAnswerState('correct');
-      if (setIndex) {
-        setIndex((prev: any) => prev + 1);
-      }
+      // if (setIndex) {
+      //   setIndex((prev: any) => prev + 1);
+      // }
       //trigUserId, questionId, answerState, attemptIncrement
 
       const bodyForQuestionUpsert = {

@@ -91,8 +91,8 @@ const origin_of_360 = () => {
         <P>
           2 and a half thousand years ago there were some preists who were
           really into astrology. Like, really <em>really</em> into it. Nowadays,
-          some people use the position of the stars to inform who they should
-          date. The ancient Babylon kings used the position of the stars to
+          some people use the position of the planets to inform who they should
+          date. The ancient Babylonians used the position of the planets to
           craft economic policy or designate people as sacrifical kings...
           <br />
           <br />

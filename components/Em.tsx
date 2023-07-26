@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   /* font-family: 'Architects Daughter'; */
   font-weight: 600;
   /* font-style: italic; */
-  font-stretch: ultra-expanded;
+  /* font-stretch: ultra-expanded; */
 `;
 
 export default Em;

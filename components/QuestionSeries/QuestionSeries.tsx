@@ -11,8 +11,8 @@ type QuestionSeriesProps = {
 
 const QuestionSeries = (props: QuestionSeriesProps) => {
   const { questions } = props;
-  const questionObjs = questions.map((question) => {
-    return question.createMCQuestionElementForSeries();
+  const questionObjs = questions.map((question, index) => {
+    return question.createMCQuestionElementForSeries(index, questions.length);
   });
   const [questionIndex, setQuestionIndex] = useState(0);
 

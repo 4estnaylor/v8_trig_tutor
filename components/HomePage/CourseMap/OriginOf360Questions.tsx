@@ -1,14 +1,14 @@
 import MCQuestion from '../../Inputs/MCQuestion';
 
 const isPiNatural: MCQuestion = new MCQuestion(
-  'Is π a value that pre-determined by nature or a value we get to choose',
-  ['pre-determined by nature'],
-  ['We choose.']
+  'Is π a value that is pre-determined by nature or a value that we get to choose',
+  ['Determined by nature.'],
+  ['We get to choose.']
 );
 const is360DegNatural: MCQuestion = new MCQuestion(
-  'Is 360, as a value to divide circles, determined by nature or humans?',
-  ['We choose.'],
-  ['pre-determined by nature']
+  'Is 360, as a value to divide circles, determined by nature or that we get to choose?',
+  ['We get to choose.'],
+  ['Determined by nature.']
 );
 
 const whereDoes360ComeFrom: MCQuestion = new MCQuestion(

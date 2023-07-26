@@ -56,7 +56,11 @@ export default class MCQuestion {
     );
   };
 
-  createMCQuestionElementForSeries = () => {
+  createMCQuestionElementForSeries = (
+    index?: number,
+    setIndex?: any,
+    Serieslength?: number
+  ) => {
     const [answerState, setAnswerState, questionId] = useCheckQuestionForUser({
       question: this.question,
     });
@@ -74,6 +78,7 @@ export default class MCQuestion {
         answerState={this.answerState}
         setAnswerState={this.setAnswerState}
         questionId={questionId}
+        setIndex={setIndex}
       />
     );
   };

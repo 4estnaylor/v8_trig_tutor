@@ -52,7 +52,7 @@ const TopicComponentBoilerPlate2 = (props: TopicComponentBoilerPlateProps) => {
 };
 
 const Background = styled.div`
-  background-color: ${cl.getHSLA(cl.purple, 0.2)};
+  background-color: ${cl.getHSLA(cl.purple, 0)};
 `;
 
 const Title = styled.h1`
@@ -70,9 +70,9 @@ const IntroductionText = styled.p`
 const Wrapper = styled.div`
   max-width: 700px;
   /* background-color: ${cl.getHSL(cl.white)}; */
-  background-color: ${cl.getHSLA(cl.white, 0.8)};
+  background-color: ${cl.getHSLA(cl.white, 0)};
 
-  box-shadow: 0px 0px 6px ${cl.getHSLA(cl.black, 0.2)};
+  /* box-shadow: 0px 0px 6px ${cl.getHSLA(cl.black, 0.2)}; */
 
   display: flex;
   flex-direction: column;
