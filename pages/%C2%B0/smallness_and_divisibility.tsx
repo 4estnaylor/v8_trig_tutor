@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TopicComponentBoilerPlate2 from '../../components/TopicComponents/TopicComponentBoilerPlate2';
 import Video from '../../components/Video';
 import styled from 'styled-components';
@@ -12,6 +12,8 @@ import cl from '../../colors';
 
 const smallness_and_divisibility = () => {
   const [userCircleDivisions, setUserCircleDivisions] = useState(1);
+  const [points, setPoints] = useState(8);
+  const [factors, setFactors] = useState<number[]>([1]);
   const scoreMultipliers = {
     Ten: 4,
     Hundred: 3,
@@ -82,6 +84,46 @@ const smallness_and_divisibility = () => {
     </div>
   );
 
+  const getFactors = (number: number = userCircleDivisions) => {
+    setFactors(
+      Array.from(Array(number + 1), (_, i) => i).filter((i) => number % i === 0)
+    );
+  };
+
+  const getFactorPoints = () => {
+    let newPoints = 0;
+    factors.forEach((factor) => {
+      if (factor <= 10) {
+        newPoints += divisiblityPoints.Ten;
+      } else if (factor <= 20) {
+        newPoints += divisiblityPoints.Twenty;
+      } else if (factor <= 50) {
+        newPoints += divisiblityPoints.Fifty;
+      } else if (factor <= 100) {
+        newPoints += divisiblityPoints.Hundered;
+      }
+    });
+    setPoints(newPoints);
+  };
+
+  // useEffect(() => {
+  //   getDivisibleNumbers(userCircleDivisions);
+  // }, [userCircleDivisions]);
+
+  useEffect(() => {
+    getFactors();
+    console.log('divisions', userCircleDivisions);
+    console.log('factors', factors);
+    console.log('points', points);
+  }, [userCircleDivisions]);
+
+  useEffect(() => {
+    getFactorPoints();
+  }, [factors]);
+
+  // useEffect(() => {
+  //   getDivisibleNumbers(50)
+  // }, []);
   const circleDivsionsCanvas = (
     <>
       <Criteria>
@@ -109,6 +151,13 @@ const smallness_and_divisibility = () => {
             controlledPosition,
           }}
         ></CanvasForTopicComponent>
+        <div>{userCircleDivisions}</div>
+        <div>
+          {factors.map((factor) => (
+            <span>{factor}, </span>
+          ))}
+        </div>
+        <div>{points}</div>
 
         <AddFactorsButtonBar setUserEnteredValue={setUserCircleDivisions} />
         <InputForUserCircleDivisions

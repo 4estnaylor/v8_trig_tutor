@@ -57,7 +57,7 @@ const origin_of_360 = () => {
           to converge at 3.14159-ish {`(depending on their accuracy)`}. They
           could not change the value of <Pi /> without changing the underlying
           gemoetry of a circle. <Pi /> is not a value to be created, but to
-          glean from <Em>nature</Em>.
+          gleaned from nature.
           <br />
           <br />
           <div
@@ -80,9 +80,9 @@ const origin_of_360 = () => {
           Divisions of a circle, however, are not a value we found embedded in
           the intrinsic nature of all circles. No law of nature dictates we
           couldn't divide a pizza into 11 slices instead of 8{' '}
-          {`(although basic human decency does)`}. Likewise, 360 degrees has no{' '}
-          <Em> naturally determined </Em> origin. So that means 360 is a number
-          we got to choose for ourselves. How did that happen?
+          {`(although basic human decency does)`}. Likewise, 360 degrees has no
+          naturally determined origin. So that means 360 is a number we got to
+          choose for ourselves. How did that happen?
           <QuestionSeries
             questions={[MCQuestionsFor360[0], MCQuestionsFor360[1]]}
           />
