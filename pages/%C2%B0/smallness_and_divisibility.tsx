@@ -9,14 +9,20 @@ import AddFactorsButtonBar from '../../components/Inputs/AddFactorsButtonsBar';
 import InputForUserCircleDivisions from '../../components/Inputs/InputForUserCircleDivisions';
 import getSceneUserCicrcleDivision from '../../components/getScenes/degrees/getSceneUserCircleDivision';
 import cl from '../../colors';
+import { Button } from '@mui/material';
+import InfoIcon from '@mui/icons-material/Info';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import P from '../../components/P';
+import Em from '../../components/Em';
 
 const smallness_and_divisibility = () => {
   const [userCircleDivisions, setUserCircleDivisions] = useState(1);
   const [points, setPoints] = useState(8);
+  const [multiplier, setMultiplier] = useState(4);
   const [factors, setFactors] = useState<number[]>([1]);
   const scoreMultipliers = {
-    Ten: 4,
-    Hundred: 3,
+    Ten: 8,
+    Hundred: 4,
     Thousand: 2,
   };
 
@@ -106,12 +112,28 @@ const smallness_and_divisibility = () => {
     setPoints(newPoints);
   };
 
+  const getMultiplier = () => {
+    let newMultiplier;
+    if (userCircleDivisions <= 10) {
+      newMultiplier = scoreMultipliers.Ten;
+    } else if (userCircleDivisions <= 100) {
+      newMultiplier = scoreMultipliers.Hundred;
+    } else if (userCircleDivisions <= 1000) {
+      newMultiplier = scoreMultipliers.Thousand;
+    } else {
+      newMultiplier = 1;
+    }
+
+    setMultiplier(newMultiplier);
+  };
+
   // useEffect(() => {
   //   getDivisibleNumbers(userCircleDivisions);
   // }, [userCircleDivisions]);
 
   useEffect(() => {
     getFactors();
+    getMultiplier();
     console.log('divisions', userCircleDivisions);
     console.log('factors', factors);
     console.log('points', points);
@@ -134,6 +156,38 @@ const smallness_and_divisibility = () => {
           {notTooBigCollapsable}
         </ExpandableBullet>
       </Criteria>
+      <BottomBar>
+        <PointsDisplay sx={{ color: cl.getHSL(cl.blue) }}>
+          <Caption>
+            points
+            <div style={{ display: 'flex' }}>
+              <InfoIcon />
+              <ExpandMoreIcon />
+            </div>
+          </Caption>
+          {points}
+        </PointsDisplay>
+
+        <MultiplierDisplay>
+          {' '}
+          <Caption>
+            multiplier
+            <InfoExpand>
+              <InfoIcon />
+              <ExpandMoreIcon />
+            </InfoExpand>
+          </Caption>
+          × {multiplier}
+        </MultiplierDisplay>
+        <ScoreDisplay>
+          <Caption>
+            score
+            <InfoIcon />
+          </Caption>
+          {points * multiplier}
+        </ScoreDisplay>
+      </BottomBar>
+      <Spacer />
 
       <RelativeWrapper>
         <DraggableButton
@@ -151,25 +205,51 @@ const smallness_and_divisibility = () => {
             controlledPosition,
           }}
         ></CanvasForTopicComponent>
-        <div>{userCircleDivisions}</div>
+
+        {/* <div>{userCircleDivisions}</div>
         <div>
           {factors.map((factor) => (
             <span>{factor}, </span>
           ))}
         </div>
-        <div>{points}</div>
-
-        <AddFactorsButtonBar setUserEnteredValue={setUserCircleDivisions} />
-        <InputForUserCircleDivisions
-          value={userCircleDivisions}
-          setValue={setUserCircleDivisions}
-        />
+        <div>{points}</div> */}
       </RelativeWrapper>
+      <InputForUserCircleDivisions
+        value={userCircleDivisions}
+        setValue={setUserCircleDivisions}
+      />
+      <AddFactorsButtonBar setUserEnteredValue={setUserCircleDivisions} />
     </>
   );
   return (
     <TopicComponentBoilerPlate2 title="Smallness and Divisibility">
       <>
+        <P>
+          Forget everything you know about dividing circles, we are going to
+          start with a fresh slate.
+          <br />
+          <br />
+          There are two qualities in particular that can make our lives easier
+          when using angles.
+          <h4>Smallness</h4>
+          This one is pretty straight-forward.
+          <br />
+          <br />
+          By hand, large numbers are inconvenient. They take up a lot of space
+          and give us hand cramps. By computer, we can easily use much bigger
+          numbers. Still, <Em>really</Em> large numbers eat up more memory
+          eventually overwheliming computers despite them having literally
+          billions of transistors now-a-days.
+          <br />
+          <br />
+          If this were taking only this into consideration, 1{' '}
+          {`(basically a non-division)`} would seem like an ideal number of
+          divisons. Alas, there's another competing quality besides smallness
+          that we want to consider.
+          <h4>Divisibility</h4>
+          Circles that can be divided into more whole number groups help us
+          avoid
+        </P>
         <Video href="https://player.vimeo.com/video/796468904?h=dc4303ab13&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" />
         <Spacer />
         {circleDivsionsCanvas}
@@ -180,6 +260,17 @@ const smallness_and_divisibility = () => {
 
 const Spacer = styled.div`
   height: 30px;
+`;
+
+const InfoExpand = styled.div``;
+
+const InfoIconWrapper = styled.div`
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  font-size: small;
+  right: 0;
+  top: 0;
 `;
 
 const Criteria = styled.div`
@@ -204,6 +295,38 @@ const CollapsableList = styled.ul`
 const Multiplier = styled.span`
   color: ${cl.getHSL(cl.purple)};
   display: inline;
+`;
+
+const BottomBar = styled.div`
+  display: flex;
+`;
+
+const PointsAndMultiplierDisplays = styled(Button)`
+  font-size: 1.25rem;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Caption = styled.div`
+  font-size: 0.65rem;
+  color: ${cl.getHSL(cl.gray_mid)};
+  width: min-content;
+  @media (pointer: fine) {
+  }
+  opacity: 1;
+`;
+
+const PointsDisplay = styled(PointsAndMultiplierDisplays)`
+  color: ${cl.getHSL(cl.blue)};
+`;
+
+const MultiplierDisplay = styled(PointsAndMultiplierDisplays)`
+  color: ${cl.getHSL(cl.red)};
+`;
+
+const ScoreDisplay = styled(PointsAndMultiplierDisplays)`
+  color: ${cl.getHSL(cl.black)};
+  margin-left: auto;
 `;
 
 const Points = styled.div`

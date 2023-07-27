@@ -56,6 +56,8 @@ const Background = styled.div`
 `;
 
 const Title = styled.h1`
+  display: flex;
+  /* text-align: center; */
   color: ${cl.getHSL(cl.black)};
   margin-left: auto;
   margin-right: auto;

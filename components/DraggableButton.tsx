@@ -24,7 +24,7 @@ const DraggableButton = (props: DraggableButtonProps) => {
   };
   return (
     <Draggable
-      bounds="parent"
+      // bounds="parent"
       onDrag={(e: any, position) => {
         onControlledDrag(e, position);
       }}

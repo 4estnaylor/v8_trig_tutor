@@ -1,7 +1,8 @@
-import { Button, ButtonGroup } from '@mui/material';
+import { Button, ButtonGroup, InputLabel } from '@mui/material';
 import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
+import { Label } from '@mui/icons-material';
 
 type FactorButtonsProps = {
   setUserEnteredValue: Dispatch<SetStateAction<number>>;
@@ -23,7 +24,7 @@ const AddFactorsButtonBar = (props: FactorButtonsProps) => {
       }
     });
   };
-  const primeFactors = [2, 3, 5, 7, 11, 13];
+  const primeFactors = [2, 3, 5, 7, 11, 13, 17];
   const primeFactorsButtons = primeFactors.map((factor) => {
     return (
       <SpecialButton
@@ -39,21 +40,23 @@ const AddFactorsButtonBar = (props: FactorButtonsProps) => {
   });
   return (
     <OutterWrapper>
-      {`Add Prime Factors`}
+      <InputLabel>Add Factors</InputLabel>
       <Wrapper>{primeFactorsButtons}</Wrapper>
     </OutterWrapper>
   );
 };
 
-const Wrapper = styled(ButtonGroup)``;
+const Wrapper = styled(ButtonGroup)`
+  /* color: ${cl.getHSL(cl.blue)}; */
+`;
 const OutterWrapper = styled.div`
-  background: ${cl.getHSL(cl.gray_dark)};
+  /* background: ${cl.getHSL(cl.gray_dark)}; */
   display: flex;
   gap: 10px;
   padding-left: 5px;
   align-items: center;
   font-size: 1.25rem;
-  color: ${cl.getHSL(cl.white)};
+  color: ${cl.getHSL(cl.gray_dark)};
   padding-top: 10px;
   padding-bottom: 10px;
   flex-wrap: wrap;

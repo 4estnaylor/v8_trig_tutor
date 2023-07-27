@@ -157,7 +157,7 @@ class AngleCircle {
   drawAngleInUpperRight = (posX?: number, posY?: number) => {
     this.context.fillStyle = this.color;
     this.context.font =
-      " 30px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
+      " 24px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
 
     let displayValue = this.getDisplayValue();
 
@@ -168,6 +168,67 @@ class AngleCircle {
       this.context.canvas.width - x_offset - 10,
       30
     );
+  };
+
+  drawCompleteAngleInUpperRight = (posX?: number, posY?: number) => {
+    this.context.fillStyle = this.color;
+    this.context.font =
+      " 24px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
+
+    let unitlessDisplayValue = this.getDisplayValue();
+    unitlessDisplayValue = unitlessDisplayValue.substring(
+      0,
+      unitlessDisplayValue.length - 1
+    );
+
+    // let x_offset = this.context.measureText(displayValue).width;
+
+    ///
+    // this.drawAngleInUpperRight();
+    if (!this.customUnitDivisions) {
+      return;
+    }
+    let displayValue = this.getDisplayValue();
+    let denomDisplayValue = this.getDenomDisplayValue();
+
+    let displayValueUnitless = displayValue.substring(
+      0,
+      displayValue.length - 1
+    );
+    let denomDisplayValueUnitless = denomDisplayValue.substring(
+      0,
+      denomDisplayValue.length - 1
+    );
+
+    let largerDisplayValue;
+    if (
+      this.context.measureText(displayValueUnitless).width >
+      this.context.measureText(denomDisplayValueUnitless).width
+    ) {
+      largerDisplayValue = displayValueUnitless;
+    } else {
+      largerDisplayValue = denomDisplayValueUnitless;
+    }
+    let x_offset = this.context.measureText(largerDisplayValue).width;
+    this.context.fillText(
+      unitlessDisplayValue,
+      this.context.canvas.width - x_offset - 60,
+      30
+    );
+    this.context.beginPath();
+    this.context.moveTo(this.context.canvas.width - x_offset - 60, 35);
+    this.context.lineTo(this.context.canvas.width - 60, 35);
+
+    this.context.lineWidth = 2;
+    this.context.stroke();
+    this.context.fillText(
+      denomDisplayValueUnitless,
+      this.context.canvas.width - x_offset - 60,
+      58
+    );
+    this.context.font =
+      " 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
+    this.context.fillText('units', this.context.canvas.width - 50, 39);
   };
 
   getDisplayValue = () => {
@@ -186,6 +247,20 @@ class AngleCircle {
         'ᵘ';
     }
     return displayValue;
+  };
+
+  getDenomDisplayValue = () => {
+    let denomVal;
+    let denomDisplay;
+    if (this.customUnitDivisions) {
+      denomVal = this.customUnitDivisions;
+      denomDisplay = denomVal.toString() + 'ᵘ';
+    } else {
+      denomVal = 360;
+      denomDisplay = '360°';
+    }
+
+    return denomDisplay;
   };
 
   drawAngleInSpecialUnit = () => {};
