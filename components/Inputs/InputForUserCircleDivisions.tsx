@@ -49,6 +49,8 @@ const InputForUserCircleDivisions = (props: NumberInputProps) => {
 
 const Wrapper = styled.div`
   padding: 5px;
+  display: flex;
+  justify-content: center;
   /* background-color: ${cl.getHSL(cl.gray_dark)}; */
 `;
 const MyInput = styled(TextField)`

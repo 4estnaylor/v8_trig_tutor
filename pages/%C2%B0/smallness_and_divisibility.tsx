@@ -14,6 +14,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import P from '../../components/P';
 import Em from '../../components/Em';
+import RemoveFactors from '../../components/smallness and divisibility/RemoveFactors';
 
 const smallness_and_divisibility = () => {
   const [userCircleDivisions, setUserCircleDivisions] = useState(1);
@@ -124,6 +125,8 @@ const smallness_and_divisibility = () => {
       newMultiplier = 1;
     }
 
+    newMultiplier = 10 * ((4 - Math.log10(userCircleDivisions)) / 3);
+
     setMultiplier(newMultiplier);
   };
 
@@ -219,6 +222,10 @@ const smallness_and_divisibility = () => {
         setValue={setUserCircleDivisions}
       />
       <AddFactorsButtonBar setUserEnteredValue={setUserCircleDivisions} />
+      <RemoveFactors
+        value={userCircleDivisions}
+        setValue={setUserCircleDivisions}
+      />
     </>
   );
   return (
@@ -235,20 +242,36 @@ const smallness_and_divisibility = () => {
           This one is pretty straight-forward.
           <br />
           <br />
-          By hand, large numbers are inconvenient. They take up a lot of space
-          and give us hand cramps. By computer, we can easily use much bigger
-          numbers. Still, <Em>really</Em> large numbers eat up more memory
-          eventually overwheliming computers despite them having literally
-          billions of transistors now-a-days.
+          <ul>
+            <li>
+              {' '}
+              By hand, large numbers are inconvenient. They take up a lot of
+              space on the page and give us hand cramps.{' '}
+            </li>
+            <br />
+            <br />
+            <li>
+              {' '}
+              With computers, we can easily use much bigger numbers. Still,{' '}
+              <Em>really</Em> huge numbers eat up more memory eventually
+              overwheliming computers despite them having literally billions of
+              transistors now-a-days.
+            </li>
+          </ul>
           <br />
           <br />
-          If this were taking only this into consideration, 1{' '}
-          {`(basically a non-division)`} would seem like an ideal number of
-          divisons. Alas, there's another competing quality besides smallness
-          that we want to consider.
+          If this were taking only smallness consideration, 1 seems like a
+          pretty ideal number to choose. But, there's another competing quality
+          besides smallness that we want to consider.
           <h4>Divisibility</h4>
           Circles that can be divided into more whole number groups help us
-          avoid
+          avoid the general gnarly-ness of decimal place values. Decimal places
+          tend to make calculations a lot slower when done by hand. Computers
+          again have an advantage here, but very precise values, like
+          3.0000000000001723, start to be become pretty computationally
+          expensive. So, we want to avoid decimals entirely for the exercises
+          coming up in favor of nice, whole-number groups that divide evenly
+          into our total circle divisions.
         </P>
         <Video href="https://player.vimeo.com/video/796468904?h=dc4303ab13&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" />
         <Spacer />
@@ -282,6 +305,7 @@ const RelativeWrapper = styled.div`
   /* position: relative; */
   position: relative;
   /* position: static; */
+  z-index: 99999;
 `;
 
 const CollapsableList = styled.ul`

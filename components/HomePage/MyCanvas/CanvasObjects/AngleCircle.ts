@@ -210,11 +210,14 @@ class AngleCircle {
       largerDisplayValue = denomDisplayValueUnitless;
     }
     let x_offset = this.context.measureText(largerDisplayValue).width;
+
+    this.context.globalAlpha = 0.5;
     this.context.fillText(
       unitlessDisplayValue,
       this.context.canvas.width - x_offset - 60,
       30
     );
+    this.context.globalAlpha = 1;
     this.context.beginPath();
     this.context.moveTo(this.context.canvas.width - x_offset - 60, 35);
     this.context.lineTo(this.context.canvas.width - 60, 35);
