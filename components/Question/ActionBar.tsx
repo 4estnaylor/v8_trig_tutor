@@ -9,7 +9,7 @@ type ActionBarProps = {
   answerState: AnswerState;
   handleCheck: () => void;
   userAnswer: number | null;
-  hint: JSX.Element;
+  hint?: JSX.Element | string;
 };
 const ActionBar = (props: ActionBarProps) => {
   const { answerState, handleCheck, userAnswer, hint } = props;
