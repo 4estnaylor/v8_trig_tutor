@@ -32,8 +32,9 @@ const CanvasForTopicComponent = (props: MyCanvasProps) => {
     <StyledCanvas
       ref={canvasRef}
       width={parentWidth}
+      // width="390px"
       data-passedtoscene={objectPassedToScene}
-      height="390"
+      height="390px"
     />
   );
 };

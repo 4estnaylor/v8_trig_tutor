@@ -49,16 +49,18 @@ const getSceneUserCicrcleDivision: SceneGetter = (
     width / 2,
     context.canvas.height / 2
   );
+
   testUnitCirc.color = cl.getHSL(cl.purple);
   testUnitCirc.radialPoint.color = cl.getHSL(cl.purple);
   testUnitCirc.vertex.color = cl.getHSL(cl.purple);
+  // testUnitCirc.color = cl.getHSLA(cl.purple, 0.5);
 
   let smallerLength = context.canvas.width;
   if (smallerLength > context.canvas.height) {
     smallerLength = context.canvas.height;
   }
 
-  // testUnitCirc.radius = smallerLength / 3;
+  testUnitCirc.radius = smallerLength / 3;
 
   scene.draw = () => {
     setControlledPosition((prev: { x: number; y: number }) => {
@@ -75,7 +77,7 @@ const getSceneUserCicrcleDivision: SceneGetter = (
     });
     // drawDivisions();
     testUnitCirc.drawDivisionTicks();
-    testUnitCirc.drawCompleteAngleInUpperRight();
+    testUnitCirc.drawAngleInUpperRight();
     context.fillStyle = 'black';
   };
 

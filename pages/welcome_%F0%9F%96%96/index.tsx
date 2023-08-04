@@ -18,6 +18,7 @@ import QUERIES from '../../breakpoints';
 import MCQuestion from '../../components/Inputs/MCQuestion';
 import welcomeQuestions from '../../components/HomePage/CourseMap/WelcomeQuestions';
 import Script from 'next/script';
+import Quote from '../../components/Quote/Quote';
 
 const googleSignIn = () => {
   signIn('google');
@@ -42,28 +43,36 @@ const index = () => {
         questionObjects={welcomeQuestions}
       >
         <>
+          <Quote
+            quote={`Being myself a remarkably stupid fellow, I have had to unteach
+myself the difficulties, and now beg to present to my fellow fools the
+parts that are not hard. Master these thoroughly, and the rest will
+follow. What one fool can do, another can.`}
+            source="https://www.gutenberg.org/files/33283/33283-pdf.pdf"
+            byLine=" Silvanus Thompson, 1910"
+          />
           <p>
-            Hey, I'm glad you made it here. I hope this site can be useful to
-            you for learning trigonometry and/or precalculus.
+            I'm glad you made it here. I hope this site can be useful to you for
+            learning trigonometry and/or precalculus.
             <br />
             <br />
           </p>
           {/* <a href="#testing">:testing</a> */}
 
-          <SpockWrapperOuter>
+          {/* <SpockWrapperOuter>
             <SpockWrapper>
               <SpockBlue />
               <SpockRed />
               <Image src="/spock.svg" width="1000" height="700" />
             </SpockWrapper>
-          </SpockWrapperOuter>
+          </SpockWrapperOuter> */}
 
-          <SpockQuote>
+          {/* <SpockQuote>
             There is no reason that function should not be beautiful. In fact
             beauty usually makes it more effective.
             <ByLine>S'chn T'gai Spock</ByLine>
             <CircaLine>circa 2266–2269, Prime Timeline</CircaLine>
-          </SpockQuote>
+          </SpockQuote> */}
           <br />
           <br />
 

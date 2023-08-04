@@ -5,6 +5,7 @@ import EventHandlerConfig from '../EventHandler/EventHandlerConfig';
 import InteractivePoint from './InteractivePoint';
 import NonInteractivePoint from './NonInteractivePoint';
 import { Tau } from './UsefulConstants';
+import P from '../../../P';
 
 type angleMeasurmentUnit = 'radians' | 'degrees' | 'custom';
 
@@ -326,13 +327,34 @@ class AngleCircle {
     let x0 = this.x;
     let y0 = this.y;
 
+    let far = 1.35;
+    let close = 1.2;
+
     const multiplier = this.radius;
 
-    let x1 = x0 + multiplier * 1.35 * Math.cos(angle);
-    let y1 = y0 + multiplier * 1.35 * Math.sin(angle);
+    let x1 = x0 + multiplier * far * Math.cos(angle);
+    let y1 = y0 + multiplier * far * Math.sin(angle);
 
-    let x2 = x0 + multiplier * 1.2 * Math.cos(angle);
-    let y2 = y0 + multiplier * 1.2 * Math.sin(angle);
+    let x2 = x0 + multiplier * close * Math.cos(angle);
+    let y2 = y0 + multiplier * close * Math.sin(angle);
+    this.context.moveTo(x1, y1);
+    this.context.lineTo(x2, y2);
+  };
+
+  lineToCirclePerimeterShort = (angle: number) => {
+    let x0 = this.x;
+    let y0 = this.y;
+
+    let far = 1.2;
+    let close = 1.05;
+
+    const multiplier = this.radius;
+
+    let x1 = x0 + multiplier * far * Math.cos(angle);
+    let y1 = y0 + multiplier * far * Math.sin(angle);
+
+    let x2 = x0 + multiplier * close * Math.cos(angle);
+    let y2 = y0 + multiplier * close * Math.sin(angle);
     this.context.moveTo(x1, y1);
     this.context.lineTo(x2, y2);
   };
@@ -369,14 +391,57 @@ class AngleCircle {
     let finalIteration = this.customUnitDivisions;
     if (numOfTicks > 500) {
       finalIteration = 500;
+    } else {
+      finalIteration = numOfTicks;
     }
 
-    for (let i = 0; i < numOfTicks; i++) {
-      this.context.beginPath();
+    if (finalIteration >= 400) {
+      this.drawFilledLoop();
+    } else {
+      for (let i = 0; i < finalIteration; i++) {
+        this.context.beginPath();
+        this.lineToCirclePerimeter(angleIncrement * i);
 
-      this.lineToCirclePerimeter(angleIncrement * i);
-      this.context.stroke();
+        this.context.stroke();
+      }
     }
+  };
+
+  drawFilledLoop = () => {
+    this.context.beginPath();
+    this.context.ellipse(
+      this.x,
+      this.y,
+      this.radius * 1.27,
+      this.radius * 1.27,
+      0,
+      0,
+      Tau
+    );
+    this.context.lineWidth = this.radius * 0.15;
+    this.context.stroke();
+    this.context.beginPath();
+    this.drawLoopDot();
+  };
+
+  drawLoopDot = () => {
+    this.context.beginPath();
+    let xPos = this.x + this.radius * 1.27 * Math.cos(this.angle);
+    let yPos = this.y - this.radius * 1.27 * Math.sin(this.angle);
+    this.context.ellipse(
+      xPos,
+      yPos,
+      this.radius * 0.03,
+      this.radius * 0.03,
+      0,
+      0,
+      Tau
+    );
+    this.context.fillStyle = cl.getHSL(cl.white);
+    this.context.fill();
+    // this.context.strokeStyle = cl.getHSL(cl.white);
+    // this.context.lineWidth = 2;
+    // this.context.stroke();
   };
 
   drawAngle = () => {

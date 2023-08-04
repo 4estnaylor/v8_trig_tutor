@@ -9,16 +9,25 @@ import AddFactorsButtonBar from '../../components/Inputs/AddFactorsButtonsBar';
 import InputForUserCircleDivisions from '../../components/Inputs/InputForUserCircleDivisions';
 import getSceneUserCicrcleDivision from '../../components/getScenes/degrees/getSceneUserCircleDivision';
 import cl from '../../colors';
-import { Button } from '@mui/material';
+import { Button, Input } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import P from '../../components/P';
 import Em from '../../components/Em';
 import RemoveFactors from '../../components/smallness and divisibility/RemoveFactors';
+import IntegerAnswerQuestion from '../../components/Inputs/IntegerAnswerQuestion';
+import { AnswerState } from '../../components/Inputs/MultipleChocieQuestionForSeries';
+import IntegerSimple from '../../components/Inputs/IntegerSimple';
+import TopPart from '../../components/Question/TopPart';
+import QuestionDisplay from '../../components/Question/QuestionDisplay';
+import QuestionWrapper from '../../components/Question/QuestionWrapper';
+import MostDivisible from '../../components/niche/MostDivisible';
 
 const smallness_and_divisibility = () => {
   const [userCircleDivisions, setUserCircleDivisions] = useState(1);
-  const [points, setPoints] = useState(8);
+  const [points, setPoints] = useState(0);
+  const [smallestValueAns, setSmallestValueAns] =
+    useState<AnswerState>('unanswered');
   const [multiplier, setMultiplier] = useState(4);
   const [factors, setFactors] = useState<number[]>([1]);
   const scoreMultipliers = {
@@ -28,9 +37,9 @@ const smallness_and_divisibility = () => {
   };
 
   const divisiblityPoints = {
-    Ten: 8,
-    Twenty: 4,
-    Fifty: 2,
+    Ten: 1,
+    Twenty: 1,
+    Fifty: 1,
     Hundered: 1,
   };
 
@@ -108,6 +117,8 @@ const smallness_and_divisibility = () => {
         newPoints += divisiblityPoints.Fifty;
       } else if (factor <= 100) {
         newPoints += divisiblityPoints.Hundered;
+      } else {
+        newPoints += 1;
       }
     });
     setPoints(newPoints);
@@ -125,7 +136,8 @@ const smallness_and_divisibility = () => {
       newMultiplier = 1;
     }
 
-    newMultiplier = 10 * ((4 - Math.log10(userCircleDivisions)) / 3);
+    // newMultiplier = 1 + 3 * ((4 - Math.log10(userCircleDivisions)) / 3);
+    // newMultiplier = Math.round(newMultiplier * 10) / 10;
 
     setMultiplier(newMultiplier);
   };
@@ -159,37 +171,7 @@ const smallness_and_divisibility = () => {
           {notTooBigCollapsable}
         </ExpandableBullet>
       </Criteria>
-      <BottomBar>
-        <PointsDisplay sx={{ color: cl.getHSL(cl.blue) }}>
-          <Caption>
-            points
-            <div style={{ display: 'flex' }}>
-              <InfoIcon />
-              <ExpandMoreIcon />
-            </div>
-          </Caption>
-          {points}
-        </PointsDisplay>
 
-        <MultiplierDisplay>
-          {' '}
-          <Caption>
-            multiplier
-            <InfoExpand>
-              <InfoIcon />
-              <ExpandMoreIcon />
-            </InfoExpand>
-          </Caption>
-          × {multiplier}
-        </MultiplierDisplay>
-        <ScoreDisplay>
-          <Caption>
-            score
-            <InfoIcon />
-          </Caption>
-          {points * multiplier}
-        </ScoreDisplay>
-      </BottomBar>
       <Spacer />
 
       <RelativeWrapper>
@@ -217,32 +199,92 @@ const smallness_and_divisibility = () => {
         </div>
         <div>{points}</div> */}
       </RelativeWrapper>
-      <InputForUserCircleDivisions
+      <BottomBar>
+        <UserDivisionsDisplay>
+          {' '}
+          <Caption>divisions</Caption>
+          <DivisionsInput type="number" value={userCircleDivisions} />
+          {/* {userCircleDivisions} */}
+        </UserDivisionsDisplay>
+        <PointsDisplay sx={{ color: cl.getHSL(cl.blue) }}>
+          <Caption>divisibility</Caption>
+          {points}
+        </PointsDisplay>
+
+        <MultiplierDisplay>
+          <Caption>smallness</Caption>× {multiplier}
+        </MultiplierDisplay>
+
+        <ScoreDisplay>
+          <Caption>score</Caption>
+          {Math.round(points * multiplier * 10) / 10}
+        </ScoreDisplay>
+      </BottomBar>
+      {/* <InputForUserCircleDivisions
         value={userCircleDivisions}
         setValue={setUserCircleDivisions}
-      />
-      <AddFactorsButtonBar setUserEnteredValue={setUserCircleDivisions} />
+      /> */}
       <RemoveFactors
         value={userCircleDivisions}
         setValue={setUserCircleDivisions}
       />
+      <AddFactorsButtonBar
+        setUserEnteredValue={setUserCircleDivisions}
+        userEnteredValue={userCircleDivisions}
+      />
     </>
   );
+
   return (
     <TopicComponentBoilerPlate2 title="Smallness and Divisibility">
       <>
         <P>
-          Forget everything you know about dividing circles, we are going to
-          start with a fresh slate.
+          360 be damned, we are going to clear the slate and search for the very
+          best number of divisions for a circle.
           <br />
           <br />
-          There are two qualities in particular that can make our lives easier
-          when using angles.
-          <h4>Smallness</h4>
-          This one is pretty straight-forward.
+          We'll restrict our search to values less than 10,000.
           <br />
           <br />
-          <ul>
+          We will create {`(and refine) `} a model to judge which numbers would
+          be best to divide a circle into.
+          <br />
+          <br />
+          The correct answer for what the perfect value is will depend on the
+          model you specify.
+          <br />
+          <br />
+          There are two qualities in particular that our models will focus on —
+          smallness and divisibility. How we should measure these qualities and
+          how much weight we should give them will be for you to decide.
+          <h4>Smallest</h4>
+          This question is pretty straightforward. Not a trick question.
+          <br />
+          <br />
+          <IntegerSimple
+            hint={<div>it's less than 2</div>}
+            question={`What is the smallest number from 1 to 10,000?`}
+            answer={1}
+            decimalPlaceIndex={1}
+            answerState={smallestValueAns}
+            setAnswerState={setSmallestValueAns}
+          />
+          <br />
+          <br />
+          <h4>Most Divisible</h4>
+          And now, a not-so-straighforward question. Use the tool below, see if
+          you can find the number less than 10,000 with the most divisiblitiy.
+          <br />
+          <br />
+          <MostDivisible />
+          {/* <IntegerAnswerQuestion
+            question={`What is the smallest number between 1 and 10,000?`}
+            answer={1}
+            decimalPlaceIndex={1}
+            answerState={smallestValueAns}
+            setAnswerState={setSmallestValueAns}
+          /> */}
+          {/* <ul>
             <li>
               {' '}
               By hand, large numbers are inconvenient. They take up a lot of
@@ -257,12 +299,12 @@ const smallness_and_divisibility = () => {
               overwheliming computers despite them having literally billions of
               transistors now-a-days.
             </li>
-          </ul>
-          <br />
+          </ul> */}
+          {/* <br />
           <br />
           If this were taking only smallness consideration, 1 seems like a
           pretty ideal number to choose. But, there's another competing quality
-          besides smallness that we want to consider.
+          besides smallness that we want to consider. */}
           <h4>Divisibility</h4>
           Circles that can be divided into more whole number groups help us
           avoid the general gnarly-ness of decimal place values. Decimal places
@@ -305,7 +347,15 @@ const RelativeWrapper = styled.div`
   /* position: relative; */
   position: relative;
   /* position: static; */
-  z-index: 99999;
+  z-index: 2;
+`;
+
+const DivisionsInput = styled(Input)`
+  width: 80px;
+  display: flex;
+  color: ${cl.getHSL(cl.purple)};
+  justify-content: center;
+  font-size: 1.25rem;
 `;
 
 const CollapsableList = styled.ul`
@@ -323,6 +373,7 @@ const Multiplier = styled.span`
 
 const BottomBar = styled.div`
   display: flex;
+  align-items: baseline;
 `;
 
 const PointsAndMultiplierDisplays = styled(Button)`
@@ -342,15 +393,19 @@ const Caption = styled.div`
 
 const PointsDisplay = styled(PointsAndMultiplierDisplays)`
   color: ${cl.getHSL(cl.blue)};
+  margin-left: auto;
 `;
 
 const MultiplierDisplay = styled(PointsAndMultiplierDisplays)`
   color: ${cl.getHSL(cl.red)};
 `;
 
+const UserDivisionsDisplay = styled(PointsAndMultiplierDisplays)`
+  color: ${cl.getHSL(cl.purple)};
+`;
+
 const ScoreDisplay = styled(PointsAndMultiplierDisplays)`
   color: ${cl.getHSL(cl.black)};
-  margin-left: auto;
 `;
 
 const Points = styled.div`

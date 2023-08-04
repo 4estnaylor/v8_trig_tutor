@@ -23,7 +23,6 @@ const IntegerAnswerQuestion = (props: IntegerAnswerQuestionProps) => {
   return (
     <Wrapper>
       <TopPart>
-        <Header>Question</Header>
         <Question>{question}</Question>
         <Diagram>{diagram}</Diagram>
       </TopPart>
