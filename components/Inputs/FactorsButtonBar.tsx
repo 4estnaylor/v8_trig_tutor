@@ -14,7 +14,7 @@ const FactorsButtonBar = (props: FactorButtonsProps) => {
 
   return (
     <div>
-      <AddFactorsButtonBar setUserEnteredValue={setUserEnteredValue} />
+      {/* <AddFactorsButtonBar setUserEnteredValue={setUserEnteredValue} user /> */}
     </div>
   );
 };
