@@ -215,7 +215,7 @@ const Degree = () => {
             }}
           ></CanvasForTopicComponent>
         </Canvas1Background>
-        <AddFactorsButtonBar setUserEnteredValue={setUserCircleDivisions} />
+        {/* <AddFactorsButtonBar setUserEnteredValue={setUserCircleDivisions} /> */}
         <InputForUserCircleDivisions
           value={userCircleDivisions}
           setValue={setUserCircleDivisions}
