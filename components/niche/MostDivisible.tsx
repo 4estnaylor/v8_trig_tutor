@@ -13,8 +13,16 @@ import QuestionDisplay from '../Question/QuestionDisplay';
 import BottomPart from '../Question/BottomPart';
 import ActionBar from '../Question/ActionBar';
 
-const MostDivisible = () => {
+type MostDivisibleProps = {
+  answerState: AnswerState;
+  setAnswerState: React.Dispatch<React.SetStateAction<AnswerState>>;
+};
+
+const MostDivisible = (props: MostDivisibleProps) => {
+  const { answerState, setAnswerState } = props;
+
   const [userCircleDivisions, setUserCircleDivisions] = useState(1);
+
   const [points, setPoints] = useState(0);
   const [smallestValueAns, setSmallestValueAns] =
     useState<AnswerState>('unanswered');
@@ -24,13 +32,6 @@ const MostDivisible = () => {
     Ten: 8,
     Hundred: 4,
     Thousand: 2,
-  };
-
-  const divisiblityPoints = {
-    Ten: 1,
-    Twenty: 1,
-    Fifty: 1,
-    Hundered: 1,
   };
 
   const [controlledPosition, setControlledPosition] = useState({
@@ -45,21 +46,29 @@ const MostDivisible = () => {
   };
 
   const getFactorPoints = () => {
-    let newPoints = 0;
-    factors.forEach((factor) => {
-      if (factor <= 10) {
-        newPoints += divisiblityPoints.Ten;
-      } else if (factor <= 20) {
-        newPoints += divisiblityPoints.Twenty;
-      } else if (factor <= 50) {
-        newPoints += divisiblityPoints.Fifty;
-      } else if (factor <= 100) {
-        newPoints += divisiblityPoints.Hundered;
-      } else {
-        newPoints += 1;
-      }
-    });
-    setPoints(newPoints);
+    // let newPoints = 0;
+    // factors.forEach((factor) => {
+    //   if (factor <= 10) {
+    //     newPoints += divisiblityPoints.Ten;
+    //   } else if (factor <= 20) {
+    //     newPoints += divisiblityPoints.Twenty;
+    //   } else if (factor <= 50) {
+    //     newPoints += divisiblityPoints.Fifty;
+    //   } else if (factor <= 100) {
+    //     newPoints += divisiblityPoints.Hundered;
+    //   } else {
+    //     newPoints += 1;
+    //   }
+    // });
+    setPoints(factors.length);
+  };
+
+  const handleMostDivislbeCheck = () => {
+    if (points === 64) {
+      setAnswerState('correct');
+    } else {
+      setAnswerState('incorrect');
+    }
   };
 
   const getMultiplier = () => {
@@ -98,7 +107,7 @@ const MostDivisible = () => {
         <>
           <TopPart>
             <QuestionDisplay>
-              What is the most divisible number from 1 to 10,000?
+              What number has the greatest number of divisors from 1 to 10,000?
             </QuestionDisplay>
           </TopPart>
           <BottomPart>
@@ -112,7 +121,7 @@ const MostDivisible = () => {
                   {/* {userCircleDivisions} */}
                 </UserDivisionsDisplay>
                 <PointsDisplay sx={{ color: cl.getHSL(cl.blue) }}>
-                  <Caption>divisibility</Caption>
+                  <Caption>divisors</Caption>
                   {points}
                   <DivisibilityProgressWrapper>
                     <LinearProgress
@@ -123,12 +132,6 @@ const MostDivisible = () => {
                     />
                   </DivisibilityProgressWrapper>
                 </PointsDisplay>
-
-                <CheckButton
-                  onClick={() => {}}
-                  answerState={'unanswered'}
-                  userAnswer={points}
-                />
 
                 {/* <MultiplierDisplay>
           {' '}
@@ -151,11 +154,15 @@ const MostDivisible = () => {
                 setValue={setUserCircleDivisions}
               />
               <DivisibleValuesBar factors={factors} />
-              {/* <ActionBar>
-               
-              </ActionBar> */}
+
+              <ActionBar
+                answerState={answerState}
+                userAnswer={userCircleDivisions}
+                handleCheck={handleMostDivislbeCheck}
+              />
             </>
           </BottomPart>
+          {/* <ActionBar > </ActionBar> */}
         </>
       </QuestionWrapper>
     </>

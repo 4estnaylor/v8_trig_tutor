@@ -18,7 +18,7 @@ const DivisibleValuesBar = (props: DivisbleValueBarProps) => {
   });
   return (
     <Wrapper>
-      <FormLabel>Divisible By</FormLabel>
+      <FormLabel>Divisors</FormLabel>
       <ButtonWrap>{factorButtons}</ButtonWrap>
     </Wrapper>
   );

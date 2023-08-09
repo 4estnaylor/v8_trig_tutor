@@ -8,7 +8,7 @@ import Hint from './Hint';
 type ActionBarProps = {
   answerState: AnswerState;
   handleCheck: () => void;
-  userAnswer: number | null;
+  userAnswer: number | string | null;
   hint?: JSX.Element | string;
 };
 const ActionBar = (props: ActionBarProps) => {

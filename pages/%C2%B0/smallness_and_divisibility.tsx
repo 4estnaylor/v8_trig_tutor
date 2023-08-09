@@ -22,6 +22,7 @@ import TopPart from '../../components/Question/TopPart';
 import QuestionDisplay from '../../components/Question/QuestionDisplay';
 import QuestionWrapper from '../../components/Question/QuestionWrapper';
 import MostDivisible from '../../components/niche/MostDivisible';
+import DivisorsPlot from '../../components/niche/DivisorsPlot';
 
 const smallness_and_divisibility = () => {
   const [userCircleDivisions, setUserCircleDivisions] = useState(1);
@@ -35,6 +36,9 @@ const smallness_and_divisibility = () => {
     Hundred: 4,
     Thousand: 2,
   };
+
+  const [mostDivisibleAnswerState, setMostDivisibleAnswerState] =
+    useState<AnswerState>('unanswered');
 
   const divisiblityPoints = {
     Ten: 1,
@@ -246,19 +250,16 @@ const smallness_and_divisibility = () => {
           We'll restrict our search to values less than 10,000.
           <br />
           <br />
-          We will create {`(and refine) `} a model to judge which numbers would
-          be best to divide a circle into.
-          <br />
-          <br />
-          The correct answer for what the perfect value is will depend on the
-          model you specify.
+          We will create {`(and refine) `} a model to determine which numbers
+          would be the best option{`(s)`} to divide a circle into.
           <br />
           <br />
           There are two qualities in particular that our models will focus on —
-          smallness and divisibility. How we should measure these qualities and
-          how much weight we should give them will be for you to decide.
+          smallness and having many divisors. How exactly we should measure
+          these qualities and how much weight we should give them will be an
+          exercise left for you, the reader.
           <h4>Smallest</h4>
-          This question is pretty straightforward. Not a trick question.
+          This first question is maybe overly-straightforward.
           <br />
           <br />
           <IntegerSimple
@@ -272,11 +273,16 @@ const smallness_and_divisibility = () => {
           <br />
           <br />
           <h4>Most Divisible</h4>
-          And now, a not-so-straighforward question. Use the tool below, see if
-          you can find the number less than 10,000 with the most divisiblitiy.
+          A question that requires more experimentation. Use the "Multiply" tool
+          provided below to set the number.
           <br />
           <br />
-          <MostDivisible />
+          <MostDivisible
+            answerState={mostDivisibleAnswerState}
+            setAnswerState={setMostDivisibleAnswerState}
+          />
+          <h4># of Divisors Plot:</h4>
+          <DivisorsPlot />
           {/* <IntegerAnswerQuestion
             question={`What is the smallest number between 1 and 10,000?`}
             answer={1}
@@ -305,6 +311,13 @@ const smallness_and_divisibility = () => {
           If this were taking only smallness consideration, 1 seems like a
           pretty ideal number to choose. But, there's another competing quality
           besides smallness that we want to consider. */}
+          The smallest value: 1. <br />
+          <br />
+          The value with the most divisors: 7560. <br />
+          <br />
+          We will have to negotiate between our two priorities — finding a small
+          number, and finding a number with many divisors.
+          <h4>A Humble Model of Smallness</h4>
           <h4>Divisibility</h4>
           Circles that can be divided into more whole number groups help us
           avoid the general gnarly-ness of decimal place values. Decimal places
