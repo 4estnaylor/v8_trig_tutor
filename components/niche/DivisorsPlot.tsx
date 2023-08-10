@@ -34,17 +34,16 @@ const DivisorsPlot = () => {
 
   return (
     <Wrapper>
-      <CanvasWrapper>
-        <CanvasForTopicComponent
-          sceneGetter={getSceneDivisorsPlot}
-          objectPassedToScene={{
-            setSelectedScale,
-            setSelectedValue,
-            selectedValueRef,
-            selectedScaleRef,
-          }}
-        />
-      </CanvasWrapper>
+      <CanvasForTopicComponent
+        sceneGetter={getSceneDivisorsPlot}
+        objectPassedToScene={{
+          setSelectedScale,
+          setSelectedValue,
+          selectedValueRef,
+          selectedScaleRef,
+        }}
+      />
+
       <SliderWrappper>
         <ValueSlider
           value={selectedValue}
@@ -76,6 +75,8 @@ const CanvasWrapper = styled.div``;
 
 const SliderWrappper = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: center;
   padding-left: 15px;
   padding-right: 15px;
 `;

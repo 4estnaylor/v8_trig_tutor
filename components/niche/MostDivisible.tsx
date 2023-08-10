@@ -12,6 +12,8 @@ import TopPart from '../Question/TopPart';
 import QuestionDisplay from '../Question/QuestionDisplay';
 import BottomPart from '../Question/BottomPart';
 import ActionBar from '../Question/ActionBar';
+import DivisorsPlot from './DivisorsPlot';
+import MostDivisiblePlot from './MostDivisiblePlot';
 
 type MostDivisibleProps = {
   answerState: AnswerState;
@@ -112,9 +114,9 @@ const MostDivisible = (props: MostDivisibleProps) => {
           </TopPart>
           <BottomPart>
             <>
+              <MostDivisiblePlot />
               <BottomBar>
                 <UserDivisionsDisplay>
-                  {' '}
                   <Caption>number</Caption>
                   {/* <DivisionsInput type="number" value={userCircleDivisions} /> */}
                   {userCircleDivisions}

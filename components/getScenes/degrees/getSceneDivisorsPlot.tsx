@@ -39,10 +39,12 @@ const getSceneDivisorsPlot: SceneGetter = (
   const update = () => {};
 
   let xIncrement = context.canvas.width / data.length;
-  let radius = 3;
-  let radiusMax = 10;
+  let radiusNormal = 3;
+  let radius = radiusNormal;
+  let radiusRing = 5;
+
   let bottomMargin = 0;
-  let sideMargin = 15;
+  let sideMargin = 30;
 
   data = [];
   for (let i = 1; i <= 10 ** 4; i++) {
@@ -50,34 +52,85 @@ const getSceneDivisorsPlot: SceneGetter = (
     data.push(numOfFators);
   }
 
+  let highlyComposites = [
+    1, 2, 4, 6, 12, 24, 36, 48, 60, 120, 180, 240, 360, 720, 840, 1260, 1680,
+    2520, 5040, 7560,
+  ];
+
+  const getYLimit = (limit: number) => {
+    if (!limit) return 64;
+    var index = highlyComposites.findIndex(function (number) {
+      return number > limit;
+    });
+
+    let yLimit = getNumberOfFactors(highlyComposites[index]);
+    console.log('Y limit', yLimit);
+
+    return yLimit;
+  };
+
   const drawPoints = () => {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     console.log(data);
     context.moveTo(0, context.canvas.height);
     context.fillStyle = cl.getHSL(cl.purple);
+
+    let maxVal = 10 ** selectedScaleRef.current;
+
+    let yIncrementDivisor;
+    if (maxVal < 50) {
+      yIncrementDivisor = 10 + (maxVal / 50) * 10;
+    } else if (maxVal < 240) {
+      yIncrementDivisor = 20 + ((maxVal - 50) / (240 - 50)) * 20;
+    } else if (maxVal < 1700) {
+      yIncrementDivisor = 40 + ((maxVal - 240) / (1700 - 240)) * 24;
+    } else {
+      yIncrementDivisor = 64;
+    }
+
+    let yIncrement = (context.canvas.height - radius * 2) / yIncrementDivisor;
+    radiusNormal = 150 / yIncrementDivisor;
+    radiusRing = 10;
+
     data.forEach((datum, index) => {
+      context.beginPath();
       if (index + 1 > Math.round(10 ** selectedScaleRef.current)) return;
       console.log(index + 1, 10 ** selectedScaleRef);
+      let drawRing = false;
       if (index + 1 === selectedValueRef.current) {
         context.fillStyle = cl.getHSL(cl.purple);
-        radius = 5;
-
-        console.log('datum', datum);
+        radius = radiusNormal;
+        drawRing = true;
       } else {
-        radius = 3;
+        radius = radiusNormal;
         context.fillStyle = cl.getHSLA(cl.purple, 0.2);
+        drawRing = false;
       }
       let xPos =
         (index * (context.canvas.width - 2 * sideMargin)) /
           (10 ** selectedScaleRef.current - 1) +
         sideMargin;
+      if (!selectedScaleRef.current) return;
       let yPos =
         context.canvas.height -
         bottomMargin -
-        datum * (context.canvas.height / 64);
-      context.ellipse(xPos, yPos, radius, radius, 0, 0, Tau);
+        datum * yIncrement +
+        yIncrement -
+        20;
+
+      if (drawRing) {
+        context.strokeStyle = cl.getHSL(cl.purple);
+        context.lineWidth = 5;
+        context.ellipse(xPos, yPos, radiusRing, radiusRing, 0, 0, Tau);
+        context.stroke();
+
+        context.beginPath();
+      }
+
+      context.ellipse(xPos, yPos, radiusNormal, radiusNormal, 0, 0, Tau);
       context.fill();
       context.beginPath();
+
       // context.fillText(datum.toString(), 100, 150);
     });
     context.stroke();
