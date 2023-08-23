@@ -20,6 +20,8 @@ interface IntegerAnswerQuestionProps {
   answerState: AnswerState;
   setAnswerState: React.Dispatch<React.SetStateAction<AnswerState>>;
   hint?: JSX.Element;
+  userValue: number | null;
+  setUserValue: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 const IntegerSimple = (props: IntegerAnswerQuestionProps) => {
@@ -32,7 +34,10 @@ const IntegerSimple = (props: IntegerAnswerQuestionProps) => {
     answerState,
     setAnswerState,
     hint,
+    userValue,
+    setUserValue,
   } = props;
+
   const [userAnswer, setUserAnswer] = useState<number | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,17 +45,17 @@ const IntegerSimple = (props: IntegerAnswerQuestionProps) => {
 
     let userInputNum = Number(userInput);
     if (isNaN(Number(userInput) as any)) {
-      setUserAnswer(null);
+      setUserValue(null);
     } else if (userInput === '') {
-      setUserAnswer(null);
+      setUserValue(null);
     } else {
-      setUserAnswer(userInputNum);
+      setUserValue(userInputNum);
     }
   };
 
   const handleCheck = () => {
     console.log('checking');
-    if (userAnswer === answer) {
+    if (userValue === answer) {
       setAnswerState('correct');
     } else {
       setAnswerState('incorrect');
@@ -65,9 +70,10 @@ const IntegerSimple = (props: IntegerAnswerQuestionProps) => {
         </TopPart>
         <BottomPart>
           <>
+            {diagram}
             <SpinnerLessTextField
               type="number"
-              value={userAnswer}
+              value={userValue}
               onChange={handleChange}
               variant="standard"
               label="your answer"
@@ -76,7 +82,7 @@ const IntegerSimple = (props: IntegerAnswerQuestionProps) => {
             <ActionBar
               answerState={answerState}
               handleCheck={handleCheck}
-              userAnswer={userAnswer}
+              userAnswer={userValue}
               hint={hint}
             />
             {/* <BottomBar answerState = {answerState}>

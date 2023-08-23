@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AnswerState } from '../Inputs/MultipleChoiceQuestion';
 import styled from 'styled-components';
 import cl from '../../colors';
@@ -14,16 +14,24 @@ import BottomPart from '../Question/BottomPart';
 import ActionBar from '../Question/ActionBar';
 import DivisorsPlot from './DivisorsPlot';
 import MostDivisiblePlot from './MostDivisiblePlot';
+import MiniDivisorPlot from './MiniDivisorPlot';
+import { MostDivisibleQuestionObject } from '../../pages/%C2%B0/smallness_and_divisibility';
 
 type MostDivisibleProps = {
   answerState: AnswerState;
   setAnswerState: React.Dispatch<React.SetStateAction<AnswerState>>;
+  // questionObjects: MostDivisibleQuestionObject[];
+  // setQuestionObjects: React.Dispatch<
+  //   React.SetStateAction<MostDivisibleQuestionObject[]>
+  // >;
 };
 
 const MostDivisible = (props: MostDivisibleProps) => {
   const { answerState, setAnswerState } = props;
 
   const [userCircleDivisions, setUserCircleDivisions] = useState(1);
+
+  const selectedValueRef = useRef(userCircleDivisions);
 
   const [points, setPoints] = useState(0);
   const [smallestValueAns, setSmallestValueAns] =
@@ -66,11 +74,11 @@ const MostDivisible = (props: MostDivisibleProps) => {
   };
 
   const handleMostDivislbeCheck = () => {
-    if (points === 64) {
-      setAnswerState('correct');
-    } else {
-      setAnswerState('incorrect');
-    }
+    // if (points === 64) {
+    //   setAnswerState('correct');
+    // } else {
+    //   setAnswerState('incorrect');
+    // }
   };
 
   const getMultiplier = () => {
@@ -114,14 +122,9 @@ const MostDivisible = (props: MostDivisibleProps) => {
           </TopPart>
           <BottomPart>
             <>
-              <MostDivisiblePlot />
+              <MiniDivisorPlot number={userCircleDivisions} />
+
               <BottomBar>
-                <UserDivisionsDisplay>
-                  <Caption>number</Caption>
-                  {/* <DivisionsInput type="number" value={userCircleDivisions} /> */}
-                  {userCircleDivisions}
-                  {/* {userCircleDivisions} */}
-                </UserDivisionsDisplay>
                 <PointsDisplay sx={{ color: cl.getHSL(cl.blue) }}>
                   <Caption>divisors</Caption>
                   {points}
@@ -134,6 +137,12 @@ const MostDivisible = (props: MostDivisibleProps) => {
                     />
                   </DivisibilityProgressWrapper>
                 </PointsDisplay>
+                <UserDivisionsDisplay>
+                  <Caption>number</Caption>
+                  {/* <DivisionsInput type="number" value={userCircleDivisions} /> */}
+                  {userCircleDivisions}
+                  {/* {userCircleDivisions} */}
+                </UserDivisionsDisplay>
 
                 {/* <MultiplierDisplay>
           {' '}
@@ -158,7 +167,7 @@ const MostDivisible = (props: MostDivisibleProps) => {
               <DivisibleValuesBar factors={factors} />
 
               <ActionBar
-                answerState={answerState}
+                answerState={'unanswered'}
                 userAnswer={userCircleDivisions}
                 handleCheck={handleMostDivislbeCheck}
               />
@@ -176,6 +185,7 @@ const MostDivisible = (props: MostDivisibleProps) => {
 const DivisibilityProgressWrapper = styled.div`
   color: ${cl.getHSL(cl.blue)};
   width: 100%;
+  /* transform: rotate(-90deg); */
 `;
 
 const Wrapper = styled.div`
@@ -185,7 +195,12 @@ const Wrapper = styled.div`
 
 const BottomBar = styled.div`
   display: flex;
-  align-items: center;
+  align-items: baseline;
+`;
+
+const MiniPlotAndDivisorBar = styled.div`
+  display: flex;
+  width: 100%;
 `;
 
 const PointsAndMultiplierDisplays = styled(Button)`
@@ -196,6 +211,7 @@ const PointsAndMultiplierDisplays = styled(Button)`
 
 const UserDivisionsDisplay = styled(PointsAndMultiplierDisplays)`
   color: ${cl.getHSL(cl.purple)};
+  justify-self: center;
 `;
 
 const Caption = styled.div`
@@ -217,7 +233,7 @@ const DivisionsInput = styled(Input)`
 
 const PointsDisplay = styled(PointsAndMultiplierDisplays)`
   color: ${cl.getHSL(cl.blue)};
-  margin-left: auto;
+  /* margin-left: auto; */
 `;
 
 const MultiplierDisplay = styled(PointsAndMultiplierDisplays)`

@@ -4,6 +4,7 @@ import AngleCircle from '../../HomePage/MyCanvas/CanvasObjects/AngleCircle';
 import { Pi, Tau } from '../../HomePage/MyCanvas/CanvasObjects/UsefulConstants';
 import EventHandlerConfig from '../../HomePage/MyCanvas/EventHandler/EventHandlerConfig';
 import { Scene, SceneGetter } from '../../HomePage/MyCanvas/Scene/Scene';
+import divisorCountsUnder10Thousand from '../../../divisorCount';
 
 const getSceneDivisorsPlot: SceneGetter = (
   context: CanvasRenderingContext2D,
@@ -34,8 +35,6 @@ const getSceneDivisorsPlot: SceneGetter = (
 
   let data: number[] = [];
 
-  console.log('is happening! ahwao');
-
   const update = () => {};
 
   let xIncrement = context.canvas.width / data.length;
@@ -46,11 +45,7 @@ const getSceneDivisorsPlot: SceneGetter = (
   let bottomMargin = 0;
   let sideMargin = 30;
 
-  data = [];
-  for (let i = 1; i <= 10 ** 4; i++) {
-    let numOfFators = getNumberOfFactors(i);
-    data.push(numOfFators);
-  }
+  data = divisorCountsUnder10Thousand;
 
   let highlyComposites = [
     1, 2, 4, 6, 12, 24, 36, 48, 60, 120, 180, 240, 360, 720, 840, 1260, 1680,
@@ -64,14 +59,12 @@ const getSceneDivisorsPlot: SceneGetter = (
     });
 
     let yLimit = getNumberOfFactors(highlyComposites[index]);
-    console.log('Y limit', yLimit);
 
     return yLimit;
   };
 
   const drawPoints = () => {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    console.log(data);
     context.moveTo(0, context.canvas.height);
     context.fillStyle = cl.getHSL(cl.purple);
 
@@ -95,7 +88,6 @@ const getSceneDivisorsPlot: SceneGetter = (
     data.forEach((datum, index) => {
       context.beginPath();
       if (index + 1 > Math.round(10 ** selectedScaleRef.current)) return;
-      console.log(index + 1, 10 ** selectedScaleRef);
       let drawRing = false;
       if (index + 1 === selectedValueRef.current) {
         context.fillStyle = cl.getHSL(cl.purple);

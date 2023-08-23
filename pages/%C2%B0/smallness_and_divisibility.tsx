@@ -9,7 +9,7 @@ import AddFactorsButtonBar from '../../components/Inputs/AddFactorsButtonsBar';
 import InputForUserCircleDivisions from '../../components/Inputs/InputForUserCircleDivisions';
 import getSceneUserCicrcleDivision from '../../components/getScenes/degrees/getSceneUserCircleDivision';
 import cl from '../../colors';
-import { Button, Input } from '@mui/material';
+import { Button, Input, Slider } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import P from '../../components/P';
@@ -23,6 +23,15 @@ import QuestionDisplay from '../../components/Question/QuestionDisplay';
 import QuestionWrapper from '../../components/Question/QuestionWrapper';
 import MostDivisible from '../../components/niche/MostDivisible';
 import DivisorsPlot from '../../components/niche/DivisorsPlot';
+import getSceneInteriorAngles from '../../components/getScenes/degrees/getSceneInteriorAngles';
+import getSceneExponentialSlider from '../../components/getScenes/degrees/getSceneExponentialSlider';
+import Smallest from '../../components/niche/Smallest';
+
+export type MostDivisibleQuestionObject = {
+  limit: number;
+  correct: number[];
+  answerState: AnswerState;
+};
 
 const smallness_and_divisibility = () => {
   const [userCircleDivisions, setUserCircleDivisions] = useState(1);
@@ -36,6 +45,15 @@ const smallness_and_divisibility = () => {
     Hundred: 4,
     Thousand: 2,
   };
+
+  const [mostDivisibleQuestions, setMostDivisibleQuestions] = useState<
+    MostDivisibleQuestionObject[]
+  >([
+    { limit: 15, correct: [12], answerState: 'unanswered' },
+    { limit: 100, correct: [60, 72, 84, 90, 96], answerState: 'unanswered' },
+    { limit: 1000, correct: [840], answerState: 'unanswered' },
+    { limit: 10000, correct: [7560, 9240], answerState: 'unanswered' },
+  ]);
 
   const [mostDivisibleAnswerState, setMostDivisibleAnswerState] =
     useState<AnswerState>('unanswered');
@@ -51,6 +69,8 @@ const smallness_and_divisibility = () => {
     x: 50,
     y: 50,
   });
+
+  const [userSelectedSmallestValue, setUserSelectedSmallestValue] = useState();
 
   const notTooBigCollapsable = (
     <div>
@@ -259,17 +279,38 @@ const smallness_and_divisibility = () => {
           these qualities and how much weight we should give them will be an
           exercise left for you, the reader.
           <h4>Smallest</h4>
-          This first question is maybe overly-straightforward.
+          This first question below is a little scroll-intensive, but very
+          straightforward.
           <br />
           <br />
-          <IntegerSimple
-            hint={<div>it's less than 2</div>}
-            question={`What is the smallest number from 1 to 10,000?`}
-            answer={1}
-            decimalPlaceIndex={1}
-            answerState={smallestValueAns}
-            setAnswerState={setSmallestValueAns}
-          />
+          <Smallest />
+          I made the diagram above so darn tall because otherwise the smallest
+          numbers represented by just fractions of a pixel, become too small to
+          visibly notice.
+          <br />
+          <br />
+          I most often represent the size diagram to an exponential (curve that
+          goes up with increasing steepness). It gives the smaller numbers more
+          of a spotlight — which I think they deserve. If you find it warping
+          your sense of scale, you can toggle it to a linear representation!
+          <br />
+          <br />
+          Conceptually even numbers much smaller than 10,000 are beyond what our
+          primitive little human minds can fully grasp. But visuals can assist
+          and refine our flawed intuitions.
+          <br />
+          <br />
+          A fun thought experiment to demonstrate how bad we are at
+          conceptualizing large numbers — Try mentally visualizing as many
+          distinct, individual circles as you can. Eyes closed. Most people
+          report that they cannot mentally visualize more than 5-7 distinct
+          circles at the same time.
+          <br />
+          <br />
+          Going forward though, I will squish exponential figures down for
+          practical reasons, making large numbers like 10,000 appear small
+          because the smallest numbers will become too tiny to dispaly with the
+          screens' pixels.
           <br />
           <br />
           <h4>Most Divisible</h4>
@@ -280,6 +321,8 @@ const smallness_and_divisibility = () => {
           <MostDivisible
             answerState={mostDivisibleAnswerState}
             setAnswerState={setMostDivisibleAnswerState}
+            // questionObjects={mostDivisibleQuestions}
+            // setQuestionObjects={setMostDivisibleQuestions}
           />
           <h4># of Divisors Plot:</h4>
           <DivisorsPlot />

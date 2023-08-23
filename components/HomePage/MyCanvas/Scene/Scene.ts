@@ -8,7 +8,8 @@ class Scene {
   constructor(
     public context: CanvasRenderingContext2D,
     public eventHandlerConfig: EventHandlerConfig,
-    public extra: any = {}
+    public extra: any = {},
+    public isStatic: boolean = false
   ) {
     this.init = () => {
       console.log('create init function');

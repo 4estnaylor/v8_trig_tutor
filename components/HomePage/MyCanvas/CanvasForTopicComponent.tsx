@@ -21,20 +21,21 @@ interface MyCanvasProps {
   sceneGetter: SceneGetter;
   objectPassedToScene?: any;
   height?: number;
+  width?: number;
 }
 
 const CanvasForTopicComponent = (props: MyCanvasProps) => {
-  const { sceneGetter, objectPassedToScene } = props;
+  const { sceneGetter, objectPassedToScene, height, width } = props;
   const canvasRef = useMyCanvas2(sceneGetter, objectPassedToScene);
   const parentWidth = useParentElementSize(canvasRef);
 
   return (
     <StyledCanvas
       ref={canvasRef}
-      width={parentWidth}
+      width={width ? width : parentWidth}
       // width="390px"
       data-passedtoscene={objectPassedToScene}
-      height="390px"
+      height={height ? height + 'px' : '390px'}
     />
   );
 };
