@@ -20,8 +20,6 @@ interface IntegerAnswerQuestionProps {
   answerState: AnswerState;
   setAnswerState: React.Dispatch<React.SetStateAction<AnswerState>>;
   hint?: JSX.Element;
-  userValue: number | null;
-  setUserValue: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 const IntegerSimple = (props: IntegerAnswerQuestionProps) => {
@@ -34,10 +32,7 @@ const IntegerSimple = (props: IntegerAnswerQuestionProps) => {
     answerState,
     setAnswerState,
     hint,
-    userValue,
-    setUserValue,
   } = props;
-
   const [userAnswer, setUserAnswer] = useState<number | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,17 +40,17 @@ const IntegerSimple = (props: IntegerAnswerQuestionProps) => {
 
     let userInputNum = Number(userInput);
     if (isNaN(Number(userInput) as any)) {
-      setUserValue(null);
+      setUserAnswer(null);
     } else if (userInput === '') {
-      setUserValue(null);
+      setUserAnswer(null);
     } else {
-      setUserValue(userInputNum);
+      setUserAnswer(userInputNum);
     }
   };
 
   const handleCheck = () => {
     console.log('checking');
-    if (userValue === answer) {
+    if (userAnswer === answer) {
       setAnswerState('correct');
     } else {
       setAnswerState('incorrect');
@@ -73,7 +68,7 @@ const IntegerSimple = (props: IntegerAnswerQuestionProps) => {
             {diagram}
             <SpinnerLessTextField
               type="number"
-              value={userValue}
+              value={userAnswer}
               onChange={handleChange}
               variant="standard"
               label="your answer"
@@ -82,7 +77,7 @@ const IntegerSimple = (props: IntegerAnswerQuestionProps) => {
             <ActionBar
               answerState={answerState}
               handleCheck={handleCheck}
-              userAnswer={userValue}
+              userAnswer={userAnswer}
               hint={hint}
             />
             {/* <BottomBar answerState = {answerState}>

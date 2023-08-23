@@ -4,11 +4,17 @@ import cl from '../../colors';
 
 type TopPartProps = {
   children: JSX.Element | string;
+  instruction?: JSX.Element | string;
 };
 
 const TopPart = (props: TopPartProps) => {
-  const { children } = props;
-  return <Wrapper>{children}</Wrapper>;
+  const { children, instruction } = props;
+  return (
+    <Wrapper>
+      {children}
+      <Instruction>{instruction}</Instruction>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
@@ -22,6 +28,15 @@ const Wrapper = styled.div`
   width: 100%;
   color: ${cl.getHSL(cl.white)};
   font-size: 1.25rem;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Instruction = styled.div`
+  padding: 15px;
+  padding-left: 0px;
+  color: ${cl.getHSLA(cl.white, 0.7)};
+  font-size: 1rem;
 `;
 
 export default TopPart;

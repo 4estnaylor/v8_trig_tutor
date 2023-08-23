@@ -10,12 +10,14 @@ type ActionBarProps = {
   handleCheck: () => void;
   userAnswer: number | string | null;
   hint?: JSX.Element | string;
+  children?: JSX.Element;
 };
 const ActionBar = (props: ActionBarProps) => {
-  const { answerState, handleCheck, userAnswer, hint } = props;
+  const { answerState, handleCheck, userAnswer, hint, children } = props;
   return (
     <Wrapper answerState={answerState}>
       {hint ? <Hint hint={hint} /> : null}
+      {children}
       {answerState !== 'correct' ? (
         <CheckButton
           onClick={handleCheck}
@@ -33,6 +35,7 @@ const Wrapper = styled.div<{ answerState: AnswerState }>`
   width: 100%;
   display: flex;
   padding-top: 10px;
+  align-items: baseline;
 `;
 
 export default ActionBar;

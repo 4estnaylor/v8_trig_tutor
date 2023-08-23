@@ -26,6 +26,7 @@ import DivisorsPlot from '../../components/niche/DivisorsPlot';
 import getSceneInteriorAngles from '../../components/getScenes/degrees/getSceneInteriorAngles';
 import getSceneExponentialSlider from '../../components/getScenes/degrees/getSceneExponentialSlider';
 import Smallest from '../../components/niche/Smallest';
+import Quote from '../../components/Quote/Quote';
 
 export type MostDivisibleQuestionObject = {
   limit: number;
@@ -263,6 +264,13 @@ const smallness_and_divisibility = () => {
     <TopicComponentBoilerPlate2 title="Smallness and Divisibility">
       <>
         <P>
+          <Quote
+            quote={
+              'The test of a first-rate intelligence is the ability to hold two opposed ideas in the mind at the same time, and still retain the ability to function.'
+            }
+            byLine="F. Scott Fitzgerald"
+            source="https://www.esquire.com/lifestyle/a4310/the-crack-up/"
+          />
           360 be damned, we are going to clear the slate and search for the very
           best number of divisions for a circle.
           <br />
@@ -275,9 +283,9 @@ const smallness_and_divisibility = () => {
           <br />
           <br />
           There are two qualities in particular that our models will focus on —
-          smallness and having many divisors. How exactly we should measure
-          these qualities and how much weight we should give them will be an
-          exercise left for you, the reader.
+          smallness and having many divisors. Deciding how exactly we should
+          measure these qualities and how much weight we should give them will
+          be a task left for you.
           <h4>Smallest</h4>
           This first question below is a little scroll-intensive, but very
           straightforward.

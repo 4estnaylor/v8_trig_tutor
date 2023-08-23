@@ -22,17 +22,36 @@ const getSceneExponentialSlider: SceneGetter = (
   // @ts-ignore
   // ingoring missing ev for onclick;
   const passedObject = context?.objectPassedToScene;
-  const {} = passedObject;
+  const { userValueRef } = passedObject;
 
   const base = 10;
   const startPower = 0;
   const endPower = 4;
+
+  const selectedValue = 50;
 
   context.canvas.width = context.canvas.parentElement?.clientWidth || 500;
 
   const NumberOfSegments = 300;
 
   const coordinates: Coordinate[] = [];
+
+  let maxHeight = context.canvas.height;
+  let maxWidth = context.canvas.width;
+
+  let userValuePower = Math.log10(userValueRef.current);
+  let userValueX = maxWidth * (userValuePower / endPower);
+  let userValueY =
+    maxHeight - (userValueRef.current / base ** endPower) * maxHeight;
+
+  const fillGradient = context.createLinearGradient(0, maxHeight, maxWidth, 0);
+  // fillGradient.addColorStop(0, cl.getHSL(cl.red_light));
+  fillGradient.addColorStop(0.5, cl.getHSL(cl.red));
+  fillGradient.addColorStop(1, cl.getHSL(cl.red_dark));
+
+  const displayValue = (value: number) => {
+    let xPos = (value * context.canvas.width) / NumberOfSegments;
+  };
 
   for (let index = 0; index <= NumberOfSegments; index++) {
     console.log('happening');
@@ -68,17 +87,67 @@ const getSceneExponentialSlider: SceneGetter = (
     coordinates.forEach((coordinate) => placeCoordinate(coordinate));
   };
 
-  context.fillStyle = cl.getHSLA(cl.black, 1);
+  const placeCoordinatesUpTo = (value: number) => {
+    let power = Math.log10(userValueRef.current);
+    let xPos = context.canvas.width * (power / endPower);
+    coordinates.forEach((coordinate) => {
+      if (coordinate.x <= xPos) {
+        placeCoordinate(coordinate);
+      }
+    });
+  };
 
-  scene.draw = () => {
-    // context.fillRect(0, 0, 1, 100);
-    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+  const drawUserValue = () => {
+    let maxHeight = context.canvas.height;
+    let power = Math.log10(userValueRef.current);
+    let xPos = context.canvas.width * (power / endPower);
+    let yPos =
+      maxHeight - (userValueRef.current / base ** endPower) * maxHeight;
+
+    context.beginPath();
+    context.ellipse(xPos, yPos, 10, 10, 0, 0, Tau);
+    context.fillStyle = cl.getHSL(cl.purple);
+    context.fill();
+  };
+
+  const drawUnfilled = () => {
     context.beginPath();
     placeCoordinates();
     context.lineTo(context.canvas.width, context.canvas.height);
     context.lineTo(0, context.canvas.height);
 
+    context.fillText(
+      userValueRef.current.toString(),
+      100,
+      context.canvas.height - 200
+    );
+
+    context.fillStyle = cl.getHSL(cl.gray_light);
     context.fill();
+  };
+
+  const drawFilled = () => {
+    context.beginPath();
+    let power = Math.log10(userValueRef.current);
+    let maxHeight = context.canvas.height;
+    let xPos = context.canvas.width * (power / endPower);
+    let yPos =
+      maxHeight - (userValueRef.current / base ** endPower) * maxHeight;
+    placeCoordinatesUpTo(xPos);
+    context.lineTo(xPos, yPos);
+    context.lineTo(xPos, context.canvas.height);
+    context.lineTo(0, context.canvas.height);
+    context.fillStyle = fillGradient;
+    context.fill();
+  };
+
+  scene.draw = () => {
+    // context.fillRect(0, 0, 1, 100);
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+    drawUnfilled();
+    drawFilled();
+
+    // drawUserValue();
   };
 
   return scene;
