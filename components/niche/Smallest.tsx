@@ -3,11 +3,12 @@ import IntegerSimple from '../Inputs/IntegerSimple';
 import { AnswerState } from '../Inputs/MultipleChoiceQuestion';
 import CanvasForTopicComponent from '../HomePage/MyCanvas/CanvasForTopicComponent';
 import getSceneExponentialSlider from '../getScenes/degrees/getSceneExponentialSlider';
-import { Slider } from '@mui/material';
+import { Button, Slider } from '@mui/material';
 import QuestionWrapper from '../Question/QuestionWrapper';
 import TopPart from '../Question/TopPart';
 import BottomPart from '../Question/BottomPart';
 import ActionBar from '../Question/ActionBar';
+import styled from 'styled-components';
 
 const Smallest = () => {
   const [smallestValueAns, setSmallestValueAns] =
@@ -72,6 +73,8 @@ const Smallest = () => {
           <BottomPart>
             <>
               {exponential10k}
+              <Wrapper>{userValue}</Wrapper>
+
               <ActionBar
                 answerState="unanswered"
                 handleCheck={() => {}}
@@ -85,5 +88,10 @@ const Smallest = () => {
     </>
   );
 };
+
+const Wrapper = styled(Button)`
+  width: 50px;
+  height: 50px;
+`;
 
 export default Smallest;

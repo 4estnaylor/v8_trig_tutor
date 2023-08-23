@@ -25,10 +25,7 @@ const getSceneExponentialSlider: SceneGetter = (
   const { userValueRef } = passedObject;
 
   const base = 10;
-  const startPower = 0;
   const endPower = 4;
-
-  const selectedValue = 50;
 
   context.canvas.width = context.canvas.parentElement?.clientWidth || 500;
 
@@ -44,10 +41,35 @@ const getSceneExponentialSlider: SceneGetter = (
   let userValueY =
     maxHeight - (userValueRef.current / base ** endPower) * maxHeight;
 
-  const fillGradient = context.createLinearGradient(0, maxHeight, maxWidth, 0);
-  // fillGradient.addColorStop(0, cl.getHSL(cl.red_light));
-  fillGradient.addColorStop(0.5, cl.getHSL(cl.red));
+  let fillGradient = context.createLinearGradient(
+    0,
+    maxHeight,
+    userValueX,
+    userValueY
+  );
+  fillGradient.addColorStop(0, cl.getHSL(cl.red_dark));
+  fillGradient.addColorStop(0.25, cl.getHSL(cl.red));
+  fillGradient.addColorStop(0.4, cl.getHSL(cl.white));
+  fillGradient.addColorStop(0.6, cl.getHSL(cl.red_light));
+  fillGradient.addColorStop(0.75, cl.getHSL(cl.red));
   fillGradient.addColorStop(1, cl.getHSL(cl.red_dark));
+
+  const update = () => {
+    userValuePower = Math.log10(userValueRef.current);
+    userValueX = maxWidth * (userValuePower / endPower);
+    userValueY =
+      maxHeight - (userValueRef.current / base ** endPower) * maxHeight;
+
+    fillGradient = context.createLinearGradient(
+      0,
+      maxHeight,
+      userValueX,
+      userValueY
+    );
+    fillGradient.addColorStop(0.75, cl.getHSL(cl.blue));
+    fillGradient.addColorStop(0.5, cl.getHSL(cl.purple));
+    fillGradient.addColorStop(0.25, cl.getHSL(cl.red));
+  };
 
   const displayValue = (value: number) => {
     let xPos = (value * context.canvas.width) / NumberOfSegments;
@@ -64,17 +86,6 @@ const getSceneExponentialSlider: SceneGetter = (
     coordinates.push(newCoordinate);
   }
 
-  // for (let index = 0; index < NumberOfSegments; index++) {
-  //   let maxHeight = context.canvas.height;
-  //   let xPos = (index * context.canvas.width) / NumberOfSegments;
-  //   let yPos = maxHeight - (maxHeight * index) / NumberOfSegments;
-
-  //   let newCoordinate = { x: xPos, y: yPos };
-  //   coordinates.push(newCoordinate);
-
-  //   coordinates.push;
-  // }
-
   const placeCoordinate = (coordinate: Coordinate) => {
     let xPos = coordinate.x;
     let yPos = coordinate.y;
@@ -88,26 +99,11 @@ const getSceneExponentialSlider: SceneGetter = (
   };
 
   const placeCoordinatesUpTo = (value: number) => {
-    let power = Math.log10(userValueRef.current);
-    let xPos = context.canvas.width * (power / endPower);
     coordinates.forEach((coordinate) => {
-      if (coordinate.x <= xPos) {
+      if (coordinate.x <= userValueX) {
         placeCoordinate(coordinate);
       }
     });
-  };
-
-  const drawUserValue = () => {
-    let maxHeight = context.canvas.height;
-    let power = Math.log10(userValueRef.current);
-    let xPos = context.canvas.width * (power / endPower);
-    let yPos =
-      maxHeight - (userValueRef.current / base ** endPower) * maxHeight;
-
-    context.beginPath();
-    context.ellipse(xPos, yPos, 10, 10, 0, 0, Tau);
-    context.fillStyle = cl.getHSL(cl.purple);
-    context.fill();
   };
 
   const drawUnfilled = () => {
@@ -115,27 +111,16 @@ const getSceneExponentialSlider: SceneGetter = (
     placeCoordinates();
     context.lineTo(context.canvas.width, context.canvas.height);
     context.lineTo(0, context.canvas.height);
-
-    context.fillText(
-      userValueRef.current.toString(),
-      100,
-      context.canvas.height - 200
-    );
-
     context.fillStyle = cl.getHSL(cl.gray_light);
     context.fill();
   };
 
   const drawFilled = () => {
     context.beginPath();
-    let power = Math.log10(userValueRef.current);
-    let maxHeight = context.canvas.height;
-    let xPos = context.canvas.width * (power / endPower);
-    let yPos =
-      maxHeight - (userValueRef.current / base ** endPower) * maxHeight;
-    placeCoordinatesUpTo(xPos);
-    context.lineTo(xPos, yPos);
-    context.lineTo(xPos, context.canvas.height);
+
+    placeCoordinatesUpTo(userValueX);
+    context.lineTo(userValueX, userValueY);
+    context.lineTo(userValueX, context.canvas.height);
     context.lineTo(0, context.canvas.height);
     context.fillStyle = fillGradient;
     context.fill();
@@ -143,6 +128,7 @@ const getSceneExponentialSlider: SceneGetter = (
 
   scene.draw = () => {
     // context.fillRect(0, 0, 1, 100);
+    update();
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     drawUnfilled();
     drawFilled();
