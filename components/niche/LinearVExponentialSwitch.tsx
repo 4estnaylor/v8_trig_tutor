@@ -2,7 +2,7 @@ import { Switch } from '@mui/material';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
-import Label from '../label';
+import Label from '../Label';
 
 interface LinearVExponentialToggleProps {
   handleSwitch: () => void;
@@ -18,6 +18,7 @@ const LinearVExponentialSwitch = (props: LinearVExponentialToggleProps) => {
   return (
     <Wrapper>
       <Label>{checked ? 'exponential' : 'linear'}</Label>
+
       <MySwitch
         checked={checked}
         onChange={handleChange}

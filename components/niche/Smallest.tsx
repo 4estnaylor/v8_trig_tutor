@@ -11,7 +11,7 @@ import ActionBar from '../Question/ActionBar';
 import styled from 'styled-components';
 import cl from '../../colors';
 import LinearVExponentialSwitch from './LinearVExponentialSwitch';
-import Label from '../label';
+import Label from '../Label';
 
 type VisualType = 'linear' | 'exponential';
 
@@ -113,10 +113,41 @@ const Smallest = () => {
       value: 1,
       label: '1',
     },
-
     {
       value: 1000,
       label: '1k',
+    },
+    {
+      value: 2000,
+      label: '2k',
+    },
+    {
+      value: 3000,
+      label: '3k',
+    },
+    {
+      value: 4000,
+      label: '4k',
+    },
+    {
+      value: 5000,
+      label: '5k',
+    },
+    {
+      value: 6000,
+      label: '6k',
+    },
+    {
+      value: 7000,
+      label: '7k',
+    },
+    {
+      value: 8000,
+      label: '8k',
+    },
+    {
+      value: 9000,
+      label: '9k',
     },
     {
       value: 10000,
@@ -210,8 +241,8 @@ const TopBar = styled.div`
   justify-content: center;
   position: relative;
   padding-bottom: 15px;
+  padding-top: 25px;
   align-items: flex-start;
-  height: 68px;
 `;
 
 const SwitchWrapperAbsolute = styled.div`
