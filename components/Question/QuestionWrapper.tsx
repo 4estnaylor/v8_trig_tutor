@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   color: ${cl.getHSL(cl.gray_dark)};
 
   width: 100%;
-  max-width: 500px;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
   align-items: center;

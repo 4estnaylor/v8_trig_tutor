@@ -22,7 +22,7 @@ const getSceneExponentialSlider: SceneGetter = (
   // @ts-ignore
   // ingoring missing ev for onclick;
   const passedObject = context?.objectPassedToScene;
-  const { userValueRef } = passedObject;
+  const { userValueRef, visualTypeRef } = passedObject;
 
   const base = 10;
   const endPower = 4;
@@ -66,14 +66,16 @@ const getSceneExponentialSlider: SceneGetter = (
       userValueX,
       userValueY
     );
-    fillGradient.addColorStop(0.75, cl.getHSL(cl.blue));
-    fillGradient.addColorStop(0.5, cl.getHSL(cl.purple));
-    fillGradient.addColorStop(0.25, cl.getHSL(cl.red));
+
+    fillGradient.addColorStop(0.99, cl.getHSL(cl.yellow));
+    fillGradient.addColorStop(0.7, cl.getHSL(cl.red));
   };
 
   const displayValue = (value: number) => {
     let xPos = (value * context.canvas.width) / NumberOfSegments;
   };
+
+  const minVisibleHeight = 0.2;
 
   for (let index = 0; index <= NumberOfSegments; index++) {
     console.log('happening');
@@ -81,6 +83,9 @@ const getSceneExponentialSlider: SceneGetter = (
     let maxHeight = context.canvas.height;
     let xPos = (index * context.canvas.width) / NumberOfSegments;
     let yPos = maxHeight - (base ** power / base ** endPower) * maxHeight;
+    if (yPos > maxHeight - minVisibleHeight) {
+      yPos = maxHeight - minVisibleHeight;
+    }
 
     let newCoordinate = { x: xPos, y: yPos };
     coordinates.push(newCoordinate);
@@ -106,7 +111,7 @@ const getSceneExponentialSlider: SceneGetter = (
     });
   };
 
-  const drawUnfilled = () => {
+  const drawUnfilledExp = () => {
     context.beginPath();
     placeCoordinates();
     context.lineTo(context.canvas.width, context.canvas.height);
@@ -115,23 +120,62 @@ const getSceneExponentialSlider: SceneGetter = (
     context.fill();
   };
 
-  const drawFilled = () => {
+  const drawFilledExp = () => {
     context.beginPath();
 
     placeCoordinatesUpTo(userValueX);
     context.lineTo(userValueX, userValueY);
     context.lineTo(userValueX, context.canvas.height);
     context.lineTo(0, context.canvas.height);
-    context.fillStyle = fillGradient;
+    context.fillStyle = cl.getHSL(cl.red);
     context.fill();
+  };
+
+  const drawExponential = () => {
+    drawUnfilledExp();
+    drawFilledExp();
+  };
+
+  const drawUnfilledLinear = () => {
+    context.beginPath();
+    context.moveTo(0, maxHeight);
+    context.lineTo(maxWidth, 0);
+    context.lineTo(maxWidth, maxHeight);
+    context.lineTo(0, maxHeight);
+    context.fillStyle = cl.getHSL(cl.gray_light);
+    context.fill();
+  };
+
+  const drawFilledLinear = () => {
+    context.beginPath();
+    let xPos = (maxWidth * userValueRef.current) / base ** endPower;
+    let yPos =
+      maxHeight - (maxHeight * userValueRef.current) / base ** endPower;
+    context.moveTo(0, maxHeight);
+    context.lineTo(xPos, yPos);
+    context.lineTo(xPos, maxHeight);
+    context.lineTo(0, maxHeight);
+    context.fillStyle = cl.getHSL(cl.red);
+    context.fill();
+  };
+
+  const drawLinear = () => {
+    drawUnfilledLinear();
+    drawFilledLinear();
   };
 
   scene.draw = () => {
     // context.fillRect(0, 0, 1, 100);
     update();
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    drawUnfilled();
-    drawFilled();
+    // drawExponential();
+    if (visualTypeRef.current === 'linear') {
+      drawLinear();
+    }
+
+    if (visualTypeRef.current === 'exponential') {
+      drawExponential();
+    }
 
     // drawUserValue();
   };

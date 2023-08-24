@@ -293,8 +293,8 @@ const smallness_and_divisibility = () => {
           <br />
           <Smallest />
           I made the diagram above so darn tall because otherwise the smallest
-          numbers represented by just fractions of a pixel, become too small to
-          visibly notice.
+          numbers, represented by just fractions of a pixel, become too small to
+          see.
           <br />
           <br />
           I most often represent the size diagram to an exponential (curve that
