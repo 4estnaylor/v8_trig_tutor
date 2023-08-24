@@ -194,7 +194,7 @@ const Smallest = () => {
       <QuestionWrapper>
         <>
           <TopPart instruction="(this is not a trick question)">
-            What is the smallest number from 1 to 10,000?
+            What is the smallest number from 1 to 10,000? hmm
           </TopPart>
           <BottomPart>
             <>
