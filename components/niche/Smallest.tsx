@@ -18,8 +18,7 @@ type VisualType = 'linear' | 'exponential';
 type SquishedType = 'squished' | 'unsquished';
 
 const Smallest = () => {
-  const [smallestValueAns, setSmallestValueAns] =
-    useState<AnswerState>('unanswered');
+  const [answer, setAnswer] = useState<AnswerState>('unanswered');
 
   const [exponentialSlideValue, setExponentialSlideValue] = useState(4);
   const [linearSlideValue, setLinearSlideValue] = useState(10 ** 4);
@@ -27,6 +26,14 @@ const Smallest = () => {
   const userValueRef = useRef(userValue);
   const [visualType, setVisualType] = useState<VisualType>('linear');
   const visualTypeRef = useRef(visualType);
+
+  const handleCheck = () => {
+    if (Math.round(userValue) === 1) {
+      setAnswer('correct');
+    } else {
+      setAnswer('incorrect');
+    }
+  };
 
   const [squished, setSquished] = useState<SquishedType>('squished');
   const squishedRef = useRef(squished);
@@ -232,8 +239,8 @@ const Smallest = () => {
               </TopBar>
 
               <ActionBar
-                answerState="unanswered"
-                handleCheck={() => {}}
+                answerState={answer}
+                handleCheck={handleCheck}
                 userAnswer={4}
                 hint={'The answer is less than 2.'}
               >
