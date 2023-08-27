@@ -92,6 +92,10 @@ const getSceneExponentialSlider: SceneGetter = (
   const updateValues = () => {
     userValuePower = Math.log10(userValueRef.current);
     expUserValueX = maxWidth * (userValuePower / endPower);
+    let maxHeight = 200;
+    if (squishedRef.current === 'unsquished') {
+      maxHeight = 2000;
+    }
     userValueY =
       maxHeight - (userValueRef.current / base ** endPower) * maxHeight;
   };
@@ -167,6 +171,7 @@ const getSceneExponentialSlider: SceneGetter = (
 
   const placeCoordinatesUpTo = (coordinates: Coordinate[], xValue: number) => {
     updateValues();
+
     coordinates.forEach((coordinate) => {
       if (coordinate.x <= expUserValueX) {
         placeCoordinate(coordinate);
