@@ -12,8 +12,10 @@ import styled from 'styled-components';
 import cl from '../../colors';
 import LinearVExponentialSwitch from './LinearVExponentialSwitch';
 import Label from '../Label';
+import SquishedVUnsquished from './SquishedVUnsquished';
 
 type VisualType = 'linear' | 'exponential';
+type SquishedType = 'squished' | 'unsquished';
 
 const Smallest = () => {
   const [smallestValueAns, setSmallestValueAns] =
@@ -25,6 +27,18 @@ const Smallest = () => {
   const userValueRef = useRef(userValue);
   const [visualType, setVisualType] = useState<VisualType>('linear');
   const visualTypeRef = useRef(visualType);
+
+  const [squished, setSquished] = useState<SquishedType>('unsquished');
+  const squishedRef = useRef(squished);
+
+  const handleSquishSwitch = () => {
+    if (squished === 'squished') {
+      setSquished('unsquished');
+    }
+    if (squished === 'unsquished') {
+      setSquished('squished');
+    }
+  };
 
   const handleSwitch = () => {
     if (visualType === 'linear') {
@@ -45,6 +59,10 @@ const Smallest = () => {
   useEffect(() => {
     visualTypeRef.current = visualType;
   }, [visualType]);
+
+  useEffect(() => {
+    squishedRef.current = squished;
+  }, [squished]);
 
   const calculatePowerOfTen = (value: number) => {
     let newValue = Math.round(10 ** value);
@@ -95,7 +113,7 @@ const Smallest = () => {
   ];
 
   const exponentialSlider = (
-    <Slider
+    <MySlider
       value={exponentialSlideValue}
       min={0}
       step={0.01}
@@ -156,7 +174,7 @@ const Smallest = () => {
   ];
 
   const linearSlider = (
-    <Slider
+    <MySlider
       value={Math.round(linearSlideValue)}
       min={1}
       step={1}
@@ -173,8 +191,8 @@ const Smallest = () => {
       <CanvasForTopicComponent
         sceneGetter={getSceneExponentialSlider}
         width={300}
-        height={200}
-        objectPassedToScene={{ userValueRef, visualTypeRef }}
+        height={10000}
+        objectPassedToScene={{ userValueRef, visualTypeRef, squishedRef }}
       />
       {visualType === 'linear' ? linearSlider : exponentialSlider}
     </>
@@ -194,19 +212,23 @@ const Smallest = () => {
       <QuestionWrapper>
         <>
           <TopPart instruction="(this is not a trick question)">
-            What is the smallest number from 1 to 10,000? hmm
+            What is the smallest number from 1 to 10,000?
           </TopPart>
           <BottomPart>
             <>
               {exponential10k}
               <TopBar>
-                <SwitchWrapperAbsolute>
-                  <LinearVExponentialSwitch handleSwitch={handleSwitch} />
-                </SwitchWrapperAbsolute>
                 <Wrapper>
                   <Label>Number</Label>
                   <UserValue>{Math.round(userValue)}</UserValue>
                 </Wrapper>
+                <SwitchWrapperAbsolute>
+                  <LinearVExponentialSwitch handleSwitch={handleSwitch} />
+                </SwitchWrapperAbsolute>
+                <SquishedVUnsquished
+                  handleSwitch={handleSquishSwitch}
+                  squished={squished}
+                />
               </TopBar>
 
               <ActionBar
@@ -227,30 +249,40 @@ const Smallest = () => {
 
 const Wrapper = styled.div`
   width: 50px;
-  height: 50px;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
+
   color: ${cl.getHSL(cl.purple)};
   font-size: 1rem;
   justify-self: center;
+  align-items: center;
 `;
 
 const TopBar = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   position: relative;
   padding-bottom: 15px;
   padding-top: 25px;
   align-items: flex-start;
+  gap: 30px;
+  /* height: 130px; */
+`;
+
+const MySlider = styled(Slider)`
+  & .MuiSlider-mark {
+    opacity: 0;
+  }
 `;
 
 const SwitchWrapperAbsolute = styled.div`
-  position: absolute;
+  /* position: absolute; */
   left: 15px;
+  /* margin-left: auto; */
+  width: 75px;
 
-  width: 60px;
-  height: 68px;
   display: flex;
   justify-content: center;
 `;

@@ -1,0 +1,23 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created using Krita: https://krita.org -->
+<svg xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:krita="http://krita.org/namespaces/svg/krita"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    width="48pt"
+    height="48pt"
+    viewBox="0 0 48 48">
+<defs/>
+<g id="group0" transform="matrix(0.365809068271316 0.0101320691611119 -0.0101320691611119 0.365809068271316 13.3391155945652 0.793509802242376)" fill="none">
+  <g id="group1" fill="none">
+   <path id="shape0" transform="translate(10.1959877701278, 115.459666464376)" fill="#7779a4" fill-rule="evenodd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel" d="M0 2.5111C1.07794 4.05639 2.18957 5.18316 3.33488 5.89142C5.05285 6.9538 16.4723 10.141 20.9188 9.65806C25.3653 9.17516 35.0667 8.982 38.9069 7.43671C42.7471 5.89142 46.5872 4.05639 47.1936 2.02819C47.5978 0.676064 47.7662 0 47.6989 0L26.7801 4.15297C26.7127 4.15297 17.786 3.60568 0 2.5111Z"/>
+   <path id="shape1" transform="translate(0, 5.54685825042534)" fill="#1b22f2" fill-rule="evenodd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel" d="M10.5448 113.472C17.2686 116.161 22.8717 117.506 27.3542 117.506C34.0779 117.506 45.2841 116.385 49.9907 114.592C54.6974 112.799 60.0763 109.661 61.197 106.972C62.3176 104.282 61.6452 22.7011 60.0763 17.7703C58.5075 12.8396 54.6726 4.97623 53.9099 1.25533C53.4015 -1.22527 49.2164 -0.0295232 41.3546 4.84256L13.9123 5.47032L4.92561 3.26392C4.4749 4.80921 3.992 6.38669 3.4769 7.99637C2.70426 10.4109 0 18.4271 0 20.8416C0 23.2561 2.89742 78.3071 3.18716 81.0113C3.4769 83.7156 4.53929 102.356 5.02219 104.963C5.50509 107.571 6.66406 109.792 8.20935 111.241C9.75464 112.69 9.75464 112.69 10.5448 113.472Z"/>
+   <ellipse id="shape01" transform="matrix(0.999491159718783 -0.031896245051465 0.031896245051465 0.999491159718783 3.91873884324579 1.6236295627953)" rx="25.4517351521407" ry="5.58793528406178" cx="25.4517351521407" cy="5.58793528406178" fill="#7779a4" fill-rule="evenodd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel"/>
+   <ellipse id="shape2" transform="matrix(0.99949118530357 -0.0318962458679391 0.0318962458679391 0.99949118530357 7.55928091566975 4.0094959882035)" rx="21.72" ry="3.36" cx="21.72" cy="3.36" fill="#cdcdda" fill-rule="evenodd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel"/>
+   <path id="shape3" transform="translate(23.0906012244274, 3.17712967858833)" fill="#7779a4" fill-rule="evenodd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel" d="M4.116 0.853478C0.920932 1.6413 -0.413995 2.38536 0.111222 3.08565C0.899048 4.13608 4.50992 4.6613 6.74209 4.39869C8.97426 4.13608 17.4434 3.02 17.2464 1.6413C17.0495 0.262609 15.7364 0.262609 14.2921 0.131304C12.8477 -1.25e-07 7.39861 -0.131304 5.82296 0.262609C4.24731 0.656521 4.24731 0.656521 4.116 0.853478Z"/>
+   <ellipse id="shape4" transform="translate(25.4154008465794, 5.23499991057177)" rx="3.96000000000001" ry="0.840000000000003" cx="3.96000000000001" cy="0.840000000000003" fill="#cdcdda" fill-rule="evenodd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel"/>
+   <ellipse id="shape5" transform="translate(29.7354008465794, 3.79499991057179)" rx="4.08" ry="0.479999999999997" cx="4.08" cy="0.479999999999997" fill="#cdcdda" fill-rule="evenodd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel"/>
+  </g>
+ </g><path id="shape0" transform="translate(13.1174850673412, 3.65858003208324)" fill="#575cf2" fill-rule="evenodd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel" d="M21.9097 6.74931C21.5684 7.20025 20.5671 7.73158 18.9058 8.34328C16.414 9.26084 9.70499 9.27233 5.57547 8.76332C2.82246 8.42398 0.963975 7.84633 0 7.03038C0.643064 4.36833 1.17169 2.62313 1.58586 1.79478C2.00004 0.966417 2.06907 0.368159 1.79295 0C2.57529 0.736318 3.61074 1.12749 4.8993 1.17351C6.83213 1.24254 12.6306 1.79478 14.4254 1.44963C15.6219 1.21953 17.4627 0.759328 19.9478 0.0690298C20.6381 2.7842 21.2133 4.48694 21.6735 5.17724C22.1337 5.86753 22.2125 6.39156 21.9097 6.74931Z"/>
+</svg>

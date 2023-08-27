@@ -2,6 +2,8 @@ import { Switch } from '@mui/material';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
+import Image from 'next/image';
+// @ts-ignore
 import Label from '../Label';
 
 interface LinearVExponentialToggleProps {
@@ -15,9 +17,20 @@ const LinearVExponentialSwitch = (props: LinearVExponentialToggleProps) => {
     setChecked(!checked);
     handleSwitch();
   };
+
+  const exponentialIcon = (
+    <MyImage src="/exponentialIcon.svg" width={40} height={40} />
+  );
+
+  const linearIcon = <MyImage src="/linearIcon.svg" width={40} height={40} />;
   return (
     <Wrapper>
-      <Label>{checked ? 'exponential' : 'linear'}</Label>
+      <Label>scale</Label>
+      {checked ? exponentialIcon : linearIcon}
+      <Label color={cl.getHSL(cl.purple)} capitalized={false}>
+        {checked ? 'exponential' : 'linear'}
+      </Label>
+      {/* <Switch /> */}
 
       <MySwitch
         checked={checked}
@@ -32,12 +45,18 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 5px;
+  width: 75px;
+`;
+
+const MyImage = styled(Image)`
+  /* background-color: red; */
 `;
 
 const MySwitch = styled(Switch)`
-  height: 48px;
-  width: 68px;
-  color: 'red';
+  /* height: 48px;
+  width: 68px; */
+  /* color: 'red'; */
 
   & .MuiSwitch-switchBase {
     color: ${cl.getHSL(cl.purple)};
@@ -48,8 +67,8 @@ const MySwitch = styled(Switch)`
   }
 
   & .MuiSwitch-thumb {
-    height: 30px;
-    width: 30px;
+    /* height: 30px;
+    width: 30px; */
 
     &:before {
       background-image: url('img_tree.gif');

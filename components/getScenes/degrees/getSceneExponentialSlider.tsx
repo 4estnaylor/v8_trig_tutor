@@ -22,16 +22,54 @@ const getSceneExponentialSlider: SceneGetter = (
   // @ts-ignore
   // ingoring missing ev for onclick;
   const passedObject = context?.objectPassedToScene;
-  const { userValueRef, visualTypeRef } = passedObject;
+  const { userValueRef, visualTypeRef, squishedRef } = passedObject;
 
   const base = 10;
   const endPower = 4;
 
   context.canvas.width = context.canvas.parentElement?.clientWidth || 500;
 
+  // setTimeout(() => {
+  //   shrinkHeight();
+  // }, 6000);
+
   const NumberOfSegments = 300;
 
-  const coordinates: Coordinate[] = [];
+  let coordinates: Coordinate[] = [];
+
+  // let linearCoordinates: Coordinate[] = [];
+  // let exponentialCoordinates: Coordinate[] = [];
+
+  const minVisibleHeight = 0.2;
+
+  // for (let index = 0; index <= NumberOfSegments; index++) {
+  //   console.log('happening');
+  //   let power = endPower * (index / NumberOfSegments);
+  //   let maxHeight = context.canvas.height;
+  //   let xPos = (index * context.canvas.width) / NumberOfSegments;
+  //   let yPos = maxHeight - (base ** power / base ** endPower) * maxHeight;
+  //   if (yPos > maxHeight - minVisibleHeight) {
+  //     yPos = maxHeight - minVisibleHeight;
+  //   }
+
+  //   let newCoordinate = { x: xPos, y: yPos };
+  //   linearCoordinates.push(newCoordinate);
+  // }
+
+  const shrinkHeight = () => {
+    coordinates = [];
+
+    let oldY = window.pageYOffset;
+    let heightChange = context.canvas.height - 200;
+    let newY = oldY - heightChange;
+    context.canvas.height = 200;
+
+    maxHeight = context.canvas.height;
+
+    window.scrollTo(0, newY);
+  };
+
+  // shrinkHeight();
 
   let maxHeight = context.canvas.height;
   let maxWidth = context.canvas.width;
@@ -41,55 +79,34 @@ const getSceneExponentialSlider: SceneGetter = (
   let userValueY =
     maxHeight - (userValueRef.current / base ** endPower) * maxHeight;
 
-  let fillGradient = context.createLinearGradient(
-    0,
-    maxHeight,
-    userValueX,
-    userValueY
-  );
-  fillGradient.addColorStop(0, cl.getHSL(cl.red_dark));
-  fillGradient.addColorStop(0.25, cl.getHSL(cl.red));
-  fillGradient.addColorStop(0.4, cl.getHSL(cl.white));
-  fillGradient.addColorStop(0.6, cl.getHSL(cl.red_light));
-  fillGradient.addColorStop(0.75, cl.getHSL(cl.red));
-  fillGradient.addColorStop(1, cl.getHSL(cl.red_dark));
-
-  const update = () => {
+  const updateValues = () => {
     userValuePower = Math.log10(userValueRef.current);
     userValueX = maxWidth * (userValuePower / endPower);
     userValueY =
       maxHeight - (userValueRef.current / base ** endPower) * maxHeight;
-
-    fillGradient = context.createLinearGradient(
-      0,
-      maxHeight,
-      userValueX,
-      userValueY
-    );
-
-    fillGradient.addColorStop(0.99, cl.getHSL(cl.yellow));
-    fillGradient.addColorStop(0.7, cl.getHSL(cl.red));
   };
 
   const displayValue = (value: number) => {
     let xPos = (value * context.canvas.width) / NumberOfSegments;
   };
 
-  const minVisibleHeight = 0.2;
+  const populateCoordinates = () => {
+    for (let index = 0; index <= NumberOfSegments; index++) {
+      // coordinates = [];
+      let power = endPower * (index / NumberOfSegments);
+      let maxHeight = context.canvas.height;
+      let xPos = (index * context.canvas.width) / NumberOfSegments;
+      let yPos = maxHeight - (base ** power / base ** endPower) * maxHeight;
+      if (yPos > maxHeight - minVisibleHeight) {
+        yPos = maxHeight - minVisibleHeight;
+      }
 
-  for (let index = 0; index <= NumberOfSegments; index++) {
-    console.log('happening');
-    let power = endPower * (index / NumberOfSegments);
-    let maxHeight = context.canvas.height;
-    let xPos = (index * context.canvas.width) / NumberOfSegments;
-    let yPos = maxHeight - (base ** power / base ** endPower) * maxHeight;
-    if (yPos > maxHeight - minVisibleHeight) {
-      yPos = maxHeight - minVisibleHeight;
+      let newCoordinate = { x: xPos, y: yPos };
+      coordinates.push(newCoordinate);
     }
+  };
 
-    let newCoordinate = { x: xPos, y: yPos };
-    coordinates.push(newCoordinate);
-  }
+  populateCoordinates();
 
   const placeCoordinate = (coordinate: Coordinate) => {
     let xPos = coordinate.x;
@@ -116,7 +133,7 @@ const getSceneExponentialSlider: SceneGetter = (
     placeCoordinates();
     context.lineTo(context.canvas.width, context.canvas.height);
     context.lineTo(0, context.canvas.height);
-    context.fillStyle = cl.getHSL(cl.gray_light);
+    context.fillStyle = cl.getHSLA(cl.purple_light, 0.1);
     context.fill();
   };
 
@@ -142,7 +159,7 @@ const getSceneExponentialSlider: SceneGetter = (
     context.lineTo(maxWidth, 0);
     context.lineTo(maxWidth, maxHeight);
     context.lineTo(0, maxHeight);
-    context.fillStyle = cl.getHSL(cl.gray_light);
+    context.fillStyle = cl.getHSLA(cl.purple, 0.1);
     context.fill();
   };
 
@@ -166,7 +183,15 @@ const getSceneExponentialSlider: SceneGetter = (
 
   scene.draw = () => {
     // context.fillRect(0, 0, 1, 100);
-    update();
+
+    if (squishedRef.current === 'squished' && context.canvas.height !== 200) {
+      shrinkHeight();
+      populateCoordinates();
+      updateValues();
+    }
+
+    console.log(squishedRef.current, coordinates);
+
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     // drawExponential();
     if (visualTypeRef.current === 'linear') {
