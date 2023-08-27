@@ -191,7 +191,7 @@ const Smallest = () => {
       <CanvasForTopicComponent
         sceneGetter={getSceneExponentialSlider}
         width={300}
-        height={10000}
+        height={200}
         objectPassedToScene={{ userValueRef, visualTypeRef, squishedRef }}
       />
       {visualType === 'linear' ? linearSlider : exponentialSlider}
