@@ -196,7 +196,7 @@ const getSceneExponentialSlider: SceneGetter = (
     context.lineTo(expUserValueX, userValueY);
     context.lineTo(expUserValueX, context.canvas.height);
     context.lineTo(0, context.canvas.height);
-    context.fillStyle = cl.getHSL(cl.green);
+    context.fillStyle = cl.getHSL(cl.red);
     context.fill();
   };
 
@@ -243,16 +243,15 @@ const getSceneExponentialSlider: SceneGetter = (
   };
 
   const makeTall = () => {
-    if (
-      squishedRef.current === 'squished' ||
-      context.canvas.height === tallMaxHeight
-    )
+    if (squishedRef.current === 'squished' || context.canvas.height === 10000) {
       return;
-    let oldY = window.pageYOffset;
-    let heightChange = 10000 - context.canvas.height;
-    let newY = oldY + heightChange;
-    context.canvas.height = tallMaxHeight;
-    window.scrollTo(0, newY);
+    } else {
+      let oldY = window.pageYOffset;
+      let heightChange = 10000 - context.canvas.height;
+      let newY = oldY + heightChange;
+      context.canvas.height = tallMaxHeight;
+      window.scrollTo(0, newY);
+    }
   };
 
   const makeSquished = () => {

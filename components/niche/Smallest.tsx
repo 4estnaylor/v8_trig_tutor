@@ -28,7 +28,7 @@ const Smallest = () => {
   const [visualType, setVisualType] = useState<VisualType>('linear');
   const visualTypeRef = useRef(visualType);
 
-  const [squished, setSquished] = useState<SquishedType>('unsquished');
+  const [squished, setSquished] = useState<SquishedType>('squished');
   const squishedRef = useRef(squished);
 
   const handleSquishSwitch = () => {
