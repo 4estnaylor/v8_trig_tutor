@@ -40,7 +40,7 @@ const getSceneExponentialSlider: SceneGetter = (
   let coordinatesTall: Coordinate[] = [];
 
   let squishedMaxHeight = 200;
-  let tallMaxHeight = 10000;
+  let tallMaxHeight = 2000;
 
   // let linearCoordinates: Coordinate[] = [];
   // let exponentialCoordinates: Coordinate[] = [];
@@ -208,7 +208,7 @@ const getSceneExponentialSlider: SceneGetter = (
   const drawUnfilledLinear = () => {
     let maxHeight = 200;
     if (squishedRef.current === 'unsquished') {
-      maxHeight = 10000;
+      maxHeight = 2000;
     }
     context.beginPath();
     context.moveTo(0, maxHeight);
@@ -223,7 +223,7 @@ const getSceneExponentialSlider: SceneGetter = (
     context.beginPath();
     let maxHeight = 200;
     if (squishedRef.current === 'unsquished') {
-      maxHeight = 10000;
+      maxHeight = 2000;
     }
 
     let xPos = (maxWidth * userValueRef.current) / base ** endPower;
@@ -243,11 +243,11 @@ const getSceneExponentialSlider: SceneGetter = (
   };
 
   const makeTall = () => {
-    if (squishedRef.current === 'squished' || context.canvas.height === 10000) {
+    if (squishedRef.current === 'squished' || context.canvas.height === 2000) {
       return;
     } else {
       let oldY = window.pageYOffset;
-      let heightChange = 10000 - context.canvas.height;
+      let heightChange = 2000 - context.canvas.height;
       let newY = oldY + heightChange;
       context.canvas.height = tallMaxHeight;
       window.scrollTo(0, newY);
