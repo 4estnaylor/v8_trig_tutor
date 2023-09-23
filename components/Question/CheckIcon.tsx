@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   border-radius: 50%;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(
+  /* background: linear-gradient(
     45deg,
     ${cl.getHSL(cl.purple)},
     ${cl.getHSL(cl.red)},
@@ -22,7 +22,8 @@ const Wrapper = styled.div`
     ${cl.getHSL(cl.purple)}
   );
   background-size: 400% 400%;
-  animation: gradient 25s ease infinite;
+  animation: gradient 25s ease infinite; */
+  outline: 2px solid white;
   color: ${cl.getHSL(cl.white)};
   font-size: 2rem;
 

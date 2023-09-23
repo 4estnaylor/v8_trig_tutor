@@ -271,11 +271,17 @@ const smallness_and_divisibility = () => {
             byLine="F. Scott Fitzgerald"
             source="https://www.esquire.com/lifestyle/a4310/the-crack-up/"
           />
-          360 be damned, we are going to clear the slate and search for the very
-          best number of divisions for a circle.
+          360 be damned. Let's clear the slate and search for the very best
+          number of divisions for a circle. This time, no Babylonian myths
+          involved.
           <br />
-          <br />
-          We'll restrict our search to values less than 10,000.
+          <br /> 3 guidelines for the number:
+          <ul>
+            <li>smaller is better</li>
+            <li>more divisible is better</li>
+            <li>can't be bigger than 10,000</li>
+          </ul>
+          {/* We'll restrict our search to values less than 10,000.
           <br />
           <br />
           We will create {`(and refine) `} a model to determine which numbers
@@ -283,16 +289,15 @@ const smallness_and_divisibility = () => {
           <br />
           <br />
           There are two qualities in particular that our models will focus on —
-          smallness and having many divisors. Deciding how exactly we should
-          measure these qualities and how much weight we should give them will
-          be a task left for you.
+          smallness and having many divisors. */}
           <h4>Smallest</h4>
-          This first question below is a little scroll-intensive, but very
-          straightforward.
+          Small numbers make calculations are less taxing on our pencils and our
+          computer's transistors. So "smallness" is a quality we definitely want
+          to prioritize.
           <br />
           <br />
           <Smallest />
-          I made the diagram above so darn tall because otherwise the smallest
+          {/* I made the diagram above so darn tall because otherwise the smallest
           numbers, represented by just fractions of a pixel, become too small to
           see.
           <br />
@@ -320,12 +325,17 @@ const smallness_and_divisibility = () => {
           because the smallest numbers will become too tiny to dispaly with the
           screens' pixels.
           <br />
-          <br />
+          <br /> */}
           <h4>Most Divisible</h4>
-          A question that requires more experimentation. Use the "Multiply" tool
+          Numbers divisible by a large number of factors make decimals
+          unnecesary and life easier — another quality we definitely want to
+          prioritize.
+          <br />
+          <br />
+          {/* A question that requires more experimentation. Use the "Multiply" tool
           provided below to set the number.
           <br />
-          <br />
+          <br /> */}
           <MostDivisible
             answerState={mostDivisibleAnswerState}
             setAnswerState={setMostDivisibleAnswerState}

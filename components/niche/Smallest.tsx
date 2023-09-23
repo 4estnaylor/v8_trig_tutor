@@ -216,7 +216,7 @@ const Smallest = () => {
         setAnswerState={setSmallestValueAns}
         diagram={exponential10k}
       ></IntegerSimple> */}
-      <QuestionWrapper>
+      <QuestionWrapper answer={answer}>
         <>
           <TopPart instruction="(this is not a trick question)">
             What is the smallest number from 1 to 10,000?

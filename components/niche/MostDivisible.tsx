@@ -113,7 +113,7 @@ const MostDivisible = (props: MostDivisibleProps) => {
 
   const body = (
     <>
-      <QuestionWrapper>
+      <QuestionWrapper answer={answerState}>
         <>
           <TopPart>
             <QuestionDisplay>

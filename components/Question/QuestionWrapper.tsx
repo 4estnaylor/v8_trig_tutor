@@ -2,17 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
 import QUERIES from '../../breakpoints';
+import { AnswerState } from '../Inputs/MultipleChoiceQuestion';
 
 type QuestionWrapperProps = {
   children: JSX.Element;
+  answer?: AnswerState;
 };
 
 const QuestionWrapper = (props: QuestionWrapperProps) => {
-  const { children } = props;
-  return <Wrapper>{children}</Wrapper>;
+  const { children, answer } = props;
+  return <Wrapper answer={answer || 'unanswered'}>{children}</Wrapper>;
 };
 
-const Wrapper = styled.div`
+const Tester = styled.div``;
+
+const Wrapper = styled.div<{ answer: AnswerState }>`
   box-shadow: 0px 0px 4px ${cl.getHSLA(cl.black, 0.5)};
   color: ${cl.getHSL(cl.gray_dark)};
 
