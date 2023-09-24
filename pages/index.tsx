@@ -111,7 +111,7 @@ export default function Home() {
               </MathworkWrap>
               <MyCanvas sceneGetter={getHomepageScene} height={350} />
               <HomepageIllustration aria-hidden="true" tabIndex={-1}>
-                <InnerImg src="/trig_glasses.svg" />
+                <InnerImg src="/trig_glasses2.svg" />
               </HomepageIllustration>
             </CanvasWrap>
           </TopSection>
