@@ -111,7 +111,7 @@ export default function Home() {
               </MathworkWrap>
               <MyCanvas sceneGetter={getHomepageScene} height={350} />
               <HomepageIllustration aria-hidden="true" tabIndex={-1}>
-                <InnerImg src="/trig_glasses2.svg" />
+                <InnerImg src="/trig_glasses3.svg" />
               </HomepageIllustration>
             </CanvasWrap>
           </TopSection>
@@ -224,7 +224,7 @@ const HomepageIllustration = styled.div`
 
 const InnerImg = styled.img`
   width: 100%;
-  opacity: 0.9;
+  opacity: 1;
   max-height: 220px;
   -webkit-user-select: none;
   -khtml-user-select: none;
