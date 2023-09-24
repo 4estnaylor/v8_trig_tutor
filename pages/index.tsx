@@ -18,6 +18,7 @@ import QUERIES from '../breakpoints';
 import Script from 'next/script';
 import { UserProgress } from '../components/HomePage/CourseMap/TopicSectionListItem';
 import useUserProgress from '../utils/hooks/useUserProgress';
+import CanvasForTopicComponent from '../components/HomePage/MyCanvas/CanvasForTopicComponent';
 
 export default function Home() {
   const size = useWindowSize();
@@ -109,7 +110,10 @@ export default function Home() {
                   height={size.width || 350}
                 />
               </MathworkWrap>
-              <MyCanvas sceneGetter={getHomepageScene} height={350} />
+              <CanvasForTopicComponent
+                sceneGetter={getHomepageScene}
+                height={350}
+              />
               <HomepageIllustration aria-hidden="true" tabIndex={-1}>
                 <InnerImg src="/trig_glasses3.svg" />
               </HomepageIllustration>
