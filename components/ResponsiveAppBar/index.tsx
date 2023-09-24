@@ -194,7 +194,7 @@ const ResponsiveAppBar = () => {
                 width={50}
                 height={50}
               />
-              <Typography
+              {/* <Typography
                 variant="h5"
                 noWrap
                 sx={{
@@ -205,7 +205,8 @@ const ResponsiveAppBar = () => {
                 }}
               >
                 Trig-Tutor
-              </Typography>
+              </Typography> */}
+              {/* // this is just a comment */}
             </Box>
           </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
