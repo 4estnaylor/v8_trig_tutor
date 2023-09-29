@@ -51,13 +51,13 @@ const origin_of_360 = () => {
           of reality. They cannot be changed.
           <br />
           <br />
-          <Pi /> is one such value. Two intelligent lifeforms on far-flung,
-          spiraling arms of a distant galaxy decide to accurately measure the
-          ratio of a circle's circumeference to its diameter. They are helpless
-          to converge at 3.14159-ish {`(depending on their accuracy)`}. They
-          could not change the value of <Pi /> without changing the underlying
-          gemoetry of a circle. <Pi /> is not a value to be created, but to
-          gleaned from nature.
+          <Pi /> is one such value. Another intelligent lifeform on the
+          far-flung spiraling arm of some distant galaxy decides to try and
+          measure the ratio of a circle's circumeference to its diameter. They
+          are helpless to, like us, converge at 3.14159-ish{' '}
+          {`(depending on their accuracy)`}. They could not change the value of{' '}
+          <Pi /> without changing the underlying gemoetry of a circle. <Pi /> is
+          not a value to be created, but to gleaned from nature.
           <br />
           <br />
           <div
@@ -80,9 +80,10 @@ const origin_of_360 = () => {
           Divisions of a circle, however, are not a value we found embedded in
           the intrinsic nature of all circles. No law of nature dictates we
           couldn't divide a pizza into 11 slices instead of 8{' '}
-          {`(although basic human decency does)`}. Likewise, 360 degrees has no
+          {`(even if basic human decency does)`}. Likewise, 360 degrees has no
           naturally determined origin. So that means 360 is a number we got to
-          choose for ourselves. How did that happen?
+          choose for ourselves. How did that happen? It's a pretty specific
+          value after all.
           <QuestionSeries
             questions={[MCQuestionsFor360[0], MCQuestionsFor360[1]]}
           />
@@ -102,11 +103,11 @@ const origin_of_360 = () => {
           ></Quote>
           <br />
           <br />
-          They also believed knowing Jupiter's trajectory would give them
-          insight into the level of the Eurphrates river, the price of
+          The Babylonians also believed knowing Jupiter's trajectory would give
+          them insight into the level of the Eurphrates river, the price of
           grain,that kind of thing. This pseudo-scientific reverance of
           astrology, whatever chaotic effects it may have had on their society,
-          led Babylonians down inroads into a genuine science, astronomy.
+          led Babylonians down inroads into a actual science, astronomy.
           {/* The preists, eager to more
           accurately determine how Jupiter might affect grain prices, made a
           mathematical leap, a type of proto-calculus, about 1500 years ahead of
