@@ -155,14 +155,14 @@ const BottomSection = styled.div`
   ); */
   /* background-color: ${cl.getHSL(cl.purple)}; */
   background: linear-gradient(
-    -120deg,
-
-    ${cl.getHSL(cl.black)},
-    ${cl.getHSL(cl.purple)}
+    35deg,
+    ${cl.getHSL(cl.red)},
+    ${cl.getHSL(cl.purple_bright)},
+    ${cl.getHSL(cl.blue)}
   );
-  background-size: 180%;
+  /* background-size: 180%;
   background-position-x: 50%;
-  background-position-y: 50%;
+  background-position-y: 50%; */
   flex: 1;
 `;
 

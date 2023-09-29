@@ -84,7 +84,7 @@ export default function Home() {
 
       <div>
         <Head>
-          <title>Trig Tutor</title>
+          <title>Get Good at Trig</title>
           <meta
             name="description"
             content="Learn Trigonometry Really Well. Tutoring offered for Trigonometry and Precalculus."
