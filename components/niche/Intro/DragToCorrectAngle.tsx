@@ -28,19 +28,19 @@ const DragToCorrectAngle = () => {
 
   return (
     <>
-      <QuestionWrapper>
-        <>
-          <TopPart>
-            <QuestionDisplay>
-              Use the drag button below. Make the target angles.
-            </QuestionDisplay>
-          </TopPart>
-          <BottomPart>
-            <DraggableWrapper>
-              <DraggableButton
-                controlledPosition={controlledPosition}
-                setControlledPosition={setControlledPosition}
-              />
+      <DraggableWrapper>
+        <DraggableButton
+          controlledPosition={controlledPosition}
+          setControlledPosition={setControlledPosition}
+        />
+        <QuestionWrapper>
+          <>
+            <TopPart>
+              <QuestionDisplay>
+                Use the drag button below. Make the target angles.
+              </QuestionDisplay>
+            </TopPart>
+            <BottomPart>
               <>
                 <CanvasForTopicComponent
                   sceneGetter={dragToTargetAngles}
@@ -52,10 +52,10 @@ const DragToCorrectAngle = () => {
               handleCheck={handler}
             /> */}
               </>
-            </DraggableWrapper>
-          </BottomPart>
-        </>
-      </QuestionWrapper>
+            </BottomPart>
+          </>
+        </QuestionWrapper>
+      </DraggableWrapper>
     </>
   );
 };
