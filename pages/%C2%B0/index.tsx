@@ -32,6 +32,7 @@ import ActionBar from '../../components/Question/ActionBar';
 import ToggleTicks from '../../components/niche/Intro/ToggleTicks';
 import GeneralSwitchp from '../../components/GeneralSwitch';
 import GeneralSwitch from '../../components/GeneralSwitch';
+import DragToCorrectAngle from '../../components/niche/Intro/DragToCorrectAngle';
 
 export interface TargetValueObj {
   value: number;
@@ -360,40 +361,25 @@ const Degree = () => {
     >
       <>
         {circleDivsionsCanvas}
-        <GeneralSwitch handleSwitch={() => {}} />
-        <ToggleTicks />
+        {/* <GeneralSwitch handleSwitch={() => {}} />
+        <ToggleTicks /> */}
         <DegreeIntro>
           The degree, or more formally, the
           <Fancy> arcdegree </Fancy>, is one way to measure an angle. 360 of
           them form a complete circle. The symbol for the degree {`(`} ° {`)`}{' '}
-          is quite appropriately a tiny circle.
+          is quite fittingly a tiny little baby circle.
         </DegreeIntro>
         {/* <br />
         <br />
         For this course we will generally follow the standard convention of
         starting or anchoring our angles from the rightmost position of a circle or "3
         o'clock" position. */}
-        <br />
+        {/* <br />
         <br />
         We will follow another standard convention and say that positive angles
         indicate clockwise direction and negative angles indicate
-        counter-clockwise direction.
-        <QuestionWrapper>
-          <>
-            <TopPart>
-              <QuestionDisplay>
-                Drag the node to the correct angle
-              </QuestionDisplay>
-            </TopPart>
-            <BottomPart>
-              <ActionBar
-                answerState="unanswered"
-                userAnswer="answered"
-                handleCheck={handler}
-              />
-            </BottomPart>
-          </>
-        </QuestionWrapper>
+        counter-clockwise direction. */}
+        <DragToCorrectAngle />
       </>
     </TopicComponentBoilerPlate>
   );
