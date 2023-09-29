@@ -324,6 +324,11 @@ class AngleCircle {
   };
 
   lineToCirclePerimeter = (angle: number) => {
+    if (angle <= this.angle) {
+    } else {
+      return;
+      this.context.globalAlpha = 0.1;
+    }
     let x0 = this.x;
     let y0 = this.y;
 
@@ -333,12 +338,15 @@ class AngleCircle {
     const multiplier = this.radius;
 
     let x1 = x0 + multiplier * far * Math.cos(angle);
-    let y1 = y0 + multiplier * far * Math.sin(angle);
+    let y1 = y0 - multiplier * far * Math.sin(angle);
 
     let x2 = x0 + multiplier * close * Math.cos(angle);
-    let y2 = y0 + multiplier * close * Math.sin(angle);
+    let y2 = y0 - multiplier * close * Math.sin(angle);
+    this.context.beginPath();
     this.context.moveTo(x1, y1);
     this.context.lineTo(x2, y2);
+    this.context.stroke();
+    this.context.globalAlpha = 1;
   };
 
   lineToCirclePerimeterShort = (angle: number) => {
@@ -355,6 +363,7 @@ class AngleCircle {
 
     let x2 = x0 + multiplier * close * Math.cos(angle);
     let y2 = y0 + multiplier * close * Math.sin(angle);
+    this.context.beginPath();
     this.context.moveTo(x1, y1);
     this.context.lineTo(x2, y2);
   };
@@ -388,22 +397,21 @@ class AngleCircle {
     }
     this.context.lineWidth = lineWidth;
 
-    let finalIteration = this.customUnitDivisions;
-    if (numOfTicks > 500) {
-      finalIteration = 500;
-    } else {
-      finalIteration = numOfTicks;
-    }
+    let finalIteration = this.customUnitDivisions || 360;
+    // if (numOfTicks > 500) {
+    //   finalIteration = 500;
+    // } else {
+    //   finalIteration = numOfTicks;
+    // }
 
     if (finalIteration >= 400) {
       this.drawFilledLoop();
     } else {
       for (let i = 0; i < finalIteration; i++) {
-        this.context.beginPath();
+        // this.context.beginPath();
         this.lineToCirclePerimeter(angleIncrement * i);
-
-        this.context.stroke();
       }
+      this.context.stroke();
     }
   };
 
