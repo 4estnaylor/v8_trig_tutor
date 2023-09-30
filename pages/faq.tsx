@@ -44,7 +44,7 @@ const faq = () => {
                 to learn how to fluently use a triangle sooner or later. I
                 highly recommend sooner.
               </li>
-              <li>
+              {/* <li>
                 Trig is one of the most "out of the box" practical applications
                 of math learned in highschool. Caclulating lengths and angles of
                 triangles is immensely useful even without getting into more
@@ -55,7 +55,7 @@ const faq = () => {
                 and jury-rigging mechancal pulleys... Once you get good at
                 triangles, you'll find the applications for them are
                 never-ending.
-              </li>
+              </li> */}
               <li>
                 Trigonometry will stretch your mind by requiring you to approach
                 complex systems. Carefully studied, trig will arm you with an
@@ -82,9 +82,8 @@ const faq = () => {
                 <em>interesting </em>. In math we sometimes drown ourselves in
                 self-seriousness and efficiency. Try to go "off trail" and
                 approach a solution to a problem in a weird or unique way now
-                and then. Even if it doesn't get you the right answer what you
-                may lose in efficiency you'll probably more than make up for in
-                richness and depth.
+                and then. The added richness and depth will quickly more than
+                make up for the momentary setbacks in efficiency.
               </li>
             </ol>
             <p>
@@ -198,7 +197,7 @@ const faq = () => {
         </FAQSection>
         <FAQSection
           question="Difference Between Trig and Precalc?"
-          summary="There's often a lot of confusion around where trigonometry ends and precalculus begins. This confusion is widely, and correctly, believed to be intentionally manufactured by math teachers just for the joy of tormenting students. Here are some clarifying diagrams."
+          summary="There's often a lot of confusion around where trigonometry ends and precalculus begins. This confusion is widely (and correctly) believed to be intentionally manufactured by math teachers just for the fun of it. Here are some clarifying diagrams."
           iconString="/trig_vs_precalc_simple.svg"
         >
           <div>
@@ -238,7 +237,7 @@ const faq = () => {
             time and is less clear-cut than trig's. Its definition can also vary
             signifigantly depending upon who you ask and what the phase of the
             moon is when you ask. Precalc is usually a two semester course. The
-            first semester is Trig, and the second one is, ummm, a little wacky.
+            first semester is Trig, and the second one is a little wacky.
             <br />
             <br />
             <Alert severity="info">
@@ -274,8 +273,8 @@ const faq = () => {
                 height={300}
               />
             </div>
-            The reader may ask a question I asked as a student myself, "What in
-            the
+            At this point, the reader might ask a very reasonable question,
+            "What in the
             <em> Thundering Kittens of Ipala </em> is math analysis?!"
             <br />
             <br />
@@ -320,15 +319,16 @@ const faq = () => {
             </div>
             <br />
             <br />
-            Simple really. Math analysis is, errrm, analyzing stuff with math?
-            My impression after having taught it for a few years is that "math
-            analysis" is a term carefully invented by math educators to sound
-            fancy, technical, and precise while still being just vague enough to
-            be meaningless.
+            Simple really. Math analysis is, uhm, analyzing stuff with math. My
+            impression after having taught it for a few years is that "math
+            analysis" is a term carefully crafted by math curricula to sound
+            fancy and technical while still being just vague enough to be
+            meaningless.
             <br />
             <br />
             <Alert severity="info">
-              Math analysis gets -9001/5 as a term for being the absolute worst.
+              Math analysis gets -100 out of 5 stars as a term for being a waste
+              of everyone's precious time on this earth.
             </Alert>
             <br />
             <br />
@@ -338,7 +338,7 @@ const faq = () => {
             classes have to skim or even skip a couple of the topics if they
             reach the final section of the textbook. Precalc's second semester
             is a kind of controlled chaos. The lack of logical, definite
-            structure stems from why precalculus was invented as a class in the
+            structure stems from why precaxlculus was invented as a class in the
             first place. It was not built around a <em>mathematical </em> theme,
             but around a <em> practical </em> theme.
             <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -386,11 +386,11 @@ const faq = () => {
             teacher's preferences.
             <br />
             <br />
-            To add just a dash more spice (and by spice, I mean confusion) –
-            what is considered pre-calculus' territory in math curricula has
-            been shifting and expanding over the years. Linear algebra and
+            To add just a dash more spice (and by spice, I mean confusion) the
+            topics considered pre-calculus' territory in math curricula has been
+            shifting and expanding over the years. Linear algebra and
             probability are taking an increasingly leading role in college
-            mathematics because of thier many applications in computer and data
+            mathematics because of their many applications in computer and data
             science. In response, precalc teachers are increasingly including
             topics to bolster not just calc but college-level math more broadly
             to the extent that they can manage to stuff it all into just 2
@@ -415,8 +415,8 @@ const faq = () => {
               consider a name change for this course and maybe pare it down a
               bit while we're at it!
             </Alert> */}
-            <br />I rarely use the term math analysis because of, well, what a
-            uselessly undescriptive term it is.
+            <br />I rarely use the term math analysis because of, to put it
+            gently, what a uselessly undescriptive term it is.
             <br />
             <br />
             I like to think of it more as a kind of "collegiate math trail mix".

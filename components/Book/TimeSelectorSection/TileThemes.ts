@@ -17,6 +17,10 @@ export interface TileTheme {
   cursor?: string;
 }
 
+const gradient = `linear-gradient(45deg, ${cl.getHSL(cl.red)}, ${cl.getHSL(
+  cl.purple_bright
+)}, ${cl.getHSL(cl.blue)})`;
+
 const tileThemes: {
   available: TileTheme;
   past: TileTheme;
@@ -58,7 +62,8 @@ const tileThemes: {
   },
   selectedForBooking: {
     color: cl.getHSL(cl.white),
-    backgroundColor: cl.getHSL(cl.purple),
+    backgroundColor: cl.getHSL(cl.black),
+    background: cl.getHSLA(cl.black, 0.9),
     opacity: 1,
     hover: {
       opacity: 1,
