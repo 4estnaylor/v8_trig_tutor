@@ -1,5 +1,5 @@
 import { QuestionAnswer } from '@mui/icons-material';
-import { Button } from '@mui/material';
+import { Button, Collapse } from '@mui/material';
 import React, { useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
@@ -43,14 +43,16 @@ const FAQSection = (props: FAQSectionProps) => {
         </ExpandButton>
       </TopLayer>
       <BottomLayer>
-        {isExpanded ? (
-          <>
-            <Summary>{`${summary}..` || ''} </Summary>
-            <Answer>{children}</Answer>
-          </>
-        ) : (
+        <>
           <Summary>{`${summary}..` || ''} </Summary>
-        )}
+          <Collapse in={isExpanded} timeout="auto" unmountOnExit>
+            {isExpanded ? (
+              <>
+                <Answer>{children}</Answer>
+              </>
+            ) : null}
+          </Collapse>
+        </>
       </BottomLayer>
     </Wrapper>
   );
