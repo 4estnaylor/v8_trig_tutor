@@ -33,7 +33,7 @@ const getScene360Intro: SceneGetter = (
     controlledPosition: { x: number; y: number };
   } = passedObject;
 
-  let numberOfDivisions = 360;
+  // let numberOfDivisions = 360;
 
   // setTargetValueObjs([{ value: 9, completed: true }]);
 
@@ -69,14 +69,14 @@ const getScene360Intro: SceneGetter = (
 
       return prev;
     });
-    testUnitCirc.customUnitDivisions = numberOfDivisions;
+    // testUnitCirc.customUnitDivisions = numberOfDivisions;
     testUnitCirc.draw();
     // setUserCircleDivisions((prev: number) => {
     //   numberOfDivisions = prev;
     //   return prev;
     // });
     // drawDivisions();
-    testUnitCirc.drawDivisionTicks();
+    testUnitCirc.drawDivisionTicks(360);
     testUnitCirc.drawAngleInUpperRight();
     context.fillStyle = 'black';
   };

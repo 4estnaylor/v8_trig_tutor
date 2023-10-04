@@ -25,9 +25,9 @@ const faq = () => {
       <ResponsiveAppBar />
       <Wrapper>
         <Gap height={30} />
-        <h2 style={{ textAlign: 'center', color: cl.getHSL(cl.purple) }}>
+        {/* <h2 style={{ textAlign: 'center', color: cl.getHSL(cl.gray_mid) }}>
           Frequently Asked Questions
-        </h2>
+        </h2> */}
 
         <FAQSection
           question="Why Study Trigonometry?"

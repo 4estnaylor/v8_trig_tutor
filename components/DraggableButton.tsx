@@ -10,10 +10,11 @@ type DraggableButtonProps = {
   setControlledPosition: React.Dispatch<
     React.SetStateAction<{ x: number; y: number }>
   >;
+  onStop?: () => void;
 };
 
 const DraggableButton = (props: DraggableButtonProps) => {
-  const { controlledPosition, setControlledPosition } = props;
+  const { controlledPosition, setControlledPosition, onStop } = props;
   const [isDraggable, setIsDraggable] = useState(false);
 
   const [haloOpacity, setHaloOpacity] = useState(0.2);
@@ -33,6 +34,9 @@ const DraggableButton = (props: DraggableButtonProps) => {
       }}
       onStop={() => {
         setHaloOpacity(0.2);
+        if (onStop) {
+          onStop();
+        }
       }}
       position={controlledPosition}
     >
@@ -103,6 +107,7 @@ const InnerDot = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  /* transform: translate(-50%, -50%); */
 `;
 
 export default DraggableButton;

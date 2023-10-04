@@ -5,22 +5,28 @@ import QuestionDisplay from '../../Question/QuestionDisplay';
 import BottomPart from '../../Question/BottomPart';
 import ActionBar from '../../Question/ActionBar';
 import CanvasForTopicComponent from '../../HomePage/MyCanvas/CanvasForTopicComponent';
-import Intro360Questions from '../Intro360Questions';
-import getScene360Intro from '../../getScenes/degrees/getScene360Intro';
-import getSceneDegreesIntro from '../../getScenes/degrees/getSceneTensHundredsDivisions';
-import getSceneInteriorAngles from '../../getScenes/degrees/getSceneInteriorAngles';
-import dragToTargetAngles from '../../getScenes/degrees/dragToTargetAngles';
+
 import styled from 'styled-components';
 import DraggableButton from '../../DraggableButton';
+import getSceneDragToTargetAnglesSimple from '../../getScenes/degrees/getSceneDragToTargetAnglesSimple.tsx';
 
 const DragToCorrectAngle = () => {
   const handler = () => {};
   const [controlledPosition, setControlledPosition] = useState({
-    x: 100,
-    y: 100,
+    x: 0,
+    y: 0,
   });
 
+  const [targetAngles, setTargetAngles] = useState([
+    { angle: 25, correct: false },
+    { angle: 50, correct: false },
+    { angle: 75, correct: false },
+  ]);
+
+  const [displayAngle, setDisplayAngle] = useState(targetAngles[0]);
+
   const controlledPositionRef = useRef(controlledPosition);
+  const angleRef = useRef(0);
 
   useEffect(() => {
     controlledPositionRef.current = controlledPosition;
@@ -29,10 +35,6 @@ const DragToCorrectAngle = () => {
   return (
     <>
       <DraggableWrapper>
-        <DraggableButton
-          controlledPosition={controlledPosition}
-          setControlledPosition={setControlledPosition}
-        />
         <QuestionWrapper>
           <>
             <TopPart>
@@ -42,9 +44,16 @@ const DragToCorrectAngle = () => {
             </TopPart>
             <BottomPart>
               <>
+                <DraggableButton
+                  controlledPosition={controlledPosition}
+                  setControlledPosition={setControlledPosition}
+                  onStop={() => {
+                    console.log('dropped');
+                  }}
+                />
                 <CanvasForTopicComponent
-                  sceneGetter={dragToTargetAngles}
-                  objectPassedToScene={{ controlledPositionRef }}
+                  sceneGetter={getSceneDragToTargetAnglesSimple}
+                  objectPassedToScene={{ controlledPositionRef, angleRef }}
                 />
                 {/* <ActionBar
               answerState="unanswered"
