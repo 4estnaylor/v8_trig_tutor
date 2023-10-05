@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import cl from '../../colors';
 import getScene360Divisibility from '../../components/getScenes/degrees/getScene360DivisibilityComparison';
@@ -48,6 +48,13 @@ const Degree = () => {
   const [changeMe, setChangeMe] = useState(5);
   const [introCircleDegree, setIntroCircleDegree] = useState(16);
   const [userCircleDivisions, setUserCircleDivisions] = useState(1);
+  const [slider360Value, setSlider360Value] = useState(0);
+  const slider360ValueRef = useRef(slider360Value);
+
+  useEffect(() => {
+    slider360ValueRef.current = slider360Value;
+  }, [slider360Value]);
+
   const [userSelectedPowerOfTenValue, setUserSelectedPowerOfTenValue] =
     useState(2);
   const [targetValueObjs, setTargetValueObjs] = useState<TargetValueObj[]>([
@@ -196,6 +203,10 @@ const Degree = () => {
     </div>
   );
 
+  const handle360SliderChange = (event: Event, newValue: number | number[]) => {
+    setSlider360Value(newValue as number);
+  };
+
   const circleDivsionsCanvas = (
     <>
       {/* <Criteria>
@@ -208,10 +219,10 @@ const Degree = () => {
       </Criteria> */}
 
       <InteractiveDegreeDragWrapper>
-        <DraggableButton
+        {/* <DraggableButton
           controlledPosition={controlledPosition}
           setControlledPosition={setControlledPosition}
-        />
+        /> */}
         <Canvas1Background>
           <CanvasForTopicComponent
             sceneGetter={getScene360Intro}
@@ -223,9 +234,19 @@ const Degree = () => {
               setUserCircleDivisions,
               setControlledPosition,
               controlledPosition,
+              slider360ValueRef,
             }}
           ></CanvasForTopicComponent>
         </Canvas1Background>
+        <Slider360Wrapper>
+          <Slider
+            value={slider360Value}
+            min={0}
+            max={360}
+            step={1}
+            onChange={handle360SliderChange}
+          />
+        </Slider360Wrapper>
         {/* <AddFactorsButtonBar setUserEnteredValue={setUserCircleDivisions} /> */}
         {/* <InputForUserCircleDivisions
           value={userCircleDivisions}
@@ -361,6 +382,7 @@ const Degree = () => {
     >
       <>
         {circleDivsionsCanvas}
+
         {/* <GeneralSwitch handleSwitch={() => {}} />
         <ToggleTicks /> */}
         <DegreeIntro>
@@ -551,5 +573,10 @@ const Fancy = styled.span`
 `;
 
 const NotTooBigWrapper = styled.div``;
+
+const Slider360Wrapper = styled.div`
+  padding-left: 25%;
+  padding-right: 25%;
+`;
 
 export default Degree;

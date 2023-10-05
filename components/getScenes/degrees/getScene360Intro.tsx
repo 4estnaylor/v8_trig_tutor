@@ -24,6 +24,7 @@ const getScene360Intro: SceneGetter = (
     setUserCircleDivisions,
     setControlledPosition,
     controlledPosition,
+    slider360ValueRef,
   }: {
     targetValueObjs: TargetValueObj[];
     setTargetValueObjs: any;
@@ -31,6 +32,7 @@ const getScene360Intro: SceneGetter = (
     setUserCircleDivisions: any;
     setControlledPosition: any;
     controlledPosition: { x: number; y: number };
+    slider360ValueRef: any;
   } = passedObject;
 
   // let numberOfDivisions = 360;
@@ -63,19 +65,23 @@ const getScene360Intro: SceneGetter = (
   testUnitCirc.radius = smallerLength / 3;
 
   scene.draw = () => {
-    setControlledPosition((prev: { x: number; y: number }) => {
-      testUnitCirc.radialPoint.x = prev.x + 25;
-      testUnitCirc.radialPoint.y = prev.y + 25;
+    // setControlledPosition((prev: { x: number; y: number }) => {
+    //   testUnitCirc.radialPoint.x = prev.x + 25;
+    //   testUnitCirc.radialPoint.y = prev.y + 25;
 
-      return prev;
-    });
+    //   return prev;
+    // });
     // testUnitCirc.customUnitDivisions = numberOfDivisions;
-    testUnitCirc.draw();
+    // testUnitCirc.draw();
+    // testUnitCirc.update();
+    testUnitCirc.angle = (slider360ValueRef.current * Tau) / 360;
+
     // setUserCircleDivisions((prev: number) => {
     //   numberOfDivisions = prev;
     //   return prev;
     // });
     // drawDivisions();
+    // testUnitCirc.draw();
     testUnitCirc.drawDivisionTicks(360);
     testUnitCirc.drawAngleInUpperRight();
     context.fillStyle = 'black';

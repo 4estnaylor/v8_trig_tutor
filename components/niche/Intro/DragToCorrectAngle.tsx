@@ -10,20 +10,44 @@ import styled from 'styled-components';
 import DraggableButton from '../../DraggableButton';
 import getSceneDragToTargetAnglesSimple from '../../getScenes/degrees/getSceneDragToTargetAnglesSimple.tsx';
 import TargetAngles from './TargetAngles';
+import TargetAngle from './TargetAngleDisplay';
+import TargetAngleDisplay from './TargetAngleDisplay';
+import { AnswerState } from '../../Inputs/MultipleChoiceQuestion';
 
 const DragToCorrectAngle = () => {
   const handler = () => {};
+  const [answerState, setAnswerState] = useState<AnswerState>('unanswered');
   const [controlledPosition, setControlledPosition] = useState({
     x: 0,
     y: 0,
   });
 
+  let getRand17Num = (number: number) => {
+    let random = 2 * Math.random() - 1;
+    let rand17 = Math.round(17 * random);
+    let num = number + rand17;
+    return num;
+  };
+
   const [targetAngleObjs, setTargetAngleObjs] = useState([
-    { angle: 0, correct: false },
-    { angle: 50, correct: false },
-    { angle: 75, correct: false },
-    { angle: 125, correct: false },
+    { angle: 48, correct: false },
+    { angle: 139, correct: false },
+    { angle: 220, correct: false },
+    { angle: 315, correct: false },
   ]);
+
+  useEffect(() => {
+    let allTargetsPotentiallyComplete = true;
+    targetAngleObjs.forEach((angleObj) => {
+      if (!angleObj.correct) {
+        allTargetsPotentiallyComplete = false;
+      } else {
+      }
+    });
+    if (allTargetsPotentiallyComplete === true) {
+      setAnswerState('correct');
+    }
+  }, [targetAngleObjs]);
 
   const [displayAngleIndex, setDisplayAngleIndex] = useState(0);
 
@@ -70,17 +94,22 @@ const DragToCorrectAngle = () => {
                   sceneGetter={getSceneDragToTargetAnglesSimple}
                   objectPassedToScene={{ controlledPositionRef, angleRef }}
                 />
-                {targetAngleObjs[displayAngleIndex].angle}°
+
+                <TargetAngleDisplay
+                  targetAngle={targetAngleObjs[displayAngleIndex]}
+                />
                 <TargetAngles
                   targetAngleObjects={targetAngleObjs}
                   displayIndex={displayAngleIndex}
                   setDisplayAngleIndex={setDisplayAngleIndex}
                 />
-                {/* <ActionBar
-              answerState="unanswered"
-              userAnswer="answered"
-              handleCheck={handler}
-            /> */}
+                <ActionBar
+                  answerState={answerState}
+                  userAnswer="answered"
+                  checkButtonOff={true}
+                  handleCheck={handler}
+                  hint={<div>drag the circular button</div>}
+                />
               </>
             </BottomPart>
           </>
@@ -93,5 +122,7 @@ const DragToCorrectAngle = () => {
 const DraggableWrapper = styled.div`
   position: relative;
 `;
+
+const VerticalGap20 = styled.div``;
 
 export default DragToCorrectAngle;

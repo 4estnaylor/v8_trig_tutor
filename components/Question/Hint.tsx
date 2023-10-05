@@ -36,6 +36,7 @@ const Wrapper = styled(Button)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: ${cl.getHSL(cl.gray_mid)};
 `;
 
 const ContentWrapper = styled.div`

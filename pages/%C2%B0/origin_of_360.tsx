@@ -56,7 +56,7 @@ const origin_of_360 = () => {
           measure the ratio of a circle's circumeference to its diameter. They
           are helpless to, like us, converge at 3.14159-ish{' '}
           {`(depending on their accuracy)`}. They could not change the value of{' '}
-          <Pi /> without changing the underlying gemoetry of a circle. <Pi /> is
+          <Pi /> without changing the underlying geometry of a circle. <Pi /> is
           not a value to be created, but to gleaned from nature.
           <br />
           <br />
