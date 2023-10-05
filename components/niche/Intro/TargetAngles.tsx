@@ -106,6 +106,7 @@ const DotWrapper = styled.div`
   align-items: center;
   height: 24px;
   width: 24px;
+  border-radius: 50%;
 `;
 
 const Dot = styled.button<{ isDisplayed: boolean; isCorrect: boolean }>`
