@@ -45,7 +45,7 @@ const TargetAngles = (props: TargetAnglesProps) => {
             handleDotClick(index);
           }}
         >
-          {isCorrect ? <CheckIcon fontSize="small"></CheckIcon> : ' '}
+          {isCorrect ? <CheckIcon fontSize="small"></CheckIcon> : 'k'}
         </Dot>
       </DotWrapper>
     );
