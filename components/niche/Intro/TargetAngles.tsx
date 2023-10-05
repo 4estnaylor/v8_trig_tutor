@@ -45,7 +45,7 @@ const TargetAngles = (props: TargetAnglesProps) => {
             handleDotClick(index);
           }}
         >
-          {isCorrect ? <CheckIcon fontSize="small"></CheckIcon> : null}
+          {isCorrect ? <CheckIcon fontSize="small"></CheckIcon> : ' '}
         </Dot>
       </DotWrapper>
     );
@@ -112,6 +112,7 @@ const DotWrapper = styled.div`
 
 const Dot = styled.button<{ isDisplayed: boolean; isCorrect: boolean }>`
   -webkit-appearance: none;
+  -webkit-text-size-adjust: unset;
 
   /* border-radius: 50%; */
   border: none;
