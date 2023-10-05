@@ -139,10 +139,6 @@ const Dot = styled.button<{ isDisplayed: boolean; isCorrect: boolean }>`
   transition: all 0.2s ease-in-out;
 
   // border radius weird
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  /* border-radius: 50%; */
-  -khtml-border-radius: 50%;
 `;
 
 // const DisplayedAngle = styled(Dot)`
