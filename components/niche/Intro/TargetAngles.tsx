@@ -45,7 +45,7 @@ const TargetAngles = (props: TargetAnglesProps) => {
             handleDotClick(index);
           }}
         >
-          {isCorrect ? <CheckIcon fontSize="small"></CheckIcon> : 'k'}
+          {isCorrect ? <CheckIcon fontSize="small"></CheckIcon> : null}
         </Dot>
       </DotWrapper>
     );
@@ -107,7 +107,6 @@ const DotWrapper = styled.div`
   height: 24px;
   width: 24px;
   border-radius: 12px;
-  background-color: red;
 `;
 
 const Dot = styled.div<{ isDisplayed: boolean; isCorrect: boolean }>`
@@ -169,7 +168,6 @@ const Sequence = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: green;
 `;
 
 const SequenceButton = styled(Button)<{ canClick: boolean }>`
