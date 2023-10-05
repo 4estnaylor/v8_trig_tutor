@@ -110,7 +110,7 @@ const DotWrapper = styled.div`
   background-color: red;
 `;
 
-const Dot = styled.button<{ isDisplayed: boolean; isCorrect: boolean }>`
+const Dot = styled.div<{ isDisplayed: boolean; isCorrect: boolean }>`
   -webkit-appearance: none;
   -webkit-text-size-adjust: unset;
 
