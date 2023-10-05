@@ -114,7 +114,8 @@ const Dot = styled.button<{ isDisplayed: boolean; isCorrect: boolean }>`
   box-shadow: none;
   height: ${(p) => (p.isDisplayed || p.isCorrect ? '24px' : '16px')};
   width: ${(p) => (p.isDisplayed || p.isCorrect ? '24px' : '16px')};
-  border-radius: ${(p) => (p.isDisplayed || p.isCorrect ? '12px' : '8px')};
+  /* border-radius: ${(p) =>
+    p.isDisplayed || p.isCorrect ? '12px' : '8px'}; */
 
   aspect-ratio: 1;
   display: flex;
@@ -132,6 +133,12 @@ const Dot = styled.button<{ isDisplayed: boolean; isCorrect: boolean }>`
     cursor: pointer;
   }
   transition: all 0.2s ease-in-out;
+
+  // border radius weird
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  -khtml-border-radius: 50%;
 `;
 
 // const DisplayedAngle = styled(Dot)`
