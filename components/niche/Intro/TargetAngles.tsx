@@ -109,6 +109,8 @@ const DotWrapper = styled.div`
 `;
 
 const Dot = styled.button<{ isDisplayed: boolean; isCorrect: boolean }>`
+  -webkit-appearance: none;
+
   border-radius: 50%;
   border: none;
   box-shadow: none;
