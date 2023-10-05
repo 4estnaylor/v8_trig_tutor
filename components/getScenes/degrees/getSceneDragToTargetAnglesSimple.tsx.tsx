@@ -12,7 +12,7 @@ const getSceneDragToTargetAnglesSimple: SceneGetter = (
   // @ts-ignore
   // ingoring missing ev for onclick;
   const passedObject = context?.objectPassedToScene;
-  const { controlledPositionRef } = passedObject;
+  const { controlledPositionRef, angleRef } = passedObject;
 
   context.canvas.addEventListener('click', () => {});
 
@@ -72,6 +72,9 @@ const getSceneDragToTargetAnglesSimple: SceneGetter = (
   }
 
   testUnitCirc.radius = smallerLength / 3;
+  testUnitCirc.handleOnUpdate = () => {
+    angleRef.current = Math.round((testUnitCirc.angle * 360) / Tau);
+  };
 
   // testUnitCirc.radius = 50;
   // // testUnitCirc.x = context.canvas.width / 2;
@@ -93,8 +96,7 @@ const getSceneDragToTargetAnglesSimple: SceneGetter = (
     testUnitCirc.draw();
 
     context.fillStyle = 'black';
-    context.fillText(controlledPositionRef.current.y, 100, 75);
-    context.fillText(controlledPositionRef.current.x, 100, 100);
+
     // testUnitCirc.drawFilledLoop();
     testUnitCirc.drawAngleInUpperRight();
 

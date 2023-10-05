@@ -9,6 +9,7 @@ import CanvasForTopicComponent from '../../HomePage/MyCanvas/CanvasForTopicCompo
 import styled from 'styled-components';
 import DraggableButton from '../../DraggableButton';
 import getSceneDragToTargetAnglesSimple from '../../getScenes/degrees/getSceneDragToTargetAnglesSimple.tsx';
+import TargetAngles from './TargetAngles';
 
 const DragToCorrectAngle = () => {
   const handler = () => {};
@@ -17,16 +18,32 @@ const DragToCorrectAngle = () => {
     y: 0,
   });
 
-  const [targetAngles, setTargetAngles] = useState([
-    { angle: 25, correct: false },
+  const [targetAngleObjs, setTargetAngleObjs] = useState([
+    { angle: 0, correct: false },
     { angle: 50, correct: false },
     { angle: 75, correct: false },
+    { angle: 125, correct: false },
   ]);
 
-  const [displayAngle, setDisplayAngle] = useState(targetAngles[0]);
+  const [displayAngleIndex, setDisplayAngleIndex] = useState(0);
 
   const controlledPositionRef = useRef(controlledPosition);
   const angleRef = useRef(0);
+
+  const handleButtonDrop = () => {
+    // check and see if answer is current targetAngleObjecet Value
+    console.log('handlingButtonDrop');
+    console.log(angleRef.current, targetAngleObjs[displayAngleIndex].angle);
+    if (angleRef.current === targetAngleObjs[displayAngleIndex].angle) {
+      setTargetAngleObjs((prev) => {
+        let updatedObjs = [...prev];
+        updatedObjs[displayAngleIndex].correct = true;
+        return updatedObjs;
+      });
+      if (displayAngleIndex === targetAngleObjs.length - 1) return;
+      setDisplayAngleIndex((prev) => prev + 1);
+    }
+  };
 
   useEffect(() => {
     controlledPositionRef.current = controlledPosition;
@@ -47,13 +64,17 @@ const DragToCorrectAngle = () => {
                 <DraggableButton
                   controlledPosition={controlledPosition}
                   setControlledPosition={setControlledPosition}
-                  onStop={() => {
-                    console.log('dropped');
-                  }}
+                  onStop={handleButtonDrop}
                 />
                 <CanvasForTopicComponent
                   sceneGetter={getSceneDragToTargetAnglesSimple}
                   objectPassedToScene={{ controlledPositionRef, angleRef }}
+                />
+                {targetAngleObjs[displayAngleIndex].angle}°
+                <TargetAngles
+                  targetAngleObjects={targetAngleObjs}
+                  displayIndex={displayAngleIndex}
+                  setDisplayAngleIndex={setDisplayAngleIndex}
                 />
                 {/* <ActionBar
               answerState="unanswered"

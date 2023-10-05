@@ -16,6 +16,7 @@ class AngleCircle {
   listenForAssets: (InteractivePoint | any)[];
   testFunction: any;
   checkDragValueToCorrect: any;
+  handleOnUpdate: any;
   valueCheckedSinceLastDrag: boolean;
   customUnitDivisions?: number;
   decimalPlaces: number;
@@ -54,6 +55,7 @@ class AngleCircle {
     );
 
     this.checkDragValueToCorrect = () => {};
+    this.handleOnUpdate = () => {};
 
     this.radialPoint = new InteractivePoint(
       this.context,
@@ -80,6 +82,7 @@ class AngleCircle {
   }
 
   update = () => {
+    this.handleOnUpdate();
     this.updatePosition();
     this.updateAngle();
     this.checkValueWhenNotDragging();
@@ -290,6 +293,7 @@ class AngleCircle {
       this.radialPoint.form !== 'grabbing' &&
       !this.valueCheckedSinceLastDrag
     ) {
+      console.log('yayaya');
       console.log('not dragging', this.radialPoint.form);
       this.checkDragValueToCorrect();
       this.valueCheckedSinceLastDrag = true;

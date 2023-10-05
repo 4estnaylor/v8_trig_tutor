@@ -367,7 +367,7 @@ const Degree = () => {
           The degree, or more formally, the
           <Fancy> arcdegree </Fancy>, is one way to measure an angle. 360 of
           them form a complete circle. The symbol for the degree {`(`} ° {`)`}{' '}
-          is quite fittingly a tiny little baby circle.
+          is quite fittingly a lil' baby circle.
         </DegreeIntro>
         {/* <br />
         <br />
