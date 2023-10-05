@@ -106,25 +106,25 @@ const DotWrapper = styled.div`
   align-items: center;
   height: 24px;
   width: 24px;
-  border-radius: 50%;
+  border-radius: 12px;
+  background-color: red;
 `;
 
 const Dot = styled.button<{ isDisplayed: boolean; isCorrect: boolean }>`
   -webkit-appearance: none;
 
-  border-radius: 50%;
+  /* border-radius: 50%; */
   border: none;
   box-shadow: none;
   height: ${(p) => (p.isDisplayed || p.isCorrect ? '24px' : '16px')};
   width: ${(p) => (p.isDisplayed || p.isCorrect ? '24px' : '16px')};
-  /* border-radius: ${(p) =>
-    p.isDisplayed || p.isCorrect ? '12px' : '8px'}; */
+  border-radius: ${(p) => (p.isDisplayed || p.isCorrect ? '12px' : '8px')};
 
   aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  /* position: relative; */
   color: ${cl.getHSL(cl.white)};
   background-color: ${(p) =>
     p.isDisplayed
@@ -140,7 +140,7 @@ const Dot = styled.button<{ isDisplayed: boolean; isCorrect: boolean }>`
   // border radius weird
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   -khtml-border-radius: 50%;
 `;
 
@@ -172,6 +172,7 @@ const Sequence = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: green;
 `;
 
 const SequenceButton = styled(Button)<{ canClick: boolean }>`
