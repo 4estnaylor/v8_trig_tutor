@@ -86,6 +86,7 @@ const getScene360Intro: SceneGetter = (
     testUnitCirc.drawAngleInUpperRight();
     testUnitCirc.drawDivisionTicks(360);
     testUnitCirc.drawAngleRainbow();
+    testUnitCirc.drawPurpleCenterCover();
     // if (slider360ValueRef.current === 360) {
     //   testUnitCirc.drawFilledLoop();
     // } else {
