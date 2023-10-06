@@ -20,18 +20,18 @@ const getScene360Intro: SceneGetter = (
   // ingoring missing ev for onclick;
   const passedObject = context?.objectPassedToScene;
   const {
-    userCircleDivisions,
-    setUserCircleDivisions,
-    setControlledPosition,
-    controlledPosition,
+    // userCircleDivisions,
+    // setUserCircleDivisions,
+    // setControlledPosition,
+    // controlledPosition,
     slider360ValueRef,
   }: {
-    targetValueObjs: TargetValueObj[];
-    setTargetValueObjs: any;
-    userCircleDivisions: number;
-    setUserCircleDivisions: any;
-    setControlledPosition: any;
-    controlledPosition: { x: number; y: number };
+    // targetValueObjs: TargetValueObj[];
+    // setTargetValueObjs: any;
+    // userCircleDivisions: number;
+    // setUserCircleDivisions: any;
+    // setControlledPosition: any;
+    // controlledPosition: { x: number; y: number };
     slider360ValueRef: any;
   } = passedObject;
 
@@ -82,8 +82,15 @@ const getScene360Intro: SceneGetter = (
     // });
     // drawDivisions();
     // testUnitCirc.draw();
-    testUnitCirc.drawDivisionTicks(360);
+
     testUnitCirc.drawAngleInUpperRight();
+    testUnitCirc.drawDivisionTicks(360);
+    testUnitCirc.drawAngleRainbow();
+    // if (slider360ValueRef.current === 360) {
+    //   testUnitCirc.drawFilledLoop();
+    // } else {
+    //   testUnitCirc.drawDivisionTicks(360);
+    // }
     context.fillStyle = 'black';
   };
 

@@ -207,6 +207,17 @@ const Degree = () => {
     setSlider360Value(newValue as number);
   };
 
+  const slide360Marks = [
+    {
+      value: 0,
+      label: '0°',
+    },
+    {
+      value: 360,
+      label: '360°',
+    },
+  ];
+
   const circleDivsionsCanvas = (
     <>
       {/* <Criteria>
@@ -245,6 +256,7 @@ const Degree = () => {
             max={360}
             step={1}
             onChange={handle360SliderChange}
+            marks={slide360Marks}
           />
         </Slider360Wrapper>
         {/* <AddFactorsButtonBar setUserEnteredValue={setUserCircleDivisions} /> */}
