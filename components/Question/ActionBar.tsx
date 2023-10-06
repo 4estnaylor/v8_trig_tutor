@@ -8,8 +8,8 @@ import cl from '../../colors';
 
 const correctGradient = `radial-gradient(circle at right, 
   ${cl.getHSL(cl.green)},
-  ${cl.getHSL(cl.blue)},
-  ${cl.getHSLA(cl.blue, 0.3)})
+  ${cl.getHSL(cl.green)},
+  ${cl.getHSLA(cl.blue, 1)})
    `;
 
 const incorrectGradient = `radial-gradient(circle at right, 
@@ -23,6 +23,7 @@ type ActionBarProps = {
   handleCheck: () => void;
   userAnswer: number | string | null;
   hint?: JSX.Element | string;
+  videoLink?: string;
   checkButtonOff?: boolean;
   children?: JSX.Element;
 };
@@ -37,7 +38,7 @@ const ActionBar = (props: ActionBarProps) => {
   } = props;
   return (
     <Wrapper answerState={answerState}>
-      {hint ? <Hint hint={hint} /> : null}
+      {hint ? <Hint hint={hint} answerState={answerState} /> : null}
       {children}
       {answerState !== 'correct' && !checkButtonOff ? (
         <CheckButton

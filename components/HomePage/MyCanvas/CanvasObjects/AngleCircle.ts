@@ -9,8 +9,6 @@ import P from '../../../P';
 
 type angleMeasurmentUnit = 'radians' | 'degrees' | 'custom';
 
-const rainbowGradient = `radial-gradient(18% 28% at 24% 50%, #CEFAFFFF 7%, #073AFF00 100%),radial-gradient(18% 28% at 18% 71%, #FFFFFF59 6%, #073AFF00 100%),radial-gradient(70% 53% at 36% 76%, #42cbe7 0%, #073AFF00 100%),radial-gradient(42% 53% at 15% 94%, #FFFFFFFF 7%, #073AFF00 100%),radial-gradient(42% 53% at 34% 72%, #FFFFFFFF 7%, #073AFF00 100%),radial-gradient(18% 28% at 35% 87%, #FFFFFFFF 7%, #073AFF00 100%),radial-gradient(31% 43% at 7% 98%, #FFFFFFFF 24%, #073AFF00 100%),radial-gradient(21% 37% at 72% 23%, #D3FF6D9C 24%, #073AFF00 100%),radial-gradient(35% 56% at 91% 74%, #ff0055 9%, #073AFF00 100%),radial-gradient(74% 86% at 67% 38%, #42cbe7 24%, #073AFF00 100%),linear-gradient(125deg, #161cc1 1%, #42cbe7 100%)`;
-
 class AngleCircle {
   vertex: InteractivePoint | NonInteractivePoint;
   zeroPoint: InteractivePoint | NonInteractivePoint;
@@ -25,6 +23,8 @@ class AngleCircle {
   labelColor: string;
   gradient: any;
   coverGradient: any;
+  correctGradient: any;
+  correctCoverGradient: any;
 
   constructor(
     public context: CanvasRenderingContext2D,
@@ -81,6 +81,27 @@ class AngleCircle {
       this.y,
       this.radius * 1.5
     );
+
+    this.correctGradient = this.context.createConicGradient(0, this.x, this.y);
+
+    this.correctGradient.addColorStop(0, cl.getHSL(cl.green));
+    this.correctGradient.addColorStop(0.25, cl.getHSL(cl.yellow));
+    this.correctGradient.addColorStop(0.5, cl.getHSL(cl.green));
+    this.correctGradient.addColorStop(0.75, cl.getHSL(cl.yellow));
+    this.correctGradient.addColorStop(1, cl.getHSL(cl.green));
+
+    this.correctCoverGradient = this.context.createRadialGradient(
+      this.x,
+      this.y,
+      0,
+      this.x,
+      this.y,
+      this.radius * 2.25
+    );
+
+    this.correctCoverGradient.addColorStop(0, cl.getHSLA(cl.green, 1));
+
+    this.correctCoverGradient.addColorStop(1, cl.getHSLA(cl.green, 0));
 
     // Add five color stops
     // this.gradient.addColorStop(0, cl.getHSL(cl.purple));
@@ -194,7 +215,7 @@ class AngleCircle {
   };
 
   drawAngleInUpperRight = (posX?: number, posY?: number) => {
-    this.context.fillStyle = this.color;
+    this.context.fillStyle = cl.getHSL(cl.gray_dark);
     this.context.font =
       " 24px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
 
@@ -614,6 +635,90 @@ class AngleCircle {
     context.globalAlpha = 1;
 
     context.fillStyle = this.coverGradient;
+    // context.fillStyle = 'black';
+    context.fill();
+    context.globalAlpha = 1;
+  };
+
+  drawAngleCorrect = () => {
+    let angleEndpointX = Math.cos(this.angle) * this.radius;
+    let angleEndpointY = Math.sin(this.angle) * this.radius;
+    let context = this.context;
+    context.beginPath();
+    context.moveTo(this.x, this.y);
+    context.lineTo(this.zeroPoint.x, this.zeroPoint.y);
+    if (this.angle === Tau) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        Tau - this.angle + 0.0001,
+        true
+      );
+    } else if (this.angle === 0) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        Tau - this.angle - 0.0001,
+        true
+      );
+    } else {
+      context.arc(this.x, this.y, this.radius, 0, Tau - this.angle, true);
+    }
+
+    context.closePath();
+    // let angleGradient = context.createConicGradient(0, this.x, this.y);
+    // angleGradient.addColorStop(0, cl.getHSL(cl.blue));
+    // angleGradient.addColorStop(0.33, cl.getHSL(cl.purple)),
+    //   angleGradient.addColorStop(0.66, cl.getHSL(cl.red));
+    context.globalAlpha = 1;
+
+    context.fillStyle = this.correctGradient;
+    // context.fillStyle = 'black';
+    context.fill();
+    context.globalAlpha = 1;
+  };
+
+  drawAngleCoverCorrect = () => {
+    let angleEndpointX = Math.cos(this.angle) * this.radius;
+    let angleEndpointY = Math.sin(this.angle) * this.radius;
+    let context = this.context;
+    context.beginPath();
+    context.moveTo(this.x, this.y);
+    context.lineTo(this.zeroPoint.x, this.zeroPoint.y);
+    if (this.angle === Tau) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        Tau - this.angle + 0.0001,
+        true
+      );
+    } else if (this.angle === 0) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        Tau - this.angle - 0.0001,
+        true
+      );
+    } else {
+      context.arc(this.x, this.y, this.radius, 0, Tau - this.angle, true);
+    }
+
+    context.closePath();
+    // let angleGradient = context.createConicGradient(0, this.x, this.y);
+    // angleGradient.addColorStop(0, cl.getHSL(cl.blue));
+    // angleGradient.addColorStop(0.33, cl.getHSL(cl.purple)),
+    //   angleGradient.addColorStop(0.66, cl.getHSL(cl.red));
+    context.globalAlpha = 1;
+
+    context.fillStyle = this.correctCoverGradient;
     // context.fillStyle = 'black';
     context.fill();
     context.globalAlpha = 1;

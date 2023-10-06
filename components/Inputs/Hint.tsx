@@ -4,13 +4,17 @@ import styled from 'styled-components';
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
+import { AnswerState } from './MultipleChoiceQuestion';
+import cl from '../../colors';
 
 interface HintProps {
   hint: string | JSX.Element | React.ReactElement;
+  answerState: AnswerState;
 }
 
 const Hint = (props: HintProps) => {
-  const { hint } = props;
+  const { hint, answerState } = props;
+  console.log('this is the answerstate', answerState);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -27,9 +31,15 @@ const Hint = (props: HintProps) => {
     p: 4,
   };
 
+  let areIconsWhite = answerState !== 'correct';
+
   return (
     <Wrapper>
-      <HintButton onClick={handleOpen} variant="outlined">
+      <HintButton
+        onClick={handleOpen}
+        variant="outlined"
+        isWhite={areIconsWhite}
+      >
         <TipsAndUpdatesIcon color="primary" />
       </HintButton>
       <Modal
@@ -52,7 +62,8 @@ const P = styled.div`
 `;
 
 const Wrapper = styled.div``;
-const HintButton = styled(Button)`
+const HintButton = styled(Button)<{ isWhite: boolean }>`
+  color: ${(p) => (p.isWhite ? cl.getHSL(cl.white) : cl.getHSL(cl.gray_mid))};
   min-width: 55px;
   min-height: 55px;
   max-width: 55px;

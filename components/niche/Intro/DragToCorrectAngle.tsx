@@ -34,6 +34,7 @@ const DragToCorrectAngle = () => {
     { angle: 139, correct: false },
     { angle: 220, correct: false },
     { angle: 315, correct: false },
+    { angle: 360, correct: false },
   ]);
 
   useEffect(() => {
@@ -54,6 +55,12 @@ const DragToCorrectAngle = () => {
   const controlledPositionRef = useRef(controlledPosition);
   const angleRef = useRef(0);
 
+  const targetAngleObjRef = useRef(targetAngleObjs[displayAngleIndex]);
+
+  useEffect(() => {
+    targetAngleObjRef.current = targetAngleObjs[displayAngleIndex];
+  }, [displayAngleIndex]);
+
   const handleButtonDrop = () => {
     // check and see if answer is current targetAngleObjecet Value
     console.log('handlingButtonDrop');
@@ -65,7 +72,9 @@ const DragToCorrectAngle = () => {
         return updatedObjs;
       });
       if (displayAngleIndex === targetAngleObjs.length - 1) return;
-      setDisplayAngleIndex((prev) => prev + 1);
+      setTimeout(() => {
+        setDisplayAngleIndex((prev) => prev + 1);
+      }, 700);
     }
   };
 
@@ -92,7 +101,11 @@ const DragToCorrectAngle = () => {
                 />
                 <CanvasForTopicComponent
                   sceneGetter={getSceneDragToTargetAnglesSimple}
-                  objectPassedToScene={{ controlledPositionRef, angleRef }}
+                  objectPassedToScene={{
+                    controlledPositionRef,
+                    angleRef,
+                    targetAngleObjRef,
+                  }}
                 />
 
                 <TargetAngleDisplay
@@ -103,6 +116,7 @@ const DragToCorrectAngle = () => {
                   displayIndex={displayAngleIndex}
                   setDisplayAngleIndex={setDisplayAngleIndex}
                 />
+                <VerticalGap20 />
                 <ActionBar
                   answerState={answerState}
                   userAnswer="answered"
@@ -123,6 +137,8 @@ const DraggableWrapper = styled.div`
   position: relative;
 `;
 
-const VerticalGap20 = styled.div``;
+const VerticalGap20 = styled.div`
+  height: 20px;
+`;
 
 export default DragToCorrectAngle;

@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import cl from '../../colors';
+import { AnswerState } from '../Inputs/MultipleChoiceQuestion';
 type HintProps = {
   hint: JSX.Element | string;
+  answerState: AnswerState;
 };
 const Hint = (props: HintProps) => {
   const [open, setOpen] = useState(false);
-  const { hint } = props;
+  const { hint, answerState } = props;
 
   const handleClose = () => {
     setOpen(false);
@@ -20,7 +22,10 @@ const Hint = (props: HintProps) => {
   return (
     <>
       <Tooltip title="hint">
-        <Wrapper onClick={handleButtonClick}>
+        <Wrapper
+          onClick={handleButtonClick}
+          isWhite={answerState === 'correct'}
+        >
           <TipsAndUpdatesIcon />
         </Wrapper>
       </Tooltip>
@@ -31,12 +36,12 @@ const Hint = (props: HintProps) => {
   );
 };
 
-const Wrapper = styled(Button)`
+const Wrapper = styled(Button)<{ isWhite: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: ${cl.getHSL(cl.gray_mid)};
+  color: ${(p) => (p.isWhite ? cl.getHSL(cl.white) : cl.getHSL(cl.gray_mid))};
 `;
 
 const ContentWrapper = styled.div`

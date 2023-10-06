@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import cl from '../../../colors';
 import AngleCircle from '../../HomePage/MyCanvas/CanvasObjects/AngleCircle';
 import { Pi, Tau } from '../../HomePage/MyCanvas/CanvasObjects/UsefulConstants';
 import EventHandlerConfig from '../../HomePage/MyCanvas/EventHandler/EventHandlerConfig';
 import { Scene, SceneGetter } from '../../HomePage/MyCanvas/Scene/Scene';
+import greatJobSayings from '../../../greatJobAlternatives';
 
 const getSceneDragToTargetAnglesSimple: SceneGetter = (
   context: CanvasRenderingContext2D,
@@ -12,7 +14,7 @@ const getSceneDragToTargetAnglesSimple: SceneGetter = (
   // @ts-ignore
   // ingoring missing ev for onclick;
   const passedObject = context?.objectPassedToScene;
-  const { controlledPositionRef, angleRef } = passedObject;
+  const { controlledPositionRef, angleRef, targetAngleObjRef } = passedObject;
 
   context.canvas.addEventListener('click', () => {});
 
@@ -84,23 +86,89 @@ const getSceneDragToTargetAnglesSimple: SceneGetter = (
   // testUnitCirc.color = 'green';
   // testUnitCirc.radialPoint.color = 'black';
   // testUnitCirc.angle = Tau;
+  let alreadyFlashed = false;
+  let greenOpacity;
 
-  scene.draw = () => {
+  const greenFlashTimer = (opacity: number) => {
+    alreadyFlashed = true;
+  };
+
+  setTimeout(() => {
+    alreadyFlashed = true;
+  }, 1000);
+
+  const triggerGreenFlash = () => {
+    greenOpacity = 1;
+  };
+
+  const greenFlashCover = () => {};
+
+  // green flash "cover"
+  // start increasing green opacity with each frame
+  // set timer to start decreasing green opacity down to zero
+
+  const greenFlash = () => {
+    context.fillStyle = cl.getHSLA(cl.green, 0.5);
+    context.fillRect(0, 0, context.canvas.width, context.canvas.height);
+  };
+
+  const unansweredDraw = () => {
     testUnitCirc.radialPoint.x = controlledPositionRef.current.x + 25;
     testUnitCirc.radialPoint.y = controlledPositionRef.current.y + 25;
-    // console.log('userEnteredDegreeValue', userEnteredDegreeValue);
-    // draw360Circle();
-    // drawOtherCircle();
-    context.fillStyle = 'red';
 
-    testUnitCirc.draw();
-
-    context.fillStyle = 'black';
+    testUnitCirc.update();
+    testUnitCirc.drawAngleRainbow();
+    testUnitCirc.drawPurpleCenterCover();
 
     // testUnitCirc.drawFilledLoop();
+    // context.fillStyle = 'black';
     testUnitCirc.drawAngleInUpperRight();
+  };
 
-    console.log('testUnitx', testUnitCirc.x);
+  const correctDraw = () => {
+    testUnitCirc.angle = (targetAngleObjRef.current.angle * Tau) / 360;
+    testUnitCirc.drawAngleCorrect();
+    testUnitCirc.drawAngleCoverCorrect();
+
+    // testUnitCirc.drawFilledLoop();
+    // context.fillStyle = 'black';
+    let affirmationphrase = 'Correct' as string;
+    let affirmationphraseMetrics =
+      testUnitCirc.context.measureText(affirmationphrase);
+    let xVal = context.canvas.width / 2 - affirmationphraseMetrics.width / 2;
+    let yVal = context.canvas.height - 30;
+    context.fillStyle = cl.getHSL(cl.green);
+    context.fillText(affirmationphrase, xVal, yVal);
+    // draw
+  };
+
+  scene.draw = () => {
+    // unansweredDraw();
+    if (targetAngleObjRef.current.correct) {
+      correctDraw();
+    } else {
+      unansweredDraw();
+    }
+
+    // testUnitCirc.radialPoint.x = controlledPositionRef.current.x + 25;
+    // testUnitCirc.radialPoint.y = controlledPositionRef.current.y + 25;
+    // // console.log('userEnteredDegreeValue', userEnteredDegreeValue);
+    // // draw360Circle();
+    // // drawOtherCircle();
+    // // context.fillStyle = 'red';
+
+    // // testUnitCirc.draw();
+    // testUnitCirc.update();
+    // // testUnitCirc.drawAngleRainbow();
+    // // testUnitCirc.drawPurpleCenterCover();
+    // testUnitCirc.drawAngleCorrect();
+    // testUnitCirc.drawAngleCoverCorrect();
+
+    // context.fillStyle = 'black';
+
+    // // testUnitCirc.drawFilledLoop();
+    // testUnitCirc.drawAngleInUpperRight();
+
     // setChangeMe((prev: any) => {
     //   prev + 1;
     // });
