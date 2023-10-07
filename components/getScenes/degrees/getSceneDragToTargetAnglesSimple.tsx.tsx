@@ -119,6 +119,7 @@ const getSceneDragToTargetAnglesSimple: SceneGetter = (
     testUnitCirc.update();
     testUnitCirc.drawAngleRainbow();
     testUnitCirc.drawPurpleCenterCover();
+    testUnitCirc.drawDottedTouchConncetLine();
 
     // testUnitCirc.drawFilledLoop();
     // context.fillStyle = 'black';

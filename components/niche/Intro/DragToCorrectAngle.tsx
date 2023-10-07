@@ -17,10 +17,28 @@ import { AnswerState } from '../../Inputs/MultipleChoiceQuestion';
 const DragToCorrectAngle = () => {
   const handler = () => {};
   const [answerState, setAnswerState] = useState<AnswerState>('unanswered');
+  let [startingXPos, setStartingXPos] = useState(0);
+
+  useEffect(() => {
+    if (window.innerWidth <= 700) {
+      setStartingXPos(window.innerWidth / 2 + 130);
+    } else {
+      // startingXPos = window.innerWidth / 2 + 130;
+      setStartingXPos(window.innerWidth - 150 - (window.innerWidth - 700));
+    }
+  }, []);
+
   const [controlledPosition, setControlledPosition] = useState({
-    x: 0,
-    y: 0,
+    x: startingXPos,
+    y: 390 / 2 - 26,
   });
+
+  useEffect(() => {
+    setControlledPosition({
+      x: startingXPos,
+      y: 390 / 2 - 26,
+    });
+  }, [startingXPos]);
 
   let getRand17Num = (number: number) => {
     let random = 2 * Math.random() - 1;
@@ -74,6 +92,17 @@ const DragToCorrectAngle = () => {
       if (displayAngleIndex === targetAngleObjs.length - 1) return;
       setTimeout(() => {
         setDisplayAngleIndex((prev) => prev + 1);
+        if (window.innerWidth <= 700) {
+          setControlledPosition({
+            x: window.innerWidth / 2 + 130,
+            y: 390 / 2 - 26,
+          });
+        } else {
+          setControlledPosition({
+            x: window.innerWidth - 150 - (window.innerWidth - 700),
+            y: 390 / 2 - 26,
+          });
+        }
       }, 700);
     }
   };
