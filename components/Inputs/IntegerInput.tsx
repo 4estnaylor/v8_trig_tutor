@@ -146,6 +146,7 @@ const IntegerInput = (props: IntegerInputProps) => {
         {answerState === 'incorrect' || helpBarVisible ? (
           <HelpBar>
             <Hint
+              answerState={answerState}
               hint={
                 <>
                   <P>The area of a circle can be found with the equation: </P>
