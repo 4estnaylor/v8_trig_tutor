@@ -33,6 +33,7 @@ import ToggleTicks from '../../components/niche/Intro/ToggleTicks';
 import GeneralSwitchp from '../../components/GeneralSwitch';
 import GeneralSwitch from '../../components/GeneralSwitch';
 import DragToCorrectAngle from '../../components/niche/Intro/DragToCorrectAngle';
+import NegativeAngles from '../../components/niche/Intro/NegativeAngles';
 
 export interface TargetValueObj {
   value: number;
@@ -394,14 +395,13 @@ const Degree = () => {
     >
       <>
         {circleDivsionsCanvas}
-
         {/* <GeneralSwitch handleSwitch={() => {}} />
         <ToggleTicks /> */}
         <DegreeIntro>
           The degree, or more formally, the
           <Fancy> arcdegree </Fancy>, is one way to measure an angle. 360 of
           them form a complete circle. The symbol for the degree {`(`} ° {`)`}{' '}
-          is quite fittingly a lil' baby circle.
+          is quite fittingly a tiny lil' circle.
         </DegreeIntro>
         {/* <br />
         <br />
@@ -414,6 +414,7 @@ const Degree = () => {
         indicate clockwise direction and negative angles indicate
         counter-clockwise direction. */}
         <DragToCorrectAngle />
+        <NegativeAngles />
       </>
     </TopicComponentBoilerPlate>
   );

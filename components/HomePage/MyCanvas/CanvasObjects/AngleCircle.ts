@@ -25,6 +25,7 @@ class AngleCircle {
   coverGradient: any;
   correctGradient: any;
   correctCoverGradient: any;
+  isNegative: boolean;
 
   constructor(
     public context: CanvasRenderingContext2D,
@@ -38,6 +39,7 @@ class AngleCircle {
   ) {
     this.listenForAssets = [];
     // this.vertex = new NonInteractivePoint(this.context, this.x, this.y);
+    this.isNegative = false;
     this.zeroPoint = new NonInteractivePoint(
       this.context,
       this.x + this.radius,
@@ -519,16 +521,7 @@ class AngleCircle {
     context.beginPath();
     context.moveTo(this.x, this.y);
     context.lineTo(this.zeroPoint.x, this.zeroPoint.y);
-    if (this.angle === Tau) {
-      context.arc(
-        this.x,
-        this.y,
-        this.radius,
-        0,
-        Tau - this.angle + 0.0001,
-        true
-      );
-    } else if (this.angle === 0) {
+    if (this.angle === 0) {
       context.arc(
         this.x,
         this.y,
@@ -537,8 +530,26 @@ class AngleCircle {
         Tau - this.angle - 0.0001,
         true
       );
-    } else {
+    } else if (this.angle % Tau === 0) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        Tau - this.angle + 0.0001,
+        true
+      );
+    } else if (this.angle > 0) {
       context.arc(this.x, this.y, this.radius, 0, Tau - this.angle, true);
+    } else if (this.angle < 0) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        -1 * (Tau + this.angle),
+        false
+      );
     }
 
     context.closePath();
@@ -605,16 +616,7 @@ class AngleCircle {
     context.beginPath();
     context.moveTo(this.x, this.y);
     context.lineTo(this.zeroPoint.x, this.zeroPoint.y);
-    if (this.angle === Tau) {
-      context.arc(
-        this.x,
-        this.y,
-        this.radius,
-        0,
-        Tau - this.angle + 0.0001,
-        true
-      );
-    } else if (this.angle === 0) {
+    if (this.angle === 0) {
       context.arc(
         this.x,
         this.y,
@@ -623,8 +625,26 @@ class AngleCircle {
         Tau - this.angle - 0.0001,
         true
       );
-    } else {
+    } else if (this.angle % Tau === 0) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        Tau - this.angle + 0.0001,
+        true
+      );
+    } else if (this.angle > 0) {
       context.arc(this.x, this.y, this.radius, 0, Tau - this.angle, true);
+    } else if (this.angle < 0) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        -1 * (Tau + this.angle),
+        false
+      );
     }
 
     context.closePath();
