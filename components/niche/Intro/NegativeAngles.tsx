@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import CanvasForTopicComponent from '../../HomePage/MyCanvas/CanvasForTopicComponent';
 import getScenePositiveNegativeDirectionality from '../../getScenes/degrees/getScenePositiveNegativeDirectionality';
 import { Slider } from '@mui/material';
+import styled from 'styled-components';
+import cl from '../../../colors';
 
 const NegativeAngles = () => {
   const [userSliderValue, setUserSliderValue] = useState(0);
@@ -26,23 +28,95 @@ const NegativeAngles = () => {
   return (
     <div>
       <h3>Negative Angles</h3>
-      We can also have negative angles! The convention is positive angles move
-      towards a clockwise direction while negative angles go in the opposite
-      direction — counterclockwise.
+      We can also have negative angles! The convention is that:
+      <NegativeAngleConventionsList>
+        <NegativeAngleConventionsLi>
+          <PositiveSymbol>+</PositiveSymbol>
+          positive angles go counterclockise{' '}
+          <PositiveRotation> ⟲</PositiveRotation>
+        </NegativeAngleConventionsLi>
+        <NegativeAngleConventionsLi>
+          <NegativeSymbol>-</NegativeSymbol>
+          negative angles go clockwise
+          <RotationBlock>⟳</RotationBlock>
+        </NegativeAngleConventionsLi>
+      </NegativeAngleConventionsList>
+      <br />
+      <br />
       <CanvasForTopicComponent
         sceneGetter={getScenePositiveNegativeDirectionality}
         objectPassedToScene={{ userSliderValueRef }}
       />
-      <Slider
-        value={userSliderValue}
-        step={1}
-        min={-360}
-        max={360}
-        onChange={handleUserSliderChange}
-        marks={marks}
-      />
+      <SliderDiv>
+        <Slider
+          value={userSliderValue}
+          step={1}
+          min={-360}
+          max={360}
+          onChange={handleUserSliderChange}
+          marks={marks}
+        />
+      </SliderDiv>
     </div>
   );
 };
+
+const SliderDiv = styled.div`
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+`;
+
+const NegativeAngleConventionsList = styled.ul`
+  list-style: none;
+  width: fit-content;
+`;
+
+const NegativeAngleConventionsLi = styled.li`
+  display: flex;
+  align-items: center;
+`;
+
+const RotationBlock = styled.div`
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-left: auto;
+`;
+
+const SignSymbol = styled.div`
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+`;
+
+const PositiveSymbol = styled(SignSymbol)`
+  background: -webkit-linear-gradient(
+    ${cl.getHSL(cl.blue_dark)},
+    ${cl.getHSL(cl.blue_light)}
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
+
+const NegativeSymbol = styled(SignSymbol)`
+  background: -webkit-linear-gradient(
+    ${cl.getHSL(cl.red_light)},
+    ${cl.getHSL(cl.red_dark)}
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
+
+const PositiveRotation = styled(RotationBlock)`
+  transform: rotate(180deg);
+  /* background-color: red; */
+`;
 
 export default NegativeAngles;

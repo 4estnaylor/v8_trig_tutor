@@ -216,8 +216,8 @@ class AngleCircle {
     this.context.fillText(displayValue, posX - x_offset / 2, posY);
   };
 
-  drawAngleInUpperRight = (posX?: number, posY?: number) => {
-    this.context.fillStyle = cl.getHSL(cl.gray_dark);
+  drawAngleInUpperRight = (color?: string, posX?: number, posY?: number) => {
+    this.context.fillStyle = color || cl.getHSL(cl.gray_dark);
     this.context.font =
       " 24px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
 

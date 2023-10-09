@@ -34,6 +34,7 @@ import GeneralSwitchp from '../../components/GeneralSwitch';
 import GeneralSwitch from '../../components/GeneralSwitch';
 import DragToCorrectAngle from '../../components/niche/Intro/DragToCorrectAngle';
 import NegativeAngles from '../../components/niche/Intro/NegativeAngles';
+import DragToCorrectAngleWithNegatives from '../../components/niche/Intro/DragToCorrectAngleWithNegatives';
 
 export interface TargetValueObj {
   value: number;
@@ -415,6 +416,7 @@ const Degree = () => {
         counter-clockwise direction. */}
         <DragToCorrectAngle />
         <NegativeAngles />
+        <DragToCorrectAngleWithNegatives />
       </>
     </TopicComponentBoilerPlate>
   );
