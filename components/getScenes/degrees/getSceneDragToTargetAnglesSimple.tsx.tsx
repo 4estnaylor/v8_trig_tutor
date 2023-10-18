@@ -64,7 +64,7 @@ const getSceneDragToTargetAnglesSimple: SceneGetter = (
     context.canvas.height / 2
   );
 
-  testUnitCirc.color = cl.getHSL(cl.purple);
+  // testUnitCirc.color = cl.getHSL(cl.blue);
   testUnitCirc.radialPoint.color = cl.getHSL(cl.purple);
   testUnitCirc.vertex.color = cl.getHSL(cl.purple);
 
@@ -117,8 +117,10 @@ const getSceneDragToTargetAnglesSimple: SceneGetter = (
     testUnitCirc.radialPoint.y = controlledPositionRef.current.y + 25;
 
     testUnitCirc.update();
-    testUnitCirc.drawAngleRainbow();
-    testUnitCirc.drawPurpleCenterCover();
+    testUnitCirc.drawAngle();
+    // testUnitCirc.drawPurpleCenterCover();
+    // testUnitCirc.drawAngleRainbow();
+    // testUnitCirc.drawPurpleCenterCover();
     testUnitCirc.drawDottedTouchConncetLine();
 
     // testUnitCirc.drawFilledLoop();
@@ -144,6 +146,16 @@ const getSceneDragToTargetAnglesSimple: SceneGetter = (
   };
 
   scene.draw = () => {
+    testUnitCirc.color = cl.getHSL(cl.blue);
+    if (testUnitCirc.sign === 'positive') {
+      testUnitCirc.color === cl.getHSL(cl.blue);
+      testUnitCirc.backgroundColor = cl.getHSL(cl.blue);
+      testUnitCirc.foregroundColor = cl.getHSL(cl.purple);
+    } else if (testUnitCirc.sign === 'negative') {
+      // testUnitCirc.color = cl.getHSL(cl.red);
+      testUnitCirc.sign = 'positive';
+      testUnitCirc.angle = Tau + testUnitCirc.angle;
+    }
     // unansweredDraw();
     if (targetAngleObjRef.current.correct) {
       correctDraw();
@@ -161,7 +173,7 @@ const getSceneDragToTargetAnglesSimple: SceneGetter = (
     // // testUnitCirc.draw();
     // testUnitCirc.update();
     // // testUnitCirc.drawAngleRainbow();
-    // // testUnitCirc.drawPurpleCenterCover();
+
     // testUnitCirc.drawAngleCorrect();
     // testUnitCirc.drawAngleCoverCorrect();
 

@@ -8,6 +8,7 @@ import { Tau } from './UsefulConstants';
 import P from '../../../P';
 
 type angleMeasurmentUnit = 'radians' | 'degrees' | 'custom';
+type angleSign = 'positive' | 'negative' | 'neutral';
 
 class AngleCircle {
   vertex: InteractivePoint | NonInteractivePoint;
@@ -26,6 +27,11 @@ class AngleCircle {
   correctGradient: any;
   correctCoverGradient: any;
   isNegative: boolean;
+  previousAngle: null | number;
+  sign: angleSign;
+  rotations: number;
+  backgroundColor: string | undefined;
+  foregroundColor: string | undefined;
 
   constructor(
     public context: CanvasRenderingContext2D,
@@ -137,6 +143,15 @@ class AngleCircle {
     if (this.radialPoint instanceof InteractivePoint) {
       this.radialPoint.listenFor = this.listenForAssets;
     }
+    if (this.angle > 0) {
+      this.sign = 'positive';
+    } else if (this.angle < 0) {
+      this.sign = 'negative';
+    } else {
+      this.sign = 'neutral';
+    }
+
+    this.rotations = Math.floor(this.angle / Tau);
   }
 
   update = () => {
@@ -154,6 +169,7 @@ class AngleCircle {
   };
 
   updateAngle = () => {
+    this.previousAngle = this.angle;
     let diffY = this.radialPoint.y - this.vertex.y;
     let diffX = this.radialPoint.x - this.vertex.x;
 
@@ -163,11 +179,51 @@ class AngleCircle {
     let oppositeOverAdjacent = opp / adj;
 
     let theta = -Math.atan2(diffY, diffX);
-    if (theta < 0) {
+
+    let previousAngleDiffThreshold = 5;
+
+    // make sure stays positive
+    if (
+      this.sign === 'positive' &&
+      theta < 0 &&
+      this.previousAngle >= Tau / 4
+    ) {
       theta += Tau;
     }
 
+    // make sure stays negative
+    if (
+      this.sign === 'negative' &&
+      theta > 0 &&
+      this.previousAngle <= -Tau / 4
+    ) {
+      theta -= Tau;
+    }
+
+    //switch to negative
+
+    // if (this.sign === "positive" && this.previousAngle >= Tau / 1000) {
+    //   theta += Tau;
+    // }
+
+    // if (theta < 0 && this.previousAngle <= Tau / 1000) {
+    //   theta += 0;
+    // }
+
+    // if (theta <= Tau && theta > 0 && this.previousAngle < 0) {
+    //   theta -= Tau;
+    // }
+
     this.angle = theta;
+    if (this.angle > 0) {
+      this.sign = 'positive';
+      console.log('sign set to positve');
+    } else if (this.angle < 0) {
+      this.sign = 'negative';
+      console.log('sign set to negative');
+    } else {
+      this.sign = 'neutral';
+    }
   };
 
   updatePosition = () => {
@@ -514,7 +570,7 @@ class AngleCircle {
     // this.context.stroke();
   };
 
-  drawAngle = () => {
+  drawAngle = (color?: string) => {
     let angleEndpointX = Math.cos(this.angle) * this.radius;
     let angleEndpointY = Math.sin(this.angle) * this.radius;
     let context = this.context;
@@ -559,8 +615,22 @@ class AngleCircle {
     //   angleGradient.addColorStop(0.66, cl.getHSL(cl.red));
     context.globalAlpha = 0.5;
 
-    context.fillStyle = this.color;
-    context.fill();
+    if (color) {
+      context.fillStyle = color;
+      context.fill();
+    } else {
+      if (this.backgroundColor) {
+        context.fillStyle = this.backgroundColor;
+        context.fill();
+      }
+      if (this.foregroundColor) {
+        context.fillStyle = this.foregroundColor;
+        context.fill();
+      }
+    }
+
+    // context.fillStyle = cl.getHSLA(cl.red, 0.5);
+    // context.fill();
     context.globalAlpha = 1;
 
     // context.closePath();
@@ -667,16 +737,8 @@ class AngleCircle {
     context.beginPath();
     context.moveTo(this.x, this.y);
     context.lineTo(this.zeroPoint.x, this.zeroPoint.y);
-    if (this.angle === Tau) {
-      context.arc(
-        this.x,
-        this.y,
-        this.radius,
-        0,
-        Tau - this.angle + 0.0001,
-        true
-      );
-    } else if (this.angle === 0) {
+
+    if (this.angle === 0) {
       context.arc(
         this.x,
         this.y,
@@ -685,8 +747,26 @@ class AngleCircle {
         Tau - this.angle - 0.0001,
         true
       );
-    } else {
+    } else if (this.angle % Tau === 0) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        Tau - this.angle + 0.0001,
+        true
+      );
+    } else if (this.angle > 0) {
       context.arc(this.x, this.y, this.radius, 0, Tau - this.angle, true);
+    } else if (this.angle < 0) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        -1 * (Tau + this.angle),
+        false
+      );
     }
 
     context.closePath();
@@ -709,16 +789,7 @@ class AngleCircle {
     context.beginPath();
     context.moveTo(this.x, this.y);
     context.lineTo(this.zeroPoint.x, this.zeroPoint.y);
-    if (this.angle === Tau) {
-      context.arc(
-        this.x,
-        this.y,
-        this.radius,
-        0,
-        Tau - this.angle + 0.0001,
-        true
-      );
-    } else if (this.angle === 0) {
+    if (this.angle === 0) {
       context.arc(
         this.x,
         this.y,
@@ -727,8 +798,26 @@ class AngleCircle {
         Tau - this.angle - 0.0001,
         true
       );
-    } else {
+    } else if (this.angle % Tau === 0) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        Tau - this.angle + 0.0001,
+        true
+      );
+    } else if (this.angle > 0) {
       context.arc(this.x, this.y, this.radius, 0, Tau - this.angle, true);
+    } else if (this.angle < 0) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        -1 * (Tau + this.angle),
+        false
+      );
     }
 
     context.closePath();

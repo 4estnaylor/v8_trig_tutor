@@ -83,7 +83,7 @@ const Wrapper1 = styled(Wrapper)<{
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       cursor: pointer;
-      background-color: ${cl.getHSLA(cl.white, 0.3)};
+      background-color: ${cl.getHSLA(cl.purple, 0.06)};
       color: ${cl.getHSLA(cl.purple, 1)};
     }
   }

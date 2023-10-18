@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import cl from '../../../colors';
 
 const NegativeAngles = () => {
-  const [userSliderValue, setUserSliderValue] = useState(0);
+  const [userSliderValue, setUserSliderValue] = useState(-130);
   const userSliderValueRef = useRef(userSliderValue);
   useEffect(() => {
     userSliderValueRef.current = userSliderValue;
@@ -36,7 +36,7 @@ const NegativeAngles = () => {
           <PositiveRotation> ⟲</PositiveRotation>
         </NegativeAngleConventionsLi>
         <NegativeAngleConventionsLi>
-          <NegativeSymbol>-</NegativeSymbol>
+          <NegativeSymbol>−</NegativeSymbol>
           negative angles go clockwise
           <RotationBlock>⟳</RotationBlock>
         </NegativeAngleConventionsLi>
@@ -93,7 +93,10 @@ const SignSymbol = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: ${cl.getHSL(cl.white)};
+  border-radius: 12px;
 `;
 
 const PositiveSymbol = styled(SignSymbol)`
@@ -107,9 +110,10 @@ const PositiveSymbol = styled(SignSymbol)`
 
 const NegativeSymbol = styled(SignSymbol)`
   background: -webkit-linear-gradient(
-    ${cl.getHSL(cl.red_light)},
-    ${cl.getHSL(cl.red_dark)}
+    ${cl.getHSL(cl.red_dark)},
+    ${cl.getHSL(cl.red_light)}
   );
+  font-weight: 800;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;

@@ -13,6 +13,7 @@ import TargetAngles from './TargetAngles';
 import TargetAngle from './TargetAngleDisplay';
 import TargetAngleDisplay from './TargetAngleDisplay';
 import { AnswerState } from '../../Inputs/MultipleChoiceQuestion';
+import getSceneDragToTargetAnglesSimpleWithNegatives from '../../getScenes/degrees/getSceneDragToTargetAnglesSimpleWithNegatives';
 
 const DragToCorrectAngleWithNegatives = () => {
   const handler = () => {};
@@ -48,11 +49,11 @@ const DragToCorrectAngleWithNegatives = () => {
   };
 
   const [targetAngleObjs, setTargetAngleObjs] = useState([
-    { angle: 48, correct: false },
-    { angle: 139, correct: false },
-    { angle: 220, correct: false },
-    { angle: 315, correct: false },
-    { angle: 360, correct: false },
+    { angle: 71, correct: false },
+    { angle: -71, correct: false },
+    { angle: 150, correct: false },
+    { angle: -210, correct: false },
+    { angle: -180, correct: false },
   ]);
 
   useEffect(() => {
@@ -83,7 +84,9 @@ const DragToCorrectAngleWithNegatives = () => {
     // check and see if answer is current targetAngleObjecet Value
     console.log('handlingButtonDrop');
     console.log(angleRef.current, targetAngleObjs[displayAngleIndex].angle);
-    if (angleRef.current === targetAngleObjs[displayAngleIndex].angle) {
+    if (
+      Math.abs(angleRef.current - targetAngleObjs[displayAngleIndex].angle) < 3
+    ) {
       setTargetAngleObjs((prev) => {
         let updatedObjs = [...prev];
         updatedObjs[displayAngleIndex].correct = true;
@@ -118,7 +121,10 @@ const DragToCorrectAngleWithNegatives = () => {
           <>
             <TopPart>
               <QuestionDisplay>
-                Use the drag button below. Make the target angles.
+                <>
+                  Use the drag button below to make the target angles. <br />
+                  {'(with negatives in the mix!)'}
+                </>
               </QuestionDisplay>
             </TopPart>
             <BottomPart>
@@ -129,7 +135,7 @@ const DragToCorrectAngleWithNegatives = () => {
                   onStop={handleButtonDrop}
                 />
                 <CanvasForTopicComponent
-                  sceneGetter={getSceneDragToTargetAnglesSimple}
+                  sceneGetter={getSceneDragToTargetAnglesSimpleWithNegatives}
                   objectPassedToScene={{
                     controlledPositionRef,
                     angleRef,

@@ -13,6 +13,8 @@ import TargetAngles from './TargetAngles';
 import TargetAngle from './TargetAngleDisplay';
 import TargetAngleDisplay from './TargetAngleDisplay';
 import { AnswerState } from '../../Inputs/MultipleChoiceQuestion';
+import { Tau } from '../../HomePage/MyCanvas/CanvasObjects/UsefulConstants';
+import { Alert } from '@mui/material';
 
 const DragToCorrectAngle = () => {
   const handler = () => {};
@@ -83,7 +85,9 @@ const DragToCorrectAngle = () => {
     // check and see if answer is current targetAngleObjecet Value
     console.log('handlingButtonDrop');
     console.log(angleRef.current, targetAngleObjs[displayAngleIndex].angle);
-    if (angleRef.current === targetAngleObjs[displayAngleIndex].angle) {
+    if (
+      Math.abs(angleRef.current - targetAngleObjs[displayAngleIndex].angle) < 3
+    ) {
       setTargetAngleObjs((prev) => {
         let updatedObjs = [...prev];
         updatedObjs[displayAngleIndex].correct = true;
@@ -117,42 +121,51 @@ const DragToCorrectAngle = () => {
         <QuestionWrapper>
           <>
             <TopPart>
-              <QuestionDisplay>
-                Use the drag button below. Make the target angles.
-              </QuestionDisplay>
+              <>
+                <QuestionDisplay>
+                  Use the drag button to make the target angles
+                </QuestionDisplay>
+              </>
             </TopPart>
+            <Alert severity="info">
+              Getting the <em>exact</em> angle can be slightly more finicky than
+              I would like. So as long as you get within ±2°, you'll get credit{' '}
+              {':)'}{' '}
+            </Alert>
             <BottomPart>
               <>
-                <DraggableButton
-                  controlledPosition={controlledPosition}
-                  setControlledPosition={setControlledPosition}
-                  onStop={handleButtonDrop}
-                />
-                <CanvasForTopicComponent
-                  sceneGetter={getSceneDragToTargetAnglesSimple}
-                  objectPassedToScene={{
-                    controlledPositionRef,
-                    angleRef,
-                    targetAngleObjRef,
-                  }}
-                />
+                <>
+                  <DraggableButton
+                    controlledPosition={controlledPosition}
+                    setControlledPosition={setControlledPosition}
+                    onStop={handleButtonDrop}
+                  />
+                  <CanvasForTopicComponent
+                    sceneGetter={getSceneDragToTargetAnglesSimple}
+                    objectPassedToScene={{
+                      controlledPositionRef,
+                      angleRef,
+                      targetAngleObjRef,
+                    }}
+                  />
 
-                <TargetAngleDisplay
-                  targetAngle={targetAngleObjs[displayAngleIndex]}
-                />
-                <TargetAngles
-                  targetAngleObjects={targetAngleObjs}
-                  displayIndex={displayAngleIndex}
-                  setDisplayAngleIndex={setDisplayAngleIndex}
-                />
-                <VerticalGap20 />
-                <ActionBar
-                  answerState={answerState}
-                  userAnswer="answered"
-                  checkButtonOff={true}
-                  handleCheck={handler}
-                  hint={<div>drag the circular button</div>}
-                />
+                  <TargetAngleDisplay
+                    targetAngle={targetAngleObjs[displayAngleIndex]}
+                  />
+                  <TargetAngles
+                    targetAngleObjects={targetAngleObjs}
+                    displayIndex={displayAngleIndex}
+                    setDisplayAngleIndex={setDisplayAngleIndex}
+                  />
+                  <VerticalGap20 />
+                  <ActionBar
+                    answerState={answerState}
+                    userAnswer="answered"
+                    checkButtonOff={true}
+                    handleCheck={handler}
+                    hint={<div>drag the circular button</div>}
+                  />
+                </>
               </>
             </BottomPart>
           </>
