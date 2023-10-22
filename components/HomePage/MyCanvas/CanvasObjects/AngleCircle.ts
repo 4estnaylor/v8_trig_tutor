@@ -67,7 +67,6 @@ class AngleCircle {
     );
 
     this.checkDragValueToCorrect = () => {};
-    this.handleOnUpdate = () => {};
 
     this.radialPoint = new InteractivePoint(
       this.context,
@@ -155,11 +154,10 @@ class AngleCircle {
   }
 
   update = () => {
-    this.handleOnUpdate();
+    this.handleOnUpdate && this.handleOnUpdate();
     this.updatePosition();
     this.updateAngle();
     this.checkValueWhenNotDragging();
-    // console.log('angle', (this.angle * 180) / Math.PI);
   };
 
   moveRadiusToAngle = (angle: number, distanceInRadians: number = 1.8) => {
@@ -176,11 +174,9 @@ class AngleCircle {
     let opp = diffY;
     let adj = diffX;
 
-    let oppositeOverAdjacent = opp / adj;
-
     let theta = -Math.atan2(diffY, diffX);
 
-    let previousAngleDiffThreshold = 5;
+    // allow angle to get bigger than 360
 
     // make sure stays positive
     if (
@@ -214,13 +210,21 @@ class AngleCircle {
     //   theta -= Tau;
     // }
 
+    // allow rotations to go up
+
+    if (this.previousAngle > Tau * 0.75 && theta < Tau * 0.25) {
+      this.rotations += 1;
+    }
+
+    if (this.previousAngle < Tau * 0.1 && theta > Tau * 0.99) {
+      this.rotations -= 1;
+    }
+
     this.angle = theta;
     if (this.angle > 0) {
       this.sign = 'positive';
-      console.log('sign set to positve');
     } else if (this.angle < 0) {
       this.sign = 'negative';
-      console.log('sign set to negative');
     } else {
       this.sign = 'neutral';
     }
@@ -248,7 +252,6 @@ class AngleCircle {
     this.drawAngleLabel();
     this.testFunction();
     // if (this.radialPoint instanceof InteractivePoint) {
-    //   console.log('form', this.radialPoint.form);
     // }
   };
 
@@ -356,8 +359,10 @@ class AngleCircle {
     let decimalConstant = Math.pow(10, this.decimalPlaces);
     let displayValue =
       (
-        Math.round((decimalConstant * (this.angle * 180)) / Math.PI) /
-        decimalConstant
+        Math.round(
+          (decimalConstant * ((this.angle + this.rotations * Tau) * 180)) /
+            Math.PI
+        ) / decimalConstant
       ).toString() + '°';
     if (this.customUnitDivisions) {
       displayValue =
@@ -407,8 +412,6 @@ class AngleCircle {
       this.radialPoint.form !== 'grabbing' &&
       !this.valueCheckedSinceLastDrag
     ) {
-      console.log('yayaya');
-      console.log('not dragging', this.radialPoint.form);
       this.checkDragValueToCorrect();
       this.valueCheckedSinceLastDrag = true;
     } else {

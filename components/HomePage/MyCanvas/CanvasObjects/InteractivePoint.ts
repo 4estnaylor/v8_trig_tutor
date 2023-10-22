@@ -39,9 +39,7 @@ class InteractivePoint {
     this.tester();
   }
 
-  tester = () => {
-    console.log('shizzle');
-  };
+  tester = () => {};
 
   draw() {
     this.update();

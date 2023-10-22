@@ -33,6 +33,7 @@ const CanvasForTopicComponent = (props: MyCanvasProps) => {
     <StyledCanvas
       ref={canvasRef}
       width={width ? width : parentWidth}
+      style={{ background: cl.getHSLA(cl.white, 0.8), borderRadius: '8px' }}
       // width="390px"
       data-passedtoscene={objectPassedToScene}
       height={height ? height + 'px' : '390px'}

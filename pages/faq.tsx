@@ -232,19 +232,20 @@ const faq = () => {
                 height={300}
               />
             </div>
-            Precalculus was originally about, as the name implies, preparing for
-            a calculus course. In practice its subject area has evolved over
-            time and is less clear-cut than trig's. Its definition can also vary
-            signifigantly depending upon who you ask and what the phase of the
-            moon is when you ask. Precalc is usually a two semester course. The
-            first semester is Trig, and the second one is a little wacky.
+            Precalculus was originally about, as the name implies, laying the
+            groundwork for a calculus course. In practice its subject area has
+            evolved over time and is less clear-cut than trig's. Its definition
+            can also vary signifigantly depending upon who you ask and what the
+            phase of the moon is when you ask. Precalc is usually a two semester
+            course. The first semester-ish is Trig, and the second one is a
+            little wacky.
             <br />
             <br />
             <Alert severity="info">
               The word pre-calculus from Latin prae ("before") and calculus ("A
               small pebble", because what transistors are to modern calculators,
-              small pebbles were to the acubus). Precalc gets 2/5 stars as a
-              term for being kinda bad.
+              small pebbles were to the acubus). Precalc gets 4/5 stars for
+              giving its best effort.
             </Alert>
             <br />
             <br />
@@ -273,7 +274,9 @@ const faq = () => {
                 height={300}
               />
             </div>
-            At this point, the reader might ask a very reasonable question,
+            At this point, the reader might ask a very reasonable question.
+            <br />
+            <br />
             "What in the
             <em> Thundering Kittens of Ipala </em> is math analysis?!"
             <br />
@@ -322,25 +325,27 @@ const faq = () => {
             Simple really. Math analysis is, uhm, analyzing stuff with math. My
             impression after having taught it for a few years is that "math
             analysis" is a term carefully crafted by math curricula to sound
-            fancy and technical while still being just vague enough to be
-            meaningless.
+            fancy and technical while still being just vague enough to be a
+            catchall covering whatever topics teachers see fit to jam into the
+            classroom time available.
             <br />
             <br />
             <Alert severity="info">
               Math analysis gets -100 out of 5 stars as a term for being a waste
-              of everyone's precious time on this earth.
+              of everyone's precious, limited time on this earth.
             </Alert>
             <br />
             <br />
             Why choose such an unclear, vague term? Maybe because, unlike
-            trigonometry, the topics in math analysis don't have a
-            <b> mathematical theme </b> . Worse, there's too many of them! Often
-            classes have to skim or even skip a couple of the topics if they
-            reach the final section of the textbook. Precalc's second semester
-            is a kind of controlled chaos. The lack of logical, definite
-            structure stems from why precaxlculus was invented as a class in the
-            first place. It was not built around a <em>mathematical </em> theme,
-            but around a <em> practical </em> theme.
+            trigonometry, the topics in math analysis{' '}
+            <b>don't have a mathematical theme </b> . Worse, there's too many of
+            them! Often classes have to skim or even skip a couple of the topics
+            if they reach the final section of the textbook. Precalc's second
+            semester is a kind of controlled chaos. The lack of logical,
+            definite structure stems from why precalculus was invented as a
+            class in the first place. It was not built around a{' '}
+            <em>mathematical </em> theme, but around a <em> practical </em>{' '}
+            theme.
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Image
                 src="/math_analysis_explained.svg"
@@ -370,7 +375,7 @@ const faq = () => {
             <br />
             Highschool math classes were called upon to adjust their curiculum
             to smooth students' transition into college-level math and eat up as
-            much of the learning curve disparity as possible. It mostly worked!
+            much of the learning curve disparity as possible. It kinda worked!
             <br /> <br />
             Smoothing the learning curve is all well and good, but there was a
             little bit of a problem. Math teachers and highschool students
@@ -390,8 +395,9 @@ const faq = () => {
             topics considered pre-calculus' territory in math curricula has been
             shifting and expanding over the years. Linear algebra and
             probability are taking an increasingly leading role in college
-            mathematics because of their many applications in computer and data
-            science. In response, precalc teachers are increasingly including
+            mathematics because of their many applications in computer science
+            which is a mightly powerful gateway into so much of the modern math
+            landscape. In response, precalc teachers are increasingly including
             topics to bolster not just calc but college-level math more broadly
             to the extent that they can manage to stuff it all into just 2
             semesters.
@@ -416,13 +422,23 @@ const faq = () => {
               bit while we're at it!
             </Alert> */}
             <br />I rarely use the term math analysis because of, to put it
-            gently, what a uselessly undescriptive term it is.
+            bluntly, what a widly undescriptive term it is. Just for emphasis I
+            reiterate, "math analysis" is a <em>damn silly</em> term. Am I
+            willing to die on this hill? Yes. I imagine it will be a lot like
+            Russel Crow running his palms along sun-kissed wheat stalks as an
+            award winning Hans Zimmer track beckons him to Elysium. If you don't
+            know what I'm talking about run to your nearest search-engine and
+            ask it, "Where to watch Gladiator online free".
             <br />
             <br />
-            I like to think of it more as a kind of "collegiate math trail mix".
-            Your teachers load you up with as much of it as they can before you
-            hit your college math journey to provide you nutrition, energy, and
-            insight along the way.
+            In favor of using the term "math analysis", I like to describe the
+            same math stuff as a kind of "collegiate math trail mix". Your
+            teachers load you up with as much of it as they can before you hit
+            your college math journey to provide you with densley-packed
+            nutrition, energy, and insight along the way. Despite my hang-ups
+            about its naming, I actually think it can be a kind of an amazing
+            educational experience. It's important students and teachers
+            recognize it for what it actually is to harness it.
             <br /> <br />
             {/* <Alert severity="info">
               <AlertTitle>Quick Takeaway</AlertTitle>
