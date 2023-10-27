@@ -117,8 +117,10 @@ const getSceneDragToTargetAnglesSimpleWithNegatives: SceneGetter = (
     testUnitCirc.radialPoint.y = controlledPositionRef.current.y + 25;
 
     testUnitCirc.update();
+    console.log('happening ho', testUnitCirc.angle);
+    testUnitCirc.rotations = 0;
     testUnitCirc.drawAngle();
-    testUnitCirc.drawPurpleCenterCover();
+    // testUnitCirc.drawPurpleCenterCover();
     // testUnitCirc.drawAngleRainbow();
     // testUnitCirc.drawPurpleCenterCover();
     testUnitCirc.drawDottedTouchConncetLine();
@@ -133,6 +135,7 @@ const getSceneDragToTargetAnglesSimpleWithNegatives: SceneGetter = (
     testUnitCirc.drawAngleCorrect();
     testUnitCirc.drawAngleCoverCorrect();
     testUnitCirc.update();
+
     // testUnitCirc.drawAngle();
     // context.fill();
 

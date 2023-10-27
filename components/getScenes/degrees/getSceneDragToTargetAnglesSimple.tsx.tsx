@@ -117,6 +117,11 @@ const getSceneDragToTargetAnglesSimple: SceneGetter = (
     testUnitCirc.radialPoint.y = controlledPositionRef.current.y + 25;
 
     testUnitCirc.update();
+    testUnitCirc.rotations = 0;
+    if (testUnitCirc.angle < 0) {
+      testUnitCirc.angle = Tau + testUnitCirc.angle;
+      testUnitCirc.sign = 'positive';
+    }
     testUnitCirc.drawAngle();
     // testUnitCirc.drawPurpleCenterCover();
     // testUnitCirc.drawAngleRainbow();

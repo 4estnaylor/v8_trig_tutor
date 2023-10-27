@@ -141,7 +141,7 @@ const getScenePositiveNegativeDirectionality: SceneGetter = (
     // negativeCircle.angle = (userSliderValueRef.current * Tau) / 360;
 
     mainAngle.drawAngle();
-    mainAngle.drawPurpleCenterCover();
+    // mainAngle.drawPurpleCenterCover();
     // context.fillStyle = 'black';
     // context.font = '30px Arial';
     if (mainAngle.angle > 0) {
