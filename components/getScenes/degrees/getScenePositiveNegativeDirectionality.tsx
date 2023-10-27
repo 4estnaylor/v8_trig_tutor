@@ -128,7 +128,7 @@ const getScenePositiveNegativeDirectionality: SceneGetter = (
   scene.draw = () => {
     // positiveCircle.update();
     // negativeCircle.update();
-    mainAngle.update();
+    // mainAngle.update();
     mainAngle.angle = (userSliderValueRef.current * Tau) / 360;
     if (mainAngle.angle > 0) {
       mainAngle.color = cl.getHSL(cl.blue);

@@ -41,7 +41,7 @@ class AngleCircle {
     public angle: number = 0,
     public unit: angleMeasurmentUnit = 'radians',
     public radius: number = 80,
-    public color: string = cl.getHSL(cl.white)
+    public color: string = cl.getHSL(cl.gray_dark)
   ) {
     this.listenForAssets = [];
     // this.vertex = new NonInteractivePoint(this.context, this.x, this.y);
@@ -150,7 +150,7 @@ class AngleCircle {
       this.sign = 'neutral';
     }
 
-    this.rotations = Math.floor(this.angle / Tau);
+    this.rotations = Math.floor(this.angle / Tau) | 0;
   }
 
   update = () => {
@@ -216,9 +216,19 @@ class AngleCircle {
       this.rotations += 1;
     }
 
-    if (this.previousAngle < Tau * 0.1 && theta > Tau * 0.99) {
+    if (
+      this.previousAngle < 0.25 * Tau &&
+      this.previousAngle > 0 &&
+      theta < 0
+    ) {
       this.rotations -= 1;
     }
+
+    if (this.previousAngle < -Tau * 0.75 && theta > -Tau * 0.25) {
+      this.rotations -= 1;
+    }
+
+    // if(0 > this.previousAngle && this.previousAngle < Tau*0.25 && theta < )
 
     this.angle = theta;
     if (this.angle > 0) {
@@ -239,8 +249,10 @@ class AngleCircle {
     this.zeroPoint.y = this.y;
   };
 
+  drawBase = () => {};
+
   draw = () => {
-    this.update();
+    // this.update();
 
     // this.zeroPoint.draw();
     this.drawDottedTouchConncetLine();
@@ -532,9 +544,28 @@ class AngleCircle {
         // this.context.beginPath();
         this.lineToCirclePerimeter(angleIncrement * i);
       }
-      this.context.stroke();
+      this.context.strokeStyle = cl.getHSL(cl.black);
+      // this.context.stroke();
     }
   };
+
+  drawAngleWithRotations = (color?: string) => {
+    if (this.rotations === 0) {
+      this.drawAngle();
+      return;
+    }
+    let n = 0;
+    this.context.beginPath();
+    this.context.ellipse(this.x, this.y, this.radius, this.radius, 0, 0, Tau);
+    this.context.fillStyle = color ? color : this.color;
+    this.context.fill();
+    this.context.fillText(n.toString(), 100, 100);
+    // this.context.fillRect(0, 0, 100, 100);
+  };
+
+  drawAngleRing = () => {};
+
+  drawFullAngleRing = () => {};
 
   drawFilledLoop = () => {
     this.context.beginPath();

@@ -33,7 +33,8 @@ const getSceneDragToBigAngles: SceneGetter = (
     bigAngleDragger.radialPoint.y = controlledPositionRef.current.y + 25;
     bigAngleDragger.updateAngle();
 
-    bigAngleDragger.drawAngle();
+    // bigAngleDragger.drawAngle();
+    bigAngleDragger.drawAngleWithRotations();
 
     context.fill();
     // context.fillText(controlledPositionRef.current.x, 100, 100);

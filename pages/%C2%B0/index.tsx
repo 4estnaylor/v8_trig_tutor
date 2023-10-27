@@ -415,9 +415,9 @@ const Degree = () => {
         We will follow another standard convention and say that positive angles
         indicate clockwise direction and negative angles indicate
         counter-clockwise direction. */}
-        {/* <DragToCorrectAngle /> */}
-        {/* <NegativeAngles /> */}
-        {/* <DragToCorrectAngleWithNegatives /> */}
+        <DragToCorrectAngle />
+        <NegativeAngles />
+        <DragToCorrectAngleWithNegatives />
         <DragToBigAngles />
       </>
     </TopicComponentBoilerPlate>
