@@ -142,9 +142,9 @@ class AngleCircle {
     if (this.radialPoint instanceof InteractivePoint) {
       this.radialPoint.listenFor = this.listenForAssets;
     }
-    if (this.angle > 0) {
+    if (this.angle + Tau * this.rotations > 0) {
       this.sign = 'positive';
-    } else if (this.angle < 0) {
+    } else if (this.angle + Tau * this.rotations < 0) {
       this.sign = 'negative';
     } else {
       this.sign = 'neutral';
@@ -554,7 +554,7 @@ class AngleCircle {
       this.drawAngle();
       return;
     }
-    let n = 0;
+    let n = this.rotations;
     this.context.beginPath();
     this.context.ellipse(this.x, this.y, this.radius, this.radius, 0, 0, Tau);
     this.context.fillStyle = color ? color : this.color;
@@ -651,7 +651,10 @@ class AngleCircle {
   };
 
   drawPartialRing = (level: number) => {
-    let ringRadius = this.radius * (1.1 + 0.1 * level);
+    this.context.lineWidth = 5;
+    this.context.strokeStyle = this.color;
+    this.context.fillText(this.sign, 100, 200);
+    let ringRadius = this.radius * (1.1 + 0.1 * Math.abs(level));
 
     // this.context.fillRect(0, 0, 100, 100);
 
@@ -659,35 +662,19 @@ class AngleCircle {
     context.beginPath();
     // context.moveTo(this.x, this.y);
     // context.lineTo(this.zeroPoint.x, this.zeroPoint.y);
-    if (this.angle === 0) {
-      context.arc(
-        this.x,
-        this.y,
-        this.radius,
-        0,
-        Tau - this.angle - 0.0001,
-        true
-      );
-    } else if (this.angle % Tau === 0) {
-      context.arc(
-        this.x,
-        this.y,
-        this.radius,
-        0,
-        Tau - this.angle + 0.0001,
-        true
-      );
-    } else if (this.sign === 'positive') {
+    if (this.angle + Tau * this.rotations > 0) {
       context.arc(this.x, this.y, ringRadius, 0, Tau - this.angle, true);
-    } else if (this.sign === 'negative') {
-      context.arc(
-        this.x,
-        this.y,
-        ringRadius,
-        0,
-        -1 * (Tau + this.angle),
-        false
-      );
+    } else if (this.angle + Tau * this.rotations < 0) {
+      context.strokeStyle = cl.getHSL(cl.red);
+      context.arc(this.x, this.y, ringRadius, 0, -Tau - this.angle, false);
+      // context.arc(
+      //   this.x,
+      //   this.y,
+      //   ringRadius,
+      //   0,
+      //   -1 * (Tau + this.angle),
+      //   false
+      // );
     }
 
     // context.closePath();
