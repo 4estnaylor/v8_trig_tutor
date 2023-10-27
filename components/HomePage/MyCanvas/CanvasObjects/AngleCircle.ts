@@ -560,10 +560,151 @@ class AngleCircle {
     this.context.fillStyle = color ? color : this.color;
     this.context.fill();
     this.context.fillText(n.toString(), 100, 100);
+    // this.drawAngleRing(1);
+    // this.drawAngleRing(2);
+    for (let i = 1; i < Math.abs(this.rotations); i++) {
+      this.drawAngleRing(i + 1);
+      // this.drawAngleRing();
+    }
+
+    this.drawPartialRing(this.rotations);
+    let angleEndpointX = Math.cos(this.angle) * this.radius;
+    let angleEndpointY = Math.sin(this.angle) * this.radius;
+    let context = this.context;
+    context.beginPath();
+    context.moveTo(this.x, this.y);
+    context.lineTo(this.zeroPoint.x, this.zeroPoint.y);
+    if (this.angle === 0) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        Tau - this.angle - 0.0001,
+        true
+      );
+    } else if (this.angle % Tau === 0) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        Tau - this.angle + 0.0001,
+        true
+      );
+    } else if (this.angle > 0) {
+      context.arc(this.x, this.y, this.radius, 0, Tau - this.angle, true);
+    } else if (this.angle < 0) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        -1 * (Tau + this.angle),
+        false
+      );
+    }
+
+    context.closePath();
+    // let angleGradient = context.createConicGradient(0, this.x, this.y);
+    // angleGradient.addColorStop(0, cl.getHSL(cl.blue));
+    // angleGradient.addColorStop(0.33, cl.getHSL(cl.purple)),
+    //   angleGradient.addColorStop(0.66, cl.getHSL(cl.red));
+    context.globalAlpha = 0.5;
+
+    if (color) {
+      context.fillStyle = color;
+      context.fill();
+    } else {
+      if (this.backgroundColor) {
+        context.fillStyle = this.backgroundColor;
+        context.fill();
+      }
+      if (this.foregroundColor) {
+        context.fillStyle = this.foregroundColor;
+        context.fill();
+      }
+    }
+
+    // context.fillStyle = cl.getHSLA(cl.red, 0.5);
+    // context.fill();
+    context.globalAlpha = 1;
+
+    // context.closePath();
+
+    // context.stroke();
+    // this.drawAngleRing(this.rotations);
     // this.context.fillRect(0, 0, 100, 100);
   };
 
-  drawAngleRing = () => {};
+  drawAngleRing = (level: number) => {
+    // this.context.fillStyle = 'black';
+
+    let ringRadius = this.radius * (1 + 0.1 * level);
+    // this.context.fillRect(0, 0, 100, 100);
+    this.context.lineWidth = 5;
+    this.context.strokeStyle = this.color;
+    this.context.beginPath();
+    this.context.ellipse(this.x, this.y, ringRadius, ringRadius, 0, 0, Tau);
+    this.context.stroke();
+    this.context.beginPath();
+  };
+
+  drawPartialRing = (level: number) => {
+    let ringRadius = this.radius * (1.1 + 0.1 * level);
+
+    // this.context.fillRect(0, 0, 100, 100);
+
+    let context = this.context;
+    context.beginPath();
+    // context.moveTo(this.x, this.y);
+    // context.lineTo(this.zeroPoint.x, this.zeroPoint.y);
+    if (this.angle === 0) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        Tau - this.angle - 0.0001,
+        true
+      );
+    } else if (this.angle % Tau === 0) {
+      context.arc(
+        this.x,
+        this.y,
+        this.radius,
+        0,
+        Tau - this.angle + 0.0001,
+        true
+      );
+    } else if (this.sign === 'positive') {
+      context.arc(this.x, this.y, ringRadius, 0, Tau - this.angle, true);
+    } else if (this.sign === 'negative') {
+      context.arc(
+        this.x,
+        this.y,
+        ringRadius,
+        0,
+        -1 * (Tau + this.angle),
+        false
+      );
+    }
+
+    // context.closePath();
+    // let angleGradient = context.createConicGradient(0, this.x, this.y);
+    // angleGradient.addColorStop(0, cl.getHSL(cl.blue));
+    // angleGradient.addColorStop(0.33, cl.getHSL(cl.purple)),
+    //   angleGradient.addColorStop(0.66, cl.getHSL(cl.red));
+
+    context.stroke();
+
+    // context.fillStyle = cl.getHSLA(cl.red, 0.5);
+    // context.fill();
+
+    // context.closePath();
+
+    // context.stroke();
+  };
 
   drawFullAngleRing = () => {};
 
