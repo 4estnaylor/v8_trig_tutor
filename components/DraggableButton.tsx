@@ -17,6 +17,8 @@ const DraggableButton = (props: DraggableButtonProps) => {
   const { controlledPosition, setControlledPosition, onStop } = props;
   const [isDraggable, setIsDraggable] = useState(false);
 
+  const nodeRef = React.useRef(null);
+
   const [haloOpacity, setHaloOpacity] = useState(0.2);
 
   const onControlledDrag = (e: Event, position: { x: number; y: number }) => {
@@ -24,51 +26,55 @@ const DraggableButton = (props: DraggableButtonProps) => {
     setControlledPosition({ x, y });
   };
   return (
-    <Draggable
-      // bounds="parent"
-      onDrag={(e: any, position) => {
-        onControlledDrag(e, position);
-      }}
-      onStart={() => {
-        setHaloOpacity(1);
-      }}
-      onStop={() => {
-        setHaloOpacity(0.2);
-        if (onStop) {
-          onStop();
-        }
-      }}
-      position={controlledPosition}
-    >
-      <Wrapper
-        haloOpacity={haloOpacity}
-        // onClick={() => {
-        //   console.log('clickclack');
-        // }}
-        // onMouseDown={(e) => {
-        //   console.log('mouse is down');
-        //   setIsDraggable(true);
-        // }}
-        // onMouseUp={(e) => {
-        //   console.log('mouse up');
-        //   setIsDraggable(false);
-        // }}
-        // onMouseLeave={(e) => {
-        //   setIsDraggable(false);
-        // }}
-        // onMouseMove={(e) => {
-        //   // console.log('mouse moving', e);
-        // }}
-        // onDrag={(e) => {
-        //   e.dataTransfer.setData("text", e.target.id)
-        //   console.log('dragging');
-        // }}
+    <div>
+      <Draggable
+        // bounds="parent"
+        nodeRef={nodeRef}
+        onDrag={(e: any, position) => {
+          onControlledDrag(e, position);
+        }}
+        onStart={() => {
+          setHaloOpacity(1);
+        }}
+        onStop={() => {
+          setHaloOpacity(0.2);
+          if (onStop) {
+            onStop();
+          }
+        }}
+        position={controlledPosition}
       >
-        <InnerDot>
-          <ControlCameraIcon />
-        </InnerDot>
-      </Wrapper>
-    </Draggable>
+        <Wrapper
+          ref={nodeRef}
+          haloOpacity={haloOpacity}
+          // onClick={() => {
+          //   console.log('clickclack');
+          // }}
+          // onMouseDown={(e) => {
+          //   console.log('mouse is down');
+          //   setIsDraggable(true);
+          // }}
+          // onMouseUp={(e) => {
+          //   console.log('mouse up');
+          //   setIsDraggable(false);
+          // }}
+          // onMouseLeave={(e) => {
+          //   setIsDraggable(false);
+          // }}
+          // onMouseMove={(e) => {
+          //   // console.log('mouse moving', e);
+          // }}
+          // onDrag={(e) => {
+          //   e.dataTransfer.setData("text", e.target.id)
+          //   console.log('dragging');
+          // }}
+        >
+          <InnerDot>
+            <ControlCameraIcon />
+          </InnerDot>
+        </Wrapper>
+      </Draggable>
+    </div>
   );
 };
 

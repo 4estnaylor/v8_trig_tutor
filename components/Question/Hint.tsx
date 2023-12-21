@@ -24,7 +24,7 @@ const Hint = (props: HintProps) => {
       <Tooltip title="hint">
         <Wrapper
           onClick={handleButtonClick}
-          isWhite={answerState === 'correct'}
+          $isWhite={answerState === 'correct'}
         >
           <TipsAndUpdatesIcon />
         </Wrapper>
@@ -36,12 +36,12 @@ const Hint = (props: HintProps) => {
   );
 };
 
-const Wrapper = styled(Button)<{ isWhite: boolean }>`
+const Wrapper = styled(Button)<{ $isWhite: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: ${(p) => (p.isWhite ? cl.getHSL(cl.white) : cl.getHSL(cl.gray_mid))};
+  color: ${(p) => (p.$isWhite ? cl.getHSL(cl.white) : cl.getHSL(cl.gray_mid))};
 `;
 
 const ContentWrapper = styled.div`

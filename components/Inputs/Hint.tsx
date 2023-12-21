@@ -38,7 +38,7 @@ const Hint = (props: HintProps) => {
       <HintButton
         onClick={handleOpen}
         variant="outlined"
-        isWhite={areIconsWhite}
+        $isWhite={areIconsWhite}
       >
         <TipsAndUpdatesIcon color="primary" />
       </HintButton>
@@ -62,8 +62,8 @@ const P = styled.div`
 `;
 
 const Wrapper = styled.div``;
-const HintButton = styled(Button)<{ isWhite: boolean }>`
-  color: ${(p) => (p.isWhite ? cl.getHSL(cl.white) : cl.getHSL(cl.gray_mid))};
+const HintButton = styled(Button)<{ $isWhite: boolean }>`
+  color: ${(p) => (p.$isWhite ? cl.getHSL(cl.white) : cl.getHSL(cl.gray_mid))};
   min-width: 55px;
   min-height: 55px;
   max-width: 55px;

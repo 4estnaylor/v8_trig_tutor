@@ -228,6 +228,14 @@ class AngleCircle {
       this.rotations -= 1;
     }
 
+    if (
+      this.previousAngle < 0 &&
+      this.previousAngle > -Tau * 0.25 &&
+      theta > 0
+    ) {
+      this.rotations += 1;
+    }
+
     // if(0 > this.previousAngle && this.previousAngle < Tau*0.25 && theta < )
 
     this.angle = theta;

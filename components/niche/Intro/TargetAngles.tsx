@@ -80,11 +80,11 @@ const TargetAngles = (props: TargetAnglesProps) => {
     <Wrapper>
       {/* <DisplayedAngle>{targetAngleObjects[displayIndex].angle}°</DisplayedAngle> */}
       <Sequence>
-        <SequenceButton onClick={handlePrevClick} canClick={canClickPrev}>
+        <SequenceButton onClick={handlePrevClick} $canclick={canClickPrev}>
           <NavigateBeforeIcon></NavigateBeforeIcon>
         </SequenceButton>
         {sequencedItems}
-        <SequenceButton onClick={handleNextClick} canClick={canClickNext}>
+        <SequenceButton onClick={handleNextClick} $canclick={canClickNext}>
           <NavigateNextIcon></NavigateNextIcon>
         </SequenceButton>
       </Sequence>
@@ -170,9 +170,9 @@ const Sequence = styled.div`
   align-items: center;
 `;
 
-const SequenceButton = styled(Button)<{ canClick: boolean }>`
+const SequenceButton = styled(Button)<{ $canclick: boolean }>`
   color: ${(p) =>
-    p.canClick ? cl.getHSL(cl.gray_dark) : cl.getHSL(cl.gray_light)};
+    p.$canclick ? cl.getHSL(cl.gray_dark) : cl.getHSL(cl.gray_light)};
   transition: all 0.2s ease-in-out;
 `;
 

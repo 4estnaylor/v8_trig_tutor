@@ -1,4 +1,5 @@
 import AngleCircle from '../../HomePage/MyCanvas/CanvasObjects/AngleCircle';
+import RevampedAngleCircle from '../../HomePage/MyCanvas/CanvasObjects/RevampedAngleCircle';
 import { Tau } from '../../HomePage/MyCanvas/CanvasObjects/UsefulConstants';
 import EventHandlerConfig from '../../HomePage/MyCanvas/EventHandler/EventHandlerConfig';
 import { Scene, SceneGetter } from '../../HomePage/MyCanvas/Scene/Scene';
@@ -27,18 +28,30 @@ const getSceneDragToBigAngles: SceneGetter = (
 
   bigAngleDragger.rotations = 0;
 
+  let revampedCircle = new RevampedAngleCircle(context);
+
+  // revampedCircle.centerNodePositionRef = controlledPositionRef;
+  revampedCircle.centerNodePosition = {
+    x: 0,
+    y: 0,
+  };
+
+  revampedCircle.centerNodePositionRef = controlledPositionRef;
+
+  console.log(context);
+
   scene.draw = () => {
+    revampedCircle.test();
+
     // bigAngleDragger.checkValueWhenNotDragging();
-    bigAngleDragger.radialPoint.x = controlledPositionRef.current.x + 25;
-    bigAngleDragger.radialPoint.y = controlledPositionRef.current.y + 25;
-    bigAngleDragger.updateAngle();
-
-    // bigAngleDragger.drawAngle();
-    bigAngleDragger.drawAngleWithRotations();
-
-    context.fill();
-    // context.fillText(controlledPositionRef.current.x, 100, 100);
-    bigAngleDragger.drawAngleInUpperRight();
+    // bigAngleDragger.radialPoint.x = controlledPositionRef.current.x + 25;
+    // bigAngleDragger.radialPoint.y = controlledPositionRef.current.y + 25;
+    // bigAngleDragger.updateAngle();
+    // // bigAngleDragger.drawAngle();
+    // bigAngleDragger.drawAngleWithRotations();
+    // context.fill();
+    // // context.fillText(controlledPositionRef.current.x, 100, 100);
+    // bigAngleDragger.drawAngleInUpperRight();
     // context.fillRect(0, 0, 100, 100);
   };
 
