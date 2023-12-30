@@ -75,7 +75,7 @@ const index = () => {
               water coloring, tropical bird calls, whatever. You probably did
               some combination of practice, research, and collaboration with
               other people to get that good. You probably did those things
-              strategically by reflecting on your capabilities and body
+              strategically by reflecting on your current capabilities and
               knowledge and planning how to expand them bit by bit. Do all that
               stuff, but for trig.
               <br />

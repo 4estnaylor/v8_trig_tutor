@@ -69,7 +69,7 @@ const getSceneDragToBigAngles: SceneGetter = (
     context.fill();
     // context.fillText(controlledPositionRef.current.x, 100, 100);
     bigAngleDragger.drawAngleInUpperRight();
-    context.fillRect(0, 0, 100, 100);
+    // context.fillRect(0, 0, 100, 100);
   };
 
   return scene;
