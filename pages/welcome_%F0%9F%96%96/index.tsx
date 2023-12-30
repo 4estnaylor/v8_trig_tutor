@@ -44,10 +44,7 @@ const index = () => {
       >
         <>
           <Quote
-            quote={`Being myself a remarkably stupid fellow, I have had to unteach
-myself the difficulties, and now beg to present to my fellow fools the
-parts that are not hard. Master these thoroughly, and the rest will
-follow. What one fool can do, another can.`}
+            quote={`Being myself a remarkably stupid fellow, I have had to unteach myself the difficulties, and now beg to present to my fellow fools the parts that are not hard. Master these thoroughly, and the rest will follow. What one fool can do, another can.`}
             source="https://www.gutenberg.org/files/33283/33283-pdf.pdf"
             byLine=" Silvanus Thompson, 1910"
           />
