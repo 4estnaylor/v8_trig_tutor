@@ -29,16 +29,16 @@ const math_kraken = () => {
       <Wrapper>
         If feared and disregarded, trig will inevitably sink students, but if
         understood and cared for, trig becomes a powerful ally. Trig is a kraken
-        you will want to be on friendly terms with as you navigate the world of
-        mathematics.
+        you will want to be on friendly terms with as you navigate the high seas
+        of mathematics.
         <br /> <br />
         Sweet mother of standards-compliant lesson plans, I have taught a lot of
-        different math (and math-ish) classes. I have taken even more as a
+        different math (and math adjacent) classes. I have taken even more as a
         student. And, around 95% of them benefit substantially from being really
         good at Trig. Trig is a crazy powerful math nexus that kind of enlaces
-        its tentacles into everything else in the math world. Personally, trig
-        is not my favorite subject area. Don't get me wrong, trig is cool,
-        clever, fun even.
+        its tentacles into everything else in the math world. Trig is not my
+        favorite subject area. Don't get me wrong, trig is cool, clever, fun
+        even.
         <br />
         <br />
         But, what really makes trig stand out is it's{' '}

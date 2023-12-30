@@ -30,16 +30,16 @@ const math_kraken = () => {
       <Wrapper>
         If feared and disregarded, trig will inevitably sink students, but if
         understood and cared for, trig becomes a powerful ally. Trig is a kraken
-        you will want to be on friendly terms with as you navigate the world of
-        mathematics. Trig just has it's tentacles wrapped around too many
+        you will want to be on friendly terms with as you navigate the high seas
+        of mathematics. Trig just has it's tentacles wrapped around too many
         branches of math in highschool and college to succesfully be avoided.
         There is no escape...
         <br /> <br />
         Sweet mother of standards-compliant lesson plans, I have taught a lot of
-        different math (and math-ish) classes. I have taken even more as a
+        different math (and math-adjacent) classes. I have taken even more as a
         student. And, around 95% of them benefit substantially from being really
-        good at Trig. Personally, I will openly admit trig is not my favorite
-        subject area. So why make a website about it ?
+        good at Trig. I openly admit trig is not my favorite subject area. So
+        why make a website about it ?
         <br />
         <br />
         <h3>The real reason I made this site about Trig specifically</h3>I made
@@ -53,8 +53,8 @@ const math_kraken = () => {
         math classes are important, I certianly don't deny that. In fact, I've
         taught most of them! But trig stands out as the obvious answer to where
         students would benefit the most from investing more time and effort
-        into. Trig gives the biggest bang for your buck if you want to pursue
-        mathematics to the level of calculus and beyond.
+        into. Trig gives the biggest bang for your buck should you pursue
+        mathematics in college and beyond. And you should!
         <br />
         <br />
         <Image

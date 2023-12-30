@@ -396,28 +396,30 @@ const Degree = () => {
       }
     >
       <>
-        {/* {circleDivsionsCanvas} */}
-        {/* <GeneralSwitch handleSwitch={() => {}} />
-        <ToggleTicks /> */}
-        {/* <DegreeIntro>
+        {circleDivsionsCanvas}
+        {/* <GeneralSwitch handleSwitch={() => {}} /> */}
+        {/* <ToggleTicks /> */}
+        <DegreeIntro>
           The degree, or more formally, the
           <Fancy> arcdegree </Fancy>, is one way to measure an angle. 360 of
           them form a complete circle. The symbol for the degree {`(`} ° {`)`}{' '}
           is quite fittingly a circle.
-        </DegreeIntro> */}
-        {/* <br />
+        </DegreeIntro>
+        <br />
         <br />
         For this course we will generally follow the standard convention of
-        starting or anchoring our angles from the rightmost position of a circle or "3
-        o'clock" position. */}
-        {/* <br />
+        starting or anchoring our angles from the rightmost position of a circle
+        or "3 o'clock" position.
+        <br />
         <br />
         We will follow another standard convention and say that positive angles
         indicate clockwise direction and negative angles indicate
-        counter-clockwise direction. */}
-        {/* <DragToCorrectAngle />
+        counter-clockwise direction.
+        <br />
+        <br />
+        <DragToCorrectAngle />
         <NegativeAngles />
-        <DragToCorrectAngleWithNegatives /> */}
+        <DragToCorrectAngleWithNegatives />
         <DragToBigAngles />
       </>
     </TopicComponentBoilerPlate>

@@ -76,8 +76,8 @@ const index = () => {
               some combination of practice, research, and collaboration with
               other people to get that good. You probably did those things
               strategically by reflecting on your capabilities and body
-              knowledge and planning how to expand them bit by bit. Do all that.
-              But for trig.
+              knowledge and planning how to expand them bit by bit. Do all that
+              stuff, but for trig.
               <br />
               <br />
               Sometimes in an academic setting we put math learning on an

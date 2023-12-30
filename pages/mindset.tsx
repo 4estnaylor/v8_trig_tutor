@@ -29,9 +29,8 @@ const Mindset = () => {
           If you approach difficult problems and ideas with thinking along the
           lines of "how do I figure this out, what is <em> really </em> going on
           here?" rather than "how do I avoid losing points and get this over
-          quickly" you will likely take away so much more from trig {'('}and get
-          it over with more quickly{')'}
-          .
+          quickly" you will likely take away so much more from trig <em>and</em>{' '}
+          get it over with more quickly.
           <br />
           <br />
           This "tweak" may come across as just semantics, but in my experience
@@ -47,8 +46,8 @@ const Mindset = () => {
           <br />
           At various points on your trig journey, expect to face a difficult
           idea, test problem, or assignment. Feel free to bang your head against
-          the desk {'('} not too hard {')'} or flick your calculator across the
-          desk. I know I did. But, if that fails... <br />
+          the desk {'('}not too hard{')'}. I know I did. But, when that fails...{' '}
+          <br />
           <br />
           Don't panic. Take a breath. And remember – understanding before
           grades, horse before cart.

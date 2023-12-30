@@ -52,14 +52,14 @@ const double_down = () => {
               is just as ridiculous as determining the single best song of all
               time.
               <br /> <br />
-              But, practically speaking... it's totally trig.
+              But, practically speaking... it's trig.
               <br />
               <br />
-              And, if you ask me,{' '}
+              {/* And, if you ask me,{' '}
               <Link href="https://www.youtube.com/watch?v=Ixrje2rXLMA">
                 <a>Jolene by Dolly Parton</a>
               </Link>{' '}
-              is pretty close to peerless.
+              is pretty close to peerless. */}
             </Alert>
           </span>
           {/* <MultipleChoiceQuestion

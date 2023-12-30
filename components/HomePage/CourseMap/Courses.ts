@@ -40,7 +40,7 @@ export class SubComponent {
   ) {}
 }
 
-export const introduction = new TopicSection('Welcome 🖖', [
+export const introduction = new TopicSection('Intro', [
   new TopicComponent('welcome 🖖'),
   new TopicComponent('motivation', [
     new SubComponent('why you should study trig'),
@@ -147,7 +147,7 @@ export const ratios = new TopicSection('Ratios', [
 ]);
 
 const topicSections: TopicSection[] = [
-  // introduction,
+  introduction,
   measurement,
   specialAngles,
   sideLengths,

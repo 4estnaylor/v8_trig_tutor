@@ -13,7 +13,11 @@ const getSceneDragToBigAngles: SceneGetter = (
   //@ts-ignore
   const passedObject = context?.objectPassedToScene;
 
-  const { controlledPositionRef } = passedObject;
+  const {
+    controlledPositionRef,
+    controlledPositionAnchorRef,
+    interactionStateRef,
+  } = passedObject;
 
   let width = context.canvas.parentElement?.clientWidth || 0;
   let bigAngleDragger = new AngleCircle(
@@ -37,22 +41,35 @@ const getSceneDragToBigAngles: SceneGetter = (
   };
 
   revampedCircle.centerNodePositionRef = controlledPositionRef;
+  revampedCircle.anchorNodePositionRef = controlledPositionAnchorRef;
+  revampedCircle.interactionStateRef = interactionStateRef;
 
-  console.log(context);
+  // console.log(context);
+  // console.log(interactionStateRef);
+
+  // revampedCircle.updateCenterPosition();
+  // revampedCircle.updateAnchorPosition();
 
   scene.draw = () => {
-    revampedCircle.test();
+    // revampedCircle.test();
+    context.fillText(interactionStateRef.current.anchor, 100, 100);
+    console.log(interactionStateRef.current.anchor);
+    // console.log(controlledPositionRef.current.x);
+    // console.log(controlledPositionAnchorRef.current.x);
+    // console.log(controlledPositionAnchorRef.current.x);
+    // controlledPositionAnchorRef.current.x = 200;
+    // controlledPositionAnchorRef.current = { x: 100, y: 100 };
 
-    // bigAngleDragger.checkValueWhenNotDragging();
-    // bigAngleDragger.radialPoint.x = controlledPositionRef.current.x + 25;
-    // bigAngleDragger.radialPoint.y = controlledPositionRef.current.y + 25;
-    // bigAngleDragger.updateAngle();
-    // // bigAngleDragger.drawAngle();
-    // bigAngleDragger.drawAngleWithRotations();
-    // context.fill();
-    // // context.fillText(controlledPositionRef.current.x, 100, 100);
-    // bigAngleDragger.drawAngleInUpperRight();
-    // context.fillRect(0, 0, 100, 100);
+    bigAngleDragger.checkValueWhenNotDragging();
+    bigAngleDragger.radialPoint.x = controlledPositionRef.current.x + 25;
+    bigAngleDragger.radialPoint.y = controlledPositionRef.current.y + 25;
+    bigAngleDragger.updateAngle();
+    // bigAngleDragger.drawAngle();
+    bigAngleDragger.drawAngleWithRotations();
+    context.fill();
+    // context.fillText(controlledPositionRef.current.x, 100, 100);
+    bigAngleDragger.drawAngleInUpperRight();
+    context.fillRect(0, 0, 100, 100);
   };
 
   return scene;

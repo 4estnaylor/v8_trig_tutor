@@ -52,7 +52,7 @@ const double_down = () => {
               is just as ridiculous as determining the single best song of all
               time.
               <br /> <br />
-              But, practically speaking... it's totally trig.
+              But, practically speaking... it's trig.
               <br />
               <br />
               And, if you ask me,{' '}

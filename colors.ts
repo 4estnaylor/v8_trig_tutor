@@ -1,8 +1,8 @@
-interface color {
+export type color = {
   hue: number;
   saturation: number;
   lightness: number;
-}
+};
 
 const getHSL = (color: color) => {
   const string = `hsl(${color.hue}, ${color.saturation}%, ${color.lightness}%)`;

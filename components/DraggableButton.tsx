@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import cl from '../colors';
+import cl, { color } from '../colors';
 import Draggable from 'react-draggable';
 import ControlCameraIcon from '@mui/icons-material/ControlCamera';
 
@@ -10,11 +10,25 @@ type DraggableButtonProps = {
   setControlledPosition: React.Dispatch<
     React.SetStateAction<{ x: number; y: number }>
   >;
+  color?: color;
+  radiusInPx?: number;
   onStop?: () => void;
+  onStart?: () => void;
+  onDrag?: () => void;
 };
 
+const DEFAULTCOLOR: color = cl.purple;
+
 const DraggableButton = (props: DraggableButtonProps) => {
-  const { controlledPosition, setControlledPosition, onStop } = props;
+  const {
+    controlledPosition,
+    setControlledPosition,
+    onDrag,
+    onStop,
+    onStart,
+    color = cl.black,
+    radiusInPx,
+  } = props;
   const [isDraggable, setIsDraggable] = useState(false);
 
   const nodeRef = React.useRef(null);
@@ -32,9 +46,15 @@ const DraggableButton = (props: DraggableButtonProps) => {
         nodeRef={nodeRef}
         onDrag={(e: any, position) => {
           onControlledDrag(e, position);
+          if (onDrag) {
+            onDrag();
+          }
         }}
         onStart={() => {
           setHaloOpacity(1);
+          if (onStart) {
+            onStart();
+          }
         }}
         onStop={() => {
           setHaloOpacity(0.2);
@@ -47,6 +67,8 @@ const DraggableButton = (props: DraggableButtonProps) => {
         <Wrapper
           ref={nodeRef}
           haloOpacity={haloOpacity}
+          // @ts-ignore: Unreachable code error
+          color={color}
           // onClick={() => {
           //   console.log('clickclack');
           // }}
@@ -69,8 +91,11 @@ const DraggableButton = (props: DraggableButtonProps) => {
           //   console.log('dragging');
           // }}
         >
-          <InnerDot>
-            <ControlCameraIcon />
+          <InnerDot
+            // @ts-ignore: Unreachable code error
+            color={color}
+          >
+            {/* <ControlCameraIcon /> */}
           </InnerDot>
         </Wrapper>
       </Draggable>
@@ -78,9 +103,10 @@ const DraggableButton = (props: DraggableButtonProps) => {
   );
 };
 
-const Wrapper = styled.button<{ haloOpacity: number }>`
+const Wrapper = styled.button<{ haloOpacity: number; color: color }>`
   position: absolute;
-  background-color: ${(props) => cl.getHSLA(cl.purple, props.haloOpacity)};
+  background-color: ${(props) => cl.getHSLA(props.color, props.haloOpacity)};
+
   color: ${cl.getHSL(cl.white)};
   border-radius: 50%;
   height: 50px;
@@ -101,13 +127,13 @@ const Wrapper = styled.button<{ haloOpacity: number }>`
   }
 `;
 
-const InnerDot = styled.div`
+const InnerDot = styled.div<{ color: color }>`
   position: absolute;
-  background-color: ${cl.getHSL(cl.purple)};
+  background-color: ${(props) => cl.getHSLA(props.color, 1)};
   color: ${cl.getHSL(cl.white)};
   border-radius: 50%;
-  height: 30px;
-  width: 30px;
+  height: 10px;
+  width: 10px;
   box-shadow: none;
   border: none;
   display: flex;

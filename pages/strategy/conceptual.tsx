@@ -168,7 +168,7 @@ const conceptual = () => {
             <Alert severity="info">
               That's not a bad thing by the way! Being able to solve problems
               technically, step-by-step, almost mindlessly can be critical to
-              saving time and mental energy for other things.
+              conserving your time and mental energy.
             </Alert>
             <br />
             <br />
@@ -287,15 +287,17 @@ const conceptual = () => {
               if you do not fill in holes in conceptual understanding over time,
               reliance on memorization grows beyond what most of us can manage.{' '}
             </span>
-            Math will not be a logical strategy, but an ever-growing heap of
-            arbitrary rules to follow. This heap, when grown sufficiently large,
-            consumes most of the cognitive load your brain putting you in a
-            place where it is:
+            Math will cease to feel like a logical strategy, and morph into an
+            ever-growing heap of arbitrary rules to follow. This heap, when
+            grown large enough, consumes most of the cognitive load a mere human
+            brain can muster. This puts you in a dicey situation where it is
             <ol>
               <li>
                 all but impossible to think clearly while wracking your memory
                 for rule after rule.
               </li>
+              <br />
+              {/* <br /> */}
               <li>
                 critical that you don't forget even the tiniest detail, because
                 you're technique is based entirely upon memorization rather than
@@ -313,16 +315,8 @@ const conceptual = () => {
             <br />
             Conceptual gaps are expected, and not a big deal if nipped in the
             bud. When you encounter them, rather than trying to keep at it, or
-            push ahead into new math ideas, move backwards. Move backwards until
-            just before you feel comfortable, and things make complete sense.
-            That is probably what you want to dig into, working your way back up
-            from there.
+            push ahead into new math ideas, move backwards.
           </HiddenSection>
-          <li>
-            {/* <Step> Step 2 </Step> Ask yourself, do you know why A = πr² gives
-              the area of a circle? Can you explain to me where that equation
-              comes from with logic? */}
-          </li>
         </P>
       </>
     </SubComponentBoilerPlate2>
