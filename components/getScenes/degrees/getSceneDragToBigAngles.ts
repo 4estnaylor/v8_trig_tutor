@@ -73,7 +73,7 @@ const getSceneDragToBigAngles: SceneGetter = (
     // revampedCircle.drawAngleCircleShadow();
     // revampedCircle.drawAnchorNotch();
     context.fill();
-    // context.fillText(controlledPositionRef.current.x, 100, 100);
+    context.fillText(controlledPositionAnchorRef.current.y, 100, 200);
     bigAngleDragger.drawAngleInUpperRight();
     // context.fillRect(0, 0, 100, 100);
   };

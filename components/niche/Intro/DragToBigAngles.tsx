@@ -50,14 +50,20 @@ const DragToBigAngles = () => {
   useEffect(() => {
     controlledPositionCenterRef.current = controlledPositionCenter;
   }, [controlledPositionCenter]);
+
+  // anchor ref should control when ...
   useEffect(() => {
+    if (interactionStateRef.current.anchor === 'dragged') return;
     // controlledPositionAnchorRef.current = controlledPositionAnchor;
     setControlledPositionAnchor(controlledPositionAnchorRef.current);
-    // console.log('is changing');
   }, [controlledPositionAnchorRef.current]);
-  // useEffect(() => {
-  //   controlledPositionAnchorRef.current = controlledPositionAnchor;
-  // }, [controlledPositionAnchor]);
+
+  // anchor position should control when... anchor is dragging
+  useEffect(() => {
+    if (interactionStateRef.current.anchor !== 'dragged') return;
+    console.log('is changing');
+    controlledPositionAnchorRef.current = controlledPositionAnchor;
+  }, [controlledPositionAnchor]);
 
   const handleCenterDrag = () => {
     setInteractionState({
@@ -109,7 +115,7 @@ const DragToBigAngles = () => {
             return { ...prev, anchor: 'default' };
           });
         }}
-        color={cl.black}
+        color={cl.blue}
       />
       <CanvasForTopicComponent
         sceneGetter={getSceneDragToBigAngles}

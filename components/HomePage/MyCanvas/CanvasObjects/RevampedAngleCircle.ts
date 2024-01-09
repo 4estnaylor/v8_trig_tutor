@@ -29,7 +29,7 @@ class RevampedAngleCircle {
     this.color = cl.black;
     this.canvas = this.context.canvas;
     this.radiusLengthInPixels = 120;
-    this.anchorAngleOfOffset = 0 * Tau;
+    this.anchorAngleOfOffset = 0.25 * Tau;
     // set default Interaction STate to none;
     this.interactionStateRef = {
       current: {
@@ -51,7 +51,10 @@ class RevampedAngleCircle {
   update = () => {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.updateCenterPosition();
-    this.updateAnchorPosition();
+    // this.updateAnchorPosition();
+
+    this.calculateAngleOffSetFromButtonDrag();
+    this.calculateAngleOffsetFromCenterDrag();
   };
 
   updateCenterPosition = () => {
@@ -130,10 +133,6 @@ class RevampedAngleCircle {
     this.context.fill();
     this.context.globalAlpha = 1;
     this.context.stroke();
-    // console.log(
-    //   this.centerNodePositionRef?.current.x,
-    //   this.centerNodePosition.x
-    // );
   };
 
   drawAnchorNotch = () => {
@@ -152,19 +151,55 @@ class RevampedAngleCircle {
     this.context.lineCap = 'round';
     this.context.moveTo(xPos, yPos);
     this.context.lineTo(
-      xPos - cosValue * notchLength,
-      yPos - sinValue * notchLength
+      xPos - Math.cos(this.anchorAngleOfOffset) * notchLength,
+      yPos + Math.sin(this.anchorAngleOfOffset) * notchLength
     );
     this.context.lineWidth = notchThickness;
     this.context.stroke();
+  };
+
+  calculateAngleOffSetFromButtonDrag = () => {
+    if (this.interactionStateRef.current.anchor !== 'dragged') return;
+    if (
+      !this.anchorNodePositionRef?.current ||
+      !this.centerNodePositionRef?.current
+    )
+      return;
+    let diffY =
+      this.centerNodePositionRef?.current.y -
+      this.anchorNodePositionRef?.current.y;
+    let diffX =
+      this.centerNodePositionRef?.current.x -
+      this.anchorNodePositionRef?.current.x;
+
+    diffX *= -1;
+    let newAngleOffsett = Math.atan2(diffY, diffX);
+
+    this.anchorAngleOfOffset = newAngleOffsett;
+
+    // put diff wrt to center node
+  };
+
+  calculateAngleOffsetFromCenterDrag = () => {
+    if (this.interactionStateRef.current.center !== 'dragged') return;
+    if (!this.centerNodePositionRef?.current) return;
+    if (!this.anchorNodePositionRef?.current) return;
+    let xPos =
+      this.centerNodePositionRef.current.x +
+      this.radiusLengthInPixels * Math.cos(this.anchorAngleOfOffset);
+    let yPos =
+      this.centerNodePositionRef.current.y -
+      this.radiusLengthInPixels * Math.sin(this.anchorAngleOfOffset);
+
+    this.anchorNodePositionRef.current = { x: xPos, y: yPos };
+
+    console.log(xPos, yPos);
   };
 
   test = () => {
     this.update();
     this.drawAngleCircleShadow();
     this.drawAnchorNotch();
-
-    // console.log(this.dragNodePositionRef);
   };
 }
 
