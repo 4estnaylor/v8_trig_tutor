@@ -116,6 +116,10 @@ const DragToBigAngles = () => {
           });
         }}
         color={cl.blue}
+        visible={
+          interactionState.center !== 'dragged' &&
+          interactionState.center !== 'pressed'
+        }
       />
       <CanvasForTopicComponent
         sceneGetter={getSceneDragToBigAngles}

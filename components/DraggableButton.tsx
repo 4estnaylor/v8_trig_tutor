@@ -15,6 +15,7 @@ type DraggableButtonProps = {
   onStop?: () => void;
   onStart?: () => void;
   onDrag?: () => void;
+  visible?: boolean;
 };
 
 const DEFAULTCOLOR: color = cl.purple;
@@ -28,6 +29,7 @@ const DraggableButton = (props: DraggableButtonProps) => {
     onStart,
     color = cl.black,
     radiusInPx,
+    visible = true,
   } = props;
   const [isDraggable, setIsDraggable] = useState(false);
 
@@ -43,6 +45,7 @@ const DraggableButton = (props: DraggableButtonProps) => {
     <div>
       <Draggable
         // bounds="parent"
+
         nodeRef={nodeRef}
         onDrag={(e: any, position) => {
           onControlledDrag(e, position);
@@ -65,6 +68,7 @@ const DraggableButton = (props: DraggableButtonProps) => {
         position={controlledPosition}
       >
         <Wrapper
+          $visible={visible}
           ref={nodeRef}
           haloOpacity={haloOpacity}
           // @ts-ignore: Unreachable code error
@@ -103,7 +107,11 @@ const DraggableButton = (props: DraggableButtonProps) => {
   );
 };
 
-const Wrapper = styled.button<{ haloOpacity: number; color: color }>`
+const Wrapper = styled.button<{
+  haloOpacity: number;
+  color: color;
+  $visible: boolean;
+}>`
   position: absolute;
   background-color: ${(props) => cl.getHSLA(props.color, props.haloOpacity)};
 
@@ -125,6 +133,7 @@ const Wrapper = styled.button<{ haloOpacity: number; color: color }>`
     /* background-color: ${cl.getHSLA(cl.purple, 1)}; */
     cursor: grabbing;
   }
+  display: ${(p) => (p.$visible ? 'flex' : 'none')};
 `;
 
 const InnerDot = styled.div<{ color: color }>`
