@@ -396,10 +396,10 @@ const Degree = () => {
       }
     >
       <>
-        {circleDivsionsCanvas}
+        {/* {circleDivsionsCanvas} */}
         {/* <GeneralSwitch handleSwitch={() => {}} /> */}
         {/* <ToggleTicks /> */}
-        <DegreeIntro>
+        {/* <DegreeIntro>
           The degree, or more formally, the
           <Fancy> arcdegree </Fancy>, is one way to measure an angle. 360 of
           them form a complete circle. The symbol for the degree {`(`} ° {`)`}{' '}
@@ -419,7 +419,7 @@ const Degree = () => {
         <br />
         <DragToCorrectAngle />
         <NegativeAngles />
-        <DragToCorrectAngleWithNegatives />
+        <DragToCorrectAngleWithNegatives /> */}
         <DragToBigAngles />
       </>
     </TopicComponentBoilerPlate>

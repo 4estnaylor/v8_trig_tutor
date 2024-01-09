@@ -14,7 +14,7 @@ const getSceneDragToBigAngles: SceneGetter = (
   const passedObject = context?.objectPassedToScene;
 
   const {
-    controlledPositionRef,
+    controlledPositionCenterRef,
     controlledPositionAnchorRef,
     interactionStateRef,
   } = passedObject;
@@ -40,7 +40,7 @@ const getSceneDragToBigAngles: SceneGetter = (
     y: 0,
   };
 
-  revampedCircle.centerNodePositionRef = controlledPositionRef;
+  revampedCircle.centerNodePositionRef = controlledPositionCenterRef;
   revampedCircle.anchorNodePositionRef = controlledPositionAnchorRef;
   revampedCircle.interactionStateRef = interactionStateRef;
 
@@ -51,21 +51,27 @@ const getSceneDragToBigAngles: SceneGetter = (
   // revampedCircle.updateAnchorPosition();
 
   scene.draw = () => {
-    // revampedCircle.test();
+    revampedCircle.test();
     context.fillText(interactionStateRef.current.anchor, 100, 100);
-    console.log(interactionStateRef.current.anchor);
+
+    // console.log(controlledPositionCenterRef);
+    // console.log(interactionStateRef.current.anchor);
     // console.log(controlledPositionRef.current.x);
     // console.log(controlledPositionAnchorRef.current.x);
     // console.log(controlledPositionAnchorRef.current.x);
     // controlledPositionAnchorRef.current.x = 200;
     // controlledPositionAnchorRef.current = { x: 100, y: 100 };
 
-    bigAngleDragger.checkValueWhenNotDragging();
-    bigAngleDragger.radialPoint.x = controlledPositionRef.current.x + 25;
-    bigAngleDragger.radialPoint.y = controlledPositionRef.current.y + 25;
-    bigAngleDragger.updateAngle();
+    // bigAngleDragger.checkValueWhenNotDragging();
+    // bigAngleDragger.radialPoint.x = controlledPositionRef.current.x + 25;
+    // bigAngleDragger.radialPoint.y = controlledPositionRef.current.y + 25;
+    // bigAngleDragger.updateAngle();
     // bigAngleDragger.drawAngle();
-    bigAngleDragger.drawAngleWithRotations();
+    // bigAngleDragger.drawAngleWithRotations();
+
+    // revampedCircle.drawAnchorNotch();
+    // revampedCircle.drawAngleCircleShadow();
+    // revampedCircle.drawAnchorNotch();
     context.fill();
     // context.fillText(controlledPositionRef.current.x, 100, 100);
     bigAngleDragger.drawAngleInUpperRight();

@@ -85,14 +85,32 @@ const getScene360Intro: SceneGetter = (
 
     testUnitCirc.drawAngleInUpperRight();
     testUnitCirc.drawDivisionTicks(360);
-    testUnitCirc.drawAngleRainbow();
-    testUnitCirc.drawPurpleCenterCover();
+    // if (testUnitCirc.angle === Tau) {
+    //   context.beginPath();
+    //   context.ellipse(
+    //     testUnitCirc.x,
+    //     testUnitCirc.y,
+    //     testUnitCirc.radius * 1.35,
+    //     testUnitCirc.radius * 1.35,
+    //     0,
+    //     0,
+    //     Tau
+    //   );
+    //   context.lineWidth = 2;
+    //   context.strokeStyle = cl.getHSL(cl.purple);
+    //   context.stroke();
+    //   // testUnitCirc.drawAngleRainbow();
+    //   // testUnitCirc.drawPurpleCenterCover();
+    // }
+
+    // testUnitCirc.drawAngleRainbow();
+    // testUnitCirc.drawPurpleCenterCover();
     // if (slider360ValueRef.current === 360) {
     //   testUnitCirc.drawFilledLoop();
     // } else {
     //   testUnitCirc.drawDivisionTicks(360);
     // }
-    context.fillStyle = 'black';
+    // context.fillStyle = 'black';
   };
 
   return scene;

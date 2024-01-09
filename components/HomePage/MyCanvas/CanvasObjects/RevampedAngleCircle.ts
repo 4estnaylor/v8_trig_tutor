@@ -52,14 +52,16 @@ class RevampedAngleCircle {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.updateCenterPosition();
     this.updateAnchorPosition();
-
-    // this.centerNodePosition = this.centerNodePositionRef
-    //   ? this.centerNodePositionRef.current
-    //   : { x: this.canvas.width / 2, y: this.canvas.height / 2 };
   };
 
   updateCenterPosition = () => {
     // update center node position
+    this.centerNodePosition = this.centerNodePositionRef
+      ? {
+          x: this.centerNodePositionRef.current.x + controlledButtonOffsetX,
+          y: this.centerNodePositionRef.current.y + controlledButtonOffsetY,
+        }
+      : { x: this.canvas.width / 2, y: this.canvas.height / 2 };
 
     // if isCenterNodeLocked don't update
     let currentCenterState = this.interactionStateRef.current.center;
@@ -75,9 +77,9 @@ class RevampedAngleCircle {
       y: this.centerNodePositionRef.current.y + controlledButtonOffsetY,
     };
 
-    console.log('no match');
+    // console.log('no match');
     this.centerNodePosition = newCenterNodePosition;
-    this.updateAnchorPosition();
+    // this.updateAnchorPosition();
   };
 
   updateAnchorPosition = () => {
@@ -127,6 +129,11 @@ class RevampedAngleCircle {
 
     this.context.fill();
     this.context.globalAlpha = 1;
+    this.context.stroke();
+    // console.log(
+    //   this.centerNodePositionRef?.current.x,
+    //   this.centerNodePosition.x
+    // );
   };
 
   drawAnchorNotch = () => {

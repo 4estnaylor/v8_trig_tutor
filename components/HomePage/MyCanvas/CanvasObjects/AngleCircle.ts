@@ -91,11 +91,11 @@ class AngleCircle {
 
     this.correctGradient = this.context.createConicGradient(0, this.x, this.y);
 
-    this.correctGradient.addColorStop(0, cl.getHSL(cl.green));
-    this.correctGradient.addColorStop(0.25, cl.getHSL(cl.yellow));
-    this.correctGradient.addColorStop(0.5, cl.getHSL(cl.green));
-    this.correctGradient.addColorStop(0.75, cl.getHSL(cl.yellow));
-    this.correctGradient.addColorStop(1, cl.getHSL(cl.green));
+    this.correctGradient.addColorStop(0, cl.getHSL(cl.blue));
+    this.correctGradient.addColorStop(0.25, cl.getHSL(cl.blue_light));
+    this.correctGradient.addColorStop(0.5, cl.getHSL(cl.blue));
+    this.correctGradient.addColorStop(0.75, cl.getHSL(cl.blue_light));
+    this.correctGradient.addColorStop(1, cl.getHSL(cl.blue));
 
     this.correctCoverGradient = this.context.createRadialGradient(
       this.x,
@@ -106,9 +106,9 @@ class AngleCircle {
       this.radius * 2.25
     );
 
-    this.correctCoverGradient.addColorStop(0, cl.getHSLA(cl.green, 1));
+    this.correctCoverGradient.addColorStop(0, cl.getHSLA(cl.blue, 1));
 
-    this.correctCoverGradient.addColorStop(1, cl.getHSLA(cl.green, 0));
+    this.correctCoverGradient.addColorStop(1, cl.getHSLA(cl.blue, 0));
 
     // Add five color stops
     // this.gradient.addColorStop(0, cl.getHSL(cl.purple));

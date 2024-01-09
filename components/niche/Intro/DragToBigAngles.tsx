@@ -23,13 +23,16 @@ export type InteractionState = {
 
 const DragToBigAngles = () => {
   const slider360ValueRef = useRef(20);
-  const [controlledPosition, setControlledPosition] = useState({ x: 0, y: 0 });
+  const [controlledPositionCenter, setControlledPositionCenter] = useState({
+    x: 0,
+    y: 0,
+  });
   const [controlledPositionAnchor, setControlledPositionAnchor] = useState({
     x: 0,
     y: 0,
   });
   const [anchorStatus, setAnchorStatus] = useState('inactive');
-  const controlledPositionRef = useRef(controlledPosition);
+  const controlledPositionCenterRef = useRef(controlledPositionCenter);
   const controlledPositionAnchorRef = useRef(controlledPositionAnchor);
   const [interactionState, setInteractionState] = useState({
     anchor: 'default',
@@ -45,8 +48,8 @@ const DragToBigAngles = () => {
   }, [interactionState]);
 
   useEffect(() => {
-    controlledPositionRef.current = controlledPosition;
-  }, [controlledPosition]);
+    controlledPositionCenterRef.current = controlledPositionCenter;
+  }, [controlledPositionCenter]);
   useEffect(() => {
     // controlledPositionAnchorRef.current = controlledPositionAnchor;
     setControlledPositionAnchor(controlledPositionAnchorRef.current);
@@ -80,12 +83,12 @@ const DragToBigAngles = () => {
   return (
     <Wrapper>
       <DraggableButton
-        controlledPosition={controlledPosition}
-        setControlledPosition={setControlledPosition}
+        controlledPosition={controlledPositionCenter}
+        setControlledPosition={setControlledPositionCenter}
         onDrag={handleCenterDrag}
         onStop={handleCenterStop}
         onStart={handleCenterStart}
-        // color={cl.red}
+        color={cl.red}
       />
 
       <DraggableButton
@@ -111,7 +114,7 @@ const DragToBigAngles = () => {
       <CanvasForTopicComponent
         sceneGetter={getSceneDragToBigAngles}
         objectPassedToScene={{
-          controlledPositionRef,
+          controlledPositionCenterRef,
           controlledPositionAnchorRef,
           interactionStateRef,
         }}

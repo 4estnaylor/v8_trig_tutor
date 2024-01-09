@@ -123,6 +123,7 @@ const getSceneDragToTargetAnglesSimpleWithNegatives: SceneGetter = (
     // testUnitCirc.drawAngleRainbow();
     // testUnitCirc.drawPurpleCenterCover();
     testUnitCirc.drawDottedTouchConncetLine();
+    testUnitCirc.drawDivisionTicks(360);
 
     // testUnitCirc.drawFilledLoop();
     // context.fillStyle = 'black';

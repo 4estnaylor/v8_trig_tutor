@@ -65,8 +65,8 @@ const getSceneDragToTargetAnglesSimple: SceneGetter = (
   );
 
   // testUnitCirc.color = cl.getHSL(cl.blue);
-  testUnitCirc.radialPoint.color = cl.getHSL(cl.purple);
-  testUnitCirc.vertex.color = cl.getHSL(cl.purple);
+  testUnitCirc.radialPoint.color = cl.getHSL(cl.blue);
+  testUnitCirc.vertex.color = cl.getHSL(cl.blue);
 
   let smallerLength = context.canvas.width;
   if (smallerLength > context.canvas.height) {
@@ -123,6 +123,7 @@ const getSceneDragToTargetAnglesSimple: SceneGetter = (
       testUnitCirc.sign = 'positive';
     }
     testUnitCirc.drawAngle();
+    testUnitCirc.drawDivisionTicks(360);
     // testUnitCirc.drawPurpleCenterCover();
     // testUnitCirc.drawAngleRainbow();
     // testUnitCirc.drawPurpleCenterCover();
@@ -135,7 +136,11 @@ const getSceneDragToTargetAnglesSimple: SceneGetter = (
 
   const correctDraw = () => {
     testUnitCirc.angle = (targetAngleObjRef.current.angle * Tau) / 360;
+    testUnitCirc.drawDivisionTicks(360);
+    testUnitCirc.drawAngle();
+
     testUnitCirc.drawAngleCorrect();
+
     testUnitCirc.drawAngleCoverCorrect();
 
     // testUnitCirc.drawFilledLoop();
@@ -155,7 +160,7 @@ const getSceneDragToTargetAnglesSimple: SceneGetter = (
     if (testUnitCirc.sign === 'positive') {
       testUnitCirc.color === cl.getHSL(cl.blue);
       testUnitCirc.backgroundColor = cl.getHSL(cl.blue);
-      testUnitCirc.foregroundColor = cl.getHSL(cl.purple);
+      testUnitCirc.foregroundColor = cl.getHSL(cl.blue);
     } else if (testUnitCirc.sign === 'negative') {
       // testUnitCirc.color = cl.getHSL(cl.red);
       testUnitCirc.sign = 'positive';
