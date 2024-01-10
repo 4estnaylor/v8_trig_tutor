@@ -134,7 +134,7 @@ const Wrapper = styled.button<{
     cursor: grabbing;
   }
   /* display: ${(p) => (p.$visible ? 'flex' : 'none')}; */
-  opacity: ${(p) => (p.$visible ? 1 : 0.3)};
+  opacity: ${(p) => (p.$visible ? 1 : 0)};
 `;
 
 const InnerDot = styled.div<{ color: color }>`

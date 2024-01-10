@@ -110,6 +110,12 @@ const DragToBigAngles = () => {
         onStop={handleCenterStop}
         onStart={handleCenterStart}
         color={cl.red}
+        visible={
+          interactionState.lead !== 'dragged' &&
+          interactionState.lead !== 'pressed' &&
+          interactionState.anchor !== 'pressed' &&
+          interactionState.anchor !== 'dragged'
+        }
       />
 
       <DraggableButton
@@ -133,7 +139,9 @@ const DragToBigAngles = () => {
         color={cl.blue}
         visible={
           interactionState.center !== 'dragged' &&
-          interactionState.center !== 'pressed'
+          interactionState.center !== 'pressed' &&
+          interactionState.lead !== 'pressed' &&
+          interactionState.lead !== 'dragged'
         }
       />
 
@@ -142,23 +150,25 @@ const DragToBigAngles = () => {
         setControlledPosition={setControlledPositionLead}
         onStart={() => {
           setInteractionState((prev) => {
-            return { ...prev, angle: 'pressed' };
+            return { ...prev, lead: 'pressed' };
           });
         }}
         onDrag={() => {
           setInteractionState((prev) => {
-            return { ...prev, angle: 'dragged' };
+            return { ...prev, lead: 'dragged' };
           });
         }}
         onStop={() => {
           setInteractionState((prev) => {
-            return { ...prev, angle: 'default' };
+            return { ...prev, lead: 'default' };
           });
         }}
         color={cl.green}
         visible={
           interactionState.center !== 'dragged' &&
-          interactionState.center !== 'pressed'
+          interactionState.center !== 'pressed' &&
+          interactionState.anchor !== 'pressed' &&
+          interactionState.anchor !== 'dragged'
         }
       />
 
