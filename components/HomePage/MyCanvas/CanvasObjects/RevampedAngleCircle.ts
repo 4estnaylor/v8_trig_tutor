@@ -14,6 +14,7 @@ class RevampedAngleCircle {
   dragNodePositionRef?: ControlledPositionRef;
   centerNodePositionRef?: ControlledPositionRef;
   anchorNodePositionRef?: ControlledPositionRef;
+  leadNodePositionRef?: ControlledPositionRef;
   isCenterNodeLocked: boolean;
   radiusLengthInPixels: number;
   anchorAngleOfOffset: number;
@@ -55,6 +56,8 @@ class RevampedAngleCircle {
 
     this.calculateAngleOffSetFromButtonDrag();
     this.calculateAngleOffsetFromCenterDrag();
+    this.updateLeadPosition();
+    this.calculateAngle();
   };
 
   updateCenterPosition = () => {
@@ -80,7 +83,6 @@ class RevampedAngleCircle {
       y: this.centerNodePositionRef.current.y + controlledButtonOffsetY,
     };
 
-    // console.log('no match');
     this.centerNodePosition = newCenterNodePosition;
     // this.updateAnchorPosition();
   };
@@ -109,12 +111,49 @@ class RevampedAngleCircle {
     this.anchorNodePositionRef.current = calculatedAnchorPosition;
 
     // if (this.anchorNodePositionRef) {
-    //   // console.log('harah', this.anchorNodePositionRef);
     //   this.anchorNodePositionRef.current = {
     //     x: 100,
     //     y: 100,
     //   };
     // }
+  };
+
+  updateLeadPosition = () => {
+    if (!this.centerNodePositionRef) return;
+    if (!this.leadNodePositionRef) return;
+
+    let currentLeadState = this.interactionStateRef.current.lead;
+    let currentCenterState = this.interactionStateRef.current.center;
+    let currentAnchorState = this.interactionStateRef.current.anchor;
+    // if (currentLeadState === 'pressed' || currentLeadState === 'dragged') {
+    //   // this is where I need to calculate anchorOffsetAngle
+    //   return;
+    // }
+    if (currentCenterState === 'pressed' || currentCenterState === 'dragged') {
+      let xPos =
+        this.centerNodePositionRef.current.x +
+        this.radiusLengthInPixels *
+          Math.cos(this.anchorAngleOfOffset + this.angle);
+      let yPos =
+        this.centerNodePositionRef.current.y -
+        this.radiusLengthInPixels *
+          Math.sin(this.anchorAngleOfOffset + this.angle);
+
+      this.leadNodePositionRef.current = { x: xPos, y: yPos };
+    }
+    if (currentAnchorState === 'pressed' || currentAnchorState === 'dragged') {
+      let xPos =
+        this.centerNodePositionRef.current.x +
+        this.radiusLengthInPixels *
+          Math.cos(this.anchorAngleOfOffset + this.angle);
+      let yPos =
+        this.centerNodePositionRef.current.y -
+        this.radiusLengthInPixels *
+          Math.sin(this.anchorAngleOfOffset + this.angle);
+
+      this.leadNodePositionRef.current = { x: xPos, y: yPos };
+      console.log(this.leadNodePositionRef.current);
+    }
   };
 
   drawAngleCircleShadow = () => {
@@ -135,20 +174,56 @@ class RevampedAngleCircle {
     this.context.stroke();
   };
 
+  calculateAngle = () => {
+    if (!this.anchorNodePositionRef) return;
+    if (!this.leadNodePositionRef) return;
+    if (!this.centerNodePositionRef) return;
+
+    let diffY =
+      this.centerNodePositionRef?.current.y -
+      this.leadNodePositionRef?.current.y;
+    let diffX =
+      this.centerNodePositionRef?.current.x -
+      this.leadNodePositionRef?.current.x;
+
+    diffX *= -1;
+    let leadAngle = Math.atan2(diffY, diffX);
+
+    let calculatedAngle = leadAngle - this.anchorAngleOfOffset;
+
+    if (calculatedAngle > Tau / 2) {
+      calculatedAngle -= Tau;
+    }
+    if (calculatedAngle < -Tau / 2) {
+      calculatedAngle += Tau;
+    }
+
+    this.angle = calculatedAngle;
+
+    // console.log('angle now', (this.angle * 360) / Tau);
+
+    // get lead angle
+  };
+
   drawAnchorNotch = () => {
     this.context.beginPath();
     let cosValue = Math.cos(this.anchorAngleOfOffset);
     let sinValue = Math.sin(this.anchorAngleOfOffset);
-    let notchThickness = 10;
+    let notchThickness = 6;
     let notchColorString = cl.getHSLA(this.color, 0.5);
-    let xPos = this.centerNodePosition.x + this.radiusLengthInPixels * cosValue;
-    let yPos = this.centerNodePosition.y - this.radiusLengthInPixels * sinValue;
+    let lineWidthOffset = 2;
+    let xPos =
+      this.centerNodePosition.x +
+      (this.radiusLengthInPixels - lineWidthOffset) * cosValue;
+    let yPos =
+      this.centerNodePosition.y -
+      (this.radiusLengthInPixels - lineWidthOffset) * sinValue;
 
     let notchLength = 15;
 
     this.context.beginPath();
     this.context.strokeStyle = notchColorString;
-    this.context.lineCap = 'round';
+    this.context.lineCap = 'square';
     this.context.moveTo(xPos, yPos);
     this.context.lineTo(
       xPos - Math.cos(this.anchorAngleOfOffset) * notchLength,
@@ -192,14 +267,27 @@ class RevampedAngleCircle {
       this.radiusLengthInPixels * Math.sin(this.anchorAngleOfOffset);
 
     this.anchorNodePositionRef.current = { x: xPos, y: yPos };
+  };
 
-    console.log(xPos, yPos);
+  drawLeadLine = () => {
+    if (!this.leadNodePositionRef) return;
+    this.context.beginPath();
+    this.context.moveTo(this.centerNodePosition.x, this.centerNodePosition.y);
+    let leadX = this.leadNodePositionRef?.current.x + controlledButtonOffsetX;
+    let leadY = this.leadNodePositionRef?.current.y + controlledButtonOffsetY;
+    this.context.lineTo(leadX, leadY);
+    this.context.setLineDash([2, 15]);
+    this.context.lineCap = 'round';
+    this.context.lineWidth = 2;
+    this.context.stroke();
+    this.context.setLineDash([]);
   };
 
   test = () => {
     this.update();
     this.drawAngleCircleShadow();
     this.drawAnchorNotch();
+    this.drawLeadLine();
   };
 }
 

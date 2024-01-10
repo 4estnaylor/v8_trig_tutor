@@ -16,6 +16,7 @@ const getSceneDragToBigAngles: SceneGetter = (
   const {
     controlledPositionCenterRef,
     controlledPositionAnchorRef,
+    controlledPositionLeadRef,
     interactionStateRef,
   } = passedObject;
 
@@ -42,6 +43,7 @@ const getSceneDragToBigAngles: SceneGetter = (
 
   revampedCircle.centerNodePositionRef = controlledPositionCenterRef;
   revampedCircle.anchorNodePositionRef = controlledPositionAnchorRef;
+  revampedCircle.leadNodePositionRef = controlledPositionLeadRef;
   revampedCircle.interactionStateRef = interactionStateRef;
 
   // console.log(context);
@@ -49,10 +51,14 @@ const getSceneDragToBigAngles: SceneGetter = (
 
   // revampedCircle.updateCenterPosition();
   // revampedCircle.updateAnchorPosition();
-
+  context.font = '60px';
   scene.draw = () => {
     revampedCircle.test();
-    context.fillText(interactionStateRef.current.anchor, 100, 100);
+    let angleString = Math.round(
+      (100 * revampedCircle.angle * 360) / Tau / 100
+    ).toString();
+
+    context.fillText(angleString, 100, 100);
 
     // console.log(controlledPositionCenterRef);
     // console.log(interactionStateRef.current.anchor);
@@ -72,9 +78,10 @@ const getSceneDragToBigAngles: SceneGetter = (
     // revampedCircle.drawAnchorNotch();
     // revampedCircle.drawAngleCircleShadow();
     // revampedCircle.drawAnchorNotch();
+
     context.fill();
-    context.fillText(controlledPositionAnchorRef.current.y, 100, 200);
-    bigAngleDragger.drawAngleInUpperRight();
+    // context.fillText(controlledPositionAnchorRef.current.y, 100, 200);
+    // bigAngleDragger.drawAngleInUpperRight();
     // context.fillRect(0, 0, 100, 100);
   };
 

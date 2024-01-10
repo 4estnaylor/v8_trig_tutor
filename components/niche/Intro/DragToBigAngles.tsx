@@ -24,16 +24,22 @@ export type InteractionState = {
 const DragToBigAngles = () => {
   const slider360ValueRef = useRef(20);
   const [controlledPositionCenter, setControlledPositionCenter] = useState({
-    x: 0,
-    y: 0,
+    x: 200,
+    y: 200,
   });
   const [controlledPositionAnchor, setControlledPositionAnchor] = useState({
-    x: 0,
-    y: 0,
+    x: 300,
+    y: 200,
+  });
+
+  const [controlledPositionLead, setControlledPositionLead] = useState({
+    x: 100,
+    y: 100,
   });
   const [anchorStatus, setAnchorStatus] = useState('inactive');
   const controlledPositionCenterRef = useRef(controlledPositionCenter);
   const controlledPositionAnchorRef = useRef(controlledPositionAnchor);
+  const controlledPositionLeadRef = useRef(controlledPositionAnchor);
   const [interactionState, setInteractionState] = useState({
     anchor: 'default',
     center: 'default',
@@ -64,6 +70,15 @@ const DragToBigAngles = () => {
     console.log('is changing');
     controlledPositionAnchorRef.current = controlledPositionAnchor;
   }, [controlledPositionAnchor]);
+
+  useEffect(() => {
+    controlledPositionLeadRef.current = controlledPositionLead;
+  }, [controlledPositionLead]);
+
+  useEffect(() => {
+    if (interactionStateRef.current.lead === 'dragged') return;
+    setControlledPositionLead(controlledPositionLeadRef.current);
+  }, [controlledPositionLeadRef.current]);
 
   const handleCenterDrag = () => {
     setInteractionState({
@@ -121,11 +136,38 @@ const DragToBigAngles = () => {
           interactionState.center !== 'pressed'
         }
       />
+
+      <DraggableButton
+        controlledPosition={controlledPositionLead}
+        setControlledPosition={setControlledPositionLead}
+        onStart={() => {
+          setInteractionState((prev) => {
+            return { ...prev, angle: 'pressed' };
+          });
+        }}
+        onDrag={() => {
+          setInteractionState((prev) => {
+            return { ...prev, angle: 'dragged' };
+          });
+        }}
+        onStop={() => {
+          setInteractionState((prev) => {
+            return { ...prev, angle: 'default' };
+          });
+        }}
+        color={cl.green}
+        visible={
+          interactionState.center !== 'dragged' &&
+          interactionState.center !== 'pressed'
+        }
+      />
+
       <CanvasForTopicComponent
         sceneGetter={getSceneDragToBigAngles}
         objectPassedToScene={{
           controlledPositionCenterRef,
           controlledPositionAnchorRef,
+          controlledPositionLeadRef,
           interactionStateRef,
         }}
       />

@@ -133,7 +133,8 @@ const Wrapper = styled.button<{
     /* background-color: ${cl.getHSLA(cl.purple, 1)}; */
     cursor: grabbing;
   }
-  display: ${(p) => (p.$visible ? 'flex' : 'none')};
+  /* display: ${(p) => (p.$visible ? 'flex' : 'none')}; */
+  opacity: ${(p) => (p.$visible ? 1 : 0.3)};
 `;
 
 const InnerDot = styled.div<{ color: color }>`
