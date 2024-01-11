@@ -51,14 +51,15 @@ const getSceneDragToBigAngles: SceneGetter = (
 
   // revampedCircle.updateCenterPosition();
   // revampedCircle.updateAnchorPosition();
-  context.font = '60px';
   scene.draw = () => {
     revampedCircle.test();
     let angleString = Math.round(
       (100 * revampedCircle.angle * 360) / Tau / 100
     ).toString();
+    let revolutionsString = revampedCircle.revolutions.toString();
 
-    context.fillText(angleString, 100, 100);
+    context.fillText('angle: ' + angleString, 100, 100);
+    context.fillText('revoltuions: ' + revolutionsString, 100, 50);
 
     // console.log(controlledPositionCenterRef);
     // console.log(interactionStateRef.current.anchor);

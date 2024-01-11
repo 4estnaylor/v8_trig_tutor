@@ -18,6 +18,7 @@ class RevampedAngleCircle {
   isCenterNodeLocked: boolean;
   radiusLengthInPixels: number;
   anchorAngleOfOffset: number;
+  revolutions: number;
   angle: number;
   color: color;
   interactionStateRef: { current: InteractionState };
@@ -28,9 +29,10 @@ class RevampedAngleCircle {
     this.context = context;
     this.angle = Tau / 6;
     this.color = cl.black;
+    this.revolutions = 0;
     this.canvas = this.context.canvas;
     this.radiusLengthInPixels = 120;
-    this.anchorAngleOfOffset = 0.25 * Tau;
+    this.anchorAngleOfOffset = 0;
     // set default Interaction STate to none;
     this.interactionStateRef = {
       current: {
@@ -152,7 +154,6 @@ class RevampedAngleCircle {
           Math.sin(this.anchorAngleOfOffset + this.angle);
 
       this.leadNodePositionRef.current = { x: xPos, y: yPos };
-      console.log(this.leadNodePositionRef.current);
     }
   };
 
@@ -187,20 +188,74 @@ class RevampedAngleCircle {
       this.leadNodePositionRef?.current.x;
 
     diffX *= -1;
-    let leadAngle = Math.atan2(diffY, diffX);
+    let leadAngle = Math.atan2(diffY, diffX) + this.revolutions * Tau;
 
-    let calculatedAngle = leadAngle - this.anchorAngleOfOffset;
+    let calculatedAngle =
+      leadAngle - this.anchorAngleOfOffset + this.revolutions * Tau;
 
-    if (calculatedAngle > Tau / 2) {
+    console.log(this.angle % Tau);
+
+    this.context.fillText(
+      'calculated angle: ' + (calculatedAngle * 360) / Tau,
+      100,
+      75
+    );
+
+    let calculatedAngleRevolutions = Math.floor(calculatedAngle / Tau);
+    let previousAngleRevolutions = Math.floor(this.angle / Tau);
+
+    if (calculatedAngleRevolutions > previousAngleRevolutions) {
+      this.revolutions += 1;
+    }
+
+    // if (calculatedAngle > Tau / 2) {
+    //   calculatedAngle -= Tau;
+    // }
+    // if (calculatedAngle < -Tau / 2) {
+    //   calculatedAngle += Tau;
+    // }
+
+    let differenceBetweenPrevAndNewAngle = this.angle - calculatedAngle;
+    // console.log('angle: ' + this.angle, 'calculated angle: ' + calculatedAngle);
+    // console.log(differenceBetweenPrevAndNewAngle);
+    // console.log(this.angle, calculatedAngle);
+
+    // if (this.angle < 0 && calculatedAngle >= 0) {
+    // }
+
+    // crossing zero in positive direction
+    // if (
+    //   differenceBetweenPrevAndNewAngle > Tau / 2 &&
+    //   calculatedAngle > 0 &&
+    //   calculatedAngle < Tau / 2
+    // ) {
+    //   console.log(
+    //     'crossing zero positive direction',
+    //     differenceBetweenPrevAndNewAngle
+    //   );
+    // }
+
+    // crossing Tau/2 in positive direction
+    if (differenceBetweenPrevAndNewAngle > Tau / 2) {
+      // console.log('scha-wing');
+
+      calculatedAngle += Tau * (1 + this.revolutions);
+    }
+
+    // crossing -Tau/2 in negative direction
+    if (differenceBetweenPrevAndNewAngle < -Tau / 2) {
+      console.log('chacha real smooth now');
       calculatedAngle -= Tau;
     }
-    if (calculatedAngle < -Tau / 2) {
-      calculatedAngle += Tau;
+
+    // this.revolutions = Math.floor(calculatedAngle / Tau);
+    // add revolution in positive direction
+
+    if ((this.angle % Tau) - (calculatedAngle % Tau) >= Tau * 0.9) {
+      console.log('crossing zero positive');
     }
 
     this.angle = calculatedAngle;
-
-    // console.log('angle now', (this.angle * 360) / Tau);
 
     // get lead angle
   };
@@ -283,11 +338,51 @@ class RevampedAngleCircle {
     this.context.setLineDash([]);
   };
 
+  drawAngle = () => {
+    if (!this.leadNodePositionRef) return;
+    if (!this.anchorNodePositionRef) return;
+
+    let leadX = this.leadNodePositionRef?.current.x + controlledButtonOffsetX;
+    let leadY = this.leadNodePositionRef?.current.y + controlledButtonOffsetY;
+
+    let cosValue = Math.cos(this.anchorAngleOfOffset);
+    let sinValue = Math.sin(this.anchorAngleOfOffset);
+
+    let anchorX =
+      this.centerNodePosition.x + this.radiusLengthInPixels * cosValue;
+    let anchorY =
+      this.centerNodePosition.y - this.radiusLengthInPixels * sinValue;
+
+    this.context.beginPath();
+    this.context.strokeStyle = cl.getHSL(cl.green);
+    this.context.lineWidth = 4;
+    this.context.moveTo(this.centerNodePosition.x, this.centerNodePosition.y);
+    this.context.lineTo(anchorX, anchorY);
+    this.context.stroke();
+    let startAngle = Tau - this.anchorAngleOfOffset;
+    let endAngle = Tau - this.anchorAngleOfOffset - this.angle;
+    this.context.arc(
+      this.centerNodePosition.x,
+      this.centerNodePosition.y,
+      this.radiusLengthInPixels,
+      startAngle,
+      endAngle,
+      true
+    );
+
+    this.context.strokeStyle = cl.getHSL(cl.gray_dark);
+    this.context.fillStyle = cl.getHSLA(cl.green, 0.6);
+    this.context.fill();
+    this.context.beginPath();
+    this.context.lineWidth = 2;
+  };
+
   test = () => {
     this.update();
     this.drawAngleCircleShadow();
     this.drawAnchorNotch();
     this.drawLeadLine();
+    this.drawAngle();
   };
 }
 
