@@ -190,10 +190,9 @@ class RevampedAngleCircle {
     diffX *= -1;
     let leadAngle = Math.atan2(diffY, diffX) + this.revolutions * Tau;
 
-    let calculatedAngle =
-      leadAngle - this.anchorAngleOfOffset + this.revolutions * Tau;
+    let calculatedAngle = leadAngle - this.anchorAngleOfOffset;
 
-    console.log(this.angle % Tau);
+    // console.log(this.angle % Tau);
 
     this.context.fillText(
       'calculated angle: ' + (calculatedAngle * 360) / Tau,
@@ -204,9 +203,9 @@ class RevampedAngleCircle {
     let calculatedAngleRevolutions = Math.floor(calculatedAngle / Tau);
     let previousAngleRevolutions = Math.floor(this.angle / Tau);
 
-    if (calculatedAngleRevolutions > previousAngleRevolutions) {
-      this.revolutions += 1;
-    }
+    // if (calculatedAngleRevolutions > previousAngleRevolutions) {
+    //   this.revolutions += 1;
+    // }
 
     // if (calculatedAngle > Tau / 2) {
     //   calculatedAngle -= Tau;
@@ -239,20 +238,28 @@ class RevampedAngleCircle {
     if (differenceBetweenPrevAndNewAngle > Tau / 2) {
       // console.log('scha-wing');
 
-      calculatedAngle += Tau * (1 + this.revolutions);
+      calculatedAngle += Tau;
     }
 
     // crossing -Tau/2 in negative direction
     if (differenceBetweenPrevAndNewAngle < -Tau / 2) {
-      console.log('chacha real smooth now');
+      // console.log('chacha real smooth now');
       calculatedAngle -= Tau;
     }
 
     // this.revolutions = Math.floor(calculatedAngle / Tau);
     // add revolution in positive direction
 
+    // console.log(this.angle % Tau, calculatedAngle % Tau);
+
     if ((this.angle % Tau) - (calculatedAngle % Tau) >= Tau * 0.9) {
       console.log('crossing zero positive');
+      this.revolutions += 1;
+    }
+
+    if ((this.angle % Tau) - (calculatedAngle % Tau) <= -Tau * 0.9) {
+      console.log('crossing zero negative');
+      this.revolutions -= 1;
     }
 
     this.angle = calculatedAngle;
@@ -338,7 +345,7 @@ class RevampedAngleCircle {
     this.context.setLineDash([]);
   };
 
-  drawAngle = () => {
+  drawAnglePositive = () => {
     if (!this.leadNodePositionRef) return;
     if (!this.anchorNodePositionRef) return;
 
@@ -354,7 +361,7 @@ class RevampedAngleCircle {
       this.centerNodePosition.y - this.radiusLengthInPixels * sinValue;
 
     this.context.beginPath();
-    this.context.strokeStyle = cl.getHSL(cl.green);
+    this.context.strokeStyle = cl.getHSL(cl.blue);
     this.context.lineWidth = 4;
     this.context.moveTo(this.centerNodePosition.x, this.centerNodePosition.y);
     this.context.lineTo(anchorX, anchorY);
@@ -371,15 +378,63 @@ class RevampedAngleCircle {
     );
 
     this.context.strokeStyle = cl.getHSL(cl.gray_dark);
-    this.context.fillStyle = cl.getHSLA(cl.green, 0.6);
+    this.context.fillStyle = cl.getHSLA(cl.blue, 0.6);
     this.context.fill();
     this.context.beginPath();
     this.context.lineWidth = 2;
   };
 
+  drawAngleNegative = () => {
+    if (!this.leadNodePositionRef) return;
+    if (!this.anchorNodePositionRef) return;
+
+    let leadX = this.leadNodePositionRef?.current.x + controlledButtonOffsetX;
+    let leadY = this.leadNodePositionRef?.current.y + controlledButtonOffsetY;
+
+    let cosValue = Math.cos(this.anchorAngleOfOffset);
+    let sinValue = Math.sin(this.anchorAngleOfOffset);
+
+    let anchorX =
+      this.centerNodePosition.x + this.radiusLengthInPixels * cosValue;
+    let anchorY =
+      this.centerNodePosition.y - this.radiusLengthInPixels * sinValue;
+
+    this.context.beginPath();
+    this.context.strokeStyle = cl.getHSL(cl.red);
+    this.context.lineWidth = 4;
+    this.context.moveTo(this.centerNodePosition.x, this.centerNodePosition.y);
+    this.context.lineTo(anchorX, anchorY);
+    this.context.stroke();
+    let startAngle = Tau - this.anchorAngleOfOffset;
+    let endAngle = Tau - this.anchorAngleOfOffset - this.angle;
+    this.context.arc(
+      this.centerNodePosition.x,
+      this.centerNodePosition.y,
+      this.radiusLengthInPixels,
+      startAngle,
+      endAngle,
+      false
+    );
+
+    this.context.strokeStyle = cl.getHSL(cl.gray_dark);
+    this.context.fillStyle = cl.getHSLA(cl.red, 0.6);
+    this.context.fill();
+    this.context.beginPath();
+    this.context.lineWidth = 2;
+  };
+
+  drawAngle = () => {
+    if (this.angle > 0) {
+      this.drawAnglePositive();
+    }
+    if (this.angle < 0) {
+      this.drawAngleNegative();
+    }
+  };
+
   test = () => {
     this.update();
-    this.drawAngleCircleShadow();
+    // this.drawAngleCircleShadow();
     this.drawAnchorNotch();
     this.drawLeadLine();
     this.drawAngle();
