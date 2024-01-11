@@ -434,6 +434,7 @@ class RevampedAngleCircle {
 
   test = () => {
     this.update();
+    //test
     // this.drawAngleCircleShadow();
     this.drawAnchorNotch();
     this.drawLeadLine();
