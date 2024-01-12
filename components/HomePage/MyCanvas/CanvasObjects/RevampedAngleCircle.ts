@@ -459,11 +459,12 @@ class RevampedAngleCircle {
     } else if (this.angle < 0) {
       color = cl.getHSL(cl.red);
     }
+
     this.drawAngleDashes(
       this.angle,
       this.anchorAngleOfOffset,
       360,
-      color || 'black'
+      cl.getHSL(this.color)
     );
   };
 
@@ -513,16 +514,18 @@ class RevampedAngleCircle {
 
     // let pxSpacePerDash = circumferanceInPx / dashesInRevolution;
     let dashWidth = 1;
-    let dashLength = 100;
+    let dashLength = 40;
+
     let dashColor = color;
     let angleIncrement = Tau / dashesInRevolution;
+    let minLength = 50;
     if (angle < 0) {
       angleIncrement *= -1;
     }
 
     for (let i = 0; i <= totalDashes; i++) {
       let angle = offset + i * angleIncrement;
-      this.drawDash(angle, dashWidth, dashLength, dashColor);
+      this.drawDash(angle, dashWidth, dashLength, dashColor, minLength);
     }
 
     // this.drawDash(-Tau / 8, dashWidth, dashLength, dashColor);
@@ -534,19 +537,25 @@ class RevampedAngleCircle {
     angle: number,
     dashWidthPx: number,
     dashLengthPx: number,
-    color: string
+    color: string,
+    minLength?: number
   ) => {
     this.context.lineWidth = dashWidthPx;
+    let minLengthFromRadius = minLength || 0;
     let x0Pos =
-      this.centerNodePosition.x + this.radiusLengthInPixels * Math.cos(angle);
+      this.centerNodePosition.x +
+      (this.radiusLengthInPixels + minLengthFromRadius) * Math.cos(angle);
     let y0Pos =
-      this.centerNodePosition.y - this.radiusLengthInPixels * Math.sin(angle);
+      this.centerNodePosition.y -
+      (this.radiusLengthInPixels + minLengthFromRadius) * Math.sin(angle);
     let x1Pos =
       this.centerNodePosition.x +
-      (this.radiusLengthInPixels + dashLengthPx) * Math.cos(angle);
+      (this.radiusLengthInPixels + dashLengthPx + minLengthFromRadius) *
+        Math.cos(angle);
     let y1Pos =
       this.centerNodePosition.y -
-      (this.radiusLengthInPixels + dashLengthPx) * Math.sin(angle);
+      (this.radiusLengthInPixels + dashLengthPx + minLengthFromRadius) *
+        Math.sin(angle);
 
     this.context.strokeStyle = color;
     this.context.beginPath();
