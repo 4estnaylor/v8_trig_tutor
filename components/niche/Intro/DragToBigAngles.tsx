@@ -109,7 +109,7 @@ const DragToBigAngles = () => {
         onDrag={handleCenterDrag}
         onStop={handleCenterStop}
         onStart={handleCenterStart}
-        color={cl.red}
+        color={cl.gray_dark}
         visible={
           interactionState.lead !== 'dragged' &&
           interactionState.lead !== 'pressed' &&
@@ -136,7 +136,7 @@ const DragToBigAngles = () => {
             return { ...prev, anchor: 'default' };
           });
         }}
-        color={cl.blue}
+        color={cl.gray_dark}
         visible={
           interactionState.center !== 'dragged' &&
           interactionState.center !== 'pressed' &&
@@ -163,7 +163,7 @@ const DragToBigAngles = () => {
             return { ...prev, lead: 'default' };
           });
         }}
-        color={cl.green}
+        color={cl.blue}
         visible={
           interactionState.center !== 'dragged' &&
           interactionState.center !== 'pressed' &&

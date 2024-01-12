@@ -1,3 +1,4 @@
+import cl from '../../../colors';
 import AngleCircle from '../../HomePage/MyCanvas/CanvasObjects/AngleCircle';
 import RevampedAngleCircle from '../../HomePage/MyCanvas/CanvasObjects/RevampedAngleCircle';
 import { Tau } from '../../HomePage/MyCanvas/CanvasObjects/UsefulConstants';
@@ -45,6 +46,7 @@ const getSceneDragToBigAngles: SceneGetter = (
   revampedCircle.anchorNodePositionRef = controlledPositionAnchorRef;
   revampedCircle.leadNodePositionRef = controlledPositionLeadRef;
   revampedCircle.interactionStateRef = interactionStateRef;
+  revampedCircle.color = cl.purple;
 
   // console.log(context);
   // console.log(interactionStateRef);
