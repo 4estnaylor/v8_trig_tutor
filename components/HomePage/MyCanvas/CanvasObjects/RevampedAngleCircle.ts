@@ -406,7 +406,7 @@ class RevampedAngleCircle {
     );
 
     this.context.strokeStyle = cl.getHSL(cl.gray_dark);
-    this.context.fillStyle = cl.getHSLA(this.color, 0.6);
+    this.context.fillStyle = cl.getHSLA(this.color, 0.3);
     this.context.fill();
     this.context.beginPath();
     this.context.lineWidth = 2;
@@ -445,7 +445,7 @@ class RevampedAngleCircle {
     );
 
     this.context.strokeStyle = cl.getHSL(cl.gray_dark);
-    this.context.fillStyle = cl.getHSLA(this.color, 0.6);
+    this.context.fillStyle = cl.getHSLA(this.color, 0.3);
     this.context.fill();
     this.context.beginPath();
     this.context.lineWidth = 2;
@@ -458,6 +458,32 @@ class RevampedAngleCircle {
     if (this.angle < 0) {
       this.drawAngleNegative();
     }
+    for (let i = 0; i < Math.abs(this.revolutions) - 1; i++) {
+      let startRingBuffer = 2;
+      let widthOfRing = 10;
+      let spaceForRing = 12;
+      let startRadius =
+        startRingBuffer + this.radiusLengthInPixels + spaceForRing * i;
+      let endRadius = startRadius + widthOfRing;
+      this.drawFullRing(startRadius, endRadius, cl.getHSLA(this.color, 0.3));
+      // le
+      // this.drawAngleDashes(
+      //   angle,
+      //   0,
+      //   dashesInRevolution,
+      //   cl.getHSL(this.color),
+      //   i
+      // );
+    }
+    let partialAngle = this.angle % Tau;
+    let startRadius = this.radiusLengthInPixels + 2 + 12 * this.revolutions;
+    let endRadius = startRadius + 10;
+    this.drawPartialRing(
+      partialAngle,
+      startRadius,
+      endRadius,
+      cl.getHSLA(cl.purple, 0.5)
+    );
   };
 
   drawLeadVisual = () => {
@@ -603,23 +629,6 @@ class RevampedAngleCircle {
     }
 
     // draw earlier revolutions;
-    for (let i = 0; i < Math.abs(revolutions); i++) {
-      let startRingBuffer = 2;
-      let widthOfRing = 10;
-      let spaceForRing = 12;
-      let startRadius =
-        startRingBuffer + this.radiusLengthInPixels + spaceForRing * i;
-      let endRadius = startRadius + widthOfRing;
-      this.drawFullRing(startRadius, endRadius, cl.getHSLA(this.color, 0.5));
-      // le
-      // this.drawAngleDashes(
-      //   angle,
-      //   0,
-      //   dashesInRevolution,
-      //   cl.getHSL(this.color),
-      //   i
-      // );
-    }
 
     // for (let i = 0; i < revolutions; i++) {
     //   this.drawAngleDashes(0.999 * Tau, 0, dashesInRevolution, color);
@@ -653,6 +662,43 @@ class RevampedAngleCircle {
       Tau
     );
     this.context.stroke();
+  };
+
+  drawPartialRing = (
+    partialAngle: number,
+    startRadius: number,
+    endRadius: number,
+    color: string
+  ) => {
+    let startAngle = -this.anchorAngleOfOffset;
+    let endAngle = Tau - partialAngle - this.anchorAngleOfOffset;
+
+    let isCounterclockwise = true;
+    if (partialAngle < 0) {
+      startAngle = -this.anchorAngleOfOffset;
+      endAngle = 0 - partialAngle - this.anchorAngleOfOffset;
+      isCounterclockwise = false;
+    }
+
+    let radius = this.radiusLengthInPixels + Math.abs(this.revolutions) * 12;
+    this.context.beginPath();
+    this.context.arc(
+      this.centerNodePosition.x,
+      this.centerNodePosition.y,
+      radius,
+      startAngle,
+      endAngle,
+      isCounterclockwise
+    );
+    this.context.strokeStyle = color;
+    this.context.lineCap = 'butt';
+    this.context.lineWidth = 1;
+
+    // this.context.stroke();
+    this.context.lineTo(this.centerNodePosition.x, this.centerNodePosition.y);
+    this.context.closePath();
+    this.context.fillStyle = cl.getHSLA(cl.purple, 0.5);
+    this.context.fill();
   };
 
   drawDash = (
