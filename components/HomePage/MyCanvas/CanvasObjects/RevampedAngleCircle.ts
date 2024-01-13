@@ -589,9 +589,9 @@ class RevampedAngleCircle {
     let dashWidth = 1;
     let dashLength = 30;
 
-    let dashColor = color;
+    let dashColor = angle > 0 ? cl.getHSL(cl.blue) : cl.getHSL(cl.red);
     let angleIncrement = Tau / dashesInRevolution;
-    let minLength = 5 + 35 * Math.abs(revolutions);
+    let minLength = 5 + 12 * Math.abs(revolutions);
 
     if (angle < 0) {
       angleIncrement *= -1;
@@ -604,8 +604,21 @@ class RevampedAngleCircle {
 
     // draw earlier revolutions;
     for (let i = 0; i < Math.abs(revolutions); i++) {
-      let angle = Tau * 0.999;
-      this.drawAngleDashes(angle, 0, dashesInRevolution, dashColor, i);
+      let startRingBuffer = 2;
+      let widthOfRing = 10;
+      let spaceForRing = 12;
+      let startRadius =
+        startRingBuffer + this.radiusLengthInPixels + spaceForRing * i;
+      let endRadius = startRadius + widthOfRing;
+      this.drawFullRing(startRadius, endRadius, cl.getHSLA(this.color, 0.5));
+      // le
+      // this.drawAngleDashes(
+      //   angle,
+      //   0,
+      //   dashesInRevolution,
+      //   cl.getHSL(this.color),
+      //   i
+      // );
     }
 
     // for (let i = 0; i < revolutions; i++) {
@@ -615,6 +628,31 @@ class RevampedAngleCircle {
     // this.drawDash(-Tau / 8, dashWidth, dashLength, dashColor);
 
     // this.context.moveTo(anchorX, anchorY);
+  };
+
+  drawFullRing = (startRadius: number, endRadius: number, color: string) => {
+    let radius = (startRadius + endRadius) / 2;
+    this.context.lineWidth = endRadius - startRadius;
+    this.context.strokeStyle = color;
+    this.context.beginPath();
+    this.context.lineCap = 'square';
+    // this.context.ellipse(
+    //   this.centerNodePosition.x,
+    //   this.centerNodePosition.y,
+    //   radius,
+    //   radius,
+    //   0,
+    //   0,
+    //   Tau
+    // );
+    this.context.arc(
+      this.centerNodePosition.x,
+      this.centerNodePosition.y,
+      radius,
+      0,
+      Tau
+    );
+    this.context.stroke();
   };
 
   drawDash = (
@@ -654,7 +692,6 @@ class RevampedAngleCircle {
     //test
     // this.drawAngleCircleShadow();
     let { anchor, lead, center } = this.interactionStateRef.current;
-    console.log(anchor, lead, center);
 
     // if(this.interactionStateRef.current)
     this.drawLeadLine();
