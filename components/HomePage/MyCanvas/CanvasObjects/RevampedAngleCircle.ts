@@ -348,13 +348,21 @@ class RevampedAngleCircle {
   drawLeadLine = () => {
     if (!this.leadNodePositionRef) return;
     this.context.beginPath();
-    this.context.moveTo(this.centerNodePosition.x, this.centerNodePosition.y);
+    let x0 =
+      this.centerNodePosition.x +
+      this.radiusLengthInPixels *
+        Math.cos(this.angle + this.anchorAngleOfOffset);
+    let y0 =
+      this.centerNodePosition.y -
+      this.radiusLengthInPixels *
+        Math.sin(this.angle + this.anchorAngleOfOffset);
+    this.context.moveTo(x0, y0);
     let leadX = this.leadNodePositionRef?.current.x + controlledButtonOffsetX;
     let leadY = this.leadNodePositionRef?.current.y + controlledButtonOffsetY;
     this.context.lineTo(leadX, leadY);
     this.context.setLineDash([8, 25]);
     this.context.lineCap = 'round';
-    this.context.lineWidth = 3;
+    this.context.lineWidth = 2;
     if (
       this.interactionStateRef.current.lead === 'pressed' ||
       this.interactionStateRef.current.lead === 'dragged'
@@ -473,9 +481,10 @@ class RevampedAngleCircle {
     this.context.beginPath();
     this.context.moveTo(this.centerNodePosition.x, this.centerNodePosition.y);
     this.context.lineTo(
-      this.centerNodePosition.x + this.radiusLengthInPixels,
+      this.centerNodePosition.x + this.radiusLengthInPixels + 90,
       this.centerNodePosition.y
     );
+
     // this.context.setLineDash([8, 25]);
     // this.context.lineCap = 'round';
     this.context.lineWidth = 4;
@@ -487,6 +496,56 @@ class RevampedAngleCircle {
       360,
       cl.getHSLA(cl.gray_dark, 0.5)
     );
+
+    // draw dotted line and anchorAngle
+    let x0Pos =
+      this.centerNodePosition.x +
+      this.radiusLengthInPixels * Math.cos(this.anchorAngleOfOffset);
+    let y0Pos =
+      this.centerNodePosition.y -
+      this.radiusLengthInPixels * Math.sin(this.anchorAngleOfOffset);
+
+    let x1Pos =
+      this.centerNodePosition.x +
+      (this.radiusLengthInPixels + 90) * Math.cos(this.anchorAngleOfOffset);
+    let y1Pos =
+      this.centerNodePosition.y -
+      (this.radiusLengthInPixels + 90) * Math.sin(this.anchorAngleOfOffset);
+
+    this.context.beginPath();
+    this.context.moveTo(x0Pos, y0Pos);
+    this.context.lineTo(x1Pos, y1Pos);
+    this.context.stroke();
+
+    this.context.beginPath();
+    let startAngle = 0;
+    let endAngle = Tau - this.anchorAngleOfOffset;
+    let directionCounterClockwise = true;
+    if (this.anchorAngleOfOffset < 0) {
+      directionCounterClockwise = true;
+      endAngle = Tau;
+      startAngle = Tau - this.anchorAngleOfOffset;
+    }
+
+    this.context.moveTo(this.centerNodePosition.x, this.centerNodePosition.y);
+    this.context.arc(
+      this.centerNodePosition.x,
+      this.centerNodePosition.y,
+      (this.radiusLengthInPixels * 2) / 3,
+      startAngle,
+      endAngle,
+      directionCounterClockwise
+    );
+
+    this.context.closePath();
+    this.context.fillStyle = cl.getHSL(cl.gray_dark);
+    if (this.anchorAngleOfOffset === 0) {
+      return;
+    } else {
+      this.context.fill();
+    }
+
+    this.context.stroke();
 
     this.context.fillText(
       (Math.round(this.anchorAngleOfOffset * 100) / 100).toString(),
@@ -514,7 +573,7 @@ class RevampedAngleCircle {
 
     // let pxSpacePerDash = circumferanceInPx / dashesInRevolution;
     let dashWidth = 1;
-    let dashLength = 40;
+    let dashLength = 30;
 
     let dashColor = color;
     let angleIncrement = Tau / dashesInRevolution;
@@ -588,6 +647,7 @@ class RevampedAngleCircle {
     this.drawAngle();
     this.drawAnchorNotch();
     // this.drawAngleDashes(Tau / 4, 0, 360);
+    //asdf
   };
 }
 
