@@ -468,12 +468,22 @@ class RevampedAngleCircle {
       color = cl.getHSL(cl.red);
     }
 
+    let dashesInRevolution = 360;
+
     this.drawAngleDashes(
       this.angle,
       this.anchorAngleOfOffset,
-      360,
-      cl.getHSL(this.color)
+      dashesInRevolution,
+      'green',
+      this.revolutions
     );
+
+    // this.drawAngleDashes(
+    //   this.angle,
+    //   this.anchorAngleOfOffset,
+    //   360,
+    //   cl.getHSL(this.color)
+    // );
   };
 
   drawAnchorOffsetVisual = () => {
@@ -558,16 +568,20 @@ class RevampedAngleCircle {
     angle: number,
     offset: number,
     dashesInRevolution: number,
-    color: string
+    color: string,
+    revolutions: number = 0
   ) => {
     this.context.beginPath();
+
     // let anchorX = this.centerNodePosition.x + this.radiusLengthInPixels*Math.cos(offset);
     // let anchorY = this.centerNodePosition.y - this.radiusLengthInPixels*Math.sin(offset);
     // let angleX = this.centerNodePosition.x + this.radiusLengthInPixels*Math.cos(offset + angle );
     // let angleY = this.centerNodePosition.y - this.radiusLengthInPixels*Math.sin(offset + angle);
     this.context.lineWidth = 1;
     let circumferanceInPx = this.radiusLengthInPixels * Tau;
-    let totalDashes = dashesInRevolution * (angle / Tau);
+    let outerAngle = angle % Tau;
+    let totalDashes = dashesInRevolution * (outerAngle / Tau);
+
     // make Total Dashes positive
     totalDashes = Math.abs(totalDashes);
 
@@ -577,7 +591,8 @@ class RevampedAngleCircle {
 
     let dashColor = color;
     let angleIncrement = Tau / dashesInRevolution;
-    let minLength = 50;
+    let minLength = 5 + 35 * Math.abs(revolutions);
+
     if (angle < 0) {
       angleIncrement *= -1;
     }
@@ -586,6 +601,16 @@ class RevampedAngleCircle {
       let angle = offset + i * angleIncrement;
       this.drawDash(angle, dashWidth, dashLength, dashColor, minLength);
     }
+
+    // draw earlier revolutions;
+    for (let i = 0; i < Math.abs(revolutions); i++) {
+      let angle = Tau * 0.999;
+      this.drawAngleDashes(angle, 0, dashesInRevolution, dashColor, i);
+    }
+
+    // for (let i = 0; i < revolutions; i++) {
+    //   this.drawAngleDashes(0.999 * Tau, 0, dashesInRevolution, color);
+    // }
 
     // this.drawDash(-Tau / 8, dashWidth, dashLength, dashColor);
 
@@ -630,6 +655,10 @@ class RevampedAngleCircle {
     // this.drawAngleCircleShadow();
     let { anchor, lead, center } = this.interactionStateRef.current;
     console.log(anchor, lead, center);
+
+    // if(this.interactionStateRef.current)
+    this.drawLeadLine();
+    this.drawAngle();
     if (
       // anchor === 'pressed' ||
       // anchor === 'dragged' ||
@@ -642,9 +671,6 @@ class RevampedAngleCircle {
     if (anchor === 'pressed' || anchor === 'dragged') {
       this.drawAnchorOffsetVisual();
     }
-    // if(this.interactionStateRef.current)
-    this.drawLeadLine();
-    this.drawAngle();
     this.drawAnchorNotch();
     // this.drawAngleDashes(Tau / 4, 0, 360);
     //asdf
