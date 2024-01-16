@@ -135,11 +135,11 @@ const DragToCorrectAngle = () => {
             <BottomPart>
               <>
                 <>
-                  <DraggableButton
+                  {/* <DraggableButton
                     controlledPosition={controlledPosition}
                     setControlledPosition={setControlledPosition}
                     onStop={handleButtonDrop}
-                  />
+                  /> */}
                   <CanvasForTopicComponent
                     sceneGetter={getSceneDragToTargetAnglesSimple}
                     objectPassedToScene={{

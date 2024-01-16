@@ -17,7 +17,7 @@ type DraggableButtonProps = {
   onStart?: () => void;
   onDrag?: () => void;
   visible?: boolean;
-  angleInfoRef: { current: AngleInfo };
+  angleInfoRef?: { current: AngleInfo };
 };
 
 const DEFAULTCOLOR: color = cl.purple;
