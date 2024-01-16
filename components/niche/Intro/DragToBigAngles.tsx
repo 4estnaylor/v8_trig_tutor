@@ -167,7 +167,7 @@ const DragToBigAngles = () => {
       ></input> */}
       {/* <AngleInput />
        */}
-      <InputBarForAngleCircle></InputBarForAngleCircle>
+
       <DraggableButton
         angleInfoRef={angleInfoRef}
         controlledPosition={controlledPositionCenter}
@@ -250,6 +250,7 @@ const DragToBigAngles = () => {
           angleInfoRef,
         }}
       />
+      <InputBarForAngleCircle />
     </Wrapper>
   );
 };
