@@ -4,7 +4,8 @@ import CanvasForTopicComponent from '../../HomePage/MyCanvas/CanvasForTopicCompo
 import getScene360Intro from '../../getScenes/degrees/getScene360Intro';
 import getSceneDragToBigAngles from '../../getScenes/degrees/getSceneDragToBigAngles';
 import DraggableButton from '../../DraggableButton';
-import cl from '../../../colors';
+import cl, { color } from '../../../colors';
+import { Tau } from '../../HomePage/MyCanvas/CanvasObjects/UsefulConstants';
 
 export type Interaction =
   | 'hover'
@@ -19,6 +20,22 @@ export type InteractionState = {
   center: Interaction;
   lead: Interaction;
   overall: string;
+};
+
+export type AngleInfo = {
+  angle: number;
+  angleOffset: number;
+  divisions: number;
+  units: string;
+  color: color;
+};
+
+let angleInfoInsance: AngleInfo = {
+  angle: Tau / 3,
+  angleOffset: Tau / 3,
+  divisions: 15,
+  units: 'tau radians',
+  color: cl.green,
 };
 
 const DragToBigAngles = () => {
@@ -36,6 +53,21 @@ const DragToBigAngles = () => {
     x: 100,
     y: 100,
   });
+
+  const [angleInfo, setAngleInfo] = useState<AngleInfo>(angleInfoInsance);
+  const angleInfoRef = useRef(angleInfoInsance);
+
+  // useEffect(() => {
+  //   setAngleInfo(angleInfoRef.current);
+  //   console.log('changinasdf');
+  // }, [angleInfoRef.current]);
+  useEffect(() => {
+    console.log('shahah');
+    setAngleInfo((prev) => {
+      return { ...prev, angle: angleInfoRef.current.angle };
+    });
+  }, [angleInfoRef.current.angle]);
+
   const [anchorStatus, setAnchorStatus] = useState('inactive');
   const controlledPositionCenterRef = useRef(controlledPositionCenter);
   const controlledPositionAnchorRef = useRef(controlledPositionAnchor);
@@ -103,6 +135,18 @@ const DragToBigAngles = () => {
 
   return (
     <Wrapper>
+      <div
+        onClick={() => {
+          console.log('bam');
+          setAngleInfo((prev) => {
+            console.log({ ...prev, angle: 100 });
+            return { ...prev, angle: 100 };
+          });
+          angleInfoRef.current.angle = 100;
+        }}
+      >
+        {(angleInfo.angle * 360) / Tau}
+      </div>
       <DraggableButton
         controlledPosition={controlledPositionCenter}
         setControlledPosition={setControlledPositionCenter}
@@ -179,6 +223,7 @@ const DragToBigAngles = () => {
           controlledPositionAnchorRef,
           controlledPositionLeadRef,
           interactionStateRef,
+          angleInfoRef,
         }}
       />
     </Wrapper>

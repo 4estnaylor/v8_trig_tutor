@@ -19,6 +19,7 @@ const getSceneDragToBigAngles: SceneGetter = (
     controlledPositionAnchorRef,
     controlledPositionLeadRef,
     interactionStateRef,
+    angleInfoRef,
   } = passedObject;
 
   let width = context.canvas.parentElement?.clientWidth || 0;
@@ -34,7 +35,17 @@ const getSceneDragToBigAngles: SceneGetter = (
 
   bigAngleDragger.rotations = 0;
 
-  let revampedCircle = new RevampedAngleCircle(context);
+  let controlledPositions = {
+    centerRef: controlledPositionCenterRef,
+    anchorRef: controlledPositionAnchorRef,
+    leadRef: controlledPositionLeadRef,
+  };
+
+  let revampedCircle = new RevampedAngleCircle(
+    context,
+    angleInfoRef,
+    controlledPositions
+  );
 
   // revampedCircle.centerNodePositionRef = controlledPositionRef;
   revampedCircle.centerNodePosition = {
@@ -42,11 +53,13 @@ const getSceneDragToBigAngles: SceneGetter = (
     y: 0,
   };
 
-  revampedCircle.centerNodePositionRef = controlledPositionCenterRef;
-  revampedCircle.anchorNodePositionRef = controlledPositionAnchorRef;
-  revampedCircle.leadNodePositionRef = controlledPositionLeadRef;
+  // revampedCircle.centerNodePositionRef = controlledPositionCenterRef;
+  // revampedCircle.anchorNodePositionRef = controlledPositionAnchorRef;
+  // revampedCircle.leadNodePositionRef = controlledPositionLeadRef;
   revampedCircle.interactionStateRef = interactionStateRef;
-  revampedCircle.color = cl.purple;
+
+  // revampedCircle.color = cl.purple;
+  // revampedCircle.angle = Tau / 2;
 
   // console.log(context);
   // console.log(interactionStateRef);
