@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import cl, { color } from '../colors';
 import Draggable from 'react-draggable';
 import ControlCameraIcon from '@mui/icons-material/ControlCamera';
+import { AngleInfo } from './niche/Intro/DragToBigAngles';
 
 type DraggableButtonProps = {
   controlledPosition: { x: number; y: number };
@@ -16,6 +17,7 @@ type DraggableButtonProps = {
   onStart?: () => void;
   onDrag?: () => void;
   visible?: boolean;
+  angleInfoRef: { current: AngleInfo };
 };
 
 const DEFAULTCOLOR: color = cl.purple;
@@ -30,6 +32,7 @@ const DraggableButton = (props: DraggableButtonProps) => {
     color = cl.black,
     radiusInPx,
     visible = true,
+    angleInfoRef,
   } = props;
   const [isDraggable, setIsDraggable] = useState(false);
 
@@ -43,6 +46,7 @@ const DraggableButton = (props: DraggableButtonProps) => {
   };
   return (
     <div>
+      {/* {(angleInfoRef.current.angle * 360) / Tau} */}
       <Draggable
         // bounds="parent"
 

@@ -60,6 +60,7 @@ class RevampedAngleCircle {
     // set default Interaction STate to none;
     this.interactionStateRef = {
       current: {
+        inputControl: false,
         center: 'none',
         anchor: 'none',
         lead: 'none',
@@ -73,8 +74,8 @@ class RevampedAngleCircle {
         }
       : { x: 0, y: 0 };
     this.isCenterNodeLocked = false;
-    this.anchorAngleOfOffset = Tau / 2;
-    this.angle = Tau / 4;
+    this.anchorAngleOfOffset = this.angleInfoRef.current.angleOffset;
+    this.angle = this.angleInfoRef.current.angle;
     this.initialize();
   }
 
@@ -122,6 +123,17 @@ class RevampedAngleCircle {
 
   update = () => {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    if (this.angleInfoRef.current.inputControl === true) {
+      console.log('hrm', (this.angleInfoRef.current.angle * 360) / Tau);
+
+      this.angle = this.angleInfoRef.current.angle;
+      this.angleInfoRef.current.inputControl = false;
+      this.moveLeadNodeButtonToDefaultPosition();
+      // this.leadNodePositionRef!.current.x = 0;
+      this.moveAnchorButtonToDefaultPosition();
+      // this.updateLeadPosition();
+    }
+    // console.log(this.angle);
     this.updateCenterPosition();
     this.updateAnchorPosition();
     this.updateLeadPosition();
@@ -642,7 +654,7 @@ class RevampedAngleCircle {
     // this.angle = this.angleInfoRef.current.angle;
     // this.initialize();
     this.draw();
-    console.log((this.angleInfoRef.current.angle * 360) / Tau);
+    // console.log((this.angleInfoRef.current.angle * 360) / Tau);
   };
 }
 
