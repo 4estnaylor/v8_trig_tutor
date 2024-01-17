@@ -631,11 +631,10 @@ class RevampedAngleCircle {
     hypotenuseToLeadButton = Math.sqrt(xDiff ** 2 + yDiff ** 2);
 
     // maake calculatedLengthFromRadius
-    let caluculatedLengthFromRadius =
-      hypotenuseToLeadButton + dashLength / 2 + 50;
+    let caluculatedLengthFromRadius = hypotenuseToLeadButton + 0;
     if (
       caluculatedLengthFromRadius <
-      this.actualRadiusLengthInPixels + minLengthFromRadius
+      this.actualRadiusLengthInPixels + minLengthFromRadius + dashLengthPx
     ) {
       caluculatedLengthFromRadius =
         minLengthFromRadius + this.actualRadiusLengthInPixels + dashLengthPx;
