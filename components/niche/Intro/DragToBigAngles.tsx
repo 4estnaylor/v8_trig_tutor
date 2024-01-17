@@ -38,7 +38,7 @@ export type AngleInfo = {
 let angleInfoInsance: AngleInfo = {
   angle: Tau / 3,
   angleOffset: 0,
-  divisions: 15,
+  divisions: 360,
   units: 'tau radians',
   color: cl.green,
   inputControl: false,

@@ -474,6 +474,7 @@ class RevampedAngleCircle {
     // this.context.lineCap = 'round';
 
     this.context.stroke();
+    this.context.lineCap = 'butt';
 
     this.drawAngleDashes(
       this.anchorAngleOfOffset,
@@ -554,7 +555,8 @@ class RevampedAngleCircle {
 
     let dashColor = angle > 0 ? cl.getHSL(cl.blue) : cl.getHSL(cl.red);
     let angleIncrement = Tau / dashesInRevolution;
-    let minLength = 5 + 12 * Math.abs(revolutions);
+    // let minLength = 80 + 12 * Math.abs(revolutions);
+    let minLength = 80;
 
     if (angle < 0) {
       angleIncrement *= -1;

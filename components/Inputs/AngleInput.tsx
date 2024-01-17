@@ -11,6 +11,7 @@ const AngleInput = () => {
       value={9999}
       type="number"
       label="angle"
+      variant="outlined"
       InputProps={{
         type: 'number',
         color: 'primary',

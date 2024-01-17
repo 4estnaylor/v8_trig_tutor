@@ -10,7 +10,7 @@ const InputBarForAngleCircle = () => {
     <Wrapper>
       <UnitSelections />
       <ValuesWrapper>
-        <OffsetInput />
+        {/* <OffsetInput /> */}
         <AngleInput />
       </ValuesWrapper>
     </Wrapper>
