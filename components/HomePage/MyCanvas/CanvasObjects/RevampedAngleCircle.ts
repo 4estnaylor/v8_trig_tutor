@@ -551,12 +551,13 @@ class RevampedAngleCircle {
 
     // let pxSpacePerDash = circumferanceInPx / dashesInRevolution;
     let dashWidth = 1;
-    let dashLength = 30;
+    let dashLength = 120;
 
     let dashColor = angle > 0 ? cl.getHSL(cl.blue) : cl.getHSL(cl.red);
     let angleIncrement = Tau / dashesInRevolution;
-    // let minLength = 80 + 12 * Math.abs(revolutions);
-    let minLength = 80;
+    // let minLength = 5 + 12 * Math.abs(revolutions);
+    let minLength = 5;
+    // let minLength = 80;
 
     if (angle < 0) {
       angleIncrement *= -1;
@@ -617,10 +618,33 @@ class RevampedAngleCircle {
     this.context.lineWidth = dashWidthPx;
     let minLengthFromRadius = minLength || 0;
 
+    //find distance to lead button
+    let hypotenuseToLeadButton;
+    if (!this.leadNodePositionRef || !this.centerNodePositionRef) return;
+    let xDiff =
+      this.leadNodePositionRef?.current.x -
+      this.centerNodePositionRef?.current.x;
+    let yDiff =
+      this.leadNodePositionRef.current.y -
+      this.centerNodePositionRef?.current.y;
+
+    hypotenuseToLeadButton = Math.sqrt(xDiff ** 2 + yDiff ** 2);
+
+    // maake calculatedLengthFromRadius
+    let caluculatedLengthFromRadius =
+      hypotenuseToLeadButton + dashLength / 2 + 50;
+    if (
+      caluculatedLengthFromRadius <
+      this.actualRadiusLengthInPixels + minLengthFromRadius
+    ) {
+      caluculatedLengthFromRadius =
+        minLengthFromRadius + this.actualRadiusLengthInPixels + dashLengthPx;
+    }
+
     this.context.strokeStyle = color;
     this.context.beginPath();
-    let startRadius = this.radiusLengthInPixels + minLengthFromRadius;
-    let endRadius = startRadius + dashLengthPx;
+    let startRadius = minLengthFromRadius + this.actualRadiusLengthInPixels;
+    let endRadius = caluculatedLengthFromRadius;
     this.makePolarLine(angle, startRadius, angle, endRadius);
 
     this.context.stroke();
