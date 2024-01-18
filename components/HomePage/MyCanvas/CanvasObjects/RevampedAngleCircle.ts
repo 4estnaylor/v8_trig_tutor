@@ -9,7 +9,6 @@ import { Tau } from './UsefulConstants';
 type ControlledPositionRef = { current: { x: number; y: number } };
 type AngleInfoRef = { current: AngleInfo };
 
-// const controlledButtonOffsetX = 24;
 const controlledButtonOffsetX = 25;
 const controlledButtonOffsetY = 25;
 
@@ -121,24 +120,23 @@ class RevampedAngleCircle {
     );
   };
 
+  updateLeadWithInputControl = () => {
+    if (this.angleInfoRef.current.inputControl === true) {
+      this.angle = this.angleInfoRef.current.angle;
+      // this.angle = (2 * Tau) / 3;
+      this.moveLeadNodeButtonToDefaultPosition();
+      this.angleInfoRef.current.inputControl = false;
+
+      if (!this.leadNodePositionRef) return;
+    }
+  };
+
   update = () => {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    if (this.angleInfoRef.current.inputControl === true) {
-      // console.log('hrm', (this.angleInfoRef.current.angle * 360) / Tau);
 
-      this.angle = this.angleInfoRef.current.angle;
-      this.angleInfoRef.current.inputControl = false;
-      // this.moveLeadNodeButtonToDefaultPosition();
-      if (!this.leadNodePositionRef) return;
+    // figuring out how to control angle from input and have lead angle button acutally move...
 
-      // console.log('changing leadNodePosition Ref');
-      this.leadNodePositionRef!.current.x = 100;
-
-      // this.leadNodePositionRef!.current.x = 0;
-      // this.moveAnchorButtonToDefaultPosition();
-      // this.updateLeadPosition();
-    }
-    // console.log(this.angle);
+    this.updateLeadWithInputControl();
     this.updateCenterPosition();
     this.updateAnchorPosition();
     this.updateLeadPosition();
@@ -268,12 +266,6 @@ class RevampedAngleCircle {
     let leadAngle = Math.atan2(diffY, diffX) + this.revolutions * Tau;
 
     let calculatedAngle = leadAngle - this.anchorAngleOfOffset;
-
-    this.context.fillText(
-      'calculated angle: ' + (calculatedAngle * this.dashDivisions) / Tau,
-      100,
-      75
-    );
 
     let differenceBetweenPrevAndNewAngle = this.angle - calculatedAngle;
 
@@ -520,12 +512,6 @@ class RevampedAngleCircle {
     }
 
     // this.context.stroke();
-
-    this.context.fillText(
-      (Math.round(this.anchorAngleOfOffset * 100) / 100).toString(),
-      50,
-      50
-    );
   };
 
   drawAngleDashes = (
@@ -681,10 +667,7 @@ class RevampedAngleCircle {
   };
 
   test = () => {
-    // this.angle = this.angleInfoRef.current.angle;
-    // this.initialize();
     this.draw();
-    // console.log((this.angleInfoRef.current.angle * 360) / Tau);
   };
 }
 

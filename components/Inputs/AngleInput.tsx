@@ -10,7 +10,7 @@ let endAdornment = <InputAdornment position="end">π rad</InputAdornment>;
 interface AngleInputProps {
   angle: number;
   displayUnit: DisplayUnit;
-  handleAngleInputChange: () => void;
+  handleAngleInputChange: (e: React.FormEvent<HTMLInputElement>) => void;
 }
 
 const AngleInput = (props: AngleInputProps) => {
@@ -22,18 +22,23 @@ const AngleInput = (props: AngleInputProps) => {
   let angleInTauRadians = angle / Tau;
 
   let displayValue;
+  let displayUnitDisplay;
   switch (displayUnit) {
     case 'degrees':
       displayValue = angleInDegrees;
+      displayUnitDisplay = '°';
       break;
     case 'radians':
       displayValue = angleInRadians;
+      displayUnitDisplay = 'rad';
       break;
     case 'pi radians':
       displayValue = angleInPiRadians;
+      displayUnitDisplay = 'π rad';
       break;
     case 'tau radians':
       displayValue = angleInTauRadians;
+      displayUnitDisplay = 'τ rad';
       break;
     default:
       displayValue = angleInDegrees;
@@ -44,6 +49,9 @@ const AngleInput = (props: AngleInputProps) => {
   } else {
     displayValue = Math.round(displayValue);
   }
+  let endAdornment = (
+    <InputAdornment position="start">{displayUnitDisplay}</InputAdornment>
+  );
   return (
     <Wrapper
       value={displayValue}
@@ -55,14 +63,16 @@ const AngleInput = (props: AngleInputProps) => {
         color: 'primary',
         placeholder: '0',
         sx: { fontSize: '1.5rem' },
+        endAdornment: endAdornment,
       }}
       InputLabelProps={{
         shrink: true,
       }}
-      onChange={handleAngleInputChange}
-      // InputProps={{
-      //   endAdornment: endAdornment,
-      // }}
+      onChange={(e) => {
+        console.log('shakakak', e.currentTarget.value);
+        // let valueInCorrectUnits = (Number(e.currentTarget.value) * Tau) / 360;
+        handleAngleInputChange(e);
+      }}
     ></Wrapper>
   );
 };
@@ -72,7 +82,7 @@ const Wrapper = styled(TextField)`
 
   /* border-radius: 8px 0px 0px 0px; */
 
-  width: 100px;
+  width: 180px;
   background-color: white;
 
   /* box-shadow: 0px 0px 16px ${cl.getHSL(cl.gray_mid)}; */

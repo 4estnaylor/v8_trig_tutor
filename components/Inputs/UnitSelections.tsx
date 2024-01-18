@@ -32,18 +32,18 @@ const UnitSelections = (props: UnitSelectionsProps) => {
       </Stack>
       <Stack spacing={1}>
         <CustomChip
-          onClick={() => {
-            setDisplayUnit('pi radians');
-          }}
-          label="π rad"
-          color={displayUnit === 'pi radians' ? 'primary' : 'default'}
-        />
-        <CustomChip
           label="τ rad"
           onClick={() => {
             setDisplayUnit('tau radians');
           }}
           color={displayUnit === 'tau radians' ? 'primary' : 'default'}
+        />
+        <CustomChip
+          onClick={() => {
+            setDisplayUnit('pi radians');
+          }}
+          label="π rad"
+          color={displayUnit === 'pi radians' ? 'primary' : 'default'}
         />
       </Stack>
     </Wrapper>

@@ -8,15 +8,18 @@ import { AngleInfo } from '../niche/Intro/DragToBigAngles';
 
 interface InputBarForAngleCircleProps {
   angleInfo: AngleInfo;
-  handleAngleInputChange: () => void;
+  handleAngleInputChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  displayUnit: DisplayUnit;
+  setDisplayUnit: React.Dispatch<React.SetStateAction<DisplayUnit>>;
 }
 
 export type DisplayUnit = 'degrees' | 'radians' | 'pi radians' | 'tau radians';
 
 const InputBarForAngleCircle = (props: InputBarForAngleCircleProps) => {
-  const { angleInfo, handleAngleInputChange } = props;
+  const { angleInfo, handleAngleInputChange, displayUnit, setDisplayUnit } =
+    props;
 
-  const [displayUnit, setDisplayUnit] = useState<DisplayUnit>('degrees');
+  // const [displayUnit, setDisplayUnit] = useState<DisplayUnit>('degrees');
 
   return (
     <Wrapper>

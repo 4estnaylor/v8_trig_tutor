@@ -8,7 +8,9 @@ import cl, { color } from '../../../colors';
 import { Tau } from '../../HomePage/MyCanvas/CanvasObjects/UsefulConstants';
 import { Input } from '@mui/material';
 import AngleInput from '../../Inputs/AngleInput';
-import InputBarForAngleCircle from '../../Inputs/InputBarForAngleCircle';
+import InputBarForAngleCircle, {
+  DisplayUnit,
+} from '../../Inputs/InputBarForAngleCircle';
 
 export type Interaction =
   | 'hover'
@@ -79,6 +81,8 @@ const DragToBigAngles = () => {
     lead: 'default',
     overall: '',
   });
+
+  const [displayUnit, setDisplayUnit] = useState<DisplayUnit>('degrees');
 
   const interactionStateRef = useRef(interactionState);
 
@@ -154,12 +158,37 @@ const DragToBigAngles = () => {
     angleInfoRef.current.angle = angleInfo.angle;
   }, [angleInfo]);
 
-  const handleAngleInputChange = () => {
-    let newAngle = Tau / 4;
+  useEffect(() => {
+    console.log('booyah2', (angleInfoRef.current.angle * 360) / Tau);
+    setAngleInfo((prev) => {
+      return { ...prev, angle: angleInfoRef.current.angle };
+    });
+  }, [angleInfoRef.current.angle]);
+
+  const handleAngleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+    let value = Number(e.currentTarget.value);
+
+    let newAngleInRadians = 0;
+    switch (displayUnit) {
+      case 'degrees':
+        newAngleInRadians = (value * Tau) / 360;
+        break;
+      case 'radians':
+        newAngleInRadians = value;
+        break;
+      case 'tau radians':
+        newAngleInRadians = value / Tau;
+        break;
+      case 'pi radians':
+        newAngleInRadians = value / Math.PI;
+        break;
+    }
+
+    angleInfoRef.current.angle = newAngleInRadians;
 
     setAngleInfo((prev) => {
       let angleInfoCopy = { ...prev };
-      angleInfoCopy.angle = newAngle;
+      angleInfoCopy.angle = newAngleInRadians;
       angleInfoRef.current.inputControl = true;
       return angleInfoCopy;
     });
@@ -183,6 +212,8 @@ const DragToBigAngles = () => {
       <InputBarForAngleCircle
         angleInfo={angleInfo}
         handleAngleInputChange={handleAngleInputChange}
+        displayUnit={displayUnit}
+        setDisplayUnit={setDisplayUnit}
       />
       {/* <input
         type="number"
