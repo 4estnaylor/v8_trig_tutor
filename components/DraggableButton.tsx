@@ -17,7 +17,7 @@ type DraggableButtonProps = {
   onStart?: () => void;
   onDrag?: () => void;
   visible?: boolean;
-  angleInfoRef?: { current: AngleInfo };
+  angleInfo?: AngleInfo;
 };
 
 const DEFAULTCOLOR: color = cl.purple;
@@ -32,7 +32,7 @@ const DraggableButton = (props: DraggableButtonProps) => {
     color = cl.black,
     radiusInPx,
     visible = true,
-    angleInfoRef,
+    angleInfo,
   } = props;
   const [isDraggable, setIsDraggable] = useState(false);
 

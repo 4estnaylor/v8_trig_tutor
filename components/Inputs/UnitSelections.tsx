@@ -1,44 +1,49 @@
 import { Chip, Stack } from '@mui/material';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { DisplayUnit } from './InputBarForAngleCircle';
 
-const UnitSelections = () => {
+interface UnitSelectionsProps {
+  displayUnit: DisplayUnit;
+  setDisplayUnit: React.Dispatch<React.SetStateAction<DisplayUnit>>;
+}
+
+const UnitSelections = (props: UnitSelectionsProps) => {
+  const { displayUnit, setDisplayUnit } = props;
   let [selectedUnit, setSelectedUnit] = useState('degrees');
-
-  type UnitType = 'degrees' | 'radians' | 'pi radians' | 'tau radians';
 
   return (
     <Wrapper>
       <Stack direction="column" spacing={1}>
         <CustomChip
           onClick={() => {
-            setSelectedUnit('degrees');
+            setDisplayUnit('degrees');
           }}
-          color={selectedUnit === 'degrees' ? 'primary' : 'default'}
+          color={displayUnit === 'degrees' ? 'primary' : 'default'}
           label="°"
         />
         <CustomChip
           onClick={() => {
-            setSelectedUnit('radians');
+            setDisplayUnit('radians');
           }}
           label="rad"
-          color={selectedUnit === 'radians' ? 'primary' : 'default'}
+          color={displayUnit === 'radians' ? 'primary' : 'default'}
         />
       </Stack>
       <Stack spacing={1}>
         <CustomChip
           onClick={() => {
-            setSelectedUnit('pi radians');
+            setDisplayUnit('pi radians');
           }}
           label="π rad"
-          color={selectedUnit === 'pi radians' ? 'primary' : 'default'}
+          color={displayUnit === 'pi radians' ? 'primary' : 'default'}
         />
         <CustomChip
           label="τ rad"
           onClick={() => {
-            setSelectedUnit('tau radians');
+            setDisplayUnit('tau radians');
           }}
-          color={selectedUnit === 'tau radians' ? 'primary' : 'default'}
+          color={displayUnit === 'tau radians' ? 'primary' : 'default'}
         />
       </Stack>
     </Wrapper>

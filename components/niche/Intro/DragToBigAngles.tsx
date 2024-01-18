@@ -61,11 +61,11 @@ const DragToBigAngles = () => {
   });
 
   const [angleInfo, setAngleInfo] = useState<AngleInfo>(angleInfoInsance);
+
   const angleInfoRef = useRef(angleInfoInsance);
 
   // useEffect(() => {
   //   setAngleInfo(angleInfoRef.current);
-  //   console.log('changinasdf');
   // }, [angleInfoRef.current]);
 
   const [anchorStatus, setAnchorStatus] = useState('inactive');
@@ -81,37 +81,6 @@ const DragToBigAngles = () => {
   });
 
   const interactionStateRef = useRef(interactionState);
-
-  useEffect(() => {
-    interactionStateRef.current = interactionState;
-  }, [interactionState]);
-
-  useEffect(() => {
-    controlledPositionCenterRef.current = controlledPositionCenter;
-  }, [controlledPositionCenter]);
-
-  // anchor ref should control when ...
-  useEffect(() => {
-    if (interactionStateRef.current.anchor === 'dragged') return;
-    // controlledPositionAnchorRef.current = controlledPositionAnchor;
-    setControlledPositionAnchor(controlledPositionAnchorRef.current);
-  }, [controlledPositionAnchorRef.current]);
-
-  // anchor position should control when... anchor is dragging
-  useEffect(() => {
-    if (interactionStateRef.current.anchor !== 'dragged') return;
-    // console.log('is changing');
-    controlledPositionAnchorRef.current = controlledPositionAnchor;
-  }, [controlledPositionAnchor]);
-
-  useEffect(() => {
-    controlledPositionLeadRef.current = controlledPositionLead;
-  }, [controlledPositionLead]);
-
-  useEffect(() => {
-    if (interactionStateRef.current.lead === 'dragged') return;
-    setControlledPositionLead(controlledPositionLeadRef.current);
-  }, [controlledPositionLeadRef.current]);
 
   const handleCenterDrag = () => {
     setInteractionState({
@@ -136,19 +105,85 @@ const DragToBigAngles = () => {
   };
 
   useEffect(() => {
+    interactionStateRef.current = interactionState;
+  }, [interactionState]);
+
+  useEffect(() => {
+    controlledPositionCenterRef.current = controlledPositionCenter;
+  }, [controlledPositionCenter]);
+
+  // anchor ref should control when ...
+  useEffect(() => {
+    if (interactionStateRef.current.anchor === 'dragged') return;
+    // controlledPositionAnchorRef.current = controlledPositionAnchor;
+    setControlledPositionAnchor(controlledPositionAnchorRef.current);
+  }, [controlledPositionAnchorRef.current]);
+
+  // anchor position should control when... anchor is dragging
+  useEffect(() => {
+    if (interactionStateRef.current.anchor !== 'dragged') return;
+    controlledPositionAnchorRef.current = controlledPositionAnchor;
+  }, [controlledPositionAnchor]);
+
+  useEffect(() => {
+    controlledPositionLeadRef.current = controlledPositionLead;
+  }, [controlledPositionLead]);
+
+  useEffect(() => {
+    if (interactionStateRef.current.lead === 'dragged') return;
+    console.log('happenin');
+    setControlledPositionLead(controlledPositionLeadRef.current);
+  }, [controlledPositionLeadRef.current]);
+
+  useEffect(() => {
     // if (true) return;
+    if (angleInfoRef.current.inputControl === true) {
+      return;
+    }
     setAngleInfo((prev) => {
+      console.log('olololol');
       return { ...prev, angle: angleInfoRef.current.angle };
     });
   }, [angleInfoRef.current.angle]);
 
   useEffect(() => {
+    if (angleInfoRef.current.inputControl === false) {
+      return;
+    }
     console.log('ah');
     angleInfoRef.current.angle = angleInfo.angle;
   }, [angleInfo]);
 
+  const handleAngleInputChange = () => {
+    let newAngle = Tau / 4;
+
+    setAngleInfo((prev) => {
+      let angleInfoCopy = { ...prev };
+      angleInfoCopy.angle = newAngle;
+      angleInfoRef.current.inputControl = true;
+      return angleInfoCopy;
+    });
+  };
+
+  // const handleAngleInputchange ={(e:Event) => {
+  //   let numberValue = Number(e.target.value);
+  //   if (typeof numberValue !== 'number') {
+  //     return;
+  //   }
+  //   let newAngle = (numberValue * Tau) / 360;
+
+  //   setAngleInfo((prev) => {
+  //     return { ...prev, angle: newAngle };
+  //   });
+  //   angleInfoRef.current.inputControl = true;
+  // }}
+
   return (
     <Wrapper>
+      <InputBarForAngleCircle
+        angleInfo={angleInfo}
+        handleAngleInputChange={handleAngleInputChange}
+      />
       {/* <input
         type="number"
         value={Math.round((angleInfo.angle * 360) / Tau)}
@@ -169,7 +204,7 @@ const DragToBigAngles = () => {
        */}
 
       <DraggableButton
-        angleInfoRef={angleInfoRef}
+        angleInfo={angleInfo}
         controlledPosition={controlledPositionCenter}
         setControlledPosition={setControlledPositionCenter}
         onDrag={handleCenterDrag}
@@ -185,7 +220,7 @@ const DragToBigAngles = () => {
       />
 
       <DraggableButton
-        angleInfoRef={angleInfoRef}
+        angleInfo={angleInfo}
         controlledPosition={controlledPositionAnchor}
         setControlledPosition={setControlledPositionAnchor}
         onStart={() => {
@@ -213,7 +248,7 @@ const DragToBigAngles = () => {
       />
 
       <DraggableButton
-        angleInfoRef={angleInfoRef}
+        angleInfo={angleInfo}
         controlledPosition={controlledPositionLead}
         setControlledPosition={setControlledPositionLead}
         onStart={() => {
@@ -250,7 +285,6 @@ const DragToBigAngles = () => {
           angleInfoRef,
         }}
       />
-      <InputBarForAngleCircle />
     </Wrapper>
   );
 };

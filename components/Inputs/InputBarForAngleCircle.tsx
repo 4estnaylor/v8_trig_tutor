@@ -1,17 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import AngleInput from './AngleInput';
 import cl from '../../colors';
 import UnitSelections from './UnitSelections';
 import OffsetInput from './OffsetInput';
+import { AngleInfo } from '../niche/Intro/DragToBigAngles';
 
-const InputBarForAngleCircle = () => {
+interface InputBarForAngleCircleProps {
+  angleInfo: AngleInfo;
+  handleAngleInputChange: () => void;
+}
+
+export type DisplayUnit = 'degrees' | 'radians' | 'pi radians' | 'tau radians';
+
+const InputBarForAngleCircle = (props: InputBarForAngleCircleProps) => {
+  const { angleInfo, handleAngleInputChange } = props;
+
+  const [displayUnit, setDisplayUnit] = useState<DisplayUnit>('degrees');
+
   return (
     <Wrapper>
-      <UnitSelections />
+      <UnitSelections
+        displayUnit={displayUnit}
+        setDisplayUnit={setDisplayUnit}
+      />
       <ValuesWrapper>
         {/* <OffsetInput /> */}
-        <AngleInput />
+        <AngleInput
+          angle={angleInfo.angle}
+          displayUnit={displayUnit}
+          handleAngleInputChange={handleAngleInputChange}
+        />
       </ValuesWrapper>
     </Wrapper>
   );

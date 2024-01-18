@@ -124,13 +124,18 @@ class RevampedAngleCircle {
   update = () => {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     if (this.angleInfoRef.current.inputControl === true) {
-      console.log('hrm', (this.angleInfoRef.current.angle * 360) / Tau);
+      // console.log('hrm', (this.angleInfoRef.current.angle * 360) / Tau);
 
       this.angle = this.angleInfoRef.current.angle;
       this.angleInfoRef.current.inputControl = false;
-      this.moveLeadNodeButtonToDefaultPosition();
+      // this.moveLeadNodeButtonToDefaultPosition();
+      if (!this.leadNodePositionRef) return;
+
+      // console.log('changing leadNodePosition Ref');
+      this.leadNodePositionRef!.current.x = 100;
+
       // this.leadNodePositionRef!.current.x = 0;
-      this.moveAnchorButtonToDefaultPosition();
+      // this.moveAnchorButtonToDefaultPosition();
       // this.updateLeadPosition();
     }
     // console.log(this.angle);
@@ -463,18 +468,13 @@ class RevampedAngleCircle {
     this.context.strokeStyle = cl.getHSLA(cl.gray_dark, 0.5);
 
     this.context.beginPath();
-    this.makePolarLine(
-      0,
-      0,
-      0,
-      this.actualRadiusLengthInPixels + revolutionGap + dashLength
-    );
+    this.makePolarLine(0, 0, 0, this.actualRadiusLengthInPixels);
 
     // this.context.setLineDash([8, 25]);
     // this.context.lineCap = 'round';
 
-    this.context.stroke();
     this.context.lineCap = 'butt';
+    this.context.stroke();
 
     this.drawAngleDashes(
       this.anchorAngleOfOffset,
@@ -551,7 +551,7 @@ class RevampedAngleCircle {
 
     // let pxSpacePerDash = circumferanceInPx / dashesInRevolution;
     let dashWidth = 1;
-    let dashLength = 120;
+    let dashLength = 20;
 
     let dashColor = angle > 0 ? cl.getHSL(cl.blue) : cl.getHSL(cl.red);
     let angleIncrement = Tau / dashesInRevolution;
@@ -617,33 +617,38 @@ class RevampedAngleCircle {
   ) => {
     this.context.lineWidth = dashWidthPx;
     let minLengthFromRadius = minLength || 0;
+    let startLength = this.actualRadiusLengthInPixels + revolutionGap;
+    let endLength = startLength + dashLengthPx;
 
     //find distance to lead button
-    let hypotenuseToLeadButton;
-    if (!this.leadNodePositionRef || !this.centerNodePositionRef) return;
-    let xDiff =
-      this.leadNodePositionRef?.current.x -
-      this.centerNodePositionRef?.current.x;
-    let yDiff =
-      this.leadNodePositionRef.current.y -
-      this.centerNodePositionRef?.current.y;
+    // let hypotenuseToLeadButton;
+    // if (!this.leadNodePositionRef || !this.centerNodePositionRef) return;
+    // let xDiff =
+    //   this.leadNodePositionRef?.current.x -
+    //   this.centerNodePositionRef?.current.x;
+    // let yDiff =
+    //   this.leadNodePositionRef.current.y -
+    //   this.centerNodePositionRef?.current.y;
 
-    hypotenuseToLeadButton = Math.sqrt(xDiff ** 2 + yDiff ** 2);
+    // hypotenuseToLeadButton = Math.sqrt(xDiff ** 2 + yDiff ** 2);
 
     // maake calculatedLengthFromRadius
-    let caluculatedLengthFromRadius = hypotenuseToLeadButton + 0;
-    if (
-      caluculatedLengthFromRadius <
-      this.actualRadiusLengthInPixels + minLengthFromRadius + dashLengthPx
-    ) {
-      caluculatedLengthFromRadius =
-        minLengthFromRadius + this.actualRadiusLengthInPixels + dashLengthPx;
-    }
+    // let caluculatedLengthFromRadius = hypotenuseToLeadButton + 0;
+    // if (
+    //   caluculatedLengthFromRadius <
+    //   this.actualRadiusLengthInPixels + minLengthFromRadius + dashLengthPx
+    // ) {
+    //   caluculatedLengthFromRadius =
+    //     minLengthFromRadius + this.actualRadiusLengthInPixels + dashLengthPx;
+    // }
 
     this.context.strokeStyle = color;
     this.context.beginPath();
     let startRadius = minLengthFromRadius + this.actualRadiusLengthInPixels;
-    let endRadius = caluculatedLengthFromRadius;
+    if (startRadius < 150) {
+      startRadius = 150;
+    }
+    let endRadius = startRadius + dashLengthPx;
     this.makePolarLine(angle, startRadius, angle, endRadius);
 
     this.context.stroke();
