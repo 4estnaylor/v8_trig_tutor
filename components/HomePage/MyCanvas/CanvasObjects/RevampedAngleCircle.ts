@@ -122,7 +122,17 @@ class RevampedAngleCircle {
 
   updateLeadWithInputControl = () => {
     if (this.angleInfoRef.current.inputControl === true) {
+      let revolutions = Math.floor(this.angleInfoRef.current.angle / Tau);
+      // console.log('mishafda', this.angleInfoRef.current.angle);
+      // let angleLeftOver = this.angleInfoRef.current.angle % Tau;
+      this.revolutions = revolutions;
       this.angle = this.angleInfoRef.current.angle;
+      // console.log(
+      //   'current angle',
+      //   (this.angle * 360) / Tau,
+      //   'revolutions: ',
+      //   this.revolutions
+      // );
       // this.angle = (2 * Tau) / 3;
       this.moveLeadNodeButtonToDefaultPosition();
       this.angleInfoRef.current.inputControl = false;
@@ -136,11 +146,15 @@ class RevampedAngleCircle {
 
     // figuring out how to control angle from input and have lead angle button acutally move...
 
-    this.updateLeadWithInputControl();
     this.updateCenterPosition();
     this.updateAnchorPosition();
     this.updateLeadPosition();
-    this.calculateAngle();
+    if (this.angleInfoRef.current.inputControl === true) {
+      this.updateLeadWithInputControl();
+      console.log('revamped: updatingLeadWithInput');
+    } else {
+      this.calculateAngle();
+    }
   };
 
   updateCenterPosition = () => {
@@ -248,6 +262,7 @@ class RevampedAngleCircle {
   };
 
   calculateAngle = () => {
+    if (this.angleInfoRef.current.inputControl === true) return;
     if (this.interactionStateRef.current.anchor === 'dragged') {
       return;
     }
@@ -297,6 +312,7 @@ class RevampedAngleCircle {
 
     this.angle = calculatedAngle;
     this.angleInfoRef.current.angle = calculatedAngle;
+    console.log('revamped: calculated angle');
   };
 
   drawAnchorNotch = () => {

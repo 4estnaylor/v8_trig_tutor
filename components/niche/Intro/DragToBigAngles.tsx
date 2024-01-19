@@ -135,7 +135,7 @@ const DragToBigAngles = () => {
 
   useEffect(() => {
     if (interactionStateRef.current.lead === 'dragged') return;
-    console.log('happenin');
+    console.log('UE-controlledPositionLeadREf—setting controlledPositionLead');
     setControlledPositionLead(controlledPositionLeadRef.current);
   }, [controlledPositionLeadRef.current]);
 
@@ -144,8 +144,9 @@ const DragToBigAngles = () => {
     if (angleInfoRef.current.inputControl === true) {
       return;
     }
+    console.log('UE-angleInfoRef.current.angle');
     setAngleInfo((prev) => {
-      console.log('olololol');
+      // console.log('olololol');
       return { ...prev, angle: angleInfoRef.current.angle };
     });
   }, [angleInfoRef.current.angle]);
@@ -154,18 +155,18 @@ const DragToBigAngles = () => {
     if (angleInfoRef.current.inputControl === false) {
       return;
     }
-    console.log('ah');
+    console.log('UE-angleInfo');
     angleInfoRef.current.angle = angleInfo.angle;
   }, [angleInfo]);
 
   useEffect(() => {
-    console.log('booyah2', (angleInfoRef.current.angle * 360) / Tau);
+    // console.log('booyah2', (angleInfoRef.current.angle * 360) / Tau);
     setAngleInfo((prev) => {
       return { ...prev, angle: angleInfoRef.current.angle };
     });
   }, [angleInfoRef.current.angle]);
 
-  const handleAngleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleAngleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = Number(e.currentTarget.value);
 
     let newAngleInRadians = 0;
@@ -177,13 +178,14 @@ const DragToBigAngles = () => {
         newAngleInRadians = value;
         break;
       case 'tau radians':
-        newAngleInRadians = value / Tau;
+        newAngleInRadians = value * Tau;
         break;
       case 'pi radians':
-        newAngleInRadians = value / Math.PI;
+        newAngleInRadians = value * Math.PI;
         break;
     }
 
+    console.log(newAngleInRadians);
     angleInfoRef.current.angle = newAngleInRadians;
 
     setAngleInfo((prev) => {

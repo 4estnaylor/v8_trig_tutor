@@ -10,7 +10,7 @@ let endAdornment = <InputAdornment position="end">π rad</InputAdornment>;
 interface AngleInputProps {
   angle: number;
   displayUnit: DisplayUnit;
-  handleAngleInputChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  handleAngleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const AngleInput = (props: AngleInputProps) => {
@@ -68,11 +68,7 @@ const AngleInput = (props: AngleInputProps) => {
       InputLabelProps={{
         shrink: true,
       }}
-      onChange={(e) => {
-        console.log('shakakak', e.currentTarget.value);
-        // let valueInCorrectUnits = (Number(e.currentTarget.value) * Tau) / 360;
-        handleAngleInputChange(e);
-      }}
+      onChange={handleAngleInputChange}
     ></Wrapper>
   );
 };

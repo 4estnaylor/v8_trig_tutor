@@ -8,7 +8,7 @@ import { AngleInfo } from '../niche/Intro/DragToBigAngles';
 
 interface InputBarForAngleCircleProps {
   angleInfo: AngleInfo;
-  handleAngleInputChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  handleAngleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   displayUnit: DisplayUnit;
   setDisplayUnit: React.Dispatch<React.SetStateAction<DisplayUnit>>;
 }
