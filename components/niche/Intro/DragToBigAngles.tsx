@@ -45,9 +45,30 @@ let angleInfoInsance: AngleInfo = {
   color: cl.green,
   inputControl: false,
 };
+type NodeRef = React.MutableRefObject<{
+  x: number;
+  y: number;
+}>;
+
+export interface ControlledPositions {
+  lead: NodeRef;
+  center: NodeRef;
+  anchor: NodeRef;
+}
 
 const DragToBigAngles = () => {
-  const slider360ValueRef = useRef(20);
+  let leadStartPos = { x: 100, y: 100 };
+  let centerStartPos = { x: 200, y: 200 };
+  let anchorStartPos = { x: 300, y: 200 };
+
+  let [controlledPositions, setControlledPositions] =
+    useState<ControlledPositions>({
+      lead: useRef(leadStartPos),
+      center: useRef(centerStartPos),
+      anchor: useRef(anchorStartPos),
+    });
+
+  // hopefully gonna get rid of these
   const [controlledPositionCenter, setControlledPositionCenter] = useState({
     x: 200,
     y: 200,
@@ -70,10 +91,10 @@ const DragToBigAngles = () => {
   //   setAngleInfo(angleInfoRef.current);
   // }, [angleInfoRef.current]);
 
-  const [anchorStatus, setAnchorStatus] = useState('inactive');
   const controlledPositionCenterRef = useRef(controlledPositionCenter);
   const controlledPositionAnchorRef = useRef(controlledPositionAnchor);
   const controlledPositionLeadRef = useRef(controlledPositionAnchor);
+
   const [interactionState, setInteractionState] = useState({
     inputControl: false,
     anchor: 'default',

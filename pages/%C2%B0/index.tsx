@@ -36,6 +36,7 @@ import DragToCorrectAngle from '../../components/niche/Intro/DragToCorrectAngle'
 import NegativeAngles from '../../components/niche/Intro/NegativeAngles';
 import DragToCorrectAngleWithNegatives from '../../components/niche/Intro/DragToCorrectAngleWithNegatives';
 import DragToBigAngles from '../../components/niche/Intro/DragToBigAngles';
+import DragRevamped from '../../components/niche/Intro/DragRevamped';
 
 export interface TargetValueObj {
   value: number;
@@ -420,7 +421,8 @@ const Degree = () => {
         <DragToCorrectAngle />
         <NegativeAngles />
         <DragToCorrectAngleWithNegatives /> */}
-        <DragToBigAngles />
+        {/* <DragToBigAngles /> */}
+        <DragRevamped />
       </>
     </TopicComponentBoilerPlate>
   );
