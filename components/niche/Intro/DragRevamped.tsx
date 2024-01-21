@@ -86,13 +86,22 @@ const DragRevamped = () => {
     });
   };
 
+  const handleLeadDrag = (e: Event, position: { x: number; y: number }) => {
+    const { x, y } = position;
+    let controlledPositionClone = { ...controlledPositions };
+    console.log('happening!!');
+    controlledPositionClone.lead.current.x = x;
+    controlledPositionClone.lead.current.y = y;
+    setControlledPositions(controlledPositionClone);
+  };
+
   useEffect(() => {
     setAngleInfo(angleInfoRef.current);
   }, [angleInfoRef.current]);
 
   return (
     <Wrapper>
-      <RevampedDraggableButton />
+      <RevampedDraggableButton onDrag={handleLeadDrag} />
 
       <InputBarForAngleCircle
         angleInfo={angleInfo}

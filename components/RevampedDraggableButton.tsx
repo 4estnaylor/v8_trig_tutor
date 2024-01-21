@@ -5,11 +5,12 @@ import cl, { color } from '../colors';
 import { AngleInfo } from './niche/Intro/DragToBigAngles';
 
 interface RevampedDraggableButtonProps {
-  setAngleInfo: React.Dispatch<React.SetStateAction<AngleInfo>>;
+  // setAngleInfo: React.Dispatch<React.SetStateAction<AngleInfo>>;
+  onDrag: (e: Event, position: { x: number; y: number }) => void;
 }
 
 const RevampedDraggableButton = (props: RevampedDraggableButtonProps) => {
-  const { setAngleInfo } = props;
+  const { onDrag } = props;
   const [haloOpacity, setHaloOpacity] = useState(0.2);
   const [controlledPosition, setControlledPosition] = useState({ x: 0, y: 0 });
   const [size, setSize] = useState(1);
@@ -18,22 +19,10 @@ const RevampedDraggableButton = (props: RevampedDraggableButtonProps) => {
   let color = cl.green as color;
   let colorDark = cl.adjustLightness(color, color.lightness * (4 / 5));
 
-  const onDrag = (e: Event, position: { x: number; y: number }) => {
-    const { x, y } = position;
-    console.log(x, y);
-    setControlledPosition({ x, y });
-  };
-
-  useEffect(() => {
-    // setAngleInfo((prev) => {
-    //   return { ...prev };
-    // });
-  }, [controlledPosition]);
-
   return (
     <Wrapper>
       <Draggable
-        onDrag={(e: any, position) => {
+        onDrag={(e: any, position: { x: number; y: number }) => {
           onDrag(e, position);
         }}
       >
