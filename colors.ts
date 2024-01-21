@@ -13,7 +13,14 @@ const getHSLA = (color: color, a: number) => {
   const string = `hsla(${color.hue} ${color.saturation}% ${color.lightness}% / ${a})`;
   return string;
 };
+
+const adjustLightness = (color: color, lightness: number) => {
+  let adjustedForLightness = { ...color };
+  adjustedForLightness.lightness = lightness;
+  return adjustedForLightness;
+};
 // export const turqouise: color = { hue: 174, saturation: 100, lightness: 50 };
+
 // const orange: color = { hue: 12, saturation: 88, lightness: 56 };
 // const beige: color = { hue: 354, saturation: 22, lightness: 91 };
 // const black: color = { hue: 354, saturation: 7, lightness: 17 };
@@ -43,6 +50,7 @@ const green = { hue: 164, saturation: 50, lightness: 50 };
 const cl = {
   getHSL,
   getHSLA,
+  adjustLightness,
   black,
   white,
   gray_light,

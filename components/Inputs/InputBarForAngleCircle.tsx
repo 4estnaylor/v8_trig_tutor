@@ -44,7 +44,7 @@ const Wrapper = styled.div`
   background-color: white;
   margin-top: -10px;
   height: 110px;
-  border-radius: 0px 0px 16px 16px;
+  border-radius: 16px 16px 0px 0px;
   display: flex;
   justify-content: space-between;
   box-shadow: 0px 0px 16px ${cl.getHSL(cl.gray_light)};
