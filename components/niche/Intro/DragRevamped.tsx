@@ -100,24 +100,25 @@ const DragRevamped = () => {
   }, [angleInfoRef.current]);
 
   return (
-    <Wrapper>
-      <RevampedDraggableButton onDrag={handleLeadDrag} />
-
-      <InputBarForAngleCircle
-        angleInfo={angleInfo}
-        handleAngleInputChange={handleAngleInputChange}
-        displayUnit={displayUnit}
-        setDisplayUnit={setDisplayUnit}
-      />
-      <CanvasForTopicComponent
-        sceneGetter={getSceneRevampedAngle}
-        objectPassedToScene={{
-          controlledPositions,
-          interactionStateRef,
-          angleInfoRef,
-        }}
-      />
-    </Wrapper>
+    <div>
+      <Wrapper>
+        <InputBarForAngleCircle
+          angleInfo={angleInfo}
+          handleAngleInputChange={handleAngleInputChange}
+          displayUnit={displayUnit}
+          setDisplayUnit={setDisplayUnit}
+        />
+        <RevampedDraggableButton onDrag={handleLeadDrag} />
+        <CanvasForTopicComponent
+          sceneGetter={getSceneRevampedAngle}
+          objectPassedToScene={{
+            controlledPositions,
+            interactionStateRef,
+            angleInfoRef,
+          }}
+        />
+      </Wrapper>
+    </div>
   );
 };
 

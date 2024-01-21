@@ -62,13 +62,13 @@ const Outer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translate(-20px, -20px);
+  transform: translate(-20px, 20px);
 
   &:hover {
     cursor: grab;
     height: ${45}px;
     width: ${45}px;
-    transform: translate(-25px, -25px);
+    transform: translate(-25px, 25px);
   }
   &:active {
     /* background-color: ${cl.getHSLA(cl.purple, 1)}; */

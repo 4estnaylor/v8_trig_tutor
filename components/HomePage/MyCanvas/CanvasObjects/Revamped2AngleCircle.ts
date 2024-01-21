@@ -369,6 +369,7 @@ class Revamped2AngleCircle {
     this.context.setLineDash([8, 25]);
     this.context.lineCap = 'butt';
     this.context.lineWidth = 2;
+    this.context.stroke();
     if (
       this.interactionStateRef.current.lead === 'pressed' ||
       this.interactionStateRef.current.lead === 'dragged'
@@ -471,6 +472,7 @@ class Revamped2AngleCircle {
       this.revolutions
     );
     this.drawAngle();
+    this.drawLeadLine();
   };
 }
 
