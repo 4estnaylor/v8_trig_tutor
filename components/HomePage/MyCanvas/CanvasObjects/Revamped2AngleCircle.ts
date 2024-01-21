@@ -462,6 +462,7 @@ class Revamped2AngleCircle {
   };
 
   test = () => {
+    // this.controlledPositions.lead.current.x = 100;
     this.update();
     // console.log((this.angleInfoRef.current.angle * 360) / Tau);
 

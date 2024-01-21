@@ -95,9 +95,13 @@ const DragRevamped = () => {
     setControlledPositions(controlledPositionClone);
   };
 
+  // when angleInfo gets change setAngleInfo to somehting different.
   useEffect(() => {
+    console.log(' this is herpingin');
     setAngleInfo(angleInfoRef.current);
-  }, [angleInfoRef.current]);
+  }, [angleInfoRef.current.angle]);
+
+  useEffect(() => {}, []);
 
   return (
     <div>
@@ -108,7 +112,10 @@ const DragRevamped = () => {
           displayUnit={displayUnit}
           setDisplayUnit={setDisplayUnit}
         />
-        <RevampedDraggableButton onDrag={handleLeadDrag} />
+        <RevampedDraggableButton
+          onDrag={handleLeadDrag}
+          position={controlledPositions.lead.current}
+        />
         <CanvasForTopicComponent
           sceneGetter={getSceneRevampedAngle}
           objectPassedToScene={{

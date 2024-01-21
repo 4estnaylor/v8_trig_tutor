@@ -7,12 +7,14 @@ import { AngleInfo } from './niche/Intro/DragToBigAngles';
 interface RevampedDraggableButtonProps {
   // setAngleInfo: React.Dispatch<React.SetStateAction<AngleInfo>>;
   onDrag: (e: Event, position: { x: number; y: number }) => void;
+  position: { x: number; y: number };
 }
 
 const RevampedDraggableButton = (props: RevampedDraggableButtonProps) => {
-  const { onDrag } = props;
+  const { onDrag, position } = props;
+  console.log('revamping');
   const [haloOpacity, setHaloOpacity] = useState(0.2);
-  const [controlledPosition, setControlledPosition] = useState({ x: 0, y: 0 });
+
   const [size, setSize] = useState(1);
   const radius = 30;
   const offSet = size / 2;
@@ -25,10 +27,11 @@ const RevampedDraggableButton = (props: RevampedDraggableButtonProps) => {
         onDrag={(e: any, position: { x: number; y: number }) => {
           onDrag(e, position);
         }}
+        position={position}
       >
         <div
           style={{
-            border: '2px solid black',
+            // border: '2px solid black',
             display: 'flex',
             height: '50px',
             width: '50px',
