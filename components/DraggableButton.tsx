@@ -6,6 +6,9 @@ import Draggable from 'react-draggable';
 import ControlCameraIcon from '@mui/icons-material/ControlCamera';
 import { AngleInfo } from './niche/Intro/DragToBigAngles';
 
+const offsetX = 25;
+const offsetY = 25;
+
 type DraggableButtonProps = {
   controlledPosition: { x: number; y: number };
   setControlledPosition: React.Dispatch<
@@ -139,6 +142,7 @@ const Wrapper = styled.button<{
   }
   /* display: ${(p) => (p.$visible ? 'flex' : 'none')}; */
   opacity: ${(p) => (p.$visible ? 1 : 0)};
+  transform: translate(${offsetX}px, ${offsetY}px);
 `;
 
 const InnerDot = styled.div<{ color: color }>`
@@ -153,6 +157,7 @@ const InnerDot = styled.div<{ color: color }>`
   display: flex;
   align-items: center;
   justify-content: center;
+
   /* transform: translate(-50%, -50%); */
 `;
 

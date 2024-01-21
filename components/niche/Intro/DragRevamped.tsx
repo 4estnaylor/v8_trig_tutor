@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Tau } from '../../HomePage/MyCanvas/CanvasObjects/UsefulConstants';
 import cl from '../../../colors';
 import {
@@ -74,7 +74,7 @@ const DragRevamped = () => {
         break;
     }
 
-    console.log(newAngleInRadians);
+    console.log((newAngleInRadians * 360) / Tau);
     angleInfoRef.current.angle = newAngleInRadians;
 
     setAngleInfo((prev) => {
@@ -84,6 +84,10 @@ const DragRevamped = () => {
       return angleInfoCopy;
     });
   };
+
+  useEffect(() => {
+    setAngleInfo(angleInfoRef.current);
+  }, [angleInfoRef.current]);
 
   return (
     <Wrapper>

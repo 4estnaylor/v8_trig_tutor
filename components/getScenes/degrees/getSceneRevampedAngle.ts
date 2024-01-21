@@ -1,6 +1,17 @@
 import Revamped2AngleCircle from '../../HomePage/MyCanvas/CanvasObjects/Revamped2AngleCircle';
 import EventHandlerConfig from '../../HomePage/MyCanvas/EventHandler/EventHandlerConfig';
 import { Scene, SceneGetter } from '../../HomePage/MyCanvas/Scene/Scene';
+import {
+  AngleInfo,
+  ControlledPositions,
+  InteractionState,
+} from '../../niche/Intro/DragToBigAngles';
+
+interface objectPassedForAngleCircle {
+  controlledPositions: ControlledPositions;
+  interactionStateRef: React.RefObject<InteractionState>;
+  angleInfoRef: React.RefObject<AngleInfo>;
+}
 
 const getSceneRevampedAngle: SceneGetter = (
   context: CanvasRenderingContext2D,
@@ -13,14 +24,19 @@ const getSceneRevampedAngle: SceneGetter = (
   const { controlledPositions, interactionStateRef, angleInfoRef } =
     passedObject;
 
-  console.log(controlledPositions);
+  console.log(passedObject);
 
   // let revampedCircle = new RevampedAngleCircle(
   //   context,
   //   angleInfoRef,
   //   controlledPositions
   // );
-  let revamped2Circle = new Revamped2AngleCircle();
+  let revamped2Circle = new Revamped2AngleCircle(
+    context,
+    angleInfoRef,
+    interactionStateRef,
+    controlledPositions
+  );
 
   // revampedCircle.interactionStateRef = interactionStateRef;
 
