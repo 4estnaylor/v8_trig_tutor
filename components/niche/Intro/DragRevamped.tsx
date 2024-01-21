@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import CanvasForTopicComponent from '../../HomePage/MyCanvas/CanvasForTopicComponent';
 import getSceneDragToBigAngles from '../../getScenes/degrees/getSceneDragToBigAngles';
 import getSceneRevampedAngle from '../../getScenes/degrees/getSceneRevampedAngle';
+import RevampedDraggableButton from '../../RevampedDraggableButton';
 
 let angleInfoInsance: AngleInfo = {
   angle: Tau / 3,
@@ -91,6 +92,8 @@ const DragRevamped = () => {
 
   return (
     <Wrapper>
+      <RevampedDraggableButton />
+
       <InputBarForAngleCircle
         angleInfo={angleInfo}
         handleAngleInputChange={handleAngleInputChange}
