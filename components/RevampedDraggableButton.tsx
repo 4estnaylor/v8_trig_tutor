@@ -31,7 +31,7 @@ const RevampedDraggableButton = (props: RevampedDraggableButtonProps) => {
       >
         <div
           style={{
-            // border: '2px solid black',
+            border: '2px solid black',
             display: 'flex',
             height: '50px',
             width: '50px',
@@ -65,15 +65,16 @@ const Outer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translate(-20px, 20px);
+  transform: translate(-20px, 30px);
 
   &:hover {
     cursor: grab;
     height: ${45}px;
     width: ${45}px;
-    transform: translate(-25px, 25px);
+    transform: translate(-25px, 23px);
   }
   &:active {
+    /* transform: translate(0px, -85px); */
     /* background-color: ${cl.getHSLA(cl.purple, 1)}; */
     cursor: grabbing;
   }
