@@ -133,13 +133,13 @@ const DragRevamped = () => {
         />
         <RevampedDraggableButton
           onDrag={handleDrag}
-          position={controlledPositions.lead.current}
-          nodeType="lead"
+          position={controlledPositions.center.current}
+          nodeType="center"
         />
         <RevampedDraggableButton
           onDrag={handleDrag}
-          position={controlledPositions.center.current}
-          nodeType="center"
+          position={controlledPositions.lead.current}
+          nodeType="lead"
         />
 
         <CanvasForTopicComponent

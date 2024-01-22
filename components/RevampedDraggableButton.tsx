@@ -58,7 +58,9 @@ const RevampedDraggableButton = (props: RevampedDraggableButtonProps) => {
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  position: absolute;
+`;
 
 const Outer = styled.div`
   background-color: ${cl.getHSLA(cl.green, 0.5)};
@@ -71,13 +73,13 @@ const Outer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translate(-20px, 30px);
+  transform: translate(-17.5px, -17.5px);
 
   &:hover {
     cursor: grab;
     height: ${45}px;
     width: ${45}px;
-    transform: translate(-25px, 23px);
+    transform: translate(-22.5px, -22.5px);
   }
   &:active {
     /* transform: translate(0px, -85px); */
