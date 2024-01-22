@@ -124,7 +124,7 @@ class Revamped2AngleCircle {
   };
 
   calculateAngleOffSetFromAnchorDrag = () => {
-    if (this.interactionStateRef.current.anchor !== 'dragged') return;
+    // if (this.interactionStateRef.current.anchor !== 'dragged') return;
 
     let center = this.controlledPositions.center.current;
     let anchor = this.controlledPositions.anchor.current;
@@ -226,6 +226,7 @@ class Revamped2AngleCircle {
     this.positionAnchorOnCenterDrag();
   };
 
+  updateCenterPosition = () => {};
   update = () => {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
