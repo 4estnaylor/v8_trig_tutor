@@ -52,6 +52,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   border-top: 2px solid ${cl.getHSL(cl.gray_light)};
+  overflow: hidden;
 `;
 
 const ValuesWrapper = styled.div`
