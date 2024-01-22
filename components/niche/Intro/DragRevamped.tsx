@@ -141,6 +141,11 @@ const DragRevamped = () => {
           position={controlledPositions.lead.current}
           nodeType="lead"
         />
+        <RevampedDraggableButton
+          onDrag={handleDrag}
+          position={controlledPositions.anchor.current}
+          nodeType="anchor"
+        />
 
         <CanvasForTopicComponent
           sceneGetter={getSceneRevampedAngle}
