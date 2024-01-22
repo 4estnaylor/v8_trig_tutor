@@ -24,6 +24,8 @@ let angleInfoInsance: AngleInfo = {
   inputControl: false,
 };
 
+export type NodeType = 'lead' | 'anchor' | 'center';
+
 let leadStartPos = { x: 100, y: 100 };
 let centerStartPos = { x: 200, y: 200 };
 let anchorStartPos = { x: 300, y: 200 };
@@ -86,12 +88,29 @@ const DragRevamped = () => {
     });
   };
 
-  const handleLeadDrag = (e: Event, position: { x: number; y: number }) => {
+  const handleDrag = (
+    e: Event,
+    position: { x: number; y: number },
+    nodeType: NodeType
+  ) => {
     const { x, y } = position;
     let controlledPositionClone = { ...controlledPositions };
     console.log('happening!!');
-    controlledPositionClone.lead.current.x = x;
-    controlledPositionClone.lead.current.y = y;
+    switch (nodeType) {
+      case 'lead':
+        controlledPositionClone.lead.current.x = x;
+        controlledPositionClone.lead.current.y = y;
+        break;
+      case 'anchor':
+        controlledPositionClone.anchor.current.x = x;
+        controlledPositionClone.anchor.current.y = y;
+        break;
+      case 'center':
+        controlledPositionClone.center.current.x = x;
+        controlledPositionClone.center.current.y = y;
+        break;
+    }
+
     setControlledPositions(controlledPositionClone);
   };
 
@@ -113,9 +132,16 @@ const DragRevamped = () => {
           setDisplayUnit={setDisplayUnit}
         />
         <RevampedDraggableButton
-          onDrag={handleLeadDrag}
+          onDrag={handleDrag}
           position={controlledPositions.lead.current}
+          nodeType="lead"
         />
+        <RevampedDraggableButton
+          onDrag={handleDrag}
+          position={controlledPositions.center.current}
+          nodeType="center"
+        />
+
         <CanvasForTopicComponent
           sceneGetter={getSceneRevampedAngle}
           objectPassedToScene={{

@@ -3,15 +3,21 @@ import Draggable from 'react-draggable';
 import styled from 'styled-components';
 import cl, { color } from '../colors';
 import { AngleInfo } from './niche/Intro/DragToBigAngles';
+import { NodeType } from './niche/Intro/DragRevamped';
 
 interface RevampedDraggableButtonProps {
   // setAngleInfo: React.Dispatch<React.SetStateAction<AngleInfo>>;
-  onDrag: (e: Event, position: { x: number; y: number }) => void;
+  onDrag: (
+    e: Event,
+    position: { x: number; y: number },
+    nodeType: NodeType
+  ) => void;
   position: { x: number; y: number };
+  nodeType: NodeType;
 }
 
 const RevampedDraggableButton = (props: RevampedDraggableButtonProps) => {
-  const { onDrag, position } = props;
+  const { onDrag, position, nodeType } = props;
   console.log('revamping');
   const [haloOpacity, setHaloOpacity] = useState(0.2);
 
@@ -25,16 +31,16 @@ const RevampedDraggableButton = (props: RevampedDraggableButtonProps) => {
     <Wrapper>
       <Draggable
         onDrag={(e: any, position: { x: number; y: number }) => {
-          onDrag(e, position);
+          onDrag(e, position, nodeType);
         }}
         position={position}
       >
         <div
           style={{
-            border: '2px solid black',
             display: 'flex',
             height: '50px',
             width: '50px',
+            border: '2px solid black',
           }}
         >
           <Outer>
