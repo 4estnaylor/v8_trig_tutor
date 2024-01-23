@@ -77,7 +77,6 @@ const DragRevamped = () => {
         break;
     }
 
-    console.log((newAngleInRadians * 360) / Tau);
     angleInfoRef.current.angle = newAngleInRadians;
 
     setAngleInfo((prev) => {
@@ -95,7 +94,6 @@ const DragRevamped = () => {
   ) => {
     const { x, y } = position;
     let controlledPositionClone = { ...controlledPositions };
-    console.log('happening!!');
     switch (nodeType) {
       case 'lead':
         controlledPositionClone.lead.current.x = x;
@@ -114,9 +112,55 @@ const DragRevamped = () => {
     setControlledPositions(controlledPositionClone);
   };
 
+  const handleStart = (nodeType: NodeType) => {
+    console.log('handling start');
+    switch (nodeType) {
+      case 'center':
+        interactionStateRef.current = {
+          ...interactionStateRef.current,
+          center: 'dragged',
+        };
+        break;
+      case 'anchor':
+        interactionStateRef.current = {
+          ...interactionStateRef.current,
+          anchor: 'dragged',
+        };
+        break;
+      case 'lead':
+        interactionStateRef.current = {
+          ...interactionStateRef.current,
+          lead: 'dragged',
+        };
+    }
+  };
+
+  const handleStop = (nodeType: NodeType) => {
+    console.log('handling stop');
+
+    switch (nodeType) {
+      case 'center':
+        interactionStateRef.current = {
+          ...interactionStateRef.current,
+          center: 'default',
+        };
+        break;
+      case 'anchor':
+        interactionStateRef.current = {
+          ...interactionStateRef.current,
+          anchor: 'default',
+        };
+        break;
+      case 'lead':
+        interactionStateRef.current = {
+          ...interactionStateRef.current,
+          lead: 'default',
+        };
+    }
+  };
+
   // when angleInfo gets change setAngleInfo to somehting different.
   useEffect(() => {
-    console.log(' this is herpingin');
     setAngleInfo(angleInfoRef.current);
   }, [angleInfoRef.current.angle]);
 
@@ -133,16 +177,22 @@ const DragRevamped = () => {
         />
         <RevampedDraggableButton
           onDrag={handleDrag}
+          onStart={handleStart}
+          onStop={handleStop}
           position={controlledPositions.center.current}
           nodeType="center"
         />
         <RevampedDraggableButton
           onDrag={handleDrag}
+          onStart={handleStart}
+          onStop={handleStop}
           position={controlledPositions.lead.current}
           nodeType="lead"
         />
         <RevampedDraggableButton
           onDrag={handleDrag}
+          onStart={handleStart}
+          onStop={handleStop}
           position={controlledPositions.anchor.current}
           nodeType="anchor"
         />

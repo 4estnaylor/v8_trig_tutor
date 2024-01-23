@@ -24,13 +24,6 @@ const getSceneRevampedAngle: SceneGetter = (
   const { controlledPositions, interactionStateRef, angleInfoRef } =
     passedObject;
 
-  console.log(passedObject);
-
-  // let revampedCircle = new RevampedAngleCircle(
-  //   context,
-  //   angleInfoRef,
-  //   controlledPositions
-  // );
   let revamped2Circle = new Revamped2AngleCircle(
     context,
     angleInfoRef,

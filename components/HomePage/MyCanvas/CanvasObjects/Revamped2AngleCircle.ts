@@ -242,7 +242,7 @@ class Revamped2AngleCircle {
 
   // draw functions
 
-  drawAngle = () => {
+  drawAngleVisual = () => {
     for (let i = 0; i < Math.abs(this.revolutions); i++) {
       let startRingBuffer = revolutionGap;
       let widthOfRing = revolutionRingWidth;
@@ -259,6 +259,15 @@ class Revamped2AngleCircle {
     let startRadius = this.initialRadius + 2 + 12 * this.revolutions;
     let endRadius = startRadius + 10;
     this.drawPartialRing(partialAngle, cl.getHSLA(this.color, 0.8));
+    if (this.interactionStateRef.current.lead === 'dragged') {
+      this.drawLeadLine();
+      this.drawAngleDashes(
+        this.angleInfoRef.current.angle,
+        this.angleInfoRef.current.angleOffset,
+        this.angleInfoRef.current.divisions,
+        this.revolutions
+      );
+    }
   };
 
   drawPartialRing = (partialAngle: number, color: string) => {
@@ -412,6 +421,12 @@ class Revamped2AngleCircle {
   drawAnchorOffsetVisual = () => {
     let angleOffset = this.angleInfoRef.current.angleOffset;
     let center = this.controlledPositions.center.current;
+
+    // draw anchorNotch
+    this.drawAnchorNotch();
+
+    if (this.interactionStateRef.current.anchor !== 'dragged') return;
+
     // draw 3 oclock line
     this.context.lineWidth = 4;
     this.context.strokeStyle = cl.getHSLA(cl.gray_dark, 0.5);
@@ -459,7 +474,36 @@ class Revamped2AngleCircle {
       this.context.fill();
     }
 
+    // this.drawAnchorNotch();
+
     // this.context.stroke();
+  };
+
+  drawAnchorNotch = () => {
+    let angleOffset = this.angleInfoRef.current.angleOffset;
+
+    let notchLength = 15;
+    let notchThickness = 6;
+    let notchColorString = cl.getHSLA(cl.gray_dark, 1);
+
+    this.context.lineWidth = notchThickness;
+    this.context.strokeStyle = notchColorString;
+    this.context.lineCap = 'butt';
+
+    this.context.beginPath();
+    this.makePolarLine(
+      angleOffset,
+      this.radius - notchLength,
+      angleOffset,
+      this.radius
+    );
+    this.context.stroke();
+  };
+
+  draw = () => {
+    this.drawAngleVisual();
+    this.drawAnchorOffsetVisual();
+    // this.drawAnchorNotch();
   };
 
   test = () => {
@@ -467,14 +511,7 @@ class Revamped2AngleCircle {
     this.update();
     // console.log((this.angleInfoRef.current.angle * 360) / Tau);
 
-    this.drawAngleDashes(
-      this.angleInfoRef.current.angle,
-      this.angleInfoRef.current.angleOffset,
-      360,
-      this.revolutions
-    );
-    this.drawAngle();
-    this.drawLeadLine();
+    this.draw();
   };
 }
 

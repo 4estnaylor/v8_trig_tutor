@@ -12,13 +12,14 @@ interface RevampedDraggableButtonProps {
     position: { x: number; y: number },
     nodeType: NodeType
   ) => void;
+  onStart: (nodeType: NodeType) => void;
+  onStop: (nodeType: NodeType) => void;
   position: { x: number; y: number };
   nodeType: NodeType;
 }
 
 const RevampedDraggableButton = (props: RevampedDraggableButtonProps) => {
-  const { onDrag, position, nodeType } = props;
-  console.log('revamping');
+  const { onDrag, position, nodeType, onStart, onStop } = props;
   const [haloOpacity, setHaloOpacity] = useState(0.2);
 
   const [size, setSize] = useState(1);
@@ -33,6 +34,12 @@ const RevampedDraggableButton = (props: RevampedDraggableButtonProps) => {
         onDrag={(e: any, position: { x: number; y: number }) => {
           onDrag(e, position, nodeType);
         }}
+        onStart={() => {
+          onStart(nodeType);
+        }}
+        onStop={() => {
+          onStop(nodeType);
+        }}
         position={position}
       >
         <div
@@ -40,7 +47,7 @@ const RevampedDraggableButton = (props: RevampedDraggableButtonProps) => {
             display: 'flex',
             height: '50px',
             width: '50px',
-            border: '2px solid black',
+            // border: '2px solid black',
           }}
         >
           <Outer>
