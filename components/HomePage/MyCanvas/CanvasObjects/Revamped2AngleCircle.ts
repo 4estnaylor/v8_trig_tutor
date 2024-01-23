@@ -226,9 +226,27 @@ class Revamped2AngleCircle {
     this.positionAnchorOnCenterDrag();
   };
 
-  updateCenterPosition = () => {};
+  updateCenterPosition = () => {
+    // update center node position
+    let center = this.controlledPositions.center.current;
+
+    // if isCenterNodeLocked don't update
+    let currentCenterState = this.interactionStateRef.current.center;
+    if (currentCenterState !== 'dragged') return;
+
+    this.moveAnchorButtonToDefaultPosition();
+    this.moveLeadNodeButtonToDefaultPosition();
+
+    console.log('haperawer');
+
+    // if provided centerNodePositionRef, sync it with the position.
+
+    // this.updateAnchorPosition();
+  };
   update = () => {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    this.updateCenterPosition();
 
     this.updateAnchorPosition();
     this.updateLeadPosition();
