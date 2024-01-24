@@ -109,6 +109,18 @@ const DragRevamped = () => {
         break;
     }
 
+    switch (nodeType) {
+      case 'lead':
+        interactionStateRef.current.lead = 'dragged';
+        break;
+      case 'anchor':
+        interactionStateRef.current.anchor = 'dragged';
+        break;
+      case 'center':
+        interactionStateRef.current.center = 'dragged';
+        break;
+    }
+
     setControlledPositions(controlledPositionClone);
   };
 
@@ -118,19 +130,19 @@ const DragRevamped = () => {
       case 'center':
         interactionStateRef.current = {
           ...interactionStateRef.current,
-          center: 'dragged',
+          center: 'pressed',
         };
         break;
       case 'anchor':
         interactionStateRef.current = {
           ...interactionStateRef.current,
-          anchor: 'dragged',
+          anchor: 'pressed',
         };
         break;
       case 'lead':
         interactionStateRef.current = {
           ...interactionStateRef.current,
-          lead: 'dragged',
+          lead: 'pressed',
         };
     }
   };
@@ -138,25 +150,33 @@ const DragRevamped = () => {
   const handleStop = (nodeType: NodeType) => {
     console.log('handling stop');
 
-    switch (nodeType) {
-      case 'center':
-        interactionStateRef.current = {
-          ...interactionStateRef.current,
-          center: 'default',
-        };
-        break;
-      case 'anchor':
-        interactionStateRef.current = {
-          ...interactionStateRef.current,
-          anchor: 'default',
-        };
-        break;
-      case 'lead':
-        interactionStateRef.current = {
-          ...interactionStateRef.current,
-          lead: 'default',
-        };
-    }
+    interactionStateRef.current = {
+      center: 'default',
+      lead: 'default',
+      anchor: 'default',
+      inputControl: false,
+      overall: '',
+    };
+
+    // switch (nodeType) {
+    //   case 'center':
+    //     interactionStateRef.current = {
+    //       ...interactionStateRef.current,
+    //       center: 'default',
+    //     };
+    //     break;
+    //   case 'anchor':
+    //     interactionStateRef.current = {
+    //       ...interactionStateRef.current,
+    //       anchor: 'default',
+    //     };
+    //     break;
+    //   case 'lead':
+    //     interactionStateRef.current = {
+    //       ...interactionStateRef.current,
+    //       lead: 'default',
+    //     };
+    // }
   };
 
   // when angleInfo gets change setAngleInfo to somehting different.
@@ -164,7 +184,10 @@ const DragRevamped = () => {
     setAngleInfo(angleInfoRef.current);
   }, [angleInfoRef.current.angle]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setInteractionState(interactionStateRef.current);
+    console.log('this is hapneing');
+  }, [interactionStateRef.current]);
 
   return (
     <div>
@@ -180,6 +203,8 @@ const DragRevamped = () => {
           onStart={handleStart}
           onStop={handleStop}
           position={controlledPositions.center.current}
+          isVisible={true}
+          // interactionStateRef={interactionStateRef}
           nodeType="center"
         />
         <RevampedDraggableButton
@@ -187,6 +212,8 @@ const DragRevamped = () => {
           onStart={handleStart}
           onStop={handleStop}
           position={controlledPositions.lead.current}
+          isVisible={false}
+          // interactionStateRef={interactionStateRef}
           nodeType="lead"
         />
         <RevampedDraggableButton
@@ -194,6 +221,8 @@ const DragRevamped = () => {
           onStart={handleStart}
           onStop={handleStop}
           position={controlledPositions.anchor.current}
+          isVisible={true}
+          // interactionStateRef={interactionStateRef}
           nodeType="anchor"
         />
 

@@ -237,8 +237,6 @@ class Revamped2AngleCircle {
     this.moveAnchorButtonToDefaultPosition();
     this.moveLeadNodeButtonToDefaultPosition();
 
-    console.log('haperawer');
-
     // if provided centerNodePositionRef, sync it with the position.
 
     // this.updateAnchorPosition();
@@ -260,7 +258,7 @@ class Revamped2AngleCircle {
 
   // draw functions
 
-  drawAngleVisual = () => {
+  drawAngle = () => {
     for (let i = 0; i < Math.abs(this.revolutions); i++) {
       let startRingBuffer = revolutionGap;
       let widthOfRing = revolutionRingWidth;
@@ -277,15 +275,16 @@ class Revamped2AngleCircle {
     let startRadius = this.initialRadius + 2 + 12 * this.revolutions;
     let endRadius = startRadius + 10;
     this.drawPartialRing(partialAngle, cl.getHSLA(this.color, 0.8));
-    if (this.interactionStateRef.current.lead === 'dragged') {
-      this.drawLeadLine();
-      this.drawAngleDashes(
-        this.angleInfoRef.current.angle,
-        this.angleInfoRef.current.angleOffset,
-        this.angleInfoRef.current.divisions,
-        this.revolutions
-      );
-    }
+  };
+
+  drawAngleVisual = () => {
+    this.drawLeadLine();
+    this.drawAngleDashes(
+      this.angleInfoRef.current.angle,
+      this.angleInfoRef.current.angleOffset,
+      this.angleInfoRef.current.divisions,
+      this.revolutions
+    );
   };
 
   drawPartialRing = (partialAngle: number, color: string) => {
@@ -441,9 +440,9 @@ class Revamped2AngleCircle {
     let center = this.controlledPositions.center.current;
 
     // draw anchorNotch
-    this.drawAnchorNotch();
+    // this.drawAnchorNotch();
 
-    if (this.interactionStateRef.current.anchor !== 'dragged') return;
+    // if (this.interactionStateRef.current.anchor !== 'dragged') return;
 
     // draw 3 oclock line
     this.context.lineWidth = 4;
@@ -519,8 +518,22 @@ class Revamped2AngleCircle {
   };
 
   draw = () => {
-    this.drawAngleVisual();
-    this.drawAnchorOffsetVisual();
+    this.drawAngle();
+    this.drawAnchorNotch();
+    if (
+      this.interactionStateRef.current.lead === 'pressed' ||
+      this.interactionStateRef.current.lead === 'dragged'
+    ) {
+      this.drawAngleVisual();
+    }
+
+    if (
+      this.interactionStateRef.current.anchor === 'pressed' ||
+      this.interactionStateRef.current.anchor === 'dragged'
+    ) {
+      this.drawAnchorOffsetVisual();
+    }
+
     // this.drawAnchorNotch();
   };
 
@@ -530,6 +543,7 @@ class Revamped2AngleCircle {
     // console.log((this.angleInfoRef.current.angle * 360) / Tau);
 
     this.draw();
+    // console.log(this.interactionStateRef.current);
   };
 }
 

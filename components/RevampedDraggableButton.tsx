@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Draggable from 'react-draggable';
 import styled from 'styled-components';
 import cl, { color } from '../colors';
-import { AngleInfo } from './niche/Intro/DragToBigAngles';
+import {
+  AngleInfo,
+  Interaction,
+  InteractionState,
+} from './niche/Intro/DragToBigAngles';
 import { NodeType } from './niche/Intro/DragRevamped';
 
 interface RevampedDraggableButtonProps {
@@ -16,10 +20,12 @@ interface RevampedDraggableButtonProps {
   onStop: (nodeType: NodeType) => void;
   position: { x: number; y: number };
   nodeType: NodeType;
+  isVisible: boolean;
+  // interactionStateRef: React.RefObject<InteractionState>;
 }
 
 const RevampedDraggableButton = (props: RevampedDraggableButtonProps) => {
-  const { onDrag, position, nodeType, onStart, onStop } = props;
+  const { onDrag, position, nodeType, onStart, onStop, isVisible } = props;
   const [haloOpacity, setHaloOpacity] = useState(0.2);
 
   const [size, setSize] = useState(1);
@@ -28,8 +34,34 @@ const RevampedDraggableButton = (props: RevampedDraggableButtonProps) => {
   let color = cl.green as color;
   let colorDark = cl.adjustLightness(color, color.lightness * (4 / 5));
 
+  // useEffect(() => {
+  //   console.log('cha-cha-cha-cha-changing', interactionStateRef);
+  //   let anchor = interactionStateRef.current?.anchor;
+  //   let lead = interactionStateRef.current?.lead;
+  //   let center = interactionStateRef.current?.center;
+
+  //   // console.log('sahsdkasldfha', nodeType);
+
+  //   switch (nodeType) {
+  //     case 'lead':
+  //       console.log('mambojamo', anchor === 'dragged');
+  //       if (anchor === 'dragged' || center === 'dragged') {
+  //         setIsVisible(false);
+  //       } else {
+  //         setIsVisible(true);
+  //       }
+  //       break;
+  //   }
+  // }, [
+  //   interactionStateRef.current?.anchor,
+  //   interactionStateRef.current?.lead,
+  //   interactionStateRef.current?.center,
+  // ]);
+
+  const nodeRef = React.useRef(null);
+
   return (
-    <Wrapper>
+    <Wrapper $isVisible={isVisible}>
       <Draggable
         onDrag={(e: any, position: { x: number; y: number }) => {
           onDrag(e, position, nodeType);
@@ -65,8 +97,9 @@ const RevampedDraggableButton = (props: RevampedDraggableButtonProps) => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ $isVisible: boolean }>`
   position: absolute;
+  opacity: ${(p) => (p.$isVisible ? 1 : 0.3)};
 `;
 
 const Outer = styled.div`
