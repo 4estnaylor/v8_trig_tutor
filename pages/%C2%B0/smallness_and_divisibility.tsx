@@ -27,6 +27,8 @@ import getSceneInteriorAngles from '../../components/getScenes/degrees/getSceneI
 import getSceneExponentialSlider from '../../components/getScenes/degrees/getSceneExponentialSlider';
 import Smallest from '../../components/niche/Smallest';
 import Quote from '../../components/Quote/Quote';
+import Image from 'next/image';
+import AsideNote from '../../components/AsideNote/AsideNote';
 
 export type MostDivisibleQuestionObject = {
   limit: number;
@@ -261,25 +263,60 @@ const smallness_and_divisibility = () => {
   );
 
   return (
-    <TopicComponentBoilerPlate2 title="Smallness and Divisibility">
+    <TopicComponentBoilerPlate2 title="Why 360° ?">
       <>
+        <RamanujanFace
+          src="/ramanujanFace.svg"
+          width={400}
+          height={400}
+          style={{ margin: 'auto' }}
+        />
         <P>
           <Quote
             quote={
-              'The test of a first-rate intelligence is the ability to hold two opposed ideas in the mind at the same time, and still retain the ability to function.'
+              'Dear Sir, I beg to introduce myself to you as a clerk in the Accounts Department of the Port Trust Office at Madras on a salary of only £20 per annum. I am now about 23 years of age…'
             }
-            byLine="F. Scott Fitzgerald"
-            source="https://www.esquire.com/lifestyle/a4310/the-crack-up/"
+            byLine=" Srinivasa Ramanujan"
+            source="https://writings.stephenwolfram.com/2016/04/who-was-ramanujan/"
           />
-          360 be damned. Let's clear the slate and search for the very best
-          number of divisions for a circle. This time, no Babylonian myths
-          involved.
+          Is 360 really the ideal way to divide a circle? To answer this
+          question well, I suggest we strategically give ourself amnesia and
+          forget about 360 for now and instead ask a related more general
+          question:
           <br />
-          <br /> 3 guidelines for the number:
+          <br />
+          What would be{' '}
+          <em>
+            <b> the best</b>
+          </em>{' '}
+          number to divide a circle for measurement?
+          <br />
+          <br />
+          There are actually a number of correct answers to this question, but
+          *** be warned *** there are many, <em>many</em> more incorrect
+          answers. Your task is to pick one of the correct ones AND to
+          understand why you picked it.
+          <br />
+          <br />
+          Remember, with no memory of 360 to speak of, we must approach this
+          question totally naively with eyes wide and hearts open.
+          <br />
+          <br /> 3 rules
+          <AsideNote>
+            <>
+              More like guidelines than "rules" really.
+              <br />
+              <br />
+              Except, it does have to be less than 10,000. That's a rule. I only
+              limit it to less than 10,000 because some of the visuals start to
+              get laggy with really big numbers.
+            </>
+          </AsideNote>{' '}
+          for your chosen number:
           <ul>
-            <li>smaller is better</li>
-            <li>more divisible is better</li>
-            <li>can't be bigger than 10,000</li>
+            <li>smaller is preferable</li>
+            <li>more divisible is preferable</li>
+            <li>can't be bigger than 10,000 </li>
           </ul>
           {/* We'll restrict our search to values less than 10,000.
           <br />
@@ -291,9 +328,12 @@ const smallness_and_divisibility = () => {
           There are two qualities in particular that our models will focus on —
           smallness and having many divisors. */}
           <h4>Smallest</h4>
-          Small numbers make calculations are less taxing on our pencils and our
-          computer's transistors. So "smallness" is a quality we definitely want
-          to prioritize.
+          Small numbers make calculations less taxing for our brains and our
+          computers' cpus alike. Choosing a small enough number also importantly
+          allows us to visibly see and measure single divisions. If there are
+          too many they just kind of overwhelm our vission and blend together.
+          So "smallness" is a quality we definitely want to prioritize. There is
+          a tradeoff to smallness however...
           <br />
           <br />
           <Smallest />
@@ -327,15 +367,19 @@ const smallness_and_divisibility = () => {
           <br />
           <br /> */}
           <h4>Most Divisible</h4>
-          Numbers divisible by a large number of factors make decimals
-          unnecesary and life easier — another quality we definitely want to
-          prioritize.
+          Numbers divisible by a large number of factors make life easier{' '}
+          {`(no nasty decimals!)`} which is another quality we definitely want
+          to prioritize. For instance 12 can be evenly divided by 4 factors: 2,
+          3, 4, and 6 whereas 14 can only be evenly divided by two factors: 2
+          and 7.
           <br />
           <br />
-          {/* A question that requires more experimentation. Use the "Multiply" tool
-          provided below to set the number.
+          Like you found the smallest number, you're now tasked with a problem
+          with a little more bite to it. Finding the most divisible number{' '}
+          {`(less than 10,000)`}. Fear not though, you'll tackle this question
+          in chunks.
           <br />
-          <br /> */}
+          <br />
           <MostDivisible
             answerState={mostDivisibleAnswerState}
             setAnswerState={setMostDivisibleAnswerState}
@@ -344,6 +388,17 @@ const smallness_and_divisibility = () => {
           />
           <h4># of Divisors Plot:</h4>
           <DivisorsPlot />
+          <h4>The Tradeoff</h4>
+          Ideally these two qualtiies — smallness and divisibility — would go
+          hand in hand and you wouldn't have to pick one over the other. Smaller
+          numbers would also tend to be more divisible. Is that the case though?
+          Unfortunately, there is a trend where as numbers get less small they
+          get <em>more</em> divisible. You need to make decisions about how to
+          prioritize these two desired qualities.
+          {/* A question that requires more experimentation. Use the "Multiply" tool
+          provided below to set the number.
+          <br />
+          <br /> */}
           {/* <IntegerAnswerQuestion
             question={`What is the smallest number between 1 and 10,000?`}
             answer={1}
@@ -410,6 +465,10 @@ const InfoIconWrapper = styled.div`
   font-size: small;
   right: 0;
   top: 0;
+`;
+
+const RamanujanFace = styled(Image)`
+  margin: auto;
 `;
 
 const Criteria = styled.div`

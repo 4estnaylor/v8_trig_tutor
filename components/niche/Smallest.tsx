@@ -24,7 +24,7 @@ const Smallest = () => {
   const [linearSlideValue, setLinearSlideValue] = useState(10 ** 4);
   const [userValue, setUserValue] = useState(10 ** 4);
   const userValueRef = useRef(userValue);
-  const [visualType, setVisualType] = useState<VisualType>('linear');
+  const [visualType, setVisualType] = useState<VisualType>('exponential');
   const visualTypeRef = useRef(visualType);
 
   const handleCheck = () => {

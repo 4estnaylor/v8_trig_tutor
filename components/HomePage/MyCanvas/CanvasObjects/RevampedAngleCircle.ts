@@ -136,8 +136,6 @@ class RevampedAngleCircle {
       // this.angle = (2 * Tau) / 3;
       this.moveLeadNodeButtonToDefaultPosition();
       this.angleInfoRef.current.inputControl = false;
-
-      if (!this.leadNodePositionRef) return;
     }
   };
 
@@ -378,6 +376,7 @@ class RevampedAngleCircle {
     // put diff wrt to center node
   };
 
+  // renamed positionAnchorOnCenterDrag
   calculateAngleOffsetFromCenterDrag = () => {
     // if (this.interactionStateRef.current.center !== 'dragged') return;
     if (
@@ -621,28 +620,6 @@ class RevampedAngleCircle {
     let minLengthFromRadius = minLength || 0;
     let startLength = this.actualRadiusLengthInPixels + revolutionGap;
     let endLength = startLength + dashLengthPx;
-
-    //find distance to lead button
-    // let hypotenuseToLeadButton;
-    // if (!this.leadNodePositionRef || !this.centerNodePositionRef) return;
-    // let xDiff =
-    //   this.leadNodePositionRef?.current.x -
-    //   this.centerNodePositionRef?.current.x;
-    // let yDiff =
-    //   this.leadNodePositionRef.current.y -
-    //   this.centerNodePositionRef?.current.y;
-
-    // hypotenuseToLeadButton = Math.sqrt(xDiff ** 2 + yDiff ** 2);
-
-    // maake calculatedLengthFromRadius
-    // let caluculatedLengthFromRadius = hypotenuseToLeadButton + 0;
-    // if (
-    //   caluculatedLengthFromRadius <
-    //   this.actualRadiusLengthInPixels + minLengthFromRadius + dashLengthPx
-    // ) {
-    //   caluculatedLengthFromRadius =
-    //     minLengthFromRadius + this.actualRadiusLengthInPixels + dashLengthPx;
-    // }
 
     this.context.strokeStyle = color;
     this.context.beginPath();

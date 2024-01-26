@@ -189,8 +189,17 @@ const DragRevamped = () => {
     console.log('this is hapneing');
   }, [interactionStateRef.current]);
 
+  const [visibleTest, setVisibleTest] = useState(true);
+
   return (
-    <div>
+    <div
+      onClick={() => {
+        setVisibleTest((prev) => !prev);
+      }}
+      onMouseUp={() => {
+        console.log('yep');
+      }}
+    >
       <Wrapper>
         <InputBarForAngleCircle
           angleInfo={angleInfo}
@@ -212,7 +221,7 @@ const DragRevamped = () => {
           onStart={handleStart}
           onStop={handleStop}
           position={controlledPositions.lead.current}
-          isVisible={false}
+          isVisible={true}
           // interactionStateRef={interactionStateRef}
           nodeType="lead"
         />
@@ -221,7 +230,7 @@ const DragRevamped = () => {
           onStart={handleStart}
           onStop={handleStop}
           position={controlledPositions.anchor.current}
-          isVisible={true}
+          isVisible={visibleTest}
           // interactionStateRef={interactionStateRef}
           nodeType="anchor"
         />

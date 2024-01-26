@@ -23,17 +23,17 @@ const getSceneDragToBigAngles: SceneGetter = (
   } = passedObject;
 
   let width = context.canvas.parentElement?.clientWidth || 0;
-  let bigAngleDragger = new AngleCircle(
-    context,
-    eventHandlerConfig,
-    width / 2,
-    context.canvas.height / 2,
-    Tau / 4
-  );
+  // let bigAngleDragger = new AngleCircle(
+  //   context,
+  //   eventHandlerConfig,
+  //   width / 2,
+  //   context.canvas.height / 2,
+  //   Tau / 4
+  // );
 
   // bigAngleDragger.angle = Tau * 3.5;
 
-  bigAngleDragger.rotations = 0;
+  // bigAngleDragger.rotations = 0;
 
   let controlledPositions = {
     centerRef: controlledPositionCenterRef,
