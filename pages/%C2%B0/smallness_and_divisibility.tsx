@@ -282,13 +282,14 @@ const smallness_and_divisibility = () => {
                 {' '}
                 Srinivasa Ramanujan{' '}
                 <AsideNote>
-                  <div>
-                    Srinivasa Ramanujan was said to treat positive integers with
-                    as much care and attention as most people treat good friends
-                    — making him hyper aware of their properties. This made him
-                    a pretty unique mind, far ahead of his time. A pretty
-                    incredibly story told by one of his mathematician collegues
-                    demonstrates this:
+                  <div style={{ overflow: 'scroll' }}>
+                    Srinivasa Ramanujan was was also self-taught. This made him
+                    a pretty unique mind, academically very rough around the
+                    edges compared to most prominent mathematicians, yet far
+                    ahead of his time in some areas. He excelled dealing with
+                    positve integers, and had an unbelievable familiarty with
+                    them and their properties. A pretty incredible story told by
+                    one of his mathematician collegues demonstrates this:
                     <Quote
                       quote={`I remember once going to see him when he was ill at Putney. I had ridden in taxi cab No. 1729 and remarked that the number seemed to me rather a dull one, and that I hoped it was not an unfavourable omen. "No," he replied, "it is a very interesting number; it is the smallest number expressible as the sum of two cubes in two different ways.`}
                       byLine={'G. H. Hardy'}
@@ -304,9 +305,10 @@ const smallness_and_divisibility = () => {
                     Personally I'm generally pretty skeptical of claims of
                     "genius" — always feels kinda superstitious and spooky to me
                     and out of line with how I imagine biological mutations in
-                    human brain might occur. That said, if anybody has a claim
-                    to "genius" in the spooky sense of the word, Ramanujan seems
-                    like a strong candidate.
+                    human brain might occur. That said I'm certainly not an
+                    evolutionary biologist, and if anybody has a claim to
+                    "genius" in the sense of the word I find spooky, Ramanujan
+                    seems like a strong candidate.
                     <br />
                     <br />
                     <MyLink href="https://en.wikipedia.org/wiki/Srinivasa_Ramanujan">
@@ -320,8 +322,10 @@ const smallness_and_divisibility = () => {
             source="https://writings.stephenwolfram.com/2016/04/who-was-ramanujan/"
           />
           Is 360 really the ideal way to divide a circle? To answer this
-          question well, strategically give yourself amnesia so we can ask the
-          more general version of the same question:
+          question well, strategically forget a circle has ever been measured
+          360 degrees. Without any mental baggage of a default number of
+          divisions, you can more freely ask the more general version of the
+          question:
           <br />
           <br />
           What would be{' '}
@@ -338,7 +342,7 @@ const smallness_and_divisibility = () => {
           <br />
           <br />
           Remember, with no memory of 360 to speak of, we must approach this
-          question totally naively with eyes wide and hearts open.
+          question totally naive, with eyes wide and hearts open.
           <br />
           <br /> 3 rules
           <AsideNote>
@@ -353,8 +357,8 @@ const smallness_and_divisibility = () => {
           </AsideNote>{' '}
           for your chosen number:
           <ul>
-            <li>smaller is preferable</li>
-            <li>more divisible is preferable</li>
+            <li>smaller is better</li>
+            <li>more divisible is better</li>
             <li>can't be bigger than 10,000 </li>
           </ul>
           {/* We'll restrict our search to values less than 10,000.
@@ -366,13 +370,12 @@ const smallness_and_divisibility = () => {
           <br />
           There are two qualities in particular that our models will focus on —
           smallness and having many divisors. */}
-          <h4>Smallest</h4>
+          <h4>Smaller is Better</h4>
           Small numbers make calculations less taxing for our brains and our
-          computers' cpus alike. Choosing a small enough number also importantly
+          computers' CPUs. Choosing a small enough number also importantly
           allows us to visibly see and measure single divisions. If there are
           too many they just kind of overwhelm our vission and blend together.
-          So "smallness" is a quality we definitely want to prioritize. There is
-          a tradeoff to smallness however...
+          So "smallness" is a quality we definitely want to prioritize.
           <br />
           <br />
           <Smallest />
@@ -405,7 +408,7 @@ const smallness_and_divisibility = () => {
           screens' pixels.
           <br />
           <br /> */}
-          <h4>Most Divisible</h4>
+          <h4>More Divisible is Better</h4>
           Numbers divisible by a large number of factors make life easier{' '}
           {`(no nasty decimals!)`} which is another quality we definitely want
           to prioritize. For instance 12 can be evenly divided by 4 factors: 2,
