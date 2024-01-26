@@ -29,6 +29,7 @@ import Smallest from '../../components/niche/Smallest';
 import Quote from '../../components/Quote/Quote';
 import Image from 'next/image';
 import AsideNote from '../../components/AsideNote/AsideNote';
+import MyLink from '../../components/MyLink';
 
 export type MostDivisibleQuestionObject = {
   limit: number;
@@ -276,13 +277,51 @@ const smallness_and_divisibility = () => {
             quote={
               'Dear Sir, I beg to introduce myself to you as a clerk in the Accounts Department of the Port Trust Office at Madras on a salary of only £20 per annum. I am now about 23 years of age…'
             }
-            byLine=" Srinivasa Ramanujan"
+            byLine={
+              <>
+                {' '}
+                Srinivasa Ramanujan{' '}
+                <AsideNote>
+                  <div>
+                    Srinivasa Ramanujan was said to treat positive integers with
+                    as much care and attention as most people treat good friends
+                    — making him hyper aware of their properties. This made him
+                    a pretty unique mind, far ahead of his time. A pretty
+                    incredibly story told by one of his mathematician collegues
+                    demonstrates this:
+                    <Quote
+                      quote={`I remember once going to see him when he was ill at Putney. I had ridden in taxi cab No. 1729 and remarked that the number seemed to me rather a dull one, and that I hoped it was not an unfavourable omen. "No," he replied, "it is a very interesting number; it is the smallest number expressible as the sum of two cubes in two different ways.`}
+                      byLine={'G. H. Hardy'}
+                    />
+                    Ramanujan's "closeness" to positive integers is a posture
+                    that would suit us very well trying to understand how to
+                    best divide a circle for measuremnt. We'll also directly
+                    make use of one of his ideas, highly-composite primes. So I
+                    felt like he was a really good fit for the title
+                    illustration
+                    <br /> <br /> Also Ramanujan is just a bizarre, self-taught
+                    character in the history of math worth reading into a bit.
+                    Personally I'm generally pretty skeptical of claims of
+                    "genius" — always feels kinda superstitious and spooky to me
+                    and out of line with how I imagine biological mutations in
+                    human brain might occur. That said, if anybody has a claim
+                    to "genius" in the spooky sense of the word, Ramanujan seems
+                    like a strong candidate.
+                    <br />
+                    <br />
+                    <MyLink href="https://en.wikipedia.org/wiki/Srinivasa_Ramanujan">
+                      His wikipedia page
+                    </MyLink>{' '}
+                    is pretty fascinating.
+                  </div>
+                </AsideNote>{' '}
+              </>
+            }
             source="https://writings.stephenwolfram.com/2016/04/who-was-ramanujan/"
           />
           Is 360 really the ideal way to divide a circle? To answer this
-          question well, I suggest we strategically give ourself amnesia and
-          forget about 360 for now and instead ask a related more general
-          question:
+          question well, strategically give yourself amnesia so we can ask the
+          more general version of the same question:
           <br />
           <br />
           What would be{' '}

@@ -5,7 +5,7 @@ import cl from '../../colors';
 
 interface QuoteProps {
   quote: string | string[];
-  byLine?: string;
+  byLine?: string | JSX.Element;
   date?: string;
   image?: any;
   isLong?: boolean;

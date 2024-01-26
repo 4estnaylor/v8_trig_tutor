@@ -14,7 +14,7 @@ const MyLink = (props: MyLinkProps) => {
 
 const Wrapper = styled.a`
   color: ${cl.getHSL(cl.purple)};
-  display: inline-flex;
+  display: inline;
 `;
 
 export default MyLink;
