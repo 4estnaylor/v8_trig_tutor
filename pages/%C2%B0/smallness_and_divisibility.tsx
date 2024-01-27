@@ -30,6 +30,7 @@ import Quote from '../../components/Quote/Quote';
 import Image from 'next/image';
 import AsideNote from '../../components/AsideNote/AsideNote';
 import MyLink from '../../components/MyLink';
+import Visibility from '../../components/niche/Visibility';
 
 export type MostDivisibleQuestionObject = {
   limit: number;
@@ -283,38 +284,50 @@ const smallness_and_divisibility = () => {
                 Srinivasa Ramanujan{' '}
                 <AsideNote>
                   <div style={{ overflow: 'scroll' }}>
-                    Srinivasa Ramanujan was was also self-taught. This made him
-                    a pretty unique mind, academically very rough around the
-                    edges compared to most prominent mathematicians, yet far
-                    ahead of his time in some areas. He excelled dealing with
-                    positve integers, and had an unbelievable familiarty with
-                    them and their properties. A pretty incredible story told by
-                    one of his mathematician collegues demonstrates this:
+                    <Image
+                      src="/ramanujanPhoto.png"
+                      height={300}
+                      width={250}
+                      style={{ borderRadius: '8px', marginLeft: 'auto' }}
+                    />
+                    <br />
+                    <br />
+                    Srinivasa Ramanujan was pretty much a self-taught. Possibly
+                    due to this, he had a pretty unique way of thinking —
+                    academically very rough around the edges compared to most
+                    prominent mathematicians, but far ahead of them in a lot of
+                    ways too. Ramanujan excelled dealing with positve integers,
+                    and had an incredible familiarity with them and their
+                    properties. A story told by one of his mathematician
+                    collegues really highlights this :
                     <Quote
                       quote={`I remember once going to see him when he was ill at Putney. I had ridden in taxi cab No. 1729 and remarked that the number seemed to me rather a dull one, and that I hoped it was not an unfavourable omen. "No," he replied, "it is a very interesting number; it is the smallest number expressible as the sum of two cubes in two different ways.`}
                       byLine={'G. H. Hardy'}
                     />
-                    Ramanujan's "closeness" to positive integers is a posture
-                    that would suit us very well trying to understand how to
-                    best divide a circle for measuremnt. We'll also directly
-                    make use of one of his ideas, highly-composite primes. So I
-                    felt like he was a really good fit for the title
-                    illustration
-                    <br /> <br /> Also Ramanujan is just a bizarre, self-taught
-                    character in the history of math worth reading into a bit.
-                    Personally I'm generally pretty skeptical of claims of
-                    "genius" — always feels kinda superstitious and spooky to me
-                    and out of line with how I imagine biological mutations in
-                    human brain might occur. That said I'm certainly not an
-                    evolutionary biologist, and if anybody has a claim to
-                    "genius" in the sense of the word I find spooky, Ramanujan
-                    seems like a strong candidate.
+                    The two different ways are:
+                    <br />
+                    <br />
+                    1729 = 13 + 123 = 93 + 103
+                    <br />
+                    <br />
+                    If the story is true, the implication that Ramanujan had
+                    such specific information about such a large number just
+                    catalogued somewhere in the back of his head at all times.
+                    Wow.
+                    <br />
+                    <br />
+                    Ramanujan's familiairty of and curiosity towards positive
+                    integers, while a very unreasonable standard to hold
+                    ourselves to, is a posture worth at least leaning into as we
+                    consider how to divide a cirlce. We will also directly make
+                    use of one of his ideas, highly-composite primes. So, I felt
+                    Ramanujan really fit well for the title animation.
                     <br />
                     <br />
                     <MyLink href="https://en.wikipedia.org/wiki/Srinivasa_Ramanujan">
                       His wikipedia page
                     </MyLink>{' '}
-                    is pretty fascinating.
+                    is pretty inspiring, tragic, and overall fascinating.
                   </div>
                 </AsideNote>{' '}
               </>
@@ -322,10 +335,10 @@ const smallness_and_divisibility = () => {
             source="https://writings.stephenwolfram.com/2016/04/who-was-ramanujan/"
           />
           Is 360 really the ideal way to divide a circle? To answer this
-          question well, strategically forget a circle has ever been measured
-          360 degrees. Without any mental baggage of a default number of
-          divisions, you can more freely ask the more general version of the
-          question:
+          question well, first forget a circle has ever been measured using 360
+          degrees. Without any mental baggage of a "default" or "standard"
+          number of divisions, you can more freely ask the much better, more
+          general question:
           <br />
           <br />
           What would be{' '}
@@ -357,9 +370,9 @@ const smallness_and_divisibility = () => {
           </AsideNote>{' '}
           for your chosen number:
           <ul>
-            <li>smaller is better</li>
-            <li>more divisible is better</li>
-            <li>can't be bigger than 10,000 </li>
+            <li>Smaller is better.</li>
+            <li>More divisible is better.</li>
+            <li>It can't be bigger than 10,000 </li>
           </ul>
           {/* We'll restrict our search to values less than 10,000.
           <br />
@@ -371,13 +384,48 @@ const smallness_and_divisibility = () => {
           There are two qualities in particular that our models will focus on —
           smallness and having many divisors. */}
           <h4>Smaller is Better</h4>
-          Small numbers make calculations less taxing for our brains and our
-          computers' CPUs. Choosing a small enough number also importantly
-          allows us to visibly see and measure single divisions. If there are
-          too many they just kind of overwhelm our vission and blend together.
-          So "smallness" is a quality we definitely want to prioritize.
+          Small numbers are great because they:
+          <Ul>
+            <li>
+              make calculations less taxing for our brains and our computers'
+              CPUs.{' '}
+              <AsideNote>
+                <div>
+                  Although modern computers can often handle wickedly large
+                  numbers, we ask increasingly more of them especially when it
+                  comes to graphics. Each page rerender all the animations on
+                  this page ask your computer to calculate and produce the color
+                  of every pixel on your device's display. And the animations,
+                  if not laggy, rerender at least around 24 times in a second{' '}
+                  {`also called 24 Hz (pronounced "Hurts")`}. If the animation
+                  is laggy, it is probably because the calculations become too
+                  intensive to perform them quickly enough between each
+                  rerender.
+                  <br />
+                  <br />
+                  Not long ago, the gold standard for video games was around 60
+                  times a second {`60 Hz`}. <br />
+                  <br />
+                  <MyLink href={'https://www.youtube.com/shorts/esIl_oMew8c'}>
+                    {' '}
+                    Now it's pushing 4 times that at {`240 Hz`}
+                  </MyLink>
+                  .
+                </div>
+              </AsideNote>
+            </li>
+            <li>
+              make visualization possible: observing, displaying, drawing, and
+              measuring divisions pretty quickly reaches both the limitations of
+              our eyes and technology.
+            </li>
+          </Ul>
+          So "smallness" is a quality we definitely want to prioritize. The real
+          question will be, how much priority to give "smallness" and over what
+          other considerations?
           <br />
           <br />
+          <Visibility />
           <Smallest />
           {/* I made the diagram above so darn tall because otherwise the smallest
           numbers, represented by just fractions of a pixel, become too small to
@@ -581,6 +629,10 @@ const UserDivisionsDisplay = styled(PointsAndMultiplierDisplays)`
 
 const ScoreDisplay = styled(PointsAndMultiplierDisplays)`
   color: ${cl.getHSL(cl.black)};
+`;
+
+export const Ul = styled.ul`
+  list-style-position: outside;
 `;
 
 const Points = styled.div`

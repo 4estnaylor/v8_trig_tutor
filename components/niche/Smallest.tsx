@@ -242,7 +242,7 @@ const Smallest = () => {
                 answerState={answer}
                 handleCheck={handleCheck}
                 userAnswer={4}
-                hint={'The answer is less than 2.'}
+                hint={'The answer is one less than two.'}
               >
                 <></>
               </ActionBar>
