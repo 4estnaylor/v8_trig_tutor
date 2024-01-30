@@ -6,10 +6,11 @@ import { Input, Slider } from '@mui/material';
 import { AngleInfo } from './Intro/DragToBigAngles';
 import { Tau } from '../HomePage/MyCanvas/CanvasObjects/UsefulConstants';
 import cl from '../../colors';
+import getSceneLinearSmallness from '../getScenes/degrees/getSceneLinearSmallness';
 
 type Mode = 'linear' | 'exponential';
 
-const Visibility = () => {
+const LinearSmallnessModel = () => {
   const [numberOfDivisions, setNumberOfDivisions] = useState(100);
   const numberOfDivisionsRef = useRef(numberOfDivisions);
 
@@ -91,7 +92,7 @@ const Visibility = () => {
 
   const linearSlider = (
     <Slider
-      min={0}
+      min={1}
       max={10000}
       step={1}
       value={typeof numberOfDivisions === 'number' ? numberOfDivisions : 0}
@@ -128,16 +129,16 @@ const Visibility = () => {
           {Math.round(numberOfDivisions)}
         </DivisionsInput>
         <CanvasForTopicComponent
-          sceneGetter={getSceneVisibility}
+          sceneGetter={getSceneLinearSmallness}
           objectPassedToScene={{ numberOfDivisionsRef, angleInfoRef }}
         />
-        {/* {linearSlider} */}
 
         {/* {base10Value} */}
         <br />
         <br />
       </Wrapper>
-      {exponentialSlider}
+      {linearSlider}
+      {/* {exponentialSlider} */}
     </div>
   );
 };
@@ -161,4 +162,4 @@ const DivisionsInput = styled.div`
   width: 140px;
 `;
 
-export default Visibility;
+export default LinearSmallnessModel;

@@ -31,6 +31,7 @@ import Image from 'next/image';
 import AsideNote from '../../components/AsideNote/AsideNote';
 import MyLink from '../../components/MyLink';
 import Visibility from '../../components/niche/Visibility';
+import LinearSmallnessModel from '../../components/niche/LinearSmallnessModel';
 
 export type MostDivisibleQuestionObject = {
   limit: number;
@@ -292,14 +293,29 @@ const smallness_and_divisibility = () => {
                     />
                     <br />
                     <br />
-                    Srinivasa Ramanujan was pretty much a self-taught. Possibly
-                    due to this, he had a pretty unique way of thinking —
-                    academically very rough around the edges compared to most
-                    prominent mathematicians, but far ahead of them in a lot of
-                    ways too. Ramanujan excelled dealing with positve integers,
-                    and had an incredible familiarity with them and their
-                    properties. A story told by one of his mathematician
-                    collegues really highlights this :
+                    Srinivasa Ramanujan was not only a math prodigy but a
+                    self-taught prodigy. Likely due to this, he often asked and
+                    solved questions from a pretty unique intellectual angle —
+                    very rough around the edges compared to most prominent
+                    mathematicians at the time, but far ahead of them in a lot
+                    of ways too. Ramanujan was completely ignorant of some areas
+                    of mathematics that virtually all of his peers had studied
+                    as part of a more formal education, yet he was deeply
+                    immersed in mathematical ideas that the same peers had
+                    barely given any thought to. Ramanujan's work in mathematics
+                    stunned leading mathematicians at the time for it's
+                    originality and creativity.
+                    <Quote
+                      quote={
+                        'Plenty of mathematicians, Hardy knew, could follow a step-by-step discursus unflaggingly—yet counted for nothing beside Ramanujan. Years later, he would contrive an informal scale of natural mathematical ability on which he assigned himself a 25 and Littlewood a 30. To David Hilbert, the most eminent mathematician of the day, he assigned an 80. To Ramanujan he gave 100.'
+                      }
+                      byLine={'Robert Kanigel'}
+                      source="https://ia801601.us.archive.org/7/items/TheManWhoKnewInfinityALifeOfTheGeniusRamanujan/The-Man-Who-Knew-Infinity-A-Life-of-the-Genius-Ramanujan.pdf"
+                    />
+                    Ramanujan had an incredible familiarity with positive
+                    integers aka "counting numbers" and their properties. A
+                    story told by one of his mathematician collegues really
+                    highlights this :
                     <Quote
                       quote={`I remember once going to see him when he was ill at Putney. I had ridden in taxi cab No. 1729 and remarked that the number seemed to me rather a dull one, and that I hoped it was not an unfavourable omen. "No," he replied, "it is a very interesting number; it is the smallest number expressible as the sum of two cubes in two different ways.`}
                       byLine={'G. H. Hardy'}
@@ -313,7 +329,9 @@ const smallness_and_divisibility = () => {
                     If the story is true, the implication that Ramanujan had
                     such specific information about such a large number just
                     catalogued somewhere in the back of his head at all times.
-                    Wow.
+                    Wow. And based on how prolific Ramanujan's discoveries in
+                    math were over his short life, this kind of encyclopedic
+                    knowledge seems very plausible.
                     <br />
                     <br />
                     Ramanujan's familiairty of and curiosity towards positive
@@ -383,7 +401,7 @@ const smallness_and_divisibility = () => {
           <br />
           There are two qualities in particular that our models will focus on —
           smallness and having many divisors. */}
-          <h4>Smaller is Better</h4>
+          <h1>Smaller is Better</h1>
           Small numbers are great because they:
           <Ul>
             <li>
@@ -403,6 +421,11 @@ const smallness_and_divisibility = () => {
                   rerender.
                   <br />
                   <br />
+                  <CanvasForTopicComponent
+                    sceneGetter={getSceneInteriorAngles}
+                  />
+                  <br />
+                  <br />
                   Not long ago, the gold standard for video games was around 60
                   times a second {`60 Hz`}. <br />
                   <br />
@@ -417,15 +440,47 @@ const smallness_and_divisibility = () => {
             <li>
               make visualization possible: observing, displaying, drawing, and
               measuring divisions pretty quickly reaches both the limitations of
-              our eyes and technology.
+              our our eyes and/or our displays. How many divisions can you
+              distinguish on the circle below using your display? I can
+              distinguish the individual lines up to about 550 at the outside of
+              the circle using my display.
+              <br /> <br />
             </li>
           </Ul>
-          So "smallness" is a quality we definitely want to prioritize. The real
-          question will be, how much priority to give "smallness" and over what
-          other considerations?
-          <br />
-          <br />
           <Visibility />
+          <h1>
+            Modeling Smallness{' '}
+            <AsideNote>
+              <div>
+                Why model smallness and not bigness? In general there's not a
+                good reason, and you're welcome to conceptualize it that way.
+                For this web app, I wanted to use a point system that relies on
+                good qualities being associated with positivie values. I picked
+                smallness to model since it is a positive quality as opposed to
+                bigness which would have been a negative quality.
+              </div>
+            </AsideNote>
+          </h1>
+          So "smallness" is a quality we definitely want to prioritize. The real
+          question will be, how are we going to grade a number's "smallness"?
+          The method we use to grade smallenss is going to be a critical part of
+          your model.
+          <h1>Linear Model</h1>
+          One way to grade would be a linear model. The smaller the number, the
+          more points it gets. For example, we could model smallness in a away
+          where 1 gets 100 points for smallness whereas 10,000 gets 0 points for
+          smallness. And 5,000 exactly half way in between those numbers would
+          get 50 points.
+          <LinearSmallnessModel />
+          <h1>Exponential Model</h1>
+          Another answer would be an exponential model — a curve. In this kind
+          of model 1 might still get 100 points and 10,000 could still get zero.
+          But 5,000 might only 2 points (twice that of 10,000, but 1/50th that
+          of 1), significantly less than 50.
+          <h1>Step-Wise Model</h1>
+          <h1>Mixed Model</h1>
+          <br />
+          <br />
           <Smallest />
           {/* I made the diagram above so darn tall because otherwise the smallest
           numbers, represented by just fractions of a pixel, become too small to
