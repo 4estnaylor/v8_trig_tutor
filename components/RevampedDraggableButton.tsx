@@ -103,7 +103,7 @@ const Wrapper = styled.div<{ $isVisible: boolean }>`
 `;
 
 const Outer = styled.div`
-  background-color: ${cl.getHSLA(cl.green, 0.5)};
+  background-color: ${cl.getHSLA(cl.green, 0.2)};
   color: ${cl.getHSL(cl.white)};
   border-radius: 50%;
   height: ${50}px;
