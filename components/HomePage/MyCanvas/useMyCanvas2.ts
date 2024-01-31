@@ -25,6 +25,9 @@ const useMyCanvas2: (
     let animationFrameID: number;
 
     const canvasEventHandlerConfig = new EventHandlerConfig();
+
+    context.canvas.width = window.innerWidth;
+    context.canvas.height = 390;
     // const { handlers, cursorPosition } = canvasEventHandlerConfig;
 
     // const getCursorPosition = function (e: MouseEvent) {

@@ -21,7 +21,7 @@ const getSceneLinearSmallness: SceneGetter = (
     context,
     angleInfoRef
   );
-  visibleCirc.radius *= 1.25;
+  visibleCirc.radius *= 1;
   visibleCirc.color = cl.purple;
 
   const pointsMax = 100;
@@ -40,9 +40,9 @@ const getSceneLinearSmallness: SceneGetter = (
   };
 
   let canvasHeight = 390;
+  let maxHeight = canvasHeight / 3;
   const getCurrentPointDisplayCoords = (number: number) => {
-    let yCoord =
-      canvasHeight - (getSmallnessPoints(number) / 100) * canvasHeight;
+    let yCoord = canvasHeight - (getSmallnessPoints(number) / 100) * maxHeight;
     let xCoord = (number / maxValue) * context.canvas.width;
     let coords = { x: xCoord, y: yCoord };
     return coords;
@@ -57,6 +57,7 @@ const getSceneLinearSmallness: SceneGetter = (
     let smallnessPoints = getSmallnessPoints(numberOfDivisionsRef.current);
     context.fillText(smallnessPoints.toString(), 100, 100);
     visibleCirc.center.x = context.canvas.width / 2;
+    visibleCirc.center.y = context.canvas.height / 2;
 
     // visibleCirc.radius = 20;
     // visibleCirc.initialRadius = 20;
@@ -75,7 +76,15 @@ const getSceneLinearSmallness: SceneGetter = (
       0,
       Tau
     );
+    context.fillStyle = cl.getHSL(cl.red);
     context.fill();
+    // draw line
+    context.beginPath();
+    context.moveTo(0, 0);
+    context.lineTo(context.canvas.width, context.canvas.height);
+    context.strokeStyle = cl.getHSLA(cl.red, 0.5);
+    context.lineWidth = 10;
+    context.stroke();
     // context.stroke();
   };
 

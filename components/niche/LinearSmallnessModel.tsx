@@ -130,6 +130,7 @@ const LinearSmallnessModel = () => {
         </DivisionsInput>
         <CanvasForTopicComponent
           sceneGetter={getSceneLinearSmallness}
+          height={440}
           objectPassedToScene={{ numberOfDivisionsRef, angleInfoRef }}
         />
 
