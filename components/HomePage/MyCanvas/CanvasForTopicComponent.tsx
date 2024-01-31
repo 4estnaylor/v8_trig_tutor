@@ -32,12 +32,12 @@ const CanvasForTopicComponent = (props: MyCanvasProps) => {
   return (
     <StyledCanvas
       ref={canvasRef}
-      width={width ? width + 'px' : parentWidth}
+      // width={width ? width + 'px' : parentWidth}
       // width={500}
       style={{ background: cl.getHSLA(cl.white, 0.8), borderRadius: '8px' }}
       // width="390px"
       data-passedtoscene={objectPassedToScene}
-      height={height ? height + 'px' : '390px'}
+      // height={height ? height + 'px' : '390px'}
     />
   );
 };
