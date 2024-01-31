@@ -83,7 +83,7 @@ const getSceneLinearSmallness: SceneGetter = (
     context.moveTo(0, 0);
     context.lineTo(context.canvas.width, context.canvas.height);
     context.strokeStyle = cl.getHSLA(cl.red, 0.5);
-    context.lineWidth = 10;
+    context.lineWidth = 3;
     context.stroke();
     // context.stroke();
   };

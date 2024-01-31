@@ -91,7 +91,7 @@ const LinearSmallnessModel = () => {
   }
 
   const linearSlider = (
-    <Slider
+    <MySlider
       min={1}
       max={10000}
       step={1}
@@ -161,6 +161,10 @@ const DivisionsInput = styled.div`
   margin-right: auto;
   height: 100%;
   width: 140px;
+`;
+
+const MySlider = styled(Slider)`
+  width: 90%;
 `;
 
 export default LinearSmallnessModel;

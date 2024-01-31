@@ -91,6 +91,8 @@ const useMyCanvas2: (
     };
   }, []);
 
+  // useEffect(()=>{},[canvasRef?.current.width])
+
   return canvasRef;
 };
 
