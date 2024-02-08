@@ -2,10 +2,20 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import CanvasForTopicComponent from '../HomePage/MyCanvas/CanvasForTopicComponent';
 import getSceneVisibility from '../getScenes/degrees/getSceneVisibility';
-import { Input, Slider } from '@mui/material';
+import { Button, Chip, Input, Slider, Stack, TextField } from '@mui/material';
 import { AngleInfo } from './Intro/DragToBigAngles';
 import { Tau } from '../HomePage/MyCanvas/CanvasObjects/UsefulConstants';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 import cl from '../../colors';
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import getSceneVisibilityGraph from '../getScenes/degrees/getSceneVisibilityGraph';
 
 type Mode = 'linear' | 'exponential';
 
@@ -35,6 +45,13 @@ const Visibility = () => {
     };
   }, [numberOfDivisions]);
 
+  function createData(
+    pixelSize: string,
+    maxDivisionsDistinguishable: number | null
+  ) {
+    return { pixelSize, maxDivisionsDistinguishable };
+  }
+
   const handleLinearSliderChange = (
     event: Event,
     newValue: number | number[]
@@ -55,8 +72,13 @@ const Visibility = () => {
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (Number(event.target.value) > 10000) {
+      setNumberOfDivisions(10000);
+      setBase10Value(4);
+      return;
+    }
     setNumberOfDivisions(
-      event.target.value === '' ? 0 : Number(event.target.value)
+      event.target.value === '' ? 1 : Number(event.target.value)
     );
     setBase10Value(
       event.target.value === '' ? 0 : Math.log10(Number(event.target.value))
@@ -90,54 +112,232 @@ const Visibility = () => {
   }
 
   const linearSlider = (
-    <Slider
-      min={0}
-      max={10000}
-      step={1}
-      value={typeof numberOfDivisions === 'number' ? numberOfDivisions : 0}
-      onChange={handleLinearSliderChange}
-      aria-labelledby="input-slider"
-    />
+    <ExponentialSliderWrapper sx={{ height: 300 }}>
+      <Slider
+        min={0}
+        max={10000}
+        step={1}
+        value={typeof numberOfDivisions === 'number' ? numberOfDivisions : 0}
+        onChange={handleLinearSliderChange}
+        aria-labelledby="input-slider"
+        orientation="vertical"
+      />
+    </ExponentialSliderWrapper>
   );
 
   const exponentialSlider = (
-    <Slider
-      value={typeof base10Value === 'number' ? base10Value : 0}
-      min={0}
-      max={4}
-      step={4 / 1000}
-      onChange={handleExpSliderChange}
-      scale={calculateDivisionValue}
-      aria-labelledby="input-slider"
-    />
+    <ExponentialSliderWrapper sx={{ height: 300 }}>
+      <Slider
+        value={typeof base10Value === 'number' ? base10Value : 0}
+        min={0}
+        max={4}
+        step={4 / 1000}
+        onChange={handleExpSliderChange}
+        scale={calculateDivisionValue}
+        aria-labelledby="input-slider"
+        orientation="vertical"
+      />
+    </ExponentialSliderWrapper>
   );
 
   //effects
+  const initialValuesToTest = [
+    { size: 50, userRecordedValue: null },
+    { size: 100, userRecordedValue: null },
+    { size: 200, userRecordedValue: null },
+    { size: 400, userRecordedValue: null },
+    { size: 809, userRecordedValue: null },
+  ];
+
+  const [valuesToTest, setValuesToTest] = useState(initialValuesToTest);
+
+  const valuesToTestRef = useRef(valuesToTest);
+
+  useEffect(() => {
+    valuesToTestRef.current = valuesToTest;
+  }, [valuesToTest]);
+
+  const [currentTestValueIndex, setCurrentTestValueIndex] = useState(0);
+  const currentTestValueIndexRef = useRef(currentTestValueIndex);
+
+  useEffect(() => {
+    currentTestValueIndexRef.current = currentTestValueIndex;
+  }, [currentTestValueIndex]);
 
   useEffect(() => {
     numberOfDivisionsRef.current = numberOfDivisions;
   }, [numberOfDivisions]);
 
+  const initalRows = [
+    createData('50', null),
+    createData('100', null),
+    createData('200', null),
+    createData('400', null),
+    createData('800', null),
+    createData('1600', null),
+  ];
+
+  const [rows, setRows] = useState(initalRows);
+  const rowsRef = useRef(rows);
+
+  useEffect(() => {
+    rowsRef.current = rows;
+  }, [rows]);
+
+  const handleMarkValue = () => {
+    let rowsClone = [...rows];
+    // update rowsClone;
+    rowsClone[currentTestValueIndex].maxDivisionsDistinguishable =
+      Math.round(numberOfDivisions);
+    setRows(rowsClone);
+  };
+
+  useEffect(() => {}, [rows]);
+
+  const valuesTable = (
+    <TableContainer component={Paper}>
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>radius size {`(in pixels)`}</TableCell>
+            <TableCell align="left">Max Divsions Visible</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row, index) => (
+            <TableRow
+              key={row.pixelSize}
+              sx={{
+                ' &:last-child td, &:last-child th': { border: 0 },
+              }}
+            >
+              <TableCell
+                component="th"
+                scope="row"
+                onClick={() => {
+                  setCurrentTestValueIndex(index);
+                }}
+              >
+                <HoverableDiv
+                  style={{
+                    color: `${
+                      index === currentTestValueIndex
+                        ? cl.getHSL(cl.purple)
+                        : cl.getHSL(cl.black)
+                    }`,
+                  }}
+                >
+                  {row.pixelSize}
+                </HoverableDiv>
+              </TableCell>
+              <TableCell align="left">
+                {row.maxDivisionsDistinguishable}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+
   return (
     <div>
+      <br />
+      <br />
+      Instructions: Adjust the value as high as you can visibly see the lines
+      distinctly at the five different sizes prompted for
+      <h3>
+        {' '}
+        At what value can you no longer distinguish the marks on your display
+      </h3>
       <Wrapper>
-        <DivisionsInput
-          onChange={handleInputChange}
-          onBlur={handleOutsideOfRange}
-        >
-          {Math.round(numberOfDivisions)}
-        </DivisionsInput>
+        <MyStack>
+          <Chip
+            label="50 px"
+            variant={'filled'}
+            color={currentTestValueIndex === 0 ? 'primary' : 'default'}
+            onClick={() => {
+              setCurrentTestValueIndex(0);
+            }}
+          ></Chip>
+          <Chip
+            label="100 px"
+            color={currentTestValueIndex === 1 ? 'primary' : 'default'}
+            onClick={() => {
+              setCurrentTestValueIndex(1);
+            }}
+          ></Chip>
+          <Chip
+            label="200 px"
+            color={currentTestValueIndex === 2 ? 'primary' : 'default'}
+            onClick={() => {
+              setCurrentTestValueIndex(2);
+            }}
+          ></Chip>
+          <Chip
+            label="400 px"
+            color={currentTestValueIndex === 3 ? 'primary' : 'default'}
+            onClick={() => {
+              setCurrentTestValueIndex(3);
+            }}
+          ></Chip>
+          <Chip
+            label="800 px"
+            color={currentTestValueIndex === 4 ? 'primary' : 'default'}
+            onClick={() => {
+              setCurrentTestValueIndex(4);
+            }}
+          ></Chip>
+          <Chip
+            label="1600 px"
+            color={currentTestValueIndex === 5 ? 'primary' : 'default'}
+            onClick={() => {
+              setCurrentTestValueIndex(5);
+            }}
+          ></Chip>
+        </MyStack>
+        <br />
+        <br />
+
         <CanvasForTopicComponent
           sceneGetter={getSceneVisibility}
-          objectPassedToScene={{ numberOfDivisionsRef, angleInfoRef }}
+          objectPassedToScene={{
+            numberOfDivisionsRef,
+            angleInfoRef,
+            valuesToTestRef,
+            currentTestValueIndexRef,
+          }}
         />
         {/* {linearSlider} */}
 
         {/* {base10Value} */}
+
+        {exponentialSlider}
         <br />
         <br />
       </Wrapper>
-      {exponentialSlider}
+      <br />
+      <br />
+      <MyStack>
+        <MarkValueButton variant="contained" onClick={handleMarkValue}>
+          <BorderColorIcon /> {'   '} Mark Value
+        </MarkValueButton>
+        <DivisionsInput
+          onChange={handleInputChange}
+          onBlur={handleOutsideOfRange}
+          value={Math.round(numberOfDivisions)}
+          sx={{ width: '140px', fontSize: '1.5rem' }}
+          inputProps={{ min: 1, max: 10000, fontSize: '1.5rem' }}
+          type="number"
+        ></DivisionsInput>
+      </MyStack>
+      {valuesTable}
+      <CanvasForTopicComponent
+        sceneGetter={getSceneVisibilityGraph}
+        objectPassedToScene={{
+          rowsRef,
+        }}
+      />
     </div>
   );
 };
@@ -145,20 +345,36 @@ const Visibility = () => {
 const Wrapper = styled.div`
   position: relative;
 `;
-const DivisionsInput = styled.div`
-  position: absolute;
-  font-size: 2rem;
-  /* background-color: red; */
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  margin-left: auto;
-  margin-right: auto;
-  height: 100%;
-  width: 140px;
+const HoverableDiv = styled.div`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const MyStack = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  /* gap: 10px;
+  flex-wrap: wrap; */
+  justify-content: space-between;
+  padding-right: 30px;
+`;
+
+const MarkValueButton = styled(Button)`
+  display: flex;
+  gap: 20px;
+  width: fit-content;
+`;
+const DivisionsInput = styled(TextField)`
+  width: 100px;
+`;
+
+const ExponentialSliderWrapper = styled(Stack)`
+  position: absolute;
+  top: 150px;
+  right: 50px;
 `;
 
 export default Visibility;

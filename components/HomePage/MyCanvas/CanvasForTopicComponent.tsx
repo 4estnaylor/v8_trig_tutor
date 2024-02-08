@@ -26,7 +26,19 @@ interface MyCanvasProps {
 
 const CanvasForTopicComponent = (props: MyCanvasProps) => {
   const { sceneGetter, objectPassedToScene, height, width } = props;
-  const canvasRef = useMyCanvas2(sceneGetter, objectPassedToScene);
+  let setDimensions;
+
+  let canvasRef;
+
+  if (width && height) {
+    canvasRef = useMyCanvas2(sceneGetter, objectPassedToScene, {
+      width,
+      height,
+    });
+  } else {
+    canvasRef = useMyCanvas2(sceneGetter, objectPassedToScene);
+  }
+
   const parentWidth = useParentElementSize(canvasRef);
 
   return (

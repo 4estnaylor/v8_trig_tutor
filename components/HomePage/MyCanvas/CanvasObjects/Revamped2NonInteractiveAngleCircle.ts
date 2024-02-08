@@ -405,7 +405,7 @@ class Revamped2NonInteractiveAngleCircle {
       for (let i = 0; i <= totalDashes; i++) {
         let angle = this.angleInfoRef.current.angleOffset + i * angleIncrement;
         // this.drawDash(angle, 0, 200, dashColor, 0);
-        this.makePolarLine(angle, this.radius, angle, this.radius * 1.5);
+        this.makePolarLine(angle, this.radius, angle, this.radius + 50);
       }
       this.context.strokeStyle = cl.getHSL(this.color);
       this.context.stroke();

@@ -7,12 +7,28 @@ import { AngleInfo } from './Intro/DragToBigAngles';
 import { Tau } from '../HomePage/MyCanvas/CanvasObjects/UsefulConstants';
 import cl from '../../colors';
 import getSceneLinearSmallness from '../getScenes/degrees/getSceneLinearSmallness';
+import getSceneLinearLine from '../getScenes/degrees/getSceneLinearLine';
 
 type Mode = 'linear' | 'exponential';
 
 const LinearSmallnessModel = () => {
   const [numberOfDivisions, setNumberOfDivisions] = useState(100);
   const numberOfDivisionsRef = useRef(numberOfDivisions);
+
+  const marks = [
+    {
+      value: 1,
+      label: '1',
+    },
+    {
+      value: 5000,
+      label: '5k',
+    },
+    {
+      value: 10000,
+      label: '10k',
+    },
+  ];
 
   const [base10Value, setBase10Value] = useState(1);
 
@@ -98,6 +114,7 @@ const LinearSmallnessModel = () => {
       value={typeof numberOfDivisions === 'number' ? numberOfDivisions : 0}
       onChange={handleLinearSliderChange}
       aria-labelledby="input-slider"
+      marks={marks}
     />
   );
 
@@ -122,23 +139,34 @@ const LinearSmallnessModel = () => {
   return (
     <div>
       <Wrapper>
-        <DivisionsInput
-          onChange={handleInputChange}
-          onBlur={handleOutsideOfRange}
-        >
-          {Math.round(numberOfDivisions)}
-        </DivisionsInput>
-        <CanvasForTopicComponent
-          sceneGetter={getSceneLinearSmallness}
-          height={440}
-          objectPassedToScene={{ numberOfDivisionsRef, angleInfoRef }}
-        />
+        <CanvasDoubleWide>
+          <div style={{ position: 'relative' }}>
+            <DivisionsInput
+              onChange={handleInputChange}
+              onBlur={handleOutsideOfRange}
+            >
+              {Math.round(numberOfDivisions)}
+            </DivisionsInput>
+            <CanvasForTopicComponent
+              sceneGetter={getSceneLinearSmallness}
+              height={330}
+              width={330}
+              objectPassedToScene={{ numberOfDivisionsRef, angleInfoRef }}
+            />
+          </div>
+          <CanvasForTopicComponent
+            sceneGetter={getSceneLinearLine}
+            height={200}
+            width={330}
+            objectPassedToScene={{ numberOfDivisionsRef, angleInfoRef }}
+          />
+        </CanvasDoubleWide>
+        {linearSlider}
 
         {/* {base10Value} */}
         <br />
         <br />
       </Wrapper>
-      {linearSlider}
       {/* {exponentialSlider} */}
     </div>
   );
@@ -146,6 +174,14 @@ const LinearSmallnessModel = () => {
 
 const Wrapper = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const CanvasDoubleWide = styled.div`
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
 `;
 const DivisionsInput = styled.div`
   position: absolute;
@@ -164,7 +200,9 @@ const DivisionsInput = styled.div`
 `;
 
 const MySlider = styled(Slider)`
-  width: 90%;
+  /* width: 90%; */
+  width: 260px;
+  transform: translateX(12px) translateY(-32px);
 `;
 
 export default LinearSmallnessModel;

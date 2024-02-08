@@ -355,8 +355,8 @@ const smallness_and_divisibility = () => {
           Is 360 really the ideal way to divide a circle? To answer this
           question well, first forget a circle has ever been measured using 360
           degrees. Without any mental baggage of a "default" or "standard"
-          number of divisions, you can more freely ask the much better, more
-          general question:
+          number of divisions, you can more freely ask the more general and
+          interesting question:
           <br />
           <br />
           What would be{' '}
@@ -375,22 +375,60 @@ const smallness_and_divisibility = () => {
           Remember, with no memory of 360 to speak of, we must approach this
           question totally naive, with eyes wide and hearts open.
           <br />
-          <br /> 3 rules
-          <AsideNote>
+          <br />
+          <h1>1 rule</h1>
+          The number must be no bigger than 1000.{' '}
+          <AsideNote>This rule is because</AsideNote>
+          <h1> 3 criteria </h1>
+          {/* <AsideNote>
             <>
-              More like guidelines than "rules" really.
+              Why these only these three?
               <br />
               <br />
-              Except, it does have to be less than 10,000. That's a rule. I only
-              limit it to less than 10,000 because some of the visuals start to
-              get laggy with really big numbers.
+              There are certainly other criteria that could be taken into
+              account and modeled after, but I think these three give us a very, very
+              good start.
             </>
-          </AsideNote>{' '}
-          for your chosen number:
+          </AsideNote>{' '} */}
+          You will need to build a model accounting for these three qualities.
+          With that model you will then select your ideal number for dividing a
+          circle.
           <ul>
-            <li>Smaller is better.</li>
-            <li>More divisible is better.</li>
-            <li>It can't be bigger than 10,000 </li>
+            <li>Visibility</li>
+            <li>
+              Computability{' '}
+              <AsideNote>
+                <div>
+                  Although modern computers can compute extremely large numbers
+                  very effectively, we ask increasingly more of them especially
+                  when it comes to graphics. Every time your screen visually
+                  changes, your computer needs to recalculate the coloration of
+                  each pixel. To not appear laggy this needs to happen at least
+                  24 times a second.
+                  <br />
+                  <br />
+                  {/* <CanvasForTopicComponent
+                    sceneGetter={getSceneInteriorAngles}
+                  /> */}
+                  {/* <br />
+                  <br /> */}
+                  Not long ago, the gold standard for video games was around 60
+                  times a second . Now some modern displays are pushing 4 times
+                  that recalculating pixel colorations 240 times each second.{' '}
+                  What all of this means is, so many calculations are happening
+                  so fast, that limiting the number of divisions to be
+                  calculated and displayed does make a difference.
+                  <br />
+                  <br />
+                  <MyLink href={'https://www.youtube.com/shorts/esIl_oMew8c'}>
+                    Here is a youtube video showing in slowmo the difference
+                    between a 60hz and 240hz display
+                  </MyLink>
+                  .
+                </div>
+              </AsideNote>
+            </li>
+            <li>Divisablity </li>
           </ul>
           {/* We'll restrict our search to values less than 10,000.
           <br />
@@ -401,52 +439,11 @@ const smallness_and_divisibility = () => {
           <br />
           There are two qualities in particular that our models will focus on —
           smallness and having many divisors. */}
-          <h1>Smaller is Better</h1>
-          Small numbers are great because they:
-          <Ul>
-            <li>
-              make calculations less taxing for our brains and our computers'
-              CPUs.{' '}
-              <AsideNote>
-                <div>
-                  Although modern computers can often handle wickedly large
-                  numbers, we ask increasingly more of them especially when it
-                  comes to graphics. Each page rerender all the animations on
-                  this page ask your computer to calculate and produce the color
-                  of every pixel on your device's display. And the animations,
-                  if not laggy, rerender at least around 24 times in a second{' '}
-                  {`also called 24 Hz (pronounced "Hurts")`}. If the animation
-                  is laggy, it is probably because the calculations become too
-                  intensive to perform them quickly enough between each
-                  rerender.
-                  <br />
-                  <br />
-                  <CanvasForTopicComponent
-                    sceneGetter={getSceneInteriorAngles}
-                  />
-                  <br />
-                  <br />
-                  Not long ago, the gold standard for video games was around 60
-                  times a second {`60 Hz`}. <br />
-                  <br />
-                  <MyLink href={'https://www.youtube.com/shorts/esIl_oMew8c'}>
-                    {' '}
-                    Now it's pushing 4 times that at {`240 Hz`}
-                  </MyLink>
-                  .
-                </div>
-              </AsideNote>
-            </li>
-            <li>
-              make visualization possible: observing, displaying, drawing, and
-              measuring divisions pretty quickly reaches both the limitations of
-              our our eyes and/or our displays. How many divisions can you
-              distinguish on the circle below using your display? I can
-              distinguish the individual lines up to about 550 at the outside of
-              the circle using my display.
-              <br /> <br />
-            </li>
-          </Ul>
+          <h1>Visibility</h1>
+          Seeing the divisions is useful for measuring, so you may likely to
+          consider how many divisions you can realistically see on your display.
+          How important of a priority you make visibilty will be for you to
+          decide later.
           <Visibility />
           <h1>
             Modeling Smallness{' '}

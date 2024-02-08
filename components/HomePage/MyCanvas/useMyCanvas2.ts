@@ -5,8 +5,13 @@ import EventHandlerConfig from './EventHandler/EventHandlerConfig';
 
 const useMyCanvas2: (
   sceneGetter: SceneGetter,
-  objectPassedToScene?: any
-) => React.MutableRefObject<null> = (sceneGetter, objectPassedToScene?) => {
+  objectPassedToScene?: any,
+  dimensions?: { width: number; height: number }
+) => React.MutableRefObject<null> = (
+  sceneGetter,
+  objectPassedToScene?,
+  dimensions?
+) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -26,8 +31,18 @@ const useMyCanvas2: (
 
     const canvasEventHandlerConfig = new EventHandlerConfig();
 
-    context.canvas.width = window.innerWidth;
+    let smallerOfTheTwo = window.innerWidth;
+    if (window.innerWidth > 700) {
+      smallerOfTheTwo = 700;
+    }
+
+    context.canvas.width = smallerOfTheTwo;
     context.canvas.height = 390;
+
+    if (dimensions) {
+      canvas.width = dimensions.width;
+      canvas.height = dimensions.height;
+    }
     // const { handlers, cursorPosition } = canvasEventHandlerConfig;
 
     // const getCursorPosition = function (e: MouseEvent) {

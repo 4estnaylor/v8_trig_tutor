@@ -15,7 +15,14 @@ const getSceneVisibility: SceneGetter = (
   //@ts-ignore
   const passedObject = context?.objectPassedToScene;
 
-  const { numberOfDivisionsRef, angleInfoRef } = passedObject;
+  const {
+    numberOfDivisionsRef,
+    angleInfoRef,
+    // valuesToTestRef,
+    currentTestValueIndexRef,
+  } = passedObject;
+
+  let testRadii = [50, 100, 500, 1000, 2000, 4000];
 
   let visibleCirc = new Revamped2NonInteractiveAngleCircle(
     context,
@@ -25,14 +32,17 @@ const getSceneVisibility: SceneGetter = (
   visibleCirc.color = cl.purple;
   // visibleCirc.radius = 20;
   // let visibleCirc = new Revamped2AngleCircle(,)
+  console.log('values to testref', currentTestValueIndexRef);
 
   scene.draw = () => {
-    visibleCirc.center.x = context.canvas.width / 2;
+    visibleCirc.radius = testRadii[currentTestValueIndexRef.current];
+    visibleCirc.center.x =
+      context.canvas.width / 2 - testRadii[currentTestValueIndexRef.current];
     // visibleCirc.radius = 20;
     // visibleCirc.initialRadius = 20;
     let displayDivisions = Math.round(numberOfDivisionsRef.current).toString();
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    // context.fillText(displayDivisions, 195, 195);
+    context.fillText(currentTestValueIndexRef.current, 195, 195);
     // visibleCirc.draw();
     visibleCirc.drawFullDivisions();
     // context.stroke();

@@ -194,7 +194,7 @@ const DragRevamped = () => {
   return (
     <div
       onClick={() => {
-        setVisibleTest((prev) => !prev);
+        // setVisibleTest((prev) => !prev);
       }}
       onMouseUp={() => {
         console.log('yep');
