@@ -114,9 +114,9 @@ export default function Home() {
                 sceneGetter={getHomepageScene}
                 height={350}
               />
-              <HomepageIllustration aria-hidden="true" tabIndex={-1}>
+              {/* <HomepageIllustration aria-hidden="true" tabIndex={-1}>
                 <InnerImg src="/trig_glasses3.svg" />
-              </HomepageIllustration>
+              </HomepageIllustration> */}
             </CanvasWrap>
           </TopSection>
           <BottomSection>

@@ -22,7 +22,7 @@ const getSceneVisibility: SceneGetter = (
     currentTestValueIndexRef,
   } = passedObject;
 
-  let testRadii = [50, 100, 500, 1000, 2000, 4000];
+  let testRadii = [50, 100, 200, 400, 800, 1600];
 
   let visibleCirc = new Revamped2NonInteractiveAngleCircle(
     context,

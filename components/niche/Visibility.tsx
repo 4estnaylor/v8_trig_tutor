@@ -169,12 +169,12 @@ const Visibility = () => {
   }, [numberOfDivisions]);
 
   const initalRows = [
-    createData('50', null),
-    createData('100', null),
-    createData('200', null),
-    createData('400', null),
-    createData('800', null),
-    createData('1600', null),
+    createData('50', 100),
+    createData('100', 200),
+    createData('200', 400),
+    createData('400', 800),
+    createData('800', 1600),
+    createData('1600', 3200),
   ];
 
   const [rows, setRows] = useState(initalRows);
@@ -248,7 +248,8 @@ const Visibility = () => {
       distinctly at the five different sizes prompted for
       <h3>
         {' '}
-        At what value can you no longer distinguish the marks on your display
+        A quick vision test: What value can you no longer distinguish the marks
+        on your display for the following sizes of circle.
       </h3>
       <Wrapper>
         <MyStack>

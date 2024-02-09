@@ -5,6 +5,7 @@ import Revamped2NonInteractiveAngleCircle from '../../HomePage/MyCanvas/CanvasOb
 import { Tau } from '../../HomePage/MyCanvas/CanvasObjects/UsefulConstants';
 import EventHandlerConfig from '../../HomePage/MyCanvas/EventHandler/EventHandlerConfig';
 import { Scene, SceneGetter } from '../../HomePage/MyCanvas/Scene/Scene';
+import P from '../../P';
 
 const getSceneVisibilityGraph: SceneGetter = (
   context: CanvasRenderingContext2D,
@@ -29,7 +30,27 @@ const getSceneVisibilityGraph: SceneGetter = (
   // let visibleCirc = new Revamped2AngleCircle(,)
   console.log('values to testref', rowsRef.current);
 
-  let maxY = 10000;
+  context.canvas.style.background = cl.getHSLA(cl.blue, 0.1);
+
+  let maxDivisionsSoFar = 0;
+
+  rowsRef.current.forEach((row: any) => {
+    if (row.maxDivisionsDistinguishable !== null) {
+      if (row.maxDivisionsDistinguishable > maxDivisionsSoFar) {
+        maxDivisionsSoFar = row.maxDivisionsDistinguishable;
+      } else {
+      }
+    }
+  });
+
+  let maxDivisionsCurrently = maxDivisionsSoFar;
+
+  let maxY = maxDivisionsCurrently * 1.5;
+  if (maxY > 10000) {
+    maxY = 10000;
+  }
+
+  maxY = 10000;
   let maxX = 1600;
   let bufferPx = 5;
   let dotRadius = 6;
