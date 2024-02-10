@@ -16,12 +16,20 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import getSceneVisibilityGraph from '../getScenes/degrees/getSceneVisibilityGraph';
+import AsideNote from '../AsideNote/AsideNote';
 
 type Mode = 'linear' | 'exponential';
 
 const Visibility = () => {
   const [numberOfDivisions, setNumberOfDivisions] = useState(100);
   const numberOfDivisionsRef = useRef(numberOfDivisions);
+
+  const [radiusLength, setRadiusLength] = useState(100);
+  const radiusLengthRef = useRef(radiusLength);
+
+  useEffect(() => {
+    radiusLengthRef.current = radiusLength;
+  }, [radiusLength]);
 
   const [base10Value, setBase10Value] = useState(1);
 
@@ -59,6 +67,18 @@ const Visibility = () => {
     let value = newValue as number;
     setNumberOfDivisions(value as number);
     setBase10Value(value === 0 ? 0 : Math.log10(value));
+    // setBase10Valvue(
+    //   event.target.value === '' ? 0 : Math.log10(Number(event.target.value))
+    // );
+  };
+
+  const handleRadiusLengthSlide = (
+    event: Event,
+    newValue: number | number[]
+  ) => {
+    let value = newValue as number;
+    setRadiusLength(value);
+
     // setBase10Valvue(
     //   event.target.value === '' ? 0 : Math.log10(Number(event.target.value))
     // );
@@ -112,7 +132,7 @@ const Visibility = () => {
   }
 
   const linearSlider = (
-    <ExponentialSliderWrapper sx={{ height: 300 }}>
+    <ExponentialSliderWrapper>
       <Slider
         min={0}
         max={10000}
@@ -126,7 +146,7 @@ const Visibility = () => {
   );
 
   const exponentialSlider = (
-    <ExponentialSliderWrapper sx={{ height: 300 }}>
+    <ExponentialSliderWrapper>
       <Slider
         value={typeof base10Value === 'number' ? base10Value : 0}
         min={0}
@@ -248,8 +268,14 @@ const Visibility = () => {
       distinctly at the five different sizes prompted for
       <h3>
         {' '}
-        A quick vision test: What value can you no longer distinguish the marks
-        on your display for the following sizes of circle.
+        A quick visibility test: What value can you no longer distinguish the
+        marks on your display for the following sizes of circle.
+        <AsideNote>
+          <>
+            This is not a vision test. The limiting factor will likely be due to
+            the amount or density of pixels visible on your device.
+          </>
+        </AsideNote>
       </h3>
       <Wrapper>
         <MyStack>
@@ -300,25 +326,45 @@ const Visibility = () => {
         <br />
         <br />
 
-        <CanvasForTopicComponent
-          sceneGetter={getSceneVisibility}
-          objectPassedToScene={{
-            numberOfDivisionsRef,
-            angleInfoRef,
-            valuesToTestRef,
-            currentTestValueIndexRef,
-          }}
-        />
-        {/* {linearSlider} */}
+        <div style={{ position: 'relative', height: '700px' }}>
+          <CanvasForTopicComponent
+            sceneGetter={getSceneVisibility}
+            objectPassedToScene={{
+              numberOfDivisionsRef,
+              angleInfoRef,
+              valuesToTestRef,
+              currentTestValueIndexRef,
+              radiusLengthRef,
+            }}
+          />
+          <div style={{ position: 'absolute', top: 0 }}>
+            <CanvasForTopicComponent
+              sceneGetter={getSceneVisibilityGraph}
+              objectPassedToScene={{
+                rowsRef,
+                currentTestValueIndexRef,
+                numberOfDivisionsRef,
+              }}
+            />
+          </div>
+          {/* {linearSlider} */}
 
-        {/* {base10Value} */}
+          {/* {base10Value} */}
 
-        {exponentialSlider}
+          {exponentialSlider}
+          <RadiusLengthSliderWrapper>
+            <Slider
+              value={radiusLength}
+              step={0.2}
+              sx={{ color: 'inherit' }}
+              onChange={handleRadiusLengthSlide}
+            ></Slider>
+          </RadiusLengthSliderWrapper>
+        </div>
+        {radiusLength}
         <br />
         <br />
       </Wrapper>
-      <br />
-      <br />
       <MyStack>
         <MarkValueButton variant="contained" onClick={handleMarkValue}>
           <BorderColorIcon /> {'   '} Mark Value
@@ -332,13 +378,9 @@ const Visibility = () => {
           type="number"
         ></DivisionsInput>
       </MyStack>
+      <br />
+      <br />
       {valuesTable}
-      <CanvasForTopicComponent
-        sceneGetter={getSceneVisibilityGraph}
-        objectPassedToScene={{
-          rowsRef,
-        }}
-      />
     </div>
   );
 };
@@ -374,8 +416,20 @@ const DivisionsInput = styled(TextField)`
 
 const ExponentialSliderWrapper = styled(Stack)`
   position: absolute;
-  top: 150px;
-  right: 50px;
+  /* top: 150px; */
+  top: 50%;
+  height: 300px;
+  right: 0px;
+  transform: translateY(-50%);
+`;
+
+const RadiusLengthSliderWrapper = styled(Stack)`
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  min-width: 300px;
+  transform: translateX(-50%);
+  color: ${cl.getHSL(cl.red)};
 `;
 
 export default Visibility;

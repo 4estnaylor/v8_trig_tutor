@@ -16,7 +16,8 @@ const getSceneVisibilityGraph: SceneGetter = (
   //@ts-ignore
   const passedObject = context?.objectPassedToScene;
 
-  const { rowsRef } = passedObject;
+  const { rowsRef, currentTestValueIndexRef, numberOfDivisionsRef } =
+    passedObject;
 
   let testRadii = [50, 100, 200, 400, 800, 1600];
 
@@ -50,16 +51,19 @@ const getSceneVisibilityGraph: SceneGetter = (
     maxY = 10000;
   }
 
-  maxY = 10000;
+  // maxY = 10000;
   let maxX = 1600;
   let bufferPx = 5;
-  let dotRadius = 6;
-  let color = cl.getHSL(cl.green);
+  let dotRadius = 4;
+  let selectDotRadius = dotRadius * 1.75;
+  let color = cl.getHSLA(cl.purple, 0.8);
+  let currentColor = cl.getHSLA(cl.purple, 0.8);
+  let selectColor = cl.getHSL(cl.purple);
 
   const getContextCoords = (radius: number, numberOfDivisions: number) => {
-    let length = context.canvas.width - 2 * bufferPx - 2 * dotRadius;
+    let length = context.canvas.width - 2 * bufferPx - 2 * dotRadius - 150;
     let height = context.canvas.height - 2 * bufferPx - 2 * dotRadius;
-    let xPos = bufferPx + length * (radius / maxX);
+    let xPos = 20 + bufferPx + length * (radius / maxX);
     let yPos =
       dotRadius + bufferPx + height - (numberOfDivisions / maxY) * height;
     return { x: xPos, y: yPos };
@@ -72,20 +76,59 @@ const getSceneVisibilityGraph: SceneGetter = (
     context.fill();
   };
 
+  const drawCurrentDot = (x: number, y: number) => {
+    context.beginPath();
+    context.ellipse(x, y, dotRadius, dotRadius, 0, 0, Tau);
+    context.fillStyle = currentColor;
+    context.fill();
+  };
+
+  const drawSelectDot = (x: number, y: number) => {
+    context.beginPath();
+    context.ellipse(x, y, selectDotRadius, selectDotRadius, 0, 0, Tau);
+    context.strokeStyle = selectColor;
+    context.lineWidth = 3;
+    context.stroke();
+  };
+
   const drawMarkedDots = () => {
-    rowsRef.current.forEach((row: any) => {
+    rowsRef.current.forEach((row: any, index: number) => {
       if (row.maxDivisionsDistinguishable !== null) {
         let { x, y } = getContextCoords(
           row.pixelSize,
           row.maxDivisionsDistinguishable
         );
-        drawDot(x, y);
+        if (index === currentTestValueIndexRef.current) {
+          drawCurrentDot(x, y);
+        } else {
+          drawDot(x, y);
+        }
       }
     });
   };
 
+  const drawSelectingDot = () => {
+    rowsRef.current.forEach((row: any, index: number) => {
+      if (row.maxDivisionsDistinguishable !== null) {
+        let { x, y } = getContextCoords(
+          row.pixelSize,
+          numberOfDivisionsRef.current
+        );
+        if (index === currentTestValueIndexRef.current) {
+          drawSelectDot(x, y);
+        } else {
+          // drawDot(x, y);
+        }
+      }
+    });
+  };
+
+  const setCanvasHeight = () => {};
+
   scene.draw = () => {
+    context.canvas.height = 700;
     drawMarkedDots();
+    drawSelectingDot();
     // drawDot(100, 50);
     // console.log(rowsRef.current);
     // visibleCirc.radius = testRadii[currentTestValueIndexRef.current];
