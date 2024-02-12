@@ -206,9 +206,12 @@ const Visibility = () => {
 
   const handleMarkValue = () => {
     let rowsClone = [...rows];
-    // update rowsClone;
-    rowsClone[currentTestValueIndex].maxDivisionsDistinguishable =
-      Math.round(numberOfDivisions);
+    let radius = Math.round(radiusLength * 20);
+    let stringifiedRadius = radius.toString();
+    let newRow = createData(stringifiedRadius, Math.round(numberOfDivisions));
+    rowsClone.push(newRow);
+    // rowsClone[currentTestValueIndex].maxDivisionsDistinguishable =
+    //   Math.round(numberOfDivisions);
     setRows(rowsClone);
   };
 
@@ -344,6 +347,7 @@ const Visibility = () => {
                 rowsRef,
                 currentTestValueIndexRef,
                 numberOfDivisionsRef,
+                radiusLengthRef,
               }}
             />
           </div>

@@ -35,6 +35,23 @@ const getSceneVisibility: SceneGetter = (
   // let visibleCirc = new Revamped2AngleCircle(,)
   console.log('values to testref', currentTestValueIndexRef);
 
+  const drawRadius = () => {
+    let x0 = visibleCirc.center.x;
+    let y0 = visibleCirc.center.y;
+    let x1 = visibleCirc.center.x + visibleCirc.radius;
+    let y1 = visibleCirc.center.y;
+    let lineColor = cl.getHSL(cl.red);
+    let con;
+
+    context.strokeStyle = lineColor;
+    context.lineWidth = 3;
+
+    context.beginPath();
+    context.moveTo(x0, y0);
+    context.lineTo(x1, y1);
+    context.stroke();
+  };
+
   scene.draw = () => {
     context.canvas.height = 300;
     visibleCirc.radius = radiusLengthRef.current * 20;
@@ -48,6 +65,7 @@ const getSceneVisibility: SceneGetter = (
     context.fillText(currentTestValueIndexRef.current, 195, 195);
     // visibleCirc.draw();
     visibleCirc.drawFullDivisions();
+    drawRadius();
     // context.stroke();
   };
 

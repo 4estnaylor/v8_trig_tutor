@@ -16,8 +16,12 @@ const getSceneVisibilityGraph: SceneGetter = (
   //@ts-ignore
   const passedObject = context?.objectPassedToScene;
 
-  const { rowsRef, currentTestValueIndexRef, numberOfDivisionsRef } =
-    passedObject;
+  const {
+    rowsRef,
+    currentTestValueIndexRef,
+    numberOfDivisionsRef,
+    radiusLengthRef,
+  } = passedObject;
 
   let testRadii = [50, 100, 200, 400, 800, 1600];
 
@@ -111,7 +115,7 @@ const getSceneVisibilityGraph: SceneGetter = (
     rowsRef.current.forEach((row: any, index: number) => {
       if (row.maxDivisionsDistinguishable !== null) {
         let { x, y } = getContextCoords(
-          row.pixelSize,
+          radiusLengthRef.current * 20,
           numberOfDivisionsRef.current
         );
         if (index === currentTestValueIndexRef.current) {
