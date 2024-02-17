@@ -298,7 +298,7 @@ const smallness_and_divisibility = () => {
                     solved questions from a pretty unique intellectual angle —
                     very rough around the edges compared to most prominent
                     mathematicians at the time, but far ahead of them in a lot
-                    of ways too. Ramanujan was completely ignorant of some areas
+                    of ways too. Ramanujan was suprisingly unaware of some areas
                     of mathematics that virtually all of his peers had studied
                     as part of a more formal education, yet he was deeply
                     immersed in mathematical ideas that the same peers had
