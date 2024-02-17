@@ -286,7 +286,7 @@ const smallness_and_divisibility = () => {
                 <AsideNote>
                   <div style={{ overflow: 'scroll' }}>
                     <Image
-                      src="/ramanujanPhoto.png"
+                      src="/ramanujanphoto.png"
                       height={300}
                       width={250}
                       style={{ borderRadius: '8px', marginLeft: 'auto' }}
