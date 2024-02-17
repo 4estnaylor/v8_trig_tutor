@@ -352,18 +352,55 @@ const smallness_and_divisibility = () => {
             }
             source="https://writings.stephenwolfram.com/2016/04/who-was-ramanujan/"
           />
-          Is 360 really the ideal way to divide a circle? To answer this
-          question well, first forget a circle has ever been measured using 360
-          degrees. Without any mental baggage of a "default" or "standard"
-          number of divisions, you can more freely ask the more general and
-          interesting question:
+          Is 360 really the ideal way to divide a circle? No. 42 is.{' '}
+          <AsideNote>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              Just kidding {`(kinda)`}. This is a gag from Douglass Adams book
+              Hitchiker's Guide to the Galaxy where a super computer named Deep
+              Thought is asked to answer "the ultimate question of life, the
+              universe, and everything".
+              <Quote quote={''}>
+                <div>
+                  “I checked it very thoroughly,” said the computer, “and that
+                  quite definitely is the answer. I think the problem, to be
+                  quite honest with you, is that you’ve never actually known
+                  what the question is.”
+                  <br />
+                  <br />
+                  “But it was the Great Question! The Ultimate Question of Life,
+                  the Universe and Everything!” howled Loonquawl.
+                  <br />
+                  <br />
+                  “Yes,” said Deep Thought with the air of one who suffers fools
+                  gladly, “but what actually is it?”
+                  <br />
+                  <br />
+                  A slow stupefied silence crept over the men as they stared at
+                  the computer and then at each other. “Well, you know, it’s
+                  just Everything... Everything...” offered Phouchg weakly.
+                  <br />
+                  <br />
+                  “Exactly!” said Deep Thought. “So once you do know what the
+                  question actually is, you’ll know what the answer means.”
+                </div>
+              </Quote>
+            </div>
+          </AsideNote>
+          <br />
+          <br />
+          More information is needed. A better question is needed. Let's try and
+          forget for a moment that we ever made 360 the standard for dividing
+          circles. Clean the slate, start from scratch. Without any mental
+          baggage of a "default" or "standard" number of divisions, you can more
+          freely ask the more general, interesting, and dare I say better
+          question:
           <br />
           <br />
           What would be{' '}
           <em>
             <b> the best</b>
           </em>{' '}
-          number to divide a circle for measurement?
+          number to divide a circle for measurement <em>for my purposes</em>?
           <br />
           <br />
           There are actually a number of correct answers to this question, but

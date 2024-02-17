@@ -54,9 +54,8 @@ const getSceneVisibility: SceneGetter = (
 
   scene.draw = () => {
     context.canvas.height = 300;
-    visibleCirc.radius = radiusLengthRef.current * 20;
-    visibleCirc.center.x =
-      context.canvas.width / 2 - radiusLengthRef.current * 20;
+    visibleCirc.radius = radiusLengthRef.current;
+    visibleCirc.center.x = context.canvas.width / 2 - radiusLengthRef.current;
     visibleCirc.center.y = context.canvas.height / 2;
     // visibleCirc.radius = 20;
     // visibleCirc.initialRadius = 20;

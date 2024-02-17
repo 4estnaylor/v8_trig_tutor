@@ -53,10 +53,7 @@ const Visibility = () => {
     };
   }, [numberOfDivisions]);
 
-  function createData(
-    pixelSize: string,
-    maxDivisionsDistinguishable: number | null
-  ) {
+  function createData(pixelSize: number, maxDivisionsDistinguishable: number) {
     return { pixelSize, maxDivisionsDistinguishable };
   }
 
@@ -161,13 +158,7 @@ const Visibility = () => {
   );
 
   //effects
-  const initialValuesToTest = [
-    { size: 50, userRecordedValue: null },
-    { size: 100, userRecordedValue: null },
-    { size: 200, userRecordedValue: null },
-    { size: 400, userRecordedValue: null },
-    { size: 809, userRecordedValue: null },
-  ];
+  const initialValuesToTest = [{ size: 0, userRecordedValue: 0 }];
 
   const [valuesToTest, setValuesToTest] = useState(initialValuesToTest);
 
@@ -188,32 +179,81 @@ const Visibility = () => {
     numberOfDivisionsRef.current = numberOfDivisions;
   }, [numberOfDivisions]);
 
-  const initalRows = [
-    createData('50', 100),
-    createData('100', 200),
-    createData('200', 400),
-    createData('400', 800),
-    createData('800', 1600),
-    createData('1600', 3200),
+  const initalRows: {
+    pixelSize: number;
+    maxDivisionsDistinguishable: number;
+  }[] = [
+    {
+      pixelSize: 0,
+      maxDivisionsDistinguishable: 0,
+    },
   ];
 
-  const [rows, setRows] = useState(initalRows);
+  const [rows, setRows] =
+    useState<{ pixelSize: number; maxDivisionsDistinguishable: number }[]>(
+      initalRows
+    );
   const rowsRef = useRef(rows);
 
   useEffect(() => {
     rowsRef.current = rows;
   }, [rows]);
 
+  const [lineSlope, setLineSlope] = useState<null | number>(null);
+  const lineSlopeRef = useRef<null | number>(null);
+
+  const getLinearRegression = () => {
+    if (rows.length < 1) return;
+    let xValues: number[] = rows.map((row) => Number(row.pixelSize));
+    let yValues: number[] = rows.map((row) =>
+      Number(row.maxDivisionsDistinguishable)
+    );
+    const meanX =
+      xValues.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0
+      ) / xValues.length;
+
+    const meanY =
+      yValues.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0
+      ) / yValues.length;
+
+    let dividend = 0;
+    let divisor = 0;
+    for (let i = 0; i < xValues.length; i++) {
+      dividend += (xValues[i] - meanX) * (yValues[i] - meanY);
+      divisor += (xValues[i] - meanX) ** 2;
+    }
+    let slope = dividend / divisor;
+    // theorhetically it should be zero, so not gonna calculate for y-intercept;
+    console.log(slope);
+    setLineSlope(slope);
+    lineSlopeRef.current = slope;
+    // const meanX = xValues.reduce((previousValue, currentValue) => previousValue + currentValue, initalValue,);
+  };
+
   const handleMarkValue = () => {
     let rowsClone = [...rows];
-    let radius = Math.round(radiusLength * 20);
-    let stringifiedRadius = radius.toString();
-    let newRow = createData(stringifiedRadius, Math.round(numberOfDivisions));
+    let pixelSize = Math.round(radiusLength);
+
+    // gets rid of previous values for same radius pixelsize
+    rowsClone = rowsClone.filter((row) => row.pixelSize !== pixelSize);
+
+    if (Math.round(numberOfDivisions) === null) return;
+    let newRow = createData(pixelSize, Math.round(numberOfDivisions));
     rowsClone.push(newRow);
+    rowsClone.sort((a, b) => a.pixelSize - b.pixelSize);
     // rowsClone[currentTestValueIndex].maxDivisionsDistinguishable =
     //   Math.round(numberOfDivisions);
     setRows(rowsClone);
+    getLinearRegression();
   };
+
+  const [linearRegressionSlope, setLinearRegressionSlope] = useState<
+    null | number
+  >(null);
 
   useEffect(() => {}, [rows]);
 
@@ -270,7 +310,6 @@ const Visibility = () => {
       Instructions: Adjust the value as high as you can visibly see the lines
       distinctly at the five different sizes prompted for
       <h3>
-        {' '}
         A quick visibility test: What value can you no longer distinguish the
         marks on your display for the following sizes of circle.
         <AsideNote>
@@ -282,49 +321,21 @@ const Visibility = () => {
       </h3>
       <Wrapper>
         <MyStack>
-          <Chip
-            label="50 px"
-            variant={'filled'}
-            color={currentTestValueIndex === 0 ? 'primary' : 'default'}
-            onClick={() => {
-              setCurrentTestValueIndex(0);
-            }}
-          ></Chip>
-          <Chip
-            label="100 px"
-            color={currentTestValueIndex === 1 ? 'primary' : 'default'}
-            onClick={() => {
-              setCurrentTestValueIndex(1);
-            }}
-          ></Chip>
-          <Chip
-            label="200 px"
-            color={currentTestValueIndex === 2 ? 'primary' : 'default'}
-            onClick={() => {
-              setCurrentTestValueIndex(2);
-            }}
-          ></Chip>
-          <Chip
-            label="400 px"
-            color={currentTestValueIndex === 3 ? 'primary' : 'default'}
-            onClick={() => {
-              setCurrentTestValueIndex(3);
-            }}
-          ></Chip>
-          <Chip
-            label="800 px"
-            color={currentTestValueIndex === 4 ? 'primary' : 'default'}
-            onClick={() => {
-              setCurrentTestValueIndex(4);
-            }}
-          ></Chip>
-          <Chip
-            label="1600 px"
-            color={currentTestValueIndex === 5 ? 'primary' : 'default'}
-            onClick={() => {
-              setCurrentTestValueIndex(5);
-            }}
-          ></Chip>
+          {rows.map((row, index) => {
+            return (
+              <div>
+                <Chip
+                  label={`${row.pixelSize} px`}
+                  variant={'filled'}
+                  color={currentTestValueIndex === 0 ? 'primary' : 'default'}
+                  onClick={() => {
+                    // setCurrentTestValueIndex(0);
+                    setRadiusLength(row.pixelSize);
+                  }}
+                ></Chip>
+              </div>
+            );
+          })}
         </MyStack>
         <br />
         <br />
@@ -348,6 +359,7 @@ const Visibility = () => {
                 currentTestValueIndexRef,
                 numberOfDivisionsRef,
                 radiusLengthRef,
+                lineSlopeRef,
               }}
             />
           </div>
@@ -359,7 +371,9 @@ const Visibility = () => {
           <RadiusLengthSliderWrapper>
             <Slider
               value={radiusLength}
-              step={0.2}
+              step={1}
+              min={1}
+              max={2000}
               sx={{ color: 'inherit' }}
               onChange={handleRadiusLengthSlide}
             ></Slider>

@@ -1,3 +1,4 @@
+import { buffer } from 'micro';
 import cl from '../../../colors';
 import AngleCircle from '../../HomePage/MyCanvas/CanvasObjects/AngleCircle';
 import Revamped2NonInteractiveAngleCircle from '../../HomePage/MyCanvas/CanvasObjects/Revamped2NonInteractiveAngleCircle';
@@ -21,6 +22,7 @@ const getSceneVisibilityGraph: SceneGetter = (
     currentTestValueIndexRef,
     numberOfDivisionsRef,
     radiusLengthRef,
+    lineSlopeRef,
   } = passedObject;
 
   let testRadii = [50, 100, 200, 400, 800, 1600];
@@ -50,14 +52,14 @@ const getSceneVisibilityGraph: SceneGetter = (
 
   let maxDivisionsCurrently = maxDivisionsSoFar;
 
-  let maxY = maxDivisionsCurrently * 1.5;
-  if (maxY > 10000) {
-    maxY = 10000;
-  }
+  let maxY = 10000;
+  // if (maxY > 10000) {
+  //   maxY = 10000;
+  // }
 
   // maxY = 10000;
   let maxX = 1600;
-  let bufferPx = 5;
+  let bufferPx = 25;
   let dotRadius = 4;
   let selectDotRadius = dotRadius * 1.75;
   let color = cl.getHSLA(cl.purple, 0.8);
@@ -111,20 +113,45 @@ const getSceneVisibilityGraph: SceneGetter = (
     });
   };
 
+  const drawLinearRegression = () => {
+    if (!lineSlopeRef.current) return;
+    if (rowsRef.current.length < 1) return;
+    let length = context.canvas.width - 2 * bufferPx - 2 * dotRadius - 150;
+    let height = context.canvas.height - 2 * bufferPx - 2 * dotRadius;
+    let x0 = 20 + bufferPx;
+    let y0 = dotRadius + bufferPx + height;
+
+    // let finalRow = rowsRef.current[rowsRef.current.length - 1];
+    let { x, y } = getContextCoords(2000, 2000 * lineSlopeRef.current);
+
+    context.beginPath();
+    context.moveTo(x0, y0);
+    context.lineTo(x, y);
+    context.lineWidth = 15;
+    context.strokeStyle = cl.getHSLA(cl.purple, 0.3);
+    context.stroke();
+  };
+
   const drawSelectingDot = () => {
-    rowsRef.current.forEach((row: any, index: number) => {
-      if (row.maxDivisionsDistinguishable !== null) {
-        let { x, y } = getContextCoords(
-          radiusLengthRef.current * 20,
-          numberOfDivisionsRef.current
-        );
-        if (index === currentTestValueIndexRef.current) {
-          drawSelectDot(x, y);
-        } else {
-          // drawDot(x, y);
-        }
-      }
-    });
+    let { x, y } = getContextCoords(
+      radiusLengthRef.current,
+      numberOfDivisionsRef.current
+    );
+    drawSelectDot(x, y);
+
+    // rowsRef.current.forEach((row: any, index: number) => {
+    //   if (row.maxDivisionsDistinguishable !== null) {
+    //     let { x, y } = getContextCoords(
+    //       radiusLengthRef.current,
+    //       numberOfDivisionsRef.current
+    //     );
+    //     if (index === currentTestValueIndexRef.current) {
+    //       drawSelectDot(x, y);
+    //     } else {
+    //       // drawDot(x, y);
+    //     }
+    //   }
+    // });
   };
 
   const setCanvasHeight = () => {};
@@ -133,6 +160,7 @@ const getSceneVisibilityGraph: SceneGetter = (
     context.canvas.height = 700;
     drawMarkedDots();
     drawSelectingDot();
+    drawLinearRegression();
     // drawDot(100, 50);
     // console.log(rowsRef.current);
     // visibleCirc.radius = testRadii[currentTestValueIndexRef.current];

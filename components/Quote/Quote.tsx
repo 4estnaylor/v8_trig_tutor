@@ -5,15 +5,17 @@ import cl from '../../colors';
 
 interface QuoteProps {
   quote: string | string[];
+
   byLine?: string | JSX.Element;
   date?: string;
   image?: any;
   isLong?: boolean;
   source?: string;
+  children?: JSX.Element;
 }
 
 const Quote = (props: QuoteProps) => {
-  const { quote, byLine, date, image, isLong, source } = props;
+  const { quote, byLine, date, image, isLong, source, children } = props;
 
   let displayQuote: string = '';
   if (quote && typeof quote === 'string') {
@@ -29,6 +31,7 @@ const Quote = (props: QuoteProps) => {
   return (
     <Wrapper $isLong={isLong || false}>
       {displayQuote}
+      {children}
       {byLine ? <ByLine>{byLine}</ByLine> : null}
       {source ? (
         <Source href={source} target="__blank">
