@@ -359,7 +359,10 @@ const smallness_and_divisibility = () => {
               Hitchiker's Guide to the Galaxy where a super computer named Deep
               Thought is asked to answer "the ultimate question of life, the
               universe, and everything".
-              <Quote quote={''}>
+              <Quote
+                quote={''}
+                source={`https://archive.org/details/the-hitchhikers-guide-to-the-galaxy-douglas-adams-1995/page/110/mode/2up?q=forty+two`}
+              >
                 <div>
                   “I checked it very thoroughly,” said the computer, “and that
                   quite definitely is the answer. I think the problem, to be
@@ -400,7 +403,7 @@ const smallness_and_divisibility = () => {
           <em>
             <b> the best</b>
           </em>{' '}
-          number to divide a circle for measurement <em>for my purposes</em>?
+          number to divide a circle for measurement <b>for my purposes</b>?
           <br />
           <br />
           There are actually a number of correct answers to this question, but
