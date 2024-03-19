@@ -37,7 +37,7 @@ const getSceneVisibilityGraph: SceneGetter = (
   // let visibleCirc = new Revamped2AngleCircle(,)
   console.log('values to testref', rowsRef.current);
 
-  context.canvas.style.background = cl.getHSLA(cl.blue, 0.1);
+  context.canvas.style.background = cl.getHSLA(cl.white, 0);
 
   let maxDivisionsSoFar = 0;
 
@@ -62,12 +62,12 @@ const getSceneVisibilityGraph: SceneGetter = (
   let bufferPx = 25;
   let dotRadius = 4;
   let selectDotRadius = dotRadius * 1.75;
-  let color = cl.getHSLA(cl.purple, 0.8);
-  let currentColor = cl.getHSLA(cl.purple, 0.8);
-  let selectColor = cl.getHSL(cl.purple);
+  let color = cl.getHSLA(cl.purple_bright, 0.8);
+  let currentColor = cl.getHSLA(cl.purple_bright, 0.8);
+  let selectColor = cl.getHSL(cl.purple_bright);
 
   const getContextCoords = (radius: number, numberOfDivisions: number) => {
-    let length = context.canvas.width - 2 * bufferPx - 2 * dotRadius - 150;
+    let length = context.canvas.width - 2 * bufferPx - 2 * dotRadius - 115;
     let height = context.canvas.height - 2 * bufferPx - 2 * dotRadius;
     let xPos = 20 + bufferPx + length * (radius / maxX);
     let yPos =
@@ -127,6 +127,7 @@ const getSceneVisibilityGraph: SceneGetter = (
     context.beginPath();
     context.moveTo(x0, y0);
     context.lineTo(x, y);
+    context.lineCap = 'round';
     context.lineWidth = 15;
     context.strokeStyle = cl.getHSLA(cl.purple, 0.3);
     context.stroke();
@@ -157,10 +158,11 @@ const getSceneVisibilityGraph: SceneGetter = (
   const setCanvasHeight = () => {};
 
   scene.draw = () => {
-    context.canvas.height = 700;
+    context.canvas.height = 560;
     drawMarkedDots();
     drawSelectingDot();
     drawLinearRegression();
+    context.fillText(lineSlopeRef.current, 100, 100);
     // drawDot(100, 50);
     // console.log(rowsRef.current);
     // visibleCirc.radius = testRadii[currentTestValueIndexRef.current];

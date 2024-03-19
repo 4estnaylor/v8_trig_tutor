@@ -32,6 +32,7 @@ import AsideNote from '../../components/AsideNote/AsideNote';
 import MyLink from '../../components/MyLink';
 import Visibility from '../../components/niche/Visibility';
 import LinearSmallnessModel from '../../components/niche/LinearSmallnessModel';
+import CriteriaThree from '../../components/UltimateDivisionsOfLife/Criteria';
 
 export type MostDivisibleQuestionObject = {
   limit: number;
@@ -298,13 +299,14 @@ const smallness_and_divisibility = () => {
                     solved questions from a pretty unique intellectual angle —
                     very rough around the edges compared to most prominent
                     mathematicians at the time, but far ahead of them in a lot
-                    of ways too. Ramanujan was suprisingly unaware of some areas
-                    of mathematics that virtually all of his peers had studied
-                    as part of a more formal education, yet he was deeply
-                    immersed in mathematical ideas that the same peers had
-                    barely given any thought to. Ramanujan's work in mathematics
-                    stunned leading mathematicians at the time for it's
-                    originality and creativity.
+                    of ways too. The largely self-taught Ramanujan was
+                    suprisingly unfamiliar with some areas of mathematics that
+                    virtually all of his peers had studied extensively as part
+                    of a more formal education, yet he was deeply immersed in
+                    mathematical ideas that the same peers had barely given any
+                    thought to. Ramanujan's work in mathematics stunned leading
+                    mathematicians at the time for it's originality and
+                    creativity.
                     <Quote
                       quote={
                         'Plenty of mathematicians, Hardy knew, could follow a step-by-step discursus unflaggingly—yet counted for nothing beside Ramanujan. Years later, he would contrive an informal scale of natural mathematical ability on which he assigned himself a 25 and Littlewood a 30. To David Hilbert, the most eminent mathematician of the day, he assigned an 80. To Ramanujan he gave 100.'
@@ -352,13 +354,20 @@ const smallness_and_divisibility = () => {
             }
             source="https://writings.stephenwolfram.com/2016/04/who-was-ramanujan/"
           />
-          Is 360 really the ideal way to divide a circle? No. 42 is.{' '}
+          <br />
+          <br />
+          <Video
+            href={`https://player.vimeo.com/video/923802677?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479`}
+          />
+          <br />
+          <br />
+          Is 360 really the ideal way to divide a circle? No 42 is.{' '}
           <AsideNote>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              Just kidding {`(kinda)`}. This is a gag from Douglass Adams book
-              Hitchiker's Guide to the Galaxy where a super computer named Deep
-              Thought is asked to answer "the ultimate question of life, the
-              universe, and everything".
+              This is a gag from Douglass Adams book Hitchiker's Guide to the
+              Galaxy where a super computer named Deep Thought is asked to
+              answer "the ultimate question of life, the universe, and
+              everything". Deep Thought's response? 42.
               <Quote
                 quote={''}
                 source={`https://archive.org/details/the-hitchhikers-guide-to-the-galaxy-douglas-adams-1995/page/110/mode/2up?q=forty+two`}
@@ -387,16 +396,23 @@ const smallness_and_divisibility = () => {
                   question actually is, you’ll know what the answer means.”
                 </div>
               </Quote>
+              <br />
+              <br />
+              <Video
+                href={`https://www.youtube.com/embed/tK0urw144cU?si=TJeWdX4_l4zFVX2W&amp;start=117`}
+              ></Video>
+              <br />
+              <br />
             </div>
           </AsideNote>
+          Just kidding. Well, kind of. It really depends on what does "ideal"
+          even mean for our purposes when it comes to dividing a circle?
           <br />
           <br />
-          More information is needed. A better question is needed. Let's try and
-          forget for a moment that we ever made 360 the standard for dividing
-          circles. Clean the slate, start from scratch. Without any mental
-          baggage of a "default" or "standard" number of divisions, you can more
-          freely ask the more general, interesting, and dare I say better
-          question:
+          Forget for a moment that we humans ever made 360 the standard for
+          dividing circles. Clean the slate, start from scratch. Without any
+          mental baggage of a "default" or "standard" number of divisions, you
+          can more freely ask the more general and, dare I say, better question:
           <br />
           <br />
           What would be{' '}
@@ -408,18 +424,19 @@ const smallness_and_divisibility = () => {
           <br />
           There are actually a number of correct answers to this question, but
           *** be warned *** there are many, <em>many</em> more incorrect
-          answers. Your task is to pick one of the correct ones AND to
-          understand why you picked it.
+          answers. Your task is to pick one of the correct ones AND, way more
+          importantly, to understand why you picked it.
           <br />
           <br />
           Remember, with no memory of 360 to speak of, we must approach this
           question totally naive, with eyes wide and hearts open.
           <br />
           <br />
-          <h1>1 rule</h1>
+          {/* <h1>1 rule</h1>
           The number must be no bigger than 1000.{' '}
-          <AsideNote>This rule is because</AsideNote>
+          <AsideNote>This rule is because</AsideNote> */}
           <h1> 3 criteria </h1>
+          <CriteriaThree />
           {/* <AsideNote>
             <>
               Why these only these three?
@@ -485,8 +502,18 @@ const smallness_and_divisibility = () => {
           How important of a priority you make visibilty will be for you to
           decide later.
           <Visibility />
+          <br />
+          <br />
+          Now that we have some data, you'll need to choose an apropriate way to
+          organize it into a model that matches the data in a way that is as
+          simple and sensible as possible.
+          <Quote
+            quote="All models are wrong but some are useful."
+            source={`https://en.wikipedia.org/wiki/All_models_are_wrong`}
+            byLine={'George Box'}
+          />
           <h1>
-            Modeling Smallness{' '}
+            Modeling Visibility{' '}
             <AsideNote>
               <div>
                 Why model smallness and not bigness? In general there's not a

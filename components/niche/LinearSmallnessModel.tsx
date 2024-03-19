@@ -162,7 +162,6 @@ const LinearSmallnessModel = () => {
           />
         </CanvasDoubleWide>
         {linearSlider}
-
         {/* {base10Value} */}
         <br />
         <br />

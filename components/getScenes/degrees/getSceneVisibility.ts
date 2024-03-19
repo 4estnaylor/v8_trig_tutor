@@ -35,13 +35,41 @@ const getSceneVisibility: SceneGetter = (
   // let visibleCirc = new Revamped2AngleCircle(,)
   console.log('values to testref', currentTestValueIndexRef);
 
+  const drawArrowHead = () => {
+    let verticalOffset = 10;
+    let horizontalOffset = 15;
+    let x0 = 1.5;
+    let y0 = visibleCirc.center.y;
+
+    let tailX = x0 + horizontalOffset;
+    let upperY = visibleCirc.center.y - verticalOffset;
+    let lowerY = visibleCirc.center.y + verticalOffset;
+
+    let lineColor = cl.getHSL(cl.gray_dark);
+
+    context.strokeStyle = lineColor;
+    context.lineWidth = 3;
+
+    context.beginPath();
+    context.lineCap = 'round';
+    context.moveTo(x0, y0);
+    context.lineTo(tailX, upperY);
+    context.stroke();
+    context.moveTo(x0, y0);
+    context.lineTo(tailX, lowerY);
+    context.stroke();
+  };
+
   const drawRadius = () => {
     let x0 = visibleCirc.center.x;
+    if (x0 < 1) {
+      x0 = 1.5;
+      drawArrowHead();
+    }
     let y0 = visibleCirc.center.y;
     let x1 = visibleCirc.center.x + visibleCirc.radius;
     let y1 = visibleCirc.center.y;
-    let lineColor = cl.getHSL(cl.red);
-    let con;
+    let lineColor = cl.getHSL(cl.gray_dark);
 
     context.strokeStyle = lineColor;
     context.lineWidth = 3;
@@ -53,9 +81,18 @@ const getSceneVisibility: SceneGetter = (
   };
 
   scene.draw = () => {
-    context.canvas.height = 300;
+    // context.canvas.height = 530;
+
     visibleCirc.radius = radiusLengthRef.current;
-    visibleCirc.center.x = context.canvas.width / 2 - radiusLengthRef.current;
+    let xPos = context.canvas.width / 2;
+    if (
+      context.canvas.width / 2 + visibleCirc.radius >
+      context.canvas.width - 130
+    ) {
+      xPos = context.canvas.width - 130 - visibleCirc.radius;
+    }
+
+    visibleCirc.center.x = xPos;
     visibleCirc.center.y = context.canvas.height / 2;
     // visibleCirc.radius = 20;
     // visibleCirc.initialRadius = 20;
@@ -65,6 +102,7 @@ const getSceneVisibility: SceneGetter = (
     // visibleCirc.draw();
     visibleCirc.drawFullDivisions();
     drawRadius();
+
     // context.stroke();
   };
 

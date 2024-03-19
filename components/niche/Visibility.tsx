@@ -21,7 +21,7 @@ import AsideNote from '../AsideNote/AsideNote';
 type Mode = 'linear' | 'exponential';
 
 const Visibility = () => {
-  const [numberOfDivisions, setNumberOfDivisions] = useState(100);
+  const [numberOfDivisions, setNumberOfDivisions] = useState(0);
   const numberOfDivisionsRef = useRef(numberOfDivisions);
 
   const [radiusLength, setRadiusLength] = useState(100);
@@ -129,7 +129,7 @@ const Visibility = () => {
   }
 
   const linearSlider = (
-    <ExponentialSliderWrapper>
+    <LinearSliderWrapper>
       <Slider
         min={0}
         max={10000}
@@ -139,7 +139,7 @@ const Visibility = () => {
         aria-labelledby="input-slider"
         orientation="vertical"
       />
-    </ExponentialSliderWrapper>
+    </LinearSliderWrapper>
   );
 
   const exponentialSlider = (
@@ -181,18 +181,34 @@ const Visibility = () => {
 
   const initalRows: {
     pixelSize: number;
-    maxDivisionsDistinguishable: number;
+    maxDivisionsDistinguishable: number | null;
   }[] = [
     {
-      pixelSize: 0,
-      maxDivisionsDistinguishable: 0,
+      pixelSize: 100,
+      maxDivisionsDistinguishable: null,
+    },
+    {
+      pixelSize: 200,
+      maxDivisionsDistinguishable: null,
+    },
+    {
+      pixelSize: 400,
+      maxDivisionsDistinguishable: null,
+    },
+    {
+      pixelSize: 800,
+      maxDivisionsDistinguishable: null,
+    },
+    {
+      pixelSize: 1600,
+      maxDivisionsDistinguishable: null,
     },
   ];
 
   const [rows, setRows] =
-    useState<{ pixelSize: number; maxDivisionsDistinguishable: number }[]>(
-      initalRows
-    );
+    useState<
+      { pixelSize: number; maxDivisionsDistinguishable: number | null }[]
+    >(initalRows);
   const rowsRef = useRef(rows);
 
   useEffect(() => {
@@ -226,7 +242,12 @@ const Visibility = () => {
       dividend += (xValues[i] - meanX) * (yValues[i] - meanY);
       divisor += (xValues[i] - meanX) ** 2;
     }
-    let slope = dividend / divisor;
+    let slope;
+    if (divisor !== 0) {
+      slope = dividend / divisor;
+    } else {
+      slope = null;
+    }
     // theorhetically it should be zero, so not gonna calculate for y-intercept;
     console.log(slope);
     setLineSlope(slope);
@@ -294,7 +315,7 @@ const Visibility = () => {
                 </HoverableDiv>
               </TableCell>
               <TableCell align="left">
-                {row.maxDivisionsDistinguishable}
+                {row.maxDivisionsDistinguishable || '∅'}
               </TableCell>
             </TableRow>
           ))}
@@ -320,38 +341,23 @@ const Visibility = () => {
         </AsideNote>
       </h3>
       <Wrapper>
-        <MyStack>
-          {rows.map((row, index) => {
-            return (
-              <div>
-                <Chip
-                  label={`${row.pixelSize} px`}
-                  variant={'filled'}
-                  color={currentTestValueIndex === 0 ? 'primary' : 'default'}
-                  onClick={() => {
-                    // setCurrentTestValueIndex(0);
-                    setRadiusLength(row.pixelSize);
-                  }}
-                ></Chip>
-              </div>
-            );
-          })}
-        </MyStack>
         <br />
         <br />
 
-        <div style={{ position: 'relative', height: '700px' }}>
-          <CanvasForTopicComponent
-            sceneGetter={getSceneVisibility}
-            objectPassedToScene={{
-              numberOfDivisionsRef,
-              angleInfoRef,
-              valuesToTestRef,
-              currentTestValueIndexRef,
-              radiusLengthRef,
-            }}
-          />
-          <div style={{ position: 'absolute', top: 0 }}>
+        <div style={{ position: 'relative', height: '100%' }}>
+          <WrapperForCircleVisual>
+            <CanvasForTopicComponent
+              sceneGetter={getSceneVisibility}
+              objectPassedToScene={{
+                numberOfDivisionsRef,
+                angleInfoRef,
+                valuesToTestRef,
+                currentTestValueIndexRef,
+                radiusLengthRef,
+              }}
+            />
+          </WrapperForCircleVisual>
+          {/* <div style={{ position: 'absolute', top: 0 }}>
             <CanvasForTopicComponent
               sceneGetter={getSceneVisibilityGraph}
               objectPassedToScene={{
@@ -362,13 +368,15 @@ const Visibility = () => {
                 lineSlopeRef,
               }}
             />
-          </div>
+          </div> */}
+
           {/* {linearSlider} */}
 
           {/* {base10Value} */}
 
           {exponentialSlider}
-          <RadiusLengthSliderWrapper>
+          {/* {linearSlider} */}
+          {/* <RadiusLengthSliderWrapper>
             <Slider
               value={radiusLength}
               step={1}
@@ -377,12 +385,38 @@ const Visibility = () => {
               sx={{ color: 'inherit' }}
               onChange={handleRadiusLengthSlide}
             ></Slider>
-          </RadiusLengthSliderWrapper>
+          </RadiusLengthSliderWrapper> */}
         </div>
-        {radiusLength}
+        {/* {radiusLength} */}
         <br />
         <br />
       </Wrapper>
+      <MyStack>
+        {rows.map((row, index) => {
+          return (
+            <SizeChip>
+              <Chip
+                label={`${row.pixelSize} px`}
+                variant={'filled'}
+                color={currentTestValueIndex === 0 ? 'primary' : 'default'}
+                onClick={() => {
+                  // setCurrentTestValueIndex(0);
+                  setRadiusLength(row.pixelSize);
+                  if (
+                    row.maxDivisionsDistinguishable ||
+                    row.maxDivisionsDistinguishable === 0
+                  ) {
+                    setNumberOfDivisions(row.maxDivisionsDistinguishable);
+                  } else {
+                  }
+                }}
+              ></Chip>
+            </SizeChip>
+          );
+        })}
+      </MyStack>
+      <br />
+      <br />
       <MyStack>
         <MarkValueButton variant="contained" onClick={handleMarkValue}>
           <BorderColorIcon /> {'   '} Mark Value
@@ -432,22 +466,59 @@ const DivisionsInput = styled(TextField)`
   width: 100px;
 `;
 
+const WrapperForCircleVisual = styled.div`
+  /* background-color: teal; */
+  padding-left: 50px;
+`;
+
 const ExponentialSliderWrapper = styled(Stack)`
   position: absolute;
   /* top: 150px; */
   top: 50%;
-  height: 300px;
-  right: 0px;
+  /* height: 500px; */
+  height: 100%;
+  left: 0px;
   transform: translateY(-50%);
+`;
+
+const SizeChip = styled.div`
+  /* padding: 20px; */
+  width: 20%;
+  /* height: 80px; */
+  /* background-color: red; */
+  /* border: 2px solid black; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const CompletnessIndicator = styled.div``;
+
+const LinearSliderWrapper = styled(Stack)`
+  position: absolute;
+
+  /* top: ; */
+  /* height: 500px; */
+  height: 100%;
+  left: 0px;
+  bottom: 30px;
+  /* transform: translateY(-50%); */
 `;
 
 const RadiusLengthSliderWrapper = styled(Stack)`
   position: absolute;
   bottom: 0px;
   left: 50%;
-  min-width: 300px;
+  /* width: calc((100vw)-60px); */
+  /* width: calc('100vw - 60px'); */
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 30px;
   transform: translateX(-50%);
-  color: ${cl.getHSL(cl.red)};
+  color: ${cl.getHSL(cl.gray_dark)};
+  /* width: 100vw; */
+  /* background-color: green; */
 `;
 
 export default Visibility;
