@@ -81,7 +81,7 @@ const getSceneVisibility: SceneGetter = (
   };
 
   scene.draw = () => {
-    // context.canvas.height = 530;
+    context.canvas.height = 530;
 
     visibleCirc.radius = radiusLengthRef.current;
     let xPos = context.canvas.width / 2;
@@ -101,7 +101,7 @@ const getSceneVisibility: SceneGetter = (
     context.fillText(currentTestValueIndexRef.current, 195, 195);
     // visibleCirc.draw();
     visibleCirc.drawFullDivisions();
-    drawRadius();
+    // drawRadius();
 
     // context.stroke();
   };

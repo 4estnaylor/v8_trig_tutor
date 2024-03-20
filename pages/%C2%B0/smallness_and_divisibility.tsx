@@ -595,8 +595,8 @@ const smallness_and_divisibility = () => {
             // questionObjects={mostDivisibleQuestions}
             // setQuestionObjects={setMostDivisibleQuestions}
           />
-          <h4># of Divisors Plot:</h4>
-          <DivisorsPlot />
+          {/* <h4># of Divisors Plot:</h4> */}
+          {/* <DivisorsPlot /> */}
           <h4>The Tradeoff</h4>
           Ideally these two qualtiies — smallness and divisibility — would go
           hand in hand and you wouldn't have to pick one over the other. Smaller

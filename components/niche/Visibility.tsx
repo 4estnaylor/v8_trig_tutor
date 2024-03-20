@@ -21,10 +21,10 @@ import AsideNote from '../AsideNote/AsideNote';
 type Mode = 'linear' | 'exponential';
 
 const Visibility = () => {
-  const [numberOfDivisions, setNumberOfDivisions] = useState(0);
+  const [numberOfDivisions, setNumberOfDivisions] = useState(10);
   const numberOfDivisionsRef = useRef(numberOfDivisions);
 
-  const [radiusLength, setRadiusLength] = useState(100);
+  const [radiusLength, setRadiusLength] = useState(50);
   const radiusLengthRef = useRef(radiusLength);
 
   useEffect(() => {
@@ -176,6 +176,10 @@ const Visibility = () => {
   }, [currentTestValueIndex]);
 
   useEffect(() => {
+    setCurrentTestValueIndex(currentTestValueIndexRef.current);
+  }, [currentTestValueIndexRef.current]);
+
+  useEffect(() => {
     numberOfDivisionsRef.current = numberOfDivisions;
   }, [numberOfDivisions]);
 
@@ -183,6 +187,10 @@ const Visibility = () => {
     pixelSize: number;
     maxDivisionsDistinguishable: number | null;
   }[] = [
+    {
+      pixelSize: 50,
+      maxDivisionsDistinguishable: null,
+    },
     {
       pixelSize: 100,
       maxDivisionsDistinguishable: null,
@@ -344,19 +352,19 @@ const Visibility = () => {
         <br />
         <br />
 
-        <div style={{ position: 'relative', height: '100%' }}>
-          <WrapperForCircleVisual>
-            <CanvasForTopicComponent
-              sceneGetter={getSceneVisibility}
-              objectPassedToScene={{
-                numberOfDivisionsRef,
-                angleInfoRef,
-                valuesToTestRef,
-                currentTestValueIndexRef,
-                radiusLengthRef,
-              }}
-            />
-          </WrapperForCircleVisual>
+        <div style={{ position: 'relative' }}>
+          <CanvasForTopicComponent
+            sceneGetter={getSceneVisibility}
+            width={100}
+            objectPassedToScene={{
+              numberOfDivisionsRef,
+              angleInfoRef,
+              valuesToTestRef,
+              currentTestValueIndexRef,
+              radiusLengthRef,
+            }}
+          />
+
           {/* <div style={{ position: 'absolute', top: 0 }}>
             <CanvasForTopicComponent
               sceneGetter={getSceneVisibilityGraph}
@@ -393,12 +401,20 @@ const Visibility = () => {
       </Wrapper>
       <MyStack>
         {rows.map((row, index) => {
+          let isCurrentlySelected = row.pixelSize === radiusLength;
+          let color = row.maxDivisionsDistinguishable
+            ? cl.getHSL(cl.green)
+            : cl.getHSLA(cl.purple, 0.5);
           return (
             <SizeChip>
+              <div style={{ color: color }}>
+                {row.maxDivisionsDistinguishable ? '✓' : '∅'}
+              </div>
+
               <Chip
-                label={`${row.pixelSize} px`}
-                variant={'filled'}
-                color={currentTestValueIndex === 0 ? 'primary' : 'default'}
+                label={`${row.pixelSize}`}
+                variant={isCurrentlySelected ? 'filled' : 'outlined'}
+                color={'primary'}
                 onClick={() => {
                   // setCurrentTestValueIndex(0);
                   setRadiusLength(row.pixelSize);
@@ -417,7 +433,7 @@ const Visibility = () => {
       </MyStack>
       <br />
       <br />
-      <MyStack>
+      <MyStackExtraPadding>
         <MarkValueButton variant="contained" onClick={handleMarkValue}>
           <BorderColorIcon /> {'   '} Mark Value
         </MarkValueButton>
@@ -429,7 +445,7 @@ const Visibility = () => {
           inputProps={{ min: 1, max: 10000, fontSize: '1.5rem' }}
           type="number"
         ></DivisionsInput>
-      </MyStack>
+      </MyStackExtraPadding>
       <br />
       <br />
       {valuesTable}
@@ -454,7 +470,14 @@ const MyStack = styled.div`
   /* gap: 10px;
   flex-wrap: wrap; */
   justify-content: space-between;
-  padding-right: 30px;
+  padding-right: 10px;
+`;
+
+const MyStackExtraPadding = styled(MyStack)`
+  padding-left: 30px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
 `;
 
 const MarkValueButton = styled(Button)`
@@ -468,7 +491,10 @@ const DivisionsInput = styled(TextField)`
 
 const WrapperForCircleVisual = styled.div`
   /* background-color: teal; */
-  padding-left: 50px;
+  /* padding-left: 50px; */
+  background-color: teal;
+  width: 100vw;
+  border: 2px solid black;
 `;
 
 const ExponentialSliderWrapper = styled(Stack)`
@@ -483,7 +509,7 @@ const ExponentialSliderWrapper = styled(Stack)`
 
 const SizeChip = styled.div`
   /* padding: 20px; */
-  width: 20%;
+  width: 16.66%;
   /* height: 80px; */
   /* background-color: red; */
   /* border: 2px solid black; */
