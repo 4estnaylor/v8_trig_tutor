@@ -17,6 +17,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import getSceneVisibilityGraph from '../getScenes/degrees/getSceneVisibilityGraph';
 import AsideNote from '../AsideNote/AsideNote';
+import RainbowExerciseHeading from './RainbowExerciseHeading';
+import CompletenessTag from './CompletenessTag';
 
 type Mode = 'linear' | 'exponential';
 
@@ -219,8 +221,21 @@ const Visibility = () => {
     >(initalRows);
   const rowsRef = useRef(rows);
 
+  const [isVisibilityTestComplete, setIsVisibilityTestComplete] =
+    useState(false);
+
   useEffect(() => {
     rowsRef.current = rows;
+
+    let allRowsHaveDivisionsSoFar = true;
+    rows.forEach((row) => {
+      if (!row.maxDivisionsDistinguishable) {
+        allRowsHaveDivisionsSoFar = false;
+      }
+    });
+    if (allRowsHaveDivisionsSoFar) {
+      setIsVisibilityTestComplete(true);
+    }
   }, [rows]);
 
   const [lineSlope, setLineSlope] = useState<null | number>(null);
@@ -307,13 +322,14 @@ const Visibility = () => {
                 component="th"
                 scope="row"
                 onClick={() => {
-                  setCurrentTestValueIndex(index);
+                  // setCurrentTestValueIndex(index);
+                  setRadiusLength(row.pixelSize);
                 }}
               >
                 <HoverableDiv
                   style={{
                     color: `${
-                      index === currentTestValueIndex
+                      row.pixelSize === radiusLength
                         ? cl.getHSL(cl.purple)
                         : cl.getHSL(cl.black)
                     }`,
@@ -334,7 +350,12 @@ const Visibility = () => {
 
   return (
     <div>
-      <br />
+      {/* <CompletenessTag isComplete={isVisibilityTestComplete} /> */}
+      <RainbowExerciseHeading isComplete={isVisibilityTestComplete}>
+        A Quick Visibility Test
+      </RainbowExerciseHeading>
+
+      {/* <br />
       <br />
       Instructions: Adjust the value as high as you can visibly see the lines
       distinctly at the five different sizes prompted for
@@ -347,7 +368,7 @@ const Visibility = () => {
             the amount or density of pixels visible on your device.
           </>
         </AsideNote>
-      </h3>
+      </h3> */}
       <Wrapper>
         <br />
         <br />
@@ -413,8 +434,12 @@ const Visibility = () => {
 
               <Chip
                 label={`${row.pixelSize}`}
-                variant={isCurrentlySelected ? 'filled' : 'outlined'}
-                color={'primary'}
+                variant={
+                  isCurrentlySelected || row.maxDivisionsDistinguishable
+                    ? 'filled'
+                    : 'outlined'
+                }
+                color={row.maxDivisionsDistinguishable ? 'success' : 'primary'}
                 onClick={() => {
                   // setCurrentTestValueIndex(0);
                   setRadiusLength(row.pixelSize);
@@ -436,8 +461,11 @@ const Visibility = () => {
       <MyStackExtraPadding>
         <MarkValueButton variant="contained" onClick={handleMarkValue}>
           <BorderColorIcon /> {'   '} Mark Value
+          <BlankOfBlank>0 of 6 marked</BlankOfBlank>
         </MarkValueButton>
+
         <DivisionsInput
+          label="# of divisions"
           onChange={handleInputChange}
           onBlur={handleOutsideOfRange}
           value={Math.round(numberOfDivisions)}
@@ -446,12 +474,20 @@ const Visibility = () => {
           type="number"
         ></DivisionsInput>
       </MyStackExtraPadding>
+
       <br />
       <br />
       {valuesTable}
     </div>
   );
 };
+
+const BlankOfBlank = styled.div`
+  position: absolute;
+  height: 20px;
+  bottom: -20px;
+  color: ${cl.getHSL(cl.gray_mid)};
+`;
 
 const Wrapper = styled.div`
   position: relative;
@@ -484,6 +520,7 @@ const MarkValueButton = styled(Button)`
   display: flex;
   gap: 20px;
   width: fit-content;
+  position: relative;
 `;
 const DivisionsInput = styled(TextField)`
   width: 100px;

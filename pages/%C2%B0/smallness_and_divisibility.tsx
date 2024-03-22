@@ -447,9 +447,12 @@ const smallness_and_divisibility = () => {
               good start.
             </>
           </AsideNote>{' '} */}
-          You will need to build a model accounting for these three qualities.
-          With that model you will then select your ideal number for dividing a
-          circle.
+          <br />
+          <br />
+          You will need to build a model accounting for these three criteria.
+          These criteria depend on your computer/device, your preferences, and
+          even your eyesight. Don't be suprised if your model differs from my
+          own or your classmates.
           <ul>
             <li>Visibility</li>
             <li>
@@ -595,8 +598,8 @@ const smallness_and_divisibility = () => {
             // questionObjects={mostDivisibleQuestions}
             // setQuestionObjects={setMostDivisibleQuestions}
           />
-          {/* <h4># of Divisors Plot:</h4> */}
-          {/* <DivisorsPlot /> */}
+          <h4># of Divisors Plot:</h4>
+          <DivisorsPlot />
           <h4>The Tradeoff</h4>
           Ideally these two qualtiies — smallness and divisibility — would go
           hand in hand and you wouldn't have to pick one over the other. Smaller

@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created using Krita: https://krita.org -->
+<svg xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:krita="http://krita.org/namespaces/svg/krita"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    width="1920pt"
+    height="1080pt"
+    viewBox="0 0 1920 1080">
+<defs/>
+<path id="shape1" transform="matrix(4.48391873699392 0 0 4.48391873699392 337.69709612693 422.323711359711)" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="square" stroke-linejoin="bevel" d="M0.607376 7.00293L0 40.1077L136.66 117.777L277.571 43.9275L277.571 0"/><path id="shape2" transform="matrix(4.48391873699392 0 0 4.48391873699392 618.064966723094 228.827222253365)" fill="#ffffff" fill-rule="evenodd" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel" d="M0 42.5709C39.9877 14.1903 64.98 0 74.977 0C89.9723 0 138.707 19.3281 149.954 33.5737C161.2 47.8193 114.715 65.064 92.2216 76.3105C69.7286 87.5571 21.7433 60.5654 11.2465 51.5681C0.74977 42.5709 0.74977 42.5709 0 42.5709Z"/><g id="group0" transform="matrix(0.999999988709204 0 0 0.999999988709204 266.210874555237 587.89030735929)" fill="none" stroke="#000000" stroke-opacity="0" stroke-width="0" stroke-linecap="square" stroke-linejoin="bevel">
+  <path id="shape01" transform="matrix(4.48391843863445 0 0 4.48391843863445 0 0)" fill="none" stroke="#50d9fd" stroke-width="10.62" stroke-linecap="square" stroke-linejoin="bevel" d="M45.2008 0L0.63663 0.63663L0 21.0088"/>
+  <path id="shape011" transform="matrix(4.48391849370056 0 0 4.48391849370056 127.586486605332 62.5016177850446)" fill="none" stroke="#50d9fd" stroke-width="10.62" stroke-linecap="square" stroke-linejoin="bevel" d="M45.2008 0L0.63663 0.63663L0 21.0088"/>
+  <path id="shape02" transform="matrix(4.48391842108166 0 0 4.48391842108166 243.75448899053 139.276133311098)" fill="none" stroke="#50d9fd" stroke-width="10.62" stroke-linecap="square" stroke-linejoin="bevel" d="M45.2008 0L0.63663 0.63663L0 21.0088"/>
+  <path id="shape03" transform="matrix(4.48391828915208 0 0 4.48391828915208 377.050097758295 213.196009627539)" fill="none" stroke="#50d9fd" stroke-width="10.62" stroke-linecap="square" stroke-linejoin="bevel" d="M45.2008 0L0.63663 0.63663L0 21.0088"/>
+  <path id="shape04" transform="matrix(-4.48391828915208 0 0 4.48391828915208 1387.57826655639 24.7924854240397)" fill="none" stroke="#50d9fd" stroke-width="10.62" stroke-linecap="square" stroke-linejoin="bevel" d="M45.2008 0L0.63663 0.63663L0 21.0088"/>
+  <path id="shape05" transform="matrix(-4.48391840448857 0 0 4.48391840448857 1249.68714460413 104.421732716713)" fill="none" stroke="#50d9fd" stroke-width="10.62" stroke-linecap="square" stroke-linejoin="bevel" d="M45.2008 0L0.63663 0.63663L0 21.0088"/>
+  <path id="shape06" transform="matrix(-4.48391833938898 0 0 4.48391833938898 1117.50511968906 166.92325783708)" fill="none" stroke="#50d9fd" stroke-width="10.62" stroke-linecap="square" stroke-linejoin="bevel" d="M45.2008 0L0.63663 0.63663L0 21.0088"/>
+  <path id="shape07" transform="matrix(-4.48391837998103 0 0 4.48391837998103 991.032306032633 232.279493515611)" fill="none" stroke="#50d9fd" stroke-width="10.62" stroke-linecap="square" stroke-linejoin="bevel" d="M45.2008 0L0.63663 0.63663L0 21.0088"/>
+ </g><path id="shape0" transform="matrix(4.48391879791051 0 0 4.48391879791051 320.570784647753 79.771847165965)" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="square" stroke-linejoin="bevel" d="M0 77.0323L143.878 0L285.21 75.1224L141.969 154.839C141.969 153.049 94.6457 127.114 0 77.0323Z"/>
+</svg>
