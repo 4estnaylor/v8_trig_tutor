@@ -37,10 +37,13 @@ const Criterion = (props: CriterionProps) => {
   let imageString = `/${criterionObj.name}.svg`;
   return (
     <CriterionColorBoxShadowWrapper>
-      <CriterionWrapper>
+      {/* <CriterionWrapper>
         {criterionObj.name.toUpperCase()}
         <Image src={imageString} height={50} width={100} />
-      </CriterionWrapper>
+      </CriterionWrapper> */}
+      <div style={{ background: 'red' }}>
+        <Image src={imageString} height={50} width={100} />
+      </div>
     </CriterionColorBoxShadowWrapper>
   );
 };
