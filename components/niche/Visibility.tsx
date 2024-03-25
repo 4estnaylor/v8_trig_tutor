@@ -339,7 +339,7 @@ const Visibility = () => {
                 </HoverableDiv>
               </TableCell>
               <TableCell align="left">
-                {row.maxDivisionsDistinguishable || '∅'}
+                {row.maxDivisionsDistinguishable || '?'}
               </TableCell>
             </TableRow>
           ))}
@@ -429,7 +429,7 @@ const Visibility = () => {
           return (
             <SizeChip>
               <div style={{ color: color }}>
-                {row.maxDivisionsDistinguishable ? '✓' : '∅'}
+                {row.maxDivisionsDistinguishable ? '✓' : '?'}
               </div>
 
               <Chip

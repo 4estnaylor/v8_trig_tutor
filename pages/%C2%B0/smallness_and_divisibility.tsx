@@ -435,7 +435,7 @@ const smallness_and_divisibility = () => {
           {/* <h1>1 rule</h1>
           The number must be no bigger than 1000.{' '}
           <AsideNote>This rule is because</AsideNote> */}
-          <h1> 3 criteria </h1>
+          <h1> 3 criteria for our model</h1>
           <CriteriaThree />
           {/* <AsideNote>
             <>

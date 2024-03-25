@@ -36,7 +36,7 @@ const Wrapper = styled.div<{ $isComplete: boolean }>`
   /* padding-top: 5px; */
   color: ${(p) => (p.$isComplete ? cl.getHSL(cl.white) : cl.getHSL(cl.red))};
   background-color: ${(p) =>
-    p.$isComplete ? cl.getHSLA(cl.green, 1) : cl.getHSLA(cl.white, 0.2)};
+    p.$isComplete ? cl.getHSLA(cl.green, 1) : cl.getHSLA(cl.white, 0.5)};
 
   display: flex;
   align-items: center;

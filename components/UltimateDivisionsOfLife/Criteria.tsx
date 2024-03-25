@@ -1,29 +1,43 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl, { color } from '../../colors';
 
 export type CriterionObj = {
   name: string;
   color: color;
+  summary: JSX.Element;
 };
 
 interface CriterionProps {
   criterionObj: CriterionObj;
+  isSelectedCurrently: boolean;
 }
 
+let visibilitySummary = (
+  <div>
+    Ideally we would like to be able to see how we are dividing a cirlce with
+    our own eyes. When dividing up small enough circles, there simply isn't
+    enough space to see relatively large number of divisions.
+  </div>
+);
+
+let computabilitySummary = <div>This is the computability summary</div>;
+
+let divisibilitySummary = <div>this is the divisibility summary</div>;
+
 let criteria: CriterionObj[] = [
-  { name: 'visibility', color: cl.green },
-  { name: 'computability', color: cl.blue },
-  { name: 'divisibility', color: cl.red },
+  { name: 'visibility', color: cl.green, summary: visibilitySummary },
+  { name: 'computability', color: cl.blue, summary: computabilitySummary },
+  { name: 'divisibility', color: cl.red, summary: divisibilitySummary },
 ];
 
 const Criterion = (props: CriterionProps) => {
-  const { criterionObj } = props;
+  const { criterionObj, isSelectedCurrently } = props;
   let imageString = `/${criterionObj.name}.svg`;
   return (
     <CriterionColorBoxShadowWrapper>
-      <CriterionWrapper $colorString={cl.getHSLA(criterionObj.color, 0.5)}>
+      <CriterionWrapper>
         {criterionObj.name.toUpperCase()}
         <Image src={imageString} height={50} width={100} />
       </CriterionWrapper>
@@ -32,14 +46,64 @@ const Criterion = (props: CriterionProps) => {
 };
 
 const Criteria = () => {
+  const [selectedCriteriaName, setSelectedCriteriaName] = useState('');
   return (
-    <CriteriaWrapper>
-      {criteria.map((criterionObj) => {
-        return <Criterion criterionObj={criterionObj} />;
-      })}
-    </CriteriaWrapper>
+    <OuterWrapper>
+      <CriteriaWrapper>
+        {criteria.map((criterionObj) => {
+          return (
+            <div
+              onClick={() => {
+                setSelectedCriteriaName(criterionObj.name);
+              }}
+              // onMouseOver={() => {
+              //   setSelectedCriteriaName(criterionObj.name);
+              // }}
+            >
+              {' '}
+              <Criterion
+                criterionObj={criterionObj}
+                isSelectedCurrently={true}
+              />
+            </div>
+          );
+        })}
+      </CriteriaWrapper>
+      <CriteriaSummary>
+        {criteria.map((criterionObj) => {
+          return (
+            <Summary
+              opactiy={selectedCriteriaName === criterionObj.name ? 1 : 0}
+            >
+              {criterionObj.summary}
+            </Summary>
+          );
+        })}
+      </CriteriaSummary>
+    </OuterWrapper>
   );
 };
+
+const Summary = styled.div<{ opactiy: number }>`
+  opacity: ${(p) => p.opactiy};
+  transition: opacity 0s ease-in-out;
+  position: absolute;
+  top: 20px;
+`;
+
+const OuterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const CriteriaSummary = styled.div`
+  border: 2px solid ${cl.getHSL(cl.gray_light)};
+  padding: 20px;
+  border-radius: 8px;
+  min-height: 100px;
+  position: relative;
+`;
 
 const CriteriaWrapper = styled.div`
   display: flex;
