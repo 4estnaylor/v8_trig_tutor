@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import cl, { color } from '../../colors';
+import MyLink from '../MyLink';
 
 export type CriterionObj = {
   name: string;
@@ -14,17 +15,58 @@ interface CriterionProps {
   isSelectedCurrently: boolean;
 }
 
+const SummaryWrapper = styled.div``;
+
 let visibilitySummary = (
-  <div>
+  <SummaryWrapper>
+    <h1>Visibility</h1>
     Ideally we would like to be able to see how we are dividing a cirlce with
     our own eyes. When dividing up small enough circles, there simply isn't
-    enough space to see relatively large number of divisions.
-  </div>
+    enough space to see relatively large number of divisions. You will have to
+    strike a balance somehow.
+  </SummaryWrapper>
 );
 
-let computabilitySummary = <div>This is the computability summary</div>;
+let computabilitySummary = (
+  <SummaryWrapper>
+    <h1>Computability</h1>
+    Although modern computers can make computations with extremely large numbers
+    a breeze, we often push them to their limits. Especially when it comes to
+    graphics. Whatever number of divisions we choose to measure a circle, we
+    want to keep it within bounds of what our computers can manage to compute
+    and graphically render on our screens.
+    <br />
+    <br />
+    {/* <CanvasForTopicComponent
+  sceneGetter={getSceneInteriorAngles}
+/> */}
+    {/* <br />
+<br /> */}
+    {/* Not long ago, the gold standard for video games was around 60 times a second
+    . Now some modern displays are pushing 4 times that recalculating pixel
+    colorations 240 times each second. What all of this means is, so many
+    calculations are happening so fast, that limiting the number of divisions to
+    be calculated and displayed does make a difference.
+    <br />
+    <br />
+    <MyLink href={'https://www.youtube.com/shorts/esIl_oMew8c'}>
+      Here is a youtube video showing in slowmo the difference between a 60hz
+      and 240hz display
+    </MyLink> */}
+  </SummaryWrapper>
+);
 
-let divisibilitySummary = <div>this is the divisibility summary</div>;
+let divisibilitySummary = (
+  <SummaryWrapper>
+    <h1>Divisibility</h1>
+    Divisibility is really important for measuring partial circles without
+    having to trouble ourselves with fractions or decimals. Sticking to nice
+    whole numbers often makes life easier both conceptually and practically.
+    Unfortunately as numbers become more and more divisible they tend to get
+    large and unweildy. Picking a good number that is both highly divisible and
+    reasonably small will require some strategy on your part.
+  </SummaryWrapper>
+);
 
 let criteria: CriterionObj[] = [
   { name: 'visibility', color: cl.green, summary: visibilitySummary },
@@ -41,9 +83,10 @@ const Criterion = (props: CriterionProps) => {
         {criterionObj.name.toUpperCase()}
         <Image src={imageString} height={50} width={100} />
       </CriterionWrapper> */}
-      <div style={{ background: 'red' }}>
+      <CriterionWrapper $colorString={cl.getHSLA(criterionObj.color, 0.5)}>
+        {criterionObj.name.toUpperCase()}
         <Image src={imageString} height={50} width={100} />
-      </div>
+      </CriterionWrapper>
     </CriterionColorBoxShadowWrapper>
   );
 };
@@ -90,8 +133,13 @@ const Criteria = () => {
 const Summary = styled.div<{ opactiy: number }>`
   opacity: ${(p) => p.opactiy};
   transition: opacity 0s ease-in-out;
-  position: absolute;
-  top: 20px;
+  /* position: absolute; */
+  /* top: 20px; */
+
+  /* padding: 50px;
+ background-color: rgba(0,0,0,0.5); */
+  grid-row-start: 1;
+  grid-column-start: 1;
 `;
 
 const OuterWrapper = styled.div`
@@ -106,6 +154,8 @@ const CriteriaSummary = styled.div`
   border-radius: 8px;
   min-height: 100px;
   position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
 `;
 
 const CriteriaWrapper = styled.div`
