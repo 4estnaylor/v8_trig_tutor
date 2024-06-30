@@ -238,32 +238,49 @@ const Visibility = () => {
     }
   }, [rows]);
 
-  const [lineSlope, setLineSlope] = useState<null | number>(null);
+  // const [lineSlope, setLineSlope] = useState<null | number>(null);
   const lineSlopeRef = useRef<null | number>(null);
 
   const getLinearRegression = () => {
     if (rows.length < 1) return;
+
     let xValues: number[] = rows.map((row) => Number(row.pixelSize));
     let yValues: number[] = rows.map((row) =>
       Number(row.maxDivisionsDistinguishable)
     );
+
+    let valuesToCalculate: { x: number; y: number }[] = [];
+
+    yValues.forEach((value, index) => {
+      if (value === 0) {
+        return;
+      } else {
+        valuesToCalculate.push({ x: xValues[index], y: value });
+      }
+    });
+
+    xValues.unshift(0);
+    yValues.unshift(0);
+    valuesToCalculate.unshift({ x: 0, y: 0 });
+
     const meanX =
-      xValues.reduce(
-        (accumulator, currentValue) => accumulator + currentValue,
+      valuesToCalculate.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.x,
         0
       ) / xValues.length;
 
     const meanY =
-      yValues.reduce(
-        (accumulator, currentValue) => accumulator + currentValue,
+      valuesToCalculate.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.y,
         0
       ) / yValues.length;
 
     let dividend = 0;
     let divisor = 0;
-    for (let i = 0; i < xValues.length; i++) {
-      dividend += (xValues[i] - meanX) * (yValues[i] - meanY);
-      divisor += (xValues[i] - meanX) ** 2;
+    for (let i = 0; i < valuesToCalculate.length; i++) {
+      dividend +=
+        (valuesToCalculate[i].x - meanX) * (valuesToCalculate[i].y - meanY);
+      divisor += (valuesToCalculate[i].x - meanX) ** 2;
     }
     let slope;
     if (divisor !== 0) {
@@ -272,13 +289,17 @@ const Visibility = () => {
       slope = null;
     }
     // theorhetically it should be zero, so not gonna calculate for y-intercept;
-    console.log(slope);
-    setLineSlope(slope);
     lineSlopeRef.current = slope;
+    // setLineSlope(slope);
+    console.log('getting new slope: ', lineSlopeRef.current);
+    console.log('x values: ', xValues);
+    console.log('y values: ', yValues);
+    console.log('values to calculate: ', valuesToCalculate);
     // const meanX = xValues.reduce((previousValue, currentValue) => previousValue + currentValue, initalValue,);
   };
 
   const handleMarkValue = () => {
+    // console.log('handling mark value');
     let rowsClone = [...rows];
     let pixelSize = Math.round(radiusLength);
 
@@ -299,7 +320,9 @@ const Visibility = () => {
     null | number
   >(null);
 
-  useEffect(() => {}, [rows]);
+  useEffect(() => {
+    getLinearRegression();
+  }, [rows]);
 
   const valuesTable = (
     <TableContainer component={Paper}>
@@ -352,7 +375,7 @@ const Visibility = () => {
     <div>
       {/* <CompletenessTag isComplete={isVisibilityTestComplete} /> */}
       <RainbowExerciseHeading isComplete={isVisibilityTestComplete}>
-        A Quick Visibility Test
+        A Quick Visibility Test abc
       </RainbowExerciseHeading>
 
       {/* <br />
@@ -478,6 +501,16 @@ const Visibility = () => {
       <br />
       <br />
       {valuesTable}
+      <CanvasForTopicComponent
+        sceneGetter={getSceneVisibilityGraph}
+        objectPassedToScene={{
+          rowsRef,
+          currentTestValueIndexRef,
+          numberOfDivisionsRef,
+          radiusLengthRef,
+          lineSlopeRef,
+        }}
+      />
     </div>
   );
 };

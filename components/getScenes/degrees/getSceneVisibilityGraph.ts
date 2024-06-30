@@ -62,9 +62,9 @@ const getSceneVisibilityGraph: SceneGetter = (
   let bufferPx = 25;
   let dotRadius = 4;
   let selectDotRadius = dotRadius * 1.75;
-  let color = cl.getHSLA(cl.purple_bright, 0.8);
-  let currentColor = cl.getHSLA(cl.purple_bright, 0.8);
-  let selectColor = cl.getHSL(cl.purple_bright);
+  let color = cl.getHSLA(cl.green, 0.8);
+  let currentColor = cl.getHSLA(cl.green, 0.8);
+  let selectColor = cl.getHSL(cl.green);
 
   const getContextCoords = (radius: number, numberOfDivisions: number) => {
     let length = context.canvas.width - 2 * bufferPx - 2 * dotRadius - 115;
@@ -129,7 +129,7 @@ const getSceneVisibilityGraph: SceneGetter = (
     context.lineTo(x, y);
     context.lineCap = 'round';
     context.lineWidth = 15;
-    context.strokeStyle = cl.getHSLA(cl.purple, 0.3);
+    context.strokeStyle = cl.getHSLA(cl.green, 0.3);
     context.stroke();
   };
 
@@ -158,7 +158,7 @@ const getSceneVisibilityGraph: SceneGetter = (
   const setCanvasHeight = () => {};
 
   scene.draw = () => {
-    context.canvas.height = 560;
+    context.canvas.height = 500;
     drawMarkedDots();
     drawSelectingDot();
     drawLinearRegression();

@@ -453,43 +453,6 @@ const smallness_and_divisibility = () => {
           These criteria depend on your computer/device, your preferences, and
           even your eyesight. Don't be suprised if your model differs from my
           own or your classmates.
-          <ul>
-            <li>Visibility</li>
-            <li>
-              Computability{' '}
-              <AsideNote>
-                <div>
-                  Although modern computers can compute extremely large numbers
-                  very effectively, we ask increasingly more of them especially
-                  when it comes to graphics. Every time your screen visually
-                  changes, your computer needs to recalculate the coloration of
-                  each pixel. To not appear laggy this needs to happen at least
-                  24 times a second.
-                  <br />
-                  <br />
-                  {/* <CanvasForTopicComponent
-                    sceneGetter={getSceneInteriorAngles}
-                  /> */}
-                  {/* <br />
-                  <br /> */}
-                  Not long ago, the gold standard for video games was around 60
-                  times a second . Now some modern displays are pushing 4 times
-                  that recalculating pixel colorations 240 times each second.{' '}
-                  What all of this means is, so many calculations are happening
-                  so fast, that limiting the number of divisions to be
-                  calculated and displayed does make a difference.
-                  <br />
-                  <br />
-                  <MyLink href={'https://www.youtube.com/shorts/esIl_oMew8c'}>
-                    Here is a youtube video showing in slowmo the difference
-                    between a 60hz and 240hz display
-                  </MyLink>
-                  .
-                </div>
-              </AsideNote>
-            </li>
-            <li>Divisablity </li>
-          </ul>
           {/* We'll restrict our search to values less than 10,000.
           <br />
           <br />

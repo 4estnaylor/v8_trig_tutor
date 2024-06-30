@@ -19,7 +19,7 @@ const SummaryWrapper = styled.div``;
 
 let visibilitySummary = (
   <SummaryWrapper>
-    <h1>Visibility</h1>
+    <h3>Visibility</h3>
     Ideally we would like to be able to see how we are dividing a cirlce with
     our own eyes. When dividing up small enough circles, there simply isn't
     enough space to see relatively large number of divisions. You will have to
@@ -29,7 +29,7 @@ let visibilitySummary = (
 
 let computabilitySummary = (
   <SummaryWrapper>
-    <h1>Computability</h1>
+    <h3>Computability</h3>
     Although modern computers can make computations with extremely large numbers
     a breeze, we often push them to their limits. Especially when it comes to
     graphics. Whatever number of divisions we choose to measure a circle, we
@@ -58,7 +58,7 @@ let computabilitySummary = (
 
 let divisibilitySummary = (
   <SummaryWrapper>
-    <h1>Divisibility</h1>
+    <h3>Divisibility</h3>
     Divisibility is really important for measuring partial circles without
     having to trouble ourselves with fractions or decimals. Sticking to nice
     whole numbers often makes life easier both conceptually and practically.
