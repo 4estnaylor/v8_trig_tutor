@@ -375,7 +375,7 @@ const Visibility = () => {
     <div>
       {/* <CompletenessTag isComplete={isVisibilityTestComplete} /> */}
       <RainbowExerciseHeading isComplete={isVisibilityTestComplete}>
-        A Quick Visibility Test abc
+        A Quick Visibility Test
       </RainbowExerciseHeading>
 
       {/* <br />
