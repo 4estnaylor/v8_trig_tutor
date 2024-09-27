@@ -84,6 +84,7 @@ const CircaLine = styled.div`
 
 const URLWrapper = styled.a`
   visibility: hidden;
+  color: black;
 `;
 
 const SourceLabel = styled.div`
