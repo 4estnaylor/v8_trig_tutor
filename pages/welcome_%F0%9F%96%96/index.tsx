@@ -35,6 +35,19 @@ const index = () => {
     }
   });
 
+  let SylvanusByLine = (
+    <div>
+      Silvanus Thompson, 1910
+      <br />
+      <br />
+      <i>
+        Calculus Made Easy Being a very-simplest introduction to those beautiful
+        methods which are generally called by the terrifying names of the
+        Differentia
+      </i>
+    </div>
+  );
+
   return (
     <>
       <TopicComponentBoilerPlate2
@@ -46,7 +59,7 @@ const index = () => {
           <Quote
             quote={`Being myself a remarkably stupid fellow, I have had to unteach myself the difficulties, and now beg to present to my fellow fools the parts that are not hard. Master these thoroughly, and the rest will follow. What one fool can do, another can.`}
             source="https://www.gutenberg.org/files/33283/33283-pdf.pdf"
-            byLine=" Silvanus Thompson, 1910"
+            byLine={SylvanusByLine}
           />
           <p>
             I'm glad you made it here. I hope this site can be useful to you for

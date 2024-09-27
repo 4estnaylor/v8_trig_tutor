@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import QUERIES from '../../breakpoints';
 import cl from '../../colors';
@@ -28,14 +28,22 @@ const Quote = (props: QuoteProps) => {
     });
   }
 
+  let [isHTMLVisible, setIsHTMLVisible] = useState(false);
+
   return (
     <Wrapper $isLong={isLong || false}>
       {displayQuote}
       {children}
       {byLine ? <ByLine>{byLine}</ByLine> : null}
       {source ? (
-        <Source href={source} target="__blank">
-          source
+        <Source>
+          <div>
+            <SourceLabel> source </SourceLabel>
+
+            <URLWrapper href={source} target="__blank">
+              {source}
+            </URLWrapper>
+          </div>
         </Source>
       ) : null}
     </Wrapper>
@@ -74,8 +82,29 @@ const CircaLine = styled.div`
   font-size: 0.8rem;
 `;
 
-const Source = styled.a`
+const URLWrapper = styled.a`
+  visibility: hidden;
+`;
+
+const SourceLabel = styled.div`
+  position: absolute;
+`;
+
+const Source = styled.div`
+  position: relative;
   color: ${cl.getHSL(cl.purple)};
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:hover ${SourceLabel} {
+    visibility: hidden;
+  }
+
+  &:hover ${URLWrapper} {
+    visibility: visible;
+  }
 `;
 
 export default Quote;
