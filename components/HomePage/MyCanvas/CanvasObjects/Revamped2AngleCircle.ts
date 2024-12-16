@@ -189,12 +189,22 @@ class Revamped2AngleCircle {
       calculatedAngle -= Tau;
     }
 
+    // console.log((angle * 180) / Math.PI, (calculatedAngle * 180) / Math.PI);
+
     // crossing zero positive
     if ((angle % Tau) - (calculatedAngle % Tau) >= Tau * 0.9) {
+      console.log('crossing zero positive', differenceBetweenPrevAndNewAngle);
       this.revolutions += 1;
       this.radius =
         this.initialRadius +
         Math.abs(this.revolutions) * (revolutionRingGap + revolutionRingWidth);
+    }
+
+    console.log(this.revolutions);
+
+    //crossing zero negative
+    if ((calculatedAngle % Tau) - (angle % Tau) >= Tau * 0.9) {
+      console.log('crossing zero negative');
     }
 
     this.angleInfoRef.current.angle = calculatedAngle;
@@ -259,14 +269,30 @@ class Revamped2AngleCircle {
   // draw functions
 
   drawAngle = () => {
-    for (let i = 0; i < Math.abs(this.revolutions); i++) {
+    let workingRevolutions = 0;
+    if (this.revolutions >= 0) {
+      workingRevolutions = this.revolutions;
+    } else if (this.revolutions < 0) {
+      workingRevolutions = Math.abs(this.revolutions) - 1;
+    }
+    for (let i = 0; i < workingRevolutions; i++) {
       let startRingBuffer = revolutionGap;
       let widthOfRing = revolutionRingWidth;
       let spaceForRing = revolutionRingWidth + revolutionRingGap;
       let startRadius =
         startRingBuffer + this.initialRadius + spaceForRing * (i - 1);
       let endRadius = startRadius + widthOfRing;
-      this.drawFullRing(startRadius, endRadius, cl.getHSLA(this.color, 0.2));
+      let opacity = 1 - i * 0.25;
+
+      if (opacity <= 0) {
+        opacity = 0.05;
+      }
+
+      this.drawFullRing(
+        startRadius,
+        endRadius,
+        cl.getHSLA(this.color, opacity)
+      );
     }
 
     let angle = this.angleInfoRef.current.angle;
@@ -294,10 +320,12 @@ class Revamped2AngleCircle {
     let endAngle = partialAngle + angleOffset;
 
     let radius = this.initialRadius + Math.abs(this.revolutions) * 12;
+    radius = this.initialRadius - 12 * 4;
     this.context.beginPath();
     this.makeArc(radius, startAngle, endAngle);
 
     this.context.strokeStyle = color;
+    // this.context.strokeStyle = 'cyan';
     this.context.lineCap = 'butt';
     this.context.lineWidth = 10;
 
@@ -305,6 +333,7 @@ class Revamped2AngleCircle {
     this.context.lineTo(center.x, center.y);
     this.context.closePath();
     this.context.fillStyle = cl.getHSLA(this.color, 0.5);
+    // this.context.fillStyle = 'cyan';
     this.context.fill();
   };
 
@@ -374,6 +403,7 @@ class Revamped2AngleCircle {
     let radius = (startRadius + endRadius) / 2;
     this.context.lineWidth = revolutionRingWidth;
     this.context.strokeStyle = color;
+    // this.context.strokeStyle = 'black';
     this.context.beginPath();
     this.context.lineCap = 'butt';
     this.makeArc(radius, 0, Tau);

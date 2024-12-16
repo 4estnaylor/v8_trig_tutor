@@ -38,7 +38,7 @@ const Quote = (props: QuoteProps) => {
       {source ? (
         <Source>
           <div>
-            <SourceLabel> source </SourceLabel>
+            <SourceLabel> go to source →</SourceLabel>
 
             <URLWrapper href={source} target="__blank">
               {source}

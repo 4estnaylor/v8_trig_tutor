@@ -61,9 +61,11 @@ const index = () => {
             source="https://www.gutenberg.org/files/33283/33283-pdf.pdf"
             byLine={SylvanusByLine}
           />
+          <SylvanusThompsonWrapper>
+            <Image src="/sylvanusThompson.svg" width={1000} height={1000} />
+          </SylvanusThompsonWrapper>
           <p>
-            I'm glad you made it here. I hope this site can be useful to you for
-            learning trigonometry and/or precalculus.
+            I'm glad you made it here. I hope this site can be useful to you!
             <br />
             <br />
           </p>
@@ -301,6 +303,16 @@ const Card = styled.div`
   padding: 20px;
 `;
 
+const SylvanusThompson = styled(Image)`
+  margin: auto;
+`;
+
+const SylvanusThompsonWrapper = styled.div`
+  position: relative;
+  display: flex;
+  width: auto;
+  min-height: 400px;
+`;
 const BrowseCard = styled(Card)``;
 
 const SignInCard = styled(Card)``;
