@@ -62,9 +62,6 @@ let divisibilitySummary = (
     Divisibility is really important for measuring partial circles without
     having to trouble ourselves with fractions or decimals. Sticking to nice
     whole numbers often makes life easier both conceptually and practically.
-    Unfortunately as numbers become more and more divisible they tend to get
-    large and unweildy. Picking a good number that is both highly divisible and
-    reasonably small will require some strategy on your part.
   </SummaryWrapper>
 );
 

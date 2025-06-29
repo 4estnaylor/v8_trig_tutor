@@ -46,9 +46,10 @@ const origin_of_360 = () => {
         <h4>Natural Origin?</h4>
         <P>
           A good question to ask before tinkering with mathematical conventions
-          – Are we going to accidentally tear the fabric of reality? Some values
-          we use are logically necessary and inextricably linked to the nature
-          of reality. They cannot be changed.
+          like how many degrees are in a circle – Are we going to accidentally
+          tear the fabric of reality? Some values we use are logically necessary
+          and inextricably linked to the nature of reality. They cannot be
+          changed without breaking reality.
           <br />
           <br />
           <Pi /> is one such value. Another intelligent lifeform on the

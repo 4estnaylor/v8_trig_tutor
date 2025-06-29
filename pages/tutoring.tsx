@@ -151,14 +151,14 @@ const BottomSection = styled.div`
     ${cl.getHSL(cl.blue_light)} 10%,
     ${cl.getHSL(cl.blue)},
     ${cl.getHSL(cl.purple)} 50%,
-    ${cl.getHSL(cl.red)} 90%
+    ${cl.getHSL(cl.mint)} 90%
   ); */
   /* background-color: ${cl.getHSL(cl.purple)}; */
   background: linear-gradient(
     35deg,
-    ${cl.getHSL(cl.red)},
-    ${cl.getHSL(cl.purple_bright)},
-    ${cl.getHSL(cl.blue)}
+    ${cl.getHSL(cl.mint)} 10%,
+    ${cl.getHSL(cl.purple_bright)} 50%,
+    ${cl.getHSL(cl.red)} 90%
   );
   /* background-size: 180%;
   background-position-x: 50%;

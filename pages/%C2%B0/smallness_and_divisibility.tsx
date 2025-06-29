@@ -333,7 +333,7 @@ const smallness_and_divisibility = () => {
                     catalogued somewhere in the back of his head at all times.
                     Wow. And based on how prolific Ramanujan's discoveries in
                     math were over his short life, this kind of encyclopedic
-                    knowledge seems very plausible.
+                    knowledge seems at least plausible.
                     <br />
                     <br />
                     Ramanujan's familiairty of and curiosity towards positive
@@ -453,6 +453,12 @@ const smallness_and_divisibility = () => {
           These criteria depend on your computer/device, your preferences, and
           even your eyesight. Don't be suprised if your model differs from my
           own or your classmates.
+          <Quote
+            quote="All models are wrong but some are useful."
+            source={`https://en.wikipedia.org/wiki/All_models_are_wrong`}
+            byLine={'George Box (statistician)'}
+            image={'/georgebox.svg'}
+          />
           {/* We'll restrict our search to values less than 10,000.
           <br />
           <br />
@@ -466,18 +472,13 @@ const smallness_and_divisibility = () => {
           Seeing the divisions is useful for measuring, so you may likely to
           consider how many divisions you can realistically see on your display.
           How important of a priority you make visibilty will be for you to
-          decide later.
+          decide;
           <Visibility />
           <br />
           <br />
           Now that we have some data, you'll need to choose an apropriate way to
           organize it into a model that matches the data in a way that is as
           simple and sensible as possible.
-          <Quote
-            quote="All models are wrong but some are useful."
-            source={`https://en.wikipedia.org/wiki/All_models_are_wrong`}
-            byLine={'George Box'}
-          />
           <h1>
             Modeling Visibility{' '}
             <AsideNote>
@@ -567,9 +568,9 @@ const smallness_and_divisibility = () => {
           Ideally these two qualtiies — smallness and divisibility — would go
           hand in hand and you wouldn't have to pick one over the other. Smaller
           numbers would also tend to be more divisible. Is that the case though?
-          Unfortunately, there is a trend where as numbers get less small they
+          {/* Unfortunately, there is a trend where as numbers get less small they
           get <em>more</em> divisible. You need to make decisions about how to
-          prioritize these two desired qualities.
+          prioritize these two desired qualities. */}
           {/* A question that requires more experimentation. Use the "Multiply" tool
           provided below to set the number.
           <br />

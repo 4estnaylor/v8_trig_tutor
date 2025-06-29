@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import QUERIES from '../../breakpoints';
 import cl from '../../colors';
+import Image from 'next/image';
 
 interface QuoteProps {
   quote: string | string[];
@@ -28,27 +29,46 @@ const Quote = (props: QuoteProps) => {
     });
   }
 
+  let imageDisplay = image ? (
+    <Image
+      src={image}
+      height={300}
+      width={250}
+      style={{ borderRadius: '8px', marginLeft: 'auto' }}
+    />
+  ) : null;
+
+  let x = 5;
+
   let [isHTMLVisible, setIsHTMLVisible] = useState(false);
 
   return (
-    <Wrapper $isLong={isLong || false}>
-      {displayQuote}
-      {children}
-      {byLine ? <ByLine>{byLine}</ByLine> : null}
-      {source ? (
-        <Source>
-          <div>
-            <SourceLabel> go to source →</SourceLabel>
+    <OuterWrapper>
+      {imageDisplay}
+      <Wrapper $isLong={isLong || false}>
+        {displayQuote}
+        {children}
+        {byLine ? <ByLine>{byLine}</ByLine> : null}
+        {source ? (
+          <Source>
+            <div>
+              <SourceLabel> go to source →</SourceLabel>
 
-            <URLWrapper href={source} target="__blank">
-              {source}
-            </URLWrapper>
-          </div>
-        </Source>
-      ) : null}
-    </Wrapper>
+              <URLWrapper href={source} target="__blank">
+                {source}
+              </URLWrapper>
+            </div>
+          </Source>
+        ) : null}
+      </Wrapper>
+    </OuterWrapper>
   );
 };
+
+const OuterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const Wrapper = styled.div<{ $isLong: boolean }>`
   padding: 20px;

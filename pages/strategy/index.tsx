@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import cl from '../../colors';
 import TopicComponentBoilerPlate from '../../components/TopicComponents/TopicComponentBoilerPlate';
 import TopicComponentBoilerPlate2 from '../../components/TopicComponents/TopicComponentBoilerPlate2';
+import AsideNote from '../../components/AsideNote/AsideNote';
 
 const index = () => {
   return (
@@ -47,9 +48,10 @@ const index = () => {
               <br />
               <br />
               Often the content of the videos and written content overlaps. The
-              repition is not accidental. I find that absorbing content twice
-              (in different ways), makes content way more likely to stick for
-              me.
+              repition is not accidental. I find that absorbing content multiple
+              times (in different ways), makes content way more likely to stick
+              for me. If you can only find time for one, stick to the written
+              content.
             </li>
             <br />
             <br />
@@ -58,26 +60,54 @@ const index = () => {
               <BulletPoint>Do your thing</BulletPoint>
               <br />
               <br />
-              If we're gonna be honest, you are way more capable of learning
-              than I am of teaching you. I can certainly make conditions better
-              or worse for learning as a teacher, but the real legwork always
-              happens on the students' end.
+              You are way more capable of learning than I am of teaching you. I
+              can certainly make conditions better or worse for learning as a
+              teacher, but the real legwork always happens on the students' end.
               <br />
               <br />
-              You're a curious person. If you can develop and harness that
-              curiousity there isn't a math teacher on the planet terrible
-              enough to prevent you from learning trig when sufficiently
-              motivated.
+              If you can orient or follow that curiousity towards math{' '}
+              <AsideNote>
+                <>
+                  <p>
+                    Do you think it's possible to direct your own curiosity. Or
+                    do you think curiosity is what directs you? Or something
+                    else? If you have thoughts on how curiosity arises in your
+                    experience, I'd love to hear them! As both a teacher and a
+                    student I think insight into this topic is so valuable!
+                    4estnaylor@gmail.com
+                  </p>
+                </>
+              </AsideNote>{' '}
+              there isn't a math teacher on the planet terrible enough{' '}
+              <AsideNote>
+                <>
+                  Admittedly, I've some pretty bad ones. If you find yourself in
+                  the unforutnate situation of being in that kind of class, work
+                  around it the best you can. Finding online resources outside
+                  of class can be really helpful - youtube, Khan Academy,
+                  schoolyourself.org.
+                </>
+              </AsideNote>{' '}
+              to prevent you from learning trig when sufficiently motivated.
               <br />
               <br />
               Think of some area or domain you consider yourself pretty
               knowledgable. It could be about college basketball, a video game,
-              water coloring, tropical bird calls, whatever. You probably did
-              some combination of practice, research, and collaboration with
-              other people to get that good. You probably did those things
-              strategically by reflecting on your current capabilities and
-              knowledge and planning how to expand them bit by bit. Do all that
-              stuff, but for trig.
+              water coloring, tropical bird calls, whatever. There's some{' '}
+              <em>thing</em> you're really good at. The <em>thing</em> your
+              family members and friends know to ask you about. For me one of
+              those <em>things</em> is running. When they have a question about
+              running: what shoes to get, how to train, what to stretch, how to
+              support their ankles, etc I'm the guy they go to. I didn't set out
+              for expertise on running - it just naturally accrued as I ran
+              myself by racking up the miles, reading things, talking to
+              teammates, experiencing and recovering from injury, You probably
+              did some combination of practice, research, and collaboration with
+              other people to get that good at your <em>thing</em>. You probably
+              did those things strategically by reflecting on your current
+              capabilities and knowledge and planning how to expand them bit by
+              bit. If you can approach trig in this way, you will get good at
+              trig. You won't even be able to help it.
               <br />
               <br />
               Sometimes in an academic setting we put math learning on an
